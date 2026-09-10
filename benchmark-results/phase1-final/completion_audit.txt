@@ -1,0 +1,46 @@
+PHASE1 FINAL COMPLETION AUDIT
+2026-09-10T18:11:56Z
+--- required inputs ---
+PASS SWIFTLLM_BASELINE.md
+PASS PHASE1_BENCHMARK_REPORT.md
+PASS PHASE1_SATURATION_REPORT.md
+PASS PHASE1_COMPLETION_AUDIT.md
+PASS PHASE1_KV_CALIBRATION.md
+PASS docs/MORPHSERVE_PHASE1_REFERENCE.md
+--- raw/config/metrics evidence ---
+PASS aggregate_validation
+PASS all_8_runs_have_20_completed_requests_and_required_raw_fields
+PASS fixed_final_config_and_1768_profile
+PASS only_target_rps_varies_in_fixed_metadata_fields
+PASS summaries_regenerated_from_raw_and_independent_percentiles
+PASS plot_source_matches_points
+PASS image_open benchmark-results/phase1-final/plots/representative_time_series.png
+PASS image_open benchmark-results/phase1-final/plots/rps_vs_completed_throughput.png
+PASS image_open benchmark-results/phase1-final/plots/rps_vs_p95_queueing.png
+PASS image_open benchmark-results/phase1-final/plots/rps_vs_p95_ttft.png
+PASS image_open benchmark-results/phase1-final/plots/rps_vs_peak_logical_kv_utilization.png
+PASS image_open benchmark-results/phase1-final/plots/rps_vs_ttft_components.png
+PASS representative above phase1-final-rps-1p25 pressure_samples 6 kv_range [0.9411764705882353, 0.9485294117647058] waiting_range [4, 5]
+PASS representative below phase1-final-rps-0p75 pressure_samples 0 kv_range [None, None] waiting_range [None, None]
+PASS representative near phase1-final-rps-1 pressure_samples 4 kv_range [0.9411764705882353, 0.9485294117647058] waiting_range [1, 2]
+PASS open_loop_arrival_precedes_prior_completion
+PASS final_1768_runs_separated_from_historical_3880_baseline_results
+--- scheduler checkpoint audit ---
+80e2142c5a7bab300aad43e10af110043d429fd9d1655e5942f5073f99305c6d  swiftLLM/swiftllm/server/scheduler.py
+80e2142c5a7bab300aad43e10af110043d429fd9d1655e5942f5073f99305c6d  -
+PASS scheduler_text_unchanged_from_HEAD_checkpoint
+--- code/test gates ---
+test_one_token_tpot_is_zero (benchmark.test_benchmark.MetricTests.test_one_token_tpot_is_zero) ... ok
+test_request_formulas (benchmark.test_benchmark.MetricTests.test_request_formulas) ... ok
+test_summary_can_be_regenerated_from_saved_raw_files (benchmark.test_benchmark.SummaryTests.test_summary_can_be_regenerated_from_saved_raw_files) ... ok
+test_duration_schedule_has_only_offsets_before_duration (benchmark.test_benchmark.WorkloadTests.test_duration_schedule_has_only_offsets_before_duration) ... ok
+test_fixed_schedule_is_independent_of_completion (benchmark.test_benchmark.WorkloadTests.test_fixed_schedule_is_independent_of_completion) ... ok
+test_poisson_schedule_is_seeded_and_not_completion_driven (benchmark.test_benchmark.WorkloadTests.test_poisson_schedule_is_seeded_and_not_completion_driven) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+PASS py_compile_and_diff_check
+--- stop rule ---
+PASS sweep stopped at 2 RPS after sustained KV pressure (25 pressure samples, 16 waiting peak); no arbitrary higher-RPS points were run.

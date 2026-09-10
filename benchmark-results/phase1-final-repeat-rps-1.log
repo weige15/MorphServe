@@ -1,0 +1,158 @@
+[Engine] Initializing model...
+[Engine] Loading weights...
+[Engine] Profiling kv blocks...
+[Model.profile] GPU total memory: 23.56 GB, runtime peak memory: 19.87 GB
+[Engine] Number of GPU blocks: 1768 (3.45 GB)
+[Engine] Number of CPU blocks: 4096 (8.00 GB)
+[Engine] Allocating kv cache and swap...
+[Engine] Initializing scheduler...
+[Engine] Initializing tokenization engine...
+2026-09-11 02:01:32,067	INFO worker.py:2012 -- Started a local Ray instance.
+/nfs/home/s314511048/.venv/lib/python3.12/site-packages/ray/_private/worker.py:2051: FutureWarning: Tip: In future versions of Ray, Ray will no longer override accelerator visible devices env var if num_gpus=0 or num_gpus=None (default). To enable this behavior and turn off this error message, set RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO=0
+  warnings.warn(
+[Engine] Model initialized
+{
+  "achieved_arrival_rate_rps": 1.000033334163761,
+  "achieved_offered_arrival_rate_rps": 1.0,
+  "actual_interarrival_rate_rps": 1.000033334163761,
+  "completed_request_count": 20,
+  "completed_request_throughput_rps": 1.0064880711115338,
+  "engine_tpot_s": {
+    "count": 20,
+    "mean": 0.11679729995000002,
+    "p50": 0.09479883293333334,
+    "p95": 0.1784238320500002,
+    "p99": 0.36843152299666637
+  },
+  "engine_ttft_s": {
+    "count": 20,
+    "mean": 4.3252897169999995,
+    "p50": 3.6564520625,
+    "p95": 9.984536620050001,
+    "p99": 10.74433619361
+  },
+  "failed_or_incomplete_request_count": 0,
+  "generated_output_token_count": 320,
+  "generated_token_throughput_tps": 16.10380913778454,
+  "gpu_memory": {
+    "gpu_memory_free_bytes": {
+      "count": 81,
+      "max": 4683988992.0,
+      "mean": 3955008600.4938273,
+      "min": 3442475008.0
+    },
+    "gpu_memory_total_bytes": {
+      "count": 81,
+      "max": 25296044032.0,
+      "mean": 25296044032.0,
+      "min": 25296044032.0
+    },
+    "gpu_memory_used_bytes": {
+      "count": 81,
+      "max": 21853569024.0,
+      "mean": 21341035431.506172,
+      "min": 20612055040.0
+    }
+  },
+  "measurement_duration_s": 19.871075052,
+  "num_gpu_blocks_observed": [
+    1768
+  ],
+  "peak_logical_kv_utilization": 0.9485294117647058,
+  "peak_num_decoding_gpu_blocks": 1677.0,
+  "peak_running_count": 13.0,
+  "peak_swapped_queue_depth": 0.0,
+  "peak_waiting_queue_depth": 8.0,
+  "preemption_count": 0,
+  "queueing_delay_s": {
+    "count": 20,
+    "mean": 0.6597391032,
+    "p50": 0.526271878,
+    "p95": 1.9653976602000007,
+    "p99": 2.726235289639999
+  },
+  "request_count": 20,
+  "run_id": "phase1-final-repeat-rps-1",
+  "schema_version": 1,
+  "source_files": [
+    "metadata.json",
+    "requests.jsonl",
+    "telemetry.jsonl"
+  ],
+  "swap_in_count": 0,
+  "swap_out_count": 0,
+  "target_rps": 1.0,
+  "telemetry_sample_count": 81,
+  "telemetry_stats": {
+    "logical_kv_utilization": {
+      "count": 81,
+      "max": 0.9485294117647058,
+      "mean": 0.2720448578291716,
+      "min": 0.0,
+      "p50": 0.07296380090497738,
+      "p95": 0.8687782805429864,
+      "p99": 0.9485294117647058
+    },
+    "num_decoding_gpu_blocks": {
+      "count": 81,
+      "max": 1677.0,
+      "mean": 480.9753086419753,
+      "min": 0.0,
+      "p50": 129.0,
+      "p95": 1536.0,
+      "p99": 1677.0
+    },
+    "num_gpu_blocks": {
+      "count": 81,
+      "max": 1768.0,
+      "mean": 1768.0,
+      "min": 1768.0,
+      "p50": 1768.0,
+      "p95": 1768.0,
+      "p99": 1768.0
+    },
+    "running_q_count": {
+      "count": 81,
+      "max": 13.0,
+      "mean": 3.753086419753086,
+      "min": 0.0,
+      "p50": 1.0,
+      "p95": 12.0,
+      "p99": 13.0
+    },
+    "swapped_q_count": {
+      "count": 81,
+      "max": 0.0,
+      "mean": 0.0,
+      "min": 0.0,
+      "p50": 0.0,
+      "p95": 0.0,
+      "p99": 0.0
+    },
+    "waiting_q_depth": {
+      "count": 81,
+      "max": 8.0,
+      "mean": 0.6790123456790124,
+      "min": 0.0,
+      "p50": 0.0,
+      "p95": 3.0,
+      "p99": 7.200000000000003
+    }
+  },
+  "token_throughput_tps": 16.10380913778454,
+  "tpot_s": {
+    "count": 20,
+    "mean": 0.11681692422,
+    "p50": 0.09480178363333333,
+    "p95": 0.1784601025033335,
+    "p99": 0.368439737087333
+  },
+  "ttft_s": {
+    "count": 20,
+    "mean": 4.325475540899999,
+    "p50": 3.656668963,
+    "p95": 9.98474156155,
+    "p99": 10.744518935509998
+  }
+}
+raw benchmark run: benchmark-results/phase1-final-repeat-rps-1

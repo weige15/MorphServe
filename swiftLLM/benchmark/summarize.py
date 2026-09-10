@@ -97,13 +97,28 @@ def summarize_run(run_dir: str | Path) -> dict[str, Any]:
         else None
     )
 
+    telemetry_fields = (
+        "waiting_q_depth",
+        "running_q_count",
+        "swapped_q_count",
+        "num_decoding_gpu_blocks",
+        "num_gpu_blocks",
+        "logical_kv_utilization",
+    )
+    telemetry_stats: dict[str, dict[str, Any]] = {}
+    for field in telemetry_fields:
+        values = _finite_numbers(telemetry, field)
+        stats = distribution(values)
+        stats["min"] = min(values) if values else None
+        stats["max"] = max(values) if values else None
+        telemetry_stats[field] = stats
+
     peak = {
-        "waiting_q_depth": max((int(row.get("waiting_q_depth", 0)) for row in telemetry), default=None),
-        "running_q_count": max((int(row.get("running_q_count", 0)) for row in telemetry), default=None),
-        "logical_kv_utilization": max(
-            (float(row["logical_kv_utilization"]) for row in telemetry if row.get("logical_kv_utilization") is not None),
-            default=None,
-        ),
+        "waiting_q_depth": telemetry_stats["waiting_q_depth"]["max"],
+        "running_q_count": telemetry_stats["running_q_count"]["max"],
+        "swapped_q_count": telemetry_stats["swapped_q_count"]["max"],
+        "num_decoding_gpu_blocks": telemetry_stats["num_decoding_gpu_blocks"]["max"],
+        "logical_kv_utilization": telemetry_stats["logical_kv_utilization"]["max"],
     }
     swap_in = max((int(row.get("swap_in_count", 0)) for row in telemetry), default=0)
     swap_out = max((int(row.get("swap_out_count", 0)) for row in telemetry), default=0)
@@ -122,6 +137,7 @@ def summarize_run(run_dir: str | Path) -> dict[str, Any]:
         "failed_or_incomplete_request_count": len(requests) - completed_count,
         "target_rps": metadata.get("target_rps"),
         "achieved_offered_arrival_rate_rps": offered_rate,
+        "achieved_arrival_rate_rps": actual_arrival_rate,
         "actual_interarrival_rate_rps": actual_arrival_rate,
         "completed_request_throughput_rps": completed_throughput,
         "generated_output_token_count": output_tokens,
@@ -135,7 +151,11 @@ def summarize_run(run_dir: str | Path) -> dict[str, Any]:
         "engine_tpot_s": engine_tpot,
         "peak_waiting_queue_depth": peak["waiting_q_depth"],
         "peak_running_count": peak["running_q_count"],
+        "peak_swapped_queue_depth": peak["swapped_q_count"],
+        "peak_num_decoding_gpu_blocks": peak["num_decoding_gpu_blocks"],
         "peak_logical_kv_utilization": peak["logical_kv_utilization"],
+        "telemetry_stats": telemetry_stats,
+        "telemetry_sample_count": len(telemetry),
         "swap_in_count": swap_in,
         "swap_out_count": swap_out,
         "preemption_count": swap_out,
