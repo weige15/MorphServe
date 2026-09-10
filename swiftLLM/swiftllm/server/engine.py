@@ -1,5 +1,6 @@
 import asyncio
 import functools
+import time
 from typing import AsyncGenerator
 
 import torch
@@ -26,6 +27,11 @@ class Engine:
         self.tokenization_engine = None
 
         self.untokenized_raw_requests: list[tuple[Request, str]] = []
+
+        # Observational counters for benchmark telemetry. They do not affect
+        # scheduler decisions or model execution.
+        self.benchmark_swap_in_count = 0
+        self.benchmark_swap_out_count = 0
 
     async def _run_on_model_async(self, func, *args, **kwargs):
         """
@@ -109,6 +115,9 @@ class Engine:
                 request.prompt_len = len(prompt_token_id)
                 new_requests.append(request)
 
+            eligible_time_ns = time.perf_counter_ns()
+            for request in new_requests:
+                request.benchmark_scheduler_eligible_time_ns = eligible_time_ns
             self.scheduler.on_requests_arrival(new_requests)
             await asyncio.sleep(0.001)  # yield the event loop
     
@@ -124,13 +133,17 @@ class Engine:
                 await asyncio.sleep(0.005)
                 continue
 
-            # Perform swap in/out
+            # Perform swap in/out. The counters are observational only; the
+            # list materialization preserves the upstream call and ordering.
             if cur_swap_out:
+                swap_out_ids = [req.request_id for req in cur_swap_out]
+                self.benchmark_swap_out_count += len(swap_out_ids)
                 await self._run_on_model_async(
                     self.model.swap_out_seqs,
-                    [req.request_id for req in cur_swap_out]
+                    swap_out_ids
                 )
             if cur_swap_in:
+                self.benchmark_swap_in_count += len(cur_swap_in)
                 await self._run_on_model_async(
                     self.model.swap_in_seqs,
                     [req.request_id for req in cur_swap_in]
@@ -147,19 +160,31 @@ class Engine:
                 for req in cur_batch
                 if not req.is_prefill_stage()
             ]
+            prefill_time_ns = time.perf_counter_ns()
+            for req in cur_batch:
+                if req.is_prefill_stage() and req.benchmark_first_prefill_time_ns is None:
+                    req.benchmark_first_prefill_time_ns = prefill_time_ns
             output_tokens = await self._run_on_model_async(
                 self.model.forward,
                 input_ids,
                 seq_ids,
                 decoding_seq_lens_list
             )
+            output_time_ns = time.perf_counter_ns()
 
             # Deal with output tokens
             finished_req_ids = []
             for req, output_token in zip(cur_batch, output_tokens):
                 req.output_token_ids.append(output_token)
+                if req.benchmark_first_output_token_time_ns is None:
+                    req.benchmark_first_output_token_time_ns = output_time_ns
+                is_finished = req.is_finished()
+                if is_finished:
+                    # Capture the timestamp before publishing the final
+                    # StepOutput; this remains observational only.
+                    req.benchmark_completion_time_ns = output_time_ns
                 req.output_q.put_nowait(StepOutput(output_token, req))
-                if req.is_finished():
+                if is_finished:
                     finished_req_ids.append(req.request_id)
                     req.finished_event.set()
             await self._run_on_model_async(
@@ -170,6 +195,19 @@ class Engine:
             # Inform the scheduler
             self.scheduler.on_batch_finish(cur_batch)
     
+    def get_benchmark_snapshot(self) -> dict[str, int]:
+        """Return scheduler/runtime state for non-semantic benchmark telemetry."""
+        scheduler = self.scheduler
+        return {
+            "waiting_q_depth": len(scheduler.waiting_q),
+            "running_q_count": len(scheduler.running_q),
+            "swapped_q_count": len(scheduler.swapped_q),
+            "num_decoding_gpu_blocks": scheduler.num_decoding_gpu_blocks,
+            "num_gpu_blocks": scheduler.num_gpu_blocks,
+            "swap_in_count": self.benchmark_swap_in_count,
+            "swap_out_count": self.benchmark_swap_out_count,
+        }
+
     async def start_all_event_loops(self):
         """
         Start all event loops
