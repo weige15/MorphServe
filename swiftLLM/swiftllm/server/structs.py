@@ -1,5 +1,6 @@
 import asyncio
 import dataclasses
+from typing import Optional
 
 @dataclasses.dataclass
 class StepOutput:
@@ -17,9 +18,20 @@ class RawRequest:
     prompt: str
     output_len: int
 
-    def __init__(self, prompt: str, output_len: int):
+    def __init__(
+        self,
+        prompt: str,
+        output_len: int,
+        *,
+        benchmark_request_id: Optional[str] = None,
+        benchmark_arrival_time_ns: Optional[int] = None,
+    ):
         self.prompt = prompt
         self.output_len = output_len
+        # Optional observational metadata used by the Phase-1 benchmark.
+        # The engine ignores these fields for scheduling and inference.
+        self.benchmark_request_id = benchmark_request_id
+        self.benchmark_arrival_time_ns = benchmark_arrival_time_ns
 
 
 class Request:
@@ -52,6 +64,15 @@ class Request:
         self.finished_event = asyncio.Event()
         self.request_id = -1
         self.output_token_ids = []
+
+        # Optional benchmark observations. These are timestamps only; they do
+        # not participate in admission, ordering, preemption, or inference.
+        self.benchmark_request_id = raw_request.benchmark_request_id
+        self.benchmark_arrival_time_ns = raw_request.benchmark_arrival_time_ns
+        self.benchmark_scheduler_eligible_time_ns: Optional[int] = None
+        self.benchmark_first_prefill_time_ns: Optional[int] = None
+        self.benchmark_first_output_token_time_ns: Optional[int] = None
+        self.benchmark_completion_time_ns: Optional[int] = None
     
     def is_finished(self) -> bool:
         return len(self.output_token_ids) == self.output_len
