@@ -6,7 +6,7 @@ This report, `sweep.csv`, `decomposition.csv`, admission evidence, and all figur
 
 ## A. Original validated SwiftLLM baseline
 
-The original control is the unquantized/FP16 local Llama 3.1 8B execution documented in `SWIFTLLM_BASELINE.md` and the earlier benchmark reports. It is not the fixed configuration used by the final sweep.
+The original control is the unquantized/FP16 local Llama 3.1 8B execution documented in [`baseline.md`](baseline.md) and the earlier benchmark reports. It is not the fixed configuration used by the final sweep.
 
 | EngineConfig field | Original validated value |
 | --- | ---: |
@@ -175,7 +175,7 @@ Increasing offered request arrival rate from `0.75` to `1.25` RPS produced a rep
 - Summaries were regenerated from raw JSONL by the command below and compared with the saved summaries: **PASS**.
 - Figures and tables use `aggregate.json`/CSV values produced from those raw files; image-open checks are recorded by the final completion audit.
 - Scheduler audit: `swiftLLM/swiftllm/server/scheduler.py` remains byte-identical to the checkpoint; no final experiment run modified it.
-- Full prompt-to-artifact completion checklist and current-state evidence: `PHASE1_FINAL_COMPLETION_AUDIT.md`.
+- Full prompt-to-artifact completion checklist and current-state evidence: [`final-audit.md`](final-audit.md).
 
 ```bash
 cd /nfs/home/s314511048/MorphServe
@@ -190,5 +190,5 @@ PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m benchmark.final_analyze \
   benchmark-results/phase1-final-rps-2 \
   benchmark-results/phase1-final-repeat-rps-2 \
   --output-dir benchmark-results/phase1-final \
-  --report PHASE1_FINAL_REPORT.md
+  --report docs/phase1/final-report.md
 ```

@@ -17,15 +17,15 @@ short-workload baseline or changing `scheduler.py`.
 
 | Requirement / success criterion | Current evidence inspected | Status |
 |---|---|---|
-| Read `SWIFTLLM_BASELINE.md` before work | File exists and was read at the start of this continuation | PASS |
-| Read `PHASE1_BENCHMARK_REPORT.md` before work | File exists and was read at the start of this continuation | PASS |
-| Read `PHASE1_SATURATION_REPORT.md` before work | File exists and was read at the start of this continuation | PASS |
-| Read `PHASE1_COMPLETION_AUDIT.md` before work | File exists and was read at the start of this continuation | PASS |
-| Read authoritative `PHASE1_KV_CALIBRATION.md` before work | File exists and was read at the start of this continuation | PASS |
-| Read `docs/MORPHSERVE_PHASE1_REFERENCE.md` when present | File exists and was read at the start of this continuation | PASS |
-| Preserve original validated baseline facts | `SWIFTLLM_BASELINE.md`, `PHASE1_SATURATION_REPORT.md`, and Section A of `PHASE1_FINAL_REPORT.md`: original EngineConfig, 3880 blocks, and 62,080 token slots | PASS |
-| Preserve the original short-workload compute result as separate evidence | Section A of `PHASE1_FINAL_REPORT.md`: approximately 35 RPS plateau at approximately 0.206% logical KV utilization, no swaps/preemptions, compute-bound classification | PASS |
-| Use the calibrated fixed configuration without recalibration | Every final metadata record and Section B of `PHASE1_FINAL_REPORT.md`: block 16, utilization 0.99, profiled 1768 GPU blocks, CPU 4096, sequence table 128, max blocks 3072, batch 32, batch-token budget 49152 | PASS |
+| Read `baseline.md` before work | File exists and was read at the start of this continuation | PASS |
+| Read `archive/benchmark-harness-report.md` before work | File exists and was read at the start of this continuation | PASS |
+| Read `archive/short-workload-saturation-report.md` before work | File exists and was read at the start of this continuation | PASS |
+| Read `archive/completion-audit.md` before work | File exists and was read at the start of this continuation | PASS |
+| Read authoritative `calibration.md` before work | File exists and was read at the start of this continuation | PASS |
+| Read `../../references/MORPHSERVE_PHASE1_REFERENCE.md` when present | File exists and was read at the start of this continuation | PASS |
+| Preserve original validated baseline facts | `baseline.md`, `archive/short-workload-saturation-report.md`, and Section A of `final-report.md`: original EngineConfig, 3880 blocks, and 62,080 token slots | PASS |
+| Preserve the original short-workload compute result as separate evidence | Section A of `final-report.md`: approximately 35 RPS plateau at approximately 0.206% logical KV utilization, no swaps/preemptions, compute-bound classification | PASS |
+| Use the calibrated fixed configuration without recalibration | Every final metadata record and Section B of `final-report.md`: block 16, utilization 0.99, profiled 1768 GPU blocks, CPU 4096, sequence table 128, max blocks 3072, batch 32, batch-token budget 49152 | PASS |
 | Use exact 2048-token prompts and 16 requested output tokens | Eight final `metadata.json` files and all final `requests.jsonl`: observed prompt 2048 and output 16 for every completed request | PASS |
 | Use fixed arrival mode and calibration seed policy | Final metadata: `arrival_mode=fixed`, `random_seed=2025`, no warmup, telemetry interval 0.25 s | PASS |
 | Keep model, GPU, scheduler, and workload settings fixed | `aggregate.json` verification: `fixed_configuration_consistent=true`; all eight final metadata records agree on fixed fields; only target RPS and derived schedule window/run ID differ | PASS |
@@ -54,10 +54,10 @@ short-workload baseline or changing `scheduler.py`.
 | Generate RPS vs peak logical KV plot from saved data | `.../rps_vs_peak_logical_kv_utilization.png`; source series in `aggregate.json.plot_data` | PASS |
 | Generate RPS vs completed throughput plot from saved data | `.../rps_vs_completed_throughput.png`; source series in `aggregate.json.plot_data` | PASS |
 | Generate TTFT decomposition diagnostic | `.../rps_vs_ttft_components.png` and `decomposition.csv`, generated from raw timestamps | PASS |
-| Regenerate summaries, tables, plots, and report from raw files | `final_analyze.py` rewrites summaries using `summarize_run`, derives CSV/JSON/plots, and writes `PHASE1_FINAL_REPORT.md`; aggregate verification says summary regeneration and plot-source checks PASS | PASS |
+| Regenerate summaries, tables, plots, and report from raw files | `final_analyze.py` rewrites summaries using `summarize_run`, derives CSV/JSON/plots, and writes `docs/phase1/final-report.md`; aggregate verification says summary regeneration and plot-source checks PASS | PASS |
 | Independently recompute selected request metrics and percentiles | `request_audit.json` stores all request timestamp recomputations and selected first/last IDs; `aggregate.json` stores independent TTFT/queueing/TPOT percentile checks for all eight runs | PASS |
 | Verify repeatability | Target 1 and 2 repeats reproduce 1768 blocks, 1677 peak decoding blocks, 94.85% peak KV utilization, and matching pressure queue ranges; request-level percentiles are preserved in `request_audit.json` | PASS |
-| Produce `PHASE1_FINAL_REPORT.md` sections A/B/C/D | File exists and contains baseline, fixed configuration/admission proof, final sweep tables/plots/evidence, and explicit conclusion/comparison policy | PASS |
+| Produce `final-report.md` sections A/B/C/D | File exists and contains baseline, fixed configuration/admission proof, final sweep tables/plots/evidence, and explicit conclusion/comparison policy | PASS |
 | Preserve qualitative-only MorphServe comparison | Section D says qualitative mechanism only and makes no numerical paper reproduction claim | PASS |
 | Keep `swiftLLM/swiftllm/server/scheduler.py` unchanged | `git diff --exit-code -- swiftLLM/swiftllm/server/scheduler.py` passed; current and `git show HEAD:` SHA-256 are both `80e2142c5a7bab300aad43e10af110043d429fd9d1655e5942f5073f99305c6d` | PASS |
 | Avoid MorphServe, quantization, layer swapping, KV resizing, new admission, scheduler, forecasting, or mitigation changes | Final command uses existing benchmark/Engine path and unchanged scheduler; code diff contains no such implementation | PASS |

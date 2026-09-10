@@ -477,7 +477,7 @@ VENV=/nfs/home/s314511048/.venv
 PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m benchmark.final_analyze \\
   {" \\\n  ".join(record['run_dir'] for record in records)} \\
   --output-dir benchmark-results/phase1-final \\
-  --report PHASE1_FINAL_REPORT.md'''
+  --report docs/phase1/final-report.md'''
     lines = [
         "# PHASE1 Final SwiftLLM KV-Saturation Report",
         "",
@@ -487,7 +487,7 @@ PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m benchmark.final_analyze \\
         "",
         "## A. Original validated SwiftLLM baseline",
         "",
-        "The original control is the unquantized/FP16 local Llama 3.1 8B execution documented in `SWIFTLLM_BASELINE.md` and the earlier benchmark reports. It is not the fixed configuration used by the final sweep.",
+        "The original control is the unquantized/FP16 local Llama 3.1 8B execution documented in [`baseline.md`](baseline.md) and the earlier benchmark reports. It is not the fixed configuration used by the final sweep.",
         "",
         "| EngineConfig field | Original validated value |",
         "| --- | ---: |",
@@ -604,7 +604,7 @@ PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m benchmark.final_analyze \\
         f"- Summaries were regenerated from raw JSONL by the command below and compared with the saved summaries: **{'PASS' if validation['summary_regeneration_passed'] else 'FAIL'}**.",
         "- Figures and tables use `aggregate.json`/CSV values produced from those raw files; image-open checks are recorded by the final completion audit.",
         "- Scheduler audit: `swiftLLM/swiftllm/server/scheduler.py` remains byte-identical to the checkpoint; no final experiment run modified it.",
-        "- Full prompt-to-artifact completion checklist and current-state evidence: `PHASE1_FINAL_COMPLETION_AUDIT.md`.",
+        "- Full prompt-to-artifact completion checklist and current-state evidence: [`final-audit.md`](final-audit.md).",
         "",
         "```bash",
         analysis_command,

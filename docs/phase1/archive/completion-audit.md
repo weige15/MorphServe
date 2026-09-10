@@ -8,8 +8,8 @@ Complete a reproducible, open-loop RPS sweep of the unchanged full-precision Swi
 
 | Requirement | Evidence inspected | Status |
 |---|---|---|
-| Read authoritative baseline/reference inputs before experimental work | `SWIFTLLM_BASELINE.md`, `PHASE1_BENCHMARK_REPORT.md`, `docs/MORPHSERVE_PHASE1_REFERENCE.md` | PASS |
-| Preserve full-precision validated baseline and exact baseline EngineConfig | Final run `metadata.json` files; `PHASE1_SATURATION_REPORT.md` fixed configuration; all runs report 3,880 GPU blocks | PASS |
+| Read authoritative baseline/reference inputs before experimental work | `docs/phase1/baseline.md`, `docs/phase1/archive/benchmark-harness-report.md`, `references/MORPHSERVE_PHASE1_REFERENCE.md` | PASS |
+| Preserve full-precision validated baseline and exact baseline EngineConfig | Final run `metadata.json` files; `docs/phase1/archive/short-workload-saturation-report.md` fixed configuration; all runs report 3,880 GPU blocks | PASS |
 | Keep scheduler semantics, FCFS, admission, preemption/swap, precision, and KV policy unchanged | `benchmark-results/phase1-saturation/scheduler_audit.txt`; before/after/baseline SHA-256 all `80e214...`; `git diff --exit-code -- swiftLLM/swiftllm/server/scheduler.py` | PASS |
 | Perform only minimum calibration before final sweep | `benchmark-results/phase1-calibration-warmup-fixed/`; one fixed 8/4-token warmup calibration selected the one-request warmup policy | PASS |
 | Hold model, EngineConfig, GPU, prompt/output lengths, arrival mode, seed, warmup, telemetry, and request count fixed | `aggregate.json` `verification.fixed_configuration_consistent=true`; 12/12 metadata records checked; only target RPS and derived schedule window/run identity differ | PASS |
@@ -27,11 +27,11 @@ Complete a reproducible, open-loop RPS sweep of the unchanged full-precision Swi
 | Regenerate summaries/tables/plots from raw machine-readable files | `swiftLLM/benchmark/analyze.py`; summaries regenerated with `benchmark.summarize`; `aggregate.json` and `sweep.csv` produced by the analysis command | PASS |
 | Independently recompute percentiles from raw timestamps | `aggregate.json` per-run `verification.per_run[*].percentiles`; TTFT/queueing/TPOT checks pass for all 12 runs | PASS |
 | Verify plotted data source | `aggregate.json` `verification.plot_source_matches_points=true`; `plot_data` records exact source series | PASS |
-| Produce required report contents | `PHASE1_SATURATION_REPORT.md`: configuration, exact commands, complete tables, paths, estimate, causal evidence, qualitative comparison, discrepancy, uncertainty, next test | PASS |
+| Produce required report contents | `docs/phase1/archive/short-workload-saturation-report.md`: configuration, exact commands, complete tables, paths, estimate, causal evidence, qualitative comparison, discrepancy, uncertainty, next test | PASS |
 | Report local mismatch honestly and give smallest next adjustment | Report states no KV saturation; recommends retaining baseline and increasing fixed output length toward ~15,500 tokens for a controlled KV-pressure test | PASS |
 | Avoid all Phase-1 non-goals | No MorphServe, quantization, layer swapping, KV resizing, new scheduler, admission heuristic, forecasting, or mitigation changes; scheduler audit remains clean | PASS |
 | Run implementation checks | `unittest benchmark.test_benchmark`: 6 tests OK; `py_compile`: PASS; `git diff --check`: PASS; raw completion/config/artifact audit: PASS | PASS |
 
 ## Final decision
 
-The deliverables are complete for the selected practical workload. The experiment demonstrates an RPS knee and compute-bound saturation, but it does **not** demonstrate the reference memory/KV saturation phenomenon. That negative result is intentional and is reported without overclaiming; the next controlled experiment is documented in `PHASE1_SATURATION_REPORT.md`.
+The deliverables are complete for the selected practical workload. The experiment demonstrates an RPS knee and compute-bound saturation, but it does **not** demonstrate the reference memory/KV saturation phenomenon. That negative result is intentional and is reported without overclaiming; the next controlled experiment is documented in `docs/phase1/archive/short-workload-saturation-report.md`.

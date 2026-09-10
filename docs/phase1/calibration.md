@@ -183,7 +183,7 @@ Hold this configuration fixed in that later experiment and vary only the intende
 
 | requirement | concrete evidence | status |
 |---|---|---|
-| Read required baseline, benchmark, saturation, audit, and reference documents | Files read before calibration: `SWIFTLLM_BASELINE.md`, `PHASE1_BENCHMARK_REPORT.md`, `PHASE1_SATURATION_REPORT.md`, `PHASE1_COMPLETION_AUDIT.md`, `docs/MORPHSERVE_PHASE1_REFERENCE.md` | PASS |
+| Read required baseline, benchmark, saturation, audit, and reference documents | Files read before calibration: `baseline.md`, `archive/benchmark-harness-report.md`, `archive/short-workload-saturation-report.md`, `archive/completion-audit.md`, `../../references/MORPHSERVE_PHASE1_REFERENCE.md` | PASS |
 | Preserve the prior short-workload result as negative KV evidence | Prior report value (~0.206%, no swaps/preemptions) retained verbatim in this report | PASS |
 | Inspect/report all requested EngineConfig fields | Baseline and selected tables above include batch, token, block, CPU/GPU, sequence, and utilization fields | PASS |
 | Use 3880-block/16-token baseline capacity explicitly | 62,080 slots and `62,080/C` planning table above | PASS |
