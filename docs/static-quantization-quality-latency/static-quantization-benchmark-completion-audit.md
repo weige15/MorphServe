@@ -31,7 +31,7 @@ The objective requires either all four static configurations with auditable meas
 | Claim (2) tested without forcing the trend | report says only P95 partial support; SLO worsens/non-monotonic | PASS |
 | Claim (3) tested without forcing the trend | report says selective degradation partial, full W4 reverses it | PASS |
 | Claim (4) tested | report documents proxy-level Pareto evidence and non-monotonicity | PASS |
-| Iterative uncertainty reduction performed | v1 106-row runs retained under `input-v1`/`runs-v1`; v2 fixed prompt construction to preserve answer cue and reran all conditions | PASS |
+| Iterative uncertainty reduction performed | v1 prompt-construction issue was identified before final v2; v2 fixed prompt construction to preserve the answer cue and reran all conditions | PASS |
 | Final report has required separated sections | `static-quantization-benchmark-report.md`: CONFIRMED FINDINGS, SUPPORTED BUT UNCERTAIN FINDINGS, BLOCKED QUESTIONS, REMAINING UNCERTAINTY | PASS |
 | Existing tests and code gates run | `completion_audit.txt`: 6 unittest tests OK, py_compile pass, git diff --check pass | PASS |
 | Plot opens and scheduler remains unchanged | `completion_audit.txt`: PNG verify pass; scheduler current/HEAD SHA identical | PASS |

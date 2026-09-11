@@ -75,7 +75,7 @@ The corresponding raw-derived files are:
 
 ## REMAINING UNCERTAINTY
 
-Absolute differences from Table 5 are dominated by checkpoint identity (Llama 3.1 base vs paper Llama 3), Chinese demo vs English-translated DuReader, the substituted BurstGPT interval, RTX 3090 vs L4 hardware, SwiftLLM plus NF4 proxy vs MorphServe/AWQ kernels, unavailable LIS order, and finite two-run variability. Quantization also changes SwiftLLM's profiled KV capacity non-monotonically (`1768`, `1646`, `2876`, `3928` GPU blocks for 0/8/16/32), reflecting proxy/kernel memory overhead rather than a paper-faithful resource profile. The v1 workload/prompt-construction runs are retained under `input-v1`, `runs-v1`, and `logs-v1`; v2 is final because it preserves the answer cue after discovering that prefix-only truncation could remove it.
+Absolute differences from Table 5 are dominated by checkpoint identity (Llama 3.1 base vs paper Llama 3), Chinese demo vs English-translated DuReader, the substituted BurstGPT interval, RTX 3090 vs L4 hardware, SwiftLLM plus NF4 proxy vs MorphServe/AWQ kernels, unavailable LIS order, and finite two-run variability. Quantization also changes SwiftLLM's profiled KV capacity non-monotonically (`1768`, `1646`, `2876`, `3928` GPU blocks for 0/8/16/32), reflecting proxy/kernel memory overhead rather than a paper-faithful resource profile. The v1 workload/prompt-construction runs were used during development but are not part of the retained final artifact set; v2 is final because it preserves the answer cue after discovering that prefix-only truncation could remove it.
 
 ## Reproduction and regeneration
 
