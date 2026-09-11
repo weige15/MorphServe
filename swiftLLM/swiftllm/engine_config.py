@@ -22,6 +22,11 @@ class EngineConfig:
     max_batch_size: int
     max_tokens_in_batch: int
 
+    # Optional static layer-quantization controls.  A value of zero preserves
+    # the upstream FP16 path; positive values quantize decoder layers in the
+    # fixed front-to-back order used by the Table-5 proxy benchmark.
+    quantized_layer_count: int = 0
+
     @staticmethod
     def add_cli_args(parser: argparse.ArgumentParser):
         """
@@ -81,5 +86,12 @@ class EngineConfig:
             type=int,
             default=32768,
             help="Maximum number of tokens in a batch",
+        )
+        parser.add_argument(
+            "--quantized-layer-count",
+            type=int,
+            default=0,
+            choices=range(33),
+            help="Number of front-to-back decoder layers to run with the W4 proxy",
         )
         

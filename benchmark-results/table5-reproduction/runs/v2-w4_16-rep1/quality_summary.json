@@ -1,0 +1,47 @@
+{
+  "completed_request_count": 106,
+  "condition": "w4_16",
+  "f1_distribution": {
+    "count": 106,
+    "mean": 0.0029012764170533957,
+    "p50": 0.0,
+    "p95": 0.014141828277479234,
+    "p99": 0.04205141400157799
+  },
+  "f1_percent": 0.29012764170533956,
+  "failed_or_incomplete_request_count": 0,
+  "num_gpu_blocks_observed": [
+    2876
+  ],
+  "paper_reference_target": {
+    "f1_percent": 23.93,
+    "slo_violation_percent": 0.0,
+    "ttft_p95_s": 1.74
+  },
+  "peak_logical_kv_utilization": 1.0,
+  "peak_waiting_q_depth": 64,
+  "quality_metric": "macro mean of per-request character-overlap F1 against best reference",
+  "quality_source": "requests.jsonl generated_answer and dataset_reference_answers",
+  "quantization_label": "uniform_w4_nf4_bitsandbytes_proxy",
+  "quantized_layer_count": 16,
+  "raw_telemetry_sample_count": 998,
+  "request_count_launched": 106,
+  "run_id": "v2-w4_16-rep1",
+  "slo_denominator_policy": "all launched requests; failures/incomplete reported separately",
+  "slo_threshold_s": 2.0,
+  "slo_violation_count": 97,
+  "slo_violation_percent_of_launched": 91.50943396226415,
+  "source_raw_files": [
+    "metadata.json",
+    "requests.jsonl",
+    "telemetry.jsonl"
+  ],
+  "ttft_p95_s": 72.7503834585,
+  "ttft_s": {
+    "count": 106,
+    "mean": 34.51559632881132,
+    "p50": 37.6556599105,
+    "p95": 72.7503834585,
+    "p99": 77.77222086745002
+  }
+}

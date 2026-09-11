@@ -69,7 +69,8 @@ class LlamaModel:
             self.model_config,
             torch.float16,
             self.engine_config.model_path,
-            self.engine_config.use_dummy
+            self.engine_config.use_dummy,
+            quantized_layer_count=self.engine_config.quantized_layer_count,
         )
 
         # Initialize rotary embeddings

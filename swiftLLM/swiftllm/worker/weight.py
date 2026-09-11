@@ -1,10 +1,28 @@
+import dataclasses
 import json
 import os
-import dataclasses
-import torch
+from typing import Any
+
 import safetensors
+import torch
 
 from swiftllm.model_config import LlamaModelConfig
+
+
+@dataclasses.dataclass
+class QuantizedMatrix:
+    """A bitsandbytes 4-bit matrix in the layout expected by matmul_4bit.
+
+    The source model stores linear weights as [out_features, in_features],
+    while bitsandbytes' low-bit matmul stores [in_features, out_features].
+    Keeping the quantization state beside the packed tensor makes the choice
+    explicit and prevents accidentally mixing quantization implementations.
+    """
+
+    data: torch.Tensor
+    quant_state: Any
+    shape: tuple[int, int]
+
 
 @dataclasses.dataclass
 class RegisteredWeightItem:
@@ -12,6 +30,7 @@ class RegisteredWeightItem:
     key: str
     shape: tuple
     dtype: torch.dtype
+    quantizable: bool = False
 
 class WeightBase:
     """
@@ -38,17 +57,41 @@ class WeightBase:
         raise NotImplementedError()
     
     def load_weights(self, getter: callable):
-        """
-        Load weights
-        """
+        """Load weights, optionally replacing matrix weights with the W4 proxy."""
         for item in self.registered_weights:
             weight_value = getter(item)
             assert weight_value is not None, f"getter() returned None for {item.key} ({item})"
             assert isinstance(weight_value, torch.Tensor), f"Weight {item.key} is not a tensor"
             assert weight_value.shape == item.shape, f"Shape of weight {item.key} does not match"
             assert weight_value.device.type == "cuda", f"Weight {item.key} is not on GPU"
-            setattr(self, item.attr_name, weight_value.to(item.dtype))
+            if getattr(self, "quantized", False) and item.quantizable:
+                setattr(self, item.attr_name, quantize_matrix(weight_value, item.dtype))
+            else:
+                setattr(self, item.attr_name, weight_value.to(item.dtype))
         self._post_process_after_load(getter)
+
+
+def quantize_matrix(weight: torch.Tensor, dtype: torch.dtype) -> QuantizedMatrix:
+    """Quantize one [out, in] weight with the single supported W4 proxy.
+
+    This deliberately uses bitsandbytes NF4 weight-only quantization, not AWQ.
+    The function is called only for selected decoder-layer matrices and is
+    shared by the 8/16/32-layer conditions.
+    """
+    try:
+        import bitsandbytes.functional as bnb_functional
+    except ImportError as exc:  # pragma: no cover - environment dependent
+        raise RuntimeError("bitsandbytes is required for the W4 proxy") from exc
+
+    source = weight.to(dtype=dtype).transpose(0, 1).contiguous()
+    packed, quant_state = bnb_functional.quantize_4bit(
+        source,
+        absmax=None,
+        blocksize=64,
+        compress_statistics=False,
+        quant_type="nf4",
+    )
+    return QuantizedMatrix(packed, quant_state, tuple(weight.shape))
 
 
 class LlamaTransformerLayerWeight(WeightBase):
@@ -61,7 +104,8 @@ class LlamaTransformerLayerWeight(WeightBase):
         layer_id: int,
         model_config: LlamaModelConfig,
         dtype: torch.dtype,
-        model_version: str = "llama"
+        model_version: str = "llama",
+        quantized: bool = False,
     ):
         super().__init__()
 
@@ -69,6 +113,7 @@ class LlamaTransformerLayerWeight(WeightBase):
         self.model_config = model_config
         self.dtype = dtype
         self.model_version = model_version
+        self.quantized = quantized
 
         self.register_weight(RegisteredWeightItem(
             "attn_norm",
@@ -80,25 +125,29 @@ class LlamaTransformerLayerWeight(WeightBase):
             "q_proj",
             f"model.layers.{self.layer_id}.self_attn.q_proj.weight",
             (self.model_config.hidden_size, self.model_config.hidden_size),
-            self.dtype
+            self.dtype,
+            quantizable=True,
         ))
         self.register_weight(RegisteredWeightItem(
             "k_proj",
             f"model.layers.{self.layer_id}.self_attn.k_proj.weight",
             (self.model_config.num_kv_heads*self.model_config.head_dim, self.model_config.hidden_size),
-            self.dtype
+            self.dtype,
+            quantizable=True,
         ))
         self.register_weight(RegisteredWeightItem(
             "v_proj",
             f"model.layers.{self.layer_id}.self_attn.v_proj.weight",
             (self.model_config.num_kv_heads*self.model_config.head_dim, self.model_config.hidden_size),
-            self.dtype
+            self.dtype,
+            quantizable=True,
         ))
         self.register_weight(RegisteredWeightItem(
             "o_proj",
             f"model.layers.{self.layer_id}.self_attn.o_proj.weight",
             (self.model_config.hidden_size, self.model_config.hidden_size),
-            self.dtype
+            self.dtype,
+            quantizable=True,
         ))
 
         self.register_weight(RegisteredWeightItem(
@@ -111,27 +160,31 @@ class LlamaTransformerLayerWeight(WeightBase):
             "up_proj",
             f"model.layers.{self.layer_id}.mlp.up_proj.weight",
             (self.model_config.ffn_inter_dim, self.model_config.hidden_size),
-            self.dtype
+            self.dtype,
+            quantizable=True,
         ))
         self.register_weight(RegisteredWeightItem(
             "gate_proj",
             f"model.layers.{self.layer_id}.mlp.gate_proj.weight",
             (self.model_config.ffn_inter_dim, self.model_config.hidden_size),
-            self.dtype
+            self.dtype,
+            quantizable=True,
         ))
         self.register_weight(RegisteredWeightItem(
             "down_proj",
             f"model.layers.{self.layer_id}.mlp.down_proj.weight",
             (self.model_config.hidden_size, self.model_config.ffn_inter_dim),
-            self.dtype
+            self.dtype,
+            quantizable=True,
         ))
 
     def _post_process_after_load(self, getter: callable):
         # pylint: disable=no-member
-        # self.qkv_proj = torch.cat((self.q_proj, self.k_proj, self.v_proj), dim=0).contiguous()
-        # del self.q_proj, self.k_proj, self.v_proj
-        self.up_gate_proj = torch.cat((self.up_proj, self.gate_proj), dim=0).contiguous()
-        del self.up_proj, self.gate_proj
+        # Packed W4 matrices cannot be concatenated in source-weight layout.
+        # Keep the two MLP projections separate in a quantized layer.
+        if not self.quantized:
+            self.up_gate_proj = torch.cat((self.up_proj, self.gate_proj), dim=0).contiguous()
+            del self.up_proj, self.gate_proj
 
 
 class LlamaWeight(WeightBase):
@@ -139,7 +192,8 @@ class LlamaWeight(WeightBase):
         self,
         model_config: LlamaModelConfig,
         dtype: torch.dtype,
-        model_version: str = "llama"
+        model_version: str = "llama",
+        quantized_layer_count: int = 0,
     ):
         super().__init__()
 
@@ -178,7 +232,13 @@ class LlamaWeight(WeightBase):
 
         self.layers: list[LlamaTransformerLayerWeight] = []
         for i in range(self.model_config.num_layers):
-            layer = LlamaTransformerLayerWeight(i, self.model_config, self.dtype, self.model_version)
+            layer = LlamaTransformerLayerWeight(
+                i,
+                self.model_config,
+                self.dtype,
+                self.model_version,
+                quantized=i < quantized_layer_count,
+            )
             self.layers.append(layer)
 
     def _post_process_after_load(self, getter: callable):
@@ -191,7 +251,8 @@ def load_weights(
     dtype: torch.dtype,
     model_path: str,
     use_dummy: bool = False,
-    model_version: str = "auto"
+    model_version: str = "auto",
+    quantized_layer_count: int = 0,
 ) -> LlamaWeight:
     """
     Load weights from a given path
@@ -267,6 +328,11 @@ def load_weights(
                 return file[item.key].to(item.dtype)
             getter = weight_getter_real
 
-    weight = LlamaWeight(model_config, dtype, model_version)
+    weight = LlamaWeight(
+        model_config,
+        dtype,
+        model_version,
+        quantized_layer_count=quantized_layer_count,
+    )
     weight.load_weights(getter)
     return weight

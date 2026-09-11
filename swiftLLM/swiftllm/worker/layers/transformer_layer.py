@@ -122,8 +122,16 @@ class LlamaTransformerLayer:
         k = None
         v = None
 
-        # FFN
-        up_gate_proj = linear(o, self.weight.up_gate_proj)
+        # FFN.  FP16 layers retain the upstream fused up+gate projection;
+        # quantized layers keep packed matrices separate and concatenate their
+        # outputs in the same [up, gate] layout before the fused SiLU product.
+        if self.weight.quantized:
+            up_gate_proj = torch.cat((
+                linear(o, self.weight.up_proj),
+                linear(o, self.weight.gate_proj),
+            ), dim=1)
+        else:
+            up_gate_proj = linear(o, self.weight.up_gate_proj)
         silu_and_mul_inplace(up_gate_proj)
         ffn_out = linear(up_gate_proj[:, :self.model_config.ffn_inter_dim], self.weight.down_proj)
 

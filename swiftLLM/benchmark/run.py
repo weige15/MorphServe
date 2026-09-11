@@ -184,6 +184,7 @@ def _build_engine_config(args: argparse.Namespace) -> swiftllm.EngineConfig:
         max_blocks_per_seq=args.max_blocks_per_seq,
         max_batch_size=args.max_batch_size,
         max_tokens_in_batch=args.max_tokens_in_batch,
+        quantized_layer_count=args.quantized_layer_count,
     )
 
 
@@ -277,7 +278,7 @@ async def _run(args: argparse.Namespace) -> Path:
     metadata["num_gpu_blocks"] = initial_snapshot["num_gpu_blocks"]
     metadata["num_cpu_blocks"] = args.num_cpu_blocks
     metadata["gpu_kv_token_slots"] = args.block_size * initial_snapshot["num_gpu_blocks"]
-    if args.expected_num_gpu_blocks is not None and initial_snapshot["num_gpu_blocks"] != args.expected_num_gpu_blocks:
+    if args.expected_num_gpu_blocks is not None and args.expected_num_gpu_blocks > 0 and initial_snapshot["num_gpu_blocks"] != args.expected_num_gpu_blocks:
         raise RuntimeError(
             f"num_gpu_blocks={initial_snapshot['num_gpu_blocks']} does not match expected "
             f"{args.expected_num_gpu_blocks}; refusing to run a non-baseline configuration"
