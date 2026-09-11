@@ -15,7 +15,7 @@ PYTHONPATH="$PWD:$PWD/csrc" CUDA_VISIBLE_DEVICES=3 \
   --model-path "$MODEL" --target-rps 0.5 --arrival-mode fixed \
   --request-count 4 --prompt-token-count 8 --output-token-count 4 \
   --seed 2025 --telemetry-interval-s 0.1 \
-  --output-dir ../benchmark-results --run-id phase1-low-load-fixed \
+  --output-dir ../benchmark-results/phase-1/baseline-low-load/runs --run-id fixed-arrivals \
   --expected-num-gpu-blocks 3880
 ```
 
@@ -24,7 +24,7 @@ The run writes `metadata.json`, `requests.jsonl`, `telemetry.jsonl`, and
 
 ```bash
 PYTHONPATH="$PWD" "$VENV/bin/python" -m benchmark.summarize \
-  ../benchmark-results/phase1-low-load-fixed
+  ../benchmark-results/phase-1/baseline-low-load/runs/fixed-arrivals
 ```
 
 ## Timestamp and metric contract

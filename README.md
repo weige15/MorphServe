@@ -4,13 +4,13 @@ MorphServe is a research repository for measuring SwiftLLM serving behavior unde
 
 ## Start here
 
-- [Phase 1 context card](docs/phase1/README.md) — the only document normally needed for current work.
-- [Final Phase 1 report](docs/phase1/final-report.md) — results and reproduction commands.
-- [Final audit](docs/phase1/final-audit.md) — detailed verification evidence.
+- [Phase 1 context card](docs/phase-1/README.md) — the only document normally needed for current work.
+- [Final Phase 1 report](docs/phase-1/kv-admission-sweep-report.md) — results and reproduction commands.
+- [Final audit](docs/phase-1/kv-admission-sweep-audit.md) — detailed verification evidence.
 - [Onboarding guide](doc/onboarding.md) — setup, workflow, tests, and troubleshooting.
 - [Static quantization quality–latency benchmark](docs/static-quantization-quality-latency/static-quantization-benchmark-report.md) — protocol, results, and regeneration commands.
 
-Historical reports are preserved in [`docs/phase1/archive/`](docs/phase1/archive/) but are not required for normal context.
+Historical reports are preserved in [`docs/phase-1/archive/`](docs/phase-1/archive/) but are not required for normal context.
 
 ## Quickstart
 
@@ -25,7 +25,7 @@ PYTHONPATH="$PWD:$PWD/csrc" CUDA_VISIBLE_DEVICES=3 \
   --model-path "$MODEL" --target-rps 0.5 --arrival-mode fixed \
   --request-count 4 --prompt-token-count 8 --output-token-count 4 \
   --seed 2025 --telemetry-interval-s 0.1 \
-  --output-dir ../benchmark-results --run-id phase1-low-load-fixed
+  --output-dir ../benchmark-results/phase-1/baseline-low-load/runs --run-id fixed-arrivals
 ```
 
 Run the CPU-only checks from the repository root:
@@ -39,8 +39,8 @@ PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m unittest benchmark.test_benchma
 
 - `swiftLLM/swiftllm/` — vendored SwiftLLM implementation.
 - `swiftLLM/benchmark/` — open-loop runner, analysis, metrics, and tests.
-- `benchmark-results/` — raw JSONL runs and derived Phase 1 artifacts.
-- `docs/phase1/` — curated current documentation; `archive/` contains superseded reports.
+- `benchmark-results/phase-1/` — Phase 1 raw runs and derived artifacts, grouped by experiment.
+- `docs/phase-1/` — curated current documentation; `archive/` contains superseded reports.
 - `docs/static-quantization-quality-latency/` — static quantization benchmark protocol, report, and audit.
 - `benchmark-results/static-quantization-quality-latency/` — raw and derived static quantization benchmark artifacts.
 - `references/` — experimental reference material and source PDF.

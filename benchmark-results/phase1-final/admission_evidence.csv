@@ -1,9 +1,0 @@
-run_id,target_rps,new_prefill_blocks,pressure_sample_count,high_kv_sample_count,pressure_elapsed_s,pressure_waiting_q_range,pressure_running_q_range,pressure_decoding_blocks_range,pressure_logical_kv_range,max_batch_constraint_slack,max_tokens_constraint_slack,per_sequence_constraint_slack,sequence_table_constraint_slack,admission_condition
-phase1-final-rps-0p5,0.5,128,0,0,"[None, None]","[None, None]","[None, None]","[None, None]","[None, None]",True,True,True,True,num_decoding_gpu_blocks + 128 > 1768
-phase1-final-rps-0p75,0.75,128,0,0,"[None, None]","[None, None]","[None, None]","[None, None]","[None, None]",True,True,True,True,num_decoding_gpu_blocks + 128 > 1768
-phase1-final-rps-1,1.0,128,4,10,"[13.544709887, 14.296985444]","[1, 2]","[13, 13]","[1664, 1677]","[0.9411764705882353, 0.9485294117647058]",True,True,True,True,num_decoding_gpu_blocks + 128 > 1768
-phase1-final-repeat-rps-1,1.0,128,4,10,"[13.546406456, 14.298716755]","[1, 2]","[13, 13]","[1664, 1677]","[0.9411764705882353, 0.9485294117647058]",True,True,True,True,num_decoding_gpu_blocks + 128 > 1768
-phase1-final-rps-1p25,1.25,128,6,6,"[13.05774604, 14.312645146]","[4, 5]","[13, 13]","[1664, 1677]","[0.9411764705882353, 0.9485294117647058]",True,True,True,True,num_decoding_gpu_blocks + 128 > 1768
-phase1-final-rps-1p5,1.5,128,24,25,"[8.777480147, 14.550494415]","[1, 7]","[13, 13]","[1664, 1677]","[0.9411764705882353, 0.9485294117647058]",True,True,True,True,num_decoding_gpu_blocks + 128 > 1768
-phase1-final-rps-2,2.0,128,25,25,"[8.533906049, 14.558503778]","[5, 7]","[13, 13]","[1664, 1677]","[0.9411764705882353, 0.9485294117647058]",True,True,True,True,num_decoding_gpu_blocks + 128 > 1768
-phase1-final-repeat-rps-2,2.0,128,25,25,"[8.533704499, 14.556435719]","[5, 7]","[13, 13]","[1664, 1677]","[0.9411764705882353, 0.9485294117647058]",True,True,True,True,num_decoding_gpu_blocks + 128 > 1768
