@@ -47,8 +47,12 @@ The complete final sweep command is preserved in [`docs/phase1/final-report.md`]
 | `swiftLLM/benchmark/summarize.py` | Regenerates one run summary from raw files. |
 | `swiftLLM/benchmark/analyze.py` | Historical short-workload aggregation. |
 | `swiftLLM/benchmark/final_analyze.py` | Final KV-pressure aggregation and report generation. |
+| `swiftLLM/benchmark/prepare_static_quantization_workload.py` | Builds the frozen workload for the static quantization quality–latency benchmark. |
+| `swiftLLM/benchmark/run_static_quantization_condition.py` | Runs one static quantization condition and records raw evidence. |
+| `swiftLLM/benchmark/analyze_static_quantization_quality_latency.py` | Derives quality/latency tables and plots from raw condition runs. |
 | `benchmark-results/` | Raw run directories and derived tables/figures. |
 | `docs/phase1/` | Current phase documentation. |
+| `docs/static-quantization-quality-latency/` | Static quantization benchmark protocol, report, and completion audit. |
 | `references/` | Source reference material. |
 
 ## Architecture Map
@@ -60,7 +64,7 @@ The core research constraint is baseline fidelity: benchmark instrumentation may
 ## Development Workflow
 
 1. Read `docs/phase1/README.md` first.
-2. For current results, read `docs/phase1/final-report.md`; read `final-audit.md` only when checking evidence.
+2. For Phase 1 results, read `docs/phase1/final-report.md`; for static quantization quality–latency results, read `docs/static-quantization-quality-latency/static-quantization-benchmark-report.md`.
 3. Change the smallest relevant source file. Do not add a new phase report at repository root.
 4. Keep raw run data under `benchmark-results/` and regenerate derived artifacts from raw data.
 5. Update the phase context card only when the current conclusion, reproduction recipe, or document map changes.

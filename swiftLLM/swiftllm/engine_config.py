@@ -24,7 +24,7 @@ class EngineConfig:
 
     # Optional static layer-quantization controls.  A value of zero preserves
     # the upstream FP16 path; positive values quantize decoder layers in the
-    # fixed front-to-back order used by the Table-5 proxy benchmark.
+    # fixed front-to-back order used by the static-quantization proxy benchmark.
     quantized_layer_count: int = 0
 
     @staticmethod

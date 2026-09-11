@@ -8,6 +8,7 @@ MorphServe is a research repository for measuring SwiftLLM serving behavior unde
 - [Final Phase 1 report](docs/phase1/final-report.md) — results and reproduction commands.
 - [Final audit](docs/phase1/final-audit.md) — detailed verification evidence.
 - [Onboarding guide](doc/onboarding.md) — setup, workflow, tests, and troubleshooting.
+- [Static quantization quality–latency benchmark](docs/static-quantization-quality-latency/static-quantization-benchmark-report.md) — protocol, results, and regeneration commands.
 
 Historical reports are preserved in [`docs/phase1/archive/`](docs/phase1/archive/) but are not required for normal context.
 
@@ -40,6 +41,8 @@ PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m unittest benchmark.test_benchma
 - `swiftLLM/benchmark/` — open-loop runner, analysis, metrics, and tests.
 - `benchmark-results/` — raw JSONL runs and derived Phase 1 artifacts.
 - `docs/phase1/` — curated current documentation; `archive/` contains superseded reports.
+- `docs/static-quantization-quality-latency/` — static quantization benchmark protocol, report, and audit.
+- `benchmark-results/static-quantization-quality-latency/` — raw and derived static quantization benchmark artifacts.
 - `references/` — experimental reference material and source PDF.
 
 For the full workflow and known environment issues, see [`doc/onboarding.md`](doc/onboarding.md).

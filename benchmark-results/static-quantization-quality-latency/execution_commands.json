@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "environment": "PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc CUDA_VISIBLE_DEVICES=3 /nfs/home/s314511048/.venv/bin/python",
+  "runs": [
+    {"run_id":"v2-fp16_0-rep0","condition":"fp16_0","quantized_layer_count":0,"log":"benchmark-results/static-quantization-quality-latency/logs/v2-fp16_0-rep0.log"},
+    {"run_id":"v2-fp16_0-rep1","condition":"fp16_0","quantized_layer_count":0,"log":"benchmark-results/static-quantization-quality-latency/logs/v2-fp16_0-rep1.log"},
+    {"run_id":"v2-w4_8-rep0","condition":"w4_8","quantized_layer_count":8,"log":"benchmark-results/static-quantization-quality-latency/logs/v2-w4_8-rep0.log"},
+    {"run_id":"v2-w4_8-rep1","condition":"w4_8","quantized_layer_count":8,"log":"benchmark-results/static-quantization-quality-latency/logs/v2-w4_8-rep1.log"},
+    {"run_id":"v2-w4_16-rep0","condition":"w4_16","quantized_layer_count":16,"log":"benchmark-results/static-quantization-quality-latency/logs/v2-w4_16-rep0.log"},
+    {"run_id":"v2-w4_16-rep1","condition":"w4_16","quantized_layer_count":16,"log":"benchmark-results/static-quantization-quality-latency/logs/v2-w4_16-rep1.log"},
+    {"run_id":"v2-w4_32-rep0","condition":"w4_32","quantized_layer_count":32,"log":"benchmark-results/static-quantization-quality-latency/logs/v2-w4_32-rep0.log"},
+    {"run_id":"v2-w4_32-rep1","condition":"w4_32","quantized_layer_count":32,"log":"benchmark-results/static-quantization-quality-latency/logs/v2-w4_32-rep1.log"}
+  ],
+  "command_template": "PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc CUDA_VISIBLE_DEVICES=3 /nfs/home/s314511048/.venv/bin/python -u -m benchmark.run_static_quantization_condition --model-path MODEL --workload benchmark-results/static-quantization-quality-latency/input/workload.jsonl --manifest benchmark-results/static-quantization-quality-latency/protocol_manifest.json --output-dir benchmark-results/static-quantization-quality-latency/runs --run-id RUN_ID --condition CONDITION --quantized-layer-count N --seed 2025 --telemetry-interval-s 0.25 --max-batch-size 32 --max-tokens-in-batch 49152 --num-cpu-blocks 4096 --timeout-s 2400",
+  "note": "The template is instantiated by each run entry; stdout/stderr is preserved in the listed log."
+}

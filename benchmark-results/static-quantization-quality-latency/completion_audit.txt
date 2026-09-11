@@ -1,0 +1,31 @@
+OBJECTIVE: static MorphServe Table-5 evidence for 0/8/16/32 W4 layers; F1, P95 TTFT, >2s SLO; raw audit, plot, regeneration, claim report.
+SPEC_REPORT_MANIFEST: True True e6bf558d24147387be6a9b41e330af88f0632d9de00edc0523251641ad35c507
+PAPER_SHA: 080ddcfe8c23e12bb421e4c1107c09246c82144345064018401b49e1a8dd2678 BURST_REV: d895a53bb7b8ec137d0d2fe203b335835a78c10a DUREADER_REV: c625076b06da8f56d59f19c41c73bd580a98a347
+RUN_PASS v2-fp16_0-rep0 fp16_0 0 requests=106 telemetry=942 blocks=1768
+RUN_PASS v2-fp16_0-rep1 fp16_0 0 requests=106 telemetry=942 blocks=1768
+RUN_PASS v2-w4_8-rep0 w4_8 8 requests=106 telemetry=1045 blocks=1646
+RUN_PASS v2-w4_8-rep1 w4_8 8 requests=106 telemetry=1047 blocks=1646
+RUN_PASS v2-w4_16-rep0 w4_16 16 requests=106 telemetry=996 blocks=2876
+RUN_PASS v2-w4_16-rep1 w4_16 16 requests=106 telemetry=998 blocks=2876
+RUN_PASS v2-w4_32-rep0 w4_32 32 requests=106 telemetry=1062 blocks=3928
+RUN_PASS v2-w4_32-rep1 w4_32 32 requests=106 telemetry=1061 blocks=3928
+FIXED_PROTOCOL_ONLY_LAYER_COUNT_CHANGED: PASS
+AGGREGATE_CONFIGS: [('fp16_0', 2), ('w4_8', 2), ('w4_16', 2), ('w4_32', 2)]
+PLOT_OPEN: PASS benchmark-results/static-quantization-quality-latency/quality_vs_p95_ttft.png
+SCHEDULER_UNCHANGED: True 80e2142c5a7bab300aad43e10af110043d429fd9d1655e5942f5073f99305c6d
+REGENERATION_COMMAND: PYTHONPATH=swiftLLM python -m benchmark.analyze_static_quantization_quality_latency --manifest ... --runs v2-* --output-dir benchmark-results/static-quantization-quality-latency
+AWQ_STATUS: source import succeeded; no AWQ fused kernel package or selective SwiftLLM integration available
+BLOCKED/UNCERTAINTY: exact LIS order, AWQ selective kernels, exact paper trace interval, English DuReader subset, Llama-3-vs-3.1, L4-vs-3090, SwiftLLM/NF4 proxy
+test_one_token_tpot_is_zero (benchmark.test_benchmark.MetricTests.test_one_token_tpot_is_zero) ... ok
+test_request_formulas (benchmark.test_benchmark.MetricTests.test_request_formulas) ... ok
+test_summary_can_be_regenerated_from_saved_raw_files (benchmark.test_benchmark.SummaryTests.test_summary_can_be_regenerated_from_saved_raw_files) ... ok
+test_duration_schedule_has_only_offsets_before_duration (benchmark.test_benchmark.WorkloadTests.test_duration_schedule_has_only_offsets_before_duration) ... ok
+test_fixed_schedule_is_independent_of_completion (benchmark.test_benchmark.WorkloadTests.test_fixed_schedule_is_independent_of_completion) ... ok
+test_poisson_schedule_is_seeded_and_not_completion_driven (benchmark.test_benchmark.WorkloadTests.test_poisson_schedule_is_seeded_and_not_completion_driven) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+PY_COMPILE_PASS
+GIT_DIFF_CHECK_PASS

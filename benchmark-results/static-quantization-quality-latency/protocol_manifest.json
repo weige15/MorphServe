@@ -1,0 +1,295 @@
+{
+  "commands": {
+    "aggregate": "PYTHONPATH=swiftLLM /nfs/home/s314511048/.venv/bin/python -m benchmark.analyze_static_quantization_quality_latency --manifest benchmark-results/static-quantization-quality-latency/protocol_manifest.json --runs benchmark-results/static-quantization-quality-latency/runs/... --output-dir benchmark-results/static-quantization-quality-latency",
+    "prepare": "cat /tmp/DuReader/DuReader-2.0/data/demo/devset/search.dev.json /tmp/DuReader/DuReader-2.0/data/demo/trainset/search.train.json > /tmp/DuReader/demo_dev_train.jsonl; PYTHONPATH=swiftLLM python -m benchmark.prepare_static_quantization_workload --trace /tmp/BurstGPT/data/BurstGPT_1.csv --dureader /tmp/DuReader/demo_dev_train.jsonl --tokenizer MODEL --output-dir benchmark-results/static-quantization-quality-latency/input",
+    "run_template": "PYTHONPATH=swiftLLM:swiftLLM/csrc CUDA_VISIBLE_DEVICES=3 /nfs/home/s314511048/.venv/bin/python -u -m benchmark.run_static_quantization_condition --model-path MODEL --workload benchmark-results/static-quantization-quality-latency/input/workload.jsonl --manifest benchmark-results/static-quantization-quality-latency/protocol_manifest.json --condition CONDITION --quantized-layer-count N --output-dir benchmark-results/static-quantization-quality-latency/runs --run-id RUN_ID --seed 2025 --telemetry-interval-s 0.25 --max-batch-size 32 --max-tokens-in-batch 49152 --num-cpu-blocks 4096 --timeout-s 3600 2>&1 | tee benchmark-results/static-quantization-quality-latency/logs/RUN_ID.log"
+  },
+  "conditions": [
+    {
+      "condition": "fp16_0",
+      "quantized_layer_count": 0
+    },
+    {
+      "condition": "w4_8",
+      "quantized_layer_count": 8
+    },
+    {
+      "condition": "w4_16",
+      "quantized_layer_count": 16
+    },
+    {
+      "condition": "w4_32",
+      "quantized_layer_count": 32
+    }
+  ],
+  "created_at_utc": "2026-09-10T20:07:46Z",
+  "engine_config_fixed": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "num_cpu_blocks": 4096,
+    "scheduler": "unchanged upstream SwiftLLM"
+  },
+  "hardware": {
+    "cuda_visible_devices": "3",
+    "nvidia_smi_query": "0, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n1, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n2, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n3, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n4, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n5, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n6, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03",
+    "planned_gpu": "NVIDIA GeForce RTX 3090, 24 GiB visible device 0 inside CUDA_VISIBLE_DEVICES=3"
+  },
+  "manifest_status": "recorded_before_table5_benchmark_runs",
+  "model": {
+    "actual": "meta-llama/Llama-3.1-8B",
+    "config_sha256": "54acfad3cffe057640904ca8a1e83525e6551c70c7a04c641f5a9eda0bbf64bd",
+    "paper": "Llama 3 8B",
+    "path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "snapshot_id": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "snapshot_ref": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "tokenizer_json_sha256": "76e48799b099d43365bd24ccd8ecc5aedac831718da780552f03b0a6eb4412aa"
+  },
+  "objective": "Auditable static MorphServe Table 5 quality-latency reproduction; only 0/8/16/32 W4 decoder layer conditions",
+  "paper": {
+    "evidence_sections": [
+      "Section 4.2 LIS",
+      "Section 5 Evaluation Setup",
+      "Section 5.2",
+      "Appendix B Serving Traces",
+      "Appendix B Evaluation Datasets"
+    ],
+    "path": "references/MorphServe.pdf",
+    "sha256": "080ddcfe8c23e12bb421e4c1107c09246c82144345064018401b49e1a8dd2678",
+    "table": "Table 5",
+    "targets": [
+      {
+        "condition": "w4_32",
+        "f1_percent": 23.66,
+        "slo_violation_percent": 0.0,
+        "ttft_p95_s": 1.62
+      },
+      {
+        "condition": "w4_16",
+        "f1_percent": 23.93,
+        "slo_violation_percent": 0.0,
+        "ttft_p95_s": 1.74
+      },
+      {
+        "condition": "w4_8",
+        "f1_percent": 24.16,
+        "slo_violation_percent": 4.2,
+        "ttft_p95_s": 2.61
+      },
+      {
+        "condition": "fp16_0",
+        "f1_percent": 25.19,
+        "slo_violation_percent": 12.7,
+        "ttft_p95_s": 5.65
+      }
+    ]
+  },
+  "protocol": {
+    "arrival_mode": "trace_open_loop",
+    "dataset_mapping": "trace row i maps to i-th answer-bearing record in concatenated public DuReader demo dev then train files",
+    "f1_definition": "macro mean per-request character-overlap F1; official DuReader-style whitespace removal; best reference per request",
+    "generation": "greedy argmax; exactly 512 SwiftLLM steps; no sampling or EOS stopping",
+    "iteration_note": "v1 106-row workload runs retained under runs-v1; v2 final prompt construction preserves answer cue after discovering v1 prefix truncation could remove it",
+    "layer_order": "decoder layers [0..N-1] for N in {8,16,32}",
+    "layer_order_label": "lis_order_unavailable_front_to_back",
+    "prompt_construction": "content prefix + truncated context + answer cue preserved at prompt end, deterministic hello padding before cue; every prompt re-tokenized to exactly 1024",
+    "prompt_tokens": 1024,
+    "quantization": "uniform W4 NF4 bitsandbytes proxy for all W4 conditions; not AWQ",
+    "response_tokens": 512,
+    "seed": 2025,
+    "segment_selection": "first request-timestamp-started half-open 72-second window with at least 100 rows; current interval [744286,744358) with 106 rows",
+    "slo_ttft_threshold_s": 2.0,
+    "trace_scale": 1.75,
+    "ttft_definition": "first_stream_token_received_time - actual open-loop arrival",
+    "warmup_requests": 0
+  },
+  "public_sources": {
+    "AutoAWQ": {
+      "attempt": "source import succeeded; no AWQ fused kernel package or selective SwiftLLM integration available",
+      "revision": "88e4c76b20755db275574e6a03c83c84ba3bece5",
+      "url": "https://github.com/casper-hansen/AutoAWQ.git",
+      "version": "0.2.9"
+    },
+    "BurstGPT": {
+      "file": "data/BurstGPT_1.csv",
+      "file_sha256": "46fc9480ef0b748ecb2b51d512ff08c196b031782cbe6f78e28044d768e86d5a",
+      "revision": "d895a53bb7b8ec137d0d2fe203b335835a78c10a",
+      "url": "https://github.com/HPMLL/BurstGPT.git"
+    },
+    "DuReader": {
+      "combined_source_artifact": "/tmp/DuReader/demo_dev_train.jsonl",
+      "combined_source_sha256": "737d41af65db6b69108c083576c85d3f4f323d7e3ef401d67d1bcde0f6ff745b",
+      "file": [
+        "DuReader-2.0/data/demo/devset/search.dev.json",
+        "DuReader-2.0/data/demo/trainset/search.train.json"
+      ],
+      "file_sha256": {
+        "dev": "f7d7174d2cc81738f2554c3aa69f89af7b8d0f4bc808f1c3547469d12469e3a8",
+        "train": "ce2f61b93861203b4b2e1c03a2db558142bfa4edb2c758b9665bd003adfc49bc"
+      },
+      "language": "Chinese official DuReader 2.0 public demo dev+train records, first 106 answer-bearing rows; paper English-translated subset unavailable",
+      "revision": "c625076b06da8f56d59f19c41c73bd580a98a347",
+      "selected_records_artifact": "benchmark-results/static-quantization-quality-latency/input/dureader_selected.jsonl",
+      "selected_records_sha256": "404687fae052697e5c389c21fce6c1578a587306047ebe30279a54c023bc3bed",
+      "url": "https://github.com/baidu/DuReader.git"
+    }
+  },
+  "repository": {
+    "morphserve_git_commit": "7b3f2af4c15cc744b49c4ec6048d6151eee0ce3d",
+    "morphserve_git_status": "M swiftLLM/benchmark/run.py\n M swiftLLM/swiftllm/engine_config.py\n M swiftLLM/swiftllm/worker/kernels/linear.py\n M swiftLLM/swiftllm/worker/layers/transformer_layer.py\n M swiftLLM/swiftllm/worker/model.py\n M swiftLLM/swiftllm/worker/weight.py\n?? benchmark-results/static-quantization-quality-latency/\n?? docs/static-quantization-quality-latency/\n?? swiftLLM/benchmark/prepare_static_quantization_workload.py\n?? swiftLLM/benchmark/run_static_quantization_condition.py",
+    "swiftllm_upstream_commit": "682cf9a28f97f7490409981a2f181528f377eb5d"
+  },
+  "schema_version": 1,
+  "software": {
+    "bitsandbytes": "0.49.2",
+    "cuda_torch": "12.1",
+    "datasets": "2.17.1",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "ray": "2.55.1",
+    "safetensors": "0.8.0",
+    "torch": "2.5.1+cu121",
+    "transformers": "5.16.1",
+    "triton": "3.1.0",
+    "vllm": "0.11.2"
+  },
+  "tokenizer": {
+    "prompt_token_count": 1024,
+    "same_snapshot_as_model": true,
+    "special_tokens_behavior": "SwiftLLM tokenizer actor default; prompts verified at 1024 tokens with this tokenizer"
+  },
+  "workload": {
+    "dureader_sha256": "737d41af65db6b69108c083576c85d3f4f323d7e3ef401d67d1bcde0f6ff745b",
+    "dureader_source": "/tmp/DuReader/demo_dev_train.jsonl",
+    "language_note": "official public DuReader 2.0 Chinese demo; paper's English-translated subset unavailable",
+    "mapping_rule": "BurstGPT segment row i -> i-th answer-bearing DuReader demo row",
+    "prompt_token_count": 1024,
+    "request_ids": [
+      "table5-r0000",
+      "table5-r0001",
+      "table5-r0002",
+      "table5-r0003",
+      "table5-r0004",
+      "table5-r0005",
+      "table5-r0006",
+      "table5-r0007",
+      "table5-r0008",
+      "table5-r0009",
+      "table5-r0010",
+      "table5-r0011",
+      "table5-r0012",
+      "table5-r0013",
+      "table5-r0014",
+      "table5-r0015",
+      "table5-r0016",
+      "table5-r0017",
+      "table5-r0018",
+      "table5-r0019",
+      "table5-r0020",
+      "table5-r0021",
+      "table5-r0022",
+      "table5-r0023",
+      "table5-r0024",
+      "table5-r0025",
+      "table5-r0026",
+      "table5-r0027",
+      "table5-r0028",
+      "table5-r0029",
+      "table5-r0030",
+      "table5-r0031",
+      "table5-r0032",
+      "table5-r0033",
+      "table5-r0034",
+      "table5-r0035",
+      "table5-r0036",
+      "table5-r0037",
+      "table5-r0038",
+      "table5-r0039",
+      "table5-r0040",
+      "table5-r0041",
+      "table5-r0042",
+      "table5-r0043",
+      "table5-r0044",
+      "table5-r0045",
+      "table5-r0046",
+      "table5-r0047",
+      "table5-r0048",
+      "table5-r0049",
+      "table5-r0050",
+      "table5-r0051",
+      "table5-r0052",
+      "table5-r0053",
+      "table5-r0054",
+      "table5-r0055",
+      "table5-r0056",
+      "table5-r0057",
+      "table5-r0058",
+      "table5-r0059",
+      "table5-r0060",
+      "table5-r0061",
+      "table5-r0062",
+      "table5-r0063",
+      "table5-r0064",
+      "table5-r0065",
+      "table5-r0066",
+      "table5-r0067",
+      "table5-r0068",
+      "table5-r0069",
+      "table5-r0070",
+      "table5-r0071",
+      "table5-r0072",
+      "table5-r0073",
+      "table5-r0074",
+      "table5-r0075",
+      "table5-r0076",
+      "table5-r0077",
+      "table5-r0078",
+      "table5-r0079",
+      "table5-r0080",
+      "table5-r0081",
+      "table5-r0082",
+      "table5-r0083",
+      "table5-r0084",
+      "table5-r0085",
+      "table5-r0086",
+      "table5-r0087",
+      "table5-r0088",
+      "table5-r0089",
+      "table5-r0090",
+      "table5-r0091",
+      "table5-r0092",
+      "table5-r0093",
+      "table5-r0094",
+      "table5-r0095",
+      "table5-r0096",
+      "table5-r0097",
+      "table5-r0098",
+      "table5-r0099",
+      "table5-r0100",
+      "table5-r0101",
+      "table5-r0102",
+      "table5-r0103",
+      "table5-r0104",
+      "table5-r0105"
+    ],
+    "requested_output_token_count": 512,
+    "scaled_last_offset_s": 124.25,
+    "scaled_offset_formula": "(Timestamp - segment_start_timestamp_s) * 1.75",
+    "schema_version": 1,
+    "segment_end_timestamp_exclusive_s": 744358,
+    "segment_row_count": 106,
+    "segment_rule": "first request-timestamp-started half-open 72-second window with at least 100 rows",
+    "segment_start_timestamp_s": 744286,
+    "selected_dataset_artifact": "benchmark-results/static-quantization-quality-latency/input/dureader_selected.jsonl",
+    "selected_dataset_artifact_sha256": "404687fae052697e5c389c21fce6c1578a587306047ebe30279a54c023bc3bed",
+    "selected_trace_sha256": "7c982faa6a381a3a5f892f36532cd20c9e55a27f07a3f3d0667bc051e0ea22d6",
+    "tokenizer_json_sha256": "76e48799b099d43365bd24ccd8ecc5aedac831718da780552f03b0a6eb4412aa",
+    "tokenizer_source": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "trace_scale": 1.75,
+    "trace_sha256": "46fc9480ef0b748ecb2b51d512ff08c196b031782cbe6f78e28044d768e86d5a",
+    "trace_source": "/tmp/BurstGPT/data/BurstGPT_1.csv",
+    "workload_sha256": "5811f7891332354d28cc61e4eea7d76278552edccd4a0a3d0738384255442337"
+  }
+}
