@@ -1,0 +1,130 @@
+{
+  "arrival_mode": "sequential",
+  "completed_at_utc": "2026-09-12T20:49:17.036946+00:00",
+  "completed_request_count": 106,
+  "condition": "w4_8",
+  "created_at_utc": "2026-09-12T20:12:19.523906+00:00",
+  "cuda_device_requested": "1",
+  "current_morphserve_git_commit": "914ef8e210bb0517b4811f42c1d546eec7c58d26",
+  "current_morphserve_git_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "current_morphserve_git_dirty": true,
+  "current_morphserve_git_status_porcelain": "?? benchmark-results/static-frontier-v5/pids/\n?? benchmark-results/table5-substrate-v4/input/\n?? benchmark-results/table5-substrate-v4/quality_vs_p95_ttft.png\n?? benchmark-results/table5-substrate-v4/runs/\n",
+  "engine_config_actual": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "quantized_layer_count": 8,
+    "use_dummy": false
+  },
+  "engine_config_requested": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "quantized_layer_count": 8,
+    "use_dummy": false
+  },
+  "generated_output_token_count": 54272,
+  "generation": {
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "eos_stopping": "not supported by unchanged SwiftLLM; exactly 512 output steps",
+    "temperature": null,
+    "top_p": null
+  },
+  "gpu": {
+    "cuda_visible_devices": "1",
+    "gpu_index_visible_to_process": 0,
+    "gpu_name": "NVIDIA GeForce RTX 3090"
+  },
+  "gpu_kv_token_slots": 4992,
+  "initial_engine_snapshot": {
+    "num_decoding_gpu_blocks": 0,
+    "num_gpu_blocks": 312,
+    "running_q_count": 0,
+    "swap_in_count": 0,
+    "swap_out_count": 0,
+    "swapped_q_count": 0,
+    "waiting_q_depth": 0
+  },
+  "launched_request_count": 106,
+  "layer_order": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "layer_order_label": "lis_order_unavailable_front_to_back",
+  "measurement_duration_s": 2175.090711715,
+  "measurement_end_time_ns": 204911314750411,
+  "measurement_end_utc": "2026-09-12T20:49:17.035844+00:00",
+  "measurement_start_time_ns": 202736224038696,
+  "measurement_start_utc": "2026-09-12T20:13:01.945093+00:00",
+  "metric_formula": {
+    "queueing_delay_s": "(first_prefill_time_ns - scheduler_eligible_time_ns) / 1e9",
+    "slo_violation": "finite ttft_s > 2.0",
+    "ttft_s": "(first_stream_token_received_time_ns - arrival_time_ns) / 1e9"
+  },
+  "model_path_safe": "~/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "model_path_sha256": "c5c17acefc2dfdc2cd76e141edbbe45658f0835c2a3a50a833a28cdfd7f318a3",
+  "nominal_offered_rps": 0.8450704225352113,
+  "num_gpu_blocks": 312,
+  "num_gpu_blocks_observed_in_telemetry": [
+    312
+  ],
+  "output_token_count_requested": 512,
+  "prompt_token_count_requested": 1024,
+  "protocol_manifest": "benchmark-results/static-frontier-v5/protocol_manifest.json",
+  "protocol_manifest_sha256": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+  "quantization_label": "uniform_w4_nf4_bitsandbytes_proxy",
+  "quantization_runtime": {
+    "awq_attempt": "AutoAWQ 0.2.9 source import succeeded; AWQ fused kernels/selective loading not available in this SwiftLLM engine, so all W4 conditions use the uniform NF4 proxy",
+    "blocksize": 64,
+    "compress_statistics": false,
+    "implementation": "bitsandbytes.functional.quantize_4bit + bitsandbytes.gemv_4bit decode + bitsandbytes.matmul_4bit prefill fallback",
+    "quant_type": "nf4",
+    "weight_bits": 4
+  },
+  "quantized_layer_count": 8,
+  "random_seed": 2025,
+  "raw_files": [
+    "metadata.json",
+    "requests.jsonl",
+    "telemetry.jsonl"
+  ],
+  "request_count_requested": 106,
+  "run_id": "quality-w4_8",
+  "schema_version": 2,
+  "telemetry_interval_s": 1.0,
+  "timestamp_definition": {
+    "arrival_time_ns": "immediately before Engine.add_request_and_stream",
+    "clock": "time.perf_counter_ns monotonic process clock",
+    "first_output_token_time_ns": "after model forward returned first output",
+    "first_prefill_time_ns": "immediately before first model forward containing request",
+    "first_stream_token_received_time_ns": "benchmark consumer receipt time",
+    "scheduler_eligible_time_ns": "after tokenization before scheduler arrival",
+    "stream_completion_time_ns": "benchmark consumer receipt of final output"
+  },
+  "warmup_policy": {
+    "included_in_raw_requests": false,
+    "output_token_count": 8,
+    "warmup_requests": 1
+  },
+  "workload_kind": "quality_sequential_106",
+  "workload_path": "benchmark-results/static-frontier-v5/input/quality-106.jsonl",
+  "workload_sha256": "2fceeb2aaf2a7c95a161a4d51642b754924240721c63ae1e48c85a70bd0c6b3e",
+  "workload_time_scale": 1.0
+}

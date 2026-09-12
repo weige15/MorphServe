@@ -1,0 +1,117 @@
+{
+  "dynamic_decision": {
+    "decision": "NO-GO",
+    "decision_rule": "GO iff at least one W4 state passes every predeclared eligibility gate and quality has a paired distinction or output-agreement distortion signal",
+    "eligible_quantized_states": [],
+    "quality_distinction_or_distortion_signal": true,
+    "recommended_runtime_state_set": [],
+    "schema_version": 1,
+    "state_eligibility": [
+      {
+        "classification": "ELIGIBLE",
+        "condition": "fp16_0",
+        "eligible": true,
+        "reason": "stable reference state; pressure-relief gates apply to transitions into W4 states",
+        "role": "full-precision reference/base state"
+      },
+      {
+        "advantage_exceeds_noise": false,
+        "all_near_knee_runs_complete": true,
+        "classification": "INELIGIBLE",
+        "condition": "w4_8",
+        "eligible": false,
+        "fp16_safe_gpu_blocks_mean": 1768.0,
+        "mean_p95_improvement_s": -324.33363113157503,
+        "mechanism_alignment": false,
+        "p95_better_in_both_repeats": false,
+        "p95_noise_floor_s": 3.1764293588500436,
+        "profiles_stable": true,
+        "reason": "no >5% safe-KV relief; P95 not better in both repeats; SLO rate not better in both repeats; P95 advantage does not exceed run noise; queue/KV mechanism does not align",
+        "resource_relief": false,
+        "safe_gpu_blocks_mean": 312.0,
+        "slo_better_in_both_repeats": false
+      },
+      {
+        "advantage_exceeds_noise": false,
+        "all_near_knee_runs_complete": true,
+        "classification": "INELIGIBLE",
+        "condition": "w4_16",
+        "eligible": false,
+        "fp16_safe_gpu_blocks_mean": 1768.0,
+        "mean_p95_improvement_s": -173.19599143285004,
+        "mechanism_alignment": false,
+        "p95_better_in_both_repeats": false,
+        "p95_noise_floor_s": 2.456638539599993,
+        "profiles_stable": true,
+        "reason": "no >5% safe-KV relief; P95 not better in both repeats; SLO rate not better in both repeats; P95 advantage does not exceed run noise; queue/KV mechanism does not align",
+        "resource_relief": false,
+        "safe_gpu_blocks_mean": 568.0,
+        "slo_better_in_both_repeats": false
+      },
+      {
+        "advantage_exceeds_noise": false,
+        "all_near_knee_runs_complete": true,
+        "classification": "INELIGIBLE",
+        "condition": "w4_32",
+        "eligible": false,
+        "fp16_safe_gpu_blocks_mean": 1768.0,
+        "mean_p95_improvement_s": -13.422642050475002,
+        "mechanism_alignment": false,
+        "p95_better_in_both_repeats": false,
+        "p95_noise_floor_s": 2.1859974658500008,
+        "profiles_stable": true,
+        "reason": "P95 not better in both repeats; SLO rate not better in both repeats; P95 advantage does not exceed run noise; queue/KV mechanism does not align",
+        "resource_relief": true,
+        "safe_gpu_blocks_mean": 2040.0,
+        "slo_better_in_both_repeats": false
+      }
+    ]
+  },
+  "manifest": "benchmark-results/static-frontier-v5/protocol_manifest.json",
+  "manifest_sha256": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+  "microbenchmark_files": [
+    "benchmark-results/static-frontier-v5/mechanism/micro-fp16_0.json",
+    "benchmark-results/static-frontier-v5/mechanism/micro-w4_8.json",
+    "benchmark-results/static-frontier-v5/mechanism/micro-w4_16.json",
+    "benchmark-results/static-frontier-v5/mechanism/micro-w4_32.json"
+  ],
+  "profile_files": [
+    "benchmark-results/static-frontier-v5/mechanism/profile-fp16_0-rep0.json",
+    "benchmark-results/static-frontier-v5/mechanism/profile-fp16_0-rep1.json",
+    "benchmark-results/static-frontier-v5/mechanism/profile-w4_16-rep0.json",
+    "benchmark-results/static-frontier-v5/mechanism/profile-w4_16-rep1.json",
+    "benchmark-results/static-frontier-v5/mechanism/profile-w4_32-rep0.json",
+    "benchmark-results/static-frontier-v5/mechanism/profile-w4_32-rep1.json",
+    "benchmark-results/static-frontier-v5/mechanism/profile-w4_8-rep0.json",
+    "benchmark-results/static-frontier-v5/mechanism/profile-w4_8-rep1.json"
+  ],
+  "quality_summary": "quality_summary.json",
+  "raw_quality_runs": [
+    "benchmark-results/static-frontier-v5/quality/runs/quality-fp16_0",
+    "benchmark-results/static-frontier-v5/quality/runs/quality-w4_8",
+    "benchmark-results/static-frontier-v5/quality/runs/quality-w4_16",
+    "benchmark-results/static-frontier-v5/quality/runs/quality-w4_32"
+  ],
+  "raw_serving_runs": [
+    "benchmark-results/static-frontier-v5/serving/runs/serv-fp16_0-scale-4-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-fp16_0-scale-6-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-fp16_0-scale-6-rep1",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-fp16_0-scale-8-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_16-scale-4-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_16-scale-6-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_16-scale-6-rep1",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_16-scale-8-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_32-scale-4-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_32-scale-6-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_32-scale-6-rep1",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_32-scale-8-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_8-scale-4-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_8-scale-6-rep0",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_8-scale-6-rep1",
+    "benchmark-results/static-frontier-v5/serving/runs/serv-w4_8-scale-8-rep0"
+  ],
+  "resource_mechanism_table": "resource_mechanism_table.csv",
+  "schema_version": 1,
+  "serving_summary": "serving_summary.json",
+  "state_eligibility": "state_eligibility.csv"
+}

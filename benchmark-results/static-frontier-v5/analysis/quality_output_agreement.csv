@@ -1,0 +1,4 @@
+condition,request_count,mean_position_aligned_token_agreement,token_agreement_ci95_low,token_agreement_ci95_high,exact_output_match_count,exact_output_match_percent,mean_longest_common_prefix_tokens,longest_common_prefix_ci95_low,longest_common_prefix_ci95_high,metric_role
+w4_8,106,0.3888008549528302,0.3031572449882075,0.4759917637087264,36,33.9622641509434,186.3490566037736,141.69811320754718,232.8330188679245,secondary quantization-distortion evidence; not primary QA quality
+w4_16,106,0.3427550117924528,0.26269208800117927,0.426575397995283,29,27.358490566037737,153.12264150943398,111.57452830188679,196.62287735849057,secondary quantization-distortion evidence; not primary QA quality
+w4_32,106,0.3071381191037736,0.22707795916863208,0.3911975788620283,26,24.528301886792452,138.67924528301887,97.05566037735849,181.73749999999998,secondary quantization-distortion evidence; not primary QA quality

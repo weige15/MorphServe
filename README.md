@@ -1,6 +1,6 @@
 # MorphServe
 
-MorphServe is a research repository for measuring SwiftLLM serving behavior under load. Phase 1 is complete: the final experiment reproduced a mixed GPU-KV-admission and compute transition without changing the scheduler.
+MorphServe is a research repository for measuring SwiftLLM serving behavior under load. Phase 1 reproduced a mixed GPU-KV-admission and compute transition without changing the scheduler. The latest static-frontier experiment found **NO-GO** for dynamic adaptation on the current NF4 backend: none of the tested W4 states provides repeatable latency/SLO relief.
 
 ## Start here
 
@@ -8,7 +8,8 @@ MorphServe is a research repository for measuring SwiftLLM serving behavior unde
 - [Final Phase 1 report](docs/phase-1/kv-admission-sweep-report.md) — results and reproduction commands.
 - [Final audit](docs/phase-1/kv-admission-sweep-audit.md) — detailed verification evidence.
 - [Onboarding guide](doc/onboarding.md) — setup, workflow, tests, and troubleshooting.
-- [Static quantization quality–latency benchmark](docs/static-quantization-quality-latency/static-quantization-benchmark-report.md) — protocol, results, and regeneration commands.
+- [Static frontier v5 final report](docs/static-frontier-v5/final-report.md) — 106-request paired quality, repeated serving sweep, state eligibility, and NO-GO decision.
+- [Static quantization quality–latency benchmark](docs/static-quantization-quality-latency/static-quantization-benchmark-report.md) — historical v2 protocol and results.
 
 Historical reports are preserved in [`docs/phase-1/archive/`](docs/phase-1/archive/) but are not required for normal context.
 
@@ -41,8 +42,9 @@ PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m unittest benchmark.test_benchma
 - `swiftLLM/benchmark/` — open-loop runner, analysis, metrics, and tests.
 - `benchmark-results/phase-1/` — Phase 1 raw runs and derived artifacts, grouped by experiment.
 - `docs/phase-1/` — curated current documentation; `archive/` contains superseded reports.
-- `docs/static-quantization-quality-latency/` — static quantization benchmark protocol, report, and audit.
-- `benchmark-results/static-quantization-quality-latency/` — raw and derived static quantization benchmark artifacts.
+- `docs/static-frontier-v5/` — current static-frontier protocol, report, and completion audit.
+- `benchmark-results/static-frontier-v5/` — current frozen inputs, raw runs, mechanism probes, and derived evidence.
+- `docs/static-quantization-quality-latency/` and `benchmark-results/static-quantization-quality-latency/` — preserved historical v2 benchmark.
 - `references/` — experimental reference material and source PDF.
 
 For the full workflow and known environment issues, see [`doc/onboarding.md`](doc/onboarding.md).

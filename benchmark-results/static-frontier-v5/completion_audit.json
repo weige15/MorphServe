@@ -1,0 +1,1390 @@
+{
+  "check_count": 156,
+  "checks": [
+    {
+      "check": "scope_and_namespace",
+      "evidence": {
+        "artifact_version": "static_frontier_v5",
+        "excluded": [
+          "dynamic adaptation",
+          "runtime layer swapping",
+          "controller implementation"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "preserved_namespace:benchmark-results/static-quantization-quality-latency",
+      "evidence": "benchmark-results/static-quantization-quality-latency",
+      "passed": true
+    },
+    {
+      "check": "preserved_namespace:benchmark-results/table5-substrate-v4",
+      "evidence": "benchmark-results/table5-substrate-v4",
+      "passed": true
+    },
+    {
+      "check": "four_quality_conditions",
+      "evidence": [
+        "quality-fp16_0",
+        "quality-w4_16",
+        "quality-w4_32",
+        "quality-w4_8"
+      ],
+      "passed": true
+    },
+    {
+      "check": "quality_raw_files:fp16_0",
+      "evidence": "benchmark-results/static-frontier-v5/quality/runs/quality-fp16_0",
+      "passed": true
+    },
+    {
+      "check": "quality_protocol:fp16_0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "quality_common_workload:fp16_0",
+      "evidence": "2fceeb2aaf2a7c95a161a4d51642b754924240721c63ae1e48c85a70bd0c6b3e",
+      "passed": true
+    },
+    {
+      "check": "quality_sequential_106:fp16_0",
+      "evidence": {
+        "count": 106,
+        "mode": "sequential"
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_complete_512:fp16_0",
+      "evidence": "all requests complete at 1024/512",
+      "passed": true
+    },
+    {
+      "check": "quality_warmup:fp16_0",
+      "evidence": {
+        "included_in_raw_requests": false,
+        "output_token_count": 8,
+        "warmup_requests": 1
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_raw_files:w4_16",
+      "evidence": "benchmark-results/static-frontier-v5/quality/runs/quality-w4_16",
+      "passed": true
+    },
+    {
+      "check": "quality_protocol:w4_16",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "quality_common_workload:w4_16",
+      "evidence": "2fceeb2aaf2a7c95a161a4d51642b754924240721c63ae1e48c85a70bd0c6b3e",
+      "passed": true
+    },
+    {
+      "check": "quality_sequential_106:w4_16",
+      "evidence": {
+        "count": 106,
+        "mode": "sequential"
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_complete_512:w4_16",
+      "evidence": "all requests complete at 1024/512",
+      "passed": true
+    },
+    {
+      "check": "quality_warmup:w4_16",
+      "evidence": {
+        "included_in_raw_requests": false,
+        "output_token_count": 8,
+        "warmup_requests": 1
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_raw_files:w4_32",
+      "evidence": "benchmark-results/static-frontier-v5/quality/runs/quality-w4_32",
+      "passed": true
+    },
+    {
+      "check": "quality_protocol:w4_32",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "quality_common_workload:w4_32",
+      "evidence": "2fceeb2aaf2a7c95a161a4d51642b754924240721c63ae1e48c85a70bd0c6b3e",
+      "passed": true
+    },
+    {
+      "check": "quality_sequential_106:w4_32",
+      "evidence": {
+        "count": 106,
+        "mode": "sequential"
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_complete_512:w4_32",
+      "evidence": "all requests complete at 1024/512",
+      "passed": true
+    },
+    {
+      "check": "quality_warmup:w4_32",
+      "evidence": {
+        "included_in_raw_requests": false,
+        "output_token_count": 8,
+        "warmup_requests": 1
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_raw_files:w4_8",
+      "evidence": "benchmark-results/static-frontier-v5/quality/runs/quality-w4_8",
+      "passed": true
+    },
+    {
+      "check": "quality_protocol:w4_8",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "quality_common_workload:w4_8",
+      "evidence": "2fceeb2aaf2a7c95a161a4d51642b754924240721c63ae1e48c85a70bd0c6b3e",
+      "passed": true
+    },
+    {
+      "check": "quality_sequential_106:w4_8",
+      "evidence": {
+        "count": 106,
+        "mode": "sequential"
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_complete_512:w4_8",
+      "evidence": "all requests complete at 1024/512",
+      "passed": true
+    },
+    {
+      "check": "quality_warmup:w4_8",
+      "evidence": {
+        "included_in_raw_requests": false,
+        "output_token_count": 8,
+        "warmup_requests": 1
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_condition_set",
+      "evidence": [
+        "fp16_0",
+        "w4_16",
+        "w4_32",
+        "w4_8"
+      ],
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-fp16_0-scale-4-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-fp16_0-scale-4-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-fp16_0-scale-4-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-fp16_0-scale-4-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-fp16_0-scale-4-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-fp16_0-scale-4-rep0",
+      "evidence": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-fp16_0-scale-4-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-fp16_0-scale-4-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 383
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-fp16_0-scale-4-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-fp16_0-scale-6-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-fp16_0-scale-6-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-fp16_0-scale-6-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-fp16_0-scale-6-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-fp16_0-scale-6-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-fp16_0-scale-6-rep0",
+      "evidence": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-fp16_0-scale-6-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-fp16_0-scale-6-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 478
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-fp16_0-scale-6-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-fp16_0-scale-6-rep1",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-fp16_0-scale-6-rep1",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-fp16_0-scale-6-rep1",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-fp16_0-scale-6-rep1.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-fp16_0-scale-6-rep1",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-fp16_0-scale-6-rep1",
+      "evidence": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-fp16_0-scale-6-rep1",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-fp16_0-scale-6-rep1",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 481
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-fp16_0-scale-6-rep1",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-fp16_0-scale-8-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-fp16_0-scale-8-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-fp16_0-scale-8-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-fp16_0-scale-8-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-fp16_0-scale-8-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-fp16_0-scale-8-rep0",
+      "evidence": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-fp16_0-scale-8-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-fp16_0-scale-8-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 591
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-fp16_0-scale-8-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_16-scale-4-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_16-scale-4-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_16-scale-4-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_16-scale-4-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_16-scale-4-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_16-scale-4-rep0",
+      "evidence": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_16-scale-4-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_16-scale-4-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 1236
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_16-scale-4-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_16-scale-6-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_16-scale-6-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_16-scale-6-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_16-scale-6-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_16-scale-6-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_16-scale-6-rep0",
+      "evidence": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_16-scale-6-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_16-scale-6-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 1195
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_16-scale-6-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_16-scale-6-rep1",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_16-scale-6-rep1",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_16-scale-6-rep1",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_16-scale-6-rep1.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_16-scale-6-rep1",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_16-scale-6-rep1",
+      "evidence": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_16-scale-6-rep1",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_16-scale-6-rep1",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 1203
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_16-scale-6-rep1",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_16-scale-8-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_16-scale-8-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_16-scale-8-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_16-scale-8-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_16-scale-8-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_16-scale-8-rep0",
+      "evidence": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_16-scale-8-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_16-scale-8-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 1191
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_16-scale-8-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_32-scale-4-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_32-scale-4-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_32-scale-4-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_32-scale-4-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_32-scale-4-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_32-scale-4-rep0",
+      "evidence": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_32-scale-4-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_32-scale-4-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 591
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_32-scale-4-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_32-scale-6-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_32-scale-6-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_32-scale-6-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_32-scale-6-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_32-scale-6-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_32-scale-6-rep0",
+      "evidence": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_32-scale-6-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_32-scale-6-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 636
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_32-scale-6-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_32-scale-6-rep1",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_32-scale-6-rep1",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_32-scale-6-rep1",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_32-scale-6-rep1.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_32-scale-6-rep1",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_32-scale-6-rep1",
+      "evidence": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_32-scale-6-rep1",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_32-scale-6-rep1",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 620
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_32-scale-6-rep1",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_32-scale-8-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_32-scale-8-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_32-scale-8-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_32-scale-8-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_32-scale-8-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_32-scale-8-rep0",
+      "evidence": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_32-scale-8-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_32-scale-8-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 667
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_32-scale-8-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_8-scale-4-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_8-scale-4-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_8-scale-4-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_8-scale-4-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_8-scale-4-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_8-scale-4-rep0",
+      "evidence": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_8-scale-4-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_8-scale-4-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 1891
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_8-scale-4-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_8-scale-6-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_8-scale-6-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_8-scale-6-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_8-scale-6-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_8-scale-6-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_8-scale-6-rep0",
+      "evidence": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_8-scale-6-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_8-scale-6-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 1883
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_8-scale-6-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_8-scale-6-rep1",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_8-scale-6-rep1",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_8-scale-6-rep1",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_8-scale-6-rep1.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_8-scale-6-rep1",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_8-scale-6-rep1",
+      "evidence": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_8-scale-6-rep1",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_8-scale-6-rep1",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 1865
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_8-scale-6-rep1",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_raw_files:serv-w4_8-scale-8-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/serving/runs/serv-w4_8-scale-8-rep0",
+      "passed": true
+    },
+    {
+      "check": "serving_log:serv-w4_8-scale-8-rep0",
+      "evidence": "benchmark-results/static-frontier-v5/logs/serv-w4_8-scale-8-rep0.log",
+      "passed": true
+    },
+    {
+      "check": "serving_protocol:serv-w4_8-scale-8-rep0",
+      "evidence": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+      "passed": true
+    },
+    {
+      "check": "serving_workload:serv-w4_8-scale-8-rep0",
+      "evidence": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2",
+      "passed": true
+    },
+    {
+      "check": "serving_complete_64:serv-w4_8-scale-8-rep0",
+      "evidence": {
+        "completed": 64,
+        "count": 64
+      },
+      "passed": true
+    },
+    {
+      "check": "serving_telemetry:serv-w4_8-scale-8-rep0",
+      "evidence": {
+        "fields": [
+          "gpu_memory_free_bytes",
+          "gpu_memory_used_bytes",
+          "logical_kv_utilization",
+          "num_gpu_blocks",
+          "preemption_count",
+          "running_q_count",
+          "swap_in_count",
+          "swap_out_count",
+          "swapped_q_count",
+          "waiting_q_depth"
+        ],
+        "samples": 1853
+      },
+      "passed": true
+    },
+    {
+      "check": "summary_regeneration:serv-w4_8-scale-8-rep0",
+      "evidence": "all raw-derived summary fields exactly match; runner-added condition labels ignored",
+      "passed": true
+    },
+    {
+      "check": "serving_matrix",
+      "evidence": {
+        "expected": [
+          [
+            "fp16_0",
+            4.0,
+            0
+          ],
+          [
+            "fp16_0",
+            6.0,
+            0
+          ],
+          [
+            "fp16_0",
+            6.0,
+            1
+          ],
+          [
+            "fp16_0",
+            8.0,
+            0
+          ],
+          [
+            "w4_16",
+            4.0,
+            0
+          ],
+          [
+            "w4_16",
+            6.0,
+            0
+          ],
+          [
+            "w4_16",
+            6.0,
+            1
+          ],
+          [
+            "w4_16",
+            8.0,
+            0
+          ],
+          [
+            "w4_32",
+            4.0,
+            0
+          ],
+          [
+            "w4_32",
+            6.0,
+            0
+          ],
+          [
+            "w4_32",
+            6.0,
+            1
+          ],
+          [
+            "w4_32",
+            8.0,
+            0
+          ],
+          [
+            "w4_8",
+            4.0,
+            0
+          ],
+          [
+            "w4_8",
+            6.0,
+            0
+          ],
+          [
+            "w4_8",
+            6.0,
+            1
+          ],
+          [
+            "w4_8",
+            8.0,
+            0
+          ]
+        ],
+        "observed": [
+          [
+            "fp16_0",
+            4.0,
+            0
+          ],
+          [
+            "fp16_0",
+            6.0,
+            0
+          ],
+          [
+            "fp16_0",
+            6.0,
+            1
+          ],
+          [
+            "fp16_0",
+            8.0,
+            0
+          ],
+          [
+            "w4_16",
+            4.0,
+            0
+          ],
+          [
+            "w4_16",
+            6.0,
+            0
+          ],
+          [
+            "w4_16",
+            6.0,
+            1
+          ],
+          [
+            "w4_16",
+            8.0,
+            0
+          ],
+          [
+            "w4_32",
+            4.0,
+            0
+          ],
+          [
+            "w4_32",
+            6.0,
+            0
+          ],
+          [
+            "w4_32",
+            6.0,
+            1
+          ],
+          [
+            "w4_32",
+            8.0,
+            0
+          ],
+          [
+            "w4_8",
+            4.0,
+            0
+          ],
+          [
+            "w4_8",
+            6.0,
+            0
+          ],
+          [
+            "w4_8",
+            6.0,
+            1
+          ],
+          [
+            "w4_8",
+            8.0,
+            0
+          ]
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "near_knee_ordering_repeatability",
+      "evidence": [
+        [
+          "fp16_0",
+          "w4_32",
+          "w4_16",
+          "w4_8"
+        ],
+        [
+          "fp16_0",
+          "w4_32",
+          "w4_16",
+          "w4_8"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "check": "mechanism_profile_matrix",
+      "evidence": [
+        "profile-fp16_0-rep0.json",
+        "profile-fp16_0-rep1.json",
+        "profile-w4_16-rep0.json",
+        "profile-w4_16-rep1.json",
+        "profile-w4_32-rep0.json",
+        "profile-w4_32-rep1.json",
+        "profile-w4_8-rep0.json",
+        "profile-w4_8-rep1.json"
+      ],
+      "passed": true
+    },
+    {
+      "check": "mechanism_microbench_matrix",
+      "evidence": [
+        "micro-fp16_0.json",
+        "micro-w4_16.json",
+        "micro-w4_32.json",
+        "micro-w4_8.json"
+      ],
+      "passed": true
+    },
+    {
+      "check": "derived_deliverables",
+      "evidence": {
+        "missing": [],
+        "required": [
+          "quality_table.csv",
+          "quality_paired_differences.csv",
+          "quality_output_agreement.csv",
+          "serving_runs.csv",
+          "serving_variability.csv",
+          "near_knee_paired_runs.csv",
+          "resource_mechanism_table.csv",
+          "state_eligibility.csv",
+          "dynamic_decision.json",
+          "latency_slo_vs_load.png",
+          "queue_kv_vs_load.png",
+          "quality_characterization.png",
+          "quality_vs_near_knee_latency.png",
+          "aggregate.json"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "quality_table_coverage",
+      "evidence": {
+        "request_counts": [
+          "106",
+          "106",
+          "106",
+          "106"
+        ],
+        "rows": 4
+      },
+      "passed": true
+    },
+    {
+      "check": "paired_quality_coverage",
+      "evidence": {
+        "rows": 106
+      },
+      "passed": true
+    },
+    {
+      "check": "secondary_distortion_coverage",
+      "evidence": {
+        "rows": 3
+      },
+      "passed": true
+    },
+    {
+      "check": "per_run_metric_coverage",
+      "evidence": {
+        "fields": [
+          "completed_throughput_rps",
+          "decode_tpot_s_p95",
+          "num_gpu_blocks",
+          "peak_hbm_used_gib",
+          "peak_logical_kv_utilization",
+          "preemption_count",
+          "prefill_to_first_output_s_p95",
+          "queueing_delay_s_p50",
+          "queueing_delay_s_p95",
+          "queueing_delay_s_p99",
+          "running_q_count_p95",
+          "slo_violation_percent",
+          "swap_out_count",
+          "swapped_q_count_p95",
+          "ttft_s_p50",
+          "ttft_s_p95",
+          "ttft_s_p99",
+          "waiting_q_depth_p95"
+        ],
+        "rows": 16
+      },
+      "passed": true
+    },
+    {
+      "check": "resource_table_coverage",
+      "evidence": {
+        "rows": 4
+      },
+      "passed": true
+    },
+    {
+      "check": "eligibility_table_coverage",
+      "evidence": [
+        [
+          "fp16_0",
+          "ELIGIBLE"
+        ],
+        [
+          "w4_8",
+          "INELIGIBLE"
+        ],
+        [
+          "w4_16",
+          "INELIGIBLE"
+        ],
+        [
+          "w4_32",
+          "INELIGIBLE"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "check": "explicit_dynamic_decision",
+      "evidence": "NO-GO",
+      "passed": true
+    },
+    {
+      "check": "regeneration_commands",
+      "evidence": [
+        "aggregate",
+        "audit",
+        "condition_runner_template",
+        "environment",
+        "microbenchmark_template",
+        "prepare_workloads",
+        "profile_template",
+        "quality_runs",
+        "schema_version",
+        "serving_run_matrix",
+        "validation"
+      ],
+      "passed": true
+    },
+    {
+      "check": "final_report_sections",
+      "evidence": {
+        "path": "docs/static-frontier-v5/final-report.md",
+        "sections": [
+          "CONFIRMED FINDINGS",
+          "SUPPORTED BUT UNCERTAIN FINDINGS",
+          "BLOCKED QUESTIONS",
+          "REMAINING UNCERTAINTY",
+          "DYNAMIC ADAPTATION DECISION"
+        ]
+      },
+      "passed": true
+    },
+    {
+      "check": "human_completion_audit",
+      "evidence": "docs/static-frontier-v5/completion-audit.md",
+      "passed": true
+    }
+  ],
+  "final_dynamic_decision": "NO-GO",
+  "manifest_sha256": "74151dd662761da3bb7ca3765e679acbd4389db19c0da192c64e7fe9b8a29e44",
+  "schema_version": 1,
+  "status": "PASS"
+}

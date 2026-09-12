@@ -1,0 +1,31 @@
+{
+  "decode_one_token_median_ms": 23.524119,
+  "decode_one_token_ms": [
+    24.279964,
+    23.29603,
+    23.438667,
+    23.06929,
+    23.524119,
+    27.286189,
+    23.616096
+  ],
+  "decode_one_token_p95_ms": 27.286189,
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "num_gpu_blocks": 3531,
+  "prefill_median_ms": 257.381266,
+  "prefill_ms": [
+    258.814573,
+    258.034147,
+    257.479952,
+    256.620452,
+    257.381266,
+    256.285167,
+    255.571966
+  ],
+  "prefill_p95_ms": 258.814573,
+  "prompt_token_count": 1024,
+  "quantization": "nf4_bitsandbytes_w4",
+  "quantized_layer_count": 8,
+  "repeats": 7,
+  "schema_version": 1
+}

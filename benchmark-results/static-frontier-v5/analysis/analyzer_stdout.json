@@ -1,0 +1,68 @@
+{
+  "decision": "NO-GO",
+  "decision_rule": "GO iff at least one W4 state passes every predeclared eligibility gate and quality has a paired distinction or output-agreement distortion signal",
+  "eligible_quantized_states": [],
+  "quality_distinction_or_distortion_signal": true,
+  "recommended_runtime_state_set": [],
+  "schema_version": 1,
+  "state_eligibility": [
+    {
+      "classification": "ELIGIBLE",
+      "condition": "fp16_0",
+      "eligible": true,
+      "reason": "stable reference state; pressure-relief gates apply to transitions into W4 states",
+      "role": "full-precision reference/base state"
+    },
+    {
+      "advantage_exceeds_noise": false,
+      "all_near_knee_runs_complete": true,
+      "classification": "INELIGIBLE",
+      "condition": "w4_8",
+      "eligible": false,
+      "fp16_safe_gpu_blocks_mean": 1768.0,
+      "mean_p95_improvement_s": -324.33363113157503,
+      "mechanism_alignment": false,
+      "p95_better_in_both_repeats": false,
+      "p95_noise_floor_s": 3.1764293588500436,
+      "profiles_stable": true,
+      "reason": "no >5% safe-KV relief; P95 not better in both repeats; SLO rate not better in both repeats; P95 advantage does not exceed run noise; queue/KV mechanism does not align",
+      "resource_relief": false,
+      "safe_gpu_blocks_mean": 312.0,
+      "slo_better_in_both_repeats": false
+    },
+    {
+      "advantage_exceeds_noise": false,
+      "all_near_knee_runs_complete": true,
+      "classification": "INELIGIBLE",
+      "condition": "w4_16",
+      "eligible": false,
+      "fp16_safe_gpu_blocks_mean": 1768.0,
+      "mean_p95_improvement_s": -173.19599143285004,
+      "mechanism_alignment": false,
+      "p95_better_in_both_repeats": false,
+      "p95_noise_floor_s": 2.456638539599993,
+      "profiles_stable": true,
+      "reason": "no >5% safe-KV relief; P95 not better in both repeats; SLO rate not better in both repeats; P95 advantage does not exceed run noise; queue/KV mechanism does not align",
+      "resource_relief": false,
+      "safe_gpu_blocks_mean": 568.0,
+      "slo_better_in_both_repeats": false
+    },
+    {
+      "advantage_exceeds_noise": false,
+      "all_near_knee_runs_complete": true,
+      "classification": "INELIGIBLE",
+      "condition": "w4_32",
+      "eligible": false,
+      "fp16_safe_gpu_blocks_mean": 1768.0,
+      "mean_p95_improvement_s": -13.422642050475002,
+      "mechanism_alignment": false,
+      "p95_better_in_both_repeats": false,
+      "p95_noise_floor_s": 2.1859974658500008,
+      "profiles_stable": true,
+      "reason": "P95 not better in both repeats; SLO rate not better in both repeats; P95 advantage does not exceed run noise; queue/KV mechanism does not align",
+      "resource_relief": true,
+      "safe_gpu_blocks_mean": 2040.0,
+      "slo_better_in_both_repeats": false
+    }
+  ]
+}

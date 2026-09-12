@@ -40,7 +40,7 @@ def write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
             if key not in columns:
                 columns.append(key)
     with path.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=columns)
+        writer = csv.DictWriter(handle, fieldnames=columns, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -231,6 +231,7 @@ def quality_analysis(run_dirs: list[Path], output_dir: Path) -> dict[str, Any]:
         )
     write_csv(output_dir / "quality_table.csv", table)
     write_csv(output_dir / "quality_output_agreement.csv", agreement_table)
+    plot_quality(table, agreement_table, output_dir / "quality_characterization.png")
     result = {
         "schema_version": 1,
         "bootstrap": {"method": "paired request resampling percentile CI", "repeats": 10_000, "seed_family": 2025},
@@ -244,6 +245,57 @@ def quality_analysis(run_dirs: list[Path], output_dir: Path) -> dict[str, Any]:
         encoding="utf-8",
     )
     return result
+
+
+def plot_quality(
+    quality_rows: list[dict[str, Any]], agreement_rows: list[dict[str, Any]], path: Path
+) -> None:
+    layers = [int(row["quantized_layer_count"]) for row in quality_rows]
+    means = [float(row["f1_percent"]) for row in quality_rows]
+    fig, axes = plt.subplots(1, 3, figsize=(13, 4), dpi=180)
+    axes[0].errorbar(
+        layers,
+        means,
+        yerr=[
+            [mean - float(row["f1_percent_ci95_low"]) for mean, row in zip(means, quality_rows)],
+            [float(row["f1_percent_ci95_high"]) - mean for mean, row in zip(means, quality_rows)],
+        ],
+        marker="o",
+        capsize=4,
+    )
+    axes[0].set_ylabel("DuReader F1 (%)")
+    deltas = [float(row["paired_delta_vs_fp16_percentage_points"]) for row in quality_rows]
+    axes[1].errorbar(
+        layers,
+        deltas,
+        yerr=[
+            [delta - float(row["paired_delta_ci95_low"]) for delta, row in zip(deltas, quality_rows)],
+            [float(row["paired_delta_ci95_high"]) - delta for delta, row in zip(deltas, quality_rows)],
+        ],
+        marker="o",
+        capsize=4,
+    )
+    axes[1].axhline(0, color="0.4", linestyle="--", linewidth=1)
+    axes[1].set_ylabel("Paired F1 delta vs FP16 (pp)")
+    axes[2].errorbar(
+        [int(row["condition"].split("_")[-1]) for row in agreement_rows],
+        [float(row["mean_position_aligned_token_agreement"]) for row in agreement_rows],
+        yerr=[
+            [float(row["mean_position_aligned_token_agreement"]) - float(row["token_agreement_ci95_low"]) for row in agreement_rows],
+            [float(row["token_agreement_ci95_high"]) - float(row["mean_position_aligned_token_agreement"]) for row in agreement_rows],
+        ],
+        marker="o",
+        capsize=4,
+    )
+    axes[2].set_ylabel("Output-token agreement with FP16")
+    for ax in axes:
+        ax.set_xlabel("W4 decoder layers")
+        ax.set_xticks((0, 8, 16, 32))
+        ax.grid(True, alpha=0.25)
+    fig.suptitle("Sequential 106-request quality characterization (95% bootstrap CI)")
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
 
 
 def numeric_values(rows: Iterable[dict[str, Any]], field: str) -> list[float]:
@@ -401,6 +453,7 @@ def plot_serving(rows: list[dict[str, Any]], path: Path) -> None:
             ax.set_ylabel(ylabel)
             ax.grid(True, alpha=0.25)
     axes[0].axhline(2.0, color="0.4", linestyle="--", linewidth=1)
+    axes[0].set_yscale("log")
     axes[0].legend(fontsize=8)
     fig.suptitle("Static serving latency/SLO versus frozen load")
     fig.tight_layout()
@@ -421,6 +474,7 @@ def plot_pressure(rows: list[dict[str, Any]], path: Path) -> None:
         ax.set_xlabel("Nominal offered requests/s")
         ax.grid(True, alpha=0.25)
     axes[1].axhline(0.85, color="0.4", linestyle="--", linewidth=1)
+    axes[0].set_yscale("symlog", linthresh=0.1)
     axes[0].legend(fontsize=8)
     fig.suptitle("Queue and KV pressure versus frozen load")
     fig.tight_layout()
@@ -434,6 +488,48 @@ def coefficient_of_variation(values: list[float]) -> float:
         return 0.0
     variance = sum((value - mean) ** 2 for value in values) / len(values)
     return math.sqrt(variance) / mean
+
+
+def plot_quality_latency(
+    quality_rows: list[dict[str, Any]], serving_rows: list[dict[str, Any]], near_scale: float, path: Path
+) -> None:
+    by_quality = {str(row["condition"]): row for row in quality_rows}
+    near = {
+        str(row["condition"]): row
+        for row in serving_rows
+        if float(row["time_scale"]) == near_scale
+    }
+    fig, ax = plt.subplots(figsize=(7.5, 5), dpi=180)
+    for condition in CONDITIONS:
+        quality = by_quality[condition]
+        latency = near[condition]
+        x = float(latency["ttft_s_p95_mean"])
+        y = float(quality["f1_percent"])
+        ax.errorbar(
+            x,
+            y,
+            xerr=[
+                [x - float(latency["ttft_s_p95_min"])],
+                [float(latency["ttft_s_p95_max"]) - x],
+            ],
+            yerr=[
+                [y - float(quality["f1_percent_ci95_low"])],
+                [float(quality["f1_percent_ci95_high"]) - y],
+            ],
+            marker="o",
+            capsize=4,
+            color=COLORS[condition],
+            label=condition,
+        )
+    ax.set_xscale("log")
+    ax.set_xlabel("Near-knee P95 TTFT (s, log scale; repeat range)")
+    ax.set_ylabel("Sequential DuReader F1 (%) (95% bootstrap CI)")
+    ax.grid(True, alpha=0.25)
+    ax.legend(fontsize=8)
+    ax.set_title("Validated static quality–latency frontier")
+    fig.tight_layout()
+    fig.savefig(path)
+    plt.close(fig)
 
 
 def mechanism_analysis(profile_files: list[Path], micro_files: list[Path], serving_rows: list[dict[str, Any]], output_dir: Path) -> list[dict[str, Any]]:
@@ -507,9 +603,10 @@ def eligibility_analysis(
     rows: list[dict[str, Any]] = [
         {
             "condition": "fp16_0",
-            "classification": "REFERENCE",
+            "classification": "ELIGIBLE",
             "eligible": True,
-            "reason": "full-precision reference state",
+            "role": "full-precision reference/base state",
+            "reason": "stable reference state; pressure-relief gates apply to transitions into W4 states",
         }
     ]
     eligible_quantized: list[str] = []
@@ -618,7 +715,10 @@ def main() -> None:
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
     near_scale = float(manifest["serving"]["near_knee_time_scale"])
     quality = quality_analysis(args.quality_runs, args.output_dir)
-    serving_rows, _ = serving_analysis(args.serving_runs, args.output_dir, near_scale)
+    serving_rows, serving_groups = serving_analysis(args.serving_runs, args.output_dir, near_scale)
+    plot_quality_latency(
+        quality["quality_table"], serving_groups, near_scale, args.output_dir / "quality_vs_near_knee_latency.png"
+    )
     mechanism = mechanism_analysis(args.profile_files, args.microbenchmark_files, serving_rows, args.output_dir)
     decision = eligibility_analysis(quality, serving_rows, mechanism, near_scale, args.output_dir)
     aggregate = {

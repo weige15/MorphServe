@@ -1,0 +1,46 @@
+{
+  "allocated_bytes_after_profile": 14584872960,
+  "decoded": " Berlin. The capital of Italy is Rome",
+  "engine_config": {
+    "block_size": 16,
+    "max_batch_size": 32,
+    "max_tokens_in_batch": 49152
+  },
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "gpu_kv_token_slots": 4992,
+  "load_ms": 11368.667108006775,
+  "num_gpu_blocks": 312,
+  "output_token_ids": [
+    20437,
+    13,
+    578,
+    6864,
+    315,
+    15704,
+    374,
+    22463
+  ],
+  "profile_ms": 12254.879857995547,
+  "profile_peak_allocated_bytes": 21442955776,
+  "prompt": "The capital of France is Paris. The capital of Germany is",
+  "prompt_token_ids": [
+    128000,
+    791,
+    6864,
+    315,
+    9822,
+    374,
+    12366,
+    13,
+    578,
+    6864,
+    315,
+    10057,
+    374
+  ],
+  "quantization": "nf4_bitsandbytes_w4",
+  "quantized_layer_count": 8,
+  "resident_reserved_bytes_after_load": 14998831104,
+  "resident_weight_bytes_after_load": 14576353280,
+  "schema_version": 1
+}
