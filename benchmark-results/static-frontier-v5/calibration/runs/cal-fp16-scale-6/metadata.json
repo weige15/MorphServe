@@ -1,0 +1,121 @@
+{
+  "arrival_mode": "trace_open_loop",
+  "completed_at_utc": "2026-09-12T20:10:18.414158+00:00",
+  "completed_request_count": 64,
+  "condition": "fp16_0",
+  "created_at_utc": "2026-09-12T20:07:36.066234+00:00",
+  "cuda_device_requested": "0",
+  "current_morphserve_git_commit": "f1913ea7a19f04087380678409488b8f430837e7",
+  "current_morphserve_git_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "current_morphserve_git_dirty": true,
+  "current_morphserve_git_status_porcelain": "?? benchmark-results/table5-substrate-v4/input/\n?? benchmark-results/table5-substrate-v4/quality_vs_p95_ttft.png\n?? benchmark-results/table5-substrate-v4/runs/\n",
+  "engine_config_actual": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "quantized_layer_count": 0,
+    "use_dummy": false
+  },
+  "engine_config_requested": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "quantized_layer_count": 0,
+    "use_dummy": false
+  },
+  "generated_output_token_count": 32768,
+  "generation": {
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "eos_stopping": "not supported by unchanged SwiftLLM; exactly 512 output steps",
+    "temperature": null,
+    "top_p": null
+  },
+  "gpu": {
+    "cuda_visible_devices": "0",
+    "gpu_index_visible_to_process": 0,
+    "gpu_name": "NVIDIA GeForce RTX 3090"
+  },
+  "gpu_kv_token_slots": 28288,
+  "initial_engine_snapshot": {
+    "num_decoding_gpu_blocks": 0,
+    "num_gpu_blocks": 1768,
+    "running_q_count": 0,
+    "swap_in_count": 0,
+    "swap_out_count": 0,
+    "swapped_q_count": 0,
+    "waiting_q_depth": 0
+  },
+  "launched_request_count": 64,
+  "layer_order": [],
+  "layer_order_label": "lis_order_unavailable_front_to_back",
+  "measurement_duration_s": 119.781150394,
+  "measurement_end_time_ns": 202572692699060,
+  "measurement_end_utc": "2026-09-12T20:10:18.413798+00:00",
+  "measurement_start_time_ns": 202452911548666,
+  "measurement_start_utc": "2026-09-12T20:08:18.632597+00:00",
+  "metric_formula": {
+    "queueing_delay_s": "(first_prefill_time_ns - scheduler_eligible_time_ns) / 1e9",
+    "slo_violation": "finite ttft_s > 2.0",
+    "ttft_s": "(first_stream_token_received_time_ns - arrival_time_ns) / 1e9"
+  },
+  "model_path_safe": "~/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "model_path_sha256": "c5c17acefc2dfdc2cd76e141edbbe45658f0835c2a3a50a833a28cdfd7f318a3",
+  "nominal_offered_rps": 0.6666666666666666,
+  "num_gpu_blocks": 1768,
+  "num_gpu_blocks_observed_in_telemetry": [
+    1768
+  ],
+  "output_token_count_requested": 512,
+  "prompt_token_count_requested": 1024,
+  "protocol_manifest": "benchmark-results/static-frontier-v5/protocol_manifest.json",
+  "protocol_manifest_sha256": "b411e8a4d791f4bf8bceab91e16d610c2998c95fcca4123ab7e788fe59d01903",
+  "quantization_label": "fp16_control",
+  "quantization_runtime": {
+    "awq_attempt": "AutoAWQ 0.2.9 source import succeeded; AWQ fused kernels/selective loading not available in this SwiftLLM engine, so all W4 conditions use the uniform NF4 proxy",
+    "blocksize": 64,
+    "compress_statistics": false,
+    "implementation": "bitsandbytes.functional.quantize_4bit + bitsandbytes.gemv_4bit decode + bitsandbytes.matmul_4bit prefill fallback",
+    "quant_type": "nf4",
+    "weight_bits": 4
+  },
+  "quantized_layer_count": 0,
+  "random_seed": 2025,
+  "raw_files": [
+    "metadata.json",
+    "requests.jsonl",
+    "telemetry.jsonl"
+  ],
+  "request_count_requested": 64,
+  "run_id": "cal-fp16-scale-6",
+  "schema_version": 2,
+  "telemetry_interval_s": 0.25,
+  "timestamp_definition": {
+    "arrival_time_ns": "immediately before Engine.add_request_and_stream",
+    "clock": "time.perf_counter_ns monotonic process clock",
+    "first_output_token_time_ns": "after model forward returned first output",
+    "first_prefill_time_ns": "immediately before first model forward containing request",
+    "first_stream_token_received_time_ns": "benchmark consumer receipt time",
+    "scheduler_eligible_time_ns": "after tokenization before scheduler arrival",
+    "stream_completion_time_ns": "benchmark consumer receipt of final output"
+  },
+  "warmup_policy": {
+    "included_in_raw_requests": false,
+    "output_token_count": 8,
+    "warmup_requests": 1
+  },
+  "workload_kind": "calibration_dense_trace",
+  "workload_path": "benchmark-results/static-frontier-v5/input/calibration-scale-6.jsonl",
+  "workload_sha256": "3e9b9498e738c90ad9d03e874a2bcdda6ffc402dd031bac2816d3096646cd5df",
+  "workload_time_scale": 6.0
+}

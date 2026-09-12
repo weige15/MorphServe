@@ -192,6 +192,45 @@
       "source_timestamp_end_s": 744357,
       "source_timestamp_start_s": 744348,
       "time_scale_relative_to_frozen_1p75_offsets": 24.0
+    },
+    {
+      "kind": "latency",
+      "last_arrival_offset_s": 63.0,
+      "nominal_offered_rps": 1.0,
+      "path": "benchmark-results/static-frontier-v5/input/latency-scale-4.jsonl",
+      "request_count": 64,
+      "sha256": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74",
+      "source_sequence_end": 105,
+      "source_sequence_start": 42,
+      "source_timestamp_end_s": 744357,
+      "source_timestamp_start_s": 744348,
+      "time_scale_relative_to_frozen_1p75_offsets": 4.0
+    },
+    {
+      "kind": "latency",
+      "last_arrival_offset_s": 94.5,
+      "nominal_offered_rps": 0.6666666666666666,
+      "path": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "request_count": 64,
+      "sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+      "source_sequence_end": 105,
+      "source_sequence_start": 42,
+      "source_timestamp_end_s": 744357,
+      "source_timestamp_start_s": 744348,
+      "time_scale_relative_to_frozen_1p75_offsets": 6.0
+    },
+    {
+      "kind": "latency",
+      "last_arrival_offset_s": 126.0,
+      "nominal_offered_rps": 0.5,
+      "path": "benchmark-results/static-frontier-v5/input/latency-scale-8.jsonl",
+      "request_count": 64,
+      "sha256": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2",
+      "source_sequence_end": 105,
+      "source_sequence_start": 42,
+      "source_timestamp_end_s": 744357,
+      "source_timestamp_start_s": 744348,
+      "time_scale_relative_to_frozen_1p75_offsets": 8.0
     }
   ],
   "schema_version": 1,

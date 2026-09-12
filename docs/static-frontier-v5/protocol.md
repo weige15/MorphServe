@@ -63,10 +63,13 @@ was extended to scales 6 and 4 (0.6667 and 1.0 nominal requests/s).
 
 The revised knee is the lowest offered load with P95 queueing at least 2 s or
 peak logical KV utilization at least 0.85. SLO remains a required output but is
-not used alone when invariant for this trace shape. The knee and its adjacent
-lower/higher loads are selected; at the highest boundary, use it and the two
-immediately lower loads. The selection is committed before any v5 W4 serving
-or quality run.
+not used alone when invariant for this trace shape. Scale 6 / 0.6667 nominal
+requests/s was the first point to cross the KV criterion (peak 0.9983); scale 4
+also showed P95 queueing above 10 s. The frozen final loads are therefore scale
+8 / 0.5 RPS, scale 6 / 0.6667 RPS, and scale 4 / 1.0 RPS, with scale 6 as the
+near-knee point. This selection is recorded in
+`benchmark-results/static-frontier-v5/calibration/calibration_decision.json`
+before any v5 W4 serving or quality run.
 
 ## Final serving evidence
 

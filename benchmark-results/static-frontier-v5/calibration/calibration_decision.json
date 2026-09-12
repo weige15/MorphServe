@@ -1,0 +1,57 @@
+{
+  "calibration_condition": "fp16_0",
+  "calibration_protocol": "64 requests, 1024 prompt tokens, 512 greedy output steps, one excluded 8-token warmup",
+  "calibration_summary_sha256": "99450af8f4abd5bb72443e1281ff85d0dda0bed64054d43ccd547f11aa777ea4",
+  "decision_recorded_before_any_v5_w4_run": true,
+  "initial_diagnosis": "At 0.1667-0.5 nominal RPS, the invariant SLO rate came from synchronized prefill batches, not queue saturation; P95 queueing was <0.03 s. Calibration was extended using FP16 only.",
+  "knee": {
+    "evidence": {
+      "p95_queueing_s": 0.043257319,
+      "peak_logical_kv_utilization": 0.9983031674208145,
+      "peak_waiting_queue_depth": 7.0
+    },
+    "nominal_offered_rps": 0.6666666666666666,
+    "time_scale": 6
+  },
+  "latency_workloads": {
+    "4": {
+      "path": "benchmark-results/static-frontier-v5/input/latency-scale-4.jsonl",
+      "request_count": 64,
+      "sha256": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74"
+    },
+    "6": {
+      "path": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "request_count": 64,
+      "sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    "8": {
+      "path": "benchmark-results/static-frontier-v5/input/latency-scale-8.jsonl",
+      "request_count": 64,
+      "sha256": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2"
+    }
+  },
+  "near_knee_nominal_offered_rps": 0.6666666666666666,
+  "near_knee_time_scale": 6,
+  "no_w4_results_used": true,
+  "revised_knee_rule": "lowest load with P95 queueing >=2 s or peak logical KV utilization >=0.85",
+  "schema_version": 1,
+  "selected_nominal_offered_rps": [
+    0.5,
+    0.6666666666666666,
+    1.0
+  ],
+  "selected_time_scales": [
+    8,
+    6,
+    4
+  ],
+  "selection_reason": "scale 6 is the first ascending-load point crossing 0.85 peak logical KV utilization (0.9983); scale 8 is adjacent below and scale 4 is adjacent above with P95 queueing >10 s",
+  "source_runs": [
+    "cal-fp16-scale-24",
+    "cal-fp16-scale-16",
+    "cal-fp16-scale-12",
+    "cal-fp16-scale-8",
+    "cal-fp16-scale-6",
+    "cal-fp16-scale-4"
+  ]
+}

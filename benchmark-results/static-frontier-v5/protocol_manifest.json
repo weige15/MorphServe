@@ -102,9 +102,12 @@
     "freeze_rule": "record the selected knee plus adjacent lower/higher loads before any v5 W4 run; if the knee is the highest calibration point, use it and the two immediately lower loads"
   },
   "serving": {
-    "selected_time_scales": null,
-    "selected_nominal_offered_rps": null,
-    "near_knee_time_scale": null,
+    "selection_frozen_before_any_v5_w4_run": true,
+    "calibration_decision": "benchmark-results/static-frontier-v5/calibration/calibration_decision.json",
+    "calibration_decision_sha256": "de7daef925afd0113ea83c9f37245c290683b15e194aebb1e2d31bb21981d0df",
+    "selected_time_scales": [8, 6, 4],
+    "selected_nominal_offered_rps": [0.5, 0.6666666666666666, 1.0],
+    "near_knee_time_scale": 6,
     "request_count_per_run": 64,
     "repeats": "one run at each selected load plus a second run for every condition at near-knee; add a third near-knee repeat if ordering changes materially",
     "final_protocol": "1024-token prompts, 512 output steps, frozen dense BurstGPT trace shape",
