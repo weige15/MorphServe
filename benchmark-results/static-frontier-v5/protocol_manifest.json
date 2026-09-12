@@ -92,10 +92,14 @@
     "request_count": 64,
     "prompt_tokens": 1024,
     "output_tokens": 512,
-    "time_scales_relative_to_existing_1p75_offsets": [8, 12, 16, 24],
-    "nominal_offered_rps": [0.5, 0.3333333333333333, 0.25, 0.16666666666666666],
-    "knee_rule": "in ascending offered load, first point with any of: SLO violation rate >=20%, P95 queueing >=2 s, or peak logical KV utilization >=0.85; select it and its adjacent load points, using the nearest three points at a boundary",
-    "freeze_rule": "record selected three scales and designate the middle selected point as near-knee before any v5 W4 run"
+    "initial_time_scales_relative_to_existing_1p75_offsets": [8, 12, 16, 24],
+    "initial_nominal_offered_rps": [0.5, 0.3333333333333333, 0.25, 0.16666666666666666],
+    "initial_observation": "all four initial points had the same 42.1875% SLO rate from synchronized multi-request prefill, while P95 queueing stayed below 0.03 s and peak KV stayed below 0.85; SLO alone therefore did not locate a saturation knee",
+    "extension_recorded_before_extension_runs": true,
+    "extension_time_scales": [6, 4],
+    "extension_nominal_offered_rps": [0.6666666666666666, 1.0],
+    "revised_knee_rule": "use the lowest offered load with P95 queueing >=2 s or peak logical KV utilization >=0.85; SLO is reported but cannot by itself select the knee when invariant across loads because of synchronized-burst prefill",
+    "freeze_rule": "record the selected knee plus adjacent lower/higher loads before any v5 W4 run; if the knee is the highest calibration point, use it and the two immediately lower loads"
   },
   "serving": {
     "selected_time_scales": null,

@@ -117,6 +117,32 @@
     },
     {
       "kind": "calibration",
+      "last_arrival_offset_s": 63.0,
+      "nominal_offered_rps": 1.0,
+      "path": "benchmark-results/static-frontier-v5/input/calibration-scale-4.jsonl",
+      "request_count": 64,
+      "sha256": "4c9c1f9d68d9e11a806cde2e9c575d4050cb67ff6f4aac17f72a62ed5f6d4c94",
+      "source_sequence_end": 105,
+      "source_sequence_start": 42,
+      "source_timestamp_end_s": 744357,
+      "source_timestamp_start_s": 744348,
+      "time_scale_relative_to_frozen_1p75_offsets": 4.0
+    },
+    {
+      "kind": "calibration",
+      "last_arrival_offset_s": 94.5,
+      "nominal_offered_rps": 0.6666666666666666,
+      "path": "benchmark-results/static-frontier-v5/input/calibration-scale-6.jsonl",
+      "request_count": 64,
+      "sha256": "3e9b9498e738c90ad9d03e874a2bcdda6ffc402dd031bac2816d3096646cd5df",
+      "source_sequence_end": 105,
+      "source_sequence_start": 42,
+      "source_timestamp_end_s": 744357,
+      "source_timestamp_start_s": 744348,
+      "time_scale_relative_to_frozen_1p75_offsets": 6.0
+    },
+    {
+      "kind": "calibration",
       "last_arrival_offset_s": 126.0,
       "nominal_offered_rps": 0.5,
       "path": "benchmark-results/static-frontier-v5/input/calibration-scale-8.jsonl",

@@ -55,15 +55,18 @@ to the already frozen 1.75x offsets. These correspond to nominal average loads
 0.1667, 0.25, 0.3333, and 0.5 requests/s. Calibration uses the final 1024/512
 protocol, not a shortened proxy.
 
-In ascending load, the knee is the first point meeting any of:
+The initial four-point FP16 calibration showed the same 42.1875% SLO rate at
+every load because each frozen timestamp launches a synchronized request group;
+P95 queueing remained below 0.03 s and peak KV remained below 0.85. Thus SLO
+alone did not identify a saturation knee. Before any v5 W4 run, the FP16 sweep
+was extended to scales 6 and 4 (0.6667 and 1.0 nominal requests/s).
 
-- strict TTFT violation rate at least 20%;
-- P95 queueing delay at least 2 s; or
-- peak logical KV utilization at least 0.85.
-
-The knee and its adjacent load points are selected; at a boundary, the nearest
-three are selected. The selected scales and near-knee point are committed to
-the manifest before any v5 W4 serving or quality run.
+The revised knee is the lowest offered load with P95 queueing at least 2 s or
+peak logical KV utilization at least 0.85. SLO remains a required output but is
+not used alone when invariant for this trace shape. The knee and its adjacent
+lower/higher loads are selected; at the highest boundary, use it and the two
+immediately lower loads. The selection is committed before any v5 W4 serving
+or quality run.
 
 ## Final serving evidence
 
