@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "MODEL": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "VENV": "/nfs/home/s314511048/.venv",
+    "PYTHONPATH": "$PWD/swiftLLM:$PWD/swiftLLM/csrc"
+  },
+  "prepare_workloads": "PYTHONPATH=$PWD/swiftLLM $VENV/bin/python -m benchmark.prepare_static_frontier_workloads --source-workload benchmark-results/static-quantization-quality-latency/input/workload.jsonl --output-dir benchmark-results/static-frontier-v5/input --calibration-scales 4 6 8 12 16 24 --calibration-count 64 --latency-scales 4 6 8 --latency-count 64",
+  "condition_runner_template": "CUDA_VISIBLE_DEVICES=GPU PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc $VENV/bin/python -u -m benchmark.run_static_quantization_condition --model-path $MODEL --workload WORKLOAD --manifest benchmark-results/static-frontier-v5/protocol_manifest.json --condition CONDITION --quantized-layer-count LAYERS --output-dir RUNS_DIR --run-id RUN_ID --launch-mode LAUNCH_MODE --warmup-requests 1 --warmup-output-token-count 8 --seed 2025 --telemetry-interval-s TELEMETRY --max-batch-size 32 --max-tokens-in-batch 49152 --num-cpu-blocks 4096 --timeout-s 7200",
+  "quality_runs": [
+    {"condition": "fp16_0", "layers": 0, "workload": "benchmark-results/static-frontier-v5/input/quality-106.jsonl", "launch_mode": "sequential", "run_id": "quality-fp16_0"},
+    {"condition": "w4_8", "layers": 8, "workload": "benchmark-results/static-frontier-v5/input/quality-106.jsonl", "launch_mode": "sequential", "run_id": "quality-w4_8"},
+    {"condition": "w4_16", "layers": 16, "workload": "benchmark-results/static-frontier-v5/input/quality-106.jsonl", "launch_mode": "sequential", "run_id": "quality-w4_16"},
+    {"condition": "w4_32", "layers": 32, "workload": "benchmark-results/static-frontier-v5/input/quality-106.jsonl", "launch_mode": "sequential", "run_id": "quality-w4_32"}
+  ],
+  "serving_run_matrix": {
+    "conditions": {"fp16_0": 0, "w4_8": 8, "w4_16": 16, "w4_32": 32},
+    "scales_and_repeats": {"8": [0], "6": [0, 1], "4": [0]},
+    "workload_template": "benchmark-results/static-frontier-v5/input/latency-scale-SCALE.jsonl",
+    "run_id_template": "serv-CONDITION-scale-SCALE-repREPEAT",
+    "launch_mode": "trace_open_loop",
+    "telemetry_interval_s": 0.25
+  },
+  "profile_template": "CUDA_VISIBLE_DEVICES=GPU PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc $VENV/bin/python -m benchmark.static_condition_probe --model-path $MODEL --quantized-layer-count LAYERS --max-batch-size 32 --max-tokens-in-batch 49152 --output benchmark-results/static-frontier-v5/mechanism/profile-CONDITION-repREPEAT.json",
+  "microbenchmark_template": "CUDA_VISIBLE_DEVICES=GPU PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc $VENV/bin/python -m benchmark.model_microbenchmark --model-path $MODEL --quantized-layer-count LAYERS --prompt-token-count 1024 --repeats 7 --output benchmark-results/static-frontier-v5/mechanism/micro-CONDITION.json",
+  "aggregate": "PYTHONPATH=$PWD/swiftLLM $VENV/bin/python -m benchmark.analyze_static_frontier --manifest benchmark-results/static-frontier-v5/protocol_manifest.json --quality-runs benchmark-results/static-frontier-v5/quality/runs/quality-{fp16_0,w4_8,w4_16,w4_32} --serving-runs benchmark-results/static-frontier-v5/serving/runs/serv-* --profile-files benchmark-results/static-frontier-v5/mechanism/profile-*.json --microbenchmark-files benchmark-results/static-frontier-v5/mechanism/micro-{fp16_0,w4_8,w4_16,w4_32}.json --output-dir benchmark-results/static-frontier-v5/analysis",
+  "validation": [
+    "PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc $VENV/bin/python -m unittest benchmark.test_benchmark benchmark.test_inference_substrate -v",
+    "$VENV/bin/python -m py_compile swiftLLM/benchmark/*.py",
+    "git diff --check"
+  ]
+}
