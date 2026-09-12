@@ -166,7 +166,7 @@ async def run(args: argparse.Namespace) -> Path:
         metadata["num_gpu_blocks"] = initial_snapshot["num_gpu_blocks"]
         metadata["gpu_kv_token_slots"] = 16 * initial_snapshot["num_gpu_blocks"]
         metadata["quantization_runtime"] = {
-            "implementation": "bitsandbytes.functional.quantize_4bit + bitsandbytes.matmul_4bit",
+            "implementation": "bitsandbytes.functional.quantize_4bit + bitsandbytes.gemv_4bit decode + bitsandbytes.matmul_4bit prefill fallback",
             "quant_type": "nf4",
             "weight_bits": 4,
             "blocksize": 64,

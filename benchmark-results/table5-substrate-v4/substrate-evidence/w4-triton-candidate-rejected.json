@@ -1,0 +1,117 @@
+{
+  "bits": 4,
+  "blocksize": 64,
+  "device": "NVIDIA GeForce RTX 3090",
+  "matrices": [
+    {
+      "checks": {
+        "decode": {
+          "batch_rows": 1,
+          "dispatch": "bitsandbytes.gemv_4bit",
+          "finite": true,
+          "fp16_ms": 0.05302117206156254,
+          "max_abs_error": 0.36962890625,
+          "relative_l2_error": 0.09313924610614777,
+          "w4_ms": 0.0440698117017746
+        },
+        "prefill": {
+          "batch_rows": 32,
+          "dispatch": "MorphServe Triton NF4 GEMM",
+          "finite": true,
+          "fp16_ms": 0.061529967933893204,
+          "max_abs_error": 0.61279296875,
+          "relative_l2_error": 0.09179873019456863,
+          "w4_ms": 10.030234232544899
+        }
+      },
+      "name": "q_or_o_projection",
+      "shape": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "checks": {
+        "decode": {
+          "batch_rows": 1,
+          "dispatch": "bitsandbytes.gemv_4bit",
+          "finite": true,
+          "fp16_ms": 0.017638597637414932,
+          "max_abs_error": 0.372314453125,
+          "relative_l2_error": 0.09522640705108643,
+          "w4_ms": 0.042951200157403946
+        },
+        "prefill": {
+          "batch_rows": 32,
+          "dispatch": "MorphServe Triton NF4 GEMM",
+          "finite": true,
+          "fp16_ms": 0.02254517748951912,
+          "max_abs_error": 0.4921875,
+          "relative_l2_error": 0.0925087034702301,
+          "w4_ms": 2.8897957876324654
+        }
+      },
+      "name": "k_or_v_projection",
+      "shape": [
+        1024,
+        4096
+      ]
+    },
+    {
+      "checks": {
+        "decode": {
+          "batch_rows": 1,
+          "dispatch": "bitsandbytes.gemv_4bit",
+          "finite": true,
+          "fp16_ms": 0.15869117341935635,
+          "max_abs_error": 0.4755859375,
+          "relative_l2_error": 0.09290005266666412,
+          "w4_ms": 0.06806817837059498
+        },
+        "prefill": {
+          "batch_rows": 32,
+          "dispatch": "MorphServe Triton NF4 GEMM",
+          "finite": true,
+          "fp16_ms": 0.1940963789820671,
+          "max_abs_error": 0.591796875,
+          "relative_l2_error": 0.09217534214258194,
+          "w4_ms": 29.155218601226807
+        }
+      },
+      "name": "up_or_gate_projection",
+      "shape": [
+        14336,
+        4096
+      ]
+    },
+    {
+      "checks": {
+        "decode": {
+          "batch_rows": 1,
+          "dispatch": "bitsandbytes.gemv_4bit",
+          "finite": true,
+          "fp16_ms": 0.15203463844954967,
+          "max_abs_error": 0.843505859375,
+          "relative_l2_error": 0.09299861639738083,
+          "w4_ms": 0.0736176036298275
+        },
+        "prefill": {
+          "batch_rows": 32,
+          "dispatch": "MorphServe Triton NF4 GEMM",
+          "finite": true,
+          "fp16_ms": 0.14983760192990303,
+          "max_abs_error": 0.8974609375,
+          "relative_l2_error": 0.09230276942253113,
+          "w4_ms": 31.15954981185496
+        }
+      },
+      "name": "down_projection",
+      "shape": [
+        4096,
+        14336
+      ]
+    }
+  ],
+  "quant_type": "nf4",
+  "schema_version": 1
+}

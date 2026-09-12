@@ -1,0 +1,183 @@
+{
+  "artifact_version": "v4_lowbit_decode_kernel",
+  "commands": {
+    "aggregate": "PYTHONPATH=swiftLLM /nfs/home/s314511048/.venv/bin/python -m benchmark.analyze_static_quantization_quality_latency --manifest benchmark-results/table5-substrate-v4/protocol_manifest.json --runs benchmark-results/table5-substrate-v4/runs/... --output-dir benchmark-results/table5-substrate-v4",
+    "run_template": "PYTHONPATH=swiftLLM:swiftLLM/csrc CUDA_VISIBLE_DEVICES=GPU /nfs/home/s314511048/.venv/bin/python -u -m benchmark.run_static_quantization_condition --model-path /tmp/morphserve-llama31-stable --workload benchmark-results/table5-substrate-v4/input/workload.jsonl --manifest benchmark-results/table5-substrate-v4/protocol_manifest.json --condition CONDITION --quantized-layer-count N --output-dir benchmark-results/table5-substrate-v4/runs --run-id v4-CONDITION --seed 2025 --telemetry-interval-s 0.25 --max-batch-size 32 --max-tokens-in-batch 49152 --num-cpu-blocks 4096 --timeout-s 3600"
+  },
+  "conditions": [
+    {
+      "condition": "fp16_0",
+      "quantized_layer_count": 0
+    },
+    {
+      "condition": "w4_8",
+      "quantized_layer_count": 8
+    },
+    {
+      "condition": "w4_16",
+      "quantized_layer_count": 16
+    },
+    {
+      "condition": "w4_32",
+      "quantized_layer_count": 32
+    }
+  ],
+  "created_at_utc": "2026-09-12T06:00:00Z",
+  "engine_config_fixed": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "num_cpu_blocks": 4096,
+    "scheduler": "unchanged upstream SwiftLLM"
+  },
+  "hardware": {
+    "cuda_visible_devices": "3",
+    "nvidia_smi_query": "0, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n1, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n2, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n3, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n4, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n5, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03\n6, NVIDIA GeForce RTX 3090, 24576 MiB, 580.159.03",
+    "planned_gpu": "NVIDIA GeForce RTX 3090, 24 GiB visible device 0 inside CUDA_VISIBLE_DEVICES=3"
+  },
+  "manifest_status": "recorded_before_table5_substrate_v4_runs",
+  "model": {
+    "actual": "meta-llama/Llama-3.1-8B",
+    "config_sha256": "54acfad3cffe057640904ca8a1e83525e6551c70c7a04c641f5a9eda0bbf64bd",
+    "paper": "Llama 3 8B",
+    "path": "/tmp/morphserve-llama31-stable",
+    "path_stability": "stable symlink directory to immutable HF cache blobs; snapshot directory was observed to disappear during concurrent runs",
+    "snapshot_id": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "snapshot_ref": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "tokenizer_json_sha256": "76e48799b099d43365bd24ccd8ecc5aedac831718da780552f03b0a6eb4412aa"
+  },
+  "objective": "Trustworthy SwiftLLM FP16/W4 substrate directional Table 5 rerun with genuine low-bit decode kernel; no MorphServe dynamic adaptation",
+  "paper": {
+    "evidence_sections": [
+      "Section 4.2 LIS",
+      "Section 5 Evaluation Setup",
+      "Section 5.2",
+      "Appendix B Serving Traces",
+      "Appendix B Evaluation Datasets"
+    ],
+    "path": "references/MorphServe.pdf",
+    "sha256": "080ddcfe8c23e12bb421e4c1107c09246c82144345064018401b49e1a8dd2678",
+    "table": "Table 5",
+    "targets": [
+      {
+        "condition": "w4_32",
+        "f1_percent": 23.66,
+        "slo_violation_percent": 0.0,
+        "ttft_p95_s": 1.62
+      },
+      {
+        "condition": "w4_16",
+        "f1_percent": 23.93,
+        "slo_violation_percent": 0.0,
+        "ttft_p95_s": 1.74
+      },
+      {
+        "condition": "w4_8",
+        "f1_percent": 24.16,
+        "slo_violation_percent": 4.2,
+        "ttft_p95_s": 2.61
+      },
+      {
+        "condition": "fp16_0",
+        "f1_percent": 25.19,
+        "slo_violation_percent": 12.7,
+        "ttft_p95_s": 5.65
+      }
+    ]
+  },
+  "protocol": {
+    "arrival_mode": "trace_open_loop",
+    "dataset_mapping": "trace row i maps to i-th answer-bearing record in concatenated public DuReader demo dev then train files",
+    "f1_definition": "macro mean per-request character-overlap F1; official DuReader-style whitespace removal; best reference per request",
+    "generation": "greedy argmax; exactly 512 SwiftLLM steps; no sampling or EOS stopping",
+    "iteration_note": "v3 uses the corrected FP16/W4 substrate. It preserves the v2 prompt/reference mapping but uses the first 16 frozen requests and scales their v2 offsets by 3.0, selected from FP16-only calibration before W4 comparison.",
+    "layer_order": "decoder layers [0..N-1] for N in {8,16,32}",
+    "layer_order_label": "lis_order_unavailable_front_to_back",
+    "microbenchmark_artifact": "benchmark-results/table5-substrate-v4/substrate-evidence/microbenchmark-*.json",
+    "prompt_construction": "content prefix + truncated context + answer cue preserved at prompt end, deterministic hello padding before cue; every prompt re-tokenized to exactly 1024",
+    "prompt_tokens": 1024,
+    "quantization": "uniform W4 NF4 bitsandbytes proxy for all W4 conditions; not AWQ",
+    "request_count": 16,
+    "response_tokens": 512,
+    "seed": 2025,
+    "segment_selection": "first request-timestamp-started half-open 72-second window with at least 100 rows; current interval [744286,744358) with 106 rows",
+    "slo_ttft_threshold_s": 2.0,
+    "substrate_parity_gate": "same-checkpoint HF Transformers FP16 first-token/top-k/8-token greedy continuation match recorded in /tmp/morphserve-parity-after-rope-head.json before v3 runs",
+    "trace_scale": 1.75,
+    "trace_scale_relative_to_v2": 3.0,
+    "ttft_definition": "first_stream_token_received_time - actual open-loop arrival",
+    "w4_decode_kernel": "bitsandbytes.gemv_4bit on source-layout NF4 weights; no full-weight dequantization on one-token decode",
+    "w4_prefill_kernel": "bitsandbytes.matmul_4bit prefill fallback; Transformers/bitsandbytes 0.49 internally dequantizes for multi-row calls and this limitation is reported, while one-token decode uses gemv_4bit",
+    "warmup_requests": 0
+  },
+  "public_sources": {
+    "AutoAWQ": {
+      "attempt": "source import succeeded; no AWQ fused kernel package or selective SwiftLLM integration available",
+      "revision": "88e4c76b20755db275574e6a03c83c84ba3bece5",
+      "url": "https://github.com/casper-hansen/AutoAWQ.git",
+      "version": "0.2.9"
+    },
+    "BurstGPT": {
+      "file": "data/BurstGPT_1.csv",
+      "file_sha256": "46fc9480ef0b748ecb2b51d512ff08c196b031782cbe6f78e28044d768e86d5a",
+      "revision": "d895a53bb7b8ec137d0d2fe203b335835a78c10a",
+      "url": "https://github.com/HPMLL/BurstGPT.git"
+    },
+    "DuReader": {
+      "combined_source_artifact": "/tmp/DuReader/demo_dev_train.jsonl",
+      "combined_source_sha256": "737d41af65db6b69108c083576c85d3f4f323d7e3ef401d67d1bcde0f6ff745b",
+      "file": [
+        "DuReader-2.0/data/demo/devset/search.dev.json",
+        "DuReader-2.0/data/demo/trainset/search.train.json"
+      ],
+      "file_sha256": {
+        "dev": "f7d7174d2cc81738f2554c3aa69f89af7b8d0f4bc808f1c3547469d12469e3a8",
+        "train": "ce2f61b93861203b4b2e1c03a2db558142bfa4edb2c758b9665bd003adfc49bc"
+      },
+      "language": "Chinese official DuReader 2.0 public demo dev+train records, first 106 answer-bearing rows; paper English-translated subset unavailable",
+      "revision": "c625076b06da8f56d59f19c41c73bd580a98a347",
+      "selected_records_artifact": "benchmark-results/static-quantization-quality-latency/input/dureader_selected.jsonl",
+      "selected_records_sha256": "404687fae052697e5c389c21fce6c1578a587306047ebe30279a54c023bc3bed",
+      "url": "https://github.com/baidu/DuReader.git"
+    }
+  },
+  "repository": {
+    "morphserve_git_commit": "7b3f2af4c15cc744b49c4ec6048d6151eee0ce3d",
+    "morphserve_git_status": "M swiftLLM/benchmark/run.py\n M swiftLLM/swiftllm/engine_config.py\n M swiftLLM/swiftllm/worker/kernels/linear.py\n M swiftLLM/swiftllm/worker/layers/transformer_layer.py\n M swiftLLM/swiftllm/worker/model.py\n M swiftLLM/swiftllm/worker/weight.py\n?? benchmark-results/static-quantization-quality-latency/\n?? docs/static-quantization-quality-latency/\n?? swiftLLM/benchmark/prepare_static_quantization_workload.py\n?? swiftLLM/benchmark/run_static_quantization_condition.py",
+    "swiftllm_upstream_commit": "682cf9a28f97f7490409981a2f181528f377eb5d"
+  },
+  "schema_version": 1,
+  "software": {
+    "bitsandbytes": "0.49.2",
+    "cuda_torch": "12.1",
+    "datasets": "2.17.1",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "ray": "2.55.1",
+    "safetensors": "0.8.0",
+    "torch": "2.5.1+cu121",
+    "transformers": "5.16.1",
+    "triton": "3.1.0",
+    "vllm": "0.11.2"
+  },
+  "tokenizer": {
+    "prompt_token_count": 1024,
+    "same_snapshot_as_model": true,
+    "special_tokens_behavior": "SwiftLLM tokenizer actor default; prompts verified at 1024 tokens with this tokenizer"
+  },
+  "workload": {
+    "calibration_artifacts": [
+      "benchmark-results/substrate-v3/calibration-rps512/rps-0.06/fp16-rps-0.06",
+      "benchmark-results/substrate-v3/calibration/rps-0.20/fp16-rps-0.20",
+      "benchmark-results/substrate-v3/calibration/rps-0.40/fp16-rps-0.40",
+      "benchmark-results/substrate-v3/calibration/rps-0.80/fp16-rps-0.80"
+    ],
+    "frozen_before_condition_runs": true,
+    "metadata_path": "benchmark-results/table5-substrate-v3/input/workload_metadata.json",
+    "path": "benchmark-results/table5-substrate-v3/input/workload.jsonl",
+    "relative_arrival_scale_from_v2": 3.0,
+    "request_count": 16
+  }
+}

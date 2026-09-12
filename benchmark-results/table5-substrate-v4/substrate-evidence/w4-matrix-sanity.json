@@ -1,0 +1,117 @@
+{
+  "bits": 4,
+  "blocksize": 64,
+  "device": "NVIDIA GeForce RTX 3090",
+  "matrices": [
+    {
+      "checks": {
+        "decode": {
+          "batch_rows": 1,
+          "dispatch": "bitsandbytes.gemv_4bit",
+          "finite": true,
+          "fp16_ms": 0.0520430039614439,
+          "max_abs_error": 0.49609375,
+          "relative_l2_error": 0.09305266290903091,
+          "w4_ms": 0.04318323917686939
+        },
+        "prefill": {
+          "batch_rows": 32,
+          "dispatch": "bitsandbytes.matmul_4bit_prefill_fallback",
+          "finite": true,
+          "fp16_ms": 0.05538240075111389,
+          "max_abs_error": 0.60986328125,
+          "relative_l2_error": 0.09211739897727966,
+          "w4_ms": 0.12263120152056217
+        }
+      },
+      "name": "q_or_o_projection",
+      "shape": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "checks": {
+        "decode": {
+          "batch_rows": 1,
+          "dispatch": "bitsandbytes.gemv_4bit",
+          "finite": true,
+          "fp16_ms": 0.0180194154381752,
+          "max_abs_error": 0.3829345703125,
+          "relative_l2_error": 0.0935770571231842,
+          "w4_ms": 0.0417511910200119
+        },
+        "prefill": {
+          "batch_rows": 32,
+          "dispatch": "bitsandbytes.matmul_4bit_prefill_fallback",
+          "finite": true,
+          "fp16_ms": 0.02278760075569153,
+          "max_abs_error": 0.557373046875,
+          "relative_l2_error": 0.09249386936426163,
+          "w4_ms": 0.11758096516132355
+        }
+      },
+      "name": "k_or_v_projection",
+      "shape": [
+        1024,
+        4096
+      ]
+    },
+    {
+      "checks": {
+        "decode": {
+          "batch_rows": 1,
+          "dispatch": "bitsandbytes.gemv_4bit",
+          "finite": true,
+          "fp16_ms": 0.1582115888595581,
+          "max_abs_error": 0.4798583984375,
+          "relative_l2_error": 0.09161315858364105,
+          "w4_ms": 0.06821160204708576
+        },
+        "prefill": {
+          "batch_rows": 32,
+          "dispatch": "bitsandbytes.matmul_4bit_prefill_fallback",
+          "finite": true,
+          "fp16_ms": 0.1930799800902605,
+          "max_abs_error": 0.59765625,
+          "relative_l2_error": 0.09175198525190353,
+          "w4_ms": 0.36229919642210007
+        }
+      },
+      "name": "up_or_gate_projection",
+      "shape": [
+        14336,
+        4096
+      ]
+    },
+    {
+      "checks": {
+        "decode": {
+          "batch_rows": 1,
+          "dispatch": "bitsandbytes.gemv_4bit",
+          "finite": true,
+          "fp16_ms": 0.15681060031056404,
+          "max_abs_error": 0.929443359375,
+          "relative_l2_error": 0.09293416142463684,
+          "w4_ms": 0.07588276639580727
+        },
+        "prefill": {
+          "batch_rows": 32,
+          "dispatch": "bitsandbytes.matmul_4bit_prefill_fallback",
+          "finite": true,
+          "fp16_ms": 0.15007560141384602,
+          "max_abs_error": 1.037109375,
+          "relative_l2_error": 0.09174409508705139,
+          "w4_ms": 0.3494961652904749
+        }
+      },
+      "name": "down_projection",
+      "shape": [
+        4096,
+        14336
+      ]
+    }
+  ],
+  "quant_type": "nf4",
+  "schema_version": 1
+}

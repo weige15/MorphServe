@@ -11,16 +11,17 @@ from swiftllm.model_config import LlamaModelConfig
 
 @dataclasses.dataclass
 class QuantizedMatrix:
-    """A bitsandbytes 4-bit matrix in the layout expected by matmul_4bit.
+    """NF4 matrices kept in the layouts required by bitsandbytes.
 
-    The source model stores linear weights as [out_features, in_features],
-    while bitsandbytes' low-bit matmul stores [in_features, out_features].
-    Keeping the quantization state beside the packed tensor makes the choice
-    explicit and prevents accidentally mixing quantization implementations.
+    ``gemv_*`` is source [out, in] layout for one-token decode. ``matmul_*``
+    is transposed [in, out] layout for the bitsandbytes batched prefill
+    fallback. Both remain packed W4; neither is an FP16 full-weight cache.
     """
 
-    data: torch.Tensor
-    quant_state: Any
+    matmul_data: torch.Tensor
+    matmul_quant_state: Any
+    gemv_data: torch.Tensor
+    gemv_quant_state: Any
     shape: tuple[int, int]
 
 
@@ -72,26 +73,40 @@ class WeightBase:
 
 
 def quantize_matrix(weight: torch.Tensor, dtype: torch.dtype) -> QuantizedMatrix:
-    """Quantize one [out, in] weight with the single supported W4 proxy.
+    """Quantize one [out, in] weight with the shared NF4 W4 proxy.
 
     This deliberately uses bitsandbytes NF4 weight-only quantization, not AWQ.
-    The function is called only for selected decoder-layer matrices and is
-    shared by the 8/16/32-layer conditions.
+    The source-layout packed view feeds bitsandbytes' low-bit GEMV for
+    one-token decode. The transposed packed view feeds the available
+    bitsandbytes batched prefill fallback. Neither view is a full FP16 matrix.
     """
     try:
         import bitsandbytes.functional as bnb_functional
     except ImportError as exc:  # pragma: no cover - environment dependent
         raise RuntimeError("bitsandbytes is required for the W4 proxy") from exc
 
-    source = weight.to(dtype=dtype).transpose(0, 1).contiguous()
-    packed, quant_state = bnb_functional.quantize_4bit(
+    source = weight.to(dtype=dtype).contiguous()
+    gemv_data, gemv_quant_state = bnb_functional.quantize_4bit(
         source,
         absmax=None,
         blocksize=64,
         compress_statistics=False,
         quant_type="nf4",
     )
-    return QuantizedMatrix(packed, quant_state, tuple(weight.shape))
+    matmul_data, matmul_quant_state = bnb_functional.quantize_4bit(
+        source.transpose(0, 1).contiguous(),
+        absmax=None,
+        blocksize=64,
+        compress_statistics=False,
+        quant_type="nf4",
+    )
+    return QuantizedMatrix(
+        matmul_data=matmul_data,
+        matmul_quant_state=matmul_quant_state,
+        gemv_data=gemv_data,
+        gemv_quant_state=gemv_quant_state,
+        shape=tuple(weight.shape),
+    )
 
 
 class LlamaTransformerLayerWeight(WeightBase):
@@ -194,12 +209,18 @@ class LlamaWeight(WeightBase):
         dtype: torch.dtype,
         model_version: str = "llama",
         quantized_layer_count: int = 0,
+        lm_head_key: str | None = None,
     ):
         super().__init__()
 
         self.model_config = model_config
         self.dtype = dtype
         self.model_version = model_version
+        self.lm_head_key = lm_head_key or (
+            "model.embed_tokens.weight"
+            if model_config.tie_word_embeddings
+            else "lm_head.weight"
+        )
 
         self.register_weight(RegisteredWeightItem(
             "wte",
@@ -208,20 +229,12 @@ class LlamaWeight(WeightBase):
             self.dtype
         ))
 
-        if model_version == "llama3.2":
-            self.register_weight(RegisteredWeightItem(
-                "lm_head",
-                "model.embed_tokens.weight",
-                (self.model_config.vocab_size, self.model_config.hidden_size),
-                self.dtype
-            ))
-        else:
-            self.register_weight(RegisteredWeightItem(
-                "lm_head",
-                "lm_head.weight",
-                (self.model_config.vocab_size, self.model_config.hidden_size),
-                self.dtype
-            ))
+        self.register_weight(RegisteredWeightItem(
+            "lm_head",
+            self.lm_head_key,
+            (self.model_config.vocab_size, self.model_config.hidden_size),
+            self.dtype
+        ))
 
         self.register_weight(RegisteredWeightItem(
             "final_norm",
@@ -246,6 +259,66 @@ class LlamaWeight(WeightBase):
             layer.load_weights(getter)
 
 
+def _checkpoint_weight_keys(model_path: str) -> set[str] | None:
+    """Return checkpoint keys without loading model tensors into GPU memory."""
+    safetensor_index_path = os.path.join(model_path, "model.safetensors.index.json")
+    if os.path.exists(safetensor_index_path):
+        with open(safetensor_index_path, "r", encoding="utf-8") as handle:
+            return set(json.load(handle)["weight_map"])
+
+    safetensor_files = [
+        name for name in os.listdir(model_path) if name.endswith(".safetensors")
+    ]
+    if safetensor_files:
+        if len(safetensor_files) != 1:
+            raise ValueError(
+                "model.safetensors.index.json is required when a checkpoint has "
+                "multiple safetensors files"
+            )
+        with safetensors.safe_open(
+            os.path.join(model_path, safetensor_files[0]),
+            framework="pt",
+            device="cpu",
+        ) as handle:
+            return set(handle.keys())
+
+    pytorch_index_path = os.path.join(model_path, "pytorch_model.bin.index.json")
+    if os.path.exists(pytorch_index_path):
+        with open(pytorch_index_path, "r", encoding="utf-8") as handle:
+            return set(json.load(handle)["weight_map"])
+
+    # A legacy single pytorch_model.bin has no cheap key index. The config's
+    # tie_word_embeddings flag is the only safe fallback; the tensor getter
+    # below still reports the exact missing key if the file disagrees.
+    return None
+
+
+def resolve_lm_head_key(
+    model_path: str,
+    model_config: LlamaModelConfig,
+    available_keys: set[str] | None = None,
+) -> str:
+    """Resolve lm_head from actual checkpoint keys, never from rope_scaling."""
+    keys = available_keys if available_keys is not None else _checkpoint_weight_keys(model_path)
+    if keys is not None:
+        if "lm_head.weight" in keys:
+            return "lm_head.weight"
+        if "model.embed_tokens.weight" in keys and model_config.tie_word_embeddings:
+            return "model.embed_tokens.weight"
+        interesting = sorted(
+            key for key in keys if "embed_tokens" in key or "lm_head" in key
+        )
+        raise KeyError(
+            "Checkpoint has no usable lm_head.weight; available embedding/head keys: "
+            f"{interesting}"
+        )
+    return (
+        "model.embed_tokens.weight"
+        if model_config.tie_word_embeddings
+        else "lm_head.weight"
+    )
+
+
 def load_weights(
     model_config: LlamaModelConfig,
     dtype: torch.dtype,
@@ -257,21 +330,13 @@ def load_weights(
     """
     Load weights from a given path
     """
+    available_keys = None if use_dummy else _checkpoint_weight_keys(model_path)
+    lm_head_key = resolve_lm_head_key(model_path, model_config, available_keys)
+
+    # ``model_version`` is retained for API compatibility with older callers;
+    # no weight layout decision is made from rope_scaling.
     if model_version == "auto":
-        config_path = os.path.join(model_path, "config.json")
-        if os.path.exists(config_path):
-            with open(config_path, "r", encoding="utf-8") as f:
-                config_data = json.load(f)
-                
-            # In Llama 3.2, rope_scaling is a dictionary
-            # TODO 1: Add more robust detection logic
-            # TODO 2: Add more model versions
-            if "rope_scaling" in config_data and isinstance(config_data["rope_scaling"], dict):
-                model_version = "llama3.2"
-            else:
-                model_version = "llama"
-        else:
-            model_version = "llama"
+        model_version = "llama"
 
     if use_dummy:
         def weight_getter_dummy(item: RegisteredWeightItem):
@@ -294,10 +359,17 @@ def load_weights(
                 safetensor_filename = safetensor_files[0]
 
             def weight_getter_real(item: RegisteredWeightItem):
-                file_name = safetensor_index[item.key] if safetensor_index is not None else safetensor_filename
+                if safetensor_index is not None:
+                    if item.key not in safetensor_index:
+                        raise KeyError(f"Missing checkpoint key: {item.key}")
+                    file_name = safetensor_index[item.key]
+                else:
+                    file_name = safetensor_filename
                 file_path = os.path.join(model_path, file_name)
-                # For safetensor files, since "opening" it is cheap, we open it every time
+                # For safetensor files, since "opening" it is cheap, we open it every time.
                 with safetensors.safe_open(file_path, framework="pt", device="cuda") as f:
+                    if item.key not in f.keys():
+                        raise KeyError(f"Missing checkpoint key: {item.key}")
                     tensor = f.get_tensor(item.key)
                 return tensor.to(item.dtype)
             getter = weight_getter_real
@@ -320,11 +392,18 @@ def load_weights(
             # We add `mmap=True` to avoid loading the entire file into memory.
             opened_files = {}
             def weight_getter_real(item: RegisteredWeightItem):
-                file_name = pytorch_index[item.key] if pytorch_index is not None else pytorch_filename
+                if pytorch_index is not None:
+                    if item.key not in pytorch_index:
+                        raise KeyError(f"Missing checkpoint key: {item.key}")
+                    file_name = pytorch_index[item.key]
+                else:
+                    file_name = pytorch_filename
                 file_path = os.path.join(model_path, file_name)
                 if file_path not in opened_files:
                     opened_files[file_path] = torch.load(file_path, map_location="cuda", mmap=True)
                 file = opened_files[file_path]
+                if item.key not in file:
+                    raise KeyError(f"Missing checkpoint key: {item.key}")
                 return file[item.key].to(item.dtype)
             getter = weight_getter_real
 
@@ -333,6 +412,7 @@ def load_weights(
         dtype,
         model_version,
         quantized_layer_count=quantized_layer_count,
+        lm_head_key=lm_head_key,
     )
     weight.load_weights(getter)
     return weight

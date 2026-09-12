@@ -1,0 +1,23 @@
+{
+  "decode_one_token_median_ms": 25.857907,
+  "decode_one_token_ms": [
+    25.691066,
+    26.202564,
+    25.857907
+  ],
+  "decode_one_token_p95_ms": 26.202564,
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "num_gpu_blocks": 4267,
+  "prefill_median_ms": 264.976669,
+  "prefill_ms": [
+    264.067975,
+    264.976669,
+    266.757934
+  ],
+  "prefill_p95_ms": 266.757934,
+  "prompt_token_count": 1024,
+  "quantization": "nf4_bitsandbytes_w4",
+  "quantized_layer_count": 16,
+  "repeats": 3,
+  "schema_version": 1
+}

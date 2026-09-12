@@ -1,3 +1,13 @@
 
-# Local benchmark logs
-benchmark-results/*.log
+# Generated benchmark runtime artifacts
+benchmark-results/**/*.log
+benchmark-results/**/failed-attempts/
+benchmark-results/**/calibration*/
+
+benchmark-results/**/runs/**/requests.jsonl
+benchmark-results/**/runs/**/telemetry.jsonl
+benchmark-results/**/runs/**/quality_metrics.jsonl
+
+# Superseded local substrate passes
+benchmark-results/substrate-v3/
+benchmark-results/table5-substrate-v3/

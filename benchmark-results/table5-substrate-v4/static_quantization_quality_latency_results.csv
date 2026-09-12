@@ -1,0 +1,5 @@
+condition,quantized_layer_count,run_id,f1_percent,ttft_p95_s,slo_violation_percent_of_launched,request_count_launched,completed_request_count,failed_or_incomplete_request_count,num_gpu_blocks_observed,quantization_label
+fp16_0,0,v4-fp16_0,13.489698096930013,10.22223204075,12.5,16,16,0,[1768],fp16_control
+w4_8,8,v4-w4_8,18.12531558328279,24.980596042,25.0,16,16,0,[312],uniform_w4_nf4_bitsandbytes_proxy
+w4_16,16,v4-w4_16,18.478565297728395,4.832878071250001,12.5,16,16,0,[568],uniform_w4_nf4_bitsandbytes_proxy
+w4_32,32,v4-w4_32,19.462608118968383,8.2098250415,12.5,16,16,0,[2040],uniform_w4_nf4_bitsandbytes_proxy
