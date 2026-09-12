@@ -7,6 +7,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
+from .analyze_static_frontier import bootstrap_mean_ci, longest_common_prefix, token_agreement
 from .metrics import derive_request_metrics
 from .prepare_static_frontier_workloads import derive_rows
 from .summarize import summarize_run
@@ -49,6 +50,14 @@ class StaticFrontierWorkloadTests(unittest.TestCase):
         self.assertEqual([row["planned_arrival_offset_s"] for row in rows], [0.0, 8.0, 16.0])
         self.assertEqual([row["prompt"] for row in rows], ["p1", "p2", "p3"])
         self.assertAlmostEqual(rows[0]["frontier_nominal_offered_rps"], 2 / 16)
+
+
+class StaticFrontierAnalysisTests(unittest.TestCase):
+    def test_paired_bootstrap_and_output_agreement_helpers(self) -> None:
+        self.assertEqual(bootstrap_mean_ci([2.0, 2.0], repeats=100, seed=7), (2.0, 2.0))
+        self.assertEqual(longest_common_prefix([1, 2, 3], [1, 2, 4]), 2)
+        self.assertAlmostEqual(token_agreement([1, 2, 3], [1, 4, 3]), 2 / 3)
+        self.assertAlmostEqual(token_agreement([1, 2], [1, 2, 3]), 2 / 3)
 
 
 class MetricTests(unittest.TestCase):
