@@ -126,12 +126,16 @@ def quality_analysis(run_dirs: list[Path], output_dir: Path) -> dict[str, Any]:
         for row in requests:
             request_id = str(row["benchmark_request_id"])
             references = [str(value) for value in row.get("dataset_reference_answers", [])]
+            answer = str(row.get("generated_answer") or "")
+            output_token_ids = [int(value) for value in row.get("output_token_ids", [])]
             by_condition[condition][request_id] = {
                 "request_id": request_id,
                 "sequence": row.get("sequence"),
                 "dataset_question_id": row.get("dataset_question_id"),
-                "f1": best_reference_f1(str(row.get("generated_answer") or ""), references),
-                "output_token_ids": [int(value) for value in row.get("output_token_ids", [])],
+                "f1": best_reference_f1(answer, references),
+                "generated_nonwhitespace_chars": len(normalize_chars(answer)),
+                "output_token_unique_fraction": len(set(output_token_ids)) / len(output_token_ids) if output_token_ids else 0.0,
+                "output_token_ids": output_token_ids,
             }
     request_ids = list(by_condition["fp16_0"])
     if any(set(rows) != set(request_ids) for rows in by_condition.values()):
@@ -145,11 +149,15 @@ def quality_analysis(run_dirs: list[Path], output_dir: Path) -> dict[str, Any]:
             "sequence": base["sequence"],
             "dataset_question_id": base["dataset_question_id"],
             "fp16_f1": base["f1"],
+            "fp16_generated_nonwhitespace_chars": base["generated_nonwhitespace_chars"],
+            "fp16_output_token_unique_fraction": base["output_token_unique_fraction"],
         }
         for condition in CONDITIONS[1:]:
             current = by_condition[condition][request_id]
             row[f"{condition}_f1"] = current["f1"]
             row[f"{condition}_minus_fp16_f1"] = current["f1"] - base["f1"]
+            row[f"{condition}_generated_nonwhitespace_chars"] = current["generated_nonwhitespace_chars"]
+            row[f"{condition}_output_token_unique_fraction"] = current["output_token_unique_fraction"]
             row[f"{condition}_token_agreement"] = token_agreement(
                 base["output_token_ids"], current["output_token_ids"]
             )
@@ -186,6 +194,14 @@ def quality_analysis(run_dirs: list[Path], output_dir: Path) -> dict[str, Any]:
                 "paired_delta_positive_count": sum(value > 0 for value in deltas),
                 "paired_delta_zero_count": sum(value == 0 for value in deltas),
                 "paired_delta_negative_count": sum(value < 0 for value in deltas),
+                "mean_generated_nonwhitespace_chars": sum(
+                    float(row["fp16_generated_nonwhitespace_chars"] if condition == "fp16_0" else row[f"{condition}_generated_nonwhitespace_chars"])
+                    for row in paired_rows
+                ) / len(paired_rows),
+                "mean_output_token_unique_fraction": sum(
+                    float(row["fp16_output_token_unique_fraction"] if condition == "fp16_0" else row[f"{condition}_output_token_unique_fraction"])
+                    for row in paired_rows
+                ) / len(paired_rows),
             }
         )
         if condition == "fp16_0":
