@@ -8,6 +8,7 @@ import tempfile
 import unittest
 
 from .metrics import derive_request_metrics
+from .prepare_static_frontier_workloads import derive_rows
 from .summarize import summarize_run
 from .workload import build_schedule
 
@@ -28,6 +29,26 @@ class WorkloadTests(unittest.TestCase):
     def test_duration_schedule_has_only_offsets_before_duration(self) -> None:
         schedule = build_schedule(2.0, "fixed", duration_s=1.1)
         self.assertEqual([item.planned_offset_s for item in schedule], [0.0, 0.5, 1.0])
+
+
+class StaticFrontierWorkloadTests(unittest.TestCase):
+    def test_dense_trace_scaling_preserves_content_and_reindexes(self) -> None:
+        source = [
+            {
+                "sequence": i,
+                "request_id": f"r{i}",
+                "planned_arrival_offset_s": float(i * 2),
+                "source_trace_timestamp_s": 100 + i,
+                "prompt": f"p{i}",
+            }
+            for i in range(5)
+        ]
+        rows = derive_rows(source, start=1, count=3, time_scale=4.0, kind="calibration")
+        self.assertEqual([row["sequence"] for row in rows], [0, 1, 2])
+        self.assertEqual([row["source_sequence"] for row in rows], [1, 2, 3])
+        self.assertEqual([row["planned_arrival_offset_s"] for row in rows], [0.0, 8.0, 16.0])
+        self.assertEqual([row["prompt"] for row in rows], ["p1", "p2", "p3"])
+        self.assertAlmostEqual(rows[0]["frontier_nominal_offered_rps"], 2 / 16)
 
 
 class MetricTests(unittest.TestCase):

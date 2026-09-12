@@ -47,6 +47,14 @@ def add_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--condition", choices=("fp16_0", "w4_8", "w4_16", "w4_32"), required=True)
     parser.add_argument("--quantized-layer-count", type=int, choices=(0, 8, 16, 32), required=True)
     parser.add_argument("--seed", type=int, default=2025)
+    parser.add_argument(
+        "--launch-mode",
+        choices=("trace_open_loop", "sequential"),
+        default="trace_open_loop",
+        help="Use saved arrival offsets or wait for each request to complete (quality-only runs).",
+    )
+    parser.add_argument("--warmup-requests", type=int, default=0)
+    parser.add_argument("--warmup-output-token-count", type=int, default=8)
     parser.add_argument("--telemetry-interval-s", type=float, default=0.25)
     parser.add_argument("--max-batch-size", type=int, default=32)
     parser.add_argument("--max-tokens-in-batch", type=int, default=49152)
@@ -97,8 +105,15 @@ def initial_metadata(args: argparse.Namespace, workload: list[dict[str, Any]]) -
         "prompt_token_count_requested": 1024,
         "output_token_count_requested": 512,
         "random_seed": args.seed,
-        "warmup_policy": {"warmup_requests": 0, "included_in_raw_requests": False},
-        "arrival_mode": "trace_open_loop",
+        "warmup_policy": {
+            "warmup_requests": args.warmup_requests,
+            "output_token_count": args.warmup_output_token_count,
+            "included_in_raw_requests": False,
+        },
+        "arrival_mode": args.launch_mode,
+        "workload_kind": workload[0].get("frontier_workload_kind"),
+        "workload_time_scale": workload[0].get("frontier_time_scale"),
+        "nominal_offered_rps": workload[0].get("frontier_nominal_offered_rps"),
         "telemetry_interval_s": args.telemetry_interval_s,
         "generation": {
             "decoding": "greedy_argmax",
@@ -134,6 +149,8 @@ async def run(args: argparse.Namespace) -> Path:
         raise ValueError("quantized layer count must match a static quantization condition")
     if args.telemetry_interval_s <= 0 or args.timeout_s <= 0:
         raise ValueError("telemetry interval and timeout must be positive")
+    if args.warmup_requests < 0 or args.warmup_output_token_count <= 0:
+        raise ValueError("warmup request count must be non-negative and output count positive")
     for expected_sequence, row in enumerate(workload):
         if row.get("sequence") != expected_sequence:
             raise ValueError("workload sequence is not contiguous")
@@ -176,6 +193,14 @@ async def run(args: argparse.Namespace) -> Path:
         loop = asyncio.get_running_loop()
         engine_task = asyncio.create_task(engine.start_all_event_loops())
         await asyncio.sleep(0)
+        for warmup_index in range(args.warmup_requests):
+            warmup = swiftllm.RawRequest(
+                str(workload[warmup_index % len(workload)]["prompt"]),
+                args.warmup_output_token_count,
+            )
+            async for _ in engine.add_request_and_stream(warmup):
+                pass
+            print(f"warmup completed: {warmup_index + 1}/{args.warmup_requests}")
         measurement_start_loop = loop.time()
         measurement_start_ns = time.perf_counter_ns()
         metadata["measurement_start_time_ns"] = measurement_start_ns
@@ -280,6 +305,10 @@ async def run(args: argparse.Namespace) -> Path:
             row.update(derive_request_metrics(row))
 
         async def launch() -> None:
+            if args.launch_mode == "sequential":
+                for item in workload:
+                    await consume(item, time.perf_counter_ns())
+                return
             for item in workload:
                 planned_time_ns = measurement_start_ns + int(float(item["planned_arrival_offset_s"]) * NS_PER_SECOND)
                 delay = measurement_start_loop + float(item["planned_arrival_offset_s"]) - loop.time()

@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "artifact_version": "static_frontier_v5",
+  "manifest_status": "recorded_before_v5_gpu_runs",
+  "created_at_utc": "2026-09-12T19:48:20Z",
+  "repository": {
+    "git_commit": "9b3814a7",
+    "validated_substrate_namespace": "benchmark-results/table5-substrate-v4",
+    "preserve_namespaces": [
+      "benchmark-results/static-quantization-quality-latency",
+      "benchmark-results/table5-substrate-v4"
+    ]
+  },
+  "scope": {
+    "objective": "stable static quality-latency frontier and dynamic-adaptation feasibility gate for the validated Table-5 proxy",
+    "excluded": [
+      "dynamic adaptation",
+      "runtime layer swapping",
+      "controller implementation",
+      "reopening FP16/Hugging-Face parity without falsification",
+      "exact paper-number chasing"
+    ]
+  },
+  "model": {
+    "checkpoint": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "config_sha256": "54acfad3cffe057640904ca8a1e83525e6551c70c7a04c641f5a9eda0bbf64bd",
+    "tokenizer_json_sha256": "76e48799b099d43365bd24ccd8ecc5aedac831718da780552f03b0a6eb4412aa",
+    "weight_index_sha256": "146776fce3f6db1103aa6f249e65ee5544c5923ce6f971b092eee79aa6e5d37b",
+    "fp16_parity_evidence": "benchmark-results/table5-substrate-v4/substrate-evidence/fp16-hf-parity.json"
+  },
+  "software": {
+    "python": "3.12.3",
+    "torch": "2.5.1+cu121",
+    "cuda_runtime": "12.1",
+    "transformers": "5.16.1",
+    "bitsandbytes": "0.49.2",
+    "ray": "2.55.1",
+    "driver": "580.159.03"
+  },
+  "hardware": {
+    "gpu_model": "NVIDIA GeForce RTX 3090",
+    "physical_memory_mib": 24576,
+    "planned_physical_indices": [0, 1],
+    "one_fresh_process_and_one_gpu_per_run": true
+  },
+  "conditions": [
+    {"condition": "fp16_0", "quantized_layer_count": 0},
+    {"condition": "w4_8", "quantized_layer_count": 8},
+    {"condition": "w4_16", "quantized_layer_count": 16},
+    {"condition": "w4_32", "quantized_layer_count": 32}
+  ],
+  "fixed_model_protocol": {
+    "prompt_tokens": 1024,
+    "output_tokens": 512,
+    "decoding": "greedy argmax; exactly 512 SwiftLLM generation steps",
+    "quantization": "uniform NF4 W4 bitsandbytes proxy; blocksize 64",
+    "w4_decode": "bitsandbytes.gemv_4bit",
+    "w4_prefill": "bitsandbytes.matmul_4bit multi-row fallback that dequantizes temporary weights",
+    "layer_order": "front-to-back layers [0,N); fixed for all N",
+    "engine": {
+      "block_size": 16,
+      "gpu_mem_utilization": 0.99,
+      "num_cpu_blocks": 4096,
+      "max_seqs_in_block_table": 128,
+      "max_blocks_per_seq": 3072,
+      "max_batch_size": 32,
+      "max_tokens_in_batch": 49152,
+      "scheduler": "unchanged SwiftLLM"
+    },
+    "warmup": "one excluded request with the first frozen prompt and 8 generated tokens",
+    "seed": 2025
+  },
+  "frozen_source": {
+    "workload": "benchmark-results/static-quantization-quality-latency/input/workload.jsonl",
+    "workload_sha256": "5811f7891332354d28cc61e4eea7d76278552edccd4a0a3d0738384255442337",
+    "request_count": 106,
+    "quality_workload": "benchmark-results/static-frontier-v5/input/quality-106.jsonl",
+    "quality_workload_sha256": "2fceeb2aaf2a7c95a161a4d51642b754924240721c63ae1e48c85a70bd0c6b3e"
+  },
+  "quality": {
+    "launch_mode": "sequential",
+    "request_count": 106,
+    "primary_metric": "macro mean per-request DuReader whitespace-stripped character-overlap F1 against best reference",
+    "paired_comparison": "join every W4 request to FP16 by stable request_id; report all per-request deltas",
+    "uncertainty": "10000-request paired nonparametric bootstrap, percentile 95% CI, seed 2025",
+    "secondary_metric_predeclared": "FP16-vs-W4 position-aligned output-token agreement, exact-sequence agreement, and longest common prefix; mechanism evidence only",
+    "nonmonotonic_policy": "report unchanged; use secondary output agreement to diagnose quantization distortion; do not discard or retune examples"
+  },
+  "calibration": {
+    "condition": "fp16_0 only",
+    "workload_rule": "frozen source sequences 42..105 inclusive, normalized to zero and time-dilated",
+    "request_count": 64,
+    "prompt_tokens": 1024,
+    "output_tokens": 512,
+    "time_scales_relative_to_existing_1p75_offsets": [8, 12, 16, 24],
+    "nominal_offered_rps": [0.5, 0.3333333333333333, 0.25, 0.16666666666666666],
+    "knee_rule": "in ascending offered load, first point with any of: SLO violation rate >=20%, P95 queueing >=2 s, or peak logical KV utilization >=0.85; select it and its adjacent load points, using the nearest three points at a boundary",
+    "freeze_rule": "record selected three scales and designate the middle selected point as near-knee before any v5 W4 run"
+  },
+  "serving": {
+    "selected_time_scales": null,
+    "selected_nominal_offered_rps": null,
+    "near_knee_time_scale": null,
+    "request_count_per_run": 64,
+    "repeats": "one run at each selected load plus a second run for every condition at near-knee; add a third near-knee repeat if ordering changes materially",
+    "final_protocol": "1024-token prompts, 512 output steps, frozen dense BurstGPT trace shape",
+    "reported_metrics": [
+      "P50/P95/P99 TTFT",
+      "strict TTFT >2 s violation rate",
+      "queueing P50/P95/P99",
+      "arrival-to-scheduler, prefill/post-admission, and decode/TPOT timing where available",
+      "completed request and token throughput",
+      "waiting/running/swapped queue distributions",
+      "logical KV utilization and GPU block count",
+      "swap/preemption events",
+      "physical HBM telemetry",
+      "request counts and run-to-run ranges"
+    ]
+  },
+  "mechanism": {
+    "profile_repeats_per_state": 2,
+    "microbenchmark_repeats_per_state": 7,
+    "fields": [
+      "persistent allocation after model load",
+      "peak temporary prefill workspace = profile peak allocation - persistent allocation",
+      "safe profiled GPU KV blocks and token slots",
+      "1024-token prefill latency",
+      "one-token decode latency",
+      "serving saturation point"
+    ]
+  },
+  "eligibility_gate": {
+    "stability": "all runs complete 64/64; two profile probes agree within 5% in KV blocks and workspace; near-knee ordering is consistent or a third repeat is run",
+    "resource_relief": "quantized state has >5% more safe KV blocks than FP16, or repeated serving evidence identifies another pressure-relief mechanism",
+    "latency_advantage": "at near-knee, W4 has lower P95 TTFT and lower strict SLO rate than matched FP16 in both repeats, and mean P95 reduction exceeds the larger run-to-run P95 range (or 5% of FP16 mean if both ranges are zero)",
+    "mechanism_alignment": "queue/KV/HBM evidence must support the claimed relief; lower resident weights alone is insufficient",
+    "classification": "FP16 is the reference state; each W4 state is ELIGIBLE only if all applicable stability, resource-relief, latency-advantage, and mechanism-alignment gates pass"
+  },
+  "dynamic_gate": {
+    "go": "at least one W4 state is ELIGIBLE and quality has either a paired distinction or independently verified output-agreement distortion",
+    "no_go": "no W4 state has a stable same-workload advantage, temporary prefill workspace prevents safe relief, or noise prevents classification"
+  }
+}
