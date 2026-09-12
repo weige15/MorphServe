@@ -278,8 +278,9 @@ the current mechanism would not be scientifically meaningful.
 ## Regeneration and audit
 
 Exact command templates and run IDs are in
-`benchmark-results/static-frontier-v5/execution_commands.json`. The final
-derivation command is:
+`benchmark-results/static-frontier-v5/execution_commands.json`. To regenerate
+all derived evidence and rerun the audit from the saved raw artifacts, execute
+`benchmark-results/static-frontier-v5/regenerate.sh`. Its explicit commands are:
 
 ```bash
 cd /nfs/home/s314511048/MorphServe
@@ -297,7 +298,7 @@ PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m benchmark.audit_static_frontier
   --output benchmark-results/static-frontier-v5/completion_audit.json
 ```
 
-The machine audit performs 147 checks over raw files, protocol/workload hashes,
+The machine audit performs 157 checks over raw files, protocol/workload hashes,
 request counts, 1024/512 completion, telemetry fields, exact summary
 regeneration, required load/repeat matrix, near-knee ordering, mechanism probe
 matrix, derived deliverables, and the explicit decision. See

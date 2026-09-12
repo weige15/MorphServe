@@ -150,6 +150,8 @@ def main() -> None:
     check("explicit_dynamic_decision", final_decision["decision"] in {"GO", "NO-GO"}, final_decision["decision"])
     commands = json.loads((root / "execution_commands.json").read_text(encoding="utf-8"))
     check("regeneration_commands", all(key in commands for key in ("prepare_workloads", "condition_runner_template", "aggregate", "audit", "validation")), sorted(commands))
+    regenerate = root / "regenerate.sh"
+    check("executable_regeneration_script", regenerate.is_file() and bool(regenerate.stat().st_mode & 0o111), str(regenerate))
     repo_root = root.parents[1]
     report_path = repo_root / "docs/static-frontier-v5/final-report.md"
     audit_path = repo_root / "docs/static-frontier-v5/completion-audit.md"

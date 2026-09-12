@@ -87,7 +87,7 @@ PYTHONPATH="$PWD/swiftLLM" "$VENV/bin/python" -m py_compile swiftLLM/benchmark/*
 git diff --check
 ```
 
-A successful benchmark run creates `metadata.json`, `requests.jsonl`, `telemetry.jsonl`, and `summary.json` in its run directory. Analysis additionally creates CSV/JSON/PNG artifacts from raw timestamps. For v5, run the aggregate and audit commands recorded in `benchmark-results/static-frontier-v5/execution_commands.json`; a successful audit reports `PASS`, 156 checks, and the explicit `NO-GO` decision.
+A successful benchmark run creates `metadata.json`, `requests.jsonl`, `telemetry.jsonl`, and `summary.json` in its run directory. Analysis additionally creates CSV/JSON/PNG artifacts from raw timestamps. For v5, run the aggregate and audit commands recorded in `benchmark-results/static-frontier-v5/execution_commands.json`; a successful audit reports `PASS`, 157 checks, and the explicit `NO-GO` decision.
 
 ## Troubleshooting
 

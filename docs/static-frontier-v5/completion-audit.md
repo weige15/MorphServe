@@ -87,7 +87,7 @@ substitute for experimental coverage.
 | Required resource/mechanism table | `analysis/resource_mechanism_table.csv` | PASS |
 | Required state-eligibility table | `analysis/state_eligibility.csv` | PASS |
 | Recommended state set if GO | Decision is NO-GO; machine artifact correctly emits an empty recommended runtime set | PASS / not applicable |
-| Runnable regeneration commands | `execution_commands.json` and final report commands | PASS |
+| Runnable regeneration commands | executable `regenerate.sh`, `execution_commands.json`, and final report commands | PASS |
 | Required final sections | Final report has CONFIRMED, SUPPORTED BUT UNCERTAIN, BLOCKED, REMAINING UNCERTAINTY, and DYNAMIC ADAPTATION DECISION | PASS |
 | Raw-artifact derivation | Analyzer reads quality/serving requests and telemetry plus profile/micro JSON; no result constants | PASS |
 | Raw summaries independently reproducible | Machine audit exactly regenerates all 16 serving summaries from raw files | PASS |
@@ -104,7 +104,7 @@ PYTHONPATH="$PWD/swiftLLM" /nfs/home/s314511048/.venv/bin/python \
   --output benchmark-results/static-frontier-v5/completion_audit.json
 ```
 
-Observed result: **PASS**, 156 checks, decision **NO-GO**.
+Observed result: **PASS**, 157 checks, decision **NO-GO**.
 
 The audit checks actual raw request/telemetry rows and exact hashes. It does not
 infer completion from a green manifest. It verifies the 4 × 106 quality matrix,
