@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "checks": 30,
+  "passed": 30,
+  "failed": 0,
+  "decision": "GO"
+}

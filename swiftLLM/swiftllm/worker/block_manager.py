@@ -101,4 +101,101 @@ class BlockManager:
         Useful for swapping
         """
         return self.num_seq_allocated_blocks[seq_ids]
+
+    def get_allocated_block_ids(self) -> torch.Tensor:
+        """Return every currently allocated virtual block ID."""
+        return torch.nonzero(~self.is_block_free, as_tuple=False).view(-1)
+
+    def extend(self, additional_blocks: int):
+        """Append physically-backed virtual IDs without changing existing IDs."""
+        if additional_blocks <= 0:
+            raise ValueError("additional_blocks must be positive")
+        self.is_block_free = torch.cat((
+            self.is_block_free,
+            torch.ones(additional_blocks, dtype=torch.bool, device=self.is_block_free.device),
+        ))
+        self.num_blocks += additional_blocks
+        self.num_free_blocks += additional_blocks
+        self.assert_consistent()
+
+    def plan_compaction_to_prefix(
+        self,
+        prefix_blocks: int,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Choose extension sources and free base destinations without mutation."""
+        if not 0 < prefix_blocks <= self.num_blocks:
+            raise ValueError("invalid compaction prefix")
+        allocated = self.num_blocks - self.num_free_blocks
+        if allocated > prefix_blocks:
+            raise RuntimeError(
+                f"cannot compact {allocated} allocated blocks into {prefix_blocks}"
+            )
+        extension_ids = (
+            torch.nonzero(~self.is_block_free[prefix_blocks:], as_tuple=False).view(-1)
+            + prefix_blocks
+        )
+        if extension_ids.numel() == 0:
+            empty = torch.empty(0, dtype=torch.int64, device=self.is_block_free.device)
+            return empty, empty
+        base_ids = torch.nonzero(
+            self.is_block_free[:prefix_blocks], as_tuple=False
+        ).view(-1)[:extension_ids.numel()]
+        if base_ids.numel() != extension_ids.numel():
+            raise RuntimeError("not enough free base blocks for compaction")
+        return extension_ids, base_ids
+
+    def commit_compaction(
+        self,
+        extension_ids: torch.Tensor,
+        base_ids: torch.Tensor,
+    ):
+        """Publish a completed physical extension-to-base copy in the block table."""
+        if extension_ids.numel() != base_ids.numel():
+            raise ValueError("compaction source/destination counts differ")
+        if extension_ids.numel() == 0:
+            return
+        if not bool((~self.is_block_free[extension_ids]).all().item()):
+            raise RuntimeError("compaction source is not allocated")
+        if not bool(self.is_block_free[base_ids].all().item()):
+            raise RuntimeError("compaction destination is not free")
+
+        id_map = torch.arange(
+            self.num_blocks, dtype=torch.int64, device=self.is_block_free.device
+        )
+        id_map[extension_ids] = base_ids
+        allocated_counts = self.num_seq_allocated_blocks.cpu().tolist()
+        for seq_id, count in enumerate(allocated_counts):
+            if count:
+                row = self.block_table[seq_id, :count]
+                self.block_table[seq_id, :count] = id_map[row.long()].to(torch.int32)
+
+        self.is_block_free[base_ids] = False
+        self.is_block_free[extension_ids] = True
+        self.assert_consistent()
+
+    def shrink(self, num_blocks: int):
+        """Remove a free virtual-ID suffix after physical compaction."""
+        if not 0 < num_blocks <= self.num_blocks:
+            raise ValueError("invalid shrink target")
+        if not bool(self.is_block_free[num_blocks:].all().item()):
+            raise RuntimeError("cannot shrink while suffix blocks are allocated")
+        self.is_block_free = self.is_block_free[:num_blocks].clone()
+        self.num_blocks = num_blocks
+        self.num_free_blocks = int(self.is_block_free.sum().item())
+        self.assert_consistent()
+
+    def assert_consistent(self):
+        observed_free = int(self.is_block_free.sum().item())
+        if tuple(self.is_block_free.shape) != (self.num_blocks,):
+            raise RuntimeError("free bitmap length does not match num_blocks")
+        if observed_free != self.num_free_blocks:
+            raise RuntimeError(
+                f"free block count mismatch: {self.num_free_blocks} != {observed_free}"
+            )
+        allocated_from_rows = int(self.num_seq_allocated_blocks.sum().item())
+        if allocated_from_rows != self.num_blocks - self.num_free_blocks:
+            raise RuntimeError(
+                "block-table allocation count does not match free bitmap: "
+                f"{allocated_from_rows} != {self.num_blocks - self.num_free_blocks}"
+            )
     

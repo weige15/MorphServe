@@ -37,6 +37,9 @@ class LlamaTransformerLayer:
         residual_buf: torch.Tensor, # [num_tokens, hidden_size]
         k_cache: torch.Tensor,
         v_cache: torch.Tensor,
+        k_cache_extension: torch.Tensor,
+        v_cache_extension: torch.Tensor,
+        base_num_blocks: int,
         block_table: torch.Tensor,
         infer_state: LlamaInferState,
     ) -> torch.Tensor:
@@ -76,7 +79,10 @@ class LlamaTransformerLayer:
                 self.model_config,
                 self.engine_config,
                 infer_state,
-                self.layer_id
+                self.layer_id,
+                k_cache_extension,
+                v_cache_extension,
+                base_num_blocks,
             )
         store_kvcache_event = torch.cuda.Event()
         store_kvcache_event.record()
@@ -111,6 +117,9 @@ class LlamaTransformerLayer:
                     self.model_config, self.engine_config, infer_state,
                     self.layer_id,
                     o[infer_state.num_prefill_tokens:, :],
+                    k_cache_extension,
+                    v_cache_extension,
+                    base_num_blocks,
                 )
                 event = torch.cuda.Event()
                 event.record()

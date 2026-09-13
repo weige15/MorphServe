@@ -1,0 +1,6 @@
+[Model.profile] GPU total memory: 23.56 GB, runtime peak memory: 19.87 GB
+{
+  "condition": "fp16",
+  "output": "benchmark-results/runtime-morphing-v8/raw/state-fp16.json",
+  "elapsed_s": 42.818446218
+}

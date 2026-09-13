@@ -1,0 +1,5 @@
+state,base_blocks,extension_blocks,total_physical_blocks,scheduler_visible_blocks,physical_kv_bytes
+static_fp16,1768,0,1768,1768,3707764736
+runtime_fp16,1759,0,1759,1759,3688890368
+static_awq_w4_16,4286,0,4286,4286,8988393472
+runtime_awq_w4_16,1759,2411,4170,4170,8745123840

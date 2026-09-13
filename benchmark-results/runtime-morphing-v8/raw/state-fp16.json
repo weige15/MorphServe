@@ -1,0 +1,2247 @@
+{
+  "condition": "fp16",
+  "elapsed_ns": 42818446218,
+  "gpu": {
+    "compute_capability": [
+      8,
+      6
+    ],
+    "cuda_visible_devices": "5",
+    "free_bytes": 4681891840,
+    "name": "NVIDIA GeForce RTX 3090",
+    "torch": "2.9.0+cu128",
+    "total_bytes": 25296044032
+  },
+  "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "num_gpu_blocks": 1768,
+  "output_token_ids": [
+    [
+      20437,
+      13,
+      578,
+      6864,
+      315,
+      15704,
+      374,
+      22463,
+      13,
+      578,
+      6864,
+      315,
+      18157,
+      374,
+      25048,
+      13,
+      578,
+      6864,
+      315,
+      279,
+      3723,
+      15422,
+      374,
+      7295
+    ],
+    [
+      50789,
+      13,
+      578,
+      25655,
+      11841,
+      374,
+      44662,
+      13,
+      578,
+      7928,
+      11841,
+      374,
+      50789,
+      13,
+      578,
+      25655,
+      11841,
+      374,
+      44662,
+      13,
+      578,
+      7928,
+      11841,
+      374
+    ]
+  ],
+  "physical_kv_bytes": 3707764736,
+  "prompt_token_ids": [
+    [
+      128000,
+      791,
+      6864,
+      315,
+      9822,
+      374,
+      12366,
+      13,
+      578,
+      6864,
+      315,
+      10057,
+      374
+    ],
+    [
+      128000,
+      27814,
+      26533,
+      374,
+      279,
+      18585,
+      11841,
+      311,
+      279,
+      8219,
+      13,
+      578,
+      7928,
+      11841,
+      374
+    ]
+  ],
+  "provenance": {
+    "git_commit": "bd2a52c3ec49d7b8c2798bf0606d5a5e2f68f35e",
+    "runtime_source_diff_sha256": "ccde0539eed73ebe456a8b071c196af304d62a36d49d3b768a275430eae319b3",
+    "runtime_source_files_sha256": {
+      "swiftLLM/benchmark/run_runtime_morphing_validation.py": "61331775b8bbcf9bd66e421eaf9d0e2af7f02063a32da5a74505232bbe3081f0",
+      "swiftLLM/benchmark/test_runtime_morphing.py": "18c02226974edffa57f7624ac7eb9ce28d6d8720bef330ed20e22b813c1288eb",
+      "swiftLLM/swiftllm/engine_config.py": "700d72f22a7f04a11c4765e7021f82a0a6d2f4fa1e622fe4d18dbdc4bb37a41f",
+      "swiftLLM/swiftllm/server/engine.py": "37e2b523d4f8ddbf5284d665389a34dc52e7191519ad70077ac700d221b09e75",
+      "swiftLLM/swiftllm/server/scheduler.py": "7268a2fda431eb96fe21a26043ce75d4c6e3708374c96ecef91f4862dc0d7f70",
+      "swiftLLM/swiftllm/server/structs.py": "7d33392e5efde001786454f76ce0ef1ea151fe8bd9643dc3b8db997dcd9af88a",
+      "swiftLLM/swiftllm/worker/block_manager.py": "e9c46b2d55fff8c2f8156782fbc4d59f2d6327182826659911691ca773831cfd",
+      "swiftLLM/swiftllm/worker/kernels/kvcache_mgmt.py": "ad9d4a001060647732276eeaa6f7441da003cdf68861cbbce2da9a2260b0084e",
+      "swiftLLM/swiftllm/worker/kernels/paged_attn.py": "8a1f5131929978437ed3b733bb440c83cb5985f84c39be8ccce33eb946eac5b8",
+      "swiftLLM/swiftllm/worker/layers/transformer_layer.py": "87b2cc4a1535cf16a3552d51383c06bf127d63525655c9bf5d0ae44c56a56d71",
+      "swiftLLM/swiftllm/worker/model.py": "5b064df0057375ff9d75fe546855b855fd98df670cc2e1d8fc49bc8f4c61b186",
+      "swiftLLM/swiftllm/worker/weight.py": "242277b7d3389699b2a16eea69d3d050be1cf30bf204eb75af7bebe1027b2dae"
+    }
+  },
+  "quantized_model_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+  "schema_version": 1,
+  "selected_layer_digest": {
+    "compared_bytes": 6979584000,
+    "layouts": [
+      {
+        "layer_id": 0,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 1,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 2,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 3,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 4,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 5,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 6,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 7,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 8,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 9,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 10,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 11,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 12,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 13,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 14,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      {
+        "layer_id": 15,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      }
+    ],
+    "sha256": "8ba66e630777dffa86a4e2f9eeaa3317b32ec88a8513f216ffe328538f7a5f2d"
+  },
+  "steps": [
+    {
+      "input_position": 12,
+      "input_token_id": null,
+      "is_prefill": true,
+      "output_token_id": 20437,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 0,
+      "timestamp_ns": 282917375113232
+    },
+    {
+      "input_position": 14,
+      "input_token_id": null,
+      "is_prefill": true,
+      "output_token_id": 50789,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 0,
+      "timestamp_ns": 282917375113232
+    },
+    {
+      "input_position": 13,
+      "input_token_id": 20437,
+      "is_prefill": false,
+      "output_token_id": 13,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 1,
+      "timestamp_ns": 282917487474396
+    },
+    {
+      "input_position": 15,
+      "input_token_id": 50789,
+      "is_prefill": false,
+      "output_token_id": 13,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 1,
+      "timestamp_ns": 282917487474396
+    },
+    {
+      "input_position": 14,
+      "input_token_id": 13,
+      "is_prefill": false,
+      "output_token_id": 578,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 2,
+      "timestamp_ns": 282917509964284
+    },
+    {
+      "input_position": 16,
+      "input_token_id": 13,
+      "is_prefill": false,
+      "output_token_id": 578,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 2,
+      "timestamp_ns": 282917509964284
+    },
+    {
+      "input_position": 15,
+      "input_token_id": 578,
+      "is_prefill": false,
+      "output_token_id": 6864,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 3,
+      "timestamp_ns": 282917532356330
+    },
+    {
+      "input_position": 17,
+      "input_token_id": 578,
+      "is_prefill": false,
+      "output_token_id": 25655,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 3,
+      "timestamp_ns": 282917532356330
+    },
+    {
+      "input_position": 16,
+      "input_token_id": 6864,
+      "is_prefill": false,
+      "output_token_id": 315,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 4,
+      "timestamp_ns": 282917554700575
+    },
+    {
+      "input_position": 18,
+      "input_token_id": 25655,
+      "is_prefill": false,
+      "output_token_id": 11841,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 4,
+      "timestamp_ns": 282917554700575
+    },
+    {
+      "input_position": 17,
+      "input_token_id": 315,
+      "is_prefill": false,
+      "output_token_id": 15704,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 5,
+      "timestamp_ns": 282917577035339
+    },
+    {
+      "input_position": 19,
+      "input_token_id": 11841,
+      "is_prefill": false,
+      "output_token_id": 374,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 5,
+      "timestamp_ns": 282917577035339
+    },
+    {
+      "input_position": 18,
+      "input_token_id": 15704,
+      "is_prefill": false,
+      "output_token_id": 374,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 6,
+      "timestamp_ns": 282917599363222
+    },
+    {
+      "input_position": 20,
+      "input_token_id": 374,
+      "is_prefill": false,
+      "output_token_id": 44662,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 6,
+      "timestamp_ns": 282917599363222
+    },
+    {
+      "input_position": 19,
+      "input_token_id": 374,
+      "is_prefill": false,
+      "output_token_id": 22463,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 7,
+      "timestamp_ns": 282917621692868
+    },
+    {
+      "input_position": 21,
+      "input_token_id": 44662,
+      "is_prefill": false,
+      "output_token_id": 13,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 7,
+      "timestamp_ns": 282917621692868
+    },
+    {
+      "input_position": 20,
+      "input_token_id": 22463,
+      "is_prefill": false,
+      "output_token_id": 13,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 8,
+      "timestamp_ns": 282917644176294
+    },
+    {
+      "input_position": 22,
+      "input_token_id": 13,
+      "is_prefill": false,
+      "output_token_id": 578,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 8,
+      "timestamp_ns": 282917644176294
+    },
+    {
+      "input_position": 21,
+      "input_token_id": 13,
+      "is_prefill": false,
+      "output_token_id": 578,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 9,
+      "timestamp_ns": 282917666584971
+    },
+    {
+      "input_position": 23,
+      "input_token_id": 578,
+      "is_prefill": false,
+      "output_token_id": 7928,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 9,
+      "timestamp_ns": 282917666584971
+    },
+    {
+      "input_position": 22,
+      "input_token_id": 578,
+      "is_prefill": false,
+      "output_token_id": 6864,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 10,
+      "timestamp_ns": 282917689100928
+    },
+    {
+      "input_position": 24,
+      "input_token_id": 7928,
+      "is_prefill": false,
+      "output_token_id": 11841,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 10,
+      "timestamp_ns": 282917689100928
+    },
+    {
+      "input_position": 23,
+      "input_token_id": 6864,
+      "is_prefill": false,
+      "output_token_id": 315,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 11,
+      "timestamp_ns": 282917711575566
+    },
+    {
+      "input_position": 25,
+      "input_token_id": 11841,
+      "is_prefill": false,
+      "output_token_id": 374,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 11,
+      "timestamp_ns": 282917711575566
+    },
+    {
+      "input_position": 24,
+      "input_token_id": 315,
+      "is_prefill": false,
+      "output_token_id": 18157,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 12,
+      "timestamp_ns": 282917734128948
+    },
+    {
+      "input_position": 26,
+      "input_token_id": 374,
+      "is_prefill": false,
+      "output_token_id": 50789,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 12,
+      "timestamp_ns": 282917734128948
+    },
+    {
+      "input_position": 25,
+      "input_token_id": 18157,
+      "is_prefill": false,
+      "output_token_id": 374,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 13,
+      "timestamp_ns": 282917756603027
+    },
+    {
+      "input_position": 27,
+      "input_token_id": 50789,
+      "is_prefill": false,
+      "output_token_id": 13,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 13,
+      "timestamp_ns": 282917756603027
+    },
+    {
+      "input_position": 26,
+      "input_token_id": 374,
+      "is_prefill": false,
+      "output_token_id": 25048,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 14,
+      "timestamp_ns": 282917779092713
+    },
+    {
+      "input_position": 28,
+      "input_token_id": 13,
+      "is_prefill": false,
+      "output_token_id": 578,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 14,
+      "timestamp_ns": 282917779092713
+    },
+    {
+      "input_position": 27,
+      "input_token_id": 25048,
+      "is_prefill": false,
+      "output_token_id": 13,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 15,
+      "timestamp_ns": 282917801672233
+    },
+    {
+      "input_position": 29,
+      "input_token_id": 578,
+      "is_prefill": false,
+      "output_token_id": 25655,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 15,
+      "timestamp_ns": 282917801672233
+    },
+    {
+      "input_position": 28,
+      "input_token_id": 13,
+      "is_prefill": false,
+      "output_token_id": 578,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 16,
+      "timestamp_ns": 282917824178952
+    },
+    {
+      "input_position": 30,
+      "input_token_id": 25655,
+      "is_prefill": false,
+      "output_token_id": 11841,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 16,
+      "timestamp_ns": 282917824178952
+    },
+    {
+      "input_position": 29,
+      "input_token_id": 578,
+      "is_prefill": false,
+      "output_token_id": 6864,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 17,
+      "timestamp_ns": 282917846630483
+    },
+    {
+      "input_position": 31,
+      "input_token_id": 11841,
+      "is_prefill": false,
+      "output_token_id": 374,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 17,
+      "timestamp_ns": 282917846630483
+    },
+    {
+      "input_position": 30,
+      "input_token_id": 6864,
+      "is_prefill": false,
+      "output_token_id": 315,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 18,
+      "timestamp_ns": 282917869213808
+    },
+    {
+      "input_position": 32,
+      "input_token_id": 374,
+      "is_prefill": false,
+      "output_token_id": 44662,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 18,
+      "timestamp_ns": 282917869213808
+    },
+    {
+      "input_position": 31,
+      "input_token_id": 315,
+      "is_prefill": false,
+      "output_token_id": 279,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 19,
+      "timestamp_ns": 282917891805042
+    },
+    {
+      "input_position": 33,
+      "input_token_id": 44662,
+      "is_prefill": false,
+      "output_token_id": 13,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 19,
+      "timestamp_ns": 282917891805042
+    },
+    {
+      "input_position": 32,
+      "input_token_id": 279,
+      "is_prefill": false,
+      "output_token_id": 3723,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 20,
+      "timestamp_ns": 282917914375199
+    },
+    {
+      "input_position": 34,
+      "input_token_id": 13,
+      "is_prefill": false,
+      "output_token_id": 578,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 20,
+      "timestamp_ns": 282917914375199
+    },
+    {
+      "input_position": 33,
+      "input_token_id": 3723,
+      "is_prefill": false,
+      "output_token_id": 15422,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 21,
+      "timestamp_ns": 282917936950193
+    },
+    {
+      "input_position": 35,
+      "input_token_id": 578,
+      "is_prefill": false,
+      "output_token_id": 7928,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 21,
+      "timestamp_ns": 282917936950193
+    },
+    {
+      "input_position": 34,
+      "input_token_id": 15422,
+      "is_prefill": false,
+      "output_token_id": 374,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 22,
+      "timestamp_ns": 282917959621101
+    },
+    {
+      "input_position": 36,
+      "input_token_id": 7928,
+      "is_prefill": false,
+      "output_token_id": 11841,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 22,
+      "timestamp_ns": 282917959621101
+    },
+    {
+      "input_position": 35,
+      "input_token_id": 374,
+      "is_prefill": false,
+      "output_token_id": 7295,
+      "precision_state": "FP16",
+      "request_id": 0,
+      "sequence": 0,
+      "step_index": 23,
+      "timestamp_ns": 282917982151473
+    },
+    {
+      "input_position": 37,
+      "input_token_id": 11841,
+      "is_prefill": false,
+      "output_token_id": 374,
+      "precision_state": "FP16",
+      "request_id": 1,
+      "sequence": 1,
+      "step_index": 23,
+      "timestamp_ns": 282917982151473
+    }
+  ],
+  "transition_boundaries": []
+}

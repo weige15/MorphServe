@@ -1,0 +1,7 @@
+INFO 09-14 02:29:40 [marlin_utils.py:404] Marlin kernel can achieve better performance for small size_n with experimental use_atomic_add feature. You can consider set environment variable VLLM_MARLIN_USE_ATOMIC_ADD to 1 if possible.
+[Model.profile] GPU total memory: 23.56 GB, runtime peak memory: 14.95 GB
+{
+  "condition": "static_awq",
+  "output": "benchmark-results/runtime-morphing-v8/raw/state-static-awq.json",
+  "elapsed_s": 26.821442614
+}

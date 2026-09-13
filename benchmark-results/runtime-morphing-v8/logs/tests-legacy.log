@@ -1,0 +1,32 @@
+test_one_token_tpot_is_zero (benchmark.test_benchmark.MetricTests.test_one_token_tpot_is_zero) ... ok
+test_request_formulas (benchmark.test_benchmark.MetricTests.test_request_formulas) ... ok
+test_paired_bootstrap_and_output_agreement_helpers (benchmark.test_benchmark.StaticFrontierAnalysisTests.test_paired_bootstrap_and_output_agreement_helpers) ... ok
+test_dense_trace_scaling_preserves_content_and_reindexes (benchmark.test_benchmark.StaticFrontierWorkloadTests.test_dense_trace_scaling_preserves_content_and_reindexes) ... ok
+test_summary_can_be_regenerated_from_saved_raw_files (benchmark.test_benchmark.SummaryTests.test_summary_can_be_regenerated_from_saved_raw_files) ... ok
+test_duration_schedule_has_only_offsets_before_duration (benchmark.test_benchmark.WorkloadTests.test_duration_schedule_has_only_offsets_before_duration) ... ok
+test_fixed_schedule_is_independent_of_completion (benchmark.test_benchmark.WorkloadTests.test_fixed_schedule_is_independent_of_completion) ... ok
+test_poisson_schedule_is_seeded_and_not_completion_driven (benchmark.test_benchmark.WorkloadTests.test_poisson_schedule_is_seeded_and_not_completion_driven) ... ok
+test_awq_config_is_frozen (benchmark.test_inference_substrate.AWQLoadingRegressionTests.test_awq_config_is_frozen) ... ok
+test_component_keys_and_shapes_match_autoawq_gemm (benchmark.test_inference_substrate.AWQLoadingRegressionTests.test_component_keys_and_shapes_match_autoawq_gemm) ... ok
+test_selected_layer_backend_does_not_change_unselected_layers (benchmark.test_inference_substrate.AWQLoadingRegressionTests.test_selected_layer_backend_does_not_change_unselected_layers) ... ok
+test_explicit_lm_head_wins_when_rope_scaling_is_a_dict (benchmark.test_inference_substrate.ModelConfigRegressionTests.test_explicit_lm_head_wins_when_rope_scaling_is_a_dict) ... ok
+test_llama31_rope_formula_is_not_model_version_detection (benchmark.test_inference_substrate.ModelConfigRegressionTests.test_llama31_rope_formula_is_not_model_version_detection) ... ok
+test_real_checkpoint_index_resolves_untied_head (benchmark.test_inference_substrate.ModelConfigRegressionTests.test_real_checkpoint_index_resolves_untied_head) ... ok
+test_tied_checkpoint_uses_embeddings_only_when_head_is_absent (benchmark.test_inference_substrate.ModelConfigRegressionTests.test_tied_checkpoint_uses_embeddings_only_when_head_is_absent) ... ok
+test_linear_source_has_no_full_matrix_decode_fallback (benchmark.test_inference_substrate.W4HotPathRegressionTests.test_linear_source_has_no_full_matrix_decode_fallback) ... ok
+test_high_pressure_fires_and_release_obeys_hysteresis (benchmark.test_crossover.CrossoverSignalTests.test_high_pressure_fires_and_release_obeys_hysteresis) ... ok
+test_persistent_queue_kv_signals_reject_low_pressure (benchmark.test_crossover.CrossoverSignalTests.test_persistent_queue_kv_signals_reject_low_pressure) ... ok
+test_restore_admission_hold_preserves_fcfs_queues (benchmark.test_runtime_morphing.RuntimeContractTests.test_restore_admission_hold_preserves_fcfs_queues) ... ok
+test_runtime_config_is_explicit_and_disabled_by_default (benchmark.test_runtime_morphing.RuntimeContractTests.test_runtime_config_is_explicit_and_disabled_by_default) ... ok
+test_block_manager_grow_compact_shrink_preserves_logical_slots (benchmark.test_runtime_morphing.SegmentedKVKernelTests.test_block_manager_grow_compact_shrink_preserves_logical_slots) ... skipped 'set MORPHSERVE_RUN_CUDA_TESTS=1 with CUDA available'
+test_decode_store_can_address_extension (benchmark.test_runtime_morphing.SegmentedKVKernelTests.test_decode_store_can_address_extension) ... skipped 'set MORPHSERVE_RUN_CUDA_TESTS=1 with CUDA available'
+test_segmented_swap_round_trip_uses_virtual_ids (benchmark.test_runtime_morphing.SegmentedKVKernelTests.test_segmented_swap_round_trip_uses_virtual_ids) ... skipped 'set MORPHSERVE_RUN_CUDA_TESTS=1 with CUDA available'
+test_shrink_rejects_usage_above_retained_capacity (benchmark.test_runtime_morphing.SegmentedKVKernelTests.test_shrink_rejects_usage_above_retained_capacity) ... skipped 'set MORPHSERVE_RUN_CUDA_TESTS=1 with CUDA available'
+test_store_and_attention_cross_base_extension_boundary (benchmark.test_runtime_morphing.SegmentedKVKernelTests.test_store_and_attention_cross_base_extension_boundary) ... skipped 'set MORPHSERVE_RUN_CUDA_TESTS=1 with CUDA available'
+test_direct_manual_transitions_are_serialized (benchmark.test_runtime_morphing.TransitionSerializationTests.test_direct_manual_transitions_are_serialized) ... ok
+test_direct_restore_rejects_over_capacity_without_poisoning_state (benchmark.test_runtime_morphing.TransitionSerializationTests.test_direct_restore_rejects_over_capacity_without_poisoning_state) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 0.327s
+
+OK (skipped=5)

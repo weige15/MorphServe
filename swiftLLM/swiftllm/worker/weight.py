@@ -44,6 +44,31 @@ class AWQMarlinMatrix:
 
 
 @dataclasses.dataclass
+class PreparedAWQMarlinMatrix:
+    """Pinned-host copy of the immutable tensors in one Marlin matrix."""
+
+    qweight: torch.Tensor
+    scales: torch.Tensor
+    qzeros: torch.Tensor
+    shape: tuple[int, int]
+    source_keys: tuple[str, ...]
+    group_size: int = 128
+    bits: int = 4
+    zero_point: bool = True
+    backend: str = "awq_marlin"
+
+
+@dataclasses.dataclass
+class PreparedLayerVariant:
+    """One complete decoder-layer representation staged outside HBM."""
+
+    layer_id: int
+    quantized: bool
+    quantization_backend: str
+    values: dict[str, torch.Tensor | PreparedAWQMarlinMatrix]
+
+
+@dataclasses.dataclass
 class RegisteredWeightItem:
     attr_name: str
     key: str
@@ -498,6 +523,184 @@ def quantized_matrix_bytes(matrix: QuantizedMatrix | AWQMarlinMatrix) -> int:
     for state in (matrix.matmul_quant_state, matrix.gemv_quant_state):
         tensors.extend(value for value in vars(state).values() if isinstance(value, torch.Tensor))
     return sum(tensor.numel() * tensor.element_size() for tensor in tensors)
+
+
+RUNTIME_LAYER_ATTRS = (
+    "attn_norm",
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "ffn_norm",
+    "up_gate_proj",
+    "down_proj",
+)
+
+
+def _copy_to_pinned_host(tensor: torch.Tensor) -> torch.Tensor:
+    host = torch.empty_like(tensor, device="cpu", pin_memory=True)
+    host.copy_(tensor, non_blocking=True)
+    return host
+
+
+def prepare_layer_variant(layer: LlamaTransformerLayerWeight) -> PreparedLayerVariant:
+    """Copy a final runtime layer layout to pinned host memory.
+
+    AutoAWQ source tensors are deliberately absent here: only the same repacked
+    qweight/scales/zero-points consumed by the validated Marlin path are kept.
+    Workspaces and empty g-index tensors are recreated on activation because
+    they are runtime scratch state, not checkpoint state.
+    """
+    values: dict[str, torch.Tensor | PreparedAWQMarlinMatrix] = {}
+    for name in RUNTIME_LAYER_ATTRS:
+        value = getattr(layer, name)
+        if isinstance(value, torch.Tensor):
+            values[name] = _copy_to_pinned_host(value)
+        elif isinstance(value, AWQMarlinMatrix):
+            values[name] = PreparedAWQMarlinMatrix(
+                qweight=_copy_to_pinned_host(value.qweight),
+                scales=_copy_to_pinned_host(value.scales),
+                qzeros=_copy_to_pinned_host(value.qzeros),
+                shape=value.shape,
+                source_keys=value.source_keys,
+                group_size=value.group_size,
+                bits=value.bits,
+                zero_point=value.zero_point,
+            )
+        else:
+            raise TypeError(f"unsupported runtime layer value {name}: {type(value)}")
+    return PreparedLayerVariant(
+        layer_id=layer.layer_id,
+        quantized=layer.quantized,
+        quantization_backend=layer.quantization_backend,
+        values=values,
+    )
+
+
+def _materialize_awq_matrix(prepared: PreparedAWQMarlinMatrix) -> AWQMarlinMatrix:
+    from vllm.model_executor.layers.quantization.utils.marlin_utils import (
+        marlin_make_empty_g_idx,
+        marlin_make_workspace_new,
+    )
+
+    qweight = prepared.qweight.to(device="cuda", non_blocking=True)
+    device = qweight.device
+    return AWQMarlinMatrix(
+        qweight=qweight,
+        scales=prepared.scales.to(device=device, non_blocking=True),
+        qzeros=prepared.qzeros.to(device=device, non_blocking=True),
+        workspace=marlin_make_workspace_new(device),
+        g_idx=marlin_make_empty_g_idx(device),
+        g_idx_sort_indices=marlin_make_empty_g_idx(device),
+        shape=prepared.shape,
+        source_keys=prepared.source_keys,
+        group_size=prepared.group_size,
+        bits=prepared.bits,
+        zero_point=prepared.zero_point,
+    )
+
+
+def materialize_layer_variant(
+    prepared: PreparedLayerVariant,
+    model_config: LlamaModelConfig,
+    dtype: torch.dtype = torch.float16,
+) -> LlamaTransformerLayerWeight:
+    """Materialize a prepared layer on CUDA without checkpoint I/O or repacking."""
+    layer = LlamaTransformerLayerWeight(
+        prepared.layer_id,
+        model_config,
+        dtype,
+        quantized=prepared.quantized,
+        quantization_backend=prepared.quantization_backend,
+    )
+    for name, value in prepared.values.items():
+        setattr(
+            layer,
+            name,
+            value.to(device="cuda", non_blocking=True)
+            if isinstance(value, torch.Tensor)
+            else _materialize_awq_matrix(value),
+        )
+    return layer
+
+
+def load_prepared_awq_layer(
+    layer_id: int,
+    model_config: LlamaModelConfig,
+    quantized_model_path: str,
+    dtype: torch.dtype = torch.float16,
+) -> tuple[PreparedLayerVariant, int]:
+    """Load/repack one validated AWQ layer and immediately stage its final layout."""
+    _validate_awq_checkpoint(quantized_model_path)
+    getter = _make_weight_getter(quantized_model_path)
+    layer = LlamaTransformerLayerWeight(
+        layer_id,
+        model_config,
+        dtype,
+        quantized=True,
+        quantization_backend="awq_marlin",
+    )
+    layer.load_weights(getter, getter)
+    prepared = prepare_layer_variant(layer)
+    torch.cuda.synchronize()
+    return prepared, layer_variant_bytes(prepared)
+
+
+def layer_variant_tensor_items(
+    variant: PreparedLayerVariant | LlamaTransformerLayerWeight,
+):
+    """Yield stable tensor names for byte accounting and exact verification."""
+    values = variant.values if isinstance(variant, PreparedLayerVariant) else {
+        name: getattr(variant, name) for name in RUNTIME_LAYER_ATTRS
+    }
+    for name, value in values.items():
+        if isinstance(value, (AWQMarlinMatrix, PreparedAWQMarlinMatrix)):
+            yield f"{name}.qweight", value.qweight
+            yield f"{name}.scales", value.scales
+            yield f"{name}.qzeros", value.qzeros
+            if isinstance(value, AWQMarlinMatrix):
+                yield f"{name}.workspace", value.workspace
+                yield f"{name}.g_idx", value.g_idx
+                yield f"{name}.g_idx_sort_indices", value.g_idx_sort_indices
+        else:
+            yield name, value
+
+
+def layer_variant_bytes(
+    variant: PreparedLayerVariant | LlamaTransformerLayerWeight,
+    *,
+    include_runtime_state: bool = False,
+) -> int:
+    total = 0
+    for name, tensor in layer_variant_tensor_items(variant):
+        if not include_runtime_state and name.endswith(
+            (".workspace", ".g_idx", ".g_idx_sort_indices")
+        ):
+            continue
+        total += tensor.numel() * tensor.element_size()
+    return total
+
+
+def layer_variant_layout(
+    variant: PreparedLayerVariant | LlamaTransformerLayerWeight,
+) -> dict:
+    """Return the shape/dtype/stride/backend contract without copying tensor data."""
+    quantized = variant.quantized
+    backend = variant.quantization_backend
+    return {
+        "layer_id": variant.layer_id,
+        "quantized": quantized,
+        "quantization_backend": backend,
+        "tensors": {
+            name: {
+                "shape": list(tensor.shape),
+                "stride": list(tensor.stride()),
+                "dtype": str(tensor.dtype),
+                "bytes": tensor.numel() * tensor.element_size(),
+            }
+            for name, tensor in layer_variant_tensor_items(variant)
+        },
+    }
 
 
 def _checkpoint_weight_keys(model_path: str) -> set[str] | None:

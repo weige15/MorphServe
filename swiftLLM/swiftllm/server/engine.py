@@ -35,6 +35,13 @@ class Engine:
         self.benchmark_batch_events: list[dict] | None = None
         self.benchmark_batch_index = 0
 
+        # Manual transition requests are consumed only by the main loop at a
+        # completed-forward boundary. There is deliberately no pressure rule.
+        self._pending_transition = None
+        self._main_loop_running = False
+        self._transition_lock = asyncio.Lock()
+        self.runtime_transition_events: list[dict] = []
+
     async def _run_on_model_async(self, func, *args, **kwargs):
         """
         Run a function on the model asynchronously, and return the result
@@ -50,6 +57,9 @@ class Engine:
 
         print("[Engine] Loading weights...")
         self.model.load_weights()
+        if self.engine_config.enable_runtime_morphing:
+            print("[Engine] Preparing pinned FP16/AWQ runtime variants...")
+            self.model.prepare_runtime_morphing()
 
         print("[Engine] Profiling kv blocks...")
         num_gpu_blocks = self.model.profile_num_blocks()
@@ -67,9 +77,145 @@ class Engine:
         print("[Engine] Initializing tokenization engine...")
         self.tokenization_engine = TokenizationEngine.remote(self.engine_config)
 
+        if (
+            self.engine_config.enable_runtime_morphing
+            and self.engine_config.runtime_awq_target_blocks < num_gpu_blocks
+        ):
+            raise ValueError("runtime AWQ target cannot be smaller than the FP16 base")
+
         print("[Engine] Model initialized")
         self.initialized = True
-    
+
+    def _transition_context(self) -> dict:
+        scheduler = self.scheduler
+        manager = self.model.gpu_block_manager
+        active_requests = list(scheduler.running_q) + list(scheduler.swapped_q)
+        return {
+            "waiting_request_count": len(scheduler.waiting_q),
+            "running_request_count": len(scheduler.running_q),
+            "swapped_request_count": len(scheduler.swapped_q),
+            "active_request_count": len(scheduler.running_q) + len(scheduler.swapped_q),
+            "scheduler_used_kv_blocks": scheduler.num_decoding_gpu_blocks,
+            "allocated_gpu_kv_blocks": manager.num_blocks - manager.num_free_blocks,
+            "scheduler_visible_blocks": scheduler.num_gpu_blocks,
+            "physical_blocks": self.model.num_blocks,
+            "base_blocks": self.model.base_num_blocks,
+            "extension_blocks": self.model.num_blocks - self.model.base_num_blocks,
+            "active_request_states": [
+                {
+                    "benchmark_request_id": request.benchmark_request_id,
+                    "request_id": request.request_id,
+                    "prompt_len": request.prompt_len,
+                    "output_len": request.get_cur_output_len(),
+                    "next_input_position": request.prompt_len + request.get_cur_output_len() - 1,
+                }
+                for request in active_requests
+            ],
+        }
+
+    async def _apply_transition(self, target: str) -> dict:
+        before = self._transition_context()
+        try:
+            if target == "AWQ_MARLIN_W4_16":
+                trace = await self._run_on_model_async(
+                    self.model.morph_to_awq_w4_16,
+                    self.engine_config.runtime_awq_target_blocks,
+                    active_request_count=before["active_request_count"],
+                    used_kv_blocks=before["allocated_gpu_kv_blocks"],
+                    verify_kv=self.engine_config.runtime_verify_kv,
+                )
+            else:
+                trace = await self._run_on_model_async(
+                    self.model.restore_to_fp16,
+                    active_request_count=before["active_request_count"],
+                    used_kv_blocks=before["allocated_gpu_kv_blocks"],
+                    verify_kv=self.engine_config.runtime_verify_kv,
+                )
+            # Publish admission capacity only after physical resize succeeds.
+            self.scheduler.num_gpu_blocks = self.model.num_blocks
+            self.scheduler.admissions_paused = False
+            trace["engine_context_before"] = before
+            trace["engine_context_after"] = self._transition_context()
+            self.runtime_transition_events.append(trace)
+            return trace
+        except Exception:
+            # Never advertise more blocks than remain physically backed after
+            # a failed transition or rollback.
+            self.scheduler.num_gpu_blocks = self.model.num_blocks
+            self.scheduler.admissions_paused = False
+            raise
+
+    async def _request_transition(self, target: str) -> dict:
+        async with self._transition_lock:
+            if not self.initialized:
+                raise RuntimeError("engine must be initialized before runtime transition")
+            if not self.engine_config.enable_runtime_morphing:
+                raise RuntimeError("runtime morphing is disabled")
+            if target not in ("FP16", "AWQ_MARLIN_W4_16"):
+                raise ValueError(f"unsupported runtime precision target: {target}")
+            if self.model.runtime_precision_state == target:
+                return {
+                    "schema_version": 1,
+                    "status": "noop",
+                    "precision_after": target,
+                    "engine_context_after": self._transition_context(),
+                }
+            if not self._main_loop_running:
+                allocated = (
+                    self.model.gpu_block_manager.num_blocks
+                    - self.model.gpu_block_manager.num_free_blocks
+                )
+                if target == "FP16" and allocated > self.model.base_num_blocks:
+                    raise RuntimeError(
+                        "direct restoration cannot drain active KV blocks; start the engine "
+                        f"loop and drain to <= {self.model.base_num_blocks} first"
+                    )
+                return await self._apply_transition(target)
+            if self._pending_transition is not None:
+                pending_target, pending_future = self._pending_transition
+                if pending_target == target:
+                    return await asyncio.shield(pending_future)
+                raise RuntimeError(
+                    f"transition to {pending_target} is already pending; refusing conflicting request"
+                )
+            future = asyncio.get_running_loop().create_future()
+            self._pending_transition = (target, future)
+            return await asyncio.shield(future)
+
+    async def morph_to_awq_w4_16(self) -> dict:
+        """Manually request FP16 -> AWQ-Marlin W4-16 at a forward boundary."""
+        return await self._request_transition("AWQ_MARLIN_W4_16")
+
+    async def restore_to_fp16(self) -> dict:
+        """Manually request AWQ-Marlin W4-16 -> FP16 at a forward boundary."""
+        return await self._request_transition("FP16")
+
+    async def _service_pending_transition(self) -> bool:
+        if self._pending_transition is None:
+            return False
+        target, future = self._pending_transition
+        allocated = (
+            self.model.gpu_block_manager.num_blocks
+            - self.model.gpu_block_manager.num_free_blocks
+        )
+        if target == "FP16" and allocated > self.model.base_num_blocks:
+            # Existing requests keep decoding; no new prefill or swap-in is
+            # admitted until enough physical blocks can be retained in base.
+            self.scheduler.admissions_paused = True
+            return False
+        self._pending_transition = None
+        try:
+            result = await self._apply_transition(target)
+        except Exception as exc:
+            if not future.done():
+                future.set_exception(exc)
+            if self.model.runtime_precision_state == "FAILED":
+                raise
+        else:
+            if not future.done():
+                future.set_result(result)
+        return True
+
     async def add_request_and_stream(self, raw_request: RawRequest) -> AsyncGenerator[StepOutput, None]:
         """
         Add a raw request to the engine and stream the output of the request (streaming mode)
@@ -128,6 +274,8 @@ class Engine:
         Event loop for forwarding the model
         """
         while True:
+            await self._service_pending_transition()
+
             # Capture pressure immediately before scheduling. Observation is
             # opt-in and never participates in scheduler decisions.
             batch_observation = None
@@ -215,16 +363,13 @@ class Engine:
                 forward_duration_ns = output_time_ns - prefill_time_ns
                 batch_observation.update({
                     "timestamp_ns": prefill_time_ns,
-                    "precision_state": (
-                        "FP16"
-                        if self.engine_config.quantized_layer_count == 0
-                        else "AWQ-Marlin W4-16"
-                        if self.engine_config.quantization_backend == "awq_marlin"
-                        and self.engine_config.quantized_layer_count == 16
-                        else f"{self.engine_config.quantization_backend}:{self.engine_config.quantized_layer_count}"
+                    "precision_state": self.model.runtime_precision_state,
+                    "quantization_backend": (
+                        self.model.weight.layers[0].quantization_backend
+                        if self.model.weight.quantized_layer_count
+                        else "fp16"
                     ),
-                    "quantization_backend": self.engine_config.quantization_backend,
-                    "quantized_layer_count": self.engine_config.quantized_layer_count,
+                    "quantized_layer_count": self.model.weight.quantized_layer_count,
                     "batch_kind": (
                         "prefill" if num_prefill_sequences == len(cur_batch)
                         else "decode" if num_prefill_sequences == 0
@@ -278,7 +423,12 @@ class Engine:
                     # Capture the timestamp before publishing the final
                     # StepOutput; this remains observational only.
                     req.benchmark_completion_time_ns = output_time_ns
-                req.output_q.put_nowait(StepOutput(output_token, req))
+                req.output_q.put_nowait(StepOutput(
+                    output_token,
+                    req,
+                    precision_state=self.model.runtime_precision_state,
+                    input_position=req.prompt_len + req.get_cur_output_len() - 2,
+                ))
                 if is_finished:
                     finished_req_ids.append(req.request_id)
                     req.finished_event.set()
@@ -312,6 +462,11 @@ class Engine:
             "swapped_q_count": len(scheduler.swapped_q),
             "num_decoding_gpu_blocks": scheduler.num_decoding_gpu_blocks,
             "num_gpu_blocks": scheduler.num_gpu_blocks,
+            "physical_gpu_blocks": self.model.num_blocks,
+            "base_gpu_blocks": self.model.base_num_blocks,
+            "extension_gpu_blocks": self.model.num_blocks - self.model.base_num_blocks,
+            "precision_state": self.model.runtime_precision_state,
+            "admissions_paused": scheduler.admissions_paused,
             "swap_in_count": self.benchmark_swap_in_count,
             "swap_out_count": self.benchmark_swap_out_count,
         }
@@ -321,7 +476,16 @@ class Engine:
         Start all event loops
         """
         assert self.initialized, "Engine not initialized. Please call `initialize()` before starting the event loop."
-        await asyncio.gather(
-            self._tokenize_raw_request_event_loop(),
-            self._main_event_loop()
-        )
+        self._main_loop_running = True
+        try:
+            await asyncio.gather(
+                self._tokenize_raw_request_event_loop(),
+                self._main_event_loop()
+            )
+        finally:
+            self._main_loop_running = False
+            if self._pending_transition is not None:
+                _, future = self._pending_transition
+                if not future.done():
+                    future.set_exception(RuntimeError("engine event loop stopped"))
+                self._pending_transition = None

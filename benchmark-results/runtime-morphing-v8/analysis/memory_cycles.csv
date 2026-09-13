@@ -1,0 +1,4 @@
+cycle,restored_allocated_bytes,restored_reserved_bytes,restored_free_bytes,allocated_spread_from_min_bytes,reserved_spread_from_min_bytes,within_64mib_tolerance
+0,19797652480,20239613952,4675600384,0,0,True
+1,19797653504,20472397824,4442816512,1024,232783872,False
+2,19797653504,20241711104,4673503232,1024,2097152,True

@@ -1,0 +1,58 @@
+{
+  "AWQ_MARLIN_W4_16_TO_FP16": {
+    "bookkeeping_residual_ms_median": 13.797009,
+    "boundary_cuda_sync_ms_median": 0.074276,
+    "count": 3,
+    "h2d_bytes": [
+      6979584000
+    ],
+    "kv_resize_ms_median": 251.208307,
+    "layer_cuda_sync_ms_median": 963.727262,
+    "layer_total_ms_median": 1044.499082,
+    "total_ms": {
+      "max": 1592.600079,
+      "median": 1510.205093,
+      "min": 1478.674636,
+      "p95": 1584.3605804000001
+    },
+    "transition_peak_allocated_bytes_max": 19911507968,
+    "weight_cleanup_ms_median": 200.636159
+  },
+  "FP16_TO_AWQ_MARLIN_W4_16": {
+    "bookkeeping_residual_ms_median": 14.629471,
+    "boundary_cuda_sync_ms_median": 0.070153,
+    "count": 3,
+    "h2d_bytes": [
+      1813250048
+    ],
+    "kv_resize_ms_median": 79.285883,
+    "layer_cuda_sync_ms_median": 212.930931,
+    "layer_total_ms_median": 267.1972,
+    "total_ms": {
+      "max": 676.684274,
+      "median": 660.984948,
+      "min": 585.977012,
+      "p95": 675.1143414
+    },
+    "transition_peak_allocated_bytes_max": 19911212032,
+    "weight_cleanup_ms_median": 282.449437
+  },
+  "v7_amortization_estimate": {
+    "caveat": "Request-equivalent estimate compares blocking transition wall time with static per-request P95 TTFT advantage; it is not a closed-loop throughput measurement.",
+    "one_way_break_even_request_equivalents": {
+      "at_median_v7_advantage": 0.07684625896206831,
+      "at_min_v7_advantage": 0.27136026088414505
+    },
+    "one_way_transition_cost_s": 0.6609849480000001,
+    "round_trip_break_even_request_equivalents": {
+      "at_median_v7_advantage": 0.2524230432953062,
+      "at_min_v7_advantage": 0.8913587181334992
+    },
+    "round_trip_transition_cost_s": 2.171190041,
+    "v7_awq_preferred_p95_advantage_s": {
+      "max": 13.017587188050001,
+      "median": 8.601393964100001,
+      "min": 2.4358207272000003
+    }
+  }
+}

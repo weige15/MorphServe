@@ -1,10 +1,12 @@
 # MorphServe
 
-MorphServe is a research repository for measuring SwiftLLM serving behavior under load. Phase 1 reproduced a mixed GPU-KV-admission and compute transition without changing the scheduler. The latest pre-registered crossover experiment finds **GO for a future controller experiment** using the static pair `{FP16, AWQ-W4-16}`: FP16 is preferable below sustained pressure, while AWQ wins after queue/KV saturation. No runtime controller is implemented.
+MorphServe is a research repository for measuring and changing SwiftLLM serving behavior under load. Phase 1 reproduced a mixed GPU-KV-admission and compute transition, v7 validated the static `{FP16, AWQ-W4-16}` crossover, and v8 establishes **GO for a manual one-process runtime substrate**: active requests survive FP16→AWQ→FP16 without re-prefill while physical KV capacity changes from 1,759 to 4,170 blocks. No workload-pressure controller is implemented.
 
 ## Start here
 
-- [FP16/AWQ crossover v7 final report](docs/fp16-awq-crossover-v7/final-report.md) — current nine-load, 36-run GO evidence and trigger candidates.
+- [Runtime morphing v8 final report](docs/runtime-morphing-v8/final-report.md) — current one-process state/KV transition GO evidence.
+- [Runtime morphing v8 completion audit](docs/runtime-morphing-v8/completion-audit.md) — prompt-to-artifact verification.
+- [FP16/AWQ crossover v7 final report](docs/fp16-awq-crossover-v7/final-report.md) — preserved nine-load, 36-run crossover evidence.
 - [Crossover v7 completion audit](docs/fp16-awq-crossover-v7/completion-audit.md) — prompt-to-artifact verification.
 - [Phase 1 context card](docs/phase-1/README.md) — original KV-admission context.
 - [Final Phase 1 report](docs/phase-1/kv-admission-sweep-report.md) — results and reproduction commands.
@@ -38,25 +40,28 @@ Run the CPU-only checks from the repository root:
 ```bash
 VENV=/nfs/home/s314511048/.venv
 PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest \
-  benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover -v
+  benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover \
+  benchmark.test_runtime_morphing -v
 ```
 
-Regenerate and audit the saved v7 crossover evidence:
+Regenerate and audit the saved v8 runtime evidence (including CUDA segmented-KV tests on device 5):
 
 ```bash
-benchmark-results/fp16-awq-crossover-v7/regenerate.sh
+CUDA_VISIBLE_DEVICES=5 benchmark-results/runtime-morphing-v8/regenerate.sh
 ```
 
-V6 remains independently reproducible with
+V7 and v6 remain independently reproducible with
+`benchmark-results/fp16-awq-crossover-v7/regenerate.sh` and
 `benchmark-results/packed-int4-backend-v6/regenerate.sh`.
 
 ## Project structure
 
-- `swiftLLM/swiftllm/` — vendored SwiftLLM implementation.
-- `swiftLLM/benchmark/` — open-loop runner, analysis, metrics, and tests.
+- `swiftLLM/swiftllm/` — vendored SwiftLLM plus explicit manual morphing and segmented KV support.
+- `swiftLLM/benchmark/` — open-loop runners, runtime validation, analysis, metrics, and tests.
 - `benchmark-results/phase-1/` — Phase 1 raw runs and derived artifacts, grouped by experiment.
 - `docs/phase-1/` — curated current documentation; `archive/` contains superseded reports.
-- `docs/fp16-awq-crossover-v7/` and `benchmark-results/fp16-awq-crossover-v7/` — current crossover protocol, multi-M diagnosis, 36 raw serving runs, analysis, report, and audit.
+- `docs/runtime-morphing-v8/` and `benchmark-results/runtime-morphing-v8/` — current architecture/ownership contract, raw transitions, capacity/cost/state evidence, report, and audit.
+- `docs/fp16-awq-crossover-v7/` and `benchmark-results/fp16-awq-crossover-v7/` — preserved crossover protocol, multi-M diagnosis, 36 raw serving runs, analysis, report, and audit.
 - `docs/packed-int4-backend-v6/` and `benchmark-results/packed-int4-backend-v6/` — preserved AWQ-Marlin backend validation and prior static-gate NO-GO.
 - `docs/static-frontier-v5/` and `benchmark-results/static-frontier-v5/` — preserved NF4 static-frontier evidence.
 - `docs/static-quantization-quality-latency/` and `benchmark-results/static-quantization-quality-latency/` — preserved historical v2 benchmark.

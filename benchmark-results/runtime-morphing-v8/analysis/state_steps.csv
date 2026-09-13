@@ -1,0 +1,9 @@
+condition,sequence,step_count,request_ids,step_indices_contiguous,positions_increase_by_one,one_prefill_step,tokens_valid,valid
+fp16,0,24,[0],True,True,True,True,True
+fp16,1,24,[1],True,True,True,True,True
+static_awq,0,24,[0],True,True,True,True,True
+static_awq,1,24,[1],True,True,True,True,True
+morph,0,24,[0],True,True,True,True,True
+morph,1,24,[1],True,True,True,True,True
+roundtrip,0,24,[0],True,True,True,True,True
+roundtrip,1,24,[1],True,True,True,True,True

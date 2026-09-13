@@ -4,11 +4,12 @@ from typing import Optional
 
 @dataclasses.dataclass
 class StepOutput:
-    """
-    The output of one decoding step
-    """
+    """The output of one decoding step with execution-time state metadata."""
+
     token_id: int
     request: "Request"
+    precision_state: str | None = None
+    input_position: int | None = None
 
 
 class RawRequest:

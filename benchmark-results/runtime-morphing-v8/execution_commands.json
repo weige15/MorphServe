@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "awq_env": "/nfs/home/s314511048/.venvs/morphserve-vllm0112",
+    "awq_extension": "/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib",
+    "model": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "awq_model": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "validated_cuda_visible_device": "5"
+  },
+  "raw_generation": [
+    "CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.run_runtime_morphing_validation --condition fp16 --model-path \"$MODEL\" --quantized-model-path \"$AWQ_MODEL\" --output benchmark-results/runtime-morphing-v8/raw/state-fp16.json",
+    "CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.run_runtime_morphing_validation --condition static_awq --model-path \"$MODEL\" --quantized-model-path \"$AWQ_MODEL\" --output benchmark-results/runtime-morphing-v8/raw/state-static-awq.json",
+    "CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.run_runtime_morphing_validation --condition morph --model-path \"$MODEL\" --quantized-model-path \"$AWQ_MODEL\" --output benchmark-results/runtime-morphing-v8/raw/state-morph.json",
+    "CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.run_runtime_morphing_validation --condition roundtrip --model-path \"$MODEL\" --quantized-model-path \"$AWQ_MODEL\" --output benchmark-results/runtime-morphing-v8/raw/state-roundtrip.json",
+    "CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.run_runtime_morphing_validation --condition capacity_cycles --cycles 3 --model-path \"$MODEL\" --quantized-model-path \"$AWQ_MODEL\" --output benchmark-results/runtime-morphing-v8/raw/capacity-cycles.json"
+  ],
+  "cuda_tests": "MORPHSERVE_RUN_CUDA_TESTS=1 CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m unittest benchmark.test_runtime_morphing -v",
+  "cpu_tests_awq_env": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing -v",
+  "cpu_tests_legacy_env": "PYTHONPATH=\"$PWD/swiftLLM:$PWD/swiftLLM/csrc\" /nfs/home/s314511048/.venv/bin/python -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing -v",
+  "analysis": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.analyze_runtime_morphing --root benchmark-results/runtime-morphing-v8",
+  "audit": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.audit_runtime_morphing --root benchmark-results/runtime-morphing-v8"
+}

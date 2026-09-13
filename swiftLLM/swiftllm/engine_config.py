@@ -29,6 +29,12 @@ class EngineConfig:
     quantization_backend: str = "nf4_bitsandbytes"
     quantized_model_path: str | None = None
 
+    # Explicit manual two-state runtime substrate. This never enables a
+    # workload-pressure controller; transitions are requested through Engine.
+    enable_runtime_morphing: bool = False
+    runtime_awq_target_blocks: int = 4170
+    runtime_verify_kv: bool = False
+
     @staticmethod
     def add_cli_args(parser: argparse.ArgumentParser):
         """
@@ -105,5 +111,21 @@ class EngineConfig:
             "--quantized-model-path",
             type=str,
             help="Offline AutoAWQ checkpoint required by the AWQ-Marlin backend",
+        )
+        parser.add_argument(
+            "--enable-runtime-morphing",
+            action="store_true",
+            help="Prepare explicit manual FP16 <-> AWQ-Marlin W4-16 transitions",
+        )
+        parser.add_argument(
+            "--runtime-awq-target-blocks",
+            type=int,
+            default=4170,
+            help="Measured safe dynamic KV target after a manual AWQ transition",
+        )
+        parser.add_argument(
+            "--runtime-verify-kv",
+            action="store_true",
+            help="Hash sampled active logical KV blocks across manual resize operations",
         )
         

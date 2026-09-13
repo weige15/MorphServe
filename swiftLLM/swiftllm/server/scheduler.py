@@ -50,6 +50,9 @@ class Scheduler:
         # This number should always equal to sum(self._get_block_needed(req) for req in self.running_q)
         self.num_decoding_gpu_blocks = 0
         self.num_free_cpu_blocks = engine_config.num_cpu_blocks
+        # Used only by an explicit AWQ->FP16 drain. It does not select a
+        # precision state or alter FCFS ordering.
+        self.admissions_paused = False
 
         self.request_id_manager = RequestIdManager(engine_config.max_seqs_in_block_table)
     
@@ -70,7 +73,7 @@ class Scheduler:
         Called when the engine wants a new batch to be forwarded
         Returns (new_batch, newly_swapped_in, newly_swapped_out)
         """
-        if not self.swapped_q:
+        if not self.swapped_q and not self.admissions_paused:
             # Try to launch a new prefill batch
             cur_batch = []
             cur_batch_block_needed = 0
@@ -112,7 +115,7 @@ class Scheduler:
         newly_swapped_in = []
         if newly_swapped_out:
             self.swapped_q.extendleft(newly_swapped_out)
-        else:
+        elif not self.admissions_paused:
             # No swap-out triggered, try to swap in some requests if possible
             while self.swapped_q:
                 cur_seq = self.swapped_q[0]
