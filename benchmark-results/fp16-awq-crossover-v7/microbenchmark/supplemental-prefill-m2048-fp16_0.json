@@ -1,0 +1,54 @@
+{
+  "condition": "fp16_0",
+  "expected_trace_burst_sequence_counts": [
+    1,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9
+  ],
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "measurement_scope": "compute-only model forward with ignore_kvcache=True; identical decoder path and multi-sequence 1024-token batches, excluding KV-capacity effects",
+  "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "pre_registered_sequence_counts": [
+    2
+  ],
+  "precision_state": "FP16",
+  "quantization_backend": "nf4_bitsandbytes",
+  "quantized_layer_count": 0,
+  "quantized_model_path": null,
+  "resident_weight_bytes": 16094109696,
+  "results": [
+    {
+      "effective_gemm_m": 2048,
+      "max_ms": 487.000192,
+      "mean_ms": 485.24151685714287,
+      "median_ms": 484.713394,
+      "min_ms": 484.313118,
+      "p95_ms": 486.80420860000004,
+      "peak_allocated_bytes": 16287754752,
+      "prompt_tokens_per_sequence": 1024,
+      "sample_count": 7,
+      "samples_ms": [
+        484.313118,
+        484.689191,
+        485.130324,
+        484.713394,
+        486.346914,
+        484.497485,
+        487.000192
+      ],
+      "sequence_count": 2,
+      "total_prefill_tokens": 2048,
+      "warmup_count": 2
+    }
+  ],
+  "schema_version": 1,
+  "serving_limits": {
+    "max_batch_size": 32,
+    "max_tokens_in_batch": 49152
+  },
+  "torch_version": "2.9.0+cu128"
+}

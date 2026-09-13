@@ -1,0 +1,3 @@
+GPU-384b6377-8f0c-e3d2-8b3a-b3408b54fd53, 268291, /nfs/home/nelson0314/venvs/wacv/bin/python, 10562 MiB
+GPU-24d15e85-4019-bdb1-5135-bca2be34d1aa, 268292, /nfs/home/nelson0314/venvs/wacv/bin/python, 10562 MiB
+GPU-ac0202b3-4185-bf4f-4ec5-442aa7701c93, 268293, /nfs/home/nelson0314/venvs/wacv/bin/python, 10562 MiB

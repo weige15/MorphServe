@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "64_complete_exact_requests": true,
+    "all_required_batch_fields": true,
+    "allocated_not_above_safe": true,
+    "contiguous_batch_indices": true,
+    "effective_m_identity": true,
+    "logical_used_not_above_safe": true,
+    "monotonic_forward_timestamps": true,
+    "no_mixed_batches": true,
+    "prefill_duration_presence": true
+  },
+  "forward_batch_count": 2924,
+  "observed_prefill_effective_m": [
+    1024,
+    2048,
+    3072,
+    4096,
+    6144,
+    7168,
+    8192,
+    9216
+  ],
+  "prefill_batch_count": 12,
+  "run": "benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-6-rep0",
+  "run_sha256": {
+    "batches.jsonl": "47e6f5e1feb35cb4b09421be63ea9b838c1ee8ed0c9f1354d52f35bb91477dbd",
+    "metadata.json": "f9ae58247961c0f32c129390829df7a7fe20810320b22cd0fe40f31d03e49454",
+    "requests.jsonl": "3c50d894eb659fb996d1f59a0da432ae408e92b0eb3bc7ba90e51126eab82f9c",
+    "summary.json": "a6e946ab374d1a82e8d516353d5601fcec7374217b39aa8f66388baa140e5118",
+    "telemetry.jsonl": "e86e1e1b5f0fe6b875d0ee13af1f79ef78b4e78558cc5e1b398f75e42f4bf836"
+  },
+  "schema_version": 1,
+  "status": "PASS"
+}

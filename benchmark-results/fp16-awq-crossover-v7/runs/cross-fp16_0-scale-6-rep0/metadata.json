@@ -1,0 +1,135 @@
+{
+  "arrival_mode": "trace_open_loop",
+  "batch_observation_definition": {
+    "effective_gemm_m": "total prefill tokens plus one activation row per decoding sequence",
+    "prefill_execution_duration_ns": "wall duration of the model forward for prefill-containing batches; null for decode-only batches",
+    "pressure_snapshot": "captured immediately before Scheduler.get_next_batch without changing its inputs or decisions",
+    "safe_kv_blocks": "profile-derived num_gpu_blocks",
+    "scope": "every model forward after warmup during the measurement interval",
+    "timestamp_ns": "immediately before submitting the model forward",
+    "used_kv_blocks": "scheduler logical block count, before/after scheduling as named"
+  },
+  "completed_at_utc": "2026-09-13T15:18:07.636745+00:00",
+  "completed_request_count": 64,
+  "condition": "fp16_0",
+  "created_at_utc": "2026-09-13T15:15:31.058248+00:00",
+  "cuda_device_requested": "5",
+  "current_morphserve_git_commit": "72da2d5b4124049063a6d390ee133dd68461d0a4",
+  "current_morphserve_git_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "current_morphserve_git_dirty": true,
+  "current_morphserve_git_status_porcelain": "?? benchmark-results/fp16-awq-crossover-v7/logs/\n?? benchmark-results/fp16-awq-crossover-v7/microbenchmark/\n",
+  "engine_config_actual": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "quantization_backend": "nf4_bitsandbytes",
+    "quantized_layer_count": 0,
+    "quantized_model_path": null,
+    "use_dummy": false
+  },
+  "engine_config_requested": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "quantization_backend": "nf4_bitsandbytes",
+    "quantized_layer_count": 0,
+    "quantized_model_path": null,
+    "use_dummy": false
+  },
+  "generated_output_token_count": 32768,
+  "generation": {
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "eos_stopping": "not supported by unchanged SwiftLLM; exactly 512 output steps",
+    "temperature": null,
+    "top_p": null
+  },
+  "gpu": {
+    "cuda_visible_devices": "5",
+    "gpu_index_visible_to_process": 0,
+    "gpu_name": "NVIDIA GeForce RTX 3090"
+  },
+  "gpu_kv_token_slots": 28288,
+  "initial_engine_snapshot": {
+    "num_decoding_gpu_blocks": 0,
+    "num_gpu_blocks": 1768,
+    "running_q_count": 0,
+    "swap_in_count": 0,
+    "swap_out_count": 0,
+    "swapped_q_count": 0,
+    "waiting_q_depth": 0
+  },
+  "launched_request_count": 64,
+  "layer_order": [],
+  "layer_order_label": "lis_order_unavailable_front_to_back",
+  "measurement_duration_s": 122.341126996,
+  "measurement_end_time_ns": 271441913603730,
+  "measurement_end_utc": "2026-09-13T15:18:07.634654+00:00",
+  "measurement_start_time_ns": 271319572476734,
+  "measurement_start_utc": "2026-09-13T15:16:05.293533+00:00",
+  "metric_formula": {
+    "queueing_delay_s": "(first_prefill_time_ns - scheduler_eligible_time_ns) / 1e9",
+    "slo_violation": "finite ttft_s > 2.0",
+    "ttft_s": "(first_stream_token_received_time_ns - arrival_time_ns) / 1e9"
+  },
+  "model_path_safe": "~/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "model_path_sha256": "c5c17acefc2dfdc2cd76e141edbbe45658f0835c2a3a50a833a28cdfd7f318a3",
+  "nominal_offered_rps": 0.6666666666666666,
+  "num_gpu_blocks": 1768,
+  "num_gpu_blocks_observed_in_telemetry": [
+    1768
+  ],
+  "observed_forward_batch_count": 2924,
+  "observed_prefill_batch_count": 12,
+  "output_token_count_requested": 512,
+  "prompt_token_count_requested": 1024,
+  "protocol_manifest": "benchmark-results/fp16-awq-crossover-v7/protocol_manifest.json",
+  "protocol_manifest_sha256": "9fcc224785906e657d07f5fd66c00bf62c4deeffda316a6b0070f6210aca0c8b",
+  "quantization_backend": "nf4_bitsandbytes",
+  "quantization_label": "fp16_control",
+  "quantization_runtime": {
+    "implementation": "unchanged SwiftLLM FP16",
+    "weight_bits": 16
+  },
+  "quantized_layer_count": 0,
+  "quantized_model_path_safe": null,
+  "random_seed": 2025,
+  "raw_files": [
+    "metadata.json",
+    "requests.jsonl",
+    "telemetry.jsonl",
+    "batches.jsonl"
+  ],
+  "request_count_requested": 64,
+  "run_id": "cross-fp16_0-scale-6-rep0",
+  "schema_version": 2,
+  "telemetry_interval_s": 0.25,
+  "timestamp_definition": {
+    "arrival_time_ns": "immediately before Engine.add_request_and_stream",
+    "clock": "time.perf_counter_ns monotonic process clock",
+    "first_output_token_time_ns": "after model forward returned first output",
+    "first_prefill_time_ns": "immediately before first model forward containing request",
+    "first_stream_token_received_time_ns": "benchmark consumer receipt time",
+    "scheduler_eligible_time_ns": "after tokenization before scheduler arrival",
+    "stream_completion_time_ns": "benchmark consumer receipt of final output"
+  },
+  "warmup_policy": {
+    "included_in_raw_requests": false,
+    "output_token_count": 8,
+    "warmup_requests": 1
+  },
+  "workload_kind": "latency_dense_trace",
+  "workload_path": "benchmark-results/fp16-awq-crossover-v7/input/latency-scale-6.jsonl",
+  "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e",
+  "workload_time_scale": 6.0
+}
