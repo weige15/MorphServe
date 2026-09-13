@@ -1,0 +1,44 @@
+{
+  "decision": "KEEP_DEFAULT_STOP_TUNING",
+  "protocol": "docs/packed-int4-backend-v6/marlin-tuning-protocol.md",
+  "qualifying_settings": [],
+  "rows": [
+    {
+      "decode_median_ms": 21.794636,
+      "decode_p95_ms": 22.120485,
+      "decode_regression_percent": 0.0,
+      "prefill_improvement_percent": 0.0,
+      "prefill_median_ms": 258.709133,
+      "prefill_p95_ms": 264.058611,
+      "qualifies": false,
+      "setting": "default",
+      "use_atomic_add": false,
+      "use_fp32_reduce": true
+    },
+    {
+      "decode_median_ms": 22.433208,
+      "decode_p95_ms": 22.683779,
+      "decode_regression_percent": 2.9299502868503913,
+      "prefill_improvement_percent": 0.4008776141660175,
+      "prefill_median_ms": 257.672026,
+      "prefill_p95_ms": 266.075638,
+      "qualifies": false,
+      "setting": "fp16_reduce",
+      "use_atomic_add": false,
+      "use_fp32_reduce": false
+    },
+    {
+      "decode_median_ms": 21.898045,
+      "decode_p95_ms": 22.005076,
+      "decode_regression_percent": 0.47446995673614545,
+      "prefill_improvement_percent": -0.4400092052413207,
+      "prefill_median_ms": 259.847477,
+      "prefill_p95_ms": 272.318907,
+      "qualifies": false,
+      "setting": "fp16_reduce_atomic",
+      "use_atomic_add": true,
+      "use_fp32_reduce": false
+    }
+  ],
+  "schema_version": 1
+}

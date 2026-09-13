@@ -1,0 +1,36 @@
+{
+  "decode_one_token_median_ms": 21.794636,
+  "decode_one_token_ms": [
+    21.501061,
+    21.69691,
+    21.89169,
+    21.933137,
+    21.541768,
+    21.794636,
+    22.120485
+  ],
+  "decode_one_token_p95_ms": 22.120485,
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "marlin_use_atomic_add": false,
+  "marlin_use_fp32_reduce": true,
+  "num_gpu_blocks": 5381,
+  "prefill_median_ms": 258.709133,
+  "prefill_ms": [
+    258.709133,
+    257.685622,
+    258.347196,
+    264.058611,
+    260.913835,
+    259.152893,
+    258.600971
+  ],
+  "prefill_p95_ms": 264.058611,
+  "prompt_token_count": 1024,
+  "quantization": "awq_marlin",
+  "quantization_backend": "awq_marlin",
+  "quantized_layer_count": 16,
+  "quantized_model_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+  "quantized_representation_bytes": 1813019392,
+  "repeats": 7,
+  "schema_version": 1
+}
