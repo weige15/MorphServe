@@ -1,0 +1,57 @@
+{
+  "no_artificial_idle_gap": true,
+  "outputs": {
+    "high": {
+      "last_arrival_offset_s": 66.9375,
+      "path": "benchmark-results/closed-loop-runtime-v9/input/high-scale-4p25.jsonl",
+      "request_count": 64,
+      "sha256": "560d3fd7ee01d19472136e4d1ff37a43e0c79e60d878ea463675688a2404605a"
+    },
+    "low": {
+      "last_arrival_offset_s": 90.5625,
+      "path": "benchmark-results/closed-loop-runtime-v9/input/low-scale-5p75.jsonl",
+      "request_count": 64,
+      "sha256": "1522ac87e17db2603f986ee5b7fe3fc73d9dd1c03367bd959e9e049b98b08a82"
+    },
+    "low_high_low": {
+      "last_arrival_offset_s": 265.5625,
+      "path": "benchmark-results/closed-loop-runtime-v9/input/low-high-low.jsonl",
+      "request_count": 192,
+      "sha256": "16e57968687482278935091ec834aaf7ea4b981ee97a10dce756063c71fa1aa3"
+    }
+  },
+  "phased_boundaries": {
+    "high": {
+      "last_arrival_offset_s": 167.5625,
+      "request_count": 64,
+      "start_offset_s": 100.625
+    },
+    "low_initial": {
+      "last_arrival_offset_s": 90.5625,
+      "request_count": 64,
+      "start_offset_s": 0.0
+    },
+    "low_recovery": {
+      "last_arrival_offset_s": 265.5625,
+      "request_count": 64,
+      "start_offset_s": 175.0
+    },
+    "natural_phase_spans_s": {
+      "definition": "last trace offset plus its existing first positive inter-cohort interval",
+      "scale_4p25": 74.375,
+      "scale_5p75": 100.625
+    }
+  },
+  "phased_content_independence": "The same 64 questions are reused in three phases; quality inference must collapse duplicates by original question rather than count 192 independent samples.",
+  "schema_version": 1,
+  "source": {
+    "common_64_request_content_sha256": "697c9fe2735a8816ed23d2445277717d43626bd30296beadacdf39d2051d3be5",
+    "high_path": "benchmark-results/fp16-awq-crossover-v7/input/latency-scale-4p25.jsonl",
+    "high_scale": 4.25,
+    "high_sha256": "4f458f5c0b20db7d934200acd9e3ea0b884c3cda2491510824700eae041f61f7",
+    "low_path": "benchmark-results/fp16-awq-crossover-v7/input/latency-scale-5p75.jsonl",
+    "low_scale": 5.75,
+    "low_sha256": "8cf822d4a17f91a553fad14e5a2752679a479ea94ece3fd79144f6bdb0e77764"
+  },
+  "status": "frozen_before_closed_loop_measurements"
+}

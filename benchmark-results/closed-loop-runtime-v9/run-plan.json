@@ -1,0 +1,188 @@
+{
+  "order_policy": "two fresh-process counterbalanced passes over three workloads and three runtime-envelope conditions",
+  "run_count": 18,
+  "runs": [
+    {
+      "condition": "runtime_static_fp16",
+      "ordinal": 0,
+      "repeat": 0,
+      "request_count": 64,
+      "run_id": "v9-low-runtime_static_fp16-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-scale-5p75.jsonl",
+      "workload_class": "low",
+      "workload_sha256": "1522ac87e17db2603f986ee5b7fe3fc73d9dd1c03367bd959e9e049b98b08a82"
+    },
+    {
+      "condition": "closed_loop_dynamic",
+      "ordinal": 1,
+      "repeat": 0,
+      "request_count": 64,
+      "run_id": "v9-low-closed_loop_dynamic-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-scale-5p75.jsonl",
+      "workload_class": "low",
+      "workload_sha256": "1522ac87e17db2603f986ee5b7fe3fc73d9dd1c03367bd959e9e049b98b08a82"
+    },
+    {
+      "condition": "runtime_static_awq_w4_16",
+      "ordinal": 2,
+      "repeat": 0,
+      "request_count": 64,
+      "run_id": "v9-low-runtime_static_awq_w4_16-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-scale-5p75.jsonl",
+      "workload_class": "low",
+      "workload_sha256": "1522ac87e17db2603f986ee5b7fe3fc73d9dd1c03367bd959e9e049b98b08a82"
+    },
+    {
+      "condition": "runtime_static_awq_w4_16",
+      "ordinal": 3,
+      "repeat": 0,
+      "request_count": 64,
+      "run_id": "v9-high-runtime_static_awq_w4_16-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/high-scale-4p25.jsonl",
+      "workload_class": "high",
+      "workload_sha256": "560d3fd7ee01d19472136e4d1ff37a43e0c79e60d878ea463675688a2404605a"
+    },
+    {
+      "condition": "closed_loop_dynamic",
+      "ordinal": 4,
+      "repeat": 0,
+      "request_count": 64,
+      "run_id": "v9-high-closed_loop_dynamic-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/high-scale-4p25.jsonl",
+      "workload_class": "high",
+      "workload_sha256": "560d3fd7ee01d19472136e4d1ff37a43e0c79e60d878ea463675688a2404605a"
+    },
+    {
+      "condition": "runtime_static_fp16",
+      "ordinal": 5,
+      "repeat": 0,
+      "request_count": 64,
+      "run_id": "v9-high-runtime_static_fp16-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/high-scale-4p25.jsonl",
+      "workload_class": "high",
+      "workload_sha256": "560d3fd7ee01d19472136e4d1ff37a43e0c79e60d878ea463675688a2404605a"
+    },
+    {
+      "condition": "runtime_static_fp16",
+      "ordinal": 6,
+      "repeat": 0,
+      "request_count": 192,
+      "run_id": "v9-low_high_low-runtime_static_fp16-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-high-low.jsonl",
+      "workload_class": "low_high_low",
+      "workload_sha256": "16e57968687482278935091ec834aaf7ea4b981ee97a10dce756063c71fa1aa3"
+    },
+    {
+      "condition": "runtime_static_awq_w4_16",
+      "ordinal": 7,
+      "repeat": 0,
+      "request_count": 192,
+      "run_id": "v9-low_high_low-runtime_static_awq_w4_16-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-high-low.jsonl",
+      "workload_class": "low_high_low",
+      "workload_sha256": "16e57968687482278935091ec834aaf7ea4b981ee97a10dce756063c71fa1aa3"
+    },
+    {
+      "condition": "closed_loop_dynamic",
+      "ordinal": 8,
+      "repeat": 0,
+      "request_count": 192,
+      "run_id": "v9-low_high_low-closed_loop_dynamic-rep0",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-high-low.jsonl",
+      "workload_class": "low_high_low",
+      "workload_sha256": "16e57968687482278935091ec834aaf7ea4b981ee97a10dce756063c71fa1aa3"
+    },
+    {
+      "condition": "closed_loop_dynamic",
+      "ordinal": 9,
+      "repeat": 1,
+      "request_count": 192,
+      "run_id": "v9-low_high_low-closed_loop_dynamic-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-high-low.jsonl",
+      "workload_class": "low_high_low",
+      "workload_sha256": "16e57968687482278935091ec834aaf7ea4b981ee97a10dce756063c71fa1aa3"
+    },
+    {
+      "condition": "runtime_static_awq_w4_16",
+      "ordinal": 10,
+      "repeat": 1,
+      "request_count": 192,
+      "run_id": "v9-low_high_low-runtime_static_awq_w4_16-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-high-low.jsonl",
+      "workload_class": "low_high_low",
+      "workload_sha256": "16e57968687482278935091ec834aaf7ea4b981ee97a10dce756063c71fa1aa3"
+    },
+    {
+      "condition": "runtime_static_fp16",
+      "ordinal": 11,
+      "repeat": 1,
+      "request_count": 192,
+      "run_id": "v9-low_high_low-runtime_static_fp16-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-high-low.jsonl",
+      "workload_class": "low_high_low",
+      "workload_sha256": "16e57968687482278935091ec834aaf7ea4b981ee97a10dce756063c71fa1aa3"
+    },
+    {
+      "condition": "runtime_static_fp16",
+      "ordinal": 12,
+      "repeat": 1,
+      "request_count": 64,
+      "run_id": "v9-high-runtime_static_fp16-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/high-scale-4p25.jsonl",
+      "workload_class": "high",
+      "workload_sha256": "560d3fd7ee01d19472136e4d1ff37a43e0c79e60d878ea463675688a2404605a"
+    },
+    {
+      "condition": "closed_loop_dynamic",
+      "ordinal": 13,
+      "repeat": 1,
+      "request_count": 64,
+      "run_id": "v9-high-closed_loop_dynamic-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/high-scale-4p25.jsonl",
+      "workload_class": "high",
+      "workload_sha256": "560d3fd7ee01d19472136e4d1ff37a43e0c79e60d878ea463675688a2404605a"
+    },
+    {
+      "condition": "runtime_static_awq_w4_16",
+      "ordinal": 14,
+      "repeat": 1,
+      "request_count": 64,
+      "run_id": "v9-high-runtime_static_awq_w4_16-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/high-scale-4p25.jsonl",
+      "workload_class": "high",
+      "workload_sha256": "560d3fd7ee01d19472136e4d1ff37a43e0c79e60d878ea463675688a2404605a"
+    },
+    {
+      "condition": "runtime_static_awq_w4_16",
+      "ordinal": 15,
+      "repeat": 1,
+      "request_count": 64,
+      "run_id": "v9-low-runtime_static_awq_w4_16-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-scale-5p75.jsonl",
+      "workload_class": "low",
+      "workload_sha256": "1522ac87e17db2603f986ee5b7fe3fc73d9dd1c03367bd959e9e049b98b08a82"
+    },
+    {
+      "condition": "closed_loop_dynamic",
+      "ordinal": 16,
+      "repeat": 1,
+      "request_count": 64,
+      "run_id": "v9-low-closed_loop_dynamic-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-scale-5p75.jsonl",
+      "workload_class": "low",
+      "workload_sha256": "1522ac87e17db2603f986ee5b7fe3fc73d9dd1c03367bd959e9e049b98b08a82"
+    },
+    {
+      "condition": "runtime_static_fp16",
+      "ordinal": 17,
+      "repeat": 1,
+      "request_count": 64,
+      "run_id": "v9-low-runtime_static_fp16-rep1",
+      "workload": "benchmark-results/closed-loop-runtime-v9/input/low-scale-5p75.jsonl",
+      "workload_class": "low",
+      "workload_sha256": "1522ac87e17db2603f986ee5b7fe3fc73d9dd1c03367bd959e9e049b98b08a82"
+    }
+  ],
+  "schema_version": 1,
+  "status": "frozen_before_closed_loop_measurements"
+}

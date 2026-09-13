@@ -1,0 +1,218 @@
+{
+  "artifact_version": "closed_loop_runtime_v9",
+  "controller": {
+    "entry": {
+      "current_waiting_gte": 4,
+      "kv_elapsed_fraction_gte": 0.8,
+      "kv_reference_utilization_gte": 0.95,
+      "waiting_elapsed_fraction_gte": 0.5,
+      "waiting_gte": 4,
+      "window_s": 3.0
+    },
+    "excluded_inputs": [
+      "workload scale",
+      "nominal RPS",
+      "future arrivals",
+      "request completion outcomes",
+      "final TTFT",
+      "DuReader answers/F1",
+      "offline crossover labels"
+    ],
+    "no_cooldown_or_retuning": true,
+    "physical_runtime_awq_blocks": 4170,
+    "physical_runtime_fp16_blocks": 1759,
+    "policy_reference_fp16_blocks": 1768,
+    "primary_policy": "sustained_compound_pressure",
+    "release": {
+      "fp16_reference_utilization_lte": 0.7,
+      "new_preemptions_eq": 0,
+      "not_before_entry_request_plus_s": 10.0,
+      "utilization_elapsed_fraction_gte": 0.9,
+      "waiting_mean_lte": 0.5,
+      "window_s": 10.0
+    },
+    "sample_interval_s": 0.25,
+    "secondary_actuating_policy": null,
+    "state_machine": [
+      "FP16",
+      "ENTRY_REQUESTED",
+      "MORPHING_TO_AWQ",
+      "AWQ",
+      "RELEASE_REQUESTED",
+      "DRAINING_OR_RESTORING",
+      "FAILED"
+    ],
+    "time_weighting": "exact v7 left-continuous piecewise-constant integration from benchmark.analyze_crossover"
+  },
+  "created_at_utc": "2026-09-13T19:30:00Z",
+  "engine": {
+    "arrival_absolute_jitter_tolerance_s": 0.25,
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "num_cpu_blocks": 4096,
+    "output_tokens": 512,
+    "prompt_tokens": 1024,
+    "scheduler": "strict FCFS plus v8 restoration-only admission hold",
+    "seed": 2025,
+    "timeout_s": 7200,
+    "warmup_output_tokens": 8,
+    "warmup_requests": 1
+  },
+  "environment": {
+    "awq_config_sha256": "f43d421c9be84ac8d666ca5db2144ae4286c26069501040690141e8236d61910",
+    "awq_index_sha256": "3f15d6929b622d055c487feaefb17767dd1a36ded8a46aa63a751b331e5f0684",
+    "awq_model": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+    "cuda_visible_devices": "5",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "model": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "physical_gpu": 5,
+    "python": "/nfs/home/s314511048/.venvs/morphserve-vllm0112/bin/python",
+    "swiftllm_extension": "/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib",
+    "torch": "2.9.0+cu128",
+    "transformers": "4.51.3",
+    "vllm": "0.11.2"
+  },
+  "forbidden_scope": [
+    "W4-8",
+    "W4-32",
+    "alternate quantization backend",
+    "new scheduler",
+    "new KV policy",
+    "kernel tuning",
+    "LIS profiling",
+    "new model or dataset",
+    "post-result threshold/workload/transition retuning"
+  ],
+  "noise_rule": {
+    "epsilon": "max(0.111 s, static-FP16 two-repeat range, Dynamic two-repeat range, 0.05 * static-FP16 two-repeat mean), per workload",
+    "independent_unit": "fresh serving run",
+    "metric": "P95 TTFT"
+  },
+  "policy_helper_source_sha256": {
+    "swiftLLM/benchmark/analyze_crossover.py": "e13f1c60d7dc896afca3785aad0bcd9b861c053fa68fb32cf90e5b62f09801a7"
+  },
+  "preserved_namespace_tree_sha256": {
+    "benchmark-results/fp16-awq-crossover-v7": "cd62412c57f8b38adde7bdc0782fca7c8a522c13cb4841515f0d6303a9b26919",
+    "benchmark-results/packed-int4-backend-v6": "75200e01f784954c80f0d1bfdb38687a4c58e827e09e90c1d72fb8b5174b70c7",
+    "benchmark-results/runtime-morphing-v8": "3302f590dee96f7042a17a0cf3dc2f654700d4f7a0136fc354591be8fad861b6",
+    "benchmark-results/static-frontier-v5": "9c9a4a587e16fdcc86c7eded69f33be615c0669005b7b4876ef2a765c1c5c379",
+    "benchmark-results/static-quantization-quality-latency": "db8bdc9846d770a696c64d2758770f9b9b4e123e479ef2f0ef302a5e91ad859d",
+    "benchmark-results/table5-substrate-v4": "2e72143378bfc2763ae3ae57df677243d518fa900ce8baba34396253dafcf272"
+  },
+  "quality_decision_rule": {
+    "bootstrap_repeats": 10000,
+    "independent_quality_units": 64,
+    "strong_go": "systems GO and lower bound of paired 95% bootstrap CI for Dynamic-minus-static-AWQ DuReader F1 > 0",
+    "supported_uncertain": "systems GO but semantic F1 separation unresolved"
+  },
+  "repository": {
+    "base_commit": "31e2c87a5fab34ae4387aadedef716cfb5695c4b",
+    "protocol_path": "docs/closed-loop-runtime-v9/protocol.md",
+    "protocol_sha256": "931e80fb991af25973b7129797255f334c9376af702e6201844b0637cb4fa4a1"
+  },
+  "run_plan": {
+    "attempt_lineage": "planned ID for attempt0; preserved failures followed by -attemptN; execution_status selects exactly one valid attempt per cell",
+    "fresh_process": true,
+    "matrix": "3 workloads x 3 conditions x 2 repeats",
+    "path": "benchmark-results/closed-loop-runtime-v9/run-plan.json",
+    "repeats_per_cell": 2,
+    "sha256": "1540f5bf29bdaada209dc79e7b7f73bbf054f6631a576f02965df3bfd5f30203",
+    "total_runs": 18
+  },
+  "runtime_controls": {
+    "closed_loop_dynamic": "start measured service FP16; charge every causal transition",
+    "runtime_static_awq_w4_16": "same runtime process; pre-measurement morph to 4170; hold AWQ",
+    "runtime_static_fp16": "runtime preparation enabled; hold FP16 at 1759 blocks; no controller",
+    "runtime_verify_kv": true
+  },
+  "runtime_source_sha256": {
+    "swiftLLM/swiftllm/engine_config.py": "700d72f22a7f04a11c4765e7021f82a0a6d2f4fa1e622fe4d18dbdc4bb37a41f",
+    "swiftLLM/swiftllm/server/engine.py": "37e2b523d4f8ddbf5284d665389a34dc52e7191519ad70077ac700d221b09e75",
+    "swiftLLM/swiftllm/server/scheduler.py": "7268a2fda431eb96fe21a26043ce75d4c6e3708374c96ecef91f4862dc0d7f70",
+    "swiftLLM/swiftllm/server/structs.py": "7d33392e5efde001786454f76ce0ef1ea151fe8bd9643dc3b8db997dcd9af88a",
+    "swiftLLM/swiftllm/worker/block_manager.py": "e9c46b2d55fff8c2f8156782fbc4d59f2d6327182826659911691ca773831cfd",
+    "swiftLLM/swiftllm/worker/kernels/kvcache_mgmt.py": "ad9d4a001060647732276eeaa6f7441da003cdf68861cbbce2da9a2260b0084e",
+    "swiftLLM/swiftllm/worker/kernels/paged_attn.py": "8a1f5131929978437ed3b733bb440c83cb5985f84c39be8ccce33eb946eac5b8",
+    "swiftLLM/swiftllm/worker/layers/transformer_layer.py": "87b2cc4a1535cf16a3552d51383c06bf127d63525655c9bf5d0ae44c56a56d71",
+    "swiftLLM/swiftllm/worker/model.py": "5b064df0057375ff9d75fe546855b855fd98df670cc2e1d8fc49bc8f4c61b186",
+    "swiftLLM/swiftllm/worker/weight.py": "242277b7d3389699b2a16eea69d3d050be1cf30bf204eb75af7bebe1027b2dae"
+  },
+  "schema_version": 1,
+  "state_pair": [
+    "FP16",
+    "AWQ_MARLIN_W4_16"
+  ],
+  "status": "pre_registered_before_any_v9_closed_loop_serving_result",
+  "systems_go_gates": [
+    "all 18 runs valid",
+    "low zero entry both and FP16-like within epsilon",
+    "high entry and FP16 P95 improvement > epsilon both",
+    "high queue/area/KV/preemption/throughput mechanism gates",
+    "all transitions/KV state valid",
+    "useful ordered roundtrip both phased repeats",
+    "no oscillation",
+    "restored allocated-HBM repeat spread <=64 MiB"
+  ],
+  "v9_source_sha256_at_preregistration": {
+    "swiftLLM/benchmark/analyze_closed_loop.py": "4d2aa60b8a0cdf34953f7543eb760ab922be2a061b4b7518ebfbcb075d53bbf3",
+    "swiftLLM/benchmark/audit_closed_loop.py": "bfd60fe6702470ecd286aad0a4bbecf42098d3afd4726f0d6d1644bb50ded29a",
+    "swiftLLM/benchmark/closed_loop_controller.py": "d2f364798680cd2f9ba2d7f8e93b71206cea10e4192ce7c83e6a3252492e64e7",
+    "swiftLLM/benchmark/prepare_closed_loop_workloads.py": "738258aeff46d2356a43c279b5be4a4df9f3a9def610ade2b7a9c17f41419a61",
+    "swiftLLM/benchmark/run_closed_loop_condition.py": "59a09755ca766e0b583b31cbb07b6618db6f15e1f469cebfefb6d22e5a5f9dd9",
+    "swiftLLM/benchmark/run_closed_loop_plan.py": "28db152b332f2e56d24f5d89c1c04884279be826dd092d88fd808d914defb280",
+    "swiftLLM/benchmark/test_closed_loop_controller.py": "6ebe26d7cc0f2cb415299efa9262f3c09546f1c7062bb3fdbeb4c9c5de7d8080"
+  },
+  "workloads": {
+    "duplicate_quality_unit_rule": "collapse by 64 original questions",
+    "files": {
+      "high": {
+        "last_arrival_offset_s": 66.9375,
+        "path": "benchmark-results/closed-loop-runtime-v9/input/high-scale-4p25.jsonl",
+        "request_count": 64,
+        "sha256": "560d3fd7ee01d19472136e4d1ff37a43e0c79e60d878ea463675688a2404605a"
+      },
+      "low": {
+        "last_arrival_offset_s": 90.5625,
+        "path": "benchmark-results/closed-loop-runtime-v9/input/low-scale-5p75.jsonl",
+        "request_count": 64,
+        "sha256": "1522ac87e17db2603f986ee5b7fe3fc73d9dd1c03367bd959e9e049b98b08a82"
+      },
+      "low_high_low": {
+        "last_arrival_offset_s": 265.5625,
+        "path": "benchmark-results/closed-loop-runtime-v9/input/low-high-low.jsonl",
+        "request_count": 192,
+        "sha256": "16e57968687482278935091ec834aaf7ea4b981ee97a10dce756063c71fa1aa3"
+      }
+    },
+    "high_scale": 4.25,
+    "low_scale": 5.75,
+    "metadata_path": "benchmark-results/closed-loop-runtime-v9/input/workload_metadata.json",
+    "metadata_sha256": "6460d7497c3788441480150e8882a6b86126a694f898cda19b2d5af2d130df96",
+    "phased_boundaries": {
+      "high": {
+        "last_arrival_offset_s": 167.5625,
+        "request_count": 64,
+        "start_offset_s": 100.625
+      },
+      "low_initial": {
+        "last_arrival_offset_s": 90.5625,
+        "request_count": 64,
+        "start_offset_s": 0.0
+      },
+      "low_recovery": {
+        "last_arrival_offset_s": 265.5625,
+        "request_count": 64,
+        "start_offset_s": 175.0
+      },
+      "natural_phase_spans_s": {
+        "definition": "last trace offset plus its existing first positive inter-cohort interval",
+        "scale_4p25": 74.375,
+        "scale_5p75": 100.625
+      }
+    }
+  }
+}
