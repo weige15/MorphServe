@@ -1,0 +1,199 @@
+{
+  "artifact_version": "fp16_awq_crossover_v7",
+  "awq_preferred_rule": [
+    "each paired P95 difference strictly exceeds epsilon",
+    "both repeats have lower W4 P95 queueing, lower waiting queue area, and less dwell at logical KV >=0.95",
+    "W4 preemptions no greater in either repeat and strictly lower in at least one",
+    "W4 completed throughput at least 98% of FP16 each repeat and mean no lower",
+    "all four runs complete and protocol-valid"
+  ],
+  "created_at_utc": "2026-09-13T15:05:00Z",
+  "decision_values": [
+    "GO",
+    "NO-GO"
+  ],
+  "engine": {
+    "block_size": 16,
+    "decoding": "exactly 512 greedy argmax steps",
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "num_cpu_blocks": 4096,
+    "scheduler": "unchanged strict FCFS",
+    "seed": 2025,
+    "telemetry_interval_s": 0.25,
+    "timeout_s": 7200,
+    "warmup_output_tokens": 8,
+    "warmup_requests": 1
+  },
+  "environment": {
+    "compute_capability": "8.6",
+    "environment": "/nfs/home/s314511048/.venvs/morphserve-vllm0112",
+    "gpu_model": "NVIDIA GeForce RTX 3090",
+    "physical_gpu": 5,
+    "swiftllm_extension": "/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib",
+    "torch": "2.9.0+cu128",
+    "transformers": "4.51.3",
+    "vllm": "0.11.2"
+  },
+  "fp16_default_rule": [
+    "FP16 P95 lower in both repeats or both differences within +/- epsilon",
+    "no single AWQ advantage beyond epsilon"
+  ],
+  "go_rule": [
+    "scale 6 is FP16-default/non-inferior",
+    "scale 4 and at least one immediately adjacent lower-load point are AWQ-preferred",
+    "no ordering reversal or conflicting lower AWQ win",
+    "all pressure gates hold",
+    "at least one fixed causal trigger fires in both repeats of every AWQ-preferred point and never in FP16-default points",
+    "all 36 runs complete with valid batch telemetry"
+  ],
+  "model": {
+    "checkpoint": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "config_sha256": "54acfad3cffe057640904ca8a1e83525e6551c70c7a04c641f5a9eda0bbf64bd",
+    "snapshot": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "tokenizer_json_sha256": "76e48799b099d43365bd24ccd8ecc5aedac831718da780552f03b0a6eb4412aa",
+    "weight_index_sha256": "146776fce3f6db1103aa6f249e65ee5544c5923ce6f971b092eee79aa6e5d37b"
+  },
+  "noise_rule": {
+    "epsilon": "max(0.111 s, FP16 repeat range, AWQ repeat range, 0.05 * FP16 repeat mean)",
+    "independent_unit": "fresh serving run, not request",
+    "metric": "P95 TTFT",
+    "paired_difference": "FP16 minus AWQ by repeat index"
+  },
+  "online_signal_candidates": {
+    "capacity_margin_queue_integral": {
+      "clear": "same as sustained_compound_pressure",
+      "enter": "for >=1 continuous s free safe blocks<65 and trailing-5-s waiting area>=15 request-seconds"
+    },
+    "preemption_confirmed_pressure": {
+      "clear": "10 s no preemption, waiting mean<0.5, FP16-equivalent utilization<0.70",
+      "enter": "at least 2 preemptions in trailing 5 s and trailing-2-s mean waiting>=2"
+    },
+    "sustained_compound_pressure": {
+      "clear": "10 continuous s: waiting mean<=0.5, no preemption, FP16-equivalent utilization<=0.70 for >=90% time",
+      "enter": "trailing 3 s: FP16 KV>=0.95 for >=80% time, waiting>=4 for >=50% time, current waiting>=4"
+    }
+  },
+  "prefill_microbenchmark": {
+    "effective_gemm_m": [
+      1024,
+      3072,
+      4096,
+      6144,
+      7168,
+      8192,
+      9216,
+      16384,
+      24576,
+      32768
+    ],
+    "ignore_kvcache": true,
+    "must_precede_full_serving": true,
+    "prompt_tokens_per_sequence": 1024,
+    "role": "diagnosis only; no optimization",
+    "samples": 7,
+    "sequence_counts": [
+      1,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      16,
+      24,
+      32
+    ],
+    "warmup": 2
+  },
+  "repository": {
+    "git_commit_before_protocol": "d29cb79",
+    "preserve_namespaces": [
+      "benchmark-results/static-quantization-quality-latency",
+      "benchmark-results/table5-substrate-v4",
+      "benchmark-results/static-frontier-v5",
+      "benchmark-results/packed-int4-backend-v6"
+    ]
+  },
+  "schema_version": 1,
+  "scope": {
+    "excluded": [
+      "runtime adaptation",
+      "controller implementation",
+      "quantization backend change",
+      "scheduler change",
+      "KV semantics change",
+      "model checkpoint change",
+      "quality dataset change",
+      "decoding change",
+      "kernel optimization",
+      "post-result load selection"
+    ],
+    "hypothesis": "FP16 is preferable below sustained resource pressure; AWQ-Marlin W4-16 is preferable only after genuine FP16 KV/queue saturation",
+    "v6_scale4_role": "exploratory motivation only"
+  },
+  "serving": {
+    "fresh_process_per_run": true,
+    "raw_files": [
+      "metadata.json",
+      "requests.jsonl",
+      "telemetry.jsonl",
+      "batches.jsonl"
+    ],
+    "repeats_per_state_per_load": 2,
+    "required_completed_requests_per_run": 64,
+    "run_plan": "benchmark-results/fp16-awq-crossover-v7/run-plan.json",
+    "run_plan_sha256": "062edde1e0cb3c2673ff7d5a11ff0cf4089790157bb016aea496119f3bc0f56d",
+    "total_runs": 36
+  },
+  "states": [
+    {
+      "condition": "fp16_0",
+      "display": "FP16",
+      "implementation": "unchanged SwiftLLM FP16",
+      "quantized_layer_count": 0
+    },
+    {
+      "awq_checkpoint": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+      "condition": "awq_w4_16",
+      "display": "AWQ-W4-16",
+      "implementation": "validated offline AutoAWQ W4 G128 asymmetric-ZP to vLLM 0.11.2 AWQ-Marlin",
+      "quantized_layer_count": 16
+    }
+  ],
+  "status": "pre_registered_before_new_intermediate_serving_results",
+  "workloads": {
+    "endpoint_byte_identity_required": true,
+    "fixed_scales_low_to_high_load": [
+      6.0,
+      5.75,
+      5.5,
+      5.25,
+      5.0,
+      4.75,
+      4.5,
+      4.25,
+      4.0
+    ],
+    "metadata": "benchmark-results/fp16-awq-crossover-v7/input/workload_metadata.json",
+    "metadata_sha256": "8b7d3a54e33405de0e56dc252e9ac6c6c09893be0722e5fe8ec98029ba29303a",
+    "nominal_offered_rps": [
+      0.6666666666666666,
+      0.6956521739130435,
+      0.7272727272727273,
+      0.7619047619047619,
+      0.8,
+      0.8421052631578947,
+      0.8888888888888888,
+      0.9411764705882353,
+      1.0
+    ],
+    "output_tokens": 512,
+    "prompt_tokens": 1024,
+    "request_content_sha256": "2219f131502c306a9a0c895ccc234892acc3e9dd53a48aa8c9ce8bb33e7d038c",
+    "request_count": 64
+  }
+}

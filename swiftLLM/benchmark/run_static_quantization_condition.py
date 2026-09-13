@@ -161,7 +161,16 @@ def initial_metadata(args: argparse.Namespace, workload: list[dict[str, Any]]) -
             "slo_violation": "finite ttft_s > 2.0",
         },
         "engine_config_requested": asdict(make_config(args)),
-        "raw_files": ["metadata.json", "requests.jsonl", "telemetry.jsonl"],
+        "raw_files": ["metadata.json", "requests.jsonl", "telemetry.jsonl", "batches.jsonl"],
+        "batch_observation_definition": {
+            "scope": "every model forward after warmup during the measurement interval",
+            "timestamp_ns": "immediately before submitting the model forward",
+            "pressure_snapshot": "captured immediately before Scheduler.get_next_batch without changing its inputs or decisions",
+            "prefill_execution_duration_ns": "wall duration of the model forward for prefill-containing batches; null for decode-only batches",
+            "effective_gemm_m": "total prefill tokens plus one activation row per decoding sequence",
+            "safe_kv_blocks": "profile-derived num_gpu_blocks",
+            "used_kv_blocks": "scheduler logical block count, before/after scheduling as named",
+        },
     }
 
 
@@ -202,6 +211,7 @@ async def run(args: argparse.Namespace) -> Path:
     (run_dir / "metadata.json").write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     request_rows: dict[str, dict[str, Any]] = {}
     telemetry_rows: list[dict[str, Any]] = []
+    batch_rows: list[dict[str, Any]] = []
     counters = {"launched": 0, "completed": 0, "generated_tokens": 0}
     engine_task: asyncio.Task[Any] | None = None
     telemetry_task: asyncio.Task[Any] | None = None
@@ -259,6 +269,7 @@ async def run(args: argparse.Namespace) -> Path:
             async for _ in engine.add_request_and_stream(warmup):
                 pass
             print(f"warmup completed: {warmup_index + 1}/{args.warmup_requests}")
+        engine.start_benchmark_batch_observation()
         measurement_start_loop = loop.time()
         measurement_start_ns = time.perf_counter_ns()
         metadata["measurement_start_time_ns"] = measurement_start_ns
@@ -398,6 +409,8 @@ async def run(args: argparse.Namespace) -> Path:
         if engine_task is not None:
             engine_task.cancel()
             await asyncio.gather(engine_task, return_exceptions=True)
+        if engine is not None:
+            batch_rows = engine.get_benchmark_batch_events()
         end_ns = time.perf_counter_ns()
         metadata["measurement_end_time_ns"] = end_ns
         metadata["measurement_end_utc"] = _utc_now()
@@ -407,6 +420,10 @@ async def run(args: argparse.Namespace) -> Path:
         metadata["completed_request_count"] = counters["completed"]
         metadata["generated_output_token_count"] = counters["generated_tokens"]
         metadata["num_gpu_blocks_observed_in_telemetry"] = sorted({row.get("num_gpu_blocks") for row in telemetry_rows})
+        metadata["observed_forward_batch_count"] = len(batch_rows)
+        metadata["observed_prefill_batch_count"] = sum(
+            int(row.get("num_prefill_sequences", 0) > 0) for row in batch_rows
+        )
         metadata["completed_at_utc"] = _utc_now()
         (run_dir / "metadata.json").write_text(json.dumps(metadata, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         with (run_dir / "requests.jsonl").open("w", encoding="utf-8") as handle:
@@ -414,6 +431,9 @@ async def run(args: argparse.Namespace) -> Path:
                 handle.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
         with (run_dir / "telemetry.jsonl").open("w", encoding="utf-8") as handle:
             for row in telemetry_rows:
+                handle.write(json.dumps(row, sort_keys=True) + "\n")
+        with (run_dir / "batches.jsonl").open("w", encoding="utf-8") as handle:
+            for row in batch_rows:
                 handle.write(json.dumps(row, sort_keys=True) + "\n")
         if (run_dir / "requests.jsonl").exists() and (run_dir / "metadata.json").exists():
             try:

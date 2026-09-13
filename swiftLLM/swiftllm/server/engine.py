@@ -32,6 +32,8 @@ class Engine:
         # scheduler decisions or model execution.
         self.benchmark_swap_in_count = 0
         self.benchmark_swap_out_count = 0
+        self.benchmark_batch_events: list[dict] | None = None
+        self.benchmark_batch_index = 0
 
     async def _run_on_model_async(self, func, *args, **kwargs):
         """
@@ -126,7 +128,35 @@ class Engine:
         Event loop for forwarding the model
         """
         while True:
-            # Get the next batch from the scheduler
+            # Capture pressure immediately before scheduling. Observation is
+            # opt-in and never participates in scheduler decisions.
+            batch_observation = None
+            if self.benchmark_batch_events is not None:
+                snapshot = self.get_benchmark_snapshot()
+                batch_observation = {
+                    "schema_version": 1,
+                    "batch_index": self.benchmark_batch_index,
+                    "scheduling_timestamp_ns": time.perf_counter_ns(),
+                    "waiting_queue_depth_before_scheduling": snapshot["waiting_q_depth"],
+                    "running_request_count_before_scheduling": snapshot["running_q_count"],
+                    "swapped_queue_depth_before_scheduling": snapshot["swapped_q_count"],
+                    "safe_kv_blocks": snapshot["num_gpu_blocks"],
+                    "used_kv_blocks_before_scheduling": snapshot["num_decoding_gpu_blocks"],
+                    "allocated_gpu_blocks_before_scheduling": (
+                        self.model.gpu_block_manager.num_blocks
+                        - self.model.gpu_block_manager.num_free_blocks
+                    ),
+                    "free_gpu_blocks_before_scheduling": self.model.gpu_block_manager.num_free_blocks,
+                    "logical_kv_utilization_before_scheduling": (
+                        snapshot["num_decoding_gpu_blocks"] / snapshot["num_gpu_blocks"]
+                        if snapshot["num_gpu_blocks"] else None
+                    ),
+                    "swap_in_count_before_scheduling": snapshot["swap_in_count"],
+                    "swap_out_count_before_scheduling": snapshot["swap_out_count"],
+                    "preemption_count_before_scheduling": snapshot["swap_out_count"],
+                }
+
+            # Get the next batch from the scheduler.
             cur_batch, cur_swap_in, cur_swap_out = self.scheduler.get_next_batch()
             if not cur_batch and not cur_swap_in and not cur_swap_out:
                 # No new batch, sleep for a bit
@@ -135,6 +165,7 @@ class Engine:
 
             # Perform swap in/out. The counters are observational only; the
             # list materialization preserves the upstream call and ordering.
+            swap_out_ids = []
             if cur_swap_out:
                 swap_out_ids = [req.request_id for req in cur_swap_out]
                 self.benchmark_swap_out_count += len(swap_out_ids)
@@ -142,17 +173,19 @@ class Engine:
                     self.model.swap_out_seqs,
                     swap_out_ids
                 )
-            if cur_swap_in:
-                self.benchmark_swap_in_count += len(cur_swap_in)
+            swap_in_ids = [req.request_id for req in cur_swap_in]
+            if swap_in_ids:
+                self.benchmark_swap_in_count += len(swap_in_ids)
                 await self._run_on_model_async(
                     self.model.swap_in_seqs,
-                    [req.request_id for req in cur_swap_in]
+                    swap_in_ids
                 )
-            
+
             # Forward the model
+            prefill_flags = [req.is_prefill_stage() for req in cur_batch]
             input_ids = [
-                req.prompt_token_ids if req.is_prefill_stage() else [req.output_token_ids[-1]]
-                for req in cur_batch
+                req.prompt_token_ids if is_prefill else [req.output_token_ids[-1]]
+                for req, is_prefill in zip(cur_batch, prefill_flags)
             ]
             seq_ids = [req.request_id for req in cur_batch]
             decoding_seq_lens_list = [
@@ -161,8 +194,8 @@ class Engine:
                 if not req.is_prefill_stage()
             ]
             prefill_time_ns = time.perf_counter_ns()
-            for req in cur_batch:
-                if req.is_prefill_stage() and req.benchmark_first_prefill_time_ns is None:
+            for req, is_prefill in zip(cur_batch, prefill_flags):
+                if is_prefill and req.benchmark_first_prefill_time_ns is None:
                     req.benchmark_first_prefill_time_ns = prefill_time_ns
             output_tokens = await self._run_on_model_async(
                 self.model.forward,
@@ -171,6 +204,68 @@ class Engine:
                 decoding_seq_lens_list
             )
             output_time_ns = time.perf_counter_ns()
+
+            if batch_observation is not None:
+                num_prefill_sequences = sum(prefill_flags)
+                total_prefill_tokens = sum(
+                    len(input_ids[index])
+                    for index, is_prefill in enumerate(prefill_flags)
+                    if is_prefill
+                )
+                forward_duration_ns = output_time_ns - prefill_time_ns
+                batch_observation.update({
+                    "timestamp_ns": prefill_time_ns,
+                    "precision_state": (
+                        "FP16"
+                        if self.engine_config.quantized_layer_count == 0
+                        else "AWQ-Marlin W4-16"
+                        if self.engine_config.quantization_backend == "awq_marlin"
+                        and self.engine_config.quantized_layer_count == 16
+                        else f"{self.engine_config.quantization_backend}:{self.engine_config.quantized_layer_count}"
+                    ),
+                    "quantization_backend": self.engine_config.quantization_backend,
+                    "quantized_layer_count": self.engine_config.quantized_layer_count,
+                    "batch_kind": (
+                        "prefill" if num_prefill_sequences == len(cur_batch)
+                        else "decode" if num_prefill_sequences == 0
+                        else "mixed"
+                    ),
+                    "benchmark_request_ids": [req.benchmark_request_id for req in cur_batch],
+                    "num_prefill_sequences": num_prefill_sequences,
+                    "total_prefill_tokens": total_prefill_tokens,
+                    "effective_gemm_m": total_prefill_tokens + len(decoding_seq_lens_list),
+                    "num_decoding_sequences": len(decoding_seq_lens_list),
+                    "forward_execution_duration_ns": forward_duration_ns,
+                    "forward_execution_duration_s": forward_duration_ns / 1_000_000_000,
+                    "prefill_execution_duration_ns": (
+                        forward_duration_ns if num_prefill_sequences else None
+                    ),
+                    "prefill_execution_duration_s": (
+                        forward_duration_ns / 1_000_000_000
+                        if num_prefill_sequences else None
+                    ),
+                    "waiting_queue_depth_after_scheduling": len(self.scheduler.waiting_q),
+                    "running_request_count_after_scheduling": len(self.scheduler.running_q),
+                    "swapped_queue_depth_after_scheduling": len(self.scheduler.swapped_q),
+                    "used_kv_blocks_after_scheduling": self.scheduler.num_decoding_gpu_blocks,
+                    "allocated_gpu_blocks_after_forward": (
+                        self.model.gpu_block_manager.num_blocks
+                        - self.model.gpu_block_manager.num_free_blocks
+                    ),
+                    "free_gpu_blocks_after_forward": self.model.gpu_block_manager.num_free_blocks,
+                    "logical_kv_utilization_after_scheduling": (
+                        self.scheduler.num_decoding_gpu_blocks / self.scheduler.num_gpu_blocks
+                        if self.scheduler.num_gpu_blocks else None
+                    ),
+                    "swap_in_count_this_step": len(swap_in_ids),
+                    "swap_out_count_this_step": len(swap_out_ids),
+                    "preemption_count_this_step": len(swap_out_ids),
+                    "swap_in_count": self.benchmark_swap_in_count,
+                    "swap_out_count": self.benchmark_swap_out_count,
+                    "preemption_count": self.benchmark_swap_out_count,
+                })
+                self.benchmark_batch_events.append(batch_observation)
+                self.benchmark_batch_index += 1
 
             # Deal with output tokens
             finished_req_ids = []
@@ -195,6 +290,19 @@ class Engine:
             # Inform the scheduler
             self.scheduler.on_batch_finish(cur_batch)
     
+    def start_benchmark_batch_observation(self) -> None:
+        """Start a fresh, opt-in batch observation interval."""
+        if not self.initialized:
+            raise RuntimeError("engine must be initialized before batch observation")
+        self.benchmark_batch_events = []
+        self.benchmark_batch_index = 0
+        self.benchmark_swap_in_count = 0
+        self.benchmark_swap_out_count = 0
+
+    def get_benchmark_batch_events(self) -> list[dict]:
+        """Return a copy of recorded forward-batch observations."""
+        return list(self.benchmark_batch_events or [])
+
     def get_benchmark_snapshot(self) -> dict[str, int]:
         """Return scheduler/runtime state for non-semantic benchmark telemetry."""
         scheduler = self.scheduler
