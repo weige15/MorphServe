@@ -1,0 +1,7 @@
+{
+  "analysis": "to be recorded after raw runs without changing metric definitions",
+  "phase_d_runner": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -u -m benchmark.run_static_quantization_condition --model-path $MODEL --workload benchmark-results/static-frontier-v5/input/latency-scale-$SCALE.jsonl --manifest benchmark-results/packed-int4-backend-v6/protocol_manifest.json --condition $CONDITION --quantized-layer-count $LAYERS [--quantization-backend awq_marlin --quantized-model-path $AWQ] --output-dir benchmark-results/packed-int4-backend-v6/phase-d/runs --run-id serv-$CONDITION-scale-$SCALE-rep$REP --launch-mode trace_open_loop --warmup-requests 1 --warmup-output-token-count 8 --seed 2025 --telemetry-interval-s 0.25 --max-batch-size 32 --max-tokens-in-batch 49152 --num-cpu-blocks 4096 --gpu-mem-utilization 0.99 --timeout-s 7200",
+  "profile": "See protocol and committed Phase C JSON files",
+  "quality_runner": "same condition runner with --workload benchmark-results/static-frontier-v5/input/quality-106.jsonl --launch-mode sequential; run only after eligibility",
+  "schema_version": 1
+}

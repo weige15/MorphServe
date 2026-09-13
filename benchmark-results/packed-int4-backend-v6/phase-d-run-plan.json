@@ -1,0 +1,180 @@
+{
+  "common": {
+    "awq_model": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+    "environment": "/nfs/home/s314511048/.venvs/morphserve-vllm0112",
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_tokens_in_batch": 49152,
+    "model": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "output_tokens": 512,
+    "physical_gpu": 5,
+    "prompt_tokens": 1024,
+    "protocol_manifest": "benchmark-results/packed-int4-backend-v6/protocol_manifest.json",
+    "protocol_manifest_sha256": "3407e1ddce3f19b5d36a6702cfa3f7fc083e622b1018de41c3a7b75c4ad4c14d",
+    "request_count": 64,
+    "scheduler": "unchanged SwiftLLM",
+    "swiftllm_extension": "/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib",
+    "telemetry_interval_s": 0.25,
+    "warmup_output_tokens": 8,
+    "warmup_requests": 1
+  },
+  "conditions": {
+    "awq_w4_16": 16,
+    "awq_w4_32": 32,
+    "awq_w4_8": 8,
+    "fp16_0": 0
+  },
+  "created_after_phase_c_commit": "cdf1ba5",
+  "eligibility_basis": "two independent matched scale-6 repeats per state; adjacent runs explain load curve",
+  "near_knee_scale": 6,
+  "reason_for_adjacent_loads": "all candidates change safe KV capacity by 71.6% to 282.7%, so use the complete already-defined v5 scale 8/6/4 matrix",
+  "runs": [
+    {
+      "condition": "fp16_0",
+      "layers": 0,
+      "repeat": 0,
+      "run_id": "serv-fp16_0-scale-8-rep0",
+      "scale": 8,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-8.jsonl",
+      "workload_sha256": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2"
+    },
+    {
+      "condition": "fp16_0",
+      "layers": 0,
+      "repeat": 0,
+      "run_id": "serv-fp16_0-scale-6-rep0",
+      "scale": 6,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    {
+      "condition": "fp16_0",
+      "layers": 0,
+      "repeat": 1,
+      "run_id": "serv-fp16_0-scale-6-rep1",
+      "scale": 6,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    {
+      "condition": "fp16_0",
+      "layers": 0,
+      "repeat": 0,
+      "run_id": "serv-fp16_0-scale-4-rep0",
+      "scale": 4,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-4.jsonl",
+      "workload_sha256": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74"
+    },
+    {
+      "condition": "awq_w4_8",
+      "layers": 8,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_8-scale-8-rep0",
+      "scale": 8,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-8.jsonl",
+      "workload_sha256": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2"
+    },
+    {
+      "condition": "awq_w4_8",
+      "layers": 8,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_8-scale-6-rep0",
+      "scale": 6,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    {
+      "condition": "awq_w4_8",
+      "layers": 8,
+      "repeat": 1,
+      "run_id": "serv-awq_w4_8-scale-6-rep1",
+      "scale": 6,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    {
+      "condition": "awq_w4_8",
+      "layers": 8,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_8-scale-4-rep0",
+      "scale": 4,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-4.jsonl",
+      "workload_sha256": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74"
+    },
+    {
+      "condition": "awq_w4_16",
+      "layers": 16,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_16-scale-8-rep0",
+      "scale": 8,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-8.jsonl",
+      "workload_sha256": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2"
+    },
+    {
+      "condition": "awq_w4_16",
+      "layers": 16,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_16-scale-6-rep0",
+      "scale": 6,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    {
+      "condition": "awq_w4_16",
+      "layers": 16,
+      "repeat": 1,
+      "run_id": "serv-awq_w4_16-scale-6-rep1",
+      "scale": 6,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    {
+      "condition": "awq_w4_16",
+      "layers": 16,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_16-scale-4-rep0",
+      "scale": 4,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-4.jsonl",
+      "workload_sha256": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74"
+    },
+    {
+      "condition": "awq_w4_32",
+      "layers": 32,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_32-scale-8-rep0",
+      "scale": 8,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-8.jsonl",
+      "workload_sha256": "79b8061af513b40f901f04e56837fc2c0f3d2d13a3858854be5e9ccfae8f0ed2"
+    },
+    {
+      "condition": "awq_w4_32",
+      "layers": 32,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_32-scale-6-rep0",
+      "scale": 6,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    {
+      "condition": "awq_w4_32",
+      "layers": 32,
+      "repeat": 1,
+      "run_id": "serv-awq_w4_32-scale-6-rep1",
+      "scale": 6,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "workload_sha256": "4fbf8b1995d5ac81e995915a2f8177526f1406463ba6b39e0f8a244b3813499e"
+    },
+    {
+      "condition": "awq_w4_32",
+      "layers": 32,
+      "repeat": 0,
+      "run_id": "serv-awq_w4_32-scale-4-rep0",
+      "scale": 4,
+      "workload": "benchmark-results/static-frontier-v5/input/latency-scale-4.jsonl",
+      "workload_sha256": "8eb239357e01f5d9ba44d5bcfd7d6acc466368302809400fb70fdd6de6b60b74"
+    }
+  ],
+  "schema_version": 1,
+  "status": "frozen_before_any_v6_serving_run"
+}
