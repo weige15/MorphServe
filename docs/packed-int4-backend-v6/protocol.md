@@ -35,8 +35,9 @@ The following common AutoAWQ configuration is therefore frozen as a
 - serving backend: vLLM 0.11.2 AWQ-to-Marlin repack and Marlin GEMM;
 - activation and output dtype: FP16;
 - calibration: AutoAWQ's standard `mit-han-lab/pile-val-backup` validation
-  corpus, shuffled with its fixed seed 42, at most 128 accepted samples and
-  512 tokens per packed calibration block;
+  corpus at frozen revision `2f5e46ae6a69cf0dce4b12f78241c408936ca0e4`,
+  shuffled with its fixed seed 42, at most 128 accepted samples and 512 tokens
+  per packed calibration block;
 - `duo_scaling=true` and clipping enabled;
 - memory-only execution controls: one calibration sample per forward partition
   and a 512 MiB scale-search chunk ceiling (these do not change the accepted

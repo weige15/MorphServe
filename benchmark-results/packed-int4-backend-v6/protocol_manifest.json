@@ -52,6 +52,7 @@
     "duo_scaling": true,
     "apply_clip": true,
     "calibration_dataset": "mit-han-lab/pile-val-backup validation",
+    "calibration_dataset_revision": "2f5e46ae6a69cf0dce4b12f78241c408936ca0e4",
     "calibration_shuffle_seed": 42,
     "max_calibration_samples": 128,
     "max_calibration_sequence_length": 512,
