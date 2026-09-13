@@ -1,0 +1,98 @@
+{
+  "awq_triton_path": "present; not measured because AWQ-Marlin passed the preregistered first-candidate gate",
+  "compatible_kernel_environment": {
+    "cuda": {
+      "capability": [
+        8,
+        6
+      ],
+      "name": "NVIDIA GeForce RTX 3090",
+      "sm_count": 82
+    },
+    "custom_ops_import": "PASS",
+    "ops": {
+      "awq_marlin_repack": true,
+      "gptq_marlin_gemm": true,
+      "shape_support": {
+        "down": [
+          true,
+          null
+        ],
+        "fused_up_gate": [
+          true,
+          null
+        ],
+        "k_v": [
+          true,
+          null
+        ],
+        "q_o": [
+          true,
+          null
+        ],
+        "up_gate": [
+          true,
+          null
+        ]
+      },
+      "uint4_g128_zp": true,
+      "workspace_bytes": 328
+    },
+    "packages": {
+      "autoawq": "0.2.9",
+      "bitsandbytes": "0.49.2",
+      "datasets": "3.2.0",
+      "torch": "2.9.0",
+      "transformers": "4.51.3",
+      "vllm": "0.11.2"
+    },
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]"
+  },
+  "environment_finding": "The vLLM 0.11.2 wheel is ABI-incompatible with the validated torch 2.5.1 environment; the same wheel works in the isolated torch 2.9.0 environment required by its package metadata.",
+  "installed_vllm_source_files": [
+    {
+      "bytes": 10010,
+      "path": "/nfs/home/s314511048/.venv/lib/python3.12/site-packages/vllm/model_executor/layers/quantization/awq.py",
+      "sha256": "69b3c49f6924fce52d387b11770308c4981cd5225891a901c6c6cac03a7a36c3"
+    },
+    {
+      "bytes": 23834,
+      "path": "/nfs/home/s314511048/.venv/lib/python3.12/site-packages/vllm/model_executor/layers/quantization/awq_marlin.py",
+      "sha256": "9c6840720203798fa0ad6caab26a9b3b5c91d21096c67781002fbd58cd8b41e4"
+    },
+    {
+      "bytes": 11620,
+      "path": "/nfs/home/s314511048/.venv/lib/python3.12/site-packages/vllm/model_executor/layers/quantization/awq_triton.py",
+      "sha256": "7d11fdad7e630d2a90b5d99cad7c31b4fb501222b14d474f900266b6f5bfce78"
+    },
+    {
+      "bytes": 18450,
+      "path": "/nfs/home/s314511048/.venv/lib/python3.12/site-packages/vllm/model_executor/layers/quantization/utils/marlin_utils.py",
+      "sha256": "75f65b0a7e694579030403af7e91b9e45ae2785eea5727c19bb5d9e3f10c339d"
+    },
+    {
+      "bytes": 85072,
+      "path": "/nfs/home/s314511048/.venv/lib/python3.12/site-packages/vllm/_custom_ops.py",
+      "sha256": "f0ce09c2e3b1bd25db452156451002221b9858f840340d2e40ab33c266a4bcc4"
+    }
+  ],
+  "main_swiftllm_environment": {
+    "custom_ops_import": "ImportError: /nfs/home/s314511048/.venv/lib/python3.12/site-packages/vllm/_C.abi3.so: undefined symbol: _ZN3c106ivalue14ConstantString6createENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE",
+    "packages": {
+      "autoawq": null,
+      "bitsandbytes": "0.49.2",
+      "datasets": "2.17.1",
+      "torch": "2.5.1+cu121",
+      "transformers": "5.16.1",
+      "vllm": "0.11.2"
+    },
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]"
+  },
+  "nvidia_smi": {
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "0, NVIDIA GeForce RTX 3090, GPU-384b6377-8f0c-e3d2-8b3a-b3408b54fd53, 8.6, 24576 MiB, 580.159.03\n1, NVIDIA GeForce RTX 3090, GPU-24d15e85-4019-bdb1-5135-bca2be34d1aa, 8.6, 24576 MiB, 580.159.03\n2, NVIDIA GeForce RTX 3090, GPU-ac0202b3-4185-bf4f-4ec5-442aa7701c93, 8.6, 24576 MiB, 580.159.03\n3, NVIDIA GeForce RTX 3090, GPU-bc868077-1737-9b6d-c46b-73c51a34da95, 8.6, 24576 MiB, 580.159.03\n4, NVIDIA GeForce RTX 3090, GPU-f4871bda-940b-f124-851a-ba9ed142b6c6, 8.6, 24576 MiB, 580.159.03\n5, NVIDIA GeForce RTX 3090, GPU-f11c2303-9ae6-0a80-c02f-18cdaafc1ec9, 8.6, 24576 MiB, 580.159.03\n6, NVIDIA GeForce RTX 3090, GPU-c57c604b-c51a-e97a-81f6-5e32fed68688, 8.6, 24576 MiB, 580.159.03"
+  },
+  "ordinary_awq_hot_path": "AWQLinearMethod.apply fully dequantizes qweight for flattened token counts >=256; excluded as fallback for full-shape prefill",
+  "schema_version": 1
+}
