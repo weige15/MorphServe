@@ -1,0 +1,19 @@
+run 1/18: v9-low-runtime_static_fp16-rep0 attempt 0
+run 2/18: v9-low-closed_loop_dynamic-rep0 attempt 0
+run 3/18: v9-low-runtime_static_awq_w4_16-rep0 attempt 0
+run 4/18: v9-high-runtime_static_awq_w4_16-rep0 attempt 0
+run 5/18: v9-high-closed_loop_dynamic-rep0 attempt 0
+run 6/18: v9-high-runtime_static_fp16-rep0 attempt 0
+run 7/18: v9-low_high_low-runtime_static_fp16-rep0 attempt 0
+run 8/18: v9-low_high_low-runtime_static_awq_w4_16-rep0 attempt 0
+run 9/18: v9-low_high_low-closed_loop_dynamic-rep0 attempt 0
+run 10/18: v9-low_high_low-closed_loop_dynamic-rep1 attempt 0
+run 11/18: v9-low_high_low-runtime_static_awq_w4_16-rep1 attempt 0
+run 12/18: v9-low_high_low-runtime_static_fp16-rep1 attempt 0
+run 13/18: v9-high-runtime_static_fp16-rep1 attempt 0
+run 14/18: v9-high-closed_loop_dynamic-rep1 attempt 0
+run 15/18: v9-high-runtime_static_awq_w4_16-rep1 attempt 0
+run 16/18: v9-low-runtime_static_awq_w4_16-rep1 attempt 0
+run 17/18: v9-low-closed_loop_dynamic-rep1 attempt 0
+run 18/18: v9-low-runtime_static_fp16-rep1 attempt 0
+v9 run plan complete: 18/18 valid

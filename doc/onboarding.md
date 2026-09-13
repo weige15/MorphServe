@@ -2,7 +2,7 @@
 
 ## What This Project Does
 
-MorphServe is a research workspace built around a vendored SwiftLLM inference engine. It measures open-loop request arrivals, queueing, TTFT, TPOT, KV occupancy, admission pressure, and mixed-precision behavior. V6 validates offline AutoAWQ plus vLLM AWQ-Marlin, v7 validates the static `{FP16, AWQ-W4-16}` crossover, and v8 implements a manual one-process FP16↔AWQ substrate with pinned weight staging and segmented physical KV resizing. Active requests survive both directions without re-prefill. The repository still does not implement a replacement scheduler or workload-pressure controller.
+MorphServe is a research workspace built around a vendored SwiftLLM inference engine. It measures open-loop arrivals, queueing, TTFT, TPOT, KV pressure, and runtime precision behavior. V7 validates the static `{FP16, AWQ-W4-16}` crossover, v8 implements state-preserving one-process FP16↔AWQ morphing with segmented physical KV resize, and v9 completes the frozen closed-loop experiment. V9 confirms causal high-pressure entry and repeated latency relief but records a final systems/quality **NO-GO** because useful restoration and semantic F1 separation were not demonstrated.
 
 ## Quickstart
 
@@ -33,20 +33,20 @@ Run the tests from the repository root:
 
 ```bash
 VENV=/nfs/home/s314511048/.venv
-PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing -v
+PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
 
 AWQ_ENV=/nfs/home/s314511048/.venvs/morphserve-vllm0112
 AWQ_EXT=/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib
-PYTHONPATH="$AWQ_EXT:$PWD/swiftLLM" "$AWQ_ENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing -v
+PYTHONPATH="$AWQ_EXT:$PWD/swiftLLM" "$AWQ_ENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
 ```
 
-Regenerate v8 analysis, both CPU suites, segmented-KV CUDA tests, and its completion audit:
+Regenerate v9 analysis/tests and independently audit all saved raw evidence:
 
 ```bash
-CUDA_VISIBLE_DEVICES=5 benchmark-results/runtime-morphing-v8/regenerate.sh
+benchmark-results/closed-loop-runtime-v9/regenerate.sh
 ```
 
-A pass ends with `status: PASS`, all completion checks passing, and decision `GO`. V7 and v6 remain independently reproducible with their existing `regenerate.sh` scripts; do not rerun their broad serving matrices for routine v8 work.
+A successful artifact audit ends with `status: PASS`; its scientific decisions remain `NO-GO` by design. V8, v7, and v6 remain independently reproducible with their existing `regenerate.sh` scripts. Do not rerun broad historical serving matrices for routine checks.
 
 The complete final sweep command is preserved in [`docs/phase-1/kv-admission-sweep-report.md`](../docs/phase-1/kv-admission-sweep-report.md); it requires a CUDA GPU and is substantially more expensive than the smoke run.
 
@@ -78,12 +78,19 @@ The complete final sweep command is preserved in [`docs/phase-1/kv-admission-swe
 | `swiftLLM/benchmark/run_crossover_plan.py` | Executes/resumes the immutable 36-run matrix serially. |
 | `swiftLLM/benchmark/analyze_crossover.py` | Regenerates per-run metrics, mechanism tables, causal signals, and the frozen crossover decision. |
 | `swiftLLM/benchmark/audit_crossover.py` | Verifies preserved v7 raw coverage, analysis, and decision gates. |
-| `swiftLLM/benchmark/run_runtime_morphing_validation.py` | Generates static, mid-request, live-extension, capacity, cost, and cycle evidence. |
-| `swiftLLM/benchmark/analyze_runtime_morphing.py` | Regenerates v8 state, capacity, cost, memory, provenance, and amortization checks. |
-| `swiftLLM/benchmark/audit_runtime_morphing.py` | Performs the independent v8 completion audit. |
+| `swiftLLM/benchmark/closed_loop_controller.py` | Frozen v7 sustained-pressure state machine using exact time-weighted helpers. |
+| `swiftLLM/benchmark/run_closed_loop_condition.py` | Same-envelope static/Dynamic runner with controller, transition, and per-token precision traces. |
+| `swiftLLM/benchmark/run_closed_loop_plan.py` | Executes/resumes the immutable 18-run matrix with preserved attempt lineage. |
+| `swiftLLM/benchmark/analyze_closed_loop.py` | Regenerates v9 performance, quality, fidelity, timelines, gates, and decisions. |
+| `swiftLLM/benchmark/audit_closed_loop.py` | Checks frozen hashes, raw structure/state, named outputs, and decision coverage. |
+| `swiftLLM/benchmark/verify_closed_loop_results.py` | Post-result independent recomputation of raw metrics, gates, quality CI, fidelity, and decisions. |
+| `swiftLLM/benchmark/test_closed_loop_controller.py` | Boundary/state-machine checks and exact v7 telemetry replay. |
+| `swiftLLM/benchmark/run_runtime_morphing_validation.py` | Generates v8 static, mid-request, capacity, cost, and cycle evidence. |
 | `swiftLLM/benchmark/test_runtime_morphing.py` | CPU contract and opt-in CUDA segmented-KV/allocator/swap tests. |
-| `benchmark-results/runtime-morphing-v8/` | Current five raw runs, nine transitions, diagnostics, tables, logs, commands, and audit. |
-| `docs/runtime-morphing-v8/` | Current transition contract, ownership, trace format, final report, and audit. |
+| `benchmark-results/closed-loop-runtime-v9/` | Frozen inputs/manifest, 18 raw runs, analysis, timelines, commands, logs, and audit. |
+| `docs/closed-loop-runtime-v9/` | V9 protocol, final report, and exhaustive completion audit. |
+| `benchmark-results/runtime-morphing-v8/` | Preserved five raw runs, nine transitions, diagnostics, tables, logs, commands, and audit. |
+| `docs/runtime-morphing-v8/` | Preserved transition contract, ownership, trace format, final report, and audit. |
 | `benchmark-results/fp16-awq-crossover-v7/` | Preserved protocol, raw batch/request/pressure streams, multi-M evidence, analysis, and 28-check audit. |
 | `docs/fp16-awq-crossover-v7/` | Preserved protocol, diagnosis, final report, and completion audit. |
 | `benchmark-results/packed-int4-backend-v6/` | Preserved backend validation, checkpoint manifest, profiles, raw serving, analysis, and audit. |
@@ -97,22 +104,23 @@ The complete final sweep command is preserved in [`docs/phase-1/kv-admission-swe
 
 ## Architecture Map
 
-Serving benchmarks launch requests on saved wall-clock offsets without waiting for prior completion; v5 quality runs use an explicit sequential mode. SwiftLLM's control plane (`Engine` and `Scheduler`) admits and batches requests, while the data plane executes model work and maintains the KV cache. V7 opt-in observation also records every forward batch in memory—pre-schedule pressure, admitted prefill/decode shape, effective M, duration, safe/used blocks, and swaps—then writes `batches.jsonl` after execution. Request, periodic, and batch streams are analyzed only after the run.
+Serving benchmarks launch requests on saved absolute offsets without waiting for prior completion. SwiftLLM's control plane (`Engine` and `Scheduler`) admits and batches requests, while the data plane executes model work and maintains KV. Batch observation records pre-schedule pressure, admitted prefill/decode shape, effective M, duration, state, safe/used blocks, and swaps; request and periodic streams are analyzed only after the run.
 
-The v8 control plane accepts only explicit `morph_to_awq_w4_16()` and `restore_to_fp16()` calls. The main loop services them between complete forwards after CUDA synchronization. Selected layers load from pinned-host final layouts; only one representation is active in HBM. The original K/V tensors remain a 1,759-block base, while AWQ adds a 2,411-block physical extension. Block tables use virtual IDs, and store/attention/swap resolve base versus extension. Restoration holds new admission if needed, remaps live extension blocks to free base IDs, releases the extension, restores dense FP16, then publishes base capacity. Strict-FCFS ordering and v7 crossover logic are not changed.
+The v8 control plane accepts explicit `morph_to_awq_w4_16()` and `restore_to_fp16()` calls between complete forwards. Selected layers load from pinned host layouts; only one representation is active in HBM. The base K/V segment has 1,759 blocks, AWQ adds 2,411 physical blocks for a safe total of 4,170, and restoration drains/remaps before publishing the base capacity.
+
+V9 keeps policy outside the scheduler. A 0.25-s benchmark coroutine observes causal pressure, evaluates exact v7 time-weighted windows against a separate 1,768-block policy reference, and latches one Engine transition. Static arms initialize the same runtime-capable process. Dynamic request rows retain every output step's precision/position/time; controller and transition traces preserve trigger, pending, hot cost, physical capacity, and KV hashes. The frozen release rule restored only at the terminal tail in one phased repeat and not at all in the other, so the result remains NO-GO without retuning.
 
 The safe dynamic total is 4,170 blocks. A 4,286-block diagnostic allocation completed but exceeded the 0.99 maximum-shape memory envelope, so it is not advertised as safe. See `docs/runtime-morphing-v8/state-memory-ownership.md` before changing capacity.
 
 ## Development Workflow
 
-1. Read `docs/runtime-morphing-v8/final-report.md`, then v7 for crossover evidence and v6 for backend details.
-2. Treat v8 GO as validation of a **manual substrate**, not a controller or deployable policy.
-3. Preserve `{FP16, AWQ-W4-16}`, the 4,170 safe target, serialization, byte-exact ownership, and physical-before-scheduler resize ordering.
-4. Do not retrofit controller triggers into v7/v8. A controller needs a separately pre-registered namespace and workload experiment.
-5. Preserve v2/v4/v5/v6/v7 and raw v8 evidence; put new experiments in a new namespace.
-6. Do not resolve v7's ambiguous scales 5.25/4.75 with selective repeats or changed thresholds.
-7. If runtime source changes, regenerate all five v8 raw files because each is bound to per-file source hashes.
-8. Run both CPU suites, opt-in CUDA tests, compilation, the v8 analyzer/audit, and `git diff --check` before handoff.
+1. Read `docs/closed-loop-runtime-v9/final-report.md`, then the v9 protocol/audit, v8 substrate evidence, and v7 crossover evidence.
+2. Treat v9 as a completed frozen NO-GO experiment. Do not add selective repeats, lengthen recovery, or alter thresholds inside its namespace.
+3. Preserve `{FP16, AWQ-W4-16}`, the 1,768 policy reference, 1,759/4,170 physical capacities, serialization, and physical-before-scheduler resize ordering.
+4. Preserve all v2/v4/v5/v6/v7/v8/v9 raw evidence; any follow-up needs a separately pre-registered namespace.
+5. Do not resolve v7 ambiguous scales or v9 release/static-AWQ variance with post-hoc runs.
+6. If runtime source changes, v8/v9 provenance audits will fail; create new evidence rather than rewriting frozen raw files.
+7. Run CPU checks, opt-in CUDA tests when changing runtime code, compilation, the relevant analyzer/audit, and `git diff --check` before handoff.
 
 ## Testing
 
@@ -120,12 +128,12 @@ The validated CPU-only checks are:
 
 ```bash
 VENV=/nfs/home/s314511048/.venv
-PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing -v
+PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
 PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m py_compile swiftLLM/benchmark/*.py swiftLLM/swiftllm/server/*.py swiftLLM/swiftllm/worker/*.py swiftLLM/swiftllm/worker/layers/*.py swiftLLM/swiftllm/worker/kernels/*.py
 git diff --check
 ```
 
-A successful v8 validation has five raw JSON files, a nine-line `raw/transition-traces.jsonl`, `analysis/state_preservation_summary.json` with `all_pass: true`, and `completion_audit.json` with `status: PASS` and decision `GO`. The CUDA suite must run with `MORPHSERVE_RUN_CUDA_TESTS=1`; otherwise hardware cases intentionally skip. V7, v6, and v5 remain independently reproducible with their existing audits.
+A successful v9 artifact validation has 18 selected runs, `analysis/run_validation.json`, `independent_verification.json`, and `completion_audit.json` all reporting `PASS`; its scientific systems and quality decisions remain `NO-GO`. The CUDA suite must run with `MORPHSERVE_RUN_CUDA_TESTS=1`; otherwise hardware cases intentionally skip. V8, v7, v6, and v5 remain independently reproducible with their existing audits.
 
 ## Troubleshooting
 
@@ -142,7 +150,9 @@ A successful v8 validation has five raw JSON files, a nine-line `raw/transition-
 - **Dynamic target set to 4,286:** do not treat static capacity as runtime-safe. V8's diagnostic exceeded the 0.99 maximum-shape envelope; retain 4,170 unless a full probe establishes a new maximum.
 - **Direct restore says it cannot drain:** start the engine loop so existing requests can complete while admissions are held, or wait until allocated blocks fit base. Never force-release extension tensors.
 - **CUDA morphing tests skip:** set `MORPHSERVE_RUN_CUDA_TESTS=1` and use the torch-2.9 AWQ environment plus rebuilt extension.
-- **Raw provenance mismatch:** runtime source changed after evidence generation. Rerun all five commands in `benchmark-results/runtime-morphing-v8/execution_commands.json`.
+- **Raw provenance mismatch:** frozen v8/v9 evidence intentionally fails when source changes. Do not rewrite completed evidence; use the recorded commit or create a new pre-registered namespace.
+- **V9 release appears too late:** this is the measured result. Repeat 0 never released; repeat 1 restored after the final arrival. Do not tweak release or extend the frozen workload in v9.
+- **V9 static AWQ headline variance:** repeat P95 is 21.395/2.253 s. Both raw runs are valid and must remain; no selective third repeat belongs in v9.
 
 ## Documentation Freshness Checklist
 

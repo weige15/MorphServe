@@ -1,0 +1,53 @@
+{
+  "both_repeats_pass": false,
+  "phase_boundaries": {
+    "high_start_s": 100.625,
+    "recovery_last_arrival_s": 265.5625,
+    "recovery_start_s": 175.0
+  },
+  "repeats": [
+    {
+      "all_192_completed": true,
+      "all_positions_contiguous": true,
+      "completed_recovery_requests_arriving_after_restore": 0,
+      "directions": [
+        "FP16_TO_AWQ_MARLIN_W4_16"
+      ],
+      "ended_s": [
+        134.017603107
+      ],
+      "entry_during_or_after_high_start": true,
+      "exactly_one_ordered_roundtrip": false,
+      "low_phase_remained_fp16": true,
+      "repeat": 0,
+      "requested_s": [
+        133.259500791
+      ],
+      "restore_completed_before_last_recovery_arrival": false,
+      "restore_requested_after_recovery_start": false
+    },
+    {
+      "all_192_completed": true,
+      "all_positions_contiguous": true,
+      "completed_recovery_requests_arriving_after_restore": 0,
+      "directions": [
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16"
+      ],
+      "ended_s": [
+        110.932169202,
+        297.720720663
+      ],
+      "entry_during_or_after_high_start": true,
+      "exactly_one_ordered_roundtrip": true,
+      "low_phase_remained_fp16": true,
+      "repeat": 1,
+      "requested_s": [
+        110.00985548,
+        295.768673268
+      ],
+      "restore_completed_before_last_recovery_arrival": false,
+      "restore_requested_after_recovery_start": true
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+condition,display_condition,repeat,request_count,f1_percent,awq_output_token_fraction
+runtime_static_awq_w4_16,RUNTIME-STATIC-AWQ-W4-16,0,64,13.31593081068796,1.0
+closed_loop_dynamic,CLOSED-LOOP-DYNAMIC,0,64,15.869667428326087,0.306793212890625
+runtime_static_fp16,RUNTIME-STATIC-FP16,0,64,15.254929942120096,0.0
+runtime_static_fp16,RUNTIME-STATIC-FP16,1,64,15.254929942120096,0.0
+closed_loop_dynamic,CLOSED-LOOP-DYNAMIC,1,64,14.996757986398727,0.58807373046875
+runtime_static_awq_w4_16,RUNTIME-STATIC-AWQ-W4-16,1,64,15.671511736189355,1.0

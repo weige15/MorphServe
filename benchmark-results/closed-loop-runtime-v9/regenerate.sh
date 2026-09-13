@@ -18,6 +18,9 @@ mkdir -p benchmark-results/closed-loop-runtime-v9/logs
 "$AWQ_ENV/bin/python" -m benchmark.analyze_closed_loop \
   --root benchmark-results/closed-loop-runtime-v9 \
   2>&1 | tee benchmark-results/closed-loop-runtime-v9/logs/analysis.log
+"$AWQ_ENV/bin/python" -m benchmark.verify_closed_loop_results \
+  --root benchmark-results/closed-loop-runtime-v9 \
+  2>&1 | tee benchmark-results/closed-loop-runtime-v9/logs/independent-verification.log
 "$AWQ_ENV/bin/python" -m benchmark.audit_closed_loop \
   --root benchmark-results/closed-loop-runtime-v9 \
   2>&1 | tee benchmark-results/closed-loop-runtime-v9/logs/audit.log

@@ -1,10 +1,12 @@
 # MorphServe
 
-MorphServe is a research repository for measuring and changing SwiftLLM serving behavior under load. Phase 1 reproduced a mixed GPU-KV-admission and compute transition, v7 validated the static `{FP16, AWQ-W4-16}` crossover, and v8 establishes **GO for a manual one-process runtime substrate**: active requests survive FP16→AWQ→FP16 without re-prefill while physical KV capacity changes from 1,759 to 4,170 blocks. No workload-pressure controller is implemented.
+MorphServe is a research repository for measuring and changing SwiftLLM serving behavior under load. V7 validated the static `{FP16, AWQ-W4-16}` crossover, v8 established a state-preserving one-process morph substrate, and v9 completes the final closed-loop experiment. V9 confirms causal high-pressure entry and repeated latency relief, but the full result is **NO-GO** because the frozen release hysteresis did not restore usefully and Dynamic's DuReader F1 did not separate from static AWQ.
 
 ## Start here
 
-- [Runtime morphing v8 final report](docs/runtime-morphing-v8/final-report.md) — current one-process state/KV transition GO evidence.
+- [Closed-loop runtime v9 final report](docs/closed-loop-runtime-v9/final-report.md) — current 18-run controller result and separate systems/quality decisions.
+- [Closed-loop runtime v9 completion audit](docs/closed-loop-runtime-v9/completion-audit.md) — exhaustive prompt-to-artifact verification.
+- [Runtime morphing v8 final report](docs/runtime-morphing-v8/final-report.md) — one-process state/KV transition GO evidence.
 - [Runtime morphing v8 completion audit](docs/runtime-morphing-v8/completion-audit.md) — prompt-to-artifact verification.
 - [FP16/AWQ crossover v7 final report](docs/fp16-awq-crossover-v7/final-report.md) — preserved nine-load, 36-run crossover evidence.
 - [Crossover v7 completion audit](docs/fp16-awq-crossover-v7/completion-audit.md) — prompt-to-artifact verification.
@@ -41,16 +43,17 @@ Run the CPU-only checks from the repository root:
 VENV=/nfs/home/s314511048/.venv
 PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest \
   benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover \
-  benchmark.test_runtime_morphing -v
+  benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
 ```
 
-Regenerate and audit the saved v8 runtime evidence (including CUDA segmented-KV tests on device 5):
+Regenerate and audit the saved v9 tables, figures, decisions, and raw-evidence checks:
 
 ```bash
-CUDA_VISIBLE_DEVICES=5 benchmark-results/runtime-morphing-v8/regenerate.sh
+benchmark-results/closed-loop-runtime-v9/regenerate.sh
 ```
 
-V7 and v6 remain independently reproducible with
+V8 (including CUDA segmented-KV tests), v7, and v6 remain independently reproducible with
+`CUDA_VISIBLE_DEVICES=5 benchmark-results/runtime-morphing-v8/regenerate.sh`,
 `benchmark-results/fp16-awq-crossover-v7/regenerate.sh` and
 `benchmark-results/packed-int4-backend-v6/regenerate.sh`.
 
@@ -60,7 +63,8 @@ V7 and v6 remain independently reproducible with
 - `swiftLLM/benchmark/` — open-loop runners, runtime validation, analysis, metrics, and tests.
 - `benchmark-results/phase-1/` — Phase 1 raw runs and derived artifacts, grouped by experiment.
 - `docs/phase-1/` — curated current documentation; `archive/` contains superseded reports.
-- `docs/runtime-morphing-v8/` and `benchmark-results/runtime-morphing-v8/` — current architecture/ownership contract, raw transitions, capacity/cost/state evidence, report, and audit.
+- `docs/closed-loop-runtime-v9/` and `benchmark-results/closed-loop-runtime-v9/` — frozen controller protocol, 18 same-envelope runs, raw traces, tables, timelines, final report, and audit.
+- `docs/runtime-morphing-v8/` and `benchmark-results/runtime-morphing-v8/` — architecture/ownership contract, raw transitions, capacity/cost/state evidence, report, and audit.
 - `docs/fp16-awq-crossover-v7/` and `benchmark-results/fp16-awq-crossover-v7/` — preserved crossover protocol, multi-M diagnosis, 36 raw serving runs, analysis, report, and audit.
 - `docs/packed-int4-backend-v6/` and `benchmark-results/packed-int4-backend-v6/` — preserved AWQ-Marlin backend validation and prior static-gate NO-GO.
 - `docs/static-frontier-v5/` and `benchmark-results/static-frontier-v5/` — preserved NF4 static-frontier evidence.

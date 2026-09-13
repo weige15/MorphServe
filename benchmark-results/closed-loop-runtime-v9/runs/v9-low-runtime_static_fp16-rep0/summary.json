@@ -1,0 +1,146 @@
+{
+  "achieved_arrival_rate_rps": 0.6956417940349184,
+  "achieved_offered_arrival_rate_rps": null,
+  "actual_interarrival_rate_rps": 0.6956417940349184,
+  "completed_request_count": 64,
+  "completed_request_throughput_rps": 0.5221862131959999,
+  "condition": "runtime_static_fp16",
+  "engine_tpot_s": {
+    "count": 64,
+    "mean": 0.052812101151785716,
+    "p50": 0.052795813144814095,
+    "p95": 0.06487232538542075,
+    "p99": 0.06630483688540116
+  },
+  "engine_ttft_s": {
+    "count": 64,
+    "mean": 2.779148931328125,
+    "p50": 1.930517809,
+    "p95": 5.7057282259,
+    "p99": 11.588267499529987
+  },
+  "failed_or_incomplete_request_count": 0,
+  "generated_output_token_count": 32768,
+  "generated_token_throughput_tps": 267.35934115635195,
+  "gpu_memory": {
+    "gpu_memory_free_bytes": {
+      "count": 491,
+      "max": 4671406080.0,
+      "mean": 3511108685.1649694,
+      "min": 3067084800.0
+    },
+    "gpu_memory_total_bytes": {
+      "count": 491,
+      "max": 25296044032.0,
+      "mean": 25296044032.0,
+      "min": 25296044032.0
+    },
+    "gpu_memory_used_bytes": {
+      "count": 491,
+      "max": 22228959232.0,
+      "mean": 21784935346.83503,
+      "min": 20624637952.0
+    }
+  },
+  "measurement_duration_s": 122.561642538,
+  "num_gpu_blocks_observed": [
+    1759
+  ],
+  "peak_logical_kv_utilization": 0.9988629903354178,
+  "peak_num_decoding_gpu_blocks": 1757.0,
+  "peak_running_count": 24.0,
+  "peak_swapped_queue_depth": 3.0,
+  "peak_waiting_queue_depth": 10.0,
+  "preemption_count": 10,
+  "queueing_delay_s": {
+    "count": 64,
+    "mean": 1.128473606484375,
+    "p50": 0.043618054,
+    "p95": 4.0019131,
+    "p99": 10.601414020459991
+  },
+  "request_count": 64,
+  "run_id": "v9-low-runtime_static_fp16-rep0",
+  "schema_version": 1,
+  "source_files": [
+    "metadata.json",
+    "requests.jsonl",
+    "telemetry.jsonl"
+  ],
+  "swap_in_count": 10,
+  "swap_out_count": 10,
+  "target_rps": null,
+  "telemetry_sample_count": 491,
+  "telemetry_stats": {
+    "logical_kv_utilization": {
+      "count": 491,
+      "max": 0.9988629903354178,
+      "mean": 0.6633779839267127,
+      "min": 0.03695281409891984,
+      "p50": 0.6895963615690733,
+      "p95": 0.9914724275156339,
+      "p99": 0.9971574758385446
+    },
+    "num_decoding_gpu_blocks": {
+      "count": 491,
+      "max": 1757.0,
+      "mean": 1166.8818737270876,
+      "min": 65.0,
+      "p50": 1213.0,
+      "p95": 1744.0,
+      "p99": 1754.0
+    },
+    "num_gpu_blocks": {
+      "count": 491,
+      "max": 1759.0,
+      "mean": 1759.0,
+      "min": 1759.0,
+      "p50": 1759.0,
+      "p95": 1759.0,
+      "p99": 1759.0
+    },
+    "running_q_count": {
+      "count": 491,
+      "max": 24.0,
+      "mean": 14.682281059063136,
+      "min": 1.0,
+      "p50": 17.0,
+      "p95": 23.0,
+      "p99": 24.0
+    },
+    "swapped_q_count": {
+      "count": 491,
+      "max": 3.0,
+      "mean": 0.2525458248472505,
+      "min": 0.0,
+      "p50": 0.0,
+      "p95": 2.0,
+      "p99": 3.0
+    },
+    "waiting_q_depth": {
+      "count": 491,
+      "max": 10.0,
+      "mean": 0.5845213849287169,
+      "min": 0.0,
+      "p50": 0.0,
+      "p95": 7.0,
+      "p99": 10.0
+    }
+  },
+  "token_throughput_tps": 267.35934115635195,
+  "tpot_s": {
+    "count": 64,
+    "mean": 0.05281797526709271,
+    "p50": 0.05280037687377691,
+    "p95": 0.06487369490821919,
+    "p99": 0.06630977595414872
+  },
+  "ttft_s": {
+    "count": 64,
+    "mean": 2.779499924609375,
+    "p50": 1.930722031,
+    "p95": 5.70615548235,
+    "p99": 11.588659942609988
+  },
+  "workload_class": "low"
+}

@@ -13,5 +13,6 @@
   "cuda_preflight": "MORPHSERVE_RUN_CUDA_TESTS=1 CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m unittest benchmark.test_runtime_morphing -v",
   "run_matrix": "CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -u -m benchmark.run_closed_loop_plan --plan benchmark-results/closed-loop-runtime-v9/run-plan.json --manifest benchmark-results/closed-loop-runtime-v9/protocol_manifest.json --model-path \"$MODEL\" --quantized-model-path \"$AWQ_MODEL\" --output-dir benchmark-results/closed-loop-runtime-v9/runs --log-dir benchmark-results/closed-loop-runtime-v9/logs --status benchmark-results/closed-loop-runtime-v9/execution_status.json --resume",
   "analysis": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.analyze_closed_loop --root benchmark-results/closed-loop-runtime-v9",
+  "independent_verification": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.verify_closed_loop_results --root benchmark-results/closed-loop-runtime-v9",
   "audit": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.audit_closed_loop --root benchmark-results/closed-loop-runtime-v9"
 }

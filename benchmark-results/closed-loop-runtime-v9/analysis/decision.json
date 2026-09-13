@@ -1,0 +1,34 @@
+{
+  "performance_gates": {
+    "high_enters_awq_both": true,
+    "high_improvement_exceeds_noise_both": true,
+    "high_preemption_aligned": true,
+    "high_queue_area_kv_aligned_both": false,
+    "high_throughput_gate": false,
+    "low_fp16_like_within_noise_both": true,
+    "low_no_false_entry_both": true
+  },
+  "predeclared_noise_formula": "max(0.111 s, static-FP16 two-repeat P95 range, Dynamic two-repeat P95 range, 5% of static-FP16 P95 mean), separately per workload",
+  "quality_gate": {
+    "dynamic_minus_awq_paired_unique_question_ci95_low_pp": -1.5816154536709233,
+    "dynamic_semantically_better_than_awq": false
+  },
+  "quality_latency_tradeoff_decision": "NO-GO",
+  "restored_fp16_allocated_hbm_repeat_spread_bytes": null,
+  "schema_version": 1,
+  "systems_adaptation_decision": "NO-GO",
+  "systems_checks": {
+    "all_18_runs_valid": true,
+    "all_dynamic_transitions_successful_and_kv_preserved": true,
+    "high_enters_awq_both": true,
+    "high_improvement_exceeds_noise_both": true,
+    "high_preemption_aligned": true,
+    "high_queue_area_kv_aligned_both": false,
+    "high_throughput_gate": false,
+    "low_fp16_like_within_noise_both": true,
+    "low_no_false_entry_both": true,
+    "no_closed_loop_oscillation": true,
+    "phased_reversibility_both_repeats": false,
+    "restored_fp16_hbm_repeat_spread_le_64mib": false
+  }
+}
