@@ -1,0 +1,13 @@
+{
+  "conditions": [
+    "fp16_0",
+    "awq_w4_8",
+    "awq_w4_16",
+    "awq_w4_32"
+  ],
+  "decision": "NO-GO",
+  "run_count": 16,
+  "schema_version": 1,
+  "source": "all raw requests.jsonl, telemetry.jsonl, metadata.json and Phase C profiles/microbenchmarks",
+  "variability_rows": 12
+}

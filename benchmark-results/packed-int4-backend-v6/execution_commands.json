@@ -1,7 +1,28 @@
 {
-  "analysis": "to be recorded after raw runs without changing metric definitions",
-  "phase_d_runner": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -u -m benchmark.run_static_quantization_condition --model-path $MODEL --workload benchmark-results/static-frontier-v5/input/latency-scale-$SCALE.jsonl --manifest benchmark-results/packed-int4-backend-v6/protocol_manifest.json --condition $CONDITION --quantized-layer-count $LAYERS [--quantization-backend awq_marlin --quantized-model-path $AWQ] --output-dir benchmark-results/packed-int4-backend-v6/phase-d/runs --run-id serv-$CONDITION-scale-$SCALE-rep$REP --launch-mode trace_open_loop --warmup-requests 1 --warmup-output-token-count 8 --seed 2025 --telemetry-interval-s 0.25 --max-batch-size 32 --max-tokens-in-batch 49152 --num-cpu-blocks 4096 --gpu-mem-utilization 0.99 --timeout-s 7200",
-  "profile": "See protocol and committed Phase C JSON files",
-  "quality_runner": "same condition runner with --workload benchmark-results/static-frontier-v5/input/quality-106.jsonl --launch-mode sequential; run only after eligibility",
-  "schema_version": 1
+  "schema_version": 2,
+  "environment": {
+    "MODEL": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "AWQ": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+    "ENV": "/nfs/home/s314511048/.venvs/morphserve-vllm0112",
+    "SWIFTLLM_EXTENSION": "/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib",
+    "PYTHONPATH": "$SWIFTLLM_EXTENSION:$PWD/swiftLLM",
+    "CUDA_VISIBLE_DEVICES": "5"
+  },
+  "build_swiftllm_extension": "mkdir -p $SWIFTLLM_EXTENSION ../temp && cd swiftLLM/csrc && $ENV/bin/python setup.py build_ext --build-lib $SWIFTLLM_EXTENSION --build-temp /nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/temp",
+  "offline_quantization_once": "PYTHONPATH=$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -m benchmark.quantize_awq_checkpoint --model-path $MODEL --output-checkpoint $AWQ --calibration-output benchmark-results/packed-int4-backend-v6/phase-b/calibration-selected.jsonl --manifest-output benchmark-results/packed-int4-backend-v6/phase-b/awq-checkpoint-manifest.json",
+  "phase_a": "PYTHONPATH=$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -m benchmark.awq_marlin_feasibility --model-path $MODEL --rows 1 16 128 1024 --warmup 10 --repeats 20 --output benchmark-results/packed-int4-backend-v6/phase-a/awq-marlin-kernel-feasibility.json",
+  "packed_checkpoint_sanity": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -m benchmark.awq_checkpoint_sanity --awq-model-path $AWQ --output benchmark-results/packed-int4-backend-v6/phase-b/awq-checkpoint-sanity.json",
+  "phase_c_profile_template": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -m benchmark.static_condition_probe --model-path $MODEL --quantized-layer-count $LAYERS [--quantization-backend awq_marlin --quantized-model-path $AWQ] --max-batch-size 32 --max-tokens-in-batch 49152 --max-new-tokens 8 --output benchmark-results/packed-int4-backend-v6/phase-c/profile-$CONDITION-rep$REP.json",
+  "phase_c_microbenchmark_template": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -m benchmark.model_microbenchmark --model-path $MODEL --quantized-layer-count $LAYERS [--quantization-backend awq_marlin --quantized-model-path $AWQ] --prompt-token-count 1024 --repeats 7 --output benchmark-results/packed-int4-backend-v6/phase-c/micro-$CONDITION.json",
+  "phase_d_runner_template": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -u -m benchmark.run_static_quantization_condition --model-path $MODEL --workload benchmark-results/static-frontier-v5/input/latency-scale-$SCALE.jsonl --manifest benchmark-results/packed-int4-backend-v6/protocol_manifest.json --condition $CONDITION --quantized-layer-count $LAYERS [--quantization-backend awq_marlin --quantized-model-path $AWQ] --output-dir benchmark-results/packed-int4-backend-v6/phase-d/runs --run-id serv-$CONDITION-scale-$SCALE-rep$REP --launch-mode trace_open_loop --warmup-requests 1 --warmup-output-token-count 8 --seed 2025 --telemetry-interval-s 0.25 --max-batch-size 32 --max-tokens-in-batch 49152 --num-cpu-blocks 4096 --gpu-mem-utilization 0.99 --timeout-s 7200",
+  "quality_runner_policy": "Use the phase-D template with benchmark-results/static-frontier-v5/input/quality-106.jsonl and --launch-mode sequential only if backend_decision.json has a non-empty eligible_states list. It is empty in v6, so quality was not run.",
+  "analysis": "PYTHONPATH=$PWD/swiftLLM /nfs/home/s314511048/.venv/bin/python -m benchmark.analyze_packed_backend --root benchmark-results/packed-int4-backend-v6 --output-dir benchmark-results/packed-int4-backend-v6/analysis",
+  "audit": "PYTHONPATH=$PWD/swiftLLM /nfs/home/s314511048/.venv/bin/python -m benchmark.audit_packed_backend --root benchmark-results/packed-int4-backend-v6 --output benchmark-results/packed-int4-backend-v6/completion_audit.json",
+  "regenerate_saved_raw_artifacts": "benchmark-results/packed-int4-backend-v6/regenerate.sh",
+  "validation": [
+    "PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc /nfs/home/s314511048/.venv/bin/python -m unittest benchmark.test_benchmark benchmark.test_inference_substrate -v",
+    "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM $ENV/bin/python -m unittest benchmark.test_benchmark benchmark.test_inference_substrate -v",
+    "$ENV/bin/python -m py_compile swiftLLM/benchmark/*.py swiftLLM/swiftllm/*.py swiftLLM/swiftllm/worker/*.py swiftLLM/swiftllm/worker/kernels/*.py swiftLLM/swiftllm/worker/layers/*.py",
+    "git diff --check"
+  ]
 }

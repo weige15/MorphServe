@@ -1,0 +1,928 @@
+{
+  "check_count": 183,
+  "checks": [
+    {
+      "detail": null,
+      "name": "protocol pre-registered",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "quantization config frozen",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "dynamic work excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A all_shapes_supported",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A all_outputs_finite",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A relative_l2_below_0p20",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A cosine_above_0p98",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A packed_fraction_below_0p35",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A temporary_below_64_mib",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A no_static_dequantize_or_matmul_hot_path",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A phase_a_representation_and_numerical_gate_pass",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A exact row counts",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A samples",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase A shape classes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "vLLM 0.11.2 compiled ops load",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "RTX 3090 SM86",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "all installed shape checks pass",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Marlin workspace is 328 bytes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "validated environment ABI blocker recorded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "offline AWQ emitted config",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "calibration hash",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "calibration count",
+      "status": "PASS"
+    },
+    {
+      "detail": 8,
+      "name": "external checkpoint files and hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "672 packed component mappings",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "packed mapping numerics",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "packed object has no FP16 matrix",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "torch-2.9 FP16 parity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-0 short generation",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-8 short generation",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-8 selected packed",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-8 unselected FP16",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-8 fused MLP mapping",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-16 short generation",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-16 selected packed",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-16 unselected FP16",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-16 fused MLP mapping",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-32 short generation",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-32 selected packed",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-32 unselected FP16",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "W4-32 fused MLP mapping",
+      "status": "PASS"
+    },
+    {
+      "detail": {
+        "fused_blocks": 3034,
+        "separate_blocks": 1711
+      },
+      "name": "MLP fusion removes activation pathology",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "Phase C four states",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "fp16_0 profile repeatability",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "fp16_0 seven-sample microbenchmark",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "fp16_0 finite short profile generation",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_8 profile repeatability",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_8 seven-sample microbenchmark",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_8 finite short profile generation",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_16 profile repeatability",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_16 seven-sample microbenchmark",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_16 finite short profile generation",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_32 profile repeatability",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_32 seven-sample microbenchmark",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "awq_w4_32 finite short profile generation",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "safe KV monotonic",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "all W4 states pass Phase C",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serving plan frozen",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-8-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-8-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-8-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-8-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-8-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-8-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep1 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep1 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep1 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep1 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep1 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-6-rep1 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-4-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-4-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-4-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-4-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-4-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-fp16_0-scale-4-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-8-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-8-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-8-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-8-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-8-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-8-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-8-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep1 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep1 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep1 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep1 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep1 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep1 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-6-rep1 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-4-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-4-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-4-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-4-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-4-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-4-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_8-scale-4-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-8-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-8-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-8-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-8-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-8-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-8-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-8-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep1 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep1 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep1 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep1 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep1 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep1 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-6-rep1 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-4-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-4-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-4-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-4-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-4-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-4-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_16-scale-4-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-8-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-8-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-8-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-8-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-8-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-8-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-8-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep1 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep1 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep1 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep1 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep1 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep1 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-6-rep1 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-4-rep0 identity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-4-rep0 hashes",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-4-rep0 exact request protocol",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-4-rep0 warmup excluded",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-4-rep0 telemetry",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-4-rep0 raw summary",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "serv-awq_w4_32-scale-4-rep0 packed metadata",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "exact regeneration serving_runs.csv",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "exact regeneration serving_variability.csv",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "exact regeneration near_knee_paired_runs.csv",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "exact regeneration serving_summary.json",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "all required raw-derived metrics",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "explicit NO-GO",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "quality correctly gated",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "high-load exploratory repeats",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "reduction tuning stopped",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "QKV tuning rejected on capacity",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "v2/v4/v5 artifacts preserved",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "scheduler unchanged",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "report section ## CONFIRMED FINDINGS",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "report section ## SUPPORTED BUT UNCERTAIN FINDINGS",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "report section ## BLOCKED QUESTIONS",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "report section ## REMAINING UNCERTAINTY",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "report section ## BACKEND DECISION: **NO-GO**",
+      "status": "PASS"
+    },
+    {
+      "detail": null,
+      "name": "report forbids controller",
+      "status": "PASS"
+    }
+  ],
+  "decision": "NO-GO",
+  "failure_count": 0,
+  "pass_count": 183,
+  "schema_version": 1,
+  "status": "PASS"
+}
