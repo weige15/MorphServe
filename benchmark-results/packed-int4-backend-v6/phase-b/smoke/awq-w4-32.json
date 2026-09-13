@@ -1,0 +1,691 @@
+{
+  "allocated_bytes_after_profile": 5778448384,
+  "decoded": " Berlin. The capital of Italy is Rome",
+  "engine_config": {
+    "block_size": 16,
+    "max_batch_size": 1,
+    "max_tokens_in_batch": 128
+  },
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "gpu_kv_token_slots": 143552,
+  "layer_layout": [
+    {
+      "layer": 0,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.0.mlp.up_proj.qweight",
+        "model.layers.0.mlp.up_proj.qzeros",
+        "model.layers.0.mlp.up_proj.scales",
+        "model.layers.0.mlp.gate_proj.qweight",
+        "model.layers.0.mlp.gate_proj.qzeros",
+        "model.layers.0.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.0.self_attn.q_proj.qweight",
+        "model.layers.0.self_attn.q_proj.scales",
+        "model.layers.0.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 1,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.1.mlp.up_proj.qweight",
+        "model.layers.1.mlp.up_proj.qzeros",
+        "model.layers.1.mlp.up_proj.scales",
+        "model.layers.1.mlp.gate_proj.qweight",
+        "model.layers.1.mlp.gate_proj.qzeros",
+        "model.layers.1.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.1.self_attn.q_proj.qweight",
+        "model.layers.1.self_attn.q_proj.scales",
+        "model.layers.1.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 2,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.2.mlp.up_proj.qweight",
+        "model.layers.2.mlp.up_proj.qzeros",
+        "model.layers.2.mlp.up_proj.scales",
+        "model.layers.2.mlp.gate_proj.qweight",
+        "model.layers.2.mlp.gate_proj.qzeros",
+        "model.layers.2.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.2.self_attn.q_proj.qweight",
+        "model.layers.2.self_attn.q_proj.scales",
+        "model.layers.2.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 3,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.3.mlp.up_proj.qweight",
+        "model.layers.3.mlp.up_proj.qzeros",
+        "model.layers.3.mlp.up_proj.scales",
+        "model.layers.3.mlp.gate_proj.qweight",
+        "model.layers.3.mlp.gate_proj.qzeros",
+        "model.layers.3.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.3.self_attn.q_proj.qweight",
+        "model.layers.3.self_attn.q_proj.scales",
+        "model.layers.3.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 4,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.4.mlp.up_proj.qweight",
+        "model.layers.4.mlp.up_proj.qzeros",
+        "model.layers.4.mlp.up_proj.scales",
+        "model.layers.4.mlp.gate_proj.qweight",
+        "model.layers.4.mlp.gate_proj.qzeros",
+        "model.layers.4.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.4.self_attn.q_proj.qweight",
+        "model.layers.4.self_attn.q_proj.scales",
+        "model.layers.4.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 5,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.5.mlp.up_proj.qweight",
+        "model.layers.5.mlp.up_proj.qzeros",
+        "model.layers.5.mlp.up_proj.scales",
+        "model.layers.5.mlp.gate_proj.qweight",
+        "model.layers.5.mlp.gate_proj.qzeros",
+        "model.layers.5.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.5.self_attn.q_proj.qweight",
+        "model.layers.5.self_attn.q_proj.scales",
+        "model.layers.5.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 6,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.6.mlp.up_proj.qweight",
+        "model.layers.6.mlp.up_proj.qzeros",
+        "model.layers.6.mlp.up_proj.scales",
+        "model.layers.6.mlp.gate_proj.qweight",
+        "model.layers.6.mlp.gate_proj.qzeros",
+        "model.layers.6.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.6.self_attn.q_proj.qweight",
+        "model.layers.6.self_attn.q_proj.scales",
+        "model.layers.6.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 7,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.7.mlp.up_proj.qweight",
+        "model.layers.7.mlp.up_proj.qzeros",
+        "model.layers.7.mlp.up_proj.scales",
+        "model.layers.7.mlp.gate_proj.qweight",
+        "model.layers.7.mlp.gate_proj.qzeros",
+        "model.layers.7.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.7.self_attn.q_proj.qweight",
+        "model.layers.7.self_attn.q_proj.scales",
+        "model.layers.7.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 8,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.8.mlp.up_proj.qweight",
+        "model.layers.8.mlp.up_proj.qzeros",
+        "model.layers.8.mlp.up_proj.scales",
+        "model.layers.8.mlp.gate_proj.qweight",
+        "model.layers.8.mlp.gate_proj.qzeros",
+        "model.layers.8.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.8.self_attn.q_proj.qweight",
+        "model.layers.8.self_attn.q_proj.scales",
+        "model.layers.8.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 9,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.9.mlp.up_proj.qweight",
+        "model.layers.9.mlp.up_proj.qzeros",
+        "model.layers.9.mlp.up_proj.scales",
+        "model.layers.9.mlp.gate_proj.qweight",
+        "model.layers.9.mlp.gate_proj.qzeros",
+        "model.layers.9.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.9.self_attn.q_proj.qweight",
+        "model.layers.9.self_attn.q_proj.scales",
+        "model.layers.9.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 10,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.10.mlp.up_proj.qweight",
+        "model.layers.10.mlp.up_proj.qzeros",
+        "model.layers.10.mlp.up_proj.scales",
+        "model.layers.10.mlp.gate_proj.qweight",
+        "model.layers.10.mlp.gate_proj.qzeros",
+        "model.layers.10.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.10.self_attn.q_proj.qweight",
+        "model.layers.10.self_attn.q_proj.scales",
+        "model.layers.10.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 11,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.11.mlp.up_proj.qweight",
+        "model.layers.11.mlp.up_proj.qzeros",
+        "model.layers.11.mlp.up_proj.scales",
+        "model.layers.11.mlp.gate_proj.qweight",
+        "model.layers.11.mlp.gate_proj.qzeros",
+        "model.layers.11.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.11.self_attn.q_proj.qweight",
+        "model.layers.11.self_attn.q_proj.scales",
+        "model.layers.11.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 12,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.12.mlp.up_proj.qweight",
+        "model.layers.12.mlp.up_proj.qzeros",
+        "model.layers.12.mlp.up_proj.scales",
+        "model.layers.12.mlp.gate_proj.qweight",
+        "model.layers.12.mlp.gate_proj.qzeros",
+        "model.layers.12.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.12.self_attn.q_proj.qweight",
+        "model.layers.12.self_attn.q_proj.scales",
+        "model.layers.12.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 13,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.13.mlp.up_proj.qweight",
+        "model.layers.13.mlp.up_proj.qzeros",
+        "model.layers.13.mlp.up_proj.scales",
+        "model.layers.13.mlp.gate_proj.qweight",
+        "model.layers.13.mlp.gate_proj.qzeros",
+        "model.layers.13.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.13.self_attn.q_proj.qweight",
+        "model.layers.13.self_attn.q_proj.scales",
+        "model.layers.13.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 14,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.14.mlp.up_proj.qweight",
+        "model.layers.14.mlp.up_proj.qzeros",
+        "model.layers.14.mlp.up_proj.scales",
+        "model.layers.14.mlp.gate_proj.qweight",
+        "model.layers.14.mlp.gate_proj.qzeros",
+        "model.layers.14.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.14.self_attn.q_proj.qweight",
+        "model.layers.14.self_attn.q_proj.scales",
+        "model.layers.14.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 15,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.15.mlp.up_proj.qweight",
+        "model.layers.15.mlp.up_proj.qzeros",
+        "model.layers.15.mlp.up_proj.scales",
+        "model.layers.15.mlp.gate_proj.qweight",
+        "model.layers.15.mlp.gate_proj.qzeros",
+        "model.layers.15.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.15.self_attn.q_proj.qweight",
+        "model.layers.15.self_attn.q_proj.scales",
+        "model.layers.15.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 16,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.16.mlp.up_proj.qweight",
+        "model.layers.16.mlp.up_proj.qzeros",
+        "model.layers.16.mlp.up_proj.scales",
+        "model.layers.16.mlp.gate_proj.qweight",
+        "model.layers.16.mlp.gate_proj.qzeros",
+        "model.layers.16.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.16.self_attn.q_proj.qweight",
+        "model.layers.16.self_attn.q_proj.scales",
+        "model.layers.16.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 17,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.17.mlp.up_proj.qweight",
+        "model.layers.17.mlp.up_proj.qzeros",
+        "model.layers.17.mlp.up_proj.scales",
+        "model.layers.17.mlp.gate_proj.qweight",
+        "model.layers.17.mlp.gate_proj.qzeros",
+        "model.layers.17.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.17.self_attn.q_proj.qweight",
+        "model.layers.17.self_attn.q_proj.scales",
+        "model.layers.17.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 18,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.18.mlp.up_proj.qweight",
+        "model.layers.18.mlp.up_proj.qzeros",
+        "model.layers.18.mlp.up_proj.scales",
+        "model.layers.18.mlp.gate_proj.qweight",
+        "model.layers.18.mlp.gate_proj.qzeros",
+        "model.layers.18.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.18.self_attn.q_proj.qweight",
+        "model.layers.18.self_attn.q_proj.scales",
+        "model.layers.18.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 19,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.19.mlp.up_proj.qweight",
+        "model.layers.19.mlp.up_proj.qzeros",
+        "model.layers.19.mlp.up_proj.scales",
+        "model.layers.19.mlp.gate_proj.qweight",
+        "model.layers.19.mlp.gate_proj.qzeros",
+        "model.layers.19.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.19.self_attn.q_proj.qweight",
+        "model.layers.19.self_attn.q_proj.scales",
+        "model.layers.19.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 20,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.20.mlp.up_proj.qweight",
+        "model.layers.20.mlp.up_proj.qzeros",
+        "model.layers.20.mlp.up_proj.scales",
+        "model.layers.20.mlp.gate_proj.qweight",
+        "model.layers.20.mlp.gate_proj.qzeros",
+        "model.layers.20.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.20.self_attn.q_proj.qweight",
+        "model.layers.20.self_attn.q_proj.scales",
+        "model.layers.20.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 21,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.21.mlp.up_proj.qweight",
+        "model.layers.21.mlp.up_proj.qzeros",
+        "model.layers.21.mlp.up_proj.scales",
+        "model.layers.21.mlp.gate_proj.qweight",
+        "model.layers.21.mlp.gate_proj.qzeros",
+        "model.layers.21.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.21.self_attn.q_proj.qweight",
+        "model.layers.21.self_attn.q_proj.scales",
+        "model.layers.21.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 22,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.22.mlp.up_proj.qweight",
+        "model.layers.22.mlp.up_proj.qzeros",
+        "model.layers.22.mlp.up_proj.scales",
+        "model.layers.22.mlp.gate_proj.qweight",
+        "model.layers.22.mlp.gate_proj.qzeros",
+        "model.layers.22.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.22.self_attn.q_proj.qweight",
+        "model.layers.22.self_attn.q_proj.scales",
+        "model.layers.22.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 23,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.23.mlp.up_proj.qweight",
+        "model.layers.23.mlp.up_proj.qzeros",
+        "model.layers.23.mlp.up_proj.scales",
+        "model.layers.23.mlp.gate_proj.qweight",
+        "model.layers.23.mlp.gate_proj.qzeros",
+        "model.layers.23.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.23.self_attn.q_proj.qweight",
+        "model.layers.23.self_attn.q_proj.scales",
+        "model.layers.23.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 24,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.24.mlp.up_proj.qweight",
+        "model.layers.24.mlp.up_proj.qzeros",
+        "model.layers.24.mlp.up_proj.scales",
+        "model.layers.24.mlp.gate_proj.qweight",
+        "model.layers.24.mlp.gate_proj.qzeros",
+        "model.layers.24.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.24.self_attn.q_proj.qweight",
+        "model.layers.24.self_attn.q_proj.scales",
+        "model.layers.24.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 25,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.25.mlp.up_proj.qweight",
+        "model.layers.25.mlp.up_proj.qzeros",
+        "model.layers.25.mlp.up_proj.scales",
+        "model.layers.25.mlp.gate_proj.qweight",
+        "model.layers.25.mlp.gate_proj.qzeros",
+        "model.layers.25.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.25.self_attn.q_proj.qweight",
+        "model.layers.25.self_attn.q_proj.scales",
+        "model.layers.25.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 26,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.26.mlp.up_proj.qweight",
+        "model.layers.26.mlp.up_proj.qzeros",
+        "model.layers.26.mlp.up_proj.scales",
+        "model.layers.26.mlp.gate_proj.qweight",
+        "model.layers.26.mlp.gate_proj.qzeros",
+        "model.layers.26.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.26.self_attn.q_proj.qweight",
+        "model.layers.26.self_attn.q_proj.scales",
+        "model.layers.26.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 27,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.27.mlp.up_proj.qweight",
+        "model.layers.27.mlp.up_proj.qzeros",
+        "model.layers.27.mlp.up_proj.scales",
+        "model.layers.27.mlp.gate_proj.qweight",
+        "model.layers.27.mlp.gate_proj.qzeros",
+        "model.layers.27.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.27.self_attn.q_proj.qweight",
+        "model.layers.27.self_attn.q_proj.scales",
+        "model.layers.27.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 28,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.28.mlp.up_proj.qweight",
+        "model.layers.28.mlp.up_proj.qzeros",
+        "model.layers.28.mlp.up_proj.scales",
+        "model.layers.28.mlp.gate_proj.qweight",
+        "model.layers.28.mlp.gate_proj.qzeros",
+        "model.layers.28.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.28.self_attn.q_proj.qweight",
+        "model.layers.28.self_attn.q_proj.scales",
+        "model.layers.28.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 29,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.29.mlp.up_proj.qweight",
+        "model.layers.29.mlp.up_proj.qzeros",
+        "model.layers.29.mlp.up_proj.scales",
+        "model.layers.29.mlp.gate_proj.qweight",
+        "model.layers.29.mlp.gate_proj.qzeros",
+        "model.layers.29.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.29.self_attn.q_proj.qweight",
+        "model.layers.29.self_attn.q_proj.scales",
+        "model.layers.29.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 30,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.30.mlp.up_proj.qweight",
+        "model.layers.30.mlp.up_proj.qzeros",
+        "model.layers.30.mlp.up_proj.scales",
+        "model.layers.30.mlp.gate_proj.qweight",
+        "model.layers.30.mlp.gate_proj.qzeros",
+        "model.layers.30.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.30.self_attn.q_proj.qweight",
+        "model.layers.30.self_attn.q_proj.scales",
+        "model.layers.30.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 31,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.31.mlp.up_proj.qweight",
+        "model.layers.31.mlp.up_proj.qzeros",
+        "model.layers.31.mlp.up_proj.scales",
+        "model.layers.31.mlp.gate_proj.qweight",
+        "model.layers.31.mlp.gate_proj.qzeros",
+        "model.layers.31.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.31.self_attn.q_proj.qweight",
+        "model.layers.31.self_attn.q_proj.scales",
+        "model.layers.31.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    }
+  ],
+  "load_ms": 5793.36594499182,
+  "num_gpu_blocks": 8972,
+  "output_token_ids": [
+    20437,
+    13,
+    578,
+    6864,
+    315,
+    15704,
+    374,
+    22463
+  ],
+  "profile_ms": 1363.4356510010548,
+  "profile_peak_allocated_bytes": 5787872768,
+  "prompt": "The capital of France is Paris. The capital of Germany is",
+  "prompt_token_ids": [
+    128000,
+    791,
+    6864,
+    315,
+    9822,
+    374,
+    12366,
+    13,
+    578,
+    6864,
+    315,
+    10057,
+    374
+  ],
+  "quantization": "awq_marlin",
+  "quantization_backend": "awq_marlin",
+  "quantized_layer_count": 32,
+  "quantized_model_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+  "quantized_representation_bytes": 3626038784,
+  "resident_reserved_bytes_after_load": 5918162944,
+  "resident_weight_bytes_after_load": 5769928704,
+  "schema_version": 1
+}

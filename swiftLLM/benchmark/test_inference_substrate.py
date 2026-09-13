@@ -13,7 +13,13 @@ from transformers import LlamaConfig
 from transformers.modeling_rope_utils import _compute_llama3_parameters
 
 from swiftllm.model_config import LlamaModelConfig
-from swiftllm.worker.weight import resolve_lm_head_key
+from swiftllm.worker.weight import (
+    LlamaWeight,
+    RegisteredWeightItem,
+    _validate_awq_checkpoint,
+    awq_component_items,
+    resolve_lm_head_key,
+)
 
 
 LLAMA31_CONFIG = {
@@ -45,7 +51,10 @@ class ModelConfigRegressionTests(unittest.TestCase):
         config = LlamaModelConfig(LLAMA31_CONFIG)
         frequencies = config.get_rope_inv_freq()
         hf_config = LlamaConfig(**LLAMA31_CONFIG)
-        expected, _ = _compute_llama3_parameters(hf_config)
+        try:
+            expected, _ = _compute_llama3_parameters(hf_config)
+        except TypeError:  # Transformers 4.51 requires the explicit device argument.
+            expected, _ = _compute_llama3_parameters(hf_config, device=None)
         torch.testing.assert_close(frequencies, expected)
         self.assertEqual(tuple(frequencies.shape), (64,))
         self.assertAlmostEqual(float(frequencies[0]), 1.0, places=6)
@@ -91,6 +100,57 @@ class ModelConfigRegressionTests(unittest.TestCase):
             )
 
 
+class AWQLoadingRegressionTests(unittest.TestCase):
+    def test_component_keys_and_shapes_match_autoawq_gemm(self):
+        item = RegisteredWeightItem(
+            "down_proj",
+            "model.layers.3.mlp.down_proj.weight",
+            (4096, 14336),
+            torch.float16,
+            quantizable=True,
+        )
+        qweight, qzeros, scales = awq_component_items(item)
+        self.assertEqual(qweight.key, "model.layers.3.mlp.down_proj.qweight")
+        self.assertEqual(qweight.shape, (14336, 512))
+        self.assertEqual(qweight.dtype, torch.int32)
+        self.assertEqual(qzeros.shape, (112, 512))
+        self.assertEqual(scales.shape, (112, 4096))
+        self.assertEqual(scales.dtype, torch.float16)
+
+    def test_selected_layer_backend_does_not_change_unselected_layers(self):
+        config = LlamaModelConfig(LLAMA31_CONFIG)
+        weights = LlamaWeight(
+            config,
+            torch.float16,
+            quantized_layer_count=8,
+            quantization_backend="awq_marlin",
+        )
+        self.assertTrue(all(layer.quantized for layer in weights.layers[:8]))
+        self.assertTrue(all(not layer.quantized for layer in weights.layers[8:]))
+        self.assertTrue(
+            all(layer.quantization_backend == "awq_marlin" for layer in weights.layers)
+        )
+
+    def test_awq_config_is_frozen(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)
+            valid = {
+                "quantization_config": {
+                    "quant_method": "awq",
+                    "bits": 4,
+                    "group_size": 128,
+                    "zero_point": True,
+                    "version": "gemm",
+                }
+            }
+            (path / "config.json").write_text(json.dumps(valid))
+            _validate_awq_checkpoint(str(path))
+            valid["quantization_config"]["group_size"] = 64
+            (path / "config.json").write_text(json.dumps(valid))
+            with self.assertRaises(ValueError):
+                _validate_awq_checkpoint(str(path))
+
+
 class W4HotPathRegressionTests(unittest.TestCase):
     def test_linear_source_has_no_full_matrix_decode_fallback(self):
         source = Path(__file__).resolve().parents[1] / "swiftllm/worker/kernels/linear.py"
@@ -104,6 +164,9 @@ class W4HotPathRegressionTests(unittest.TestCase):
         self.assertNotIn("dequantize_4bit", names)
         self.assertIn("gemv_4bit", names)
         self.assertIn("matmul_4bit", names)
+        rendered = source.read_text()
+        self.assertIn("apply_awq_marlin_linear", rendered)
+        self.assertNotIn("awq_dequantize", rendered)
 
 
 if __name__ == "__main__":

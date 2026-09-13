@@ -26,6 +26,8 @@ class EngineConfig:
     # the upstream FP16 path; positive values quantize decoder layers in the
     # fixed front-to-back order used by the static-quantization proxy benchmark.
     quantized_layer_count: int = 0
+    quantization_backend: str = "nf4_bitsandbytes"
+    quantized_model_path: str | None = None
 
     @staticmethod
     def add_cli_args(parser: argparse.ArgumentParser):
@@ -92,6 +94,16 @@ class EngineConfig:
             type=int,
             default=0,
             choices=range(33),
-            help="Number of front-to-back decoder layers to run with the W4 proxy",
+            help="Number of front-to-back decoder layers to run with the W4 backend",
+        )
+        parser.add_argument(
+            "--quantization-backend",
+            choices=("nf4_bitsandbytes", "awq_marlin"),
+            default="nf4_bitsandbytes",
+        )
+        parser.add_argument(
+            "--quantized-model-path",
+            type=str,
+            help="Offline AutoAWQ checkpoint required by the AWQ-Marlin backend",
         )
         

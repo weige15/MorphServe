@@ -1,0 +1,303 @@
+{
+  "allocated_bytes_after_profile": 13519491072,
+  "decoded": " Berlin. The capital",
+  "engine_config": {
+    "block_size": 16,
+    "max_batch_size": 32,
+    "max_tokens_in_batch": 49152
+  },
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "gpu_kv_token_slots": 27376,
+  "layer_layout": [
+    {
+      "layer": 0,
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.0.self_attn.q_proj.qweight",
+        "model.layers.0.self_attn.q_proj.scales",
+        "model.layers.0.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 1,
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.1.self_attn.q_proj.qweight",
+        "model.layers.1.self_attn.q_proj.scales",
+        "model.layers.1.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 2,
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.2.self_attn.q_proj.qweight",
+        "model.layers.2.self_attn.q_proj.scales",
+        "model.layers.2.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 3,
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.3.self_attn.q_proj.qweight",
+        "model.layers.3.self_attn.q_proj.scales",
+        "model.layers.3.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 4,
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.4.self_attn.q_proj.qweight",
+        "model.layers.4.self_attn.q_proj.scales",
+        "model.layers.4.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 5,
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.5.self_attn.q_proj.qweight",
+        "model.layers.5.self_attn.q_proj.scales",
+        "model.layers.5.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 6,
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.6.self_attn.q_proj.qweight",
+        "model.layers.6.self_attn.q_proj.scales",
+        "model.layers.6.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 7,
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.7.self_attn.q_proj.qweight",
+        "model.layers.7.self_attn.q_proj.scales",
+        "model.layers.7.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 8,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 9,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 10,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 11,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 12,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 13,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 14,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 15,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 16,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 17,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 18,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 19,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 20,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 21,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 22,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 23,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 24,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 25,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 26,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 27,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 28,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 29,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 30,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 31,
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    }
+  ],
+  "load_ms": 8517.923784995219,
+  "num_gpu_blocks": 1711,
+  "output_token_ids": [
+    20437,
+    13,
+    578,
+    6864
+  ],
+  "profile_ms": 12653.116984991357,
+  "profile_peak_allocated_bytes": 20369054208,
+  "prompt": "The capital of France is Paris. The capital of Germany is",
+  "prompt_token_ids": [
+    128000,
+    791,
+    6864,
+    315,
+    9822,
+    374,
+    12366,
+    13,
+    578,
+    6864,
+    315,
+    10057,
+    374
+  ],
+  "quantization": "awq_marlin",
+  "quantization_backend": "awq_marlin",
+  "quantized_layer_count": 8,
+  "quantized_model_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+  "quantized_representation_bytes": 906512320,
+  "resident_reserved_bytes_after_load": 13994295296,
+  "resident_weight_bytes_after_load": 13510971392,
+  "schema_version": 1
+}

@@ -1,0 +1,164 @@
+{
+  "checkpoint": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "checkpoint_config": {
+    "hidden_size": 4096,
+    "num_hidden_layers": 32,
+    "resolved_lm_head_key": "lm_head.weight",
+    "rope_scaling": {
+      "factor": 8.0,
+      "high_freq_factor": 4.0,
+      "low_freq_factor": 1.0,
+      "original_max_position_embeddings": 8192,
+      "rope_type": "llama3"
+    },
+    "rope_theta": 500000.0,
+    "tie_word_embeddings": false,
+    "vocab_size": 128256,
+    "weight_key_count": 291
+  },
+  "first_token_match": true,
+  "first_topk_overlap": 9,
+  "greedy_common_prefix_tokens": 8,
+  "greedy_exact_match": true,
+  "prompt": "The capital of France is Paris. The capital of Germany is",
+  "prompt_token_ids": [
+    128000,
+    791,
+    6864,
+    315,
+    9822,
+    374,
+    12366,
+    13,
+    578,
+    6864,
+    315,
+    10057,
+    374
+  ],
+  "reference": {
+    "decoded": " Berlin. The capital of Italy is Rome",
+    "first_logits_topk": [
+      {
+        "logit": 21.015625,
+        "token_id": 20437
+      },
+      {
+        "logit": 16.296875,
+        "token_id": 13789
+      },
+      {
+        "logit": 14.9609375,
+        "token_id": 56284
+      },
+      {
+        "logit": 14.8828125,
+        "token_id": 9084
+      },
+      {
+        "logit": 14.34375,
+        "token_id": 12366
+      },
+      {
+        "logit": 14.328125,
+        "token_id": 1101
+      },
+      {
+        "logit": 14.125,
+        "token_id": 279
+      },
+      {
+        "logit": 13.953125,
+        "token_id": 198
+      },
+      {
+        "logit": 13.9453125,
+        "token_id": 4194
+      },
+      {
+        "logit": 13.890625,
+        "token_id": 47304
+      }
+    ],
+    "first_token_id": 20437,
+    "output_token_ids": [
+      20437,
+      13,
+      578,
+      6864,
+      315,
+      15704,
+      374,
+      22463
+    ]
+  },
+  "schema_version": 1,
+  "swiftllm_fp16": {
+    "decoded": " Berlin. The capital of Italy is Rome",
+    "first_logits_topk": [
+      {
+        "logit": 21.015625,
+        "token_id": 20437
+      },
+      {
+        "logit": 16.3125,
+        "token_id": 13789
+      },
+      {
+        "logit": 14.9609375,
+        "token_id": 56284
+      },
+      {
+        "logit": 14.890625,
+        "token_id": 9084
+      },
+      {
+        "logit": 14.34375,
+        "token_id": 12366
+      },
+      {
+        "logit": 14.328125,
+        "token_id": 1101
+      },
+      {
+        "logit": 14.125,
+        "token_id": 279
+      },
+      {
+        "logit": 13.953125,
+        "token_id": 198
+      },
+      {
+        "logit": 13.9453125,
+        "token_id": 4194
+      },
+      {
+        "logit": 13.890625,
+        "token_id": 10057
+      }
+    ],
+    "first_token_id": 20437,
+    "num_gpu_blocks": 2775,
+    "output_token_ids": [
+      20437,
+      13,
+      578,
+      6864,
+      315,
+      15704,
+      374,
+      22463
+    ]
+  },
+  "tokenizer": {
+    "bos_token_id": 128000,
+    "eos_token_id": 128001,
+    "files_sha256": {
+      "special_tokens_map.json": "462d91939dbc37178aa5a3eae7068d1990ccc92e09f288cc71f42cdf139d69cc",
+      "tokenizer.json": "76e48799b099d43365bd24ccd8ecc5aedac831718da780552f03b0a6eb4412aa",
+      "tokenizer_config.json": "8004530facf809ac432114de2a4dcc65fcb632da5ec16d666091aeb6a2ee444a"
+    },
+    "name_or_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "vocab_size": 128256
+  }
+}

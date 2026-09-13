@@ -71,6 +71,8 @@ class LlamaModel:
             self.engine_config.model_path,
             self.engine_config.use_dummy,
             quantized_layer_count=self.engine_config.quantized_layer_count,
+            quantization_backend=self.engine_config.quantization_backend,
+            quantized_model_path=self.engine_config.quantized_model_path,
         )
 
         # Initialize rotary embeddings

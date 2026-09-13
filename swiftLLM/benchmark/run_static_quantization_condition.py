@@ -44,8 +44,21 @@ def add_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--run-id", required=True)
-    parser.add_argument("--condition", choices=("fp16_0", "w4_8", "w4_16", "w4_32"), required=True)
+    parser.add_argument(
+        "--condition",
+        choices=(
+            "fp16_0", "w4_8", "w4_16", "w4_32",
+            "awq_w4_8", "awq_w4_16", "awq_w4_32",
+        ),
+        required=True,
+    )
     parser.add_argument("--quantized-layer-count", type=int, choices=(0, 8, 16, 32), required=True)
+    parser.add_argument(
+        "--quantization-backend",
+        choices=("nf4_bitsandbytes", "awq_marlin"),
+        default="nf4_bitsandbytes",
+    )
+    parser.add_argument("--quantized-model-path", type=Path)
     parser.add_argument("--seed", type=int, default=2025)
     parser.add_argument(
         "--launch-mode",
@@ -75,6 +88,8 @@ def make_config(args: argparse.Namespace) -> swiftllm.EngineConfig:
         max_batch_size=args.max_batch_size,
         max_tokens_in_batch=args.max_tokens_in_batch,
         quantized_layer_count=args.quantized_layer_count,
+        quantization_backend=args.quantization_backend,
+        quantized_model_path=(str(args.quantized_model_path) if args.quantized_model_path else None),
     )
 
 
@@ -85,12 +100,21 @@ def initial_metadata(args: argparse.Namespace, workload: list[dict[str, Any]]) -
         "run_id": args.run_id,
         "condition": args.condition,
         "quantized_layer_count": args.quantized_layer_count,
-        "quantization_label": "fp16_control" if args.quantized_layer_count == 0 else QUANTIZATION_LABEL,
+        "quantization_label": (
+            "fp16_control"
+            if args.quantized_layer_count == 0
+            else ("awq_marlin_w4_g128_zp" if args.quantization_backend == "awq_marlin" else QUANTIZATION_LABEL)
+        ),
+        "quantization_backend": args.quantization_backend,
         "layer_order_label": LAYER_ORDER_LABEL,
         "layer_order": list(range(args.quantized_layer_count)),
         "created_at_utc": _utc_now(),
         "model_path_safe": _safe_model_path(str(args.model_path)),
         "model_path_sha256": hashlib.sha256(str(args.model_path.resolve()).encode()).hexdigest(),
+        "quantized_model_path_safe": (
+            _safe_model_path(str(args.quantized_model_path))
+            if args.quantized_model_path else None
+        ),
         "current_morphserve_git_commit": commit,
         "current_morphserve_git_dirty": dirty,
         "current_morphserve_git_diff_sha256": diff_sha256,
@@ -145,8 +169,21 @@ async def run(args: argparse.Namespace) -> Path:
     workload = read_jsonl(args.workload)
     if not workload:
         raise ValueError("empty workload")
-    if args.quantized_layer_count not in (0, 8, 16, 32):
-        raise ValueError("quantized layer count must match a static quantization condition")
+    expected_layers = {
+        "fp16_0": 0,
+        "w4_8": 8,
+        "w4_16": 16,
+        "w4_32": 32,
+        "awq_w4_8": 8,
+        "awq_w4_16": 16,
+        "awq_w4_32": 32,
+    }
+    if args.quantized_layer_count != expected_layers[args.condition]:
+        raise ValueError("quantized layer count does not match the named condition")
+    if args.condition.startswith("awq_") != (args.quantization_backend == "awq_marlin"):
+        raise ValueError("AWQ condition and quantization backend must agree")
+    if args.quantization_backend == "awq_marlin" and args.quantized_model_path is None:
+        raise ValueError("AWQ-Marlin requires --quantized-model-path")
     if args.telemetry_interval_s <= 0 or args.timeout_s <= 0:
         raise ValueError("telemetry interval and timeout must be positive")
     if args.warmup_requests < 0 or args.warmup_output_token_count <= 0:
@@ -182,14 +219,35 @@ async def run(args: argparse.Namespace) -> Path:
         metadata["initial_engine_snapshot"] = initial_snapshot
         metadata["num_gpu_blocks"] = initial_snapshot["num_gpu_blocks"]
         metadata["gpu_kv_token_slots"] = 16 * initial_snapshot["num_gpu_blocks"]
-        metadata["quantization_runtime"] = {
-            "implementation": "bitsandbytes.functional.quantize_4bit + bitsandbytes.gemv_4bit decode + bitsandbytes.matmul_4bit prefill fallback",
-            "quant_type": "nf4",
-            "weight_bits": 4,
-            "blocksize": 64,
-            "compress_statistics": False,
-            "awq_attempt": "AutoAWQ 0.2.9 source import succeeded; AWQ fused kernels/selective loading not available in this SwiftLLM engine, so all W4 conditions use the uniform NF4 proxy",
-        }
+        if args.quantized_layer_count == 0:
+            metadata["quantization_runtime"] = {
+                "implementation": "unchanged SwiftLLM FP16",
+                "weight_bits": 16,
+            }
+        elif args.quantization_backend == "awq_marlin":
+            awq_config = args.quantized_model_path / "config.json"
+            awq_index = args.quantized_model_path / "model.safetensors.index.json"
+            metadata["quantization_runtime"] = {
+                "implementation": "offline AutoAWQ GEMM layout -> one-time vLLM 0.11.2 Marlin repack -> gptq_marlin_gemm for decode and prefill",
+                "quant_type": "asymmetric_uint4",
+                "weight_bits": 4,
+                "group_size": 128,
+                "zero_point": True,
+                "activation_dtype": "float16",
+                "full_weight_dequantization_hot_path": False,
+                "awq_config_sha256": sha256_file(awq_config),
+                "awq_weight_index_sha256": sha256_file(awq_index),
+                "packed_representation_bytes": engine.model.weight.quantized_representation_bytes(),
+            }
+        else:
+            metadata["quantization_runtime"] = {
+                "implementation": "bitsandbytes.functional.quantize_4bit + bitsandbytes.gemv_4bit decode + bitsandbytes.matmul_4bit prefill fallback",
+                "quant_type": "nf4",
+                "weight_bits": 4,
+                "blocksize": 64,
+                "compress_statistics": False,
+                "awq_attempt": "AutoAWQ 0.2.9 source import succeeded; AWQ fused kernels/selective loading not available in this SwiftLLM engine, so all W4 conditions use the uniform NF4 proxy",
+            }
         loop = asyncio.get_running_loop()
         engine_task = asyncio.create_task(engine.start_all_event_loops())
         await asyncio.sleep(0)

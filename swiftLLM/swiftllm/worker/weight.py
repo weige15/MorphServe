@@ -1,7 +1,7 @@
 import dataclasses
 import json
 import os
-from typing import Any
+from typing import Any, Callable
 
 import safetensors
 import torch
@@ -23,6 +23,24 @@ class QuantizedMatrix:
     gemv_data: torch.Tensor
     gemv_quant_state: Any
     shape: tuple[int, int]
+
+
+@dataclasses.dataclass
+class AWQMarlinMatrix:
+    """One vLLM-Marlin packed matrix loaded from an offline AutoAWQ checkpoint."""
+
+    qweight: torch.Tensor
+    scales: torch.Tensor
+    qzeros: torch.Tensor
+    workspace: torch.Tensor
+    g_idx: torch.Tensor
+    g_idx_sort_indices: torch.Tensor
+    shape: tuple[int, int]
+    source_keys: tuple[str, ...]
+    group_size: int = 128
+    bits: int = 4
+    zero_point: bool = True
+    backend: str = "awq_marlin"
 
 
 @dataclasses.dataclass
@@ -50,26 +68,54 @@ class WeightBase:
     def register_weight(self, item: RegisteredWeightItem):
         self.registered_weights.append(item)
 
-    def _post_process_after_load(self, getter: callable):
+    def _post_process_after_load(self, getter: Callable, awq_getter: Callable | None):
         """
         This function is called after loading weights (real/dummy).
         Defined in each concrete weight class, called by load_weights().
         """
         raise NotImplementedError()
     
-    def load_weights(self, getter: callable):
-        """Load weights, optionally replacing matrix weights with the W4 proxy."""
+    def load_weights(self, getter: Callable, awq_getter: Callable | None = None):
+        """Load dense weights or selected packed matrices from the fixed backend."""
         for item in self.registered_weights:
-            weight_value = getter(item)
-            assert weight_value is not None, f"getter() returned None for {item.key} ({item})"
-            assert isinstance(weight_value, torch.Tensor), f"Weight {item.key} is not a tensor"
-            assert weight_value.shape == item.shape, f"Shape of weight {item.key} does not match"
-            assert weight_value.device.type == "cuda", f"Weight {item.key} is not on GPU"
-            if getattr(self, "quantized", False) and item.quantizable:
-                setattr(self, item.attr_name, quantize_matrix(weight_value, item.dtype))
+            backend = getattr(self, "quantization_backend", "nf4_bitsandbytes")
+            selected = getattr(self, "quantized", False)
+            if (
+                selected
+                and backend == "awq_marlin"
+                and item.attr_name in ("up_proj", "gate_proj")
+            ):
+                continue
+            if selected and item.quantizable and backend == "awq_marlin":
+                if awq_getter is None:
+                    raise ValueError("AWQ-Marlin selected without an AWQ checkpoint getter")
+                value = load_awq_marlin_matrix(item, awq_getter)
             else:
-                setattr(self, item.attr_name, weight_value.to(item.dtype))
-        self._post_process_after_load(getter)
+                # AutoAWQ rescales selected layers' norms together with their
+                # packed linears. Load those norms from the AWQ artifact too.
+                source_getter = (
+                    awq_getter
+                    if selected and backend == "awq_marlin" and awq_getter is not None
+                    else getter
+                )
+                value = source_getter(item)
+                assert value is not None, f"getter() returned None for {item.key} ({item})"
+                assert isinstance(value, torch.Tensor), f"Weight {item.key} is not a tensor"
+                assert value.shape == item.shape, f"Shape of weight {item.key} does not match"
+                assert value.device.type == "cuda", f"Weight {item.key} is not on GPU"
+                value = (
+                    quantize_matrix(value, item.dtype)
+                    if selected and item.quantizable
+                    else value.to(item.dtype)
+                )
+            setattr(self, item.attr_name, value)
+        if selected and backend == "awq_marlin":
+            up_item = next(item for item in self.registered_weights if item.attr_name == "up_proj")
+            gate_item = next(item for item in self.registered_weights if item.attr_name == "gate_proj")
+            self.up_gate_proj = load_awq_marlin_fused_matrix(
+                up_item, gate_item, awq_getter
+            )
+        self._post_process_after_load(getter, awq_getter)
 
 
 def quantize_matrix(weight: torch.Tensor, dtype: torch.dtype) -> QuantizedMatrix:
@@ -109,6 +155,163 @@ def quantize_matrix(weight: torch.Tensor, dtype: torch.dtype) -> QuantizedMatrix
     )
 
 
+def awq_component_items(item: RegisteredWeightItem, group_size: int = 128):
+    """Return the exact AutoAWQ GEMM component keys and shapes for a matrix."""
+    out_features, in_features = item.shape
+    if in_features % group_size or out_features % 8:
+        raise ValueError(f"AWQ group/packing is incompatible with {item.key}: {item.shape}")
+    prefix = item.key.removesuffix(".weight")
+    return (
+        RegisteredWeightItem(
+            "qweight", f"{prefix}.qweight", (in_features, out_features // 8), torch.int32
+        ),
+        RegisteredWeightItem(
+            "qzeros",
+            f"{prefix}.qzeros",
+            (in_features // group_size, out_features // 8),
+            torch.int32,
+        ),
+        RegisteredWeightItem(
+            "scales",
+            f"{prefix}.scales",
+            (in_features // group_size, out_features),
+            torch.float16,
+        ),
+    )
+
+
+def _convert_autoawq_to_marlin(
+    item: RegisteredWeightItem,
+    qweight: torch.Tensor,
+    qzeros: torch.Tensor,
+    scales: torch.Tensor,
+    source_keys: tuple[str, ...],
+    group_size: int = 128,
+) -> AWQMarlinMatrix:
+    from vllm import _custom_ops as ops
+    from vllm.model_executor.layers.quantization.utils.marlin_utils import (
+        awq_to_marlin_zero_points,
+        marlin_make_empty_g_idx,
+        marlin_make_workspace_new,
+        marlin_permute_scales,
+        verify_marlin_supports_shape,
+    )
+
+    out_features, in_features = item.shape
+    verify_marlin_supports_shape(
+        output_size_per_partition=out_features,
+        input_size_per_partition=in_features,
+        input_size=in_features,
+        group_size=group_size,
+    )
+    expected_shapes = (
+        (in_features, out_features // 8),
+        (in_features // group_size, out_features // 8),
+        (in_features // group_size, out_features),
+    )
+    for name, value, shape, dtype in zip(
+        ("qweight", "qzeros", "scales"),
+        (qweight, qzeros, scales),
+        expected_shapes,
+        (torch.int32, torch.int32, torch.float16),
+    ):
+        if tuple(value.shape) != shape or value.dtype != dtype:
+            raise ValueError(
+                f"{item.key} {name} expected {shape}/{dtype}, "
+                f"got {tuple(value.shape)}/{value.dtype}"
+            )
+        if value.device.type != "cuda":
+            raise ValueError(f"{item.key} {name} must load directly onto CUDA")
+
+    marlin_qweight = ops.awq_marlin_repack(
+        qweight, size_k=in_features, size_n=out_features, num_bits=4
+    )
+    marlin_scales = marlin_permute_scales(
+        scales,
+        size_k=in_features,
+        size_n=out_features,
+        group_size=group_size,
+    )
+    marlin_qzeros = awq_to_marlin_zero_points(
+        qzeros,
+        size_k=in_features // group_size,
+        size_n=out_features,
+        num_bits=4,
+    )
+    device = marlin_qweight.device
+    return AWQMarlinMatrix(
+        qweight=marlin_qweight,
+        scales=marlin_scales,
+        qzeros=marlin_qzeros,
+        workspace=marlin_make_workspace_new(device),
+        g_idx=marlin_make_empty_g_idx(device),
+        g_idx_sort_indices=marlin_make_empty_g_idx(device),
+        shape=tuple(item.shape),
+        source_keys=source_keys,
+        group_size=group_size,
+    )
+
+
+def load_awq_marlin_matrix(
+    item: RegisteredWeightItem, getter: Callable, group_size: int = 128
+) -> AWQMarlinMatrix:
+    """Load AutoAWQ components and retain only their vLLM Marlin transforms."""
+    qweight_item, qzeros_item, scales_item = awq_component_items(item, group_size)
+    qweight = getter(qweight_item)
+    qzeros = getter(qzeros_item)
+    scales = getter(scales_item)
+    for component_item, value in (
+        (qweight_item, qweight),
+        (qzeros_item, qzeros),
+        (scales_item, scales),
+    ):
+        if value.shape != component_item.shape or value.dtype != component_item.dtype:
+            raise ValueError(
+                f"{component_item.key} expected {component_item.shape}/{component_item.dtype}, "
+                f"got {tuple(value.shape)}/{value.dtype}"
+            )
+        if value.device.type != "cuda":
+            raise ValueError(f"{component_item.key} must load directly onto CUDA")
+
+    return _convert_autoawq_to_marlin(
+        item,
+        qweight,
+        qzeros,
+        scales,
+        (qweight_item.key, scales_item.key, qzeros_item.key),
+        group_size,
+    )
+
+
+def load_awq_marlin_fused_matrix(
+    first: RegisteredWeightItem,
+    second: RegisteredWeightItem,
+    getter: Callable,
+    group_size: int = 128,
+) -> AWQMarlinMatrix:
+    """Fuse AutoAWQ output columns before repacking, preserving `[first,second]`."""
+    if first.shape != second.shape:
+        raise ValueError("fused AWQ matrices must have the same shape")
+    component_sets = [awq_component_items(item, group_size) for item in (first, second)]
+    loaded = [[getter(component) for component in components] for components in component_sets]
+    qweight = torch.cat((loaded[0][0], loaded[1][0]), dim=1).contiguous()
+    qzeros = torch.cat((loaded[0][1], loaded[1][1]), dim=1).contiguous()
+    scales = torch.cat((loaded[0][2], loaded[1][2]), dim=1).contiguous()
+    fused = RegisteredWeightItem(
+        "up_gate_proj",
+        first.key.replace("up_proj.weight", "up_gate_proj.weight"),
+        (first.shape[0] + second.shape[0], first.shape[1]),
+        first.dtype,
+        quantizable=True,
+    )
+    source_keys = tuple(
+        component.key for components in component_sets for component in components
+    )
+    return _convert_autoawq_to_marlin(
+        fused, qweight, qzeros, scales, source_keys, group_size
+    )
+
+
 class LlamaTransformerLayerWeight(WeightBase):
     """
     Class stores the weights of one transformer layer (transformer block) in Llama model.
@@ -121,6 +324,7 @@ class LlamaTransformerLayerWeight(WeightBase):
         dtype: torch.dtype,
         model_version: str = "llama",
         quantized: bool = False,
+        quantization_backend: str = "nf4_bitsandbytes",
     ):
         super().__init__()
 
@@ -129,6 +333,7 @@ class LlamaTransformerLayerWeight(WeightBase):
         self.dtype = dtype
         self.model_version = model_version
         self.quantized = quantized
+        self.quantization_backend = quantization_backend
 
         self.register_weight(RegisteredWeightItem(
             "attn_norm",
@@ -193,7 +398,7 @@ class LlamaTransformerLayerWeight(WeightBase):
             quantizable=True,
         ))
 
-    def _post_process_after_load(self, getter: callable):
+    def _post_process_after_load(self, getter: Callable, awq_getter: Callable | None):
         # pylint: disable=no-member
         # Packed W4 matrices cannot be concatenated in source-weight layout.
         # Keep the two MLP projections separate in a quantized layer.
@@ -210,12 +415,15 @@ class LlamaWeight(WeightBase):
         model_version: str = "llama",
         quantized_layer_count: int = 0,
         lm_head_key: str | None = None,
+        quantization_backend: str = "nf4_bitsandbytes",
     ):
         super().__init__()
 
         self.model_config = model_config
         self.dtype = dtype
         self.model_version = model_version
+        self.quantized_layer_count = quantized_layer_count
+        self.quantization_backend = quantization_backend
         self.lm_head_key = lm_head_key or (
             "model.embed_tokens.weight"
             if model_config.tie_word_embeddings
@@ -251,12 +459,45 @@ class LlamaWeight(WeightBase):
                 self.dtype,
                 self.model_version,
                 quantized=i < quantized_layer_count,
+                quantization_backend=quantization_backend,
             )
             self.layers.append(layer)
 
-    def _post_process_after_load(self, getter: callable):
+    def _post_process_after_load(self, getter: Callable, awq_getter: Callable | None):
         for layer in self.layers:
-            layer.load_weights(getter)
+            layer.load_weights(getter, awq_getter)
+
+    def quantized_representation_bytes(self) -> int:
+        total = 0
+        for layer in self.layers:
+            if not layer.quantized:
+                continue
+            matrix_names = (
+                ("q_proj", "k_proj", "v_proj", "o_proj", "up_gate_proj", "down_proj")
+                if layer.quantization_backend == "awq_marlin"
+                else ("q_proj", "k_proj", "v_proj", "o_proj", "up_proj", "gate_proj", "down_proj")
+            )
+            total += sum(
+                quantized_matrix_bytes(getattr(layer, name)) for name in matrix_names
+            )
+        return total
+
+
+def quantized_matrix_bytes(matrix: QuantizedMatrix | AWQMarlinMatrix) -> int:
+    if isinstance(matrix, AWQMarlinMatrix):
+        tensors = (
+            matrix.qweight,
+            matrix.scales,
+            matrix.qzeros,
+            matrix.workspace,
+            matrix.g_idx,
+            matrix.g_idx_sort_indices,
+        )
+        return sum(tensor.numel() * tensor.element_size() for tensor in tensors)
+    tensors = [matrix.matmul_data, matrix.gemv_data]
+    for state in (matrix.matmul_quant_state, matrix.gemv_quant_state):
+        tensors.extend(value for value in vars(state).values() if isinstance(value, torch.Tensor))
+    return sum(tensor.numel() * tensor.element_size() for tensor in tensors)
 
 
 def _checkpoint_weight_keys(model_path: str) -> set[str] | None:
@@ -319,6 +560,84 @@ def resolve_lm_head_key(
     )
 
 
+def _make_weight_getter(model_path: str):
+    safetensor_files = [
+        name for name in os.listdir(model_path) if name.endswith(".safetensors")
+    ]
+    if safetensor_files:
+        index_path = os.path.join(model_path, "model.safetensors.index.json")
+        if os.path.exists(index_path):
+            with open(index_path, "r", encoding="utf-8") as handle:
+                index = json.load(handle)["weight_map"]
+            single_filename = None
+        else:
+            if len(safetensor_files) != 1:
+                raise ValueError(
+                    "model.safetensors.index.json is required for sharded checkpoints"
+                )
+            index = None
+            single_filename = safetensor_files[0]
+
+        def safetensor_getter(item: RegisteredWeightItem):
+            if index is not None:
+                if item.key not in index:
+                    raise KeyError(f"Missing checkpoint key: {item.key}")
+                filename = index[item.key]
+            else:
+                filename = single_filename
+            with safetensors.safe_open(
+                os.path.join(model_path, filename), framework="pt", device="cuda"
+            ) as handle:
+                if item.key not in handle.keys():
+                    raise KeyError(f"Missing checkpoint key: {item.key}")
+                tensor = handle.get_tensor(item.key)
+            return tensor.to(item.dtype)
+
+        return safetensor_getter
+
+    index_path = os.path.join(model_path, "pytorch_model.bin.index.json")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as handle:
+            index = json.load(handle)["weight_map"]
+        single_filename = None
+    else:
+        index = None
+        single_filename = "pytorch_model.bin"
+    opened_files = {}
+
+    def pytorch_getter(item: RegisteredWeightItem):
+        if index is not None:
+            if item.key not in index:
+                raise KeyError(f"Missing checkpoint key: {item.key}")
+            filename = index[item.key]
+        else:
+            filename = single_filename
+        path = os.path.join(model_path, filename)
+        if path not in opened_files:
+            opened_files[path] = torch.load(path, map_location="cuda", mmap=True)
+        if item.key not in opened_files[path]:
+            raise KeyError(f"Missing checkpoint key: {item.key}")
+        return opened_files[path][item.key].to(item.dtype)
+
+    return pytorch_getter
+
+
+def _validate_awq_checkpoint(model_path: str) -> None:
+    config_path = os.path.join(model_path, "config.json")
+    with open(config_path, "r", encoding="utf-8") as handle:
+        quantization = json.load(handle).get("quantization_config", {})
+    observed = (
+        quantization.get("quant_method"),
+        quantization.get("bits"),
+        quantization.get("group_size"),
+        quantization.get("zero_point"),
+        str(quantization.get("version", "")).lower(),
+    )
+    expected = ("awq", 4, 128, True, "gemm")
+    if observed != expected:
+        raise ValueError(f"AWQ checkpoint config must be {expected}, got {observed}")
+
+
 def load_weights(
     model_config: LlamaModelConfig,
     dtype: torch.dtype,
@@ -326,6 +645,8 @@ def load_weights(
     use_dummy: bool = False,
     model_version: str = "auto",
     quantized_layer_count: int = 0,
+    quantization_backend: str = "nf4_bitsandbytes",
+    quantized_model_path: str | None = None,
 ) -> LlamaWeight:
     """
     Load weights from a given path
@@ -338,74 +659,25 @@ def load_weights(
     if model_version == "auto":
         model_version = "llama"
 
+    if quantization_backend not in ("nf4_bitsandbytes", "awq_marlin"):
+        raise ValueError(f"unsupported quantization backend: {quantization_backend}")
+    if use_dummy and quantized_layer_count and quantization_backend == "awq_marlin":
+        raise ValueError("dummy AWQ weights are unsupported; use the offline checkpoint")
+
     if use_dummy:
-        def weight_getter_dummy(item: RegisteredWeightItem):
-            return torch.empty(item.shape, dtype=item.dtype, device="cuda").uniform_(-0.001, 0.001)
-        getter = weight_getter_dummy
+        def getter(item: RegisteredWeightItem):
+            return torch.empty(item.shape, dtype=item.dtype, device="cuda").uniform_(
+                -0.001, 0.001
+            )
     else:
-        safetensor_files = [name for name in os.listdir(model_path) if name.endswith(".safetensors")]
-        if len(safetensor_files) > 0:
-            # Use Safetensors
-            safetensor_index_path = os.path.join(model_path, "model.safetensors.index.json")
-            if os.path.exists(safetensor_index_path):
-                # The weight is stored in multiple files
-                f = open(safetensor_index_path, "r", encoding="utf-8")
-                safetensor_index = json.load(f)["weight_map"]
-                safetensor_filename = None
-            else:
-                # The weight is stored in a single file
-                assert len(safetensor_files) == 1, "model.safetensors.index.json not found, but there are multiple .safetensors files"
-                safetensor_index = None
-                safetensor_filename = safetensor_files[0]
+        getter = _make_weight_getter(model_path)
 
-            def weight_getter_real(item: RegisteredWeightItem):
-                if safetensor_index is not None:
-                    if item.key not in safetensor_index:
-                        raise KeyError(f"Missing checkpoint key: {item.key}")
-                    file_name = safetensor_index[item.key]
-                else:
-                    file_name = safetensor_filename
-                file_path = os.path.join(model_path, file_name)
-                # For safetensor files, since "opening" it is cheap, we open it every time.
-                with safetensors.safe_open(file_path, framework="pt", device="cuda") as f:
-                    if item.key not in f.keys():
-                        raise KeyError(f"Missing checkpoint key: {item.key}")
-                    tensor = f.get_tensor(item.key)
-                return tensor.to(item.dtype)
-            getter = weight_getter_real
-
-        else:
-            # Use PyTorch
-            pytorch_index_path = os.path.join(model_path, "pytorch_model.bin.index.json")
-            if os.path.exists(pytorch_index_path):
-                # The weight is stored in multiple files
-                f = open(pytorch_index_path, "r", encoding="utf-8")
-                pytorch_index = json.load(f)["weight_map"]
-                pytorch_filename = None
-            else:
-                # The weight is stored in a single file
-                pytorch_index = None
-                pytorch_filename = "pytorch_model.bin"
-            
-            # For PyTorch files, since "opening" it is slow (due to deserialization),
-            # we open it only once and then store the opened files in a dictionary.
-            # We add `mmap=True` to avoid loading the entire file into memory.
-            opened_files = {}
-            def weight_getter_real(item: RegisteredWeightItem):
-                if pytorch_index is not None:
-                    if item.key not in pytorch_index:
-                        raise KeyError(f"Missing checkpoint key: {item.key}")
-                    file_name = pytorch_index[item.key]
-                else:
-                    file_name = pytorch_filename
-                file_path = os.path.join(model_path, file_name)
-                if file_path not in opened_files:
-                    opened_files[file_path] = torch.load(file_path, map_location="cuda", mmap=True)
-                file = opened_files[file_path]
-                if item.key not in file:
-                    raise KeyError(f"Missing checkpoint key: {item.key}")
-                return file[item.key].to(item.dtype)
-            getter = weight_getter_real
+    awq_getter = None
+    if quantized_layer_count and quantization_backend == "awq_marlin":
+        if quantized_model_path is None:
+            raise ValueError("AWQ-Marlin requires quantized_model_path")
+        _validate_awq_checkpoint(quantized_model_path)
+        awq_getter = _make_weight_getter(quantized_model_path)
 
     weight = LlamaWeight(
         model_config,
@@ -413,6 +685,7 @@ def load_weights(
         model_version,
         quantized_layer_count=quantized_layer_count,
         lm_head_key=lm_head_key,
+        quantization_backend=quantization_backend,
     )
-    weight.load_weights(getter)
+    weight.load_weights(getter, awq_getter)
     return weight

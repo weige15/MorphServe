@@ -22,6 +22,8 @@ def run(
     max_new_tokens: int,
     max_batch_size: int,
     max_tokens_in_batch: int,
+    quantization_backend: str = "nf4_bitsandbytes",
+    quantized_model_path: Path | None = None,
 ) -> dict:
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     prompt_ids = tokenizer(prompt, return_attention_mask=False)["input_ids"]
@@ -36,6 +38,8 @@ def run(
         max_batch_size=max_batch_size,
         max_tokens_in_batch=max_tokens_in_batch,
         quantized_layer_count=quantized_layer_count,
+        quantization_backend=quantization_backend,
+        quantized_model_path=(str(quantized_model_path) if quantized_model_path else None),
     )
     torch.cuda.empty_cache()
     torch.cuda.reset_peak_memory_stats()
@@ -69,6 +73,27 @@ def run(
             )[0]
             generated.append(int(torch.argmax(logits).item()))
     decoded = tokenizer.decode(generated, skip_special_tokens=True)
+    quantized_representation_bytes = model.weight.quantized_representation_bytes()
+    layer_layout = [
+        {
+            "layer": index,
+            "selected": layer.quantized,
+            "q_proj_type": type(layer.q_proj).__name__,
+            "q_proj_source_keys": list(getattr(layer.q_proj, "source_keys", ())),
+            "mlp_projection_type": type(
+                layer.up_gate_proj if hasattr(layer, "up_gate_proj") else layer.up_proj
+            ).__name__,
+            "mlp_source_keys": list(
+                getattr(getattr(layer, "up_gate_proj", None), "source_keys", ())
+            ),
+            "norm_source": (
+                "awq_checkpoint"
+                if layer.quantized and quantization_backend == "awq_marlin"
+                else "base_checkpoint"
+            ),
+        }
+        for index, layer in enumerate(model.weight.layers)
+    ]
     model.free_seqs_resources([0])
     del model
     gc.collect()
@@ -76,7 +101,11 @@ def run(
     return {
         "schema_version": 1,
         "quantized_layer_count": quantized_layer_count,
-        "quantization": "fp16" if quantized_layer_count == 0 else "nf4_bitsandbytes_w4",
+        "quantization": "fp16" if quantized_layer_count == 0 else quantization_backend,
+        "quantization_backend": quantization_backend,
+        "quantized_model_path": str(quantized_model_path) if quantized_model_path else None,
+        "quantized_representation_bytes": quantized_representation_bytes,
+        "layer_layout": layer_layout,
         "gpu": torch.cuda.get_device_name(),
         "engine_config": {
             "max_batch_size": max_batch_size,
@@ -106,6 +135,12 @@ def main() -> None:
     parser.add_argument("--max-new-tokens", type=int, default=8)
     parser.add_argument("--max-batch-size", type=int, default=32)
     parser.add_argument("--max-tokens-in-batch", type=int, default=49152)
+    parser.add_argument(
+        "--quantization-backend",
+        choices=("nf4_bitsandbytes", "awq_marlin"),
+        default="nf4_bitsandbytes",
+    )
+    parser.add_argument("--quantized-model-path", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = run(
@@ -115,6 +150,8 @@ def main() -> None:
         args.max_new_tokens,
         args.max_batch_size,
         args.max_tokens_in_batch,
+        args.quantization_backend,
+        args.quantized_model_path,
     )
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2, sort_keys=True))

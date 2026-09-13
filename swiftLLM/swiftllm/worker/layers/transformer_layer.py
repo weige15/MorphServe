@@ -1,5 +1,8 @@
 import torch
-import vllm_flash_attn
+try:
+    import vllm_flash_attn
+except ImportError:  # vLLM 0.11.2 bundles a torch-2.9-compatible FA2 build
+    from vllm import vllm_flash_attn
 
 from swiftllm.model_config import LlamaModelConfig
 from swiftllm.engine_config import EngineConfig
@@ -87,10 +90,10 @@ class LlamaTransformerLayer:
                 q[:infer_state.num_prefill_tokens, :, :],
                 k[:infer_state.num_prefill_tokens, :, :],
                 v[:infer_state.num_prefill_tokens, :, :],
-                infer_state.prefill_seq_start_locs_with_end,
-                infer_state.prefill_seq_start_locs_with_end,
-                infer_state.max_prefill_len,
-                infer_state.max_prefill_len,
+                cu_seqlens_q=infer_state.prefill_seq_start_locs_with_end,
+                cu_seqlens_k=infer_state.prefill_seq_start_locs_with_end,
+                max_seqlen_q=infer_state.max_prefill_len,
+                max_seqlen_k=infer_state.max_prefill_len,
                 softmax_scale=infer_state.softmax_scale,
                 causal=True
             ).reshape(-1, self.model_config.hidden_size)
@@ -122,10 +125,9 @@ class LlamaTransformerLayer:
         k = None
         v = None
 
-        # FFN.  FP16 layers retain the upstream fused up+gate projection;
-        # quantized layers keep packed matrices separate and concatenate their
-        # outputs in the same [up, gate] layout before the fused SiLU product.
-        if self.weight.quantized:
+        # FP16 and AWQ-Marlin preserve one fused [up, gate] projection. The
+        # legacy NF4 backend keeps its two incompatible packed layouts separate.
+        if self.weight.quantized and self.weight.quantization_backend == "nf4_bitsandbytes":
             up_gate_proj = torch.cat((
                 linear(o, self.weight.up_proj),
                 linear(o, self.weight.gate_proj),

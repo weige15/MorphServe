@@ -36,6 +36,8 @@ def run(
     quantized_layer_count: int,
     prompt_token_count: int,
     repeats: int,
+    quantization_backend: str = "nf4_bitsandbytes",
+    quantized_model_path: Path | None = None,
 ) -> dict:
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     base_ids = tokenizer(
@@ -54,6 +56,8 @@ def run(
         max_batch_size=1,
         max_tokens_in_batch=prompt_token_count,
         quantized_layer_count=quantized_layer_count,
+        quantization_backend=quantization_backend,
+        quantized_model_path=(str(quantized_model_path) if quantized_model_path else None),
     )
     torch.cuda.empty_cache()
     model = LlamaModel(config)
@@ -88,7 +92,10 @@ def run(
         "schema_version": 1,
         "gpu": torch.cuda.get_device_name(),
         "quantized_layer_count": quantized_layer_count,
-        "quantization": "fp16" if quantized_layer_count == 0 else "nf4_bitsandbytes_w4",
+        "quantization": "fp16" if quantized_layer_count == 0 else quantization_backend,
+        "quantization_backend": quantization_backend,
+        "quantized_model_path": str(quantized_model_path) if quantized_model_path else None,
+        "quantized_representation_bytes": model.weight.quantized_representation_bytes(),
         "prompt_token_count": prompt_token_count,
         "repeats": repeats,
         "num_gpu_blocks": num_gpu_blocks,
@@ -111,9 +118,22 @@ def main() -> None:
     parser.add_argument("--quantized-layer-count", type=int, choices=(0, 8, 16, 32), required=True)
     parser.add_argument("--prompt-token-count", type=int, default=1024)
     parser.add_argument("--repeats", type=int, default=5)
+    parser.add_argument(
+        "--quantization-backend",
+        choices=("nf4_bitsandbytes", "awq_marlin"),
+        default="nf4_bitsandbytes",
+    )
+    parser.add_argument("--quantized-model-path", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    result = run(args.model_path, args.quantized_layer_count, args.prompt_token_count, args.repeats)
+    result = run(
+        args.model_path,
+        args.quantized_layer_count,
+        args.prompt_token_count,
+        args.repeats,
+        args.quantization_backend,
+        args.quantized_model_path,
+    )
     args.output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2, sort_keys=True))
 

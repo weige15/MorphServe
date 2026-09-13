@@ -1,0 +1,99 @@
+{
+  "base_checkpoint": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "base_config_sha256": "54acfad3cffe057640904ca8a1e83525e6551c70c7a04c641f5a9eda0bbf64bd",
+  "base_weight_index_sha256": "146776fce3f6db1103aa6f249e65ee5544c5923ce6f971b092eee79aa6e5d37b",
+  "calibration": {
+    "accepted_samples": 128,
+    "apply_clip": true,
+    "concatenated_tokens": 30511,
+    "dataset": "mit-han-lab/pile-val-backup",
+    "duo_scaling": true,
+    "full_512_token_blocks": 59,
+    "max_chunk_memory_bytes": 536870912,
+    "max_sequence_length": 512,
+    "n_parallel_calib_samples": 1,
+    "revision": "2f5e46ae6a69cf0dce4b12f78241c408936ca0e4",
+    "selected_jsonl": "benchmark-results/packed-int4-backend-v6/phase-b/calibration-selected.jsonl",
+    "selected_jsonl_sha256": "6962d72578e344f9a2e6b84a923702f04e19d0741a03727a77f6f5bce6eaed77",
+    "shuffle_seed": 42,
+    "split": "validation"
+  },
+  "device": {
+    "compute_capability": [
+      8,
+      6
+    ],
+    "cuda_visible_devices": "5",
+    "name": "NVIDIA GeForce RTX 3090"
+  },
+  "elapsed_seconds": null,
+  "emitted_quantization_config": {
+    "bits": 4,
+    "group_size": 128,
+    "modules_to_not_convert": null,
+    "quant_method": "awq",
+    "version": "gemm",
+    "zero_point": true
+  },
+  "files": [
+    {
+      "bytes": 1019,
+      "name": "config.json",
+      "sha256": "f43d421c9be84ac8d666ca5db2144ae4286c26069501040690141e8236d61910"
+    },
+    {
+      "bytes": 180,
+      "name": "generation_config.json",
+      "sha256": "ff430424d2a41cb066ce82b53358d55f1d142995223fb23e3f634736f2f1aa8b"
+    },
+    {
+      "bytes": 3997272472,
+      "name": "model-00001-of-00002.safetensors",
+      "sha256": "ff2c33ee642bfbc846f830a606a62ee837eec248c58d10bce1631ff4d32220e4"
+    },
+    {
+      "bytes": 1730665920,
+      "name": "model-00002-of-00002.safetensors",
+      "sha256": "68a024d7310d2d9fa14eb1ad0941b3c179adddf0cb7f006681ce9cf62d5a5d65"
+    },
+    {
+      "bytes": 60512,
+      "name": "model.safetensors.index.json",
+      "sha256": "3f15d6929b622d055c487feaefb17767dd1a36ded8a46aa63a751b331e5f0684"
+    },
+    {
+      "bytes": 301,
+      "name": "special_tokens_map.json",
+      "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535"
+    },
+    {
+      "bytes": 17209920,
+      "name": "tokenizer.json",
+      "sha256": "6b9e4e7fb171f92fd137b777cc2714bf87d11576700a1dcd7a399e7bbe39537b"
+    },
+    {
+      "bytes": 50526,
+      "name": "tokenizer_config.json",
+      "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793"
+    }
+  ],
+  "manifest_finalized_from_existing_export": true,
+  "output_checkpoint": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+  "protocol_manifest": "benchmark-results/packed-int4-backend-v6/protocol_manifest.json",
+  "quantization": {
+    "q_group_size": 128,
+    "version": "GEMM",
+    "w_bit": 4,
+    "zero_point": true
+  },
+  "schema_version": 1,
+  "software": {
+    "autoawq": "0.2.9",
+    "cuda_runtime": "12.8",
+    "datasets": "3.2.0",
+    "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+    "torch": "2.9.0+cu128",
+    "transformers": "4.51.3"
+  },
+  "total_checkpoint_bytes": 5745260850
+}
