@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "artifact_version": "packed_int4_backend_v6",
+  "manifest_status": "recorded_before_v6_gpu_kernel_measurements",
+  "created_at_utc": "2026-09-13T10:06:51Z",
+  "repository": {
+    "git_commit_before_protocol": "3efe426607f62046c693bf8dedcc682d1b74d76a",
+    "validated_v5_namespace": "benchmark-results/static-frontier-v5",
+    "preserve_namespaces": [
+      "benchmark-results/static-quantization-quality-latency",
+      "benchmark-results/table5-substrate-v4",
+      "benchmark-results/static-frontier-v5"
+    ]
+  },
+  "scope": {
+    "objective": "find whether a packed low-workspace INT4 backend creates at least one real SwiftLLM pressure-relief state under the frozen v5 methodology",
+    "excluded": [
+      "runtime controller",
+      "dynamic adaptation",
+      "runtime layer swapping",
+      "KVResizer",
+      "scheduler changes",
+      "attention changes",
+      "FP16 execution changes",
+      "open-ended custom kernel development",
+      "making the rejected NF4 backend look favorable"
+    ]
+  },
+  "model": {
+    "checkpoint": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "snapshot": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "config_sha256": "54acfad3cffe057640904ca8a1e83525e6551c70c7a04c641f5a9eda0bbf64bd",
+    "tokenizer_json_sha256": "76e48799b099d43365bd24ccd8ecc5aedac831718da780552f03b0a6eb4412aa",
+    "weight_index_sha256": "146776fce3f6db1103aa6f249e65ee5544c5923ce6f971b092eee79aa6e5d37b",
+    "hidden_size": 4096,
+    "intermediate_size": 14336,
+    "num_layers": 32,
+    "num_attention_heads": 32,
+    "num_key_value_heads": 8,
+    "fp16_parity_evidence": "benchmark-results/table5-substrate-v4/substrate-evidence/fp16-hf-parity.json"
+  },
+  "candidate": {
+    "name": "awq_marlin",
+    "paper_parameter_status": "proxy because MorphServe does not disclose AWQ group size, zero-point convention, calibration corpus, sample count, or packing details",
+    "exporter": "public AutoAWQ 0.2.9",
+    "checkpoint_dialect": "AutoAWQ GEMM",
+    "weight_bits": 4,
+    "group_size": 128,
+    "zero_point": true,
+    "scale_dtype": "float16",
+    "activation_dtype": "float16",
+    "duo_scaling": true,
+    "apply_clip": true,
+    "calibration_dataset": "mit-han-lab/pile-val-backup validation",
+    "calibration_shuffle_seed": 42,
+    "max_calibration_samples": 128,
+    "max_calibration_sequence_length": 512,
+    "serving_kernel": "installed vLLM 0.11.2 AWQ-Marlin",
+    "offline_quantization_once": true,
+    "one_serving_representation_per_matrix": true,
+    "unquantized_components": ["embeddings", "norms", "lm_head"],
+    "fallback_policy": "at most installed vLLM AWQ-Triton with identical AutoAWQ layout/config; ordinary AWQ full dequantization is excluded"
+  },
+  "hardware": {
+    "gpu_model": "NVIDIA GeForce RTX 3090",
+    "compute_capability": "8.6",
+    "physical_memory_mib": 24576,
+    "planned_physical_gpu": 5,
+    "tensor_parallel_size": 1,
+    "fresh_process_per_integrated_run": true
+  },
+  "phase_a": {
+    "shapes_out_in": {
+      "q_or_o": [4096, 4096],
+      "k_or_v": [1024, 4096],
+      "up_or_gate": [14336, 4096],
+      "down": [4096, 14336],
+      "fused_up_gate_feasibility": [28672, 4096]
+    },
+    "activation_rows": [1, 16, 128, 1024],
+    "warmup": 10,
+    "timed_samples": 20,
+    "comparators": ["torch FP16", "bitsandbytes NF4 v5 backend"],
+    "numerical_gate": {
+      "finite": true,
+      "max_relative_l2_error": 0.2,
+      "min_cosine_similarity": 0.98
+    },
+    "representation_gate": {
+      "max_packed_fraction_of_fp16": 0.35,
+      "max_unexplained_hot_path_temporary_bytes": 67108864,
+      "full_fp16_hot_path_materialization": false
+    }
+  },
+  "static_conditions": [
+    {"condition": "fp16_0", "quantized_layer_count": 0},
+    {"condition": "awq_w4_8", "quantized_layer_count": 8},
+    {"condition": "awq_w4_16", "quantized_layer_count": 16},
+    {"condition": "awq_w4_32", "quantized_layer_count": 32}
+  ],
+  "layer_order": "front-to-back decoder layers [0,N)",
+  "phase_c": {
+    "engine_profile": {
+      "block_size": 16,
+      "gpu_mem_utilization": 0.99,
+      "num_cpu_blocks": 4096,
+      "max_seqs_in_block_table": 128,
+      "max_blocks_per_seq": 3072,
+      "max_batch_size": 32,
+      "max_tokens_in_batch": 49152,
+      "scheduler": "unchanged SwiftLLM"
+    },
+    "profile_repeats": 2,
+    "microbenchmark_prompt_tokens": 1024,
+    "microbenchmark_min_samples": 7,
+    "resource_relief_minimum": "more than 5% additional safe GPU KV blocks versus matched FP16"
+  },
+  "phase_d": {
+    "frozen_workloads": {
+      "near_knee": "benchmark-results/static-frontier-v5/input/latency-scale-6.jsonl",
+      "low_neighbor": "benchmark-results/static-frontier-v5/input/latency-scale-8.jsonl",
+      "high_neighbor": "benchmark-results/static-frontier-v5/input/latency-scale-4.jsonl"
+    },
+    "near_knee_request_count": 64,
+    "near_knee_repeats_per_state": 2,
+    "quality_workload": "benchmark-results/static-frontier-v5/input/quality-106.jsonl",
+    "quality_only_after_eligibility": true,
+    "quality_bootstrap_resamples": 10000,
+    "seed": 2025,
+    "eligibility": "repeatable real resource relief plus better P95 TTFT and/or SLO in both matched near-knee repeats, advantage beyond observed noise, aligned queue/KV/preemption telemetry, and no hidden full-weight dequantization/workspace"
+  },
+  "decision_values": ["GO", "NO-GO"]
+}
