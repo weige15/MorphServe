@@ -1,0 +1,427 @@
+{
+  "allocated_bytes_after_profile": 13521321984,
+  "decoded": " Berlin. The capital of Italy is Rome",
+  "engine_config": {
+    "block_size": 16,
+    "max_batch_size": 32,
+    "max_tokens_in_batch": 49152
+  },
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "gpu_kv_token_slots": 48544,
+  "layer_layout": [
+    {
+      "layer": 0,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.0.mlp.up_proj.qweight",
+        "model.layers.0.mlp.up_proj.qzeros",
+        "model.layers.0.mlp.up_proj.scales",
+        "model.layers.0.mlp.gate_proj.qweight",
+        "model.layers.0.mlp.gate_proj.qzeros",
+        "model.layers.0.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.0.self_attn.q_proj.qweight",
+        "model.layers.0.self_attn.q_proj.scales",
+        "model.layers.0.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 1,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.1.mlp.up_proj.qweight",
+        "model.layers.1.mlp.up_proj.qzeros",
+        "model.layers.1.mlp.up_proj.scales",
+        "model.layers.1.mlp.gate_proj.qweight",
+        "model.layers.1.mlp.gate_proj.qzeros",
+        "model.layers.1.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.1.self_attn.q_proj.qweight",
+        "model.layers.1.self_attn.q_proj.scales",
+        "model.layers.1.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 2,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.2.mlp.up_proj.qweight",
+        "model.layers.2.mlp.up_proj.qzeros",
+        "model.layers.2.mlp.up_proj.scales",
+        "model.layers.2.mlp.gate_proj.qweight",
+        "model.layers.2.mlp.gate_proj.qzeros",
+        "model.layers.2.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.2.self_attn.q_proj.qweight",
+        "model.layers.2.self_attn.q_proj.scales",
+        "model.layers.2.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 3,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.3.mlp.up_proj.qweight",
+        "model.layers.3.mlp.up_proj.qzeros",
+        "model.layers.3.mlp.up_proj.scales",
+        "model.layers.3.mlp.gate_proj.qweight",
+        "model.layers.3.mlp.gate_proj.qzeros",
+        "model.layers.3.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.3.self_attn.q_proj.qweight",
+        "model.layers.3.self_attn.q_proj.scales",
+        "model.layers.3.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 4,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.4.mlp.up_proj.qweight",
+        "model.layers.4.mlp.up_proj.qzeros",
+        "model.layers.4.mlp.up_proj.scales",
+        "model.layers.4.mlp.gate_proj.qweight",
+        "model.layers.4.mlp.gate_proj.qzeros",
+        "model.layers.4.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.4.self_attn.q_proj.qweight",
+        "model.layers.4.self_attn.q_proj.scales",
+        "model.layers.4.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 5,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.5.mlp.up_proj.qweight",
+        "model.layers.5.mlp.up_proj.qzeros",
+        "model.layers.5.mlp.up_proj.scales",
+        "model.layers.5.mlp.gate_proj.qweight",
+        "model.layers.5.mlp.gate_proj.qzeros",
+        "model.layers.5.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.5.self_attn.q_proj.qweight",
+        "model.layers.5.self_attn.q_proj.scales",
+        "model.layers.5.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 6,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.6.mlp.up_proj.qweight",
+        "model.layers.6.mlp.up_proj.qzeros",
+        "model.layers.6.mlp.up_proj.scales",
+        "model.layers.6.mlp.gate_proj.qweight",
+        "model.layers.6.mlp.gate_proj.qzeros",
+        "model.layers.6.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.6.self_attn.q_proj.qweight",
+        "model.layers.6.self_attn.q_proj.scales",
+        "model.layers.6.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 7,
+      "mlp_projection_type": "AWQMarlinMatrix",
+      "mlp_source_keys": [
+        "model.layers.7.mlp.up_proj.qweight",
+        "model.layers.7.mlp.up_proj.qzeros",
+        "model.layers.7.mlp.up_proj.scales",
+        "model.layers.7.mlp.gate_proj.qweight",
+        "model.layers.7.mlp.gate_proj.qzeros",
+        "model.layers.7.mlp.gate_proj.scales"
+      ],
+      "norm_source": "awq_checkpoint",
+      "q_proj_source_keys": [
+        "model.layers.7.self_attn.q_proj.qweight",
+        "model.layers.7.self_attn.q_proj.scales",
+        "model.layers.7.self_attn.q_proj.qzeros"
+      ],
+      "q_proj_type": "AWQMarlinMatrix",
+      "selected": true
+    },
+    {
+      "layer": 8,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 9,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 10,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 11,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 12,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 13,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 14,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 15,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 16,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 17,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 18,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 19,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 20,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 21,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 22,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 23,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 24,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 25,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 26,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 27,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 28,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 29,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 30,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    },
+    {
+      "layer": 31,
+      "mlp_projection_type": "Tensor",
+      "mlp_source_keys": [],
+      "norm_source": "base_checkpoint",
+      "q_proj_source_keys": [],
+      "q_proj_type": "Tensor",
+      "selected": false
+    }
+  ],
+  "load_ms": 7998.214557999745,
+  "num_gpu_blocks": 3034,
+  "output_token_ids": [
+    20437,
+    13,
+    578,
+    6864,
+    315,
+    15704,
+    374,
+    22463
+  ],
+  "profile_ms": 12888.46679701237,
+  "profile_peak_allocated_bytes": 17963485696,
+  "prompt": "The capital of France is Paris. The capital of Germany is",
+  "prompt_token_ids": [
+    128000,
+    791,
+    6864,
+    315,
+    9822,
+    374,
+    12366,
+    13,
+    578,
+    6864,
+    315,
+    10057,
+    374
+  ],
+  "quantization": "awq_marlin",
+  "quantization_backend": "awq_marlin",
+  "quantized_layer_count": 8,
+  "quantized_model_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+  "quantized_representation_bytes": 906509696,
+  "resident_reserved_bytes_after_load": 13920894976,
+  "resident_weight_bytes_after_load": 13512802304,
+  "schema_version": 1
+}
