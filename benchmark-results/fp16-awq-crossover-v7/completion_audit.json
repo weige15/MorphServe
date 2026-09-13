@@ -1,0 +1,170 @@
+{
+  "check_count": 28,
+  "checks": [
+    {
+      "detail": null,
+      "name": "protocol status is pre-registered",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "protocol commit exists",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "protocol commit precedes first result commit",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "all prior v2/v4/v5/v6 namespaces unchanged",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "scheduler unchanged",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "KV/model/backend execution code unchanged",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "nine predeclared loads",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "36 unique predeclared runs",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "two states only",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "two repeats per state/load",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "run-plan hash frozen in manifest",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "workload metadata hash frozen in manifest",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "common request-content hash",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "scale endpoints byte-identical to v5",
+      "passed": true
+    },
+    {
+      "detail": [],
+      "name": "all 36 raw runs protocol-valid",
+      "passed": true
+    },
+    {
+      "detail": 2304,
+      "name": "2304 complete requests",
+      "passed": true
+    },
+    {
+      "detail": {
+        "forward": 83041,
+        "prefill": 421
+      },
+      "name": "batch observation coverage",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "pre-registered multi-M microbenchmarks",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "bounded matched M2048 supplement",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "one fully reported row per serving run",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "all analysis rows protocol-valid",
+      "passed": true
+    },
+    {
+      "detail": {
+        "4.0": "AWQ-preferred",
+        "4.25": "AWQ-preferred",
+        "4.5": "AWQ-preferred",
+        "4.75": "ambiguous",
+        "5.0": "AWQ-preferred",
+        "5.25": "ambiguous",
+        "5.5": "FP16-default/non-inferior",
+        "5.75": "FP16-default/non-inferior",
+        "6.0": "FP16-default/non-inferior"
+      },
+      "name": "predeclared point classification reproduced",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "decision is GO for exact state pair",
+      "passed": true
+    },
+    {
+      "detail": {
+        "all_36_runs_protocol_valid": true,
+        "at_least_one_online_signal_qualifies": true,
+        "no_awq_win_below_last_fp16_default": true,
+        "no_fp16_reversal_after_first_awq_win": true,
+        "scale_4_awq_preferred": true,
+        "scale_4p25_awq_preferred": true,
+        "scale_6_fp16_default": true
+      },
+      "name": "all frozen decision gates pass",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "two qualifying causal signals",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "no controller implemented",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "required human reports exist",
+      "passed": true
+    },
+    {
+      "detail": null,
+      "name": "required final sections",
+      "passed": true
+    }
+  ],
+  "decision": "GO",
+  "failure_count": 0,
+  "schema_version": 1,
+  "status": "PASS"
+}

@@ -1,0 +1,4 @@
+candidate,awq_preferred_fp16_run_count,awq_preferred_fire_count,fp16_default_run_count,fp16_default_false_fire_count,fires_all_awq_preferred_runs,fires_no_fp16_default_runs,matched_awq_release_eligible_count,matched_awq_min_release_delay_s,matched_awq_max_release_delay_s,qualifies
+capacity_margin_queue_integral,8,8,6,0,True,True,8,27.560750538999997,51.46532380000001,True
+preemption_confirmed_pressure,8,8,6,4,True,False,8,28.563447017,49.456363599,False
+sustained_compound_pressure,8,8,6,0,True,True,8,27.218858721000004,51.46532380000001,True

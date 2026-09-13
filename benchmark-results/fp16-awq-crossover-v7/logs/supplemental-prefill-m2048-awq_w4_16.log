@@ -1,0 +1,55 @@
+INFO 09-13 23:19:37 [marlin_utils.py:404] Marlin kernel can achieve better performance for small size_n with experimental use_atomic_add feature. You can consider set environment variable VLLM_MARLIN_USE_ATOMIC_ADD to 1 if possible.
+{
+  "condition": "awq_w4_16",
+  "expected_trace_burst_sequence_counts": [
+    1,
+    3,
+    4,
+    6,
+    7,
+    8,
+    9
+  ],
+  "gpu": "NVIDIA GeForce RTX 3090",
+  "measurement_scope": "compute-only model forward with ignore_kvcache=True; identical decoder path and multi-sequence 1024-token batches, excluding KV-capacity effects",
+  "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "pre_registered_sequence_counts": [
+    2
+  ],
+  "precision_state": "AWQ-Marlin W4-16",
+  "quantization_backend": "awq_marlin",
+  "quantized_layer_count": 16,
+  "quantized_model_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+  "resident_weight_bytes": 10932019200,
+  "results": [
+    {
+      "effective_gemm_m": 2048,
+      "max_ms": 510.533161,
+      "mean_ms": 504.91693742857143,
+      "median_ms": 504.611227,
+      "min_ms": 499.072787,
+      "p95_ms": 509.8012483,
+      "peak_allocated_bytes": 11131038208,
+      "prompt_tokens_per_sequence": 1024,
+      "sample_count": 7,
+      "samples_ms": [
+        510.533161,
+        499.072787,
+        508.060184,
+        501.523487,
+        508.093452,
+        502.524264,
+        504.611227
+      ],
+      "sequence_count": 2,
+      "total_prefill_tokens": 2048,
+      "warmup_count": 2
+    }
+  ],
+  "schema_version": 1,
+  "serving_limits": {
+    "max_batch_size": 32,
+    "max_tokens_in_batch": 49152
+  },
+  "torch_version": "2.9.0+cu128"
+}

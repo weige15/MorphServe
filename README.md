@@ -1,10 +1,12 @@
 # MorphServe
 
-MorphServe is a research repository for measuring SwiftLLM serving behavior under load. Phase 1 reproduced a mixed GPU-KV-admission and compute transition without changing the scheduler. The latest packed-backend experiment replaced the rejected NF4 path with offline AWQ + vLLM Marlin. It achieved monotonic 71.6–282.7% safe-KV relief and non-regressive isolated decode, but remains **NO-GO** for dynamic adaptation because every W4 state had worse P95/SLO at the frozen near-knee workload.
+MorphServe is a research repository for measuring SwiftLLM serving behavior under load. Phase 1 reproduced a mixed GPU-KV-admission and compute transition without changing the scheduler. The latest pre-registered crossover experiment finds **GO for a future controller experiment** using the static pair `{FP16, AWQ-W4-16}`: FP16 is preferable below sustained pressure, while AWQ wins after queue/KV saturation. No runtime controller is implemented.
 
 ## Start here
 
-- [Phase 1 context card](docs/phase-1/README.md) — the only document normally needed for current work.
+- [FP16/AWQ crossover v7 final report](docs/fp16-awq-crossover-v7/final-report.md) — current nine-load, 36-run GO evidence and trigger candidates.
+- [Crossover v7 completion audit](docs/fp16-awq-crossover-v7/completion-audit.md) — prompt-to-artifact verification.
+- [Phase 1 context card](docs/phase-1/README.md) — original KV-admission context.
 - [Final Phase 1 report](docs/phase-1/kv-admission-sweep-report.md) — results and reproduction commands.
 - [Final audit](docs/phase-1/kv-admission-sweep-audit.md) — detailed verification evidence.
 - [Onboarding guide](doc/onboarding.md) — setup, workflow, tests, and troubleshooting.
@@ -36,14 +38,17 @@ Run the CPU-only checks from the repository root:
 ```bash
 VENV=/nfs/home/s314511048/.venv
 PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest \
-  benchmark.test_benchmark benchmark.test_inference_substrate -v
+  benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover -v
 ```
 
-Regenerate and audit the saved v6 evidence (the audit also verifies the external AWQ checkpoint hashes):
+Regenerate and audit the saved v7 crossover evidence:
 
 ```bash
-benchmark-results/packed-int4-backend-v6/regenerate.sh
+benchmark-results/fp16-awq-crossover-v7/regenerate.sh
 ```
+
+V6 remains independently reproducible with
+`benchmark-results/packed-int4-backend-v6/regenerate.sh`.
 
 ## Project structure
 
@@ -51,7 +56,8 @@ benchmark-results/packed-int4-backend-v6/regenerate.sh
 - `swiftLLM/benchmark/` — open-loop runner, analysis, metrics, and tests.
 - `benchmark-results/phase-1/` — Phase 1 raw runs and derived artifacts, grouped by experiment.
 - `docs/phase-1/` — curated current documentation; `archive/` contains superseded reports.
-- `docs/packed-int4-backend-v6/` and `benchmark-results/packed-int4-backend-v6/` — current AWQ-Marlin protocol, implementation evidence, profiles, serving results, reports, and audit.
+- `docs/fp16-awq-crossover-v7/` and `benchmark-results/fp16-awq-crossover-v7/` — current crossover protocol, multi-M diagnosis, 36 raw serving runs, analysis, report, and audit.
+- `docs/packed-int4-backend-v6/` and `benchmark-results/packed-int4-backend-v6/` — preserved AWQ-Marlin backend validation and prior static-gate NO-GO.
 - `docs/static-frontier-v5/` and `benchmark-results/static-frontier-v5/` — preserved NF4 static-frontier evidence.
 - `docs/static-quantization-quality-latency/` and `benchmark-results/static-quantization-quality-latency/` — preserved historical v2 benchmark.
 - `references/` — experimental reference material and source PDF.

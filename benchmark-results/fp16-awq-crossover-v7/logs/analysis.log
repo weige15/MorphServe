@@ -1,0 +1,43 @@
+{
+  "ambiguous_scales": [
+    5.25,
+    4.75
+  ],
+  "awq_preferred_scales": [
+    5.0,
+    4.5,
+    4.25,
+    4.0
+  ],
+  "controller_implemented": false,
+  "crossover_region": {
+    "awq_side_nominal_rps": 0.8,
+    "awq_side_scale": 5.0,
+    "fp16_side_nominal_rps": 0.7272727272727273,
+    "fp16_side_scale": 5.5
+  },
+  "decision": "GO",
+  "fp16_default_scales": [
+    6.0,
+    5.75,
+    5.5
+  ],
+  "gates": {
+    "all_36_runs_protocol_valid": true,
+    "at_least_one_online_signal_qualifies": true,
+    "no_awq_win_below_last_fp16_default": true,
+    "no_fp16_reversal_after_first_awq_win": true,
+    "scale_4_awq_preferred": true,
+    "scale_4p25_awq_preferred": true,
+    "scale_6_fp16_default": true
+  },
+  "qualifying_online_signals": [
+    "capacity_margin_queue_integral",
+    "sustained_compound_pressure"
+  ],
+  "schema_version": 1,
+  "validated_state_pair": [
+    "FP16",
+    "AWQ-W4-16"
+  ]
+}

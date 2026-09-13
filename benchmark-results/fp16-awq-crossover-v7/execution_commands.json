@@ -1,4 +1,6 @@
 {
+  "analysis": "PYTHONPATH=$PWD/swiftLLM /nfs/home/s314511048/.venv/bin/python -m benchmark.analyze_crossover --root benchmark-results/fp16-awq-crossover-v7 --output-dir benchmark-results/fp16-awq-crossover-v7/analysis",
+  "audit": "PYTHONPATH=$PWD/swiftLLM /nfs/home/s314511048/.venv/bin/python -m benchmark.audit_crossover --root benchmark-results/fp16-awq-crossover-v7 --output benchmark-results/fp16-awq-crossover-v7/completion_audit.json",
   "environment": {
     "AWQ": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
     "CUDA_VISIBLE_DEVICES": "5",
@@ -10,11 +12,12 @@
   "prefill_microbenchmark_awq": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -u -m benchmark.crossover_prefill_microbenchmark --model-path $MODEL --quantized-layer-count 16 --quantization-backend awq_marlin --quantized-model-path $AWQ --sequence-counts 1 3 4 6 7 8 9 16 24 32 --warmup 2 --repeats 7 --output benchmark-results/fp16-awq-crossover-v7/microbenchmark/prefill-awq_w4_16.json",
   "prefill_microbenchmark_fp16": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -u -m benchmark.crossover_prefill_microbenchmark --model-path $MODEL --quantized-layer-count 0 --sequence-counts 1 3 4 6 7 8 9 16 24 32 --warmup 2 --repeats 7 --output benchmark-results/fp16-awq-crossover-v7/microbenchmark/prefill-fp16_0.json",
   "prepare_workloads": "PYTHONPATH=$PWD/swiftLLM $ENV/bin/python -m benchmark.prepare_crossover_workloads --source-workload benchmark-results/static-quantization-quality-latency/input/workload.jsonl --reference-input-dir benchmark-results/static-frontier-v5/input --output-dir benchmark-results/fp16-awq-crossover-v7/input --scales 6 5.75 5.5 5.25 5 4.75 4.5 4.25 4",
+  "regenerate_saved_raw_artifacts": "benchmark-results/fp16-awq-crossover-v7/regenerate.sh",
   "schema_version": 1,
   "serving_matrix": "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM CUDA_VISIBLE_DEVICES=5 $ENV/bin/python -u -m benchmark.run_crossover_plan --plan benchmark-results/fp16-awq-crossover-v7/run-plan.json --manifest benchmark-results/fp16-awq-crossover-v7/protocol_manifest.json --model-path $MODEL --quantized-model-path $AWQ --output-dir benchmark-results/fp16-awq-crossover-v7/runs --log-dir benchmark-results/fp16-awq-crossover-v7/logs --status benchmark-results/fp16-awq-crossover-v7/execution_status.json --resume",
   "validation": [
-    "PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc /nfs/home/s314511048/.venv/bin/python -m unittest benchmark.test_benchmark benchmark.test_inference_substrate -v",
-    "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM $ENV/bin/python -m unittest benchmark.test_benchmark benchmark.test_inference_substrate -v",
+    "PYTHONPATH=$PWD/swiftLLM:$PWD/swiftLLM/csrc /nfs/home/s314511048/.venv/bin/python -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover -v",
+    "PYTHONPATH=$SWIFTLLM_EXTENSION:$PWD/swiftLLM $ENV/bin/python -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover -v",
     "$ENV/bin/python -m py_compile swiftLLM/benchmark/*.py swiftLLM/swiftllm/*.py swiftLLM/swiftllm/server/*.py swiftLLM/swiftllm/worker/*.py",
     "git diff --check"
   ]

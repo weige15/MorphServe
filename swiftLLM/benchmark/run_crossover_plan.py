@@ -121,6 +121,13 @@ def main() -> None:
         if run_dir.exists():
             if args.resume and valid_completed_run(run_dir):
                 print(f"skip completed {row['run_id']}", flush=True)
+                skipped = status.setdefault("preexisting_valid_runs", [])
+                if row["run_id"] not in skipped:
+                    skipped.append(row["run_id"])
+                    args.status.write_text(
+                        json.dumps(status, indent=2, sort_keys=True) + "\n",
+                        encoding="utf-8",
+                    )
                 continue
             raise FileExistsError(f"refusing to overwrite or silently replace {run_dir}")
         command = command_for(row, args)

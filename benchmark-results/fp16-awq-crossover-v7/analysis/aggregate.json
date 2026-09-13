@@ -1,0 +1,62 @@
+{
+  "all_runs_protocol_valid": true,
+  "decision": {
+    "ambiguous_scales": [
+      5.25,
+      4.75
+    ],
+    "awq_preferred_scales": [
+      5.0,
+      4.5,
+      4.25,
+      4.0
+    ],
+    "controller_implemented": false,
+    "crossover_region": {
+      "awq_side_nominal_rps": 0.8,
+      "awq_side_scale": 5.0,
+      "fp16_side_nominal_rps": 0.7272727272727273,
+      "fp16_side_scale": 5.5
+    },
+    "decision": "GO",
+    "fp16_default_scales": [
+      6.0,
+      5.75,
+      5.5
+    ],
+    "gates": {
+      "all_36_runs_protocol_valid": true,
+      "at_least_one_online_signal_qualifies": true,
+      "no_awq_win_below_last_fp16_default": true,
+      "no_fp16_reversal_after_first_awq_win": true,
+      "scale_4_awq_preferred": true,
+      "scale_4p25_awq_preferred": true,
+      "scale_6_fp16_default": true
+    },
+    "qualifying_online_signals": [
+      "capacity_margin_queue_integral",
+      "sustained_compound_pressure"
+    ],
+    "schema_version": 1,
+    "validated_state_pair": [
+      "FP16",
+      "AWQ-W4-16"
+    ]
+  },
+  "mechanism_load_row_count": 9,
+  "microbenchmark_point_count": 11,
+  "point_count": 9,
+  "protocol_manifest_sha256": "9fcc224785906e657d07f5fd66c00bf62c4deeffda316a6b0070f6210aca0c8b",
+  "root": "benchmark-results/fp16-awq-crossover-v7",
+  "run_count": 36,
+  "run_plan_sha256": "062edde1e0cb3c2673ff7d5a11ff0cf4089790157bb016aea496119f3bc0f56d",
+  "schema_version": 1,
+  "serving_prefill_m_row_count": 10,
+  "source_files": [
+    "metadata.json",
+    "requests.jsonl",
+    "telemetry.jsonl",
+    "batches.jsonl"
+  ],
+  "variability_row_count": 18
+}

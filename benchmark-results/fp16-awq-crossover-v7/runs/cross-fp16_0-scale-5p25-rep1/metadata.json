@@ -1,0 +1,135 @@
+{
+  "arrival_mode": "trace_open_loop",
+  "batch_observation_definition": {
+    "effective_gemm_m": "total prefill tokens plus one activation row per decoding sequence",
+    "prefill_execution_duration_ns": "wall duration of the model forward for prefill-containing batches; null for decode-only batches",
+    "pressure_snapshot": "captured immediately before Scheduler.get_next_batch without changing its inputs or decisions",
+    "safe_kv_blocks": "profile-derived num_gpu_blocks",
+    "scope": "every model forward after warmup during the measurement interval",
+    "timestamp_ns": "immediately before submitting the model forward",
+    "used_kv_blocks": "scheduler logical block count, before/after scheduling as named"
+  },
+  "completed_at_utc": "2026-09-13T16:12:50.762338+00:00",
+  "completed_request_count": 64,
+  "condition": "fp16_0",
+  "created_at_utc": "2026-09-13T16:10:21.007839+00:00",
+  "cuda_device_requested": "5",
+  "current_morphserve_git_commit": "83996c674809f840e8c62eadb584c9ad49ec1f5e",
+  "current_morphserve_git_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "current_morphserve_git_dirty": true,
+  "current_morphserve_git_status_porcelain": "?? benchmark-results/fp16-awq-crossover-v7/execution_status.json\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-4-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-4p25-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-4p25-rep1/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-4p5-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-4p75-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-5-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-5p25-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-5p5-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-5p75-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-awq_w4_16-scale-6-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-4-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-4p25-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-4p25-rep1/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-4p5-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-4p75-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-5-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-5p25-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-5p5-rep0/\n?? benchmark-results/fp16-awq-crossover-v7/runs/cross-fp16_0-scale-5p75-rep0/\n",
+  "engine_config_actual": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "quantization_backend": "nf4_bitsandbytes",
+    "quantized_layer_count": 0,
+    "quantized_model_path": null,
+    "use_dummy": false
+  },
+  "engine_config_requested": {
+    "block_size": 16,
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "model_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "num_cpu_blocks": 4096,
+    "quantization_backend": "nf4_bitsandbytes",
+    "quantized_layer_count": 0,
+    "quantized_model_path": null,
+    "use_dummy": false
+  },
+  "generated_output_token_count": 32768,
+  "generation": {
+    "decoding": "greedy_argmax",
+    "do_sample": false,
+    "eos_stopping": "not supported by unchanged SwiftLLM; exactly 512 output steps",
+    "temperature": null,
+    "top_p": null
+  },
+  "gpu": {
+    "cuda_visible_devices": "5",
+    "gpu_index_visible_to_process": 0,
+    "gpu_name": "NVIDIA GeForce RTX 3090"
+  },
+  "gpu_kv_token_slots": 28288,
+  "initial_engine_snapshot": {
+    "num_decoding_gpu_blocks": 0,
+    "num_gpu_blocks": 1768,
+    "running_q_count": 0,
+    "swap_in_count": 0,
+    "swap_out_count": 0,
+    "swapped_q_count": 0,
+    "waiting_q_depth": 0
+  },
+  "launched_request_count": 64,
+  "layer_order": [],
+  "layer_order_label": "lis_order_unavailable_front_to_back",
+  "measurement_duration_s": 115.327985176,
+  "measurement_end_time_ns": 274725037908696,
+  "measurement_end_utc": "2026-09-13T16:12:50.758966+00:00",
+  "measurement_start_time_ns": 274609709923520,
+  "measurement_start_utc": "2026-09-13T16:10:55.430978+00:00",
+  "metric_formula": {
+    "queueing_delay_s": "(first_prefill_time_ns - scheduler_eligible_time_ns) / 1e9",
+    "slo_violation": "finite ttft_s > 2.0",
+    "ttft_s": "(first_stream_token_received_time_ns - arrival_time_ns) / 1e9"
+  },
+  "model_path_safe": "~/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "model_path_sha256": "c5c17acefc2dfdc2cd76e141edbbe45658f0835c2a3a50a833a28cdfd7f318a3",
+  "nominal_offered_rps": 0.7619047619047619,
+  "num_gpu_blocks": 1768,
+  "num_gpu_blocks_observed_in_telemetry": [
+    1768
+  ],
+  "observed_forward_batch_count": 2409,
+  "observed_prefill_batch_count": 10,
+  "output_token_count_requested": 512,
+  "prompt_token_count_requested": 1024,
+  "protocol_manifest": "benchmark-results/fp16-awq-crossover-v7/protocol_manifest.json",
+  "protocol_manifest_sha256": "9fcc224785906e657d07f5fd66c00bf62c4deeffda316a6b0070f6210aca0c8b",
+  "quantization_backend": "nf4_bitsandbytes",
+  "quantization_label": "fp16_control",
+  "quantization_runtime": {
+    "implementation": "unchanged SwiftLLM FP16",
+    "weight_bits": 16
+  },
+  "quantized_layer_count": 0,
+  "quantized_model_path_safe": null,
+  "random_seed": 2025,
+  "raw_files": [
+    "metadata.json",
+    "requests.jsonl",
+    "telemetry.jsonl",
+    "batches.jsonl"
+  ],
+  "request_count_requested": 64,
+  "run_id": "cross-fp16_0-scale-5p25-rep1",
+  "schema_version": 2,
+  "telemetry_interval_s": 0.25,
+  "timestamp_definition": {
+    "arrival_time_ns": "immediately before Engine.add_request_and_stream",
+    "clock": "time.perf_counter_ns monotonic process clock",
+    "first_output_token_time_ns": "after model forward returned first output",
+    "first_prefill_time_ns": "immediately before first model forward containing request",
+    "first_stream_token_received_time_ns": "benchmark consumer receipt time",
+    "scheduler_eligible_time_ns": "after tokenization before scheduler arrival",
+    "stream_completion_time_ns": "benchmark consumer receipt of final output"
+  },
+  "warmup_policy": {
+    "included_in_raw_requests": false,
+    "output_token_count": 8,
+    "warmup_requests": 1
+  },
+  "workload_kind": "latency_dense_trace",
+  "workload_path": "benchmark-results/fp16-awq-crossover-v7/input/latency-scale-5p25.jsonl",
+  "workload_sha256": "2d7350310d58652d82cabf34869fd1587fa4fceac7ecdd10019b794dd2f83406",
+  "workload_time_scale": 5.25
+}
