@@ -37,7 +37,10 @@ The following common AutoAWQ configuration is therefore frozen as a
 - calibration: AutoAWQ's standard `mit-han-lab/pile-val-backup` validation
   corpus, shuffled with its fixed seed 42, at most 128 accepted samples and
   512 tokens per packed calibration block;
-- `duo_scaling=true`, clipping enabled, and exporter defaults otherwise;
+- `duo_scaling=true` and clipping enabled;
+- memory-only execution controls: one calibration sample per forward partition
+  and a 512 MiB scale-search chunk ceiling (these do not change the accepted
+  samples or quantization objective);
 - embeddings, norms, and LM head remain FP16;
 - decoder layers are selected front-to-back in the fixed states 0/8/16/32.
 

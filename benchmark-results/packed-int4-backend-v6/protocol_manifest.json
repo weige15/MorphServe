@@ -55,6 +55,8 @@
     "calibration_shuffle_seed": 42,
     "max_calibration_samples": 128,
     "max_calibration_sequence_length": 512,
+    "n_parallel_calibration_samples": 1,
+    "max_chunk_memory_bytes": 536870912,
     "serving_kernel": "installed vLLM 0.11.2 AWQ-Marlin",
     "offline_quantization_once": true,
     "one_serving_representation_per_matrix": true,
