@@ -1,0 +1,187 @@
+{
+  "analysis": {
+    "confidence_bound": 0.975,
+    "global_rule": "intersection-union across low-only, one-cycle, two-cycle; each lower bound strictly >0.98; no pooled rescue",
+    "independent_unit": "fresh-process matched pair",
+    "margin": 0.98,
+    "method": "paired one-sample Student t",
+    "no_early_stop": true,
+    "one_sided_alpha": 0.025,
+    "phase_a_pairs": 12,
+    "phase_c_pairs_per_workload": 8,
+    "primary": "log Dynamic/FP16 completed-request throughput ratio",
+    "v10_in_primary": false
+  },
+  "artifact_version": "throughput_confirmation_v11",
+  "attempt_policy": {
+    "fresh_process": true,
+    "max_full_pair_replacements": 2,
+    "preserve_every_attempt": true,
+    "scientific_failures_not_replaceable": true,
+    "selected_pair": "chronologically first full administratively valid block attempt"
+  },
+  "created_at_utc": "2026-09-14T11:47:10.909856+00:00",
+  "frozen_runtime": {
+    "backend": "AWQ-Marlin",
+    "cadence_s": 0.25,
+    "decoding": "greedy exact 512 steps",
+    "entry_policy": "unchanged sustained_compound_pressure",
+    "gpu": "physical RTX 3090 index 5",
+    "output_tokens": 512,
+    "physical_capacities": [
+      1759,
+      4170
+    ],
+    "policy_reference_blocks": 1768,
+    "prompt_tokens": 1024,
+    "quantized_layers": "decoder [0,16)",
+    "release_policy": "quiet_pressure_drop_5v10",
+    "scheduler_order": "strict FCFS unchanged",
+    "seed": 2025,
+    "state_pair": [
+      "FP16",
+      "AWQ_MARLIN_W4_16"
+    ]
+  },
+  "instrumentation": {
+    "controller": "unchanged Phase A output-only timed evaluator",
+    "event_loop_probe_interval_s": 0.05,
+    "parity_artifact": "benchmark-results/throughput-confirmation-v11/archived_policy_parity.json",
+    "parity_sha256": "361d60f529b21b8bb45461f023cbecca467afa78ce84c017ba5be0b544c64a64",
+    "policy_inputs_unchanged": true
+  },
+  "phase_b": {
+    "implementation_decision": "KEEP_CONTROLLER_UNCHANGED",
+    "optimization_performed": false,
+    "phase_a_geometric_mean_ratio": 0.9907627606930599,
+    "phase_a_lower_bound": 0.9789295561154991,
+    "reason": "Phase A two-sided 95% upper ratio 1.002739 was not below 1.0, so the preregistered conjunction was not met"
+  },
+  "preserved_namespace_tree_sha256": {
+    "benchmark-results/closed-loop-runtime-v9": "2af684bccd229b39bf607c3e1a70aa9a397166353db6407e13daedf6d00ee35d",
+    "benchmark-results/fp16-awq-crossover-v7": "8b40be54544c9d493b742ee9ff2950ea3573b09dea39f783eb5ffe811985b05d",
+    "benchmark-results/release-side-runtime-v10": "4c7fad5d4bcbedf2580944e5141e9543f6048b51e3bbb96be5d5258fe673f07c",
+    "benchmark-results/runtime-morphing-v8": "f7f81204f8c2d91096dfc64e0c5e631d04b5a010020441bc813b3eca4b5c792e",
+    "docs/closed-loop-runtime-v9": "5695fb6a176e945baa3f967069f3033c1ea0fea20b9b397b08842152549ef657",
+    "docs/fp16-awq-crossover-v7": "4dcfeef2f233454edd84fd2bb375cde403d6af910ee4bf729bd9d847a14260a2",
+    "docs/release-side-runtime-v10": "8c9f46b42cc79ef8d2136a77be21712c35bee097ead7c5dfb35986e0e5f5133d",
+    "docs/runtime-morphing-v8": "1c81e71bd714e46b4adebfed80b11dffafdea3143f7ce56fbb95c53ebd344005"
+  },
+  "preserved_phase_a_artifact_sha256": {
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/controller_overhead.json": "ba2657304d1d43b9b08e68ec1ae994510dbb5a88336c28d52713a7f13a4011ea",
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/decision.json": "faaf6eec9b4d633c95c2bc83dec2663fac126a0e47e63ff3f5a92b45c94aef05",
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/gpu_environment_summary.csv": "128128acc7eb52ce574c95ee796958f998ec75024d933ffed9e42671a8cc2e9c",
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/guardrails.json": "e2f9accb6e4913bc79d54fc561b24a328d0e293fc7c69574aa3825f5e6f0542b",
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/inference.json": "1adddb9b1df94b7bb1c4ad3d091f1407aeea633a346206222b459a490a1fc08c",
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/instrumentation_calibration.json": "e6e26e565f75f7d3efcd0016cf091d50255bf92ccb705f91b729e3726152016a",
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/paired_throughput.csv": "cbc99cc2488894993f35fdd8e440e076313dcc9c31611f19d85ee6aa9f16aaff",
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/serving_runs.csv": "37f8198727c60e5496031352155a0eb8df4dfcf32b85c874551fd9f76946e1e2",
+    "benchmark-results/throughput-confirmation-v11/analysis/phase_a/tail_decomposition.csv": "cbc99cc2488894993f35fdd8e440e076313dcc9c31611f19d85ee6aa9f16aaff",
+    "benchmark-results/throughput-confirmation-v11/analysis_correction.json": "89e86d9a105da7b6554e50d0f3ce5581d48a7342d3e3f25bb3fd01b0247ee13b",
+    "benchmark-results/throughput-confirmation-v11/phase-a-audit.json": "5bfc4dc9a9015a9a85af02600f9eb1898fc0065b600887a7c155a8da6f3aef2d",
+    "benchmark-results/throughput-confirmation-v11/phase-a-execution-status.json": "cfb90996e76025a610e4555cfbb051aecaef7eb7b6b43e753a65a55235c77f45",
+    "benchmark-results/throughput-confirmation-v11/phase-a-run-plan.json": "6a90b7214353d808eadd6570ad213de6761c9f4227bad14c65c6aa9c76acb7c3",
+    "docs/throughput-confirmation-v11/phase-a-report.md": "8f96d0253305c676905c398eb67abd8aff38915d898edf7e9875015a2a5cc1b6"
+  },
+  "preserved_phase_a_run_tree_sha256": {
+    "v11-phase_a-low-00-dynamic": "8833d5183a2304188d0a1f916ed1a05bf5c5f774be641a01af83ea3472e83bc6",
+    "v11-phase_a-low-00-fp16": "7c625a0a12a77a6e6265b4f1ed06b12f187c20b3c4c61bab139be74c3dceb4fa",
+    "v11-phase_a-low-01-dynamic": "8ed5e666f3c06953bf46abeba72a5d297bb4099cd323099be1cecd3a4ae2a244",
+    "v11-phase_a-low-01-fp16": "fa6022c8a4b2a9b48ad4cc0e470cd1a89d72b54eb192f81577d4c034f96c5da3",
+    "v11-phase_a-low-02-dynamic": "539aa03380f4579352462891623adc40ee28eca9a3dc5b5c01ed7c830282f10d",
+    "v11-phase_a-low-02-fp16": "68b6e7f9437d057335c89a3b404dfbe48a8ec4cb5ee20537ae32d381994e58db",
+    "v11-phase_a-low-03-dynamic": "a8653c934e71bb1f4752cbc4e7a61fbaa32d47ec27534263beb777022a245448",
+    "v11-phase_a-low-03-fp16": "8a8b8b7ad21469631e9264430945496f1b676724db708732e56ec2dd85704500",
+    "v11-phase_a-low-04-dynamic": "526175e8cad7bca721d311d84c05c0a4c743708b902dcfcde0bb2d57e7902772",
+    "v11-phase_a-low-04-fp16": "6a2a7d8c94fad9ba6af20c857012d725295ea14485f4d39a24434812c259a157",
+    "v11-phase_a-low-05-dynamic": "f1e50a9450d43b37d8c53b5df7a83f5723f58ee02c3961d2b141c98fbd5a49c2",
+    "v11-phase_a-low-05-fp16": "1eff380f5049d2e1d60356e0b59af4589692f4735eadd88158562cdd7783cb86",
+    "v11-phase_a-low-06-dynamic": "faa914946cbf19289b2105ef3b28fc9a972b9b1d40effa9ff5b709b3b1f0777e",
+    "v11-phase_a-low-06-fp16": "a9d9f361a7017d5fe1ee224f07771b46bcc62181b8d88b59fd0ed742ee21c353",
+    "v11-phase_a-low-07-dynamic": "9182f46afdac68ebf1ad4c682955b170db139ef4e125256cca2e7022f3ba63bb",
+    "v11-phase_a-low-07-fp16": "6270f79877de8ba63eaa656692db0f70a1eac12bc0fa7000f99915f679b86aa9",
+    "v11-phase_a-low-08-dynamic": "8f5be77779649de862e8c010c82967ae94574bbe82aaa578773e5746be4a7094",
+    "v11-phase_a-low-08-fp16": "a56d78bf937b1a0d234c5d2e3b9aabc3d12fccdf50828108aa5fbf24a0d6a42d",
+    "v11-phase_a-low-09-dynamic": "48841f73f11e4b2e0f96124cb16d9dbe6a1afb4f29c59c79fd3b665e5bd1bcd7",
+    "v11-phase_a-low-09-fp16": "c1d9518032bce4d1b4bcbf3ce543c35e6d50a2a4d4ecad935a18be82f18c9211",
+    "v11-phase_a-low-10-dynamic": "2708feeccde5b95414645b477ca0acb0f856fac7608b0817c702c4d8afdd43b4",
+    "v11-phase_a-low-10-fp16": "35aaba35e90df1d147154e5e35614afa62b1b53e5da3f26b83c549307345e3fa",
+    "v11-phase_a-low-11-dynamic": "85770c74c9c64483b06f1e2a200ac6cc391874e2011d839d14a2dcad79be334e",
+    "v11-phase_a-low-11-fp16": "6bcab9d208b36ab1ff9b4e87f0be84f24abc44b45e22dcf4e11177461e98f896"
+  },
+  "repository": {
+    "base_commit": "6f144319d57d01e80e1379499ee0217fb69c5f78",
+    "main_protocol_path": "docs/throughput-confirmation-v11/protocol.md",
+    "main_protocol_sha256": "c694e0c55726513c40cf1df72864c7d6ff2ad9856f43b636d29c40b1836140f9",
+    "phase_b_frozen_result_commit": "6f14431",
+    "protocol_path": "docs/throughput-confirmation-v11/phase-c-protocol.md",
+    "protocol_sha256": "52303ad33db455f2bb45c8e5c0d92498724219a87c4f696c1c24e236fdfa7bea",
+    "temporal_proof": "all Phase C raw metadata must name one clean commit containing this supplement, manifest, plan, unchanged controller, analysis, and audit"
+  },
+  "run_plans": {
+    "phase_c": {
+      "order": "interleaved workload pairs; four FP16-Dynamic and four Dynamic-FP16 per workload",
+      "pair_count": 16,
+      "pairs_per_workload": 8,
+      "path": "benchmark-results/throughput-confirmation-v11/phase-c-run-plan.json",
+      "run_count": 32,
+      "sha256": "640ded915653cdac0488fe4156dc11baefc98e3d0653ff90c6a625e388b3887f"
+    }
+  },
+  "schema_version": 1,
+  "scientific_question": "independent one-/two-cycle throughput confirmation after unchanged Phase B controller freeze; v10 remains NO-GO",
+  "source_sha256_at_preregistration": {
+    "swiftLLM/benchmark/analyze_closed_loop.py": "4d2aa60b8a0cdf34953f7543eb760ab922be2a061b4b7518ebfbcb075d53bbf3",
+    "swiftLLM/benchmark/analyze_crossover.py": "e13f1c60d7dc896afca3785aad0bcd9b861c053fa68fb32cf90e5b62f09801a7",
+    "swiftLLM/benchmark/analyze_release_latency.py": "b76f2eea89a3f2c599af51e9f0c57c3bb602c3689ced25248bd407516cb114ce",
+    "swiftLLM/benchmark/analyze_release_side.py": "65e5c744b6299c91f5f9a094ee6233616c5e16db9441d6cfba998c58f87f2b20",
+    "swiftLLM/benchmark/analyze_static_frontier.py": "de5da22ab2b749e4e5e2875698da7c084d583ddded900da901035b6ddd1865ce",
+    "swiftLLM/benchmark/analyze_throughput_confirmation.py": "5d61a704cc62f010085af715f8f7ee7f0b94c95ea17312e2248f64f813236bc1",
+    "swiftLLM/benchmark/audit_release_side.py": "98ffb4d055afce2728a44ac29f8c273309b2553f0f0eb7c76979521104f4292a",
+    "swiftLLM/benchmark/audit_throughput_confirmation.py": "c33a751bf33feb41f0a3b0dad3c874077956f6721071c5a373dea41f3feae81f",
+    "swiftLLM/benchmark/closed_loop_controller.py": "d2f364798680cd2f9ba2d7f8e93b71206cea10e4192ce7c83e6a3252492e64e7",
+    "swiftLLM/benchmark/instrumented_release_intent_controller.py": "219b92b58d4447a482ac65ec3fcd74e6cc313f2314c9aea8eba64ce0ecc1550f",
+    "swiftLLM/benchmark/metrics.py": "a322c5f1467054eb2e1598d92b588c86c5fe8e84d887b3954a3902e750f4d4b5",
+    "swiftLLM/benchmark/prepare_release_workloads.py": "ea918b13878ef9ff8e49f268c5e7d4f03384cf4d82c16e6c331157498a6443b2",
+    "swiftLLM/benchmark/release_intent_controller.py": "e5b49e753a582be972afa0f391385b0d022c67a3ae2a793850c3634a79cc6260",
+    "swiftLLM/benchmark/replay_throughput_controller_parity.py": "33071dc6373a4a0117503b00fed265cdd8c638a37357cff610d29b71a7d02162",
+    "swiftLLM/benchmark/run.py": "ec4f6c275fb9cdd8470a5e1ef9daa81d798537b3ac13115f8117605d484f6a7c",
+    "swiftLLM/benchmark/run_release_condition.py": "f97c41f1685bed15bfc557994d7e5acf10bf6033c3d1f09837135a90d15f1578",
+    "swiftLLM/benchmark/run_release_plan.py": "6aba396529fc6a1bebab5a7252dab60e93703ac17a6fd94eb0866aa6026aed11",
+    "swiftLLM/benchmark/run_throughput_confirmation_condition.py": "1e000b0bdf98f9c3425105131a5ba0e542b3524cd42f84334b1f6e8056f381c3",
+    "swiftLLM/benchmark/run_throughput_confirmation_plan.py": "9231a938e6038f0c49a4e008927cf0c42201c10742e1038234af66d22eec969b",
+    "swiftLLM/benchmark/test_release_analysis.py": "b9565f8470e4b23bbcc3f49e793ac65f1e127ac8fcaad5fda935e6074e385a9b",
+    "swiftLLM/benchmark/test_release_intent_controller.py": "ca16248b64d28bff1a298993058ded19f6ce8c85660dd3f63445dac6e4464a45",
+    "swiftLLM/benchmark/test_release_runtime_telemetry.py": "4581dcdcc6c4a2f44da16424159ac7c1ad70621669f84a289cb4945a28597f19",
+    "swiftLLM/benchmark/test_release_workloads.py": "de470e42defa414c97977ed8851ba81284c2093dc34bd739157413894a386db8",
+    "swiftLLM/benchmark/test_throughput_confirmation.py": "8170da943ea3a44692e9ddedaadd85f8b60d30f77f59f5e400ed2f589970f445",
+    "swiftLLM/swiftllm/engine_config.py": "700d72f22a7f04a11c4765e7021f82a0a6d2f4fa1e622fe4d18dbdc4bb37a41f",
+    "swiftLLM/swiftllm/server/engine.py": "2eb3c473088e119975c592e8e66aac2904de923457ea5f38e9b7740cb3396d2a",
+    "swiftLLM/swiftllm/server/scheduler.py": "7268a2fda431eb96fe21a26043ce75d4c6e3708374c96ecef91f4862dc0d7f70",
+    "swiftLLM/swiftllm/server/structs.py": "7d33392e5efde001786454f76ce0ef1ea151fe8bd9643dc3b8db997dcd9af88a",
+    "swiftLLM/swiftllm/worker/block_manager.py": "e9c46b2d55fff8c2f8156782fbc4d59f2d6327182826659911691ca773831cfd",
+    "swiftLLM/swiftllm/worker/kernels/kvcache_mgmt.py": "ad9d4a001060647732276eeaa6f7441da003cdf68861cbbce2da9a2260b0084e",
+    "swiftLLM/swiftllm/worker/kernels/paged_attn.py": "8a1f5131929978437ed3b733bb440c83cb5985f84c39be8ccce33eb946eac5b8",
+    "swiftLLM/swiftllm/worker/layers/transformer_layer.py": "87b2cc4a1535cf16a3552d51383c06bf127d63525655c9bf5d0ae44c56a56d71",
+    "swiftLLM/swiftllm/worker/model.py": "5b064df0057375ff9d75fe546855b855fd98df670cc2e1d8fc49bc8f4c61b186",
+    "swiftLLM/swiftllm/worker/weight.py": "242277b7d3389699b2a16eea69d3d050be1cf30bf204eb75af7bebe1027b2dae"
+  },
+  "status": "phase_c_preregistered_before_any_phase_c_serving_result",
+  "workloads": {
+    "files": {
+      "heldout_one_cycle": {
+        "path": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      "heldout_two_cycle": {
+        "path": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      "low_only": {
+        "path": "benchmark-results/release-side-runtime-v10/input/low-only.jsonl",
+        "sha256": "f8cedda371c59559a3979942a88957aafe689624c48c2d26d1746892350ccb6e"
+      }
+    },
+    "source": "unchanged byte-identical v10 inputs"
+  }
+}

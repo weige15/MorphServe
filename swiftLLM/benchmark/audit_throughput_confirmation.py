@@ -69,6 +69,7 @@ def raw_check(run_dir: Path, row: dict[str, Any]) -> tuple[bool, dict[str, Any]]
     requests = read_jsonl(run_dir / "requests.jsonl")
     telemetry = read_jsonl(run_dir / "telemetry.jsonl")
     controller = read_jsonl(run_dir / "controller.jsonl")
+    batches = read_jsonl(run_dir / "batches.jsonl")
     gpu = read_jsonl(run_dir / "gpu_environment.jsonl")
     lag = read_jsonl(run_dir / "event_loop_lag.jsonl")
     transitions = read_jsonl(run_dir / "transitions.jsonl")
@@ -87,6 +88,24 @@ def raw_check(run_dir: Path, row: dict[str, Any]) -> tuple[bool, dict[str, Any]]
             and request.get("input_positions_contiguous") is True
             and request.get("error") is None
             for request in requests
+        )
+    )
+    prefill_counts: dict[str, int] = {}
+    for batch in batches:
+        if batch.get("batch_kind") != "prefill":
+            continue
+        for request_id in batch.get("benchmark_request_ids", []):
+            prefill_counts[str(request_id)] = prefill_counts.get(str(request_id), 0) + 1
+    one_prefill_each = bool(
+        len(prefill_counts) == expected and set(prefill_counts.values()) == {1}
+    )
+    capacity_integrity = bool(
+        all(
+            int(sample["physical_total_kv_blocks"]) in {1759, 4170}
+            and int(sample["scheduler_visible_kv_blocks"]) in {1759, 4170}
+            and int(sample["physical_used_kv_blocks"])
+            <= int(sample["physical_total_kv_blocks"])
+            for sample in telemetry
         )
     )
     controller_timing = (
@@ -148,6 +167,8 @@ def raw_check(run_dir: Path, row: dict[str, Any]) -> tuple[bool, dict[str, Any]]
         and metadata.get("generated_output_token_count") == expected * 512
         and float(metadata.get("measurement_duration_s", 0)) > 0
         and integrity
+        and one_prefill_each
+        and capacity_integrity
         and telemetry
         and lag
         and any(sample.get("gpu_environment_source") == "pynvml" for sample in gpu)
@@ -159,6 +180,8 @@ def raw_check(run_dir: Path, row: dict[str, Any]) -> tuple[bool, dict[str, Any]]
     )
     return passed, {
         "request_integrity": integrity,
+        "one_prefill_each": one_prefill_each,
+        "capacity_integrity": capacity_integrity,
         "controller_timing": controller_timing,
         "transition_sequence": directions,
         "transition_integrity": transition_integrity,
@@ -254,6 +277,23 @@ def main() -> None:
         path: tree_sha256(repo / path) for path in manifest["preserved_namespace_tree_sha256"]
     }
     check("v10_and_prior_namespaces_unchanged", preserved == manifest["preserved_namespace_tree_sha256"])
+    if args.plan_key == "phase_c":
+        phase_a_runs = {
+            run_id: tree_sha256(root / "runs" / run_id)
+            for run_id in manifest.get("preserved_phase_a_run_tree_sha256", {})
+        }
+        phase_a_artifacts = {
+            path: sha256_file(repo / path)
+            for path in manifest.get("preserved_phase_a_artifact_sha256", {})
+        }
+        check(
+            "phase_a_raw_runs_unchanged",
+            phase_a_runs == manifest.get("preserved_phase_a_run_tree_sha256"),
+        )
+        check(
+            "phase_a_analysis_and_decision_unchanged",
+            phase_a_artifacts == manifest.get("preserved_phase_a_artifact_sha256"),
+        )
     v10_decision = read_json(repo / "benchmark-results/release-side-runtime-v10/analysis/decision.json")
     check("v10_decision_remains_no_go", v10_decision.get("release_side_systems_decision") == "NO-GO")
     parity = read_json(root / "archived_policy_parity.json")
@@ -275,7 +315,10 @@ def main() -> None:
     check("all_selected_raw_runs_valid", all(row["passed"] for row in raw_results.values()), raw_results)
     independent_guardrails = {
         "all_raw_runs_valid": all(row["passed"] for row in raw_results.values()),
-        "all_requests_integral": all(row["request_integrity"] for row in raw_results.values()),
+        "all_requests_integral": all(
+            row["request_integrity"] and row["one_prefill_each"] and row["capacity_integrity"]
+            for row in raw_results.values()
+        ),
         "all_transition_sequences_valid": all(
             row["transition_sequence"] == expected_directions(next(item["workload_class"] for item in plan if item["run_id"] == run_id))
             if next(item["condition"] for item in plan if item["run_id"] == run_id) == "closed_loop_dynamic"
