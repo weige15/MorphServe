@@ -1,0 +1,140 @@
+{
+  "dynamic_runs": [
+    {
+      "controller_blocking_wall_fraction": 0.01477741531068886,
+      "controller_evaluate_cpu_s": 1.977863721,
+      "controller_evaluate_wall_s": 1.711997934,
+      "controller_trace_bookkeeping_cpu_s": 0.038528652,
+      "controller_trace_bookkeeping_wall_s": 0.027306234,
+      "controller_window_cpu_s": 1.899706781,
+      "controller_window_wall_s": 1.648337492,
+      "run_id": "v11-phase_a-low-00-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.014861528896507076,
+      "controller_evaluate_cpu_s": 2.005764404,
+      "controller_evaluate_wall_s": 1.721723948,
+      "controller_trace_bookkeeping_cpu_s": 0.039311476,
+      "controller_trace_bookkeeping_wall_s": 0.028151162,
+      "controller_window_cpu_s": 1.925792268,
+      "controller_window_wall_s": 1.658250228,
+      "run_id": "v11-phase_a-low-01-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.01580441828564749,
+      "controller_evaluate_cpu_s": 2.146836719,
+      "controller_evaluate_wall_s": 1.84232552,
+      "controller_trace_bookkeeping_cpu_s": 0.035329634,
+      "controller_trace_bookkeeping_wall_s": 0.029773857,
+      "controller_window_cpu_s": 2.063614744,
+      "controller_window_wall_s": 1.773238127,
+      "run_id": "v11-phase_a-low-02-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.013221063199997137,
+      "controller_evaluate_cpu_s": 1.724597532,
+      "controller_evaluate_wall_s": 1.527888481,
+      "controller_trace_bookkeeping_cpu_s": 0.034333225,
+      "controller_trace_bookkeeping_wall_s": 0.026139833,
+      "controller_window_cpu_s": 1.650647036,
+      "controller_window_wall_s": 1.468716165,
+      "run_id": "v11-phase_a-low-03-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.018674586511009974,
+      "controller_evaluate_cpu_s": 2.745633278,
+      "controller_evaluate_wall_s": 2.336232272,
+      "controller_trace_bookkeeping_cpu_s": 0.083120403,
+      "controller_trace_bookkeeping_wall_s": 0.072302933,
+      "controller_window_cpu_s": 2.552691913,
+      "controller_window_wall_s": 2.158875281,
+      "run_id": "v11-phase_a-low-04-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.017962185869910784,
+      "controller_evaluate_cpu_s": 2.500635049,
+      "controller_evaluate_wall_s": 2.216007561,
+      "controller_trace_bookkeeping_cpu_s": 0.069365341,
+      "controller_trace_bookkeeping_wall_s": 0.059448136,
+      "controller_window_cpu_s": 2.333917713,
+      "controller_window_wall_s": 2.064161007,
+      "run_id": "v11-phase_a-low-05-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.018286517980991325,
+      "controller_evaluate_cpu_s": 2.501889924,
+      "controller_evaluate_wall_s": 2.226688097,
+      "controller_trace_bookkeeping_cpu_s": 0.073510674,
+      "controller_trace_bookkeeping_wall_s": 0.059271856,
+      "controller_window_cpu_s": 2.336080856,
+      "controller_window_wall_s": 2.078908921,
+      "run_id": "v11-phase_a-low-06-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.017365959579286286,
+      "controller_evaluate_cpu_s": 2.360611194,
+      "controller_evaluate_wall_s": 2.09326421,
+      "controller_trace_bookkeeping_cpu_s": 0.066367847,
+      "controller_trace_bookkeeping_wall_s": 0.056354416,
+      "controller_window_cpu_s": 2.215102458,
+      "controller_window_wall_s": 1.954764499,
+      "run_id": "v11-phase_a-low-07-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.01713630421625455,
+      "controller_evaluate_cpu_s": 2.324508064,
+      "controller_evaluate_wall_s": 2.045007381,
+      "controller_trace_bookkeeping_cpu_s": 0.057021194,
+      "controller_trace_bookkeeping_wall_s": 0.045025485,
+      "controller_window_cpu_s": 2.202316744,
+      "controller_window_wall_s": 1.93528042,
+      "run_id": "v11-phase_a-low-08-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.015012357453387502,
+      "controller_evaluate_cpu_s": 2.038207459,
+      "controller_evaluate_wall_s": 1.750774037,
+      "controller_trace_bookkeeping_cpu_s": 0.035980426,
+      "controller_trace_bookkeeping_wall_s": 0.029631736,
+      "controller_window_cpu_s": 1.956172601,
+      "controller_window_wall_s": 1.682803349,
+      "run_id": "v11-phase_a-low-09-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.014927304520785717,
+      "controller_evaluate_cpu_s": 2.010855227,
+      "controller_evaluate_wall_s": 1.766804523,
+      "controller_trace_bookkeeping_cpu_s": 0.049617481,
+      "controller_trace_bookkeeping_wall_s": 0.039501643,
+      "controller_window_cpu_s": 1.901944737,
+      "controller_window_wall_s": 1.670937638,
+      "run_id": "v11-phase_a-low-10-dynamic",
+      "workload": "low_only"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.015410951022767846,
+      "controller_evaluate_cpu_s": 2.087013475,
+      "controller_evaluate_wall_s": 1.821483771,
+      "controller_trace_bookkeeping_cpu_s": 0.045531233,
+      "controller_trace_bookkeeping_wall_s": 0.039701769,
+      "controller_window_cpu_s": 1.975203726,
+      "controller_window_wall_s": 1.722335675,
+      "run_id": "v11-phase_a-low-11-dynamic",
+      "workload": "low_only"
+    }
+  ],
+  "instrumentation_effect": "timings are output-only and exact policy parity is a prerequisite",
+  "materiality_rule": "eligible for one optimization only if the two-sided 95% upper ratio is below 1.0 and median measured blocking wall time is >=25% of positive matched duration excess",
+  "measurement_boundary": "evaluate includes all frozen v10 window construction/integration and decision work; trace bookkeeping includes decision construction and trace_fields only",
+  "median_fraction_of_positive_matched_duration_excess": 1.7359826104310483
+}

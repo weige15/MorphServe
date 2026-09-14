@@ -1,0 +1,336 @@
+{
+  "counterbalanced_order": true,
+  "passes": 20,
+  "records": [
+    {
+      "actions": [],
+      "cpu_ns": 565443357,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 0,
+      "wall_ns": 565478230
+    },
+    {
+      "actions": [],
+      "cpu_ns": 599191013,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 0,
+      "wall_ns": 599243397
+    },
+    {
+      "actions": [],
+      "cpu_ns": 605074527,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 1,
+      "wall_ns": 605088041
+    },
+    {
+      "actions": [],
+      "cpu_ns": 549777602,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 1,
+      "wall_ns": 549785996
+    },
+    {
+      "actions": [],
+      "cpu_ns": 550408042,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 2,
+      "wall_ns": 550408225
+    },
+    {
+      "actions": [],
+      "cpu_ns": 558672772,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 2,
+      "wall_ns": 558684594
+    },
+    {
+      "actions": [],
+      "cpu_ns": 555428225,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 3,
+      "wall_ns": 555436235
+    },
+    {
+      "actions": [],
+      "cpu_ns": 552946386,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 3,
+      "wall_ns": 552953656
+    },
+    {
+      "actions": [],
+      "cpu_ns": 546662301,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 4,
+      "wall_ns": 546662816
+    },
+    {
+      "actions": [],
+      "cpu_ns": 555829366,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 4,
+      "wall_ns": 555841543
+    },
+    {
+      "actions": [],
+      "cpu_ns": 548895535,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 5,
+      "wall_ns": 548898526
+    },
+    {
+      "actions": [],
+      "cpu_ns": 543441048,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 5,
+      "wall_ns": 543455663
+    },
+    {
+      "actions": [],
+      "cpu_ns": 591636308,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 6,
+      "wall_ns": 591644709
+    },
+    {
+      "actions": [],
+      "cpu_ns": 704635009,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 6,
+      "wall_ns": 704643944
+    },
+    {
+      "actions": [],
+      "cpu_ns": 731186455,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 7,
+      "wall_ns": 731200047
+    },
+    {
+      "actions": [],
+      "cpu_ns": 680604002,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 7,
+      "wall_ns": 680614379
+    },
+    {
+      "actions": [],
+      "cpu_ns": 847910846,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 8,
+      "wall_ns": 847953258
+    },
+    {
+      "actions": [],
+      "cpu_ns": 699616303,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 8,
+      "wall_ns": 699620673
+    },
+    {
+      "actions": [],
+      "cpu_ns": 715138600,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 9,
+      "wall_ns": 715261493
+    },
+    {
+      "actions": [],
+      "cpu_ns": 705352003,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 9,
+      "wall_ns": 705399016
+    },
+    {
+      "actions": [],
+      "cpu_ns": 728438537,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 10,
+      "wall_ns": 728439791
+    },
+    {
+      "actions": [],
+      "cpu_ns": 739785624,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 10,
+      "wall_ns": 739834397
+    },
+    {
+      "actions": [],
+      "cpu_ns": 737818455,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 11,
+      "wall_ns": 737857656
+    },
+    {
+      "actions": [],
+      "cpu_ns": 685524505,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 11,
+      "wall_ns": 685552389
+    },
+    {
+      "actions": [],
+      "cpu_ns": 539552707,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 12,
+      "wall_ns": 539558024
+    },
+    {
+      "actions": [],
+      "cpu_ns": 561453851,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 12,
+      "wall_ns": 561501072
+    },
+    {
+      "actions": [],
+      "cpu_ns": 566285912,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 13,
+      "wall_ns": 566289360
+    },
+    {
+      "actions": [],
+      "cpu_ns": 557923311,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 13,
+      "wall_ns": 557957398
+    },
+    {
+      "actions": [],
+      "cpu_ns": 563173942,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 14,
+      "wall_ns": 563158712
+    },
+    {
+      "actions": [],
+      "cpu_ns": 575985400,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 14,
+      "wall_ns": 575999108
+    },
+    {
+      "actions": [],
+      "cpu_ns": 589645183,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 15,
+      "wall_ns": 589657838
+    },
+    {
+      "actions": [],
+      "cpu_ns": 545326821,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 15,
+      "wall_ns": 545332648
+    },
+    {
+      "actions": [],
+      "cpu_ns": 589444690,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 16,
+      "wall_ns": 589446180
+    },
+    {
+      "actions": [],
+      "cpu_ns": 632627857,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 16,
+      "wall_ns": 632631369
+    },
+    {
+      "actions": [],
+      "cpu_ns": 563405399,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 17,
+      "wall_ns": 563446518
+    },
+    {
+      "actions": [],
+      "cpu_ns": 576501268,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 17,
+      "wall_ns": 576515318
+    },
+    {
+      "actions": [],
+      "cpu_ns": 558375362,
+      "implementation": "original",
+      "order": 0,
+      "repeat": 18,
+      "wall_ns": 558429939
+    },
+    {
+      "actions": [],
+      "cpu_ns": 638968448,
+      "implementation": "instrumented",
+      "order": 1,
+      "repeat": 18,
+      "wall_ns": 639050778
+    },
+    {
+      "actions": [],
+      "cpu_ns": 559190734,
+      "implementation": "instrumented",
+      "order": 0,
+      "repeat": 19,
+      "wall_ns": 559209814
+    },
+    {
+      "actions": [],
+      "cpu_ns": 557248900,
+      "implementation": "original",
+      "order": 1,
+      "repeat": 19,
+      "wall_ns": 557321037
+    }
+  ],
+  "role": "post-Phase-A diagnostic only; does not alter preregistered inference or optimization rule",
+  "sample_count": 471,
+  "schema_version": 1,
+  "source_trace": "benchmark-results/throughput-confirmation-v11/runs/v11-phase_a-low-00-dynamic/telemetry.jsonl",
+  "summary": {
+    "incremental_wall_mean_s": 0.02016645094999993,
+    "instrumented_over_original_wall_ratio": 1.033510033313386,
+    "instrumented_wall_mean_s": 0.62196982015,
+    "original_wall_mean_s": 0.6018033692
+  }
+}

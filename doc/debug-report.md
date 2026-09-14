@@ -35,7 +35,7 @@ FileNotFoundError: [Errno 2] No such file or directory:
 'benchmark-results/release-side-runtime-v10/input/low-only.jsonl'
 ```
 
-Full log: `benchmark-results/throughput-confirmation-v11/logs/v11-phase_a-low-00-fp16.log`.
+Preserved captured traceback: `benchmark-results/throughput-confirmation-v11/logs/pre-measurement-path-failure.log`.
 
 ## Failure Layer Classification
 
@@ -96,3 +96,5 @@ run 1/24: v11-phase_a-low-00-fp16 attempt 0
 ...
 v11 phase_a run plan complete: 24/24 valid
 ```
+
+Applied verification: **PASS**. The corrected root-working-directory command completed all 24/24 selected serving runs. All raw metadata records a clean source commit; the earlier path-validation event remains in the attempt ledger and produced no run directory.

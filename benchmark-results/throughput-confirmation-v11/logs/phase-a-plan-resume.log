@@ -1,0 +1,25 @@
+run 1/24: v11-phase_a-low-00-fp16 attempt 0
+run 2/24: v11-phase_a-low-00-dynamic attempt 0
+run 3/24: v11-phase_a-low-01-dynamic attempt 0
+run 4/24: v11-phase_a-low-01-fp16 attempt 0
+run 5/24: v11-phase_a-low-02-fp16 attempt 0
+run 6/24: v11-phase_a-low-02-dynamic attempt 0
+run 7/24: v11-phase_a-low-03-dynamic attempt 0
+run 8/24: v11-phase_a-low-03-fp16 attempt 0
+run 9/24: v11-phase_a-low-04-fp16 attempt 0
+run 10/24: v11-phase_a-low-04-dynamic attempt 0
+run 11/24: v11-phase_a-low-05-dynamic attempt 0
+run 12/24: v11-phase_a-low-05-fp16 attempt 0
+run 13/24: v11-phase_a-low-06-fp16 attempt 0
+run 14/24: v11-phase_a-low-06-dynamic attempt 0
+run 15/24: v11-phase_a-low-07-dynamic attempt 0
+run 16/24: v11-phase_a-low-07-fp16 attempt 0
+run 17/24: v11-phase_a-low-08-fp16 attempt 0
+run 18/24: v11-phase_a-low-08-dynamic attempt 0
+run 19/24: v11-phase_a-low-09-dynamic attempt 0
+run 20/24: v11-phase_a-low-09-fp16 attempt 0
+run 21/24: v11-phase_a-low-10-fp16 attempt 0
+run 22/24: v11-phase_a-low-10-dynamic attempt 0
+run 23/24: v11-phase_a-low-11-dynamic attempt 0
+run 24/24: v11-phase_a-low-11-fp16 attempt 0
+v11 phase_a run plan complete: 24/24 valid

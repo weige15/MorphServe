@@ -1,0 +1,9 @@
+{
+  "total_actions": 38,
+  "total_samples": 27217,
+  "total_streams": 48,
+  "v10_dynamic_streams": 6,
+  "v7_streams": 36,
+  "v9_dynamic_streams": 6
+}
+status: PASS

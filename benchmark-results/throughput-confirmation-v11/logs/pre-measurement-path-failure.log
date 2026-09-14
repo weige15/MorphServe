@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/run_throughput_confirmation_condition.py", line 176, in <module>
+    main()
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/run_throughput_confirmation_condition.py", line 171, in main
+    path = asyncio.run(run(args))
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/run_throughput_confirmation_condition.py", line 121, in run
+    run_dir = await v10_runner.run(args)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/run_release_condition.py", line 248, in run
+    validate_preregistration(args)
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/run_throughput_confirmation_condition.py", line 62, in validate_preregistration
+    workload_hash = sha256_file(args.workload)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/run_throughput_confirmation_condition.py", line 38, in sha256_file
+    with path.open("rb") as handle:
+         ^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'benchmark-results/release-side-runtime-v10/input/low-only.jsonl'

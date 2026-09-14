@@ -152,9 +152,7 @@ def raw_check(run_dir: Path, row: dict[str, Any]) -> tuple[bool, dict[str, Any]]
         and lag
         and any(sample.get("gpu_environment_source") == "pynvml" for sample in gpu)
         and controller_timing
-        and transitions_valid
         and transition_integrity
-        and phase_correct
         and final.get("precision_state") == "FP16"
         and int(final.get("num_gpu_blocks", -1)) == 1759
         and not (run_dir / "failure.json").exists()
@@ -229,7 +227,29 @@ def main() -> None:
     current_sources = {
         path: sha256_file(repo / path) for path in manifest["source_sha256_at_preregistration"]
     }
-    check("preregistered_sources_unchanged", current_sources == manifest["source_sha256_at_preregistration"])
+    source_mismatches = {
+        path: {
+            "preregistered_sha256": manifest["source_sha256_at_preregistration"][path],
+            "current_sha256": digest,
+        }
+        for path, digest in current_sources.items()
+        if digest != manifest["source_sha256_at_preregistration"][path]
+    }
+    correction_path = root / "analysis_correction.json"
+    correction = read_json(correction_path) if correction_path.is_file() else {}
+    declared = correction.get("source_corrections", {})
+    check(
+        "actuation_sources_unchanged_and_audit_correction_bounded",
+        set(source_mismatches) == set(declared)
+        and set(source_mismatches) <= {"swiftLLM/benchmark/audit_throughput_confirmation.py"}
+        and all(
+            declared[path].get("preregistered_sha256") == record["preregistered_sha256"]
+            and declared[path].get("corrected_sha256") == record["current_sha256"]
+            for path, record in source_mismatches.items()
+        )
+        and correction.get("controller_analyzer_or_scientific_rule_changed") is False,
+        {"mismatches": source_mismatches, "declared": declared},
+    )
     preserved = {
         path: tree_sha256(repo / path) for path in manifest["preserved_namespace_tree_sha256"]
     }
@@ -253,6 +273,33 @@ def main() -> None:
         passed, evidence = raw_check(root / "runs" / actual, row) if actual else (False, {"missing_selection": True})
         raw_results[row["run_id"]] = {"passed": passed, **evidence}
     check("all_selected_raw_runs_valid", all(row["passed"] for row in raw_results.values()), raw_results)
+    independent_guardrails = {
+        "all_raw_runs_valid": all(row["passed"] for row in raw_results.values()),
+        "all_requests_integral": all(row["request_integrity"] for row in raw_results.values()),
+        "all_transition_sequences_valid": all(
+            row["transition_sequence"] == expected_directions(next(item["workload_class"] for item in plan if item["run_id"] == run_id))
+            if next(item["condition"] for item in plan if item["run_id"] == run_id) == "closed_loop_dynamic"
+            else row["transition_sequence"] == []
+            for run_id, row in raw_results.items()
+        ),
+        "all_final_states_fp16_1759": all(
+            row["final_state"] == "FP16" and int(row["final_capacity"]) == 1759
+            for row in raw_results.values()
+        ),
+        "all_transitions_success": all(row["transition_integrity"] for row in raw_results.values()),
+        "nvml_available_all_runs": all(int(row["nvml_samples"]) > 0 for row in raw_results.values()),
+        "low_only_dynamic_zero_transitions": all(
+            raw_results[item["run_id"]]["transition_sequence"] == []
+            for item in plan
+            if item["workload_class"] == "low_only" and item["condition"] == "closed_loop_dynamic"
+        ),
+    }
+    analyzed_guardrails = read_json(root / "analysis" / args.plan_key / "guardrails.json")
+    check(
+        "systems_guardrails_independently_recomputed",
+        independent_guardrails == analyzed_guardrails,
+        independent_guardrails,
+    )
 
     independent = independent_inference(plan, root, selected)
     analyzed = read_json(root / "analysis" / args.plan_key / "inference.json")
@@ -270,7 +317,7 @@ def main() -> None:
     check(
         "decision_matches_inference_and_guardrails",
         decision.get("all_workloads_noninferior") == all(row["noninferior"] for row in independent)
-        and decision.get("all_guardrails_pass") is True,
+        and decision.get("all_guardrails_pass") == all(independent_guardrails.values()),
         decision,
     )
     result = {

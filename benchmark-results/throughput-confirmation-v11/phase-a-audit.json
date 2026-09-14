@@ -1,0 +1,382 @@
+{
+  "check_count": 12,
+  "checks": [
+    {
+      "evidence": null,
+      "name": "manifest_artifact_version",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "protocol_hash",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "run_plan_hash",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "declared": {
+          "swiftLLM/benchmark/audit_throughput_confirmation.py": {
+            "corrected_sha256": "f18866ca7a9f10fa7848efa610af57996186cb14d0b45f4517eb34a08d829029",
+            "preregistered_sha256": "a88900344564bebc75eade5df103413e434841fac9aced413af446d5008fe2ad"
+          }
+        },
+        "mismatches": {
+          "swiftLLM/benchmark/audit_throughput_confirmation.py": {
+            "current_sha256": "f18866ca7a9f10fa7848efa610af57996186cb14d0b45f4517eb34a08d829029",
+            "preregistered_sha256": "a88900344564bebc75eade5df103413e434841fac9aced413af446d5008fe2ad"
+          }
+        }
+      },
+      "name": "actuation_sources_unchanged_and_audit_correction_bounded",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "v10_and_prior_namespaces_unchanged",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "v10_decision_remains_no_go",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "total_actions": 38,
+        "total_samples": 27217,
+        "total_streams": 48,
+        "v10_dynamic_streams": 6,
+        "v7_streams": 36,
+        "v9_dynamic_streams": 6
+      },
+      "name": "archived_policy_parity_passes",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "execution_complete",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "v11-phase_a-low-00-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 118,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-00-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 117,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-01-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 118,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-01-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 118,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-02-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 119,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-02-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 119,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-03-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 118,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-03-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 118,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-04-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 129,
+          "passed": true,
+          "phase_and_restore_behavior": false,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_a-low-04-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 123,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-05-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 127,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-05-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 123,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-06-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 125,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-06-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 123,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-07-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 124,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-07-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 123,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-08-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 122,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-08-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 123,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-09-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 119,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-09-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 121,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-10-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 121,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-10-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 122,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-11-dynamic": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 121,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_a-low-11-fp16": {
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 120,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        }
+      },
+      "name": "all_selected_raw_runs_valid",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "all_final_states_fp16_1759": true,
+        "all_raw_runs_valid": true,
+        "all_requests_integral": true,
+        "all_transition_sequences_valid": false,
+        "all_transitions_success": true,
+        "low_only_dynamic_zero_transitions": false,
+        "nvml_available_all_runs": true
+      },
+      "name": "systems_guardrails_independently_recomputed",
+      "passed": true
+    },
+    {
+      "evidence": [
+        {
+          "geometric_mean_ratio": 0.9907627606930599,
+          "noninferior": false,
+          "one_sided_lower_confidence_bound": 0.9789295561154991,
+          "pair_count": 12,
+          "workload": "low_only"
+        }
+      ],
+      "name": "throughput_inference_independently_recomputed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "all_guardrails_pass": false,
+        "all_workloads_noninferior": false,
+        "phase_a_control_plane_optimization_eligible": false,
+        "phase_a_implementation_decision": "KEEP_CONTROLLER_UNCHANGED",
+        "scope": "phase_a",
+        "workload_noninferiority": {
+          "low_only": false
+        }
+      },
+      "name": "decision_matches_inference_and_guardrails",
+      "passed": true
+    }
+  ],
+  "passed_check_count": 12,
+  "plan_key": "phase_a",
+  "schema_version": 1,
+  "status": "PASS"
+}

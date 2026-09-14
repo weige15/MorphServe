@@ -1,0 +1,5592 @@
+{
+  "d2h_bytes": 8792834048,
+  "elapsed_ns": 11807751621,
+  "ended_ns": 341240886925109,
+  "event": "runtime_variant_preparation",
+  "layers": [
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 0,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 1176918475,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 0,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 0
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 1,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 519274052,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 1,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 1
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 2,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 502915720,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 2,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 2
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 3,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 453763053,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 3,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 3
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 4,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 428687567,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 4,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 4
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 5,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 459903819,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 5,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 5
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 6,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 412408722,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 6,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 6
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 7,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 444458204,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 7,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 7
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 8,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 403130464,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 8,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 8
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 9,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 437164591,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 9,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 9
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 10,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 427799325,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 10,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 10
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 11,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 436182547,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 11,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 11
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 12,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 444973325,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 12,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 12
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 13,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 517374872,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 13,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 13
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 14,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 516100201,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 14,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 14
+    },
+    {
+      "awq_immutable_bytes": 113328128,
+      "awq_layout": {
+        "layer_id": 15,
+        "quantization_backend": "awq_marlin",
+        "quantized": true,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj.qweight": {
+            "bytes": 29360128,
+            "dtype": "torch.int32",
+            "shape": [
+              896,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "down_proj.qzeros": {
+            "bytes": 229376,
+            "dtype": "torch.int32",
+            "shape": [
+              112,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "down_proj.scales": {
+            "bytes": 917504,
+            "dtype": "torch.float16",
+            "shape": [
+              112,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "k_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "k_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          },
+          "o_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "o_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "o_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj.qweight": {
+            "bytes": 8388608,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              8192
+            ],
+            "stride": [
+              8192,
+              1
+            ]
+          },
+          "q_proj.qzeros": {
+            "bytes": 65536,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              512
+            ],
+            "stride": [
+              512,
+              1
+            ]
+          },
+          "q_proj.scales": {
+            "bytes": 262144,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj.qweight": {
+            "bytes": 58720256,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              57344
+            ],
+            "stride": [
+              57344,
+              1
+            ]
+          },
+          "up_gate_proj.qzeros": {
+            "bytes": 458752,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              3584
+            ],
+            "stride": [
+              3584,
+              1
+            ]
+          },
+          "up_gate_proj.scales": {
+            "bytes": 1835008,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              28672
+            ],
+            "stride": [
+              28672,
+              1
+            ]
+          },
+          "v_proj.qweight": {
+            "bytes": 2097152,
+            "dtype": "torch.int32",
+            "shape": [
+              256,
+              2048
+            ],
+            "stride": [
+              2048,
+              1
+            ]
+          },
+          "v_proj.qzeros": {
+            "bytes": 16384,
+            "dtype": "torch.int32",
+            "shape": [
+              32,
+              128
+            ],
+            "stride": [
+              128,
+              1
+            ]
+          },
+          "v_proj.scales": {
+            "bytes": 65536,
+            "dtype": "torch.float16",
+            "shape": [
+              32,
+              1024
+            ],
+            "stride": [
+              1024,
+              1
+            ]
+          }
+        }
+      },
+      "elapsed_ns": 568774099,
+      "fp16_bytes": 436224000,
+      "fp16_layout": {
+        "layer_id": 15,
+        "quantization_backend": "awq_marlin",
+        "quantized": false,
+        "tensors": {
+          "attn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "down_proj": {
+            "bytes": 117440512,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              14336
+            ],
+            "stride": [
+              14336,
+              1
+            ]
+          },
+          "ffn_norm": {
+            "bytes": 8192,
+            "dtype": "torch.float16",
+            "shape": [
+              4096
+            ],
+            "stride": [
+              1
+            ]
+          },
+          "k_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "o_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "q_proj": {
+            "bytes": 33554432,
+            "dtype": "torch.float16",
+            "shape": [
+              4096,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "up_gate_proj": {
+            "bytes": 234881024,
+            "dtype": "torch.float16",
+            "shape": [
+              28672,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          },
+          "v_proj": {
+            "bytes": 8388608,
+            "dtype": "torch.float16",
+            "shape": [
+              1024,
+              4096
+            ],
+            "stride": [
+              4096,
+              1
+            ]
+          }
+        }
+      },
+      "layer_id": 15
+    }
+  ],
+  "memory_after": {
+    "allocated_bytes": 16094109696,
+    "free_bytes": 8389656576,
+    "max_allocated_bytes": 16341888000,
+    "reserved_bytes": 16542334976,
+    "total_bytes": 25296044032
+  },
+  "memory_before": {
+    "allocated_bytes": 16094109696,
+    "free_bytes": 8291090432,
+    "max_allocated_bytes": 16295403520,
+    "reserved_bytes": 16659775488,
+    "total_bytes": 25296044032
+  },
+  "schema_version": 1,
+  "started_ns": 341229079173488
+}

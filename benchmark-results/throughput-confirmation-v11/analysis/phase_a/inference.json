@@ -1,0 +1,23 @@
+[
+  {
+    "degrees_of_freedom": 11,
+    "estimand": "geometric mean Dynamic/FP16 completed-request throughput ratio",
+    "geometric_mean_ratio": 0.9907627606930599,
+    "log_ratio_sd": 0.018910922342164058,
+    "margin": 0.98,
+    "mean_log_ratio": -0.009280167163035714,
+    "method": "paired one-sample Student t on run-level log ratios",
+    "noninferior": false,
+    "null": "mean log ratio <= log(0.98)",
+    "one_sided_alpha": 0.025,
+    "one_sided_confidence_level": 0.975,
+    "one_sided_lower_confidence_bound": 0.9789295561154991,
+    "one_sided_p_value": 0.03535407590795328,
+    "pair_count": 12,
+    "repeatable_nonzero_deficit": false,
+    "standard_error": 0.0054591130524362635,
+    "t_statistic_vs_margin": 2.000790247347836,
+    "two_sided_95_upper_ratio": 1.0027390038883635,
+    "workload": "low_only"
+  }
+]

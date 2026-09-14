@@ -1,0 +1,9 @@
+run 1/24: v11-phase_a-low-00-fp16 attempt 0
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/run_throughput_confirmation_plan.py", line 257, in <module>
+    main()
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/run_throughput_confirmation_plan.py", line 235, in main
+    raise RuntimeError(
+RuntimeError: run attempt failed and was preserved: v11-phase_a-low-00-fp16 -> v11-phase_a-low-00-fp16; resume creates the next attempt
