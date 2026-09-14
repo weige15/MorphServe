@@ -1,0 +1,151 @@
+{
+  "analysis": {
+    "confidence_bound": 0.975,
+    "global_rule": "intersection-union; every workload-specific lower bound strictly exceeds 0.98; no pooled rescue",
+    "independent_unit": "fresh-process matched pair",
+    "margin": 0.98,
+    "method": "paired one-sample Student t",
+    "no_early_stop": true,
+    "one_sided_alpha": 0.025,
+    "optimization_materiality": "repeatable deficit upper two-sided-95 bound <1.0 and median measured blocking wall >=25% of positive matched duration excess",
+    "phase_a_pairs": 12,
+    "phase_c_pairs_per_workload": 8,
+    "primary": "log Dynamic/FP16 completed-request throughput ratio",
+    "v10_in_primary": false
+  },
+  "artifact_version": "throughput_confirmation_v11",
+  "attempt_policy": {
+    "fresh_process": true,
+    "max_full_pair_replacements": 2,
+    "preserve_every_attempt": true,
+    "scientific_failures_not_replaceable": true,
+    "selected_pair": "chronologically first full administratively valid block attempt"
+  },
+  "created_at_utc": "2026-09-14T10:13:41.535366+00:00",
+  "frozen_runtime": {
+    "backend": "AWQ-Marlin",
+    "cadence_s": 0.25,
+    "decoding": "greedy exact 512 steps",
+    "entry_policy": "unchanged sustained_compound_pressure",
+    "gpu": "physical RTX 3090 index 5",
+    "output_tokens": 512,
+    "physical_capacities": [
+      1759,
+      4170
+    ],
+    "policy_reference_blocks": 1768,
+    "prompt_tokens": 1024,
+    "quantized_layers": "decoder [0,16)",
+    "release_policy": "quiet_pressure_drop_5v10",
+    "scheduler_order": "strict FCFS unchanged",
+    "seed": 2025,
+    "state_pair": [
+      "FP16",
+      "AWQ_MARLIN_W4_16"
+    ]
+  },
+  "instrumentation": {
+    "controller": "output-only wall/process CPU evaluate, windows, decision/history, trace fields",
+    "event_loop_probe_interval_s": 0.05,
+    "existing_fields": [
+      "sampling_jitter_s",
+      "arrival_jitter_s",
+      "GPU/HBM/NVML",
+      "first/final producer-consumer timestamps"
+    ],
+    "parity_artifact": "benchmark-results/throughput-confirmation-v11/archived_policy_parity.json",
+    "parity_sha256": "361d60f529b21b8bb45461f023cbecca467afa78ce84c017ba5be0b544c64a64",
+    "policy_inputs_unchanged": true
+  },
+  "preserved_namespace_tree_sha256": {
+    "benchmark-results/closed-loop-runtime-v9": "2af684bccd229b39bf607c3e1a70aa9a397166353db6407e13daedf6d00ee35d",
+    "benchmark-results/fp16-awq-crossover-v7": "8b40be54544c9d493b742ee9ff2950ea3573b09dea39f783eb5ffe811985b05d",
+    "benchmark-results/release-side-runtime-v10": "4c7fad5d4bcbedf2580944e5141e9543f6048b51e3bbb96be5d5258fe673f07c",
+    "benchmark-results/runtime-morphing-v8": "f7f81204f8c2d91096dfc64e0c5e631d04b5a010020441bc813b3eca4b5c792e",
+    "docs/closed-loop-runtime-v9": "5695fb6a176e945baa3f967069f3033c1ea0fea20b9b397b08842152549ef657",
+    "docs/fp16-awq-crossover-v7": "4dcfeef2f233454edd84fd2bb375cde403d6af910ee4bf729bd9d847a14260a2",
+    "docs/release-side-runtime-v10": "8c9f46b42cc79ef8d2136a77be21712c35bee097ead7c5dfb35986e0e5f5133d",
+    "docs/runtime-morphing-v8": "1c81e71bd714e46b4adebfed80b11dffafdea3143f7ce56fbb95c53ebd344005"
+  },
+  "repository": {
+    "base_commit": "26306e03b0f4c5e9edd9cb037f807a5da0f5ad95",
+    "protocol_path": "docs/throughput-confirmation-v11/protocol.md",
+    "protocol_sha256": "c694e0c55726513c40cf1df72864c7d6ff2ad9856f43b636d29c40b1836140f9",
+    "temporal_proof": "all raw metadata must name one clean commit containing this exact protocol, manifest, plan, analysis, audit, and instrumented evaluator"
+  },
+  "run_plans": {
+    "phase_a": {
+      "order": "six FP16-Dynamic and six Dynamic-FP16 contiguous blocks",
+      "pair_count": 12,
+      "path": "benchmark-results/throughput-confirmation-v11/phase-a-run-plan.json",
+      "run_count": 24,
+      "sha256": "6a90b7214353d808eadd6570ad213de6761c9f4227bad14c65c6aa9c76acb7c3"
+    }
+  },
+  "schema_version": 1,
+  "scientific_question": "repeatable >=2% closed-loop cost versus two-repeat finite-run noise; v10 remains NO-GO",
+  "source_sha256_at_preregistration": {
+    "swiftLLM/benchmark/analyze_closed_loop.py": "4d2aa60b8a0cdf34953f7543eb760ab922be2a061b4b7518ebfbcb075d53bbf3",
+    "swiftLLM/benchmark/analyze_crossover.py": "e13f1c60d7dc896afca3785aad0bcd9b861c053fa68fb32cf90e5b62f09801a7",
+    "swiftLLM/benchmark/analyze_release_latency.py": "b76f2eea89a3f2c599af51e9f0c57c3bb602c3689ced25248bd407516cb114ce",
+    "swiftLLM/benchmark/analyze_release_side.py": "65e5c744b6299c91f5f9a094ee6233616c5e16db9441d6cfba998c58f87f2b20",
+    "swiftLLM/benchmark/analyze_static_frontier.py": "de5da22ab2b749e4e5e2875698da7c084d583ddded900da901035b6ddd1865ce",
+    "swiftLLM/benchmark/analyze_throughput_confirmation.py": "5d61a704cc62f010085af715f8f7ee7f0b94c95ea17312e2248f64f813236bc1",
+    "swiftLLM/benchmark/audit_release_side.py": "98ffb4d055afce2728a44ac29f8c273309b2553f0f0eb7c76979521104f4292a",
+    "swiftLLM/benchmark/audit_throughput_confirmation.py": "a88900344564bebc75eade5df103413e434841fac9aced413af446d5008fe2ad",
+    "swiftLLM/benchmark/closed_loop_controller.py": "d2f364798680cd2f9ba2d7f8e93b71206cea10e4192ce7c83e6a3252492e64e7",
+    "swiftLLM/benchmark/instrumented_release_intent_controller.py": "219b92b58d4447a482ac65ec3fcd74e6cc313f2314c9aea8eba64ce0ecc1550f",
+    "swiftLLM/benchmark/metrics.py": "a322c5f1467054eb2e1598d92b588c86c5fe8e84d887b3954a3902e750f4d4b5",
+    "swiftLLM/benchmark/prepare_release_workloads.py": "ea918b13878ef9ff8e49f268c5e7d4f03384cf4d82c16e6c331157498a6443b2",
+    "swiftLLM/benchmark/release_intent_controller.py": "e5b49e753a582be972afa0f391385b0d022c67a3ae2a793850c3634a79cc6260",
+    "swiftLLM/benchmark/replay_throughput_controller_parity.py": "33071dc6373a4a0117503b00fed265cdd8c638a37357cff610d29b71a7d02162",
+    "swiftLLM/benchmark/run.py": "ec4f6c275fb9cdd8470a5e1ef9daa81d798537b3ac13115f8117605d484f6a7c",
+    "swiftLLM/benchmark/run_release_condition.py": "f97c41f1685bed15bfc557994d7e5acf10bf6033c3d1f09837135a90d15f1578",
+    "swiftLLM/benchmark/run_release_plan.py": "6aba396529fc6a1bebab5a7252dab60e93703ac17a6fd94eb0866aa6026aed11",
+    "swiftLLM/benchmark/run_throughput_confirmation_condition.py": "1e000b0bdf98f9c3425105131a5ba0e542b3524cd42f84334b1f6e8056f381c3",
+    "swiftLLM/benchmark/run_throughput_confirmation_plan.py": "9231a938e6038f0c49a4e008927cf0c42201c10742e1038234af66d22eec969b",
+    "swiftLLM/benchmark/test_release_analysis.py": "b9565f8470e4b23bbcc3f49e793ac65f1e127ac8fcaad5fda935e6074e385a9b",
+    "swiftLLM/benchmark/test_release_intent_controller.py": "ca16248b64d28bff1a298993058ded19f6ce8c85660dd3f63445dac6e4464a45",
+    "swiftLLM/benchmark/test_release_runtime_telemetry.py": "4581dcdcc6c4a2f44da16424159ac7c1ad70621669f84a289cb4945a28597f19",
+    "swiftLLM/benchmark/test_release_workloads.py": "de470e42defa414c97977ed8851ba81284c2093dc34bd739157413894a386db8",
+    "swiftLLM/benchmark/test_throughput_confirmation.py": "8170da943ea3a44692e9ddedaadd85f8b60d30f77f59f5e400ed2f589970f445",
+    "swiftLLM/swiftllm/engine_config.py": "700d72f22a7f04a11c4765e7021f82a0a6d2f4fa1e622fe4d18dbdc4bb37a41f",
+    "swiftLLM/swiftllm/server/engine.py": "2eb3c473088e119975c592e8e66aac2904de923457ea5f38e9b7740cb3396d2a",
+    "swiftLLM/swiftllm/server/scheduler.py": "7268a2fda431eb96fe21a26043ce75d4c6e3708374c96ecef91f4862dc0d7f70",
+    "swiftLLM/swiftllm/server/structs.py": "7d33392e5efde001786454f76ce0ef1ea151fe8bd9643dc3b8db997dcd9af88a",
+    "swiftLLM/swiftllm/worker/block_manager.py": "e9c46b2d55fff8c2f8156782fbc4d59f2d6327182826659911691ca773831cfd",
+    "swiftLLM/swiftllm/worker/kernels/kvcache_mgmt.py": "ad9d4a001060647732276eeaa6f7441da003cdf68861cbbce2da9a2260b0084e",
+    "swiftLLM/swiftllm/worker/kernels/paged_attn.py": "8a1f5131929978437ed3b733bb440c83cb5985f84c39be8ccce33eb946eac5b8",
+    "swiftLLM/swiftllm/worker/layers/transformer_layer.py": "87b2cc4a1535cf16a3552d51383c06bf127d63525655c9bf5d0ae44c56a56d71",
+    "swiftLLM/swiftllm/worker/model.py": "5b064df0057375ff9d75fe546855b855fd98df670cc2e1d8fc49bc8f4c61b186",
+    "swiftLLM/swiftllm/worker/weight.py": "242277b7d3389699b2a16eea69d3d050be1cf30bf204eb75af7bebe1027b2dae"
+  },
+  "status": "phase_a_preregistered_before_any_v11_serving_result",
+  "v10_immutable_files": {
+    "benchmark-results/release-side-runtime-v10/analysis/decision.json": "772a22fd9fea022f0323c24bc1b8834db38c53e7ff0b5382e8d47528ac0a6fbc",
+    "benchmark-results/release-side-runtime-v10/analysis_correction.json": "dd4b86f2cace27f05fe2234de477d088d50214793a8a4385fa43f2ad97f73c46",
+    "benchmark-results/release-side-runtime-v10/completion_audit.json": "f76e331163bd24d5c36cb91aeb669db9c5663c29bf369ce067e6f4e43f79cea9",
+    "benchmark-results/release-side-runtime-v10/protocol_manifest.json": "41d3853de5a4c31c68e3863d40cad0056ece01ff9abb6cabc2ce487542ff642e",
+    "benchmark-results/release-side-runtime-v10/run-plan.json": "b7b68a562962660c64bf87fceaf486b30493230478d3392c7b3e0d08e1daa71a",
+    "docs/release-side-runtime-v10/completion-audit.md": "d0dcf5cc761c8d9bb11e8cf36ff493bb98b5f4c25546ee3477e07306e7b6e43f",
+    "docs/release-side-runtime-v10/final-report.md": "2361377d768fcf5753de34548dbb6fb48dd65be2fbfbca4e63484d1f0807c67f",
+    "docs/release-side-runtime-v10/protocol.md": "7e507bbb2169fe8de0ce4a63a6b9cc02b576ca77f6ccbb480392845271ad6f83"
+  },
+  "workloads": {
+    "files": {
+      "heldout_one_cycle": {
+        "path": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      "heldout_two_cycle": {
+        "path": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      "low_only": {
+        "path": "benchmark-results/release-side-runtime-v10/input/low-only.jsonl",
+        "sha256": "f8cedda371c59559a3979942a88957aafe689624c48c2d26d1746892350ccb6e"
+      }
+    },
+    "source": "unchanged byte-identical v10 inputs"
+  }
+}
