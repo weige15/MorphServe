@@ -1,0 +1,27 @@
+{
+  "controller_or_gate_changed": false,
+  "corrected_log": "benchmark-results/release-side-runtime-v10/logs/analysis-corrected.log",
+  "correction": "Changed phase percentile calls from 0.50/0.95/0.99 to a tested phase_percentiles helper using 50/95/99. Added the exact regression test. Updated the audit to independently recompute all decisive scientific gates from raw, disclose and bound analysis-source corrections, and resolve a caller-supplied relative root before Git lookup. No actuation or preregistered scientific rule changed.",
+  "discovered_after_all_16_raw_runs_completed": true,
+  "effect": "Correct P50/P95/P99 phase metrics and the derived high-phase gate. The preliminary and corrected overall release-side decisions are both NO-GO because the frozen 0.98 throughput margin still fails.",
+  "preliminary_log": "benchmark-results/release-side-runtime-v10/logs/analysis-first.log",
+  "raw_runs_reexecuted": false,
+  "reason": "percentile helper expects 0-100, but the preregistered analyzer passed fractions",
+  "schema_version": 1,
+  "source_corrections": {
+    "swiftLLM/benchmark/analyze_release_side.py": {
+      "corrected_sha256": "65e5c744b6299c91f5f9a094ee6233616c5e16db9441d6cfba998c58f87f2b20",
+      "preregistered_sha256": "a8f434cf227724aae4ef273224b7cf14e77cb0b42fbab9a313b32ee22f714422"
+    },
+    "swiftLLM/benchmark/audit_release_side.py": {
+      "corrected_sha256": "98ffb4d055afce2728a44ac29f8c273309b2553f0f0eb7c76979521104f4292a",
+      "preregistered_sha256": "c5b7f670f573467b0e869af6f91b514e5b08fc56ea86b170f85ea43ee1fddc21"
+    },
+    "swiftLLM/benchmark/test_release_analysis.py": {
+      "corrected_sha256": "b9565f8470e4b23bbcc3f49e793ac65f1e127ac8fcaad5fda935e6074e385a9b",
+      "preregistered_sha256": "737265b20b33f0084fd5057c2fca7fc9905c57b7e579f9e38f8fc261cafd9930"
+    }
+  },
+  "status": "post_result_analysis_only_correction",
+  "workload_or_run_selection_changed": false
+}

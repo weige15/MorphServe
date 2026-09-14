@@ -1,0 +1,17 @@
+run 1/16: v10-low_only-runtime_static_fp16-rep0 attempt 0
+run 2/16: v10-low_only-closed_loop_dynamic-rep0 attempt 0
+run 3/16: v10-heldout_one_cycle-runtime_static_fp16-rep0 attempt 0
+run 4/16: v10-heldout_one_cycle-runtime_static_awq_w4_16-rep0 attempt 0
+run 5/16: v10-heldout_one_cycle-closed_loop_dynamic-rep0 attempt 0
+run 6/16: v10-heldout_two_cycle-runtime_static_awq_w4_16-rep0 attempt 0
+run 7/16: v10-heldout_two_cycle-closed_loop_dynamic-rep0 attempt 0
+run 8/16: v10-heldout_two_cycle-runtime_static_fp16-rep0 attempt 0
+run 9/16: v10-heldout_two_cycle-runtime_static_fp16-rep1 attempt 0
+run 10/16: v10-heldout_two_cycle-closed_loop_dynamic-rep1 attempt 0
+run 11/16: v10-heldout_two_cycle-runtime_static_awq_w4_16-rep1 attempt 0
+run 12/16: v10-heldout_one_cycle-closed_loop_dynamic-rep1 attempt 0
+run 13/16: v10-heldout_one_cycle-runtime_static_awq_w4_16-rep1 attempt 0
+run 14/16: v10-heldout_one_cycle-runtime_static_fp16-rep1 attempt 0
+run 15/16: v10-low_only-closed_loop_dynamic-rep1 attempt 0
+run 16/16: v10-low_only-runtime_static_fp16-rep1 attempt 0
+release-side v10 run plan complete: 16/16 valid

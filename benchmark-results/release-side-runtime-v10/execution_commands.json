@@ -1,5 +1,7 @@
 {
   "schema_version": 1,
+  "raw_reproduction_commit": "8e7675f6c690d364818acd890f2df7e0e317852d",
+  "result_note": "Checkout raw_reproduction_commit for the immutable run_matrix. Use regenerate on the result commit; analysis_correction.json explains the bounded percentile fix.",
   "environment": {
     "awq_env": "/nfs/home/s314511048/.venvs/morphserve-vllm0112",
     "awq_extension": "/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib",

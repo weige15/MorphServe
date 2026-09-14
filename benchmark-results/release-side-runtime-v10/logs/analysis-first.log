@@ -1,0 +1,74 @@
+{
+  "checks": {
+    "all_16_runs_raw_valid": true,
+    "every_high_phase_preserves_entry_benefit": false,
+    "every_release_has_complete_useful_bounded_recovery": true,
+    "gpu_clock_temperature_power_available": true,
+    "low_only_fp16_like_within_noise_both": true,
+    "low_only_zero_false_entries_both": true,
+    "no_chatter_or_release_during_high": true,
+    "ordered_one_and_two_cycle_sequences_both_repeats": true,
+    "throughput_noninferior_with_0p98_margin": false
+  },
+  "decision_scope": "Release-side systems only. Descriptive DuReader F1 is not a completion gate.",
+  "release_side_systems_decision": "NO-GO",
+  "restored_driver_hbm": [
+    {
+      "repeat_spread_bytes": 0,
+      "repeat_values_bytes": [
+        21151023104,
+        21151023104
+      ],
+      "restore_index": 0,
+      "workload_class": "heldout_one_cycle"
+    },
+    {
+      "repeat_spread_bytes": 83886080,
+      "repeat_values_bytes": [
+        21268463616,
+        21184577536
+      ],
+      "restore_index": 0,
+      "workload_class": "heldout_two_cycle"
+    },
+    {
+      "repeat_spread_bytes": 316669952,
+      "repeat_values_bytes": [
+        21102788608,
+        21419458560
+      ],
+      "restore_index": 1,
+      "workload_class": "heldout_two_cycle"
+    }
+  ],
+  "schema_version": 1,
+  "throughput_noninferiority": [
+    {
+      "passes_0p98_noninferiority": false,
+      "repeat_ratios": [
+        0.977782109130529,
+        0.9900545404952067
+      ],
+      "two_repeat_mean_ratio": 0.9839076737154336,
+      "workload_class": "low_only"
+    },
+    {
+      "passes_0p98_noninferiority": false,
+      "repeat_ratios": [
+        0.9811353015354991,
+        0.9777449200650998
+      ],
+      "two_repeat_mean_ratio": 0.9794389618009295,
+      "workload_class": "heldout_one_cycle"
+    },
+    {
+      "passes_0p98_noninferiority": true,
+      "repeat_ratios": [
+        0.9837595012637106,
+        0.9879960428992901
+      ],
+      "two_repeat_mean_ratio": 0.9858762761651768,
+      "workload_class": "heldout_two_cycle"
+    }
+  ]
+}

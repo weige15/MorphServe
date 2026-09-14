@@ -91,6 +91,15 @@ def ns_elapsed(timestamp_ns: int | None, measurement_start_ns: int) -> float | N
     )
 
 
+def phase_percentiles(values: list[float]) -> dict[str, float | None]:
+    """Use metrics.percentile's 0-100 API for phase-level P50/P95/P99."""
+    return {
+        "p50": percentile(values, 50),
+        "p95": percentile(values, 95),
+        "p99": percentile(values, 99),
+    }
+
+
 def numeric_summary(prefix: str, rows: list[dict[str, Any]], field: str) -> dict[str, Any]:
     values = [float(row[field]) for row in rows if isinstance(row.get(field), (int, float))]
     return {
@@ -139,6 +148,7 @@ def phase_metrics(
                 for event in transitions
                 if start <= float(event["requested_elapsed_s"]) < end
             ]
+            ttft_percentiles = phase_percentiles(ttft)
             output.append(
                 {
                     "run_id": plan_row["run_id"],
@@ -156,13 +166,13 @@ def phase_metrics(
                     "completed_request_count": sum(
                         row.get("status") == "completed" for row in phase_requests
                     ),
-                    "ttft_p50_s": percentile(ttft, 0.50),
-                    "ttft_p95_s": percentile(ttft, 0.95),
-                    "ttft_p99_s": percentile(ttft, 0.99),
+                    "ttft_p50_s": ttft_percentiles["p50"],
+                    "ttft_p95_s": ttft_percentiles["p95"],
+                    "ttft_p99_s": ttft_percentiles["p99"],
                     "strict_ttft_gt_2_rate": (
                         sum(value > 2.0 for value in ttft) / len(ttft) if ttft else None
                     ),
-                    "queue_p95_s": percentile(queue, 0.95),
+                    "queue_p95_s": percentile(queue, 95),
                     "waiting_queue_area_request_s": integrate(
                         segments,
                         lambda row: float(row["waiting_q_depth"]),

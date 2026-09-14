@@ -1,0 +1,26 @@
+{
+  "expected": "FP16 -> AWQ -> FP16 -> AWQ -> FP16",
+  "runs": [
+    {
+      "exact_expected_sequence": true,
+      "expected_directions": "FP16_TO_AWQ_MARLIN_W4_16|AWQ_MARLIN_W4_16_TO_FP16|FP16_TO_AWQ_MARLIN_W4_16|AWQ_MARLIN_W4_16_TO_FP16",
+      "final_controller_state": "FP16",
+      "final_runtime_precision": "FP16",
+      "repeat": 0,
+      "run_id": "v10-heldout_two_cycle-closed_loop_dynamic-rep0",
+      "transition_directions": "FP16_TO_AWQ_MARLIN_W4_16|AWQ_MARLIN_W4_16_TO_FP16|FP16_TO_AWQ_MARLIN_W4_16|AWQ_MARLIN_W4_16_TO_FP16",
+      "workload_class": "heldout_two_cycle"
+    },
+    {
+      "exact_expected_sequence": true,
+      "expected_directions": "FP16_TO_AWQ_MARLIN_W4_16|AWQ_MARLIN_W4_16_TO_FP16|FP16_TO_AWQ_MARLIN_W4_16|AWQ_MARLIN_W4_16_TO_FP16",
+      "final_controller_state": "FP16",
+      "final_runtime_precision": "FP16",
+      "repeat": 1,
+      "run_id": "v10-heldout_two_cycle-closed_loop_dynamic-rep1",
+      "transition_directions": "FP16_TO_AWQ_MARLIN_W4_16|AWQ_MARLIN_W4_16_TO_FP16|FP16_TO_AWQ_MARLIN_W4_16|AWQ_MARLIN_W4_16_TO_FP16",
+      "workload_class": "heldout_two_cycle"
+    }
+  ],
+  "schema_version": 1
+}

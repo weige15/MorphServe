@@ -1,0 +1,301 @@
+{
+  "plan": {
+    "order_policy": "two counterbalanced fresh-process passes; AWQ only on alternating workloads",
+    "run_count": 16,
+    "runs": [
+      {
+        "condition": "runtime_static_fp16",
+        "ordinal": 0,
+        "repeat": 0,
+        "request_count": 64,
+        "run_id": "v10-low_only-runtime_static_fp16-rep0",
+        "workload": "benchmark-results/release-side-runtime-v10/input/low-only.jsonl",
+        "workload_class": "low_only",
+        "workload_sha256": "f8cedda371c59559a3979942a88957aafe689624c48c2d26d1746892350ccb6e"
+      },
+      {
+        "condition": "closed_loop_dynamic",
+        "ordinal": 1,
+        "repeat": 0,
+        "request_count": 64,
+        "run_id": "v10-low_only-closed_loop_dynamic-rep0",
+        "workload": "benchmark-results/release-side-runtime-v10/input/low-only.jsonl",
+        "workload_class": "low_only",
+        "workload_sha256": "f8cedda371c59559a3979942a88957aafe689624c48c2d26d1746892350ccb6e"
+      },
+      {
+        "condition": "runtime_static_fp16",
+        "ordinal": 2,
+        "repeat": 0,
+        "request_count": 192,
+        "run_id": "v10-heldout_one_cycle-runtime_static_fp16-rep0",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "workload_class": "heldout_one_cycle",
+        "workload_sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      {
+        "condition": "runtime_static_awq_w4_16",
+        "ordinal": 3,
+        "repeat": 0,
+        "request_count": 192,
+        "run_id": "v10-heldout_one_cycle-runtime_static_awq_w4_16-rep0",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "workload_class": "heldout_one_cycle",
+        "workload_sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      {
+        "condition": "closed_loop_dynamic",
+        "ordinal": 4,
+        "repeat": 0,
+        "request_count": 192,
+        "run_id": "v10-heldout_one_cycle-closed_loop_dynamic-rep0",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "workload_class": "heldout_one_cycle",
+        "workload_sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      {
+        "condition": "runtime_static_awq_w4_16",
+        "ordinal": 5,
+        "repeat": 0,
+        "request_count": 320,
+        "run_id": "v10-heldout_two_cycle-runtime_static_awq_w4_16-rep0",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "workload_class": "heldout_two_cycle",
+        "workload_sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      {
+        "condition": "closed_loop_dynamic",
+        "ordinal": 6,
+        "repeat": 0,
+        "request_count": 320,
+        "run_id": "v10-heldout_two_cycle-closed_loop_dynamic-rep0",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "workload_class": "heldout_two_cycle",
+        "workload_sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      {
+        "condition": "runtime_static_fp16",
+        "ordinal": 7,
+        "repeat": 0,
+        "request_count": 320,
+        "run_id": "v10-heldout_two_cycle-runtime_static_fp16-rep0",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "workload_class": "heldout_two_cycle",
+        "workload_sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      {
+        "condition": "runtime_static_fp16",
+        "ordinal": 8,
+        "repeat": 1,
+        "request_count": 320,
+        "run_id": "v10-heldout_two_cycle-runtime_static_fp16-rep1",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "workload_class": "heldout_two_cycle",
+        "workload_sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      {
+        "condition": "closed_loop_dynamic",
+        "ordinal": 9,
+        "repeat": 1,
+        "request_count": 320,
+        "run_id": "v10-heldout_two_cycle-closed_loop_dynamic-rep1",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "workload_class": "heldout_two_cycle",
+        "workload_sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      {
+        "condition": "runtime_static_awq_w4_16",
+        "ordinal": 10,
+        "repeat": 1,
+        "request_count": 320,
+        "run_id": "v10-heldout_two_cycle-runtime_static_awq_w4_16-rep1",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "workload_class": "heldout_two_cycle",
+        "workload_sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      {
+        "condition": "closed_loop_dynamic",
+        "ordinal": 11,
+        "repeat": 1,
+        "request_count": 192,
+        "run_id": "v10-heldout_one_cycle-closed_loop_dynamic-rep1",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "workload_class": "heldout_one_cycle",
+        "workload_sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      {
+        "condition": "runtime_static_awq_w4_16",
+        "ordinal": 12,
+        "repeat": 1,
+        "request_count": 192,
+        "run_id": "v10-heldout_one_cycle-runtime_static_awq_w4_16-rep1",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "workload_class": "heldout_one_cycle",
+        "workload_sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      {
+        "condition": "runtime_static_fp16",
+        "ordinal": 13,
+        "repeat": 1,
+        "request_count": 192,
+        "run_id": "v10-heldout_one_cycle-runtime_static_fp16-rep1",
+        "workload": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "workload_class": "heldout_one_cycle",
+        "workload_sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      {
+        "condition": "closed_loop_dynamic",
+        "ordinal": 14,
+        "repeat": 1,
+        "request_count": 64,
+        "run_id": "v10-low_only-closed_loop_dynamic-rep1",
+        "workload": "benchmark-results/release-side-runtime-v10/input/low-only.jsonl",
+        "workload_class": "low_only",
+        "workload_sha256": "f8cedda371c59559a3979942a88957aafe689624c48c2d26d1746892350ccb6e"
+      },
+      {
+        "condition": "runtime_static_fp16",
+        "ordinal": 15,
+        "repeat": 1,
+        "request_count": 64,
+        "run_id": "v10-low_only-runtime_static_fp16-rep1",
+        "workload": "benchmark-results/release-side-runtime-v10/input/low-only.jsonl",
+        "workload_class": "low_only",
+        "workload_sha256": "f8cedda371c59559a3979942a88957aafe689624c48c2d26d1746892350ccb6e"
+      }
+    ],
+    "schema_version": 1,
+    "status": "frozen_before_any_v10_serving_result"
+  },
+  "workloads": {
+    "arrival_templates": {
+      "high": {
+        "path": "benchmark-results/fp16-awq-crossover-v7/input/latency-scale-4p25.jsonl",
+        "scale": 4.25,
+        "sha256": "4f458f5c0b20db7d934200acd9e3ea0b884c3cda2491510824700eae041f61f7",
+        "span_s": 74.375
+      },
+      "low": {
+        "path": "benchmark-results/fp16-awq-crossover-v7/input/latency-scale-5p75.jsonl",
+        "scale": 5.75,
+        "sha256": "8cf822d4a17f91a553fad14e5a2752679a479ea94ece3fd79144f6bdb0e77764",
+        "span_s": 100.625
+      }
+    },
+    "content_selection": {
+      "content_sha256": "aebf17b1892cdb73317886ab60b573b74b966ff581873e965441aa5acbad90ba",
+      "limitation": "The frozen source has 106 questions, so no disjoint 64-row slice exists. Rows 0-63 maximize novelty while preserving deterministic content.",
+      "new_questions_relative_to_v9_42_105": 42,
+      "overlapping_questions_relative_to_v9_42_105": 22,
+      "request_count": 64,
+      "source_sequence_end": 63,
+      "source_sequence_start": 0
+    },
+    "derivation": "Map frozen source content rows 0-63 positionally onto the validated v7 scale-5.75/4.25 arrival offsets; concatenate natural phase spans without gaps.",
+    "no_artificial_idle_gap": true,
+    "outputs": {
+      "heldout_one_cycle": {
+        "last_arrival_offset_s": 265.5625,
+        "path": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "request_count": 192,
+        "sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      "heldout_two_cycle": {
+        "last_arrival_offset_s": 440.5625,
+        "path": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "request_count": 320,
+        "sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      "low_only": {
+        "last_arrival_offset_s": 90.5625,
+        "path": "benchmark-results/release-side-runtime-v10/input/low-only.jsonl",
+        "request_count": 64,
+        "sha256": "f8cedda371c59559a3979942a88957aafe689624c48c2d26d1746892350ccb6e"
+      }
+    },
+    "phase_boundaries": {
+      "heldout_one_cycle": [
+        {
+          "last_arrival_offset_s": 90.5625,
+          "phase": "low_0",
+          "phase_index": 0,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 0.0
+        },
+        {
+          "last_arrival_offset_s": 167.5625,
+          "phase": "high_1",
+          "phase_index": 1,
+          "regime": "high",
+          "request_count": 64,
+          "start_offset_s": 100.625
+        },
+        {
+          "last_arrival_offset_s": 265.5625,
+          "phase": "low_2",
+          "phase_index": 2,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 175.0
+        }
+      ],
+      "heldout_two_cycle": [
+        {
+          "last_arrival_offset_s": 90.5625,
+          "phase": "low_0",
+          "phase_index": 0,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 0.0
+        },
+        {
+          "last_arrival_offset_s": 167.5625,
+          "phase": "high_1",
+          "phase_index": 1,
+          "regime": "high",
+          "request_count": 64,
+          "start_offset_s": 100.625
+        },
+        {
+          "last_arrival_offset_s": 265.5625,
+          "phase": "low_2",
+          "phase_index": 2,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 175.0
+        },
+        {
+          "last_arrival_offset_s": 342.5625,
+          "phase": "high_3",
+          "phase_index": 3,
+          "regime": "high",
+          "request_count": 64,
+          "start_offset_s": 275.625
+        },
+        {
+          "last_arrival_offset_s": 440.5625,
+          "phase": "low_4",
+          "phase_index": 4,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 350.0
+        }
+      ],
+      "low_only": [
+        {
+          "last_arrival_offset_s": 90.5625,
+          "phase": "low_0",
+          "phase_index": 0,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 0.0
+        }
+      ]
+    },
+    "schema_version": 1,
+    "source_workload": "benchmark-results/static-frontier-v5/input/quality-106.jsonl",
+    "source_workload_sha256": "2fceeb2aaf2a7c95a161a4d51642b754924240721c63ae1e48c85a70bd0c6b3e",
+    "status": "frozen_before_any_v10_serving_result"
+  }
+}

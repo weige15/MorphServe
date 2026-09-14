@@ -6,7 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from .analyze_release_side import catch_up_end, write_csv
+from .analyze_release_side import catch_up_end, phase_percentiles, write_csv
 
 
 class ReleaseAnalysisTests(unittest.TestCase):
@@ -15,6 +15,12 @@ class ReleaseAnalysisTests(unittest.TestCase):
             path = Path(directory) / "empty.csv"
             write_csv(path, [], ("run_id", "lifecycle_complete"))
             self.assertEqual(path.read_text(encoding="utf-8"), "run_id,lifecycle_complete\n")
+
+    def test_phase_percentiles_use_zero_to_one_hundred_api(self) -> None:
+        result = phase_percentiles([float(value) for value in range(100)])
+        self.assertEqual(result["p50"], 49.5)
+        self.assertEqual(result["p95"], 94.05)
+        self.assertEqual(result["p99"], 98.01)
 
     def test_catch_up_requires_three_continuous_zero_wait_seconds(self) -> None:
         telemetry = [

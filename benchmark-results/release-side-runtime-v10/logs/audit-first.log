@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/audit_release_side.py", line 497, in <module>
+    main()
+  File "/nfs/home/s314511048/MorphServe/swiftLLM/benchmark/audit_release_side.py", line 459, in main
+    repo, commit, str(root.relative_to(repo) / "protocol_manifest.json")
+                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 682, in relative_to
+    raise ValueError(f"{str(self)!r} is not in the subpath of {str(other)!r}")
+ValueError: 'benchmark-results/release-side-runtime-v10' is not in the subpath of '/nfs/home/s314511048/MorphServe'

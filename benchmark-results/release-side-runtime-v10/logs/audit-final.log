@@ -1,0 +1,460 @@
+{
+  "check_count": 16,
+  "checks": [
+    {
+      "evidence": null,
+      "name": "frozen_protocol_hash",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "frozen_plan_hash",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "frozen_workload_metadata_hash",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "all_workload_hashes",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "declared": {
+          "swiftLLM/benchmark/analyze_release_side.py": {
+            "corrected_sha256": "a85ed00dcd968923861ae29d49e8b45dca74d8430957d1c0e994dce98fe425e8",
+            "preregistered_sha256": "a8f434cf227724aae4ef273224b7cf14e77cb0b42fbab9a313b32ee22f714422"
+          },
+          "swiftLLM/benchmark/audit_release_side.py": {
+            "corrected_sha256": "b211e2496ce2dca308796b4bc9a636aba19e07a809ce546c27934129092c9ba6",
+            "preregistered_sha256": "c5b7f670f573467b0e869af6f91b514e5b08fc56ea86b170f85ea43ee1fddc21"
+          }
+        },
+        "mismatches": {
+          "swiftLLM/benchmark/analyze_release_side.py": {
+            "current_sha256": "a85ed00dcd968923861ae29d49e8b45dca74d8430957d1c0e994dce98fe425e8",
+            "preregistered_sha256": "a8f434cf227724aae4ef273224b7cf14e77cb0b42fbab9a313b32ee22f714422"
+          },
+          "swiftLLM/benchmark/audit_release_side.py": {
+            "current_sha256": "b211e2496ce2dca308796b4bc9a636aba19e07a809ce546c27934129092c9ba6",
+            "preregistered_sha256": "c5b7f670f573467b0e869af6f91b514e5b08fc56ea86b170f85ea43ee1fddc21"
+          }
+        }
+      },
+      "name": "actuation_sources_unchanged_and_analysis_repair_bounded",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "benchmark-results/closed-loop-runtime-v9": "429a4a488ab8d42b95e63899f74c40ca39766fdd5f0f7f75a0259812a56348ca",
+        "benchmark-results/fp16-awq-crossover-v7": "cd62412c57f8b38adde7bdc0782fca7c8a522c13cb4841515f0d6303a9b26919",
+        "benchmark-results/packed-int4-backend-v6": "75200e01f784954c80f0d1bfdb38687a4c58e827e09e90c1d72fb8b5174b70c7",
+        "benchmark-results/runtime-morphing-v8": "3302f590dee96f7042a17a0cf3dc2f654700d4f7a0136fc354591be8fad861b6",
+        "benchmark-results/static-frontier-v5": "9c9a4a587e16fdcc86c7eded69f33be615c0669005b7b4876ef2a765c1c5c379",
+        "benchmark-results/static-quantization-quality-latency": "db8bdc9846d770a696c64d2758770f9b9b4e123e479ef2f0ef302a5e91ad859d",
+        "benchmark-results/table5-substrate-v3": "5fc5b015d6caba6ea389532692e7b7fcf251be2f275df5dd07900422735bc384",
+        "benchmark-results/table5-substrate-v4": "2e72143378bfc2763ae3ae57df677243d518fa900ce8baba34396253dafcf272",
+        "docs/closed-loop-runtime-v9": "38a880ca68b139f83077f820914106e40533957900ff2c62f4d3888a44501a75",
+        "docs/fp16-awq-crossover-v7": "429fa1f103b0b9bd067f541ef955b6d8618bce0ec5c0bcada037777cca79b4ba",
+        "docs/packed-int4-backend-v6": "8ef3066b7a1e1a6ab7f7e79d41bb1182d1e4f5fc21b007a0fc4a855601d90b75",
+        "docs/runtime-morphing-v8": "3665f65f77dfded21f7bb36fa409ddaab7680f50da598d49b50d8a37c4ab34cf",
+        "docs/static-frontier-v5": "b654b466244a1b03460c2cca3a36e81e43a7717cdf6506ad0c0b0e18f9b1fcb6",
+        "docs/static-quantization-quality-latency": "c1b95f9bbd485f76a1fd5300a9296e0e6011e77e5d6c1c8219c59c2fb27f760b",
+        "docs/table5-substrate-v4": "b66a2fe15ba4b166e936dbaecf10ade01697a0547cadc8c30523a28c16053a44"
+      },
+      "name": "v2_through_v9_artifacts_unchanged",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "analysis_outputs_exist",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "controller_or_gate_changed": false,
+        "corrected_log": "benchmark-results/release-side-runtime-v10/logs/analysis-corrected.log",
+        "correction": "Changed phase percentile calls from 0.50/0.95/0.99 to 50/95/99. Updated the audit only to disclose and bound this analysis-source correction; all actuation sources remain byte-identical to the run commit. The post-result audit also resolves the caller-supplied relative root before computing its Git path; this changes no scientific calculation.",
+        "discovered_after_all_16_raw_runs_completed": true,
+        "effect": "Correct P50/P95/P99 phase metrics and the derived high-phase gate. The preliminary and corrected overall release-side decisions are both NO-GO because the frozen 0.98 throughput margin still fails.",
+        "preliminary_log": "benchmark-results/release-side-runtime-v10/logs/analysis-first.log",
+        "raw_runs_reexecuted": false,
+        "reason": "percentile helper expects 0-100, but the preregistered analyzer passed fractions",
+        "schema_version": 1,
+        "source_corrections": {
+          "swiftLLM/benchmark/analyze_release_side.py": {
+            "corrected_sha256": "a85ed00dcd968923861ae29d49e8b45dca74d8430957d1c0e994dce98fe425e8",
+            "preregistered_sha256": "a8f434cf227724aae4ef273224b7cf14e77cb0b42fbab9a313b32ee22f714422"
+          },
+          "swiftLLM/benchmark/audit_release_side.py": {
+            "corrected_sha256": "b211e2496ce2dca308796b4bc9a636aba19e07a809ce546c27934129092c9ba6",
+            "preregistered_sha256": "c5b7f670f573467b0e869af6f91b514e5b08fc56ea86b170f85ea43ee1fddc21"
+          }
+        },
+        "status": "post_result_analysis_only_correction",
+        "workload_or_run_selection_changed": false
+      },
+      "name": "post_result_analysis_correction_disclosed",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "final_docs_exist",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "required_final_report_sections",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "plan_exact_16_cells",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "v10-heldout_one_cycle-closed_loop_dynamic-rep0": "v10-heldout_one_cycle-closed_loop_dynamic-rep0",
+        "v10-heldout_one_cycle-closed_loop_dynamic-rep1": "v10-heldout_one_cycle-closed_loop_dynamic-rep1",
+        "v10-heldout_one_cycle-runtime_static_awq_w4_16-rep0": "v10-heldout_one_cycle-runtime_static_awq_w4_16-rep0",
+        "v10-heldout_one_cycle-runtime_static_awq_w4_16-rep1": "v10-heldout_one_cycle-runtime_static_awq_w4_16-rep1",
+        "v10-heldout_one_cycle-runtime_static_fp16-rep0": "v10-heldout_one_cycle-runtime_static_fp16-rep0",
+        "v10-heldout_one_cycle-runtime_static_fp16-rep1": "v10-heldout_one_cycle-runtime_static_fp16-rep1",
+        "v10-heldout_two_cycle-closed_loop_dynamic-rep0": "v10-heldout_two_cycle-closed_loop_dynamic-rep0",
+        "v10-heldout_two_cycle-closed_loop_dynamic-rep1": "v10-heldout_two_cycle-closed_loop_dynamic-rep1",
+        "v10-heldout_two_cycle-runtime_static_awq_w4_16-rep0": "v10-heldout_two_cycle-runtime_static_awq_w4_16-rep0",
+        "v10-heldout_two_cycle-runtime_static_awq_w4_16-rep1": "v10-heldout_two_cycle-runtime_static_awq_w4_16-rep1",
+        "v10-heldout_two_cycle-runtime_static_fp16-rep0": "v10-heldout_two_cycle-runtime_static_fp16-rep0",
+        "v10-heldout_two_cycle-runtime_static_fp16-rep1": "v10-heldout_two_cycle-runtime_static_fp16-rep1",
+        "v10-low_only-closed_loop_dynamic-rep0": "v10-low_only-closed_loop_dynamic-rep0",
+        "v10-low_only-closed_loop_dynamic-rep1": "v10-low_only-closed_loop_dynamic-rep1",
+        "v10-low_only-runtime_static_fp16-rep0": "v10-low_only-runtime_static_fp16-rep0",
+        "v10-low_only-runtime_static_fp16-rep1": "v10-low_only-runtime_static_fp16-rep1"
+      },
+      "name": "one_selected_fresh_process_per_cell",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "all_raw_runs_pass_direct_audit",
+      "passed": true
+    },
+    {
+      "evidence": [
+        "8e7675f6c690d364818acd890f2df7e0e317852d"
+      ],
+      "name": "all_runs_same_clean_preregistered_commit",
+      "passed": true
+    },
+    {
+      "evidence": "8e7675f6c690d364818acd890f2df7e0e317852d",
+      "name": "protocol_and_manifest_existed_at_run_commit",
+      "passed": true
+    },
+    {
+      "evidence": "NO-GO",
+      "name": "decision_is_explicit_go_or_no_go",
+      "passed": true
+    }
+  ],
+  "note": "Artifact-audit PASS does not imply scientific GO.",
+  "passed_count": 16,
+  "raw_runs": {
+    "v10-heldout_one_cycle-closed_loop_dynamic-rep0": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [
+        {
+          "match": true,
+          "observed_s": 199.00066718,
+          "replayed_s": 199.00066718
+        }
+      ],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_one_cycle-closed_loop_dynamic-rep1": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [
+        {
+          "match": true,
+          "observed_s": 199.500426602,
+          "replayed_s": 199.500426602
+        }
+      ],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_one_cycle-runtime_static_awq_w4_16-rep0": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_one_cycle-runtime_static_awq_w4_16-rep1": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_one_cycle-runtime_static_fp16-rep0": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_one_cycle-runtime_static_fp16-rep1": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_two_cycle-closed_loop_dynamic-rep0": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [
+        {
+          "match": true,
+          "observed_s": 199.000920353,
+          "replayed_s": 199.000920353
+        },
+        {
+          "match": true,
+          "observed_s": 376.501215376,
+          "replayed_s": 376.501215376
+        }
+      ],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_two_cycle-closed_loop_dynamic-rep1": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [
+        {
+          "match": true,
+          "observed_s": 199.750291326,
+          "replayed_s": 199.750291326
+        },
+        {
+          "match": true,
+          "observed_s": 375.001266946,
+          "replayed_s": 375.001266946
+        }
+      ],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_two_cycle-runtime_static_awq_w4_16-rep0": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_two_cycle-runtime_static_awq_w4_16-rep1": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_two_cycle-runtime_static_fp16-rep0": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-heldout_two_cycle-runtime_static_fp16-rep1": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-low_only-closed_loop_dynamic-rep0": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-low_only-closed_loop_dynamic-rep1": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-low_only-runtime_static_fp16-rep0": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    },
+    "v10-low_only-runtime_static_fp16-rep1": {
+      "all_pass": true,
+      "all_restore_lifecycles_valid": true,
+      "arrival_integrity": true,
+      "clean_recorded_commit": true,
+      "exact_transition_sequence": true,
+      "gpu_environment_available": true,
+      "identity": true,
+      "independent_release_replay": [],
+      "independent_release_replay_matches": true,
+      "no_errors": true,
+      "recorded_sources_match_manifest": true,
+      "request_integrity": true,
+      "required_files": true,
+      "telemetry_capacity_integrity": true
+    }
+  },
+  "schema_version": 1,
+  "scientific_decision": "NO-GO",
+  "status": "PASS"
+}

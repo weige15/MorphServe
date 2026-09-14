@@ -1,10 +1,13 @@
 # MorphServe
 
-MorphServe is a research repository for measuring and changing SwiftLLM serving behavior under load. V7 validated the static `{FP16, AWQ-W4-16}` crossover, v8 established a state-preserving one-process morph substrate, and v9 completes the final closed-loop experiment. V9 confirms causal high-pressure entry and repeated latency relief, but the full result is **NO-GO** because the frozen release hysteresis did not restore usefully and Dynamic's DuReader F1 did not separate from static AWQ.
+MorphServe is a research repository for measuring and changing SwiftLLM serving behavior under load. V7 validated the static `{FP16, AWQ-W4-16}` crossover, v8 established state-preserving one-process morphing, and v9 confirmed high-pressure entry but failed useful release. Release-side v10 now demonstrates repeated useful AWQ→FP16 restoration on held-out one- and two-cycle workloads, while retaining a formal **NO-GO** because its preregistered 0.98 throughput non-inferiority margin narrowly failed.
 
 ## Start here
 
-- [Closed-loop runtime v9 final report](docs/closed-loop-runtime-v9/final-report.md) — current 18-run controller result and separate systems/quality decisions.
+- [Release-side runtime v10 final report](docs/release-side-runtime-v10/final-report.md) — current 16-run held-out reversibility result and formal decision.
+- [Release-side v10 completion audit](docs/release-side-runtime-v10/completion-audit.md) — prompt-to-artifact verification and bounded analysis-correction disclosure.
+- [V9 release-delay diagnosis](docs/release-side-runtime-v10/release-delay-diagnosis.md) — development replay and frozen release-intent rationale.
+- [Closed-loop runtime v9 final report](docs/closed-loop-runtime-v9/final-report.md) — preserved 18-run NO-GO baseline.
 - [Closed-loop runtime v9 completion audit](docs/closed-loop-runtime-v9/completion-audit.md) — exhaustive prompt-to-artifact verification.
 - [Runtime morphing v8 final report](docs/runtime-morphing-v8/final-report.md) — one-process state/KV transition GO evidence.
 - [Runtime morphing v8 completion audit](docs/runtime-morphing-v8/completion-audit.md) — prompt-to-artifact verification.
@@ -46,13 +49,13 @@ PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest \
   benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
 ```
 
-Regenerate and audit the saved v9 tables, figures, decisions, and raw-evidence checks:
+Regenerate the saved v10 diagnosis, held-out tables, decision, tests, and raw-evidence audit:
 
 ```bash
-benchmark-results/closed-loop-runtime-v9/regenerate.sh
+benchmark-results/release-side-runtime-v10/regenerate.sh
 ```
 
-V8 (including CUDA segmented-KV tests), v7, and v6 remain independently reproducible with
+The audit ends `status: PASS`; the frozen scientific decision remains `NO-GO`. V9 remains reproducible with `benchmark-results/closed-loop-runtime-v9/regenerate.sh`. V8 (including CUDA segmented-KV tests), v7, and v6 remain independently reproducible with
 `CUDA_VISIBLE_DEVICES=5 benchmark-results/runtime-morphing-v8/regenerate.sh`,
 `benchmark-results/fp16-awq-crossover-v7/regenerate.sh` and
 `benchmark-results/packed-int4-backend-v6/regenerate.sh`.
@@ -63,7 +66,8 @@ V8 (including CUDA segmented-KV tests), v7, and v6 remain independently reproduc
 - `swiftLLM/benchmark/` — open-loop runners, runtime validation, analysis, metrics, and tests.
 - `benchmark-results/phase-1/` — Phase 1 raw runs and derived artifacts, grouped by experiment.
 - `docs/phase-1/` — curated current documentation; `archive/` contains superseded reports.
-- `docs/closed-loop-runtime-v9/` and `benchmark-results/closed-loop-runtime-v9/` — frozen controller protocol, 18 same-envelope runs, raw traces, tables, timelines, final report, and audit.
+- `docs/release-side-runtime-v10/` and `benchmark-results/release-side-runtime-v10/` — release diagnosis, preregistered policy/workloads, 16 held-out runs, exact drain timelines, GPU telemetry, report, and audit.
+- `docs/closed-loop-runtime-v9/` and `benchmark-results/closed-loop-runtime-v9/` — preserved frozen controller protocol, 18 runs, raw traces, tables, timelines, final report, and audit.
 - `docs/runtime-morphing-v8/` and `benchmark-results/runtime-morphing-v8/` — architecture/ownership contract, raw transitions, capacity/cost/state evidence, report, and audit.
 - `docs/fp16-awq-crossover-v7/` and `benchmark-results/fp16-awq-crossover-v7/` — preserved crossover protocol, multi-M diagnosis, 36 raw serving runs, analysis, report, and audit.
 - `docs/packed-int4-backend-v6/` and `benchmark-results/packed-int4-backend-v6/` — preserved AWQ-Marlin backend validation and prior static-gate NO-GO.

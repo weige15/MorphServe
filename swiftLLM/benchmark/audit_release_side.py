@@ -186,6 +186,332 @@ def lifecycle_integrity(event: dict[str, Any]) -> bool:
     )
 
 
+def percentile(values: list[float], percent: float) -> float:
+    ordered = sorted(values)
+    rank = (len(ordered) - 1) * percent / 100
+    lower = int(rank)
+    upper = min(lower + 1, len(ordered) - 1)
+    fraction = rank - lower
+    return ordered[lower] + (ordered[upper] - ordered[lower]) * fraction
+
+
+def catch_up_duration(
+    telemetry: list[dict[str, Any]], duration: float, resume_s: float
+) -> float | None:
+    contiguous_start: float | None = None
+    for left, right, row in telemetry_segments(telemetry, duration):
+        left = max(left, resume_s)
+        if right <= left:
+            continue
+        if int(row["waiting_q_depth"]) == 0:
+            if contiguous_start is None:
+                contiguous_start = left
+            if right - contiguous_start >= 3.0:
+                return contiguous_start + 3.0 - resume_s
+        else:
+            contiguous_start = None
+    return None
+
+
+def independent_decision_from_raw(
+    root: Path,
+    plan: list[dict[str, Any]],
+    selected: dict[str, str],
+    raw_results: dict[str, Any],
+) -> dict[str, Any]:
+    workload_metadata = read_json(root / "input" / "workload_metadata.json")
+    phase_rows: list[dict[str, Any]] = []
+    run_data: dict[tuple[str, str, int], dict[str, Any]] = {}
+    for plan_row in plan:
+        workload = str(plan_row["workload_class"])
+        condition = str(plan_row["condition"])
+        repeat = int(plan_row["repeat"])
+        directory = root / "runs" / selected[plan_row["run_id"]]
+        metadata = read_json(directory / "metadata.json")
+        requests = read_jsonl(directory / "requests.jsonl")
+        telemetry = read_jsonl(directory / "telemetry.jsonl")
+        transitions = read_jsonl(directory / "transitions.jsonl")
+        duration = float(metadata["measurement_duration_s"])
+        segments = telemetry_segments(telemetry, duration)
+        boundaries = workload_metadata["phase_boundaries"][workload]
+        run_data[(workload, condition, repeat)] = {
+            "metadata": metadata,
+            "requests": requests,
+            "telemetry": telemetry,
+            "transitions": transitions,
+            "boundaries": boundaries,
+        }
+        for index, boundary in enumerate(boundaries):
+            phase_index = int(boundary["phase_index"])
+            phase_requests = [
+                row for row in requests if int(row.get("phase_index", -1)) == phase_index
+            ]
+            ttft = [
+                (int(row["first_stream_token_received_time_ns"]) - int(row["arrival_time_ns"]))
+                / 1e9
+                for row in phase_requests
+            ]
+            start = float(boundary["start_offset_s"])
+            end = (
+                float(boundaries[index + 1]["start_offset_s"])
+                if index + 1 < len(boundaries)
+                else duration
+            )
+            phase_transitions = [
+                event
+                for event in transitions
+                if start <= float(event["requested_elapsed_s"]) < end
+            ]
+            phase_rows.append(
+                {
+                    "workload": workload,
+                    "condition": condition,
+                    "repeat": repeat,
+                    "phase_index": phase_index,
+                    "regime": boundary["regime"],
+                    "p95": percentile(ttft, 95),
+                    "waiting_area": integrate(
+                        segments,
+                        lambda row: float(row["waiting_q_depth"]),
+                        start=start,
+                        end=end,
+                    ),
+                    "preemptions": counter_value_at(telemetry, "preemption_count", end)
+                    - counter_value_at(telemetry, "preemption_count", start),
+                    "entries": sum(event.get("direction") == ENTRY for event in phase_transitions),
+                    "releases": sum(event.get("direction") == RESTORE for event in phase_transitions),
+                }
+            )
+
+    phase_lookup = {
+        (row["workload"], row["condition"], row["repeat"], row["phase_index"]): row
+        for row in phase_rows
+    }
+
+    def epsilon(workload: str, phase_index: int) -> float:
+        fp16 = [
+            phase_lookup[(workload, "runtime_static_fp16", repeat, phase_index)]["p95"]
+            for repeat in (0, 1)
+        ]
+        dynamic = [
+            phase_lookup[(workload, "closed_loop_dynamic", repeat, phase_index)]["p95"]
+            for repeat in (0, 1)
+        ]
+        return max(
+            0.111,
+            max(fp16) - min(fp16),
+            max(dynamic) - min(dynamic),
+            0.05 * sum(fp16) / len(fp16),
+        )
+
+    low_entry_ok = True
+    low_latency_ok = True
+    for repeat in (0, 1):
+        dynamic = phase_lookup[("low_only", "closed_loop_dynamic", repeat, 0)]
+        fp16 = phase_lookup[("low_only", "runtime_static_fp16", repeat, 0)]
+        low_entry_ok &= dynamic["entries"] == 0
+        low_latency_ok &= abs(dynamic["p95"] - fp16["p95"]) <= epsilon(
+            "low_only", 0
+        )
+
+    high_rows = [
+        row
+        for row in phase_rows
+        if row["condition"] == "closed_loop_dynamic" and row["regime"] == "high"
+    ]
+    high_ok = len(high_rows) == 6
+    for dynamic in high_rows:
+        fp16 = phase_lookup[
+            (
+                dynamic["workload"],
+                "runtime_static_fp16",
+                dynamic["repeat"],
+                dynamic["phase_index"],
+            )
+        ]
+        high_ok &= (
+            fp16["p95"] - dynamic["p95"]
+            > epsilon(dynamic["workload"], dynamic["phase_index"])
+            and dynamic["waiting_area"] < fp16["waiting_area"]
+            and dynamic["preemptions"] <= fp16["preemptions"]
+            and dynamic["entries"] == 1
+            and dynamic["releases"] == 0
+        )
+
+    throughput_ok = True
+    throughput_records: list[dict[str, Any]] = []
+    for workload in ("low_only", "heldout_one_cycle", "heldout_two_cycle"):
+        fp16 = [
+            run_data[(workload, "runtime_static_fp16", repeat)]["metadata"]
+            for repeat in (0, 1)
+        ]
+        dynamic = [
+            run_data[(workload, "closed_loop_dynamic", repeat)]["metadata"]
+            for repeat in (0, 1)
+        ]
+        ratios = [
+            (
+                int(dynamic[index]["completed_request_count"])
+                / float(dynamic[index]["measurement_duration_s"])
+            )
+            / (
+                int(fp16[index]["completed_request_count"])
+                / float(fp16[index]["measurement_duration_s"])
+            )
+            for index in range(2)
+        ]
+        aggregate = sum(
+            int(row["completed_request_count"]) / float(row["measurement_duration_s"])
+            for row in dynamic
+        ) / sum(
+            int(row["completed_request_count"]) / float(row["measurement_duration_s"])
+            for row in fp16
+        )
+        passed = min(ratios) >= 0.98 and aggregate >= 0.98
+        throughput_ok &= passed
+        throughput_records.append(
+            {"workload": workload, "repeat_ratios": ratios, "aggregate_ratio": aggregate, "passed": passed}
+        )
+
+    expected_directions = {
+        "low_only": [],
+        "heldout_one_cycle": [ENTRY, RESTORE],
+        "heldout_two_cycle": [ENTRY, RESTORE, ENTRY, RESTORE],
+    }
+    sequence_ok = True
+    recovery_ok = True
+    recovery_count = 0
+    no_chatter = True
+    for workload in ("low_only", "heldout_one_cycle", "heldout_two_cycle"):
+        for repeat in (0, 1):
+            data = run_data[(workload, "closed_loop_dynamic", repeat)]
+            transitions = data["transitions"]
+            directions = [event.get("direction") for event in transitions]
+            sequence_ok &= directions == expected_directions[workload]
+            if workload != "low_only":
+                sequence_ok &= (data["metadata"].get("final_engine_snapshot") or {}).get(
+                    "precision_state"
+                ) == "FP16"
+            restores = [event for event in transitions if event.get("direction") == RESTORE]
+            for restore in restores:
+                recovery_count += 1
+                lifecycle = (restore.get("engine_trace") or {}).get("restore_lifecycle") or {}
+                start_ns = int(data["metadata"]["measurement_start_time_ns"])
+                resume_s = (int(lifecycle["admission_resume_ns"]) - start_ns) / 1e9
+                request_s = float(restore["requested_elapsed_s"])
+                phase = data["boundaries"][0]
+                for boundary in data["boundaries"]:
+                    if float(boundary["start_offset_s"]) > request_s:
+                        break
+                    phase = boundary
+                post = [
+                    row
+                    for row in data["requests"]
+                    if int(row.get("phase_index", -1)) == int(phase["phase_index"])
+                    and float(row["actual_arrival_offset_s"]) > resume_s
+                    and float(row["planned_arrival_offset_s"])
+                    <= float(phase["last_arrival_offset_s"])
+                ]
+                catch_up = catch_up_duration(
+                    data["telemetry"],
+                    float(data["metadata"]["measurement_duration_s"]),
+                    resume_s,
+                )
+                next_entry = next(
+                    (
+                        event
+                        for event in transitions
+                        if event.get("direction") == ENTRY
+                        and float(event["requested_elapsed_s"]) > request_s
+                    ),
+                    None,
+                )
+                next_phase = next(
+                    (
+                        boundary
+                        for boundary in data["boundaries"]
+                        if float(boundary["start_offset_s"])
+                        > float(phase["start_offset_s"])
+                    ),
+                    None,
+                )
+                chatter_ok = next_entry is None or (
+                    float(next_entry["requested_elapsed_s"]) - resume_s >= 15.0
+                    and next_phase is not None
+                    and next_phase["regime"] == "high"
+                    and float(next_entry["requested_elapsed_s"])
+                    >= float(next_phase["start_offset_s"])
+                )
+                no_chatter &= chatter_ok
+                dynamic_phase = phase_lookup[
+                    (workload, "closed_loop_dynamic", repeat, int(phase["phase_index"]))
+                ]
+                fp16_phase = phase_lookup[
+                    (workload, "runtime_static_fp16", repeat, int(phase["phase_index"]))
+                ]
+                awq_phase = phase_lookup[
+                    (workload, "runtime_static_awq_w4_16", repeat, int(phase["phase_index"]))
+                ]
+                noise = epsilon(workload, int(phase["phase_index"]))
+                not_worse_both = not (
+                    dynamic_phase["p95"] > fp16_phase["p95"] + noise
+                    and dynamic_phase["p95"] > awq_phase["p95"] + noise
+                )
+                recovery_ok &= (
+                    lifecycle_integrity(restore)
+                    and phase["regime"] == "low"
+                    and len(post) >= 8
+                    and sum(
+                        row.get("prefill_precision_state") == "FP16"
+                        and int(row.get("fp16_output_step_count", 0)) > 0
+                        for row in post
+                    )
+                    >= 8
+                    and float(phase["last_arrival_offset_s"]) - resume_s >= 20.0
+                    and resume_s
+                    - (int(lifecycle["admission_pause_ns"]) - start_ns) / 1e9
+                    <= 5.0
+                    and catch_up is not None
+                    and catch_up <= 10.0
+                    and chatter_ok
+                    and not_worse_both
+                )
+
+    gpu_ok = all(
+        any(
+            row.get("gpu_environment_source") == "pynvml"
+            for row in read_jsonl(
+                root / "runs" / selected[plan_row["run_id"]] / "gpu_environment.jsonl"
+            )
+        )
+        for plan_row in plan
+    )
+    checks = {
+        "all_16_runs_raw_valid": len(raw_results) == 16
+        and all(row["all_pass"] for row in raw_results.values()),
+        "low_only_zero_false_entries_both": low_entry_ok,
+        "low_only_fp16_like_within_noise_both": low_latency_ok,
+        "every_high_phase_preserves_entry_benefit": high_ok,
+        "throughput_noninferior_with_0p98_margin": throughput_ok,
+        "every_release_has_complete_useful_bounded_recovery": recovery_count == 6
+        and recovery_ok,
+        "ordered_one_and_two_cycle_sequences_both_repeats": sequence_ok,
+        "no_chatter_or_release_during_high": no_chatter
+        and all(row["releases"] == 0 for row in high_rows),
+        "gpu_clock_temperature_power_available": gpu_ok,
+    }
+    scientific = {
+        key: value
+        for key, value in checks.items()
+        if key != "gpu_clock_temperature_power_available"
+    }
+    return {
+        "checks": checks,
+        "throughput": throughput_records,
+        "release_side_systems_decision": "GO" if all(scientific.values()) else "NO-GO",
+    }
+
+
 def git_file_at_commit(repo: Path, commit: str, relative: str) -> bytes | None:
     try:
         return subprocess.check_output(
@@ -232,10 +558,35 @@ def main() -> None:
         relative: sha256_file(repo / relative)
         for relative in manifest["source_sha256_at_preregistration"]
     }
+    source_mismatches = {
+        relative: {
+            "preregistered_sha256": manifest["source_sha256_at_preregistration"][relative],
+            "current_sha256": digest,
+        }
+        for relative, digest in source_hashes.items()
+        if digest != manifest["source_sha256_at_preregistration"][relative]
+    }
+    correction_path = root / "analysis_correction.json"
+    correction = read_json(correction_path) if correction_path.is_file() else {}
+    declared_corrections = correction.get("source_corrections", {})
     check(
-        "preregistered_sources_unchanged",
-        source_hashes == manifest["source_sha256_at_preregistration"],
-        source_hashes,
+        "actuation_sources_unchanged_and_analysis_repair_bounded",
+        set(source_mismatches) == set(declared_corrections)
+        and all(
+            record.get("preregistered_sha256")
+            == source_mismatches[relative]["preregistered_sha256"]
+            and record.get("corrected_sha256")
+            == source_mismatches[relative]["current_sha256"]
+            for relative, record in declared_corrections.items()
+        )
+        and set(source_mismatches)
+        <= {
+            "swiftLLM/benchmark/analyze_release_side.py",
+            "swiftLLM/benchmark/audit_release_side.py",
+            "swiftLLM/benchmark/test_release_analysis.py",
+        }
+        and correction.get("controller_or_gate_changed") is False,
+        {"mismatches": source_mismatches, "declared": declared_corrections},
     )
     historical = {
         relative: tree_sha256(repo / relative)
@@ -253,6 +604,14 @@ def main() -> None:
             and (root / "analysis" / name).stat().st_size > 0
             for name in REQUIRED_ANALYSIS
         ),
+    )
+    check(
+        "post_result_analysis_correction_disclosed",
+        correction_path.is_file()
+        and correction.get("reason")
+        == "percentile helper expects 0-100, but the preregistered analyzer passed fractions"
+        and correction.get("controller_or_gate_changed") is False,
+        correction,
     )
     check("final_docs_exist", report.is_file() and completion.is_file())
     if report.is_file():
@@ -424,7 +783,7 @@ def main() -> None:
             repo, commit, manifest["repository"]["protocol_path"]
         )
         manifest_at_run = git_file_at_commit(
-            repo, commit, str(root.relative_to(repo) / "protocol_manifest.json")
+            repo, commit, str(root.resolve().relative_to(repo) / "protocol_manifest.json")
         )
         check(
             "protocol_and_manifest_existed_at_run_commit",
@@ -438,6 +797,16 @@ def main() -> None:
         )
 
     decision = read_json(root / "analysis" / "decision.json")
+    independently_recomputed = independent_decision_from_raw(
+        root, plan, selected, raw_results
+    )
+    check(
+        "scientific_gates_and_decision_match_independent_raw_recomputation",
+        decision.get("checks") == independently_recomputed["checks"]
+        and decision.get("release_side_systems_decision")
+        == independently_recomputed["release_side_systems_decision"],
+        independently_recomputed,
+    )
     check(
         "decision_is_explicit_go_or_no_go",
         decision.get("release_side_systems_decision") in {"GO", "NO-GO"},
