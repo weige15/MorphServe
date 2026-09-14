@@ -1,0 +1,130 @@
+{
+  "driver_hbm_interpretation": "end/transition values vary non-monotonically across fresh processes and cycles; capacities and allocator/KV checks remain valid, so no leak is claimed",
+  "environment": {
+    "heldout_one_cycle": {
+      "closed_loop_dynamic": {
+        "hbm_end_mib": [
+          21291.1875,
+          21299.1875,
+          21299.1875,
+          21299.1875,
+          21299.1875,
+          21251.1875,
+          21179.1875,
+          20171.1875
+        ],
+        "power_mean_w": 261.9306524323985,
+        "run_count": 8,
+        "sm_clock_mean_mhz": 1682.526343640934,
+        "temperature_max_c": 73.0,
+        "temperature_mean_c": 69.04038153125246
+      },
+      "runtime_static_fp16": {
+        "hbm_end_mib": [
+          21849.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21849.1875
+        ],
+        "power_mean_w": 266.26132118136854,
+        "run_count": 8,
+        "sm_clock_mean_mhz": 1670.3722410334233,
+        "temperature_max_c": 73.0,
+        "temperature_mean_c": 69.3072343293884
+      }
+    },
+    "heldout_two_cycle": {
+      "closed_loop_dynamic": {
+        "hbm_end_mib": [
+          21491.1875,
+          21251.1875,
+          21315.1875,
+          21267.1875,
+          21267.1875,
+          21251.1875,
+          21315.1875,
+          21203.1875
+        ],
+        "power_mean_w": 261.6826675772143,
+        "run_count": 8,
+        "sm_clock_mean_mhz": 1678.7765195928966,
+        "temperature_max_c": 73.0,
+        "temperature_mean_c": 69.430502611762
+      },
+      "runtime_static_fp16": {
+        "hbm_end_mib": [
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21849.1875
+        ],
+        "power_mean_w": 267.5058686681955,
+        "run_count": 8,
+        "sm_clock_mean_mhz": 1654.0371667426969,
+        "temperature_max_c": 74.0,
+        "temperature_mean_c": 70.08941472215001
+      }
+    },
+    "low_only": {
+      "closed_loop_dynamic": {
+        "hbm_end_mib": [
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          20283.1875,
+          21793.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875
+        ],
+        "power_mean_w": 260.7327496785966,
+        "run_count": 12,
+        "sm_clock_mean_mhz": 1727.4732328002792,
+        "temperature_max_c": 71.0,
+        "temperature_mean_c": 66.05005026496708
+      },
+      "runtime_static_fp16": {
+        "hbm_end_mib": [
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875,
+          21233.1875
+        ],
+        "power_mean_w": 261.956231549918,
+        "run_count": 12,
+        "sm_clock_mean_mhz": 1725.9446341038492,
+        "temperature_max_c": 72.0,
+        "temperature_mean_c": 66.08773339258191
+      }
+    }
+  },
+  "nvml_available_all_runs": true,
+  "restore_model_allocated_bytes": {
+    "count": 27,
+    "unique": [
+      20070251520,
+      20070775808
+    ]
+  },
+  "schema_version": 1
+}

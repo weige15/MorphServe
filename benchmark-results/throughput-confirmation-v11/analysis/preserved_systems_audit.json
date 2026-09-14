@@ -1,0 +1,142 @@
+{
+  "all_request_capacity_transition_correctness": true,
+  "completed_output_steps": 4980736,
+  "completed_requests": 9728,
+  "dynamic_run_count": 28,
+  "low_only_zero_transition_count": 11,
+  "one_cycle_exact_count": 7,
+  "phase_behavior_failures": [
+    {
+      "all_transitions_success": true,
+      "capacity_integrity": true,
+      "condition": "closed_loop_dynamic",
+      "expected_transition_directions": [],
+      "false_entries": [
+        {
+          "elapsed_s": 92.508317206,
+          "phase": "low"
+        }
+      ],
+      "final_fp16_1759": true,
+      "phase": "phase_a",
+      "phase_correct": false,
+      "real_drain_count": 0,
+      "request_count": 64,
+      "request_integrity": true,
+      "run_id": "v11-phase_a-low-04-dynamic",
+      "transition_directions": [
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16"
+      ],
+      "transition_order_valid": false,
+      "useful_releases": false,
+      "workload": "low_only"
+    },
+    {
+      "all_transitions_success": true,
+      "capacity_integrity": true,
+      "condition": "closed_loop_dynamic",
+      "expected_transition_directions": [
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16"
+      ],
+      "false_entries": [
+        {
+          "elapsed_s": 217.268433337,
+          "phase": "low_2"
+        },
+        {
+          "elapsed_s": 267.282540108,
+          "phase": "low_2"
+        }
+      ],
+      "final_fp16_1759": true,
+      "phase": "phase_c",
+      "phase_correct": false,
+      "real_drain_count": 0,
+      "request_count": 192,
+      "request_integrity": true,
+      "run_id": "v11-phase_c-one-07-dynamic",
+      "transition_directions": [
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16",
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16",
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16"
+      ],
+      "transition_order_valid": false,
+      "useful_releases": false,
+      "workload": "heldout_one_cycle"
+    }
+  ],
+  "run_count": 56,
+  "schema_version": 1,
+  "transition_count": 54,
+  "transition_order_failures": [
+    {
+      "all_transitions_success": true,
+      "capacity_integrity": true,
+      "condition": "closed_loop_dynamic",
+      "expected_transition_directions": [],
+      "false_entries": [
+        {
+          "elapsed_s": 92.508317206,
+          "phase": "low"
+        }
+      ],
+      "final_fp16_1759": true,
+      "phase": "phase_a",
+      "phase_correct": false,
+      "real_drain_count": 0,
+      "request_count": 64,
+      "request_integrity": true,
+      "run_id": "v11-phase_a-low-04-dynamic",
+      "transition_directions": [
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16"
+      ],
+      "transition_order_valid": false,
+      "useful_releases": false,
+      "workload": "low_only"
+    },
+    {
+      "all_transitions_success": true,
+      "capacity_integrity": true,
+      "condition": "closed_loop_dynamic",
+      "expected_transition_directions": [
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16"
+      ],
+      "false_entries": [
+        {
+          "elapsed_s": 217.268433337,
+          "phase": "low_2"
+        },
+        {
+          "elapsed_s": 267.282540108,
+          "phase": "low_2"
+        }
+      ],
+      "final_fp16_1759": true,
+      "phase": "phase_c",
+      "phase_correct": false,
+      "real_drain_count": 0,
+      "request_count": 192,
+      "request_integrity": true,
+      "run_id": "v11-phase_c-one-07-dynamic",
+      "transition_directions": [
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16",
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16",
+        "FP16_TO_AWQ_MARLIN_W4_16",
+        "AWQ_MARLIN_W4_16_TO_FP16"
+      ],
+      "transition_order_valid": false,
+      "useful_releases": false,
+      "workload": "heldout_one_cycle"
+    }
+  ],
+  "two_cycle_exact_all": true
+}

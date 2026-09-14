@@ -1,0 +1,617 @@
+{
+  "check_count": 14,
+  "checks": [
+    {
+      "evidence": null,
+      "name": "manifest_artifact_version",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "protocol_hash",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "run_plan_hash",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "declared": {
+          "swiftLLM/benchmark/audit_throughput_confirmation.py": {
+            "corrected_sha256": "65416dd8fe4743201aa307f9c50ffa10a56cb3a55239f3ea35a7cfaa1a0d2bc5",
+            "preregistered_sha256": "c33a751bf33feb41f0a3b0dad3c874077956f6721071c5a373dea41f3feae81f"
+          }
+        },
+        "mismatches": {
+          "swiftLLM/benchmark/audit_throughput_confirmation.py": {
+            "current_sha256": "65416dd8fe4743201aa307f9c50ffa10a56cb3a55239f3ea35a7cfaa1a0d2bc5",
+            "preregistered_sha256": "c33a751bf33feb41f0a3b0dad3c874077956f6721071c5a373dea41f3feae81f"
+          }
+        }
+      },
+      "name": "actuation_sources_unchanged_and_audit_correction_bounded",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "v10_and_prior_namespaces_unchanged",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "phase_a_raw_runs_unchanged",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "phase_a_analysis_and_decision_unchanged",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "v10_decision_remains_no_go",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "total_actions": 38,
+        "total_samples": 27217,
+        "total_streams": 48,
+        "v10_dynamic_streams": 6,
+        "v7_streams": 36,
+        "v9_dynamic_streams": 6
+      },
+      "name": "archived_policy_parity_passes",
+      "passed": true
+    },
+    {
+      "evidence": null,
+      "name": "execution_complete",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "v11-phase_c-one-00-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 297,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-one-00-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 292,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-one-01-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 294,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-one-01-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 293,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-one-02-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 293,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-one-02-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 291,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-one-03-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 296,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-one-03-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 293,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-one-04-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 294,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-one-04-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 292,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-one-05-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 299,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-one-05-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 292,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-one-06-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 296,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-one-06-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 292,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-one-07-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 305,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": false,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-one-07-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 297,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-two-00-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 471,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-two-00-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 467,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-two-01-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 471,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-two-01-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 465,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-two-02-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 470,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-two-02-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 467,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-two-03-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 473,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-two-03-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 468,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-two-04-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 472,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-two-04-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 465,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-two-05-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 470,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-two-05-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 466,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-two-06-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 469,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-two-06-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 465,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        },
+        "v11-phase_c-two-07-dynamic": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 475,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": [
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16",
+            "FP16_TO_AWQ_MARLIN_W4_16",
+            "AWQ_MARLIN_W4_16_TO_FP16"
+          ]
+        },
+        "v11-phase_c-two-07-fp16": {
+          "capacity_integrity": true,
+          "controller_timing": true,
+          "final_capacity": 1759,
+          "final_state": "FP16",
+          "nvml_samples": 469,
+          "one_prefill_each": true,
+          "passed": true,
+          "phase_and_restore_behavior": true,
+          "request_integrity": true,
+          "transition_integrity": true,
+          "transition_sequence": []
+        }
+      },
+      "name": "all_selected_raw_runs_valid",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "all_final_states_fp16_1759": true,
+        "all_raw_runs_valid": true,
+        "all_requests_integral": true,
+        "all_transition_sequences_valid": false,
+        "all_transitions_success": true,
+        "low_only_dynamic_zero_transitions": true,
+        "nvml_available_all_runs": true
+      },
+      "name": "systems_guardrails_independently_recomputed",
+      "passed": true
+    },
+    {
+      "evidence": [
+        {
+          "geometric_mean_ratio": 0.987017309513112,
+          "noninferior": true,
+          "one_sided_lower_confidence_bound": 0.9800528123264707,
+          "pair_count": 8,
+          "workload": "heldout_one_cycle"
+        },
+        {
+          "geometric_mean_ratio": 0.9894643818813631,
+          "noninferior": true,
+          "one_sided_lower_confidence_bound": 0.9873827256610046,
+          "pair_count": 8,
+          "workload": "heldout_two_cycle"
+        }
+      ],
+      "name": "throughput_inference_independently_recomputed",
+      "passed": true
+    },
+    {
+      "evidence": {
+        "all_guardrails_pass": false,
+        "all_workloads_noninferior": true,
+        "phase_a_control_plane_optimization_eligible": false,
+        "phase_a_implementation_decision": "KEEP_CONTROLLER_UNCHANGED",
+        "scope": "phase_c",
+        "workload_noninferiority": {
+          "heldout_one_cycle": true,
+          "heldout_two_cycle": true
+        }
+      },
+      "name": "decision_matches_inference_and_guardrails",
+      "passed": true
+    }
+  ],
+  "passed_check_count": 14,
+  "plan_key": "phase_c",
+  "schema_version": 1,
+  "status": "PASS"
+}

@@ -258,7 +258,11 @@ def main() -> None:
         for path, digest in current_sources.items()
         if digest != manifest["source_sha256_at_preregistration"][path]
     }
-    correction_path = root / "analysis_correction.json"
+    correction_path = root / (
+        "analysis_correction.json"
+        if args.plan_key == "phase_a"
+        else "phase-c-analysis-correction.json"
+    )
     correction = read_json(correction_path) if correction_path.is_file() else {}
     declared = correction.get("source_corrections", {})
     check(

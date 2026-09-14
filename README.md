@@ -1,10 +1,12 @@
 # MorphServe
 
-MorphServe is a research repository for measuring and changing SwiftLLM serving behavior under load. V7 validated the static `{FP16, AWQ-W4-16}` crossover, v8 established state-preserving one-process morphing, and v9 confirmed high-pressure entry but failed useful release. Release-side v10 now demonstrates repeated useful AWQ→FP16 restoration on held-out one- and two-cycle workloads, while retaining a formal **NO-GO** because its preregistered 0.98 throughput non-inferiority margin narrowly failed.
+MorphServe is a research repository for measuring and changing SwiftLLM serving behavior under load. V7 validated the static `{FP16, AWQ-W4-16}` crossover, v8 established state-preserving one-process morphing, v9 confirmed high-pressure entry but failed useful release, and v10 repaired release while retaining its formal **NO-GO**. Throughput confirmation v11 adds 28 preregistered paired blocks: adaptation workloads pass the 0.98 paired non-inferiority analysis, but the final decision is **NO-GO** because low-only remains narrowly unresolved and larger-N runs exposed false low-phase entry/chatter. V10 remains unchanged.
 
 ## Start here
 
-- [Release-side runtime v10 final report](docs/release-side-runtime-v10/final-report.md) — current 16-run held-out reversibility result and formal decision.
+- [Throughput confirmation v11 final report](docs/throughput-confirmation-v11/final-report.md) — 56-run paired inference, controller attribution, tail/HBM analysis, and final NO-GO.
+- [Throughput confirmation v11 completion audit](docs/throughput-confirmation-v11/completion-audit.md) — requirement-to-artifact verification.
+- [Release-side runtime v10 final report](docs/release-side-runtime-v10/final-report.md) — preserved 16-run held-out reversibility result and formal NO-GO.
 - [Release-side v10 completion audit](docs/release-side-runtime-v10/completion-audit.md) — prompt-to-artifact verification and bounded analysis-correction disclosure.
 - [V9 release-delay diagnosis](docs/release-side-runtime-v10/release-delay-diagnosis.md) — development replay and frozen release-intent rationale.
 - [Closed-loop runtime v9 final report](docs/closed-loop-runtime-v9/final-report.md) — preserved 18-run NO-GO baseline.
@@ -46,16 +48,17 @@ Run the CPU-only checks from the repository root:
 VENV=/nfs/home/s314511048/.venv
 PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest \
   benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover \
-  benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
+  benchmark.test_runtime_morphing benchmark.test_closed_loop_controller \
+  benchmark.test_throughput_confirmation -v
 ```
 
-Regenerate the saved v10 diagnosis, held-out tables, decision, tests, and raw-evidence audit:
+Regenerate the saved v11 paired analyses, exact policy replay, tests, and raw-evidence audit:
 
 ```bash
-benchmark-results/release-side-runtime-v10/regenerate.sh
+benchmark-results/throughput-confirmation-v11/regenerate.sh
 ```
 
-The audit ends `status: PASS`; the frozen scientific decision remains `NO-GO`. V9 remains reproducible with `benchmark-results/closed-loop-runtime-v9/regenerate.sh`. V8 (including CUDA segmented-KV tests), v7, and v6 remain independently reproducible with
+The artifact audits end `status: PASS`; the v11 scientific decision is `NO-GO`, and the preserved v10 decision remains `NO-GO`. V10 remains reproducible with `benchmark-results/release-side-runtime-v10/regenerate.sh`; v9 remains reproducible with `benchmark-results/closed-loop-runtime-v9/regenerate.sh`. V8 (including CUDA segmented-KV tests), v7, and v6 remain independently reproducible with
 `CUDA_VISIBLE_DEVICES=5 benchmark-results/runtime-morphing-v8/regenerate.sh`,
 `benchmark-results/fp16-awq-crossover-v7/regenerate.sh` and
 `benchmark-results/packed-int4-backend-v6/regenerate.sh`.
@@ -66,7 +69,8 @@ The audit ends `status: PASS`; the frozen scientific decision remains `NO-GO`. V
 - `swiftLLM/benchmark/` — open-loop runners, runtime validation, analysis, metrics, and tests.
 - `benchmark-results/phase-1/` — Phase 1 raw runs and derived artifacts, grouped by experiment.
 - `docs/phase-1/` — curated current documentation; `archive/` contains superseded reports.
-- `docs/release-side-runtime-v10/` and `benchmark-results/release-side-runtime-v10/` — release diagnosis, preregistered policy/workloads, 16 held-out runs, exact drain timelines, GPU telemetry, report, and audit.
+- `docs/throughput-confirmation-v11/` and `benchmark-results/throughput-confirmation-v11/` — paired plans, 56 raw runs, controller timing, confidence/tail/HBM analyses, reports, and audits.
+- `docs/release-side-runtime-v10/` and `benchmark-results/release-side-runtime-v10/` — preserved release diagnosis, preregistered policy/workloads, 16 held-out runs, exact drain timelines, GPU telemetry, report, and audit.
 - `docs/closed-loop-runtime-v9/` and `benchmark-results/closed-loop-runtime-v9/` — preserved frozen controller protocol, 18 runs, raw traces, tables, timelines, final report, and audit.
 - `docs/runtime-morphing-v8/` and `benchmark-results/runtime-morphing-v8/` — architecture/ownership contract, raw transitions, capacity/cost/state evidence, report, and audit.
 - `docs/fp16-awq-crossover-v7/` and `benchmark-results/fp16-awq-crossover-v7/` — preserved crossover protocol, multi-M diagnosis, 36 raw serving runs, analysis, report, and audit.

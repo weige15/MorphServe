@@ -1,0 +1,15 @@
+{
+  "controller_analyzer_or_scientific_rule_changed": false,
+  "created_at_utc": "2026-09-14T15:53:26.607917+00:00",
+  "expected_corrected_artifact_audit_status": "PASS even though Phase C transition-order guardrail remains failed",
+  "preliminary_phase_c_audit_status": "FAIL",
+  "reason": "the audit selected the Phase A correction declaration while validating a Phase C manifest whose preregistered audit hash already included that Phase A correction",
+  "schema_version": 1,
+  "scope": "audit correction-file selection only; raw runs, selection, controller, analyzer, inference, guardrail values, and scientific decisions are unchanged",
+  "source_corrections": {
+    "swiftLLM/benchmark/audit_throughput_confirmation.py": {
+      "corrected_sha256": "65416dd8fe4743201aa307f9c50ffa10a56cb3a55239f3ea35a7cfaa1a0d2bc5",
+      "preregistered_sha256": "c33a751bf33feb41f0a3b0dad3c874077956f6721071c5a373dea41f3feae81f"
+    }
+  }
+}

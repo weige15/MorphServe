@@ -1,0 +1,33 @@
+{
+  "decision_reasons": [
+    "low-only 97.5% one-sided lower bound does not exceed 0.98",
+    "one low-only Dynamic run unexpectedly transitioned",
+    "one one-cycle Dynamic run chattered with two extra round trips and post-restore usefulness failure",
+    "controller window recomputation consumed measurable and growing synchronous wall time; no optimization was authorized by the preregistered Phase B rule"
+  ],
+  "persistent_controller_overhead_observed": true,
+  "persistent_hbm_or_allocator_defect": false,
+  "phase_a_implementation_decision": "KEEP_CONTROLLER_UNCHANGED",
+  "schema_version": 1,
+  "systems_guardrails_pass": false,
+  "throughput_confirmation_decision": "NO-GO",
+  "throughput_intersection_union_pass": false,
+  "v10_release_side_systems_decision": "NO-GO (unchanged)",
+  "workload_noninferiority": {
+    "heldout_one_cycle": {
+      "geometric_mean_ratio": 0.987017309513112,
+      "lower_97p5_one_sided": 0.9800528123264707,
+      "passes_0p98": true
+    },
+    "heldout_two_cycle": {
+      "geometric_mean_ratio": 0.9894643818813631,
+      "lower_97p5_one_sided": 0.9873827256610046,
+      "passes_0p98": true
+    },
+    "low_only": {
+      "geometric_mean_ratio": 0.9907627606930599,
+      "lower_97p5_one_sided": 0.9789295561154991,
+      "passes_0p98": false
+    }
+  }
+}

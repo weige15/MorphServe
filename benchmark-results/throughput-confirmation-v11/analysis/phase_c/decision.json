@@ -1,0 +1,11 @@
+{
+  "all_guardrails_pass": false,
+  "all_workloads_noninferior": true,
+  "phase_a_control_plane_optimization_eligible": false,
+  "phase_a_implementation_decision": "KEEP_CONTROLLER_UNCHANGED",
+  "scope": "phase_c",
+  "workload_noninferiority": {
+    "heldout_one_cycle": true,
+    "heldout_two_cycle": true
+  }
+}

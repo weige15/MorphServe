@@ -1,0 +1,57 @@
+{
+  "decision": {
+    "all_guardrails_pass": false,
+    "all_workloads_noninferior": true,
+    "phase_a_control_plane_optimization_eligible": false,
+    "phase_a_implementation_decision": "KEEP_CONTROLLER_UNCHANGED",
+    "scope": "phase_c",
+    "workload_noninferiority": {
+      "heldout_one_cycle": true,
+      "heldout_two_cycle": true
+    }
+  },
+  "inference": [
+    {
+      "degrees_of_freedom": 7,
+      "estimand": "geometric mean Dynamic/FP16 completed-request throughput ratio",
+      "geometric_mean_ratio": 0.987017309513112,
+      "log_ratio_sd": 0.008470023004770259,
+      "margin": 0.98,
+      "mean_log_ratio": -0.013067702201815667,
+      "method": "paired one-sample Student t on run-level log ratios",
+      "noninferior": true,
+      "null": "mean log ratio <= log(0.98)",
+      "one_sided_alpha": 0.025,
+      "one_sided_confidence_level": 0.975,
+      "one_sided_lower_confidence_bound": 0.9800528123264707,
+      "one_sided_p_value": 0.024347110920206645,
+      "pair_count": 8,
+      "repeatable_nonzero_deficit": true,
+      "standard_error": 0.0029946053517395533,
+      "t_statistic_vs_margin": 2.382619503287505,
+      "two_sided_95_upper_ratio": 0.9940312981357785,
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "degrees_of_freedom": 7,
+      "estimand": "geometric mean Dynamic/FP16 completed-request throughput ratio",
+      "geometric_mean_ratio": 0.9894643818813631,
+      "log_ratio_sd": 0.002519120472009584,
+      "margin": 0.98,
+      "mean_log_ratio": -0.010591510664841104,
+      "method": "paired one-sample Student t on run-level log ratios",
+      "noninferior": true,
+      "null": "mean log ratio <= log(0.98)",
+      "one_sided_alpha": 0.025,
+      "one_sided_confidence_level": 0.975,
+      "one_sided_lower_confidence_bound": 0.9873827256610046,
+      "one_sided_p_value": 6.461204368396125e-06,
+      "pair_count": 8,
+      "repeatable_nonzero_deficit": true,
+      "standard_error": 0.0008906435841919165,
+      "t_statistic_vs_margin": 10.791293872507516,
+      "two_sided_95_upper_ratio": 0.9915504267673395,
+      "workload": "heldout_two_cycle"
+    }
+  ]
+}

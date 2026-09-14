@@ -1,0 +1,184 @@
+{
+  "dynamic_runs": [
+    {
+      "controller_blocking_wall_fraction": 0.035408690755041425,
+      "controller_evaluate_cpu_s": 12.374704203,
+      "controller_evaluate_wall_s": 10.413098777,
+      "controller_trace_bookkeeping_cpu_s": 0.09819391,
+      "controller_trace_bookkeeping_wall_s": 0.071592934,
+      "controller_window_cpu_s": 12.166351138,
+      "controller_window_wall_s": 10.241958874,
+      "run_id": "v11-phase_c-one-00-dynamic",
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.05142203676526752,
+      "controller_evaluate_cpu_s": 28.965272537,
+      "controller_evaluate_wall_s": 24.104634922,
+      "controller_trace_bookkeeping_cpu_s": 0.138346241,
+      "controller_trace_bookkeeping_wall_s": 0.109125921,
+      "controller_window_cpu_s": 28.644084113,
+      "controller_window_wall_s": 23.831617436,
+      "run_id": "v11-phase_c-two-00-dynamic",
+      "workload": "heldout_two_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.03418097880995669,
+      "controller_evaluate_cpu_s": 11.980937769,
+      "controller_evaluate_wall_s": 9.955448583,
+      "controller_trace_bookkeeping_cpu_s": 0.090388613,
+      "controller_trace_bookkeeping_wall_s": 0.065647053,
+      "controller_window_cpu_s": 11.792236818,
+      "controller_window_wall_s": 9.801131037,
+      "run_id": "v11-phase_c-one-01-dynamic",
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.048495102872476534,
+      "controller_evaluate_cpu_s": 27.174927093,
+      "controller_evaluate_wall_s": 22.724597389,
+      "controller_trace_bookkeeping_cpu_s": 0.141399665,
+      "controller_trace_bookkeeping_wall_s": 0.10155004,
+      "controller_window_cpu_s": 26.870739625,
+      "controller_window_wall_s": 22.485319665,
+      "run_id": "v11-phase_c-two-01-dynamic",
+      "workload": "heldout_two_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.033301507530410786,
+      "controller_evaluate_cpu_s": 11.504251009,
+      "controller_evaluate_wall_s": 9.679212587,
+      "controller_trace_bookkeeping_cpu_s": 0.086194452,
+      "controller_trace_bookkeeping_wall_s": 0.064397815,
+      "controller_window_cpu_s": 11.314357283,
+      "controller_window_wall_s": 9.524940838,
+      "run_id": "v11-phase_c-one-02-dynamic",
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.04924169000966453,
+      "controller_evaluate_cpu_s": 27.369138524,
+      "controller_evaluate_wall_s": 23.038193184,
+      "controller_trace_bookkeeping_cpu_s": 0.131275576,
+      "controller_trace_bookkeeping_wall_s": 0.101611456,
+      "controller_window_cpu_s": 27.084362515,
+      "controller_window_wall_s": 22.788939847,
+      "run_id": "v11-phase_c-two-02-dynamic",
+      "workload": "heldout_two_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.03490364832800678,
+      "controller_evaluate_cpu_s": 12.059286728,
+      "controller_evaluate_wall_s": 10.232689483,
+      "controller_trace_bookkeeping_cpu_s": 0.08396166,
+      "controller_trace_bookkeeping_wall_s": 0.065179013,
+      "controller_window_cpu_s": 11.875831372,
+      "controller_window_wall_s": 10.076551999,
+      "run_id": "v11-phase_c-one-03-dynamic",
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.05180314176251622,
+      "controller_evaluate_cpu_s": 29.028814508,
+      "controller_evaluate_wall_s": 24.380632365,
+      "controller_trace_bookkeeping_cpu_s": 0.140251185,
+      "controller_trace_bookkeeping_wall_s": 0.105185948,
+      "controller_window_cpu_s": 28.722255763,
+      "controller_window_wall_s": 24.12571899,
+      "run_id": "v11-phase_c-two-03-dynamic",
+      "workload": "heldout_two_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.034427835067020636,
+      "controller_evaluate_cpu_s": 11.974304647,
+      "controller_evaluate_wall_s": 10.03617058,
+      "controller_trace_bookkeeping_cpu_s": 0.087881215,
+      "controller_trace_bookkeeping_wall_s": 0.063777574,
+      "controller_window_cpu_s": 11.783837022,
+      "controller_window_wall_s": 9.880699525,
+      "run_id": "v11-phase_c-one-04-dynamic",
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.0505974398737211,
+      "controller_evaluate_cpu_s": 28.322677525,
+      "controller_evaluate_wall_s": 23.766423214,
+      "controller_trace_bookkeeping_cpu_s": 0.14048309,
+      "controller_trace_bookkeeping_wall_s": 0.103517437,
+      "controller_window_cpu_s": 28.012071144,
+      "controller_window_wall_s": 23.514697952,
+      "run_id": "v11-phase_c-two-04-dynamic",
+      "workload": "heldout_two_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.0390734332579426,
+      "controller_evaluate_cpu_s": 13.618004788,
+      "controller_evaluate_wall_s": 11.576049523,
+      "controller_trace_bookkeeping_cpu_s": 0.092117562,
+      "controller_trace_bookkeeping_wall_s": 0.076104847,
+      "controller_window_cpu_s": 13.402310201,
+      "controller_window_wall_s": 11.393027364,
+      "run_id": "v11-phase_c-one-05-dynamic",
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.04834082822937363,
+      "controller_evaluate_cpu_s": 26.873391301,
+      "controller_evaluate_wall_s": 22.567912834,
+      "controller_trace_bookkeeping_cpu_s": 0.140233185,
+      "controller_trace_bookkeeping_wall_s": 0.109823016,
+      "controller_window_cpu_s": 26.564338633,
+      "controller_window_wall_s": 22.301453049,
+      "run_id": "v11-phase_c-two-05-dynamic",
+      "workload": "heldout_two_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.03363877811944854,
+      "controller_evaluate_cpu_s": 11.707145103,
+      "controller_evaluate_wall_s": 9.86496703,
+      "controller_trace_bookkeeping_cpu_s": 0.079476295,
+      "controller_trace_bookkeeping_wall_s": 0.064223539,
+      "controller_window_cpu_s": 11.515502991,
+      "controller_window_wall_s": 9.708957941,
+      "run_id": "v11-phase_c-one-06-dynamic",
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.049766152544712866,
+      "controller_evaluate_cpu_s": 27.774006913,
+      "controller_evaluate_wall_s": 23.208492781,
+      "controller_trace_bookkeeping_cpu_s": 0.135861509,
+      "controller_trace_bookkeeping_wall_s": 0.10195265,
+      "controller_window_cpu_s": 27.46518162,
+      "controller_window_wall_s": 22.958636459,
+      "run_id": "v11-phase_c-two-06-dynamic",
+      "workload": "heldout_two_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.028452051939555884,
+      "controller_evaluate_cpu_s": 10.003136217,
+      "controller_evaluate_wall_s": 8.542985951,
+      "controller_trace_bookkeeping_cpu_s": 0.150041432,
+      "controller_trace_bookkeeping_wall_s": 0.12141115,
+      "controller_window_cpu_s": 9.661732415,
+      "controller_window_wall_s": 8.230409772,
+      "run_id": "v11-phase_c-one-07-dynamic",
+      "workload": "heldout_one_cycle"
+    },
+    {
+      "controller_blocking_wall_fraction": 0.050112989600766294,
+      "controller_evaluate_cpu_s": 26.626316203,
+      "controller_evaluate_wall_s": 23.513571207,
+      "controller_trace_bookkeeping_cpu_s": 0.293959046,
+      "controller_trace_bookkeeping_wall_s": 0.251263161,
+      "controller_window_cpu_s": 25.881702632,
+      "controller_window_wall_s": 22.828304638,
+      "run_id": "v11-phase_c-two-07-dynamic",
+      "workload": "heldout_two_cycle"
+    }
+  ],
+  "instrumentation_effect": "timings are output-only and exact policy parity is a prerequisite",
+  "materiality_rule": "eligible for one optimization only if the two-sided 95% upper ratio is below 1.0 and median measured blocking wall time is >=25% of positive matched duration excess",
+  "measurement_boundary": "evaluate includes all frozen v10 window construction/integration and decision work; trace bookkeeping includes decision construction and trace_fields only",
+  "median_fraction_of_positive_matched_duration_excess": 4.61324542886485
+}

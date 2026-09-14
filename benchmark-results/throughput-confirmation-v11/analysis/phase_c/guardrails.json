@@ -1,0 +1,9 @@
+{
+  "all_final_states_fp16_1759": true,
+  "all_raw_runs_valid": true,
+  "all_requests_integral": true,
+  "all_transition_sequences_valid": false,
+  "all_transitions_success": true,
+  "low_only_dynamic_zero_transitions": true,
+  "nvml_available_all_runs": true
+}

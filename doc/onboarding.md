@@ -2,7 +2,7 @@
 
 ## What This Project Does
 
-MorphServe is a research workspace built around a vendored SwiftLLM inference engine. It measures open-loop arrivals, queueing, TTFT, TPOT, KV pressure, and runtime precision behavior. V7 validates the static `{FP16, AWQ-W4-16}` crossover, v8 implements state-preserving one-process FP16↔AWQ morphing, and v9 confirms causal high-pressure entry but fails useful release. Release-side v10 demonstrates repeated useful restoration and exact two-cycle operation on held-out workloads; its formal decision remains **NO-GO** only because the preregistered 0.98 throughput non-inferiority margin narrowly failed.
+MorphServe is a research workspace built around a vendored SwiftLLM inference engine. It measures open-loop arrivals, queueing, TTFT, TPOT, KV pressure, and runtime precision behavior. V7 validates the static `{FP16, AWQ-W4-16}` crossover, v8 implements state-preserving one-process FP16↔AWQ morphing, v9 confirms causal high-pressure entry but fails useful release, and v10 repairs release while retaining its frozen **NO-GO**. V11 uses 28 new paired blocks to resolve throughput uncertainty: one-/two-cycle throughput is non-inferior at 0.98, but the final decision remains **NO-GO** because low-only is narrowly unresolved and rare false entry/chatter appeared.
 
 ## Quickstart
 
@@ -33,20 +33,20 @@ Run the tests from the repository root:
 
 ```bash
 VENV=/nfs/home/s314511048/.venv
-PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
+PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller benchmark.test_throughput_confirmation -v
 
 AWQ_ENV=/nfs/home/s314511048/.venvs/morphserve-vllm0112
 AWQ_EXT=/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib
-PYTHONPATH="$AWQ_EXT:$PWD/swiftLLM" "$AWQ_ENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
+PYTHONPATH="$AWQ_EXT:$PWD/swiftLLM" "$AWQ_ENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller benchmark.test_throughput_confirmation -v
 ```
 
-Regenerate v10 analysis/tests and independently audit all saved raw evidence:
+Regenerate v11 paired analyses/tests and independently audit saved evidence:
 
 ```bash
-benchmark-results/release-side-runtime-v10/regenerate.sh
+benchmark-results/throughput-confirmation-v11/regenerate.sh
 ```
 
-A successful artifact audit ends with `status: PASS`; its scientific decision remains `NO-GO` by design. The preregistered analyzer had a disclosed percentile-API correction; see `analysis_correction.json`. Reproducing raw v10 runs requires checkout of preregistration commit `8e7675f`, while routine regeneration uses the current result commit. V9, v8, v7, and v6 remain independently reproducible with their existing scripts. Do not rerun broad historical serving matrices for routine checks.
+Successful artifact audits end with `status: PASS`; the scientific decision remains `NO-GO`. Reproducing raw runs uses the commands/clean commits in `execution_commands.json`; routine checks should regenerate analysis rather than rerun 56 GPU processes. V10 remains independently reproducible with `benchmark-results/release-side-runtime-v10/regenerate.sh`; its preregistered analyzer correction and frozen `NO-GO` remain unchanged.
 
 The complete final sweep command is preserved in [`docs/phase-1/kv-admission-sweep-report.md`](../docs/phase-1/kv-admission-sweep-report.md); it requires a CUDA GPU and is substantially more expensive than the smoke run.
 
@@ -80,6 +80,11 @@ The complete final sweep command is preserved in [`docs/phase-1/kv-admission-swe
 | `swiftLLM/benchmark/audit_crossover.py` | Verifies preserved v7 raw coverage, analysis, and decision gates. |
 | `swiftLLM/benchmark/closed_loop_controller.py` | Frozen v7/v9 sustained-pressure entry state machine using exact time-weighted helpers. |
 | `swiftLLM/benchmark/release_intent_controller.py` | V10 causal pressure-drop release intent; entry delegates to the frozen controller. |
+| `swiftLLM/benchmark/instrumented_release_intent_controller.py` | V11 output-only evaluator/window/trace timing with exact archived policy parity. |
+| `swiftLLM/benchmark/run_throughput_confirmation_condition.py` | V11 wrapper around the unchanged v10 runtime plus event-loop timing. |
+| `swiftLLM/benchmark/run_throughput_confirmation_plan.py` | Executes immutable paired fresh-process plans. |
+| `swiftLLM/benchmark/analyze_throughput_confirmation.py` | Paired-log NI, tail, jitter, controller, HBM, and guardrail analysis. |
+| `swiftLLM/benchmark/audit_throughput_confirmation.py` | Independent raw, parity, immutability, inference, and systems audit. |
 | `swiftLLM/benchmark/analyze_release_latency.py` | Replays v9 release barriers as development evidence. |
 | `swiftLLM/benchmark/prepare_release_workloads.py` | Freezes alternate-content low-only, one-cycle, and two-cycle v10 inputs. |
 | `swiftLLM/benchmark/run_release_condition.py` | V10 same-envelope runner with drain and NVML telemetry. |
@@ -94,6 +99,8 @@ The complete final sweep command is preserved in [`docs/phase-1/kv-admission-swe
 | `swiftLLM/benchmark/test_closed_loop_controller.py` | Boundary/state-machine checks and exact v7 telemetry replay. |
 | `swiftLLM/benchmark/run_runtime_morphing_validation.py` | Generates v8 static, mid-request, capacity, cost, and cycle evidence. |
 | `swiftLLM/benchmark/test_runtime_morphing.py` | CPU contract and opt-in CUDA segmented-KV/allocator/swap tests. |
+| `benchmark-results/throughput-confirmation-v11/` | Frozen paired plans, 56 raw runs, timing, inference, tail/HBM evidence, commands, and audits. |
+| `docs/throughput-confirmation-v11/` | Protocols, Phase A attribution, final report, and completion audit. |
 | `benchmark-results/release-side-runtime-v10/` | Frozen inputs/manifest, 16 held-out raw runs, exact release/drain timelines, GPU telemetry, analysis, commands, and audit. |
 | `docs/release-side-runtime-v10/` | V9 delay diagnosis, v10 protocol, final report, and completion audit. |
 | `benchmark-results/closed-loop-runtime-v9/` | Preserved frozen inputs/manifest, 18 raw runs, analysis, timelines, commands, logs, and audit. |
@@ -123,12 +130,12 @@ The safe dynamic total is 4,170 blocks. A 4,286-block diagnostic allocation comp
 
 ## Development Workflow
 
-1. Read `docs/release-side-runtime-v10/final-report.md`, its completion audit, then the v10 protocol/diagnosis and preserved v9/v8/v7 evidence.
-2. Treat v9 and v10 as completed frozen NO-GO experiments. Do not add selective repeats or alter frozen thresholds/workloads/gates.
+1. Read `docs/throughput-confirmation-v11/final-report.md` and completion audit, then the v11 protocols/Phase A report and preserved v10/v9/v8/v7 evidence.
+2. Treat v9, v10, and v11 as completed frozen NO-GO experiments. Do not add selective repeats or alter frozen thresholds/workloads/gates.
 3. Preserve `{FP16, AWQ-W4-16}`, the 1,768 policy reference, 1,759/4,170 physical capacities, serialization, and physical-before-scheduler resize ordering.
-4. Preserve all v2–v10 raw evidence; any follow-up needs a separately preregistered namespace.
+4. Preserve all v2–v11 raw evidence; any follow-up needs a separately preregistered namespace.
 5. Do not waive v10's narrow throughput miss, resolve v7 ambiguous scales, or explain v9 static-AWQ variance with post-hoc runs.
-6. Raw v10 provenance belongs to commit `8e7675f`; the result commit contains the disclosed analyzer correction. Never rewrite raw metadata.
+6. Raw v10 provenance belongs to commit `8e7675f`; v11 Phase A/Phase C provenance belongs to `9dc8d54`/`cbf0edf`. Never rewrite raw metadata.
 7. Run CPU checks, opt-in CUDA tests when changing runtime code, compilation, the relevant analyzer/audit, and `git diff --check` before handoff.
 
 ## Testing
@@ -137,12 +144,12 @@ The validated CPU-only checks are:
 
 ```bash
 VENV=/nfs/home/s314511048/.venv
-PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller -v
+PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller benchmark.test_throughput_confirmation -v
 PYTHONPATH="$PWD/swiftLLM:$PWD/swiftLLM/csrc" "$VENV/bin/python" -m py_compile swiftLLM/benchmark/*.py swiftLLM/swiftllm/server/*.py swiftLLM/swiftllm/worker/*.py swiftLLM/swiftllm/worker/layers/*.py swiftLLM/swiftllm/worker/kernels/*.py
 git diff --check
 ```
 
-A successful v10 artifact validation has 16 selected runs, `analysis/run_validation.json` and `completion_audit.json` reporting `PASS`, six independently replayed release intents, and `analysis/decision.json` reporting the scientific `NO-GO`. The CUDA suite must run with `MORPHSERVE_RUN_CUDA_TESTS=1`; otherwise hardware cases intentionally skip. V9, v8, v7, v6, and v5 remain independently reproducible with their existing audits.
+A successful v11 regeneration has 24 Phase A and 32 Phase C selected runs, 48-stream policy parity, Phase A/Phase C audits reporting `PASS`, and `analysis/final_decision.json` reporting scientific `NO-GO`. The CUDA suite must run with `MORPHSERVE_RUN_CUDA_TESTS=1`; otherwise hardware cases intentionally skip. V9, v8, v7, v6, and v5 remain independently reproducible with their existing audits.
 
 ## Troubleshooting
 
@@ -164,6 +171,8 @@ A successful v10 artifact validation has 16 selected runs, `analysis/run_validat
 - **V10 analyzer source differs from its manifest:** this is the bounded post-result percentile-API correction, not controller drift. Verify `analysis_correction.json`; only the analyzer and audit hashes may differ.
 - **V10 raw plan refuses to resume on the result commit:** expected fail-fast behavior because analyzer/audit source hashes changed after the disclosed correction. Checkout `8e7675f` for raw reproduction; use `regenerate.sh` on the result commit.
 - **V10 throughput looks nearly equal but decision is NO-GO:** the frozen 0.98 margin fails at 0.97778/0.97774 and one-cycle aggregate 0.97944. Do not waive or selectively repeat it.
+- **V11 artifact audit passes but decision is NO-GO:** artifact integrity is separate from science. Low-only's 97.5% bound is 0.978930, and rare low-phase entry/chatter fails systems preservation.
+- **V11 controller timing grows with horizon:** this is the measured full-history window recomputation cost. No optimization was authorized in v11; do not retrofit one into frozen evidence.
 - **V9 static AWQ headline variance:** repeat P95 is 21.395/2.253 s. Both raw runs are valid and must remain; no selective third repeat belongs in v9.
 
 ## Documentation Freshness Checklist
