@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "awq_env": "/nfs/home/s314511048/.venvs/morphserve-vllm0112",
+    "awq_extension": "/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib",
+    "model": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "awq_model": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+    "cuda_visible_devices": "5"
+  },
+  "prepare": "PYTHONPATH=\"$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.prepare_release_workloads --source-workload benchmark-results/static-frontier-v5/input/quality-106.jsonl --v7-input-dir benchmark-results/fp16-awq-crossover-v7/input --output-dir benchmark-results/release-side-runtime-v10/input --plan benchmark-results/release-side-runtime-v10/run-plan.json",
+  "development_replay": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.analyze_release_latency --output-dir benchmark-results/release-side-runtime-v10/development",
+  "cpu_tests": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m unittest benchmark.test_benchmark benchmark.test_inference_substrate benchmark.test_crossover benchmark.test_runtime_morphing benchmark.test_closed_loop_controller benchmark.test_release_intent_controller benchmark.test_release_runtime_telemetry benchmark.test_release_workloads benchmark.test_release_analysis -v",
+  "cuda_preflight": "MORPHSERVE_RUN_CUDA_TESTS=1 CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m unittest benchmark.test_runtime_morphing -v",
+  "run_matrix": "CUDA_VISIBLE_DEVICES=5 PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -u -m benchmark.run_release_plan --plan benchmark-results/release-side-runtime-v10/run-plan.json --manifest benchmark-results/release-side-runtime-v10/protocol_manifest.json --model-path \"$MODEL\" --quantized-model-path \"$AWQ_MODEL\" --output-dir benchmark-results/release-side-runtime-v10/runs --log-dir benchmark-results/release-side-runtime-v10/logs --status benchmark-results/release-side-runtime-v10/execution_status.json --resume",
+  "analysis": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.analyze_release_side --root benchmark-results/release-side-runtime-v10",
+  "audit": "PYTHONPATH=\"$AWQ_EXT:$PWD/swiftLLM\" \"$AWQ_ENV/bin/python\" -m benchmark.audit_release_side --root benchmark-results/release-side-runtime-v10",
+  "regenerate": "benchmark-results/release-side-runtime-v10/regenerate.sh"
+}

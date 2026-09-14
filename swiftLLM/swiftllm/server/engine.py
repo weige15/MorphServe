@@ -38,6 +38,7 @@ class Engine:
         # Manual transition requests are consumed only by the main loop at a
         # completed-forward boundary. There is deliberately no pressure rule.
         self._pending_transition = None
+        self._pending_restore_lifecycle = None
         self._main_loop_running = False
         self._transition_lock = asyncio.Lock()
         self.runtime_transition_events: list[dict] = []
@@ -132,8 +133,25 @@ class Engine:
                     verify_kv=self.engine_config.runtime_verify_kv,
                 )
             # Publish admission capacity only after physical resize succeeds.
+            lifecycle = getattr(self, "_pending_restore_lifecycle", None)
+            if target == "FP16" and lifecycle is not None:
+                lifecycle["hot_restore_start_ns"] = trace.get("started_ns")
+                lifecycle["hot_restore_end_ns"] = trace.get("ended_ns")
+                lifecycle["model_restore_returned_ns"] = time.perf_counter_ns()
             self.scheduler.num_gpu_blocks = self.model.num_blocks
+            if target == "FP16" and lifecycle is not None:
+                lifecycle["capacity_published_ns"] = time.perf_counter_ns()
             self.scheduler.admissions_paused = False
+            if target == "FP16" and lifecycle is not None:
+                lifecycle["admission_resume_ns"] = time.perf_counter_ns()
+                lifecycle["context_at_admission_resume"] = self._transition_context()
+                if lifecycle.get("drain_start_ns") is not None and lifecycle.get(
+                    "first_physical_shrink_legal_ns"
+                ) is not None:
+                    lifecycle["drain_duration_ns"] = int(
+                        lifecycle["first_physical_shrink_legal_ns"]
+                    ) - int(lifecycle["drain_start_ns"])
+                trace["restore_lifecycle"] = dict(lifecycle)
             trace["engine_context_before"] = before
             trace["engine_context_after"] = self._transition_context()
             self.runtime_transition_events.append(trace)
@@ -180,6 +198,19 @@ class Engine:
                 )
             future = asyncio.get_running_loop().create_future()
             self._pending_transition = (target, future)
+            if target == "FP16":
+                self._pending_restore_lifecycle = {
+                    "schema_version": 1,
+                    "engine_restore_request_received_ns": time.perf_counter_ns(),
+                    "context_at_restore_request": self._transition_context(),
+                    "admission_pause_ns": None,
+                    "drain_start_ns": None,
+                    "first_physical_shrink_legal_ns": None,
+                    "drain_end_ns": None,
+                    "context_at_first_physical_shrink_legal": None,
+                    "drain_required": None,
+                    "drain_service_checks": 0,
+                }
             return await asyncio.shield(future)
 
     async def morph_to_awq_w4_16(self) -> dict:
@@ -190,23 +221,50 @@ class Engine:
         """Manually request AWQ-Marlin W4-16 -> FP16 at a forward boundary."""
         return await self._request_transition("FP16")
 
-    async def _service_pending_transition(self) -> bool:
-        if self._pending_transition is None:
+    def _mark_restore_feasible(self) -> bool:
+        lifecycle = getattr(self, "_pending_restore_lifecycle", None)
+        if lifecycle is None:
             return False
-        target, future = self._pending_transition
         allocated = (
             self.model.gpu_block_manager.num_blocks
             - self.model.gpu_block_manager.num_free_blocks
         )
-        if target == "FP16" and allocated > self.model.base_num_blocks:
-            # Existing requests keep decoding; no new prefill or swap-in is
-            # admitted until enough physical blocks can be retained in base.
-            self.scheduler.admissions_paused = True
+        if allocated > self.model.base_num_blocks:
             return False
+        if lifecycle["first_physical_shrink_legal_ns"] is None:
+            timestamp_ns = time.perf_counter_ns()
+            lifecycle["first_physical_shrink_legal_ns"] = timestamp_ns
+            lifecycle["drain_end_ns"] = timestamp_ns
+            lifecycle["context_at_first_physical_shrink_legal"] = self._transition_context()
+        return True
+
+    async def _service_pending_transition(self) -> bool:
+        if self._pending_transition is None:
+            return False
+        target, future = self._pending_transition
+        if target == "FP16":
+            lifecycle = self._pending_restore_lifecycle
+            if lifecycle["admission_pause_ns"] is None:
+                timestamp_ns = time.perf_counter_ns()
+                self.scheduler.admissions_paused = True
+                lifecycle["admission_pause_ns"] = timestamp_ns
+                lifecycle["drain_start_ns"] = timestamp_ns
+                lifecycle["context_at_admission_pause"] = self._transition_context()
+                lifecycle["drain_required"] = (
+                    lifecycle["context_at_admission_pause"]["allocated_gpu_kv_blocks"]
+                    > self.model.base_num_blocks
+                )
+            lifecycle["drain_service_checks"] += 1
+            if not self._mark_restore_feasible():
+                # Existing requests keep decoding; no new prefill or swap-in is
+                # admitted until enough physical blocks can be retained in base.
+                return False
         self._pending_transition = None
         try:
             result = await self._apply_transition(target)
         except Exception as exc:
+            self.scheduler.num_gpu_blocks = self.model.num_blocks
+            self.scheduler.admissions_paused = False
             if not future.done():
                 future.set_exception(exc)
             if self.model.runtime_precision_state == "FAILED":
@@ -214,6 +272,9 @@ class Engine:
         else:
             if not future.done():
                 future.set_result(result)
+        finally:
+            if target == "FP16":
+                self._pending_restore_lifecycle = None
         return True
 
     async def add_request_and_stream(self, raw_request: RawRequest) -> AsyncGenerator[StepOutput, None]:
@@ -302,6 +363,10 @@ class Engine:
                     "swap_in_count_before_scheduling": snapshot["swap_in_count"],
                     "swap_out_count_before_scheduling": snapshot["swap_out_count"],
                     "preemption_count_before_scheduling": snapshot["swap_out_count"],
+                    "admissions_paused_before_scheduling": snapshot["admissions_paused"],
+                    "pending_transition_target_before_scheduling": snapshot[
+                        "pending_transition_target"
+                    ],
                 }
 
             # Get the next batch from the scheduler.
@@ -436,9 +501,12 @@ class Engine:
                 self.model.free_seqs_resources,
                 finished_req_ids
             )
-            
-            # Inform the scheduler
+            # Inform the scheduler before recording the first-safe context so
+            # physical allocation and active/scheduler request counts describe
+            # the same completed-forward boundary.
             self.scheduler.on_batch_finish(cur_batch)
+            if finished_req_ids:
+                self._mark_restore_feasible()
     
     def start_benchmark_batch_observation(self) -> None:
         """Start a fresh, opt-in batch observation interval."""
@@ -467,6 +535,9 @@ class Engine:
             "extension_gpu_blocks": self.model.num_blocks - self.model.base_num_blocks,
             "precision_state": self.model.runtime_precision_state,
             "admissions_paused": scheduler.admissions_paused,
+            "pending_transition_target": (
+                self._pending_transition[0] if self._pending_transition is not None else None
+            ),
             "swap_in_count": self.benchmark_swap_in_count,
             "swap_out_count": self.benchmark_swap_out_count,
         }
@@ -489,3 +560,4 @@ class Engine:
                 if not future.done():
                     future.set_exception(RuntimeError("engine event loop stopped"))
                 self._pending_transition = None
+                self._pending_restore_lifecycle = None

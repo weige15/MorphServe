@@ -1,0 +1,314 @@
+{
+  "artifact_version": "release_side_runtime_v10",
+  "controller": {
+    "entry": {
+      "current_waiting_gte": 4,
+      "kv_elapsed_fraction_gte": 0.8,
+      "kv_reference_blocks": 1768,
+      "kv_utilization_gte": 0.95,
+      "source": "unchanged v7/v9 SustainedCompoundController.evaluate",
+      "waiting_elapsed_fraction_gte": 0.5,
+      "waiting_gte": 4,
+      "window_s": 3.0
+    },
+    "excluded_inputs": [
+      "workload label",
+      "phase",
+      "scale",
+      "nominal RPS",
+      "future arrivals",
+      "completion outcome",
+      "TTFT",
+      "answer/F1",
+      "generated tokens",
+      "offline classification"
+    ],
+    "physical_restore_safety": {
+      "authority": "existing v8 Engine/allocator drain then model shrink",
+      "controller_duplicates_allocator_logic": false,
+      "fp16_base_blocks": 1759,
+      "safe_awq_blocks": 4170
+    },
+    "release_intent": {
+      "awq_history_s": 15.0,
+      "candidate_count": 1,
+      "current_fp16_reference_utilization_lte": 1.25,
+      "current_waiting_eq": 0,
+      "physical_allocation_is_not_an_input": true,
+      "policy": "quiet_pressure_drop_5v10",
+      "prior_window_s": 10.0,
+      "recent_preemptions_eq": 0,
+      "recent_to_prior_mean_fp16_reference_utilization_ratio_lte": 0.8,
+      "recent_waiting_mean_lte": 0.5,
+      "recent_window_s": 5.0
+    },
+    "sample_interval_s": 0.25
+  },
+  "created_at_utc": "2026-09-14T02:23:32.160182+00:00",
+  "development_evidence": {
+    "decomposition": "benchmark-results/release-side-runtime-v10/development/v9_release_delay_decomposition.json",
+    "diagnosis": "docs/release-side-runtime-v10/release-delay-diagnosis.md",
+    "role": "candidate selection only; never final validation"
+  },
+  "engine": {
+    "arrival_jitter_tolerance_s": 0.25,
+    "block_size": 16,
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "gpu_mem_utilization": 0.99,
+    "max_batch_size": 32,
+    "max_blocks_per_seq": 3072,
+    "max_seqs_in_block_table": 128,
+    "max_tokens_in_batch": 49152,
+    "num_cpu_blocks": 4096,
+    "output_tokens": 512,
+    "physical_gpu": 5,
+    "prompt_tokens": 1024,
+    "seed": 2025,
+    "timeout_s": 7200,
+    "warmup_output_tokens": 8,
+    "warmup_requests": 1
+  },
+  "environment": {
+    "awq_model": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+    "cuda_visible_devices": "5",
+    "model": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "python": "/nfs/home/s314511048/.venvs/morphserve-vllm0112/bin/python",
+    "swiftllm_extension": "/nfs/home/s314511048/.cache/morphserve/swiftllm-c-torch29/lib",
+    "torch": "2.9.0+cu128",
+    "transformers": "4.51.3",
+    "vllm": "0.11.2"
+  },
+  "forbidden_scope": [
+    "entry retuning",
+    "quantization coverage change",
+    "backend change",
+    "transition implementation change",
+    "scheduler ordering change",
+    "high-pressure arrival regime change",
+    "post-result threshold/workload/gate change",
+    "semantic significance as completion gate"
+  ],
+  "noise_and_gates": {
+    "catch_up_s_max": 10.0,
+    "catch_up_zero_wait_dwell_s": 3.0,
+    "final_go": "all 16 raw valid; low no-entry/FP16-like; every high entry/benefit/queue/preemption; throughput noninferior; all six useful restores; exact repeated one-/two-cycle order; no chatter/corruption",
+    "pause_to_resume_s_max": 5.0,
+    "phase_epsilon": "max(0.111 s, FP16 two-repeat P95 range, Dynamic two-repeat P95 range, 0.05*FP16 P95 mean)",
+    "post_restore_arrivals_min": 8,
+    "post_restore_fp16_executions_min": 8,
+    "restore_reentry_guard_s": 15.0,
+    "semantic_f1_role": "descriptive only, not release-side gate",
+    "service_remaining_after_resume_s_min": 20.0,
+    "strict_ttft_gt_2_role": "reported paper-reference metric, not sole gate",
+    "throughput_repeat_ratio_gte": 0.98,
+    "throughput_two_repeat_sum_ratio_gte": 0.98
+  },
+  "preserved_namespace_tree_sha256": {
+    "benchmark-results/closed-loop-runtime-v9": "429a4a488ab8d42b95e63899f74c40ca39766fdd5f0f7f75a0259812a56348ca",
+    "benchmark-results/fp16-awq-crossover-v7": "cd62412c57f8b38adde7bdc0782fca7c8a522c13cb4841515f0d6303a9b26919",
+    "benchmark-results/packed-int4-backend-v6": "75200e01f784954c80f0d1bfdb38687a4c58e827e09e90c1d72fb8b5174b70c7",
+    "benchmark-results/runtime-morphing-v8": "3302f590dee96f7042a17a0cf3dc2f654700d4f7a0136fc354591be8fad861b6",
+    "benchmark-results/static-frontier-v5": "9c9a4a587e16fdcc86c7eded69f33be615c0669005b7b4876ef2a765c1c5c379",
+    "benchmark-results/static-quantization-quality-latency": "db8bdc9846d770a696c64d2758770f9b9b4e123e479ef2f0ef302a5e91ad859d",
+    "benchmark-results/table5-substrate-v3": "5fc5b015d6caba6ea389532692e7b7fcf251be2f275df5dd07900422735bc384",
+    "benchmark-results/table5-substrate-v4": "2e72143378bfc2763ae3ae57df677243d518fa900ce8baba34396253dafcf272",
+    "docs/closed-loop-runtime-v9": "38a880ca68b139f83077f820914106e40533957900ff2c62f4d3888a44501a75",
+    "docs/fp16-awq-crossover-v7": "429fa1f103b0b9bd067f541ef955b6d8618bce0ec5c0bcada037777cca79b4ba",
+    "docs/packed-int4-backend-v6": "8ef3066b7a1e1a6ab7f7e79d41bb1182d1e4f5fc21b007a0fc4a855601d90b75",
+    "docs/runtime-morphing-v8": "3665f65f77dfded21f7bb36fa409ddaab7680f50da598d49b50d8a37c4ab34cf",
+    "docs/static-frontier-v5": "b654b466244a1b03460c2cca3a36e81e43a7717cdf6506ad0c0b0e18f9b1fcb6",
+    "docs/static-quantization-quality-latency": "c1b95f9bbd485f76a1fd5300a9296e0e6011e77e5d6c1c8219c59c2fb27f760b",
+    "docs/table5-substrate-v4": "b66a2fe15ba4b166e936dbaecf10ade01697a0547cadc8c30523a28c16053a44"
+  },
+  "repository": {
+    "base_commit": "a2c00c2",
+    "protocol_path": "docs/release-side-runtime-v10/protocol.md",
+    "protocol_sha256": "7e507bbb2169fe8de0ce4a63a6b9cc02b576ca77f6ccbb480392845271ad6f83",
+    "temporal_proof": "All raw metadata must name one clean Git commit containing this exact protocol and manifest."
+  },
+  "run_plan": {
+    "attempt_lineage": "preserve incomplete attempt; resume uses -attemptN; select exactly one valid attempt per cell",
+    "fresh_process": true,
+    "matrix": "low-only FP16/Dynamic plus one-/two-cycle FP16/AWQ/Dynamic",
+    "path": "benchmark-results/release-side-runtime-v10/run-plan.json",
+    "repeats_per_cell": 2,
+    "sha256": "b7b68a562962660c64bf87fceaf486b30493230478d3392c7b3e0d08e1daa71a",
+    "total_runs": 16
+  },
+  "schema_version": 1,
+  "source_sha256_at_preregistration": {
+    "swiftLLM/benchmark/analyze_closed_loop.py": "4d2aa60b8a0cdf34953f7543eb760ab922be2a061b4b7518ebfbcb075d53bbf3",
+    "swiftLLM/benchmark/analyze_crossover.py": "e13f1c60d7dc896afca3785aad0bcd9b861c053fa68fb32cf90e5b62f09801a7",
+    "swiftLLM/benchmark/analyze_release_latency.py": "b76f2eea89a3f2c599af51e9f0c57c3bb602c3689ced25248bd407516cb114ce",
+    "swiftLLM/benchmark/analyze_release_side.py": "a8f434cf227724aae4ef273224b7cf14e77cb0b42fbab9a313b32ee22f714422",
+    "swiftLLM/benchmark/analyze_static_frontier.py": "de5da22ab2b749e4e5e2875698da7c084d583ddded900da901035b6ddd1865ce",
+    "swiftLLM/benchmark/audit_release_side.py": "c5b7f670f573467b0e869af6f91b514e5b08fc56ea86b170f85ea43ee1fddc21",
+    "swiftLLM/benchmark/closed_loop_controller.py": "d2f364798680cd2f9ba2d7f8e93b71206cea10e4192ce7c83e6a3252492e64e7",
+    "swiftLLM/benchmark/metrics.py": "a322c5f1467054eb2e1598d92b588c86c5fe8e84d887b3954a3902e750f4d4b5",
+    "swiftLLM/benchmark/prepare_release_workloads.py": "ea918b13878ef9ff8e49f268c5e7d4f03384cf4d82c16e6c331157498a6443b2",
+    "swiftLLM/benchmark/release_intent_controller.py": "e5b49e753a582be972afa0f391385b0d022c67a3ae2a793850c3634a79cc6260",
+    "swiftLLM/benchmark/run.py": "ec4f6c275fb9cdd8470a5e1ef9daa81d798537b3ac13115f8117605d484f6a7c",
+    "swiftLLM/benchmark/run_release_condition.py": "f97c41f1685bed15bfc557994d7e5acf10bf6033c3d1f09837135a90d15f1578",
+    "swiftLLM/benchmark/run_release_plan.py": "6aba396529fc6a1bebab5a7252dab60e93703ac17a6fd94eb0866aa6026aed11",
+    "swiftLLM/benchmark/test_release_analysis.py": "737265b20b33f0084fd5057c2fca7fc9905c57b7e579f9e38f8fc261cafd9930",
+    "swiftLLM/benchmark/test_release_intent_controller.py": "ca16248b64d28bff1a298993058ded19f6ce8c85660dd3f63445dac6e4464a45",
+    "swiftLLM/benchmark/test_release_runtime_telemetry.py": "4581dcdcc6c4a2f44da16424159ac7c1ad70621669f84a289cb4945a28597f19",
+    "swiftLLM/benchmark/test_release_workloads.py": "de470e42defa414c97977ed8851ba81284c2093dc34bd739157413894a386db8",
+    "swiftLLM/swiftllm/engine_config.py": "700d72f22a7f04a11c4765e7021f82a0a6d2f4fa1e622fe4d18dbdc4bb37a41f",
+    "swiftLLM/swiftllm/server/engine.py": "2eb3c473088e119975c592e8e66aac2904de923457ea5f38e9b7740cb3396d2a",
+    "swiftLLM/swiftllm/server/scheduler.py": "7268a2fda431eb96fe21a26043ce75d4c6e3708374c96ecef91f4862dc0d7f70",
+    "swiftLLM/swiftllm/server/structs.py": "7d33392e5efde001786454f76ce0ef1ea151fe8bd9643dc3b8db997dcd9af88a",
+    "swiftLLM/swiftllm/worker/block_manager.py": "e9c46b2d55fff8c2f8156782fbc4d59f2d6327182826659911691ca773831cfd",
+    "swiftLLM/swiftllm/worker/kernels/kvcache_mgmt.py": "ad9d4a001060647732276eeaa6f7441da003cdf68861cbbce2da9a2260b0084e",
+    "swiftLLM/swiftllm/worker/kernels/paged_attn.py": "8a1f5131929978437ed3b733bb440c83cb5985f84c39be8ccce33eb946eac5b8",
+    "swiftLLM/swiftllm/worker/layers/transformer_layer.py": "87b2cc4a1535cf16a3552d51383c06bf127d63525655c9bf5d0ae44c56a56d71",
+    "swiftLLM/swiftllm/worker/model.py": "5b064df0057375ff9d75fe546855b855fd98df670cc2e1d8fc49bc8f4c61b186",
+    "swiftLLM/swiftllm/worker/weight.py": "242277b7d3389699b2a16eea69d3d050be1cf30bf204eb75af7bebe1027b2dae"
+  },
+  "state_pair": [
+    "FP16",
+    "AWQ_MARLIN_W4_16"
+  ],
+  "status": "pre_registered_before_any_v10_serving_result",
+  "telemetry": {
+    "gpu_environment_interval_s": 1.0,
+    "gpu_fields": [
+      "SM clock",
+      "memory clock",
+      "temperature",
+      "power draw/limit",
+      "utilization",
+      "P-state",
+      "fan",
+      "throttle mask"
+    ],
+    "restore_lifecycle": [
+      "release intent first true",
+      "restore request",
+      "engine receipt",
+      "admission pause/drain start",
+      "first physical legality/drain end",
+      "hot start/end",
+      "capacity publish",
+      "admission resume",
+      "catch-up",
+      "next entry"
+    ]
+  },
+  "workloads": {
+    "content_source_sequences": [
+      0,
+      63
+    ],
+    "files": {
+      "heldout_one_cycle": {
+        "last_arrival_offset_s": 265.5625,
+        "path": "benchmark-results/release-side-runtime-v10/input/heldout-one-cycle.jsonl",
+        "request_count": 192,
+        "sha256": "e1e84d597d2a54f630d4017e78a1b21971c95d02d965e4fbc964d89b5acae2e4"
+      },
+      "heldout_two_cycle": {
+        "last_arrival_offset_s": 440.5625,
+        "path": "benchmark-results/release-side-runtime-v10/input/heldout-two-cycle.jsonl",
+        "request_count": 320,
+        "sha256": "fafcb6e611574980a58c758f13f1e05dc42c077b4f79e8873139d4e9b426c1c3"
+      },
+      "low_only": {
+        "last_arrival_offset_s": 90.5625,
+        "path": "benchmark-results/release-side-runtime-v10/input/low-only.jsonl",
+        "request_count": 64,
+        "sha256": "f8cedda371c59559a3979942a88957aafe689624c48c2d26d1746892350ccb6e"
+      }
+    },
+    "high_scale": 4.25,
+    "low_scale": 5.75,
+    "metadata_path": "benchmark-results/release-side-runtime-v10/input/workload_metadata.json",
+    "metadata_sha256": "8304a7cc498dfb0e08bfffc260f4f9e49791c08238e28c1f0864b0fa1b3b4ebc",
+    "no_artificial_idle_gap": true,
+    "phase_boundaries": {
+      "heldout_one_cycle": [
+        {
+          "last_arrival_offset_s": 90.5625,
+          "phase": "low_0",
+          "phase_index": 0,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 0.0
+        },
+        {
+          "last_arrival_offset_s": 167.5625,
+          "phase": "high_1",
+          "phase_index": 1,
+          "regime": "high",
+          "request_count": 64,
+          "start_offset_s": 100.625
+        },
+        {
+          "last_arrival_offset_s": 265.5625,
+          "phase": "low_2",
+          "phase_index": 2,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 175.0
+        }
+      ],
+      "heldout_two_cycle": [
+        {
+          "last_arrival_offset_s": 90.5625,
+          "phase": "low_0",
+          "phase_index": 0,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 0.0
+        },
+        {
+          "last_arrival_offset_s": 167.5625,
+          "phase": "high_1",
+          "phase_index": 1,
+          "regime": "high",
+          "request_count": 64,
+          "start_offset_s": 100.625
+        },
+        {
+          "last_arrival_offset_s": 265.5625,
+          "phase": "low_2",
+          "phase_index": 2,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 175.0
+        },
+        {
+          "last_arrival_offset_s": 342.5625,
+          "phase": "high_3",
+          "phase_index": 3,
+          "regime": "high",
+          "request_count": 64,
+          "start_offset_s": 275.625
+        },
+        {
+          "last_arrival_offset_s": 440.5625,
+          "phase": "low_4",
+          "phase_index": 4,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 350.0
+        }
+      ],
+      "low_only": [
+        {
+          "last_arrival_offset_s": 90.5625,
+          "phase": "low_0",
+          "phase_index": 0,
+          "regime": "low",
+          "request_count": 64,
+          "start_offset_s": 0.0
+        }
+      ]
+    },
+    "v9_content_overlap": {
+      "fully_disjoint_impossible": true,
+      "new": 42,
+      "overlap": 22
+    }
+  }
+}

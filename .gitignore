@@ -8,6 +8,12 @@ benchmark-results/**/runs/**/requests.jsonl
 benchmark-results/**/runs/**/telemetry.jsonl
 benchmark-results/**/runs/**/quality_metrics.jsonl
 
+# Release-side v10 raw files are generated from the preregistered plan. Ignore
+# during execution so later fresh processes retain clean source provenance;
+# final evidence is force-added after the matrix completes.
+benchmark-results/release-side-runtime-v10/runs/
+benchmark-results/release-side-runtime-v10/execution_status.json
+
 # Superseded local substrate passes
 benchmark-results/substrate-v3/
 benchmark-results/table5-substrate-v3/
