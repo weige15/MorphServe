@@ -1,0 +1,4 @@
+uv venv --clear --python python3.12 "/nfs/home/s314511048/MorphServe/reproduction/.venv"
+uv pip install --python "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" -r "/nfs/home/s314511048/MorphServe/reproduction/configs/fp16-requirements-lock.txt"
+(cd "/nfs/home/s314511048/MorphServe/reproduction/results/tmp/candidate-fp16/csrc" && CUDA_HOME=/usr/local/cuda-12.4 "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" setup.py build_ext --inplace)
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH="/nfs/home/s314511048/MorphServe/reproduction/results/tmp/candidate-fp16/csrc:/nfs/home/s314511048/MorphServe/reproduction/runtime/candidate-python" "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" "/nfs/home/s314511048/MorphServe/reproduction/scripts/fp16_candidate_parity.py" --model-path "meta-llama/Meta-Llama-3.1-8B" --output "/nfs/home/s314511048/MorphServe/reproduction/experiments/candidate-fp16-baseline/results/metrics.json"

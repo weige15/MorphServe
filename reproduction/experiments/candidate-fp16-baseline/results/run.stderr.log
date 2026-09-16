@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 424, in cached_files
+    hf_hub_download(
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/nfs/home/s314511048/MorphServe/meta-llama/Meta-Llama-3.1-8B'. Use `repo_type` argument if needed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/fp16_candidate_parity.py", line 202, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/fp16_candidate_parity.py", line 102, in main
+    tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py", line 946, in from_pretrained
+    tokenizer_config = get_tokenizer_config(pretrained_model_name_or_path, **kwargs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py", line 778, in get_tokenizer_config
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 266, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 471, in cached_files
+    _get_cache_file_to_return(path_or_repo_id, filename, cache_dir, revision) for filename in full_filenames
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 134, in _get_cache_file_to_return
+    resolved_file = try_to_load_from_cache(path_or_repo_id, full_filename, cache_dir=cache_dir, revision=revision)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 106, in _inner_fn
+    validate_repo_id(arg_value)
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 154, in validate_repo_id
+    raise HFValidationError(
+huggingface_hub.errors.HFValidationError: Repo id must be in the form 'repo_name' or 'namespace/repo_name': '/nfs/home/s314511048/MorphServe/meta-llama/Meta-Llama-3.1-8B'. Use `repo_type` argument if needed.

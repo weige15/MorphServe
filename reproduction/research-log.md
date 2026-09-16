@@ -174,3 +174,7 @@ The unrecorded sensitivity case still corrupted 1,530 bytes. In the recorded cas
 ### Scope and next step
 
 The C++ primitive is correct in this modified synthetic condition. It does not help unless all Python/Triton call sites record use. Integrate that call at the model executor boundary, then normalize package/config/checkpoint loading and run no-morph FP16 parity.
+
+## 2026-09-16 — FP16 parity attempt 1 setup failure
+
+The first bounded run did not load a model. The runner's generic `${MODEL_PATH}` override collided with an inherited `MODEL_PATH=meta-llama/Meta-Llama-3.1-8B`, producing a nonexistent local path and an `HFValidationError`. Dependencies/extension built, but GPU experiment time was zero and no metrics were emitted. The changed retry will use `MORPHSERVE_MODEL_PATH` and an early `config.json` existence check. See `doc/debug-report-fp16-path.md`.
