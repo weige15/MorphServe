@@ -25,6 +25,9 @@ uv venv --clear --python python3.12 "$VENV" > "$OUT/venv.log" 2>&1
 uv pip install --python "$VENV/bin/python" -r "$LOCK" > "$OUT/install-base.log" 2>&1
 uv pip install --python "$VENV/bin/python" autoawq==0.2.9 zstandard > "$OUT/install-autoawq.log" 2>&1
 (cd "$TMP/csrc" && CUDA_HOME=/usr/local/cuda-12.4 "$VENV/bin/python" setup.py build_ext --inplace) > "$OUT/build.log" 2>&1
+nvidia-smi --query-gpu=index,name,memory.used,memory.free,utilization.gpu --format=csv,noheader > "$OUT/nvidia-pre-run.csv"
+free_mib=$(nvidia-smi -i "$GPU" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
+if (( free_mib < 17408 )); then printf 'GPU %s fell to %s MiB free during setup; refusing model load.\n' "$GPU" "$free_mib" | tee "$OUT/run.stderr.log" >&2; echo 75 > "$OUT/run.exitcode"; (cd "$ROOT/vendor/author-morphserve" && sha256sum -c MANIFEST.sha256) > "$OUT/manifest-after.log"; exit 75; fi
 start=$(date +%s%N); set +e
 CUDA_VISIBLE_DEVICES="$GPU" PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="$TMP/csrc:$PYTHON_SRC:$ROOT/runtime" "$VENV/bin/python" "$ROOT/scripts/real_executor_pilot.py" --fp16-model "$FP16" --w4-model "$W4" --output "$OUT/metrics.json" > "$OUT/run.stdout.log" 2> "$OUT/run.stderr.log"
 rc=$?; set -e; end=$(date +%s%N); echo "$rc" > "$OUT/run.exitcode"
