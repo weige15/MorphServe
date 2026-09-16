@@ -14,8 +14,10 @@ required=[
  'traces/figure1b-inferred/azure-code-systematic-4.75x.jsonl','traces/figure1b-inferred/burstgpt-v1.1-systematic-1.75x.jsonl',
  'experiments/candidate-fp16-baseline/results-attempt-3/metrics.json',
  'experiments/autoawq-layer-switch/results/metrics.json','experiments/active-kv-switch/results-attempt-2/metrics.json',
- 'experiments/lis-real-8layer/results/metrics.json','experiments/real-executor/results/metrics.json',
- 'experiments/multirequest-ownership/results/metrics.json','experiments/async-layer-transfer/results/metrics.json',
+ 'experiments/lis-real-8layer/results/metrics.json',
+ 'experiments/real-executor/results-before-atomic-repair/metrics.json','experiments/real-executor/results-before-atomic-repair/CLASSIFICATION.md',
+ 'experiments/multirequest-ownership/results-before-atomic-repair/metrics.json','experiments/multirequest-ownership/results-before-atomic-repair/CLASSIFICATION.md',
+ 'experiments/async-layer-transfer/results/metrics.json',
  'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json','experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json',
  'figures/transfer-diagnostics.csv','figures/transfer-diagnostics.pdf','figures/transfer-diagnostics.png',
  'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode','experiments/async-layer-transfer/activity-analysis-results/test.exitcode',
@@ -31,10 +33,15 @@ checks={
  'switch':json.load(open(ROOT/'experiments/autoawq-layer-switch/results/metrics.json'))['passed'],
  'active_kv':json.load(open(ROOT/'experiments/active-kv-switch/results-attempt-2/metrics.json'))['passed'],
  'lis8':json.load(open(ROOT/'experiments/lis-real-8layer/results/metrics.json'))['passed'],
- 'executor':json.load(open(ROOT/'experiments/real-executor/results/metrics.json'))['passed'],
- 'ownership':json.load(open(ROOT/'experiments/multirequest-ownership/results/metrics.json'))['passed'],
+}
+historical_checks={
+ 'executor_pre_atomic':json.load(open(ROOT/'experiments/real-executor/results-before-atomic-repair/metrics.json'))['passed'],
+ 'ownership_pre_atomic':json.load(open(ROOT/'experiments/multirequest-ownership/results-before-atomic-repair/metrics.json'))['passed'],
 }
 assert all(checks.values()),checks
+assert all(historical_checks.values()),historical_checks
+assert 'not current-revision validation' in (ROOT/'experiments/real-executor/results-before-atomic-repair/CLASSIFICATION.md').read_text()
+assert 'not current-revision validation' in (ROOT/'experiments/multirequest-ownership/results-before-atomic-repair/CLASSIFICATION.md').read_text()
 static=json.load(open(ROOT/'experiments/static-autoawq/results/metrics.json'))
 assert static['passed'] is False and static['gate']['repeat_logits_exact'] is False
 references=json.load(open(ROOT/'configs/paper-reference-values.json'))
@@ -96,4 +103,4 @@ for phrase in ('partial / exact reproduction blocked','no Table 9','92.45%','[25
 for index in range(1,31):
     assert report.count(f'| H{index} |')==1,index
 print('report artifact verification: PASS')
-print(json.dumps({'positive_gates':checks,'async_copy_gate':True,'trace_manifest_gate':True,'expected_negative_static_repeat':True,'expected_memlock_blocker':True},sort_keys=True))
+print(json.dumps({'current_positive_gates':checks,'supporting_historical_gates':historical_checks,'async_copy_gate':True,'trace_manifest_gate':True,'expected_negative_static_repeat':True,'expected_memlock_blocker':True},sort_keys=True))

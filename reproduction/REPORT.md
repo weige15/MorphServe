@@ -31,7 +31,7 @@ Primary evidence:
 | Arbitrary non-contiguous/profile order | **Vendor negative; reconstruction repaired** | Vendor `[25,24,26]` writes group 2 into layer 23. Explicit-region fallback writes layer 26 and matches dense attention error 0. |
 | CUDA lifetime safety | **Vendor negative; reconstruction repaired** | Uncoordinated restore corrupts 1,530 bytes. Recorded per-region events reduce corruption to 0. |
 | State preservation | **Modified-condition strong partial** | Active FP16→W4×4→FP16 request continues without re-prefill/eviction; same-history top-1 agrees; K/V migrated exactly. |
-| Controller | **Reconstructed, not author-recovered** | Frozen machine-readable EMA/persistence/hysteresis/mode choices in `configs/reconstructed-controller-modes.json`; policy, fake-executor, historical real transactional GPU, and two-request ownership gates pass. Async transactional repairs await real-GPU rerun. |
+| Controller | **Reconstructed, not author-recovered** | Frozen machine-readable EMA/persistence/hysteresis/mode choices in `configs/reconstructed-controller-modes.json`; policy/fake-executor gates pass, while preserved real transactional and ownership GPU runs are explicitly pre-atomic historical evidence. Async transactional repairs await real-GPU rerun. |
 | Full 32-layer preloading | **Local resource blocked** | Local FP16+W4 decoder variants require 17,585,668,096 pinned bytes, 741,253,120 bytes above memlock before overhead. |
 
 ## 3. Reproduction environment
@@ -115,7 +115,7 @@ Two-request ownership pilot:
 - Recovery removes free groups 26/24, refuses occupied group 25 while preserving rows/counts/sentinel/FCFS, then succeeds after real frees.
 - Swapped queue unchanged. Ordinary scheduler preemptions were not measured because this bounded static scheduler has no cumulative preemption counter.
 
-Evidence: `experiments/real-executor/` and `experiments/multirequest-ownership/`.
+Evidence: `experiments/real-executor/results-before-atomic-repair/` and `experiments/multirequest-ownership/results-before-atomic-repair/`. The duplicate unclassified `results/` directories were removed; pending runners recreate them only for a current-revision attempt.
 
 ### 4.6 Asynchronous copy seam
 
@@ -138,7 +138,7 @@ Evidence: `experiments/async-layer-transfer/`. The separately valid transfer sub
 | H5 | §5.1 quality degradation | 0.51%–3.82%; accuracy 0.11%–2.18% | No exact task corpus/generated outputs | **Blocked exact** |
 | H6 | User objective only; absent from PDF | 41.3% average, 82.3% max LLM-PQ gap closure | No occurrence in target PDF/LaTeX | **Not a target-paper claim; not reproduced** |
 | H7 | User objective only; absent from PDF | 1.73× average, 2.4× max vs PyramidKV | PyramidKV appears only as related-work citation | **Not a target-paper result; not reproduced** |
-| H8 | Fig. 5 dynamic capacity | load-following KV expansion | Real physical expansion/recovery shown in pilots, not 72-s trace | **Modified-condition partial** |
+| H8 | Fig. 5 dynamic capacity | load-following KV expansion | Historical pre-atomic pilots showed real physical expansion/recovery, not a 72-s trace; current atomic GPU rerun pending | **Modified-condition partial, current revision unverified** |
 | H9 | Fig. 6 throughput | up to 1.83× FP16 | No valid common-engine RPS sweep | **Unverified** |
 | H10 | Fig. 7 TPOT | P99 up to 1.23×; average up to 1.17× | Synthetic replay attempt 1 JIT-contaminated; corrected retry resource-blocked | **Remaining uncertainty** |
 | H11 | §4.3 transfer | ≈4 ms W4, ≈16 ms FP16 | 15.67/58.55 ms blocking modified operation | **Tested-not-reproduced under modified conditions** |
@@ -155,10 +155,10 @@ Evidence: `experiments/async-layer-transfer/`. The separately valid transfer sub
 | H22 | Table 6 ordering | four models, CodeLlama 48 endpoint | 8-layer local order only | **Modified-condition partial** |
 | H23 | §4.2/Algorithm 1 | conditioned argmax LIS | 8 layers, 36 sets, saved real order | **Modified-condition expanded reproduction** |
 | H24 | §4.3 in-place W4/FP16 | real packed same-address swapping | Real W4 same base/exact restore/zero allocator delta; persistent copier and prebuilt variants pass small seam | **Modified-condition partial; full async rerun pending** |
-| H25 | §4.4 non-contiguous KV | physical arbitrary-region capacity | Vendor corruption found; explicit fallback + ownership tests pass | **Modified-condition repaired** |
-| H26 | §4.1 controller | persistent coordinated adaptation, 3 modes | Frozen reconstructed modes, real transactional GPU + two-request tests | **Modified-condition partial** |
+| H25 | §4.4 non-contiguous KV | physical arbitrary-region capacity | Vendor corruption found; explicit fallback CUDA test passed; ownership pilot is historical pre-atomic evidence | **Modified-condition repaired; current integrated rerun pending** |
+| H26 | §4.1 controller | persistent coordinated adaptation, 3 modes | Frozen reconstructed modes and current CPU transactions pass; real transactional/two-request GPU runs predate atomic repair | **Modified-condition partial; current GPU integration unverified** |
 | H27 | Appendix C added LOC | ≈2200 Python +500 C++/CUDA | Base commit unavailable | **Blocked exact** |
-| H28 | state preservation | no flush/re-prefill/eviction | Active same-history and two-request ownership pilots pass | **Modified-condition strong partial** |
+| H28 | state preservation | no flush/re-prefill/eviction | Active same-history pilot passes; two-request ownership evidence predates atomic repair | **Modified-condition partial; current ownership rerun pending** |
 | H29 | no-morph FP16 | baseline integrity | top-k match, rel L2 0.00204, exact weights | **Modified-condition reproduced numerically** |
 | H30 | supporting fixed W4 | real packed/deterministic behavior | Packed execution/storage verified; bit-exact repeats fail from atomic split-K, top-k stable | **Mixed result** |
 

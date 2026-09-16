@@ -51,11 +51,11 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | C7 | Real asynchronous copy, separate morph/decode streams | PARTIAL | Candidate is blocking. Independent persistent-stream copier passes small CUDA seam; full-layer run pending. |
 | C8 | Explicit lifetime/event synchronization | PASS at seams | Uncoordinated race corrupts 1,530 bytes; C++ region barrier and Python last-forward/layer-ready barriers pass. |
 | C9 | No whole-model reload/per-request routing/fake W4 | PASS for tested paths | Same base region and packed kernels used. |
-| C10 | Physical KV blocks in reclaimed weight bytes | PASS (modified) | 615 real blocks/layer in real-executor pilot; zero allocator delta. |
+| C10 | Physical KV blocks in reclaimed weight bytes | PASS at earlier seam / current integration pending | Physical reclaimed storage and zero allocator delta pass; 615 blocks/layer was measured only in the historical pre-atomic executor pilot. |
 | C11 | Non-contiguous mapping and custom Triton lookup | PASS after repair | Vendor fixed-stride corruption found; explicit-region store/attention matches dense oracle error 0. |
-| C12 | Shrink safely before FP16 restore | PASS (modified) | Occupied-group refusal and LIFO recovery in two-request pilot. |
+| C12 | Shrink safely before FP16 restore | PASS in current CPU transactions / historical GPU evidence | Current transaction tests cover all-before-mutation shrink and compensation; occupied-group refusal/LIFO GPU evidence predates atomic repair. |
 | C13 | Preserve KV, request progress, no re-prefill/eviction/restart | PASS for bounded pilot | Active FP16→W4×4→FP16 same-history test and exact occupied-block migration. |
-| C14 | Measure ordinary scheduler preemption separately | PARTIAL | Ownership pilot proves unchanged FCFS/swapped queues but has no cumulative preemption counter and no decode scheduler; it now records preemptions as not measured rather than zero. |
+| C14 | Measure ordinary scheduler preemption separately | PARTIAL | Historical ownership pilot shows unchanged FCFS/swapped queues but has no cumulative preemption counter or decode scheduler; preemptions are recorded as not measured rather than zero. Candidate source accounting is itself disconnected. |
 | C15 | Controller signals: memory/queue/throughput/TTFT/TPOT | PASS in reconstructed monitor | CPU tests cover all signals. |
 | C16 | Smoothing, persistence, coordinated action/recovery | PASS as reconstruction | Frozen choices and tests; settings not author-recovered. |
 | C17 | Default/performance/accuracy modes | PASS as reconstruction | Exposed and tested action sizes/maxima; not exact author modes. |
@@ -75,10 +75,10 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | D2 | Fixed-W4 test | MIXED | Real packed path works/top-k stable; repeat logits not bit-exact because split-K atomic accumulation (rel-L2 ≤0.00493). |
 | D3 | LIS argmax/conditioned-MDS test | PASS | Four unit tests plus 36 real conditioned evaluations. |
 | D4 | Mixed-precision numerical test | PASS (bounded) | Active W4 steps same-history rel-L2 0.00058–0.00088, top-1 match. |
-| D5 | KV address/content preservation | PASS | Synthetic, dense-oracle, active migration, two-request sentinels. |
+| D5 | KV address/content preservation | PASS at seams / historical ownership evidence | Synthetic, dense-oracle and active migration are current seam evidence; two-request sentinels are historical pre-atomic evidence. |
 | D6 | Expansion/shrink/restoration | PASS at tested seams; async real-GPU rerun pending | Historical 4→1,849→4 evidence plus all-before-mutation shrink, partial morph/restore rollback, atomic post-shrink compensation, fail-closed poisoning and second-expansion barrier tests. |
 | D7 | Repeated adaptation during prefill and decode | PARTIAL | Repeated synthetic cycles and four active decode steps; full async alternating 3× run pending. |
-| D8 | Allocation failure and rollback | PASS | Injected expansion failure restores exact state/queues. |
+| D8 | Allocation failure and rollback | PASS in current CPU transactions / historical GPU evidence | Current tests cover expansion exceptions and reverse rollback; exact-state injected GPU failure predates atomic repairs and awaits rerun. |
 | D9 | Race/lifetime hazard | PASS/NEGATIVE+REPAIR | Corruption reproduced; event-safe repair reaches zero corruption. |
 | D10 | Oscillating pressure | PASS at controller seam | CPU controller persistence test; real multi-request oscillating serving not yet timed. |
 | D11 | Same-precision-history reference | PASS where used | Active-KV protocol; full async pilot also designed this way but pending. |
@@ -159,7 +159,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 
 ## Verifier coverage audit
 
-`python3 reproduction/scripts/verify_report_artifacts.py` verifies file presence/JSON parseability, all 30 claim-evidence-map entries and their paths, six positive experiment gates, the expected static-W4 nondeterminism, memlock blocker, small async-copy gate, inferred-window identities, deterministic trace-manifest hashes, task-source metadata hashes, and key report phrases. It **does not** establish author confirmation, exact scaling/context mapping, exact models, datasets, baselines, 32-layer profiling, full-layer overlap, main workload matrix, headline aggregates, or every prose claim. It is therefore a consistency check, not completion proof.
+`python3 reproduction/scripts/verify_report_artifacts.py` verifies file presence/JSON parseability, all 30 claim-evidence-map entries and their paths, four current positive experiment gates, two separately labeled historical pre-atomic gates and their classification files, the expected static-W4 nondeterminism, memlock blocker, small async-copy gate, inferred-window identities, deterministic trace-manifest hashes, task-source metadata hashes, and key report phrases. It **does not** establish author confirmation, exact scaling/context mapping, exact models, datasets, baselines, 32-layer profiling, full-layer overlap, main workload matrix, headline aggregates, or every prose claim. It is therefore a consistency check, not completion proof.
 
 The vendor manifest proves only that the candidate snapshot was not modified. Unit-test green status proves only the named seams. Neither is accepted as completion evidence for the paper-level objective.
 
