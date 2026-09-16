@@ -6,6 +6,8 @@ TMP="$ROOT/results/tmp/real-executor"; OUT="$ROOT/experiments/real-executor/resu
 FP16=${MORPHSERVE_FP16_MODEL_PATH:-/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b}
 W4=${MORPHSERVE_W4_MODEL_PATH:-/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp}; GPU=${CUDA_VISIBLE_DEVICES:-1}
 mkdir -p "$OUT" "$ROOT/results/tmp"
+git -C "$ROOT/.." rev-parse HEAD > "$OUT/source-revision.txt"
+git -C "$ROOT/.." status --short -- reproduction/runtime reproduction/scripts/real_executor_pilot.py reproduction/scripts/run_real_executor_pilot.sh > "$OUT/source-status.txt"
 free_mib=$(nvidia-smi -i "$GPU" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
 if (( free_mib < 17408 )); then printf 'GPU %s has %s MiB free; real-executor pilot requires at least 17408 MiB.\n' "$GPU" "$free_mib" >&2; exit 75; fi
 rm -rf "$TMP"; mkdir -p "$TMP"; cp -a "$CSRC" "$TMP/csrc"
