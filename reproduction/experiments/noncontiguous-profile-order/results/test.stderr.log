@@ -1,0 +1,6 @@
+test_fixed_stride_misroutes_profile_group_two (reproduction.tests.test_noncontiguous_profile_order.NonContiguousProfileOrderTests.test_fixed_stride_misroutes_profile_group_two) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.868s
+
+OK

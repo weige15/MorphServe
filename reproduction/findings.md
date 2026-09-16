@@ -28,7 +28,7 @@ The official lab repository does not release implementation code. A separate pro
 
 6. **Real conditioned profiling is feasible and auditable, but suffix-only orders are incomplete.** The frozen 2,048-token run expanded to layers 24–31, executed all 36 sets in 58.14 s, and selected `[25,24,26,27,28,29,30,31]`; common tail order stayed `[29,30,31]`. Paper-style all-32 simultaneous pinning exceeds local memlock by 741 MB before overhead.
 
-7. **Controller semantics are now explicit rather than implicit.** The reconstruction freezes EMA, persistence, hysteresis, and 1/2/4-layer mode actions before workload evaluation; six policy tests pass. These values are deliberately not attributed to the authors and still need engine/GPU integration.
+7. **Controller semantics are explicit, but real LIS order exposes a blocking KV-address bug.** The reconstruction policy/fake integration passes, yet candidate fused KV mapping assumes selected layers descend contiguously. Real prefix `[25,24,26]` maps group 2 to layer 23 and corrupts it; real controller integration must use explicit region indirection/multi-kernel remapping.
 
 ## Open questions
 

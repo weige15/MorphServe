@@ -270,3 +270,7 @@ Because the paper gives only example 85% KV/100-ms queue thresholds, the protoco
 ## 2026-09-16 — controller/executor integration seam
 
 Five fake-executor tests pass. Pressure follows the frozen profile and copies W4 before KV expansion; expansion failure/exception rolls back FP16 in reverse order; recovery shrinks KV before restore and defers if unsafe; FCFS request order never changes. This validates command semantics/rollback only. Real GPU executor integration and concurrent allocation failures remain open.
+
+## 2026-09-16 — arbitrary profiled-order KV counterexample
+
+The real LIS prefix `[25,24,26]` was applied to a four-region synthetic layout. Candidate group 2 computed `layer25_base - 2*stride`, left registered layer 26 unchanged, and wrote the known K/V token into layer 23. The process exited 0, proving deterministic silent misrouting rather than a crash. Prior positive mapping evidence is narrowed to descending contiguous layers. Real controller integration is blocked until explicit region-pointer or multi-kernel remapping is implemented.

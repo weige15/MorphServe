@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: integrate reconstructed monitor/controller with normalized engine/executor seams
+      next_gate: repair arbitrary profile-order KV mapping and rerun counterexample/oracles
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The fake-executor integration preserves FCFS/action safety. A real executor adapter can reuse
-  the tested AutoAWQ, reclaimed-KV, migration, and event primitives, but must first expose
-  transactional allocation failure/rollback without assuming a single active request.
-active_protocol: experiments/controller-integration/protocol.md
+  Real executor integration is blocked by confirmed fixed-stride KV misrouting for LIS order
+  [25,24,26]. Explicit per-group remapping (or multi-kernel dispatch) should preserve arbitrary
+  profile order while retaining the validated descending fast path.
+active_protocol: experiments/noncontiguous-profile-order/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Add a transactional real-executor adapter around tested layer/KV primitives and inject allocation failure.
-  - Exercise multi-request block ownership and rollback before workload replay.
-  - Design a staged full-profile strategy that does not misrepresent paper-style all-variant pinning.
+  - Implement explicit arbitrary-region KV store/attention remapping and rerun the corruption counterexample.
+  - Re-run descending two-tail and active-KV same-history regressions.
+  - Only then add transactional real-executor/multi-request workload integration.

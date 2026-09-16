@@ -1,0 +1,2 @@
+arbitrary-order candidate mapping: EXPECTED NEGATIVE CONFIRMED
+{"expected_layer26_unchanged": true, "group2_expected_address": 136328706536448, "group2_fixed_stride_prediction": 136328706524160, "k_addresses": [136328706532352, 136328706528256, 136328706536448], "layer_stride_bytes": 4096, "profile_order": [25, 24, 26], "unintended_layer23_received_token": true}
