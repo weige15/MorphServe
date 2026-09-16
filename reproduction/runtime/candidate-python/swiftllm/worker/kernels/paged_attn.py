@@ -1153,8 +1153,8 @@ def paged_attention_multi_kernels(
         if new_kv_cache_used:
             _fwd_paged_attention_phase1_new_kv_used[grid](
                 acc_buf, sum_exp_buf, max_score_buf,
-                q, k_cache, v_cache,
-                block_table,
+                q, kc, vc,
+                bt,
                 infer_state.softmax_scale * 1.442695040888963,
                 infer_state.decoding_seq_lens,
                 infer_state.seq_ids[infer_state.num_prefill_seqs:],
@@ -1174,8 +1174,8 @@ def paged_attention_multi_kernels(
         else:
              _fwd_paged_attention_phase1[grid](
                 mid_o, mid_o_logexpsum,
-                q, k_cache, v_cache,
-                block_table,
+                q, kc, vc,
+                bt,
                 infer_state.softmax_scale * 1.442695040888963,
                 infer_state.decoding_seq_lens,
                 infer_state.seq_ids[infer_state.num_prefill_seqs:],

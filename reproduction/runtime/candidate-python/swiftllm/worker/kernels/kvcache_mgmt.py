@@ -45,7 +45,7 @@ def _fwd_kvcache_mgmt_prefill_kernel(
         (tl.arange(0, block_size)*head_dim)[:, None, None] + \
         tl.arange(0, head_dim)[None, None, :]
     
-    mask = (my_token_range < my_seq_len + my_seq_start_loc)[:, None, None]
+    mask = ((my_token_range < my_seq_len + my_seq_start_loc) & (my_block_index >= 0))[:, None, None]
     tl.store(k_cache + offs_kvcache, tl.load(k + offs_kv, mask=mask), mask=mask)
     tl.store(v_cache + offs_kvcache, tl.load(v + offs_kv, mask=mask), mask=mask)
 
@@ -73,6 +73,8 @@ def _fwd_kvcache_mgmt_decoding_kernel(
     my_block_id = (my_seq_len-1) // block_size
     my_block_offset = (my_seq_len-1) % block_size
     my_block_index = tl.load(block_table + my_seq_id*max_blocks_per_seq + my_block_id).to(tl.int64)
+    if my_block_index < 0:
+        return
 
     offs_kv = my_batch_id*num_kv_heads*head_dim + (tl.arange(0, num_kv_heads)*head_dim)[:, None] + tl.arange(0, head_dim)[None, :]
     offs_kvcache = (my_block_index*num_layers+cur_layer)*num_kv_heads*block_size*head_dim + (tl.arange(0, num_kv_heads)*block_size*head_dim)[:, None] + my_block_offset*head_dim + tl.arange(0, head_dim)[None, :]
@@ -476,6 +478,66 @@ def store_kvcache(
                     # exit()
                 _launch(kc=k_cache_new[j], vc=v_cache_new[j], bt=btj)
             '''
+
+
+def store_kvcache_explicit_regions(
+    k: torch.Tensor,
+    v: torch.Tensor,
+    k_cache: torch.Tensor,
+    v_cache: torch.Tensor,
+    k_cache_new: List[torch.Tensor],
+    v_cache_new: List[torch.Tensor],
+    block_table: torch.Tensor,
+    model_config: LlamaModelConfig,
+    engine_config: EngineConfig,
+    infer_state: LlamaInferState,
+    cur_layer: int,
+):
+    """Store through explicit cache tensors, supporting arbitrary reclaimed order."""
+    def launch(kc, vc, bt):
+        if infer_state.num_prefill_seqs > 0:
+            grid = (infer_state.num_prefill_seqs, cdiv(infer_state.max_prefill_len, engine_config.block_size))
+            _fwd_kvcache_mgmt_prefill_kernel[grid](
+                kc, vc, k, v, bt,
+                infer_state.seq_ids,
+                infer_state.prefill_seq_start_locs,
+                infer_state.prefill_seq_lens,
+                cur_layer,
+                model_config.num_layers,
+                model_config.num_kv_heads,
+                engine_config.block_size,
+                model_config.head_dim,
+                engine_config.max_blocks_per_seq,
+            )
+        if infer_state.num_decoding_seqs > 0:
+            grid = (infer_state.num_decoding_seqs,)
+            _fwd_kvcache_mgmt_decoding_kernel[grid](
+                kc, vc,
+                k[infer_state.num_prefill_tokens:, :, :],
+                v[infer_state.num_prefill_tokens:, :, :],
+                bt,
+                infer_state.seq_ids[infer_state.num_prefill_seqs:],
+                infer_state.decoding_seq_lens,
+                cur_layer,
+                model_config.num_layers,
+                model_config.num_kv_heads,
+                engine_config.block_size,
+                model_config.head_dim,
+                engine_config.max_blocks_per_seq,
+            )
+
+    num_blocks_org = infer_state.num_blocks_org
+    original_table = block_table.clone()
+    original_table[original_table >= num_blocks_org] = -1
+    launch(k_cache, v_cache, original_table)
+    group_size = infer_state.kv_cache_new_block_size
+    for group, (kc, vc) in enumerate(zip(k_cache_new, v_cache_new)):
+        start = num_blocks_org + group * group_size
+        end = start + group_size
+        local_table = block_table - start
+        local_table[(block_table < start) | (block_table >= end)] = -1
+        if (local_table >= 0).any():
+            launch(kc, vc, local_table)
 
 
 def store_kvcache_performance_test(
