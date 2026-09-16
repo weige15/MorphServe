@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: repair arbitrary profile-order KV mapping and rerun counterexample/oracles
+      next_gate: transactional real-executor integration with arbitrary profile order
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Real executor integration is blocked by confirmed fixed-stride KV misrouting for LIS order
-  [25,24,26]. Explicit per-group remapping (or multi-kernel dispatch) should preserve arbitrary
-  profile order while retaining the validated descending fast path.
-active_protocol: experiments/noncontiguous-profile-order/protocol.md
+  Explicit-region remapping fixes arbitrary LIS order while preserving the descending fast path.
+  A transactional real-executor adapter can now select the safe path by address layout and expose
+  allocation failure/rollback before multi-request workload replay.
+active_protocol: experiments/noncontiguous-mapping-repair/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Implement explicit arbitrary-region KV store/attention remapping and rerun the corruption counterexample.
-  - Re-run descending two-tail and active-KV same-history regressions.
-  - Only then add transactional real-executor/multi-request workload integration.
+  - Add transactional real-executor integration and inject allocation failure/rollback.
+  - Re-run active-KV same-history using explicit fallback for `[25,24,26]` multi-layer order.
+  - Begin multi-request workload instrumentation only after those gates.

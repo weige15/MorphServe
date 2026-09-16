@@ -81,3 +81,7 @@ Use explicit per-group base pointers/indirection, or the candidate's multi-kerne
 ## Verification
 
 Rerun the counterexample plus the existing two-tail dense-attention oracle. A repaired implementation must write layer 26, leave layer 23 unchanged, and preserve attention output.
+
+## Applied Repair and Verification
+
+`runtime/candidate-python` now provides explicit-region store dispatch with negative-ID guards and repairs the candidate multi-kernel attention helper to use passed region tensors/tables. The `[25,24,26]` repair test writes layer 26, leaves layer 23 unchanged, and matches the dense attention oracle with max error 0. The descending combined-path regression also remains max-error 0. Evidence: `experiments/noncontiguous-mapping-repair/results/`.

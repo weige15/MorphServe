@@ -1,0 +1,30 @@
+{
+  "attention_max_abs_error": 0.0,
+  "expected": [
+    21.0,
+    22.0,
+    23.0,
+    24.0,
+    25.0,
+    26.0,
+    27.0,
+    28.0
+  ],
+  "expected_layer26_received_token": true,
+  "output": [
+    21.0,
+    22.0,
+    23.0,
+    24.0,
+    25.0,
+    26.0,
+    27.0,
+    28.0
+  ],
+  "profile_order": [
+    25,
+    24,
+    26
+  ],
+  "unintended_layer23_unchanged": true
+}

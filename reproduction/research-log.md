@@ -273,4 +273,8 @@ Five fake-executor tests pass. Pressure follows the frozen profile and copies W4
 
 ## 2026-09-16 — arbitrary profiled-order KV counterexample
 
-The real LIS prefix `[25,24,26]` was applied to a four-region synthetic layout. Candidate group 2 computed `layer25_base - 2*stride`, left registered layer 26 unchanged, and wrote the known K/V token into layer 23. The process exited 0, proving deterministic silent misrouting rather than a crash. Prior positive mapping evidence is narrowed to descending contiguous layers. Real controller integration is blocked until explicit region-pointer or multi-kernel remapping is implemented.
+The real LIS prefix `[25,24,26]` was applied to a four-region synthetic layout. Candidate group 2 computed `layer25_base - 2*stride`, left registered layer 26 unchanged, and wrote the known K/V token into layer 23. The process exited 0, proving deterministic silent misrouting rather than a crash. Prior positive mapping evidence is narrowed to descending contiguous layers.
+
+### Explicit-region repair
+
+The independent runtime now masks/remaps one block table per region and repairs the candidate multi-kernel attention helper. The same `[25,24,26]` test writes layer 26, leaves layer 23 untouched, and matches a dense oracle with max error 0. The descending fused regression remains max-error 0. This restores correctness but adds launches and is not yet a performance-equivalent paper reproduction.

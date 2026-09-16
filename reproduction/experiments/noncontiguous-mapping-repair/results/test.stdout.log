@@ -1,0 +1,7 @@
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.00 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.14 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    511.43 ms.
+[PagedAttention-Serving] Time to paged_attention_phase_mid: 365.85 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    126.59 ms.
+[PagedAttention-Serving] Total time: 1004.00 ms.

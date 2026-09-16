@@ -1,0 +1,6 @@
+test_profile_order_store_and_attention_use_registered_group (reproduction.tests.test_noncontiguous_mapping_repair.ExplicitRegionRepairTests.test_profile_order_store_and_attention_use_registered_group) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.118s
+
+OK

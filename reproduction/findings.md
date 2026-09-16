@@ -28,7 +28,7 @@ The official lab repository does not release implementation code. A separate pro
 
 6. **Real conditioned profiling is feasible and auditable, but suffix-only orders are incomplete.** The frozen 2,048-token run expanded to layers 24–31, executed all 36 sets in 58.14 s, and selected `[25,24,26,27,28,29,30,31]`; common tail order stayed `[29,30,31]`. Paper-style all-32 simultaneous pinning exceeds local memlock by 741 MB before overhead.
 
-7. **Controller semantics are explicit, but real LIS order exposes a blocking KV-address bug.** The reconstruction policy/fake integration passes, yet candidate fused KV mapping assumes selected layers descend contiguously. Real prefix `[25,24,26]` maps group 2 to layer 23 and corrupts it; real controller integration must use explicit region indirection/multi-kernel remapping.
+7. **Real LIS order exposed a vendor KV-address bug; correctness now requires a slower explicit fallback.** Vendor fused `[25,24,26]` maps group 2 into layer 23. Reconstructed per-region store/attention dispatch fixes the address and matches dense oracles, while descending equal-stride layouts may retain the fused fast path. Launch overhead remains unmeasured.
 
 ## Open questions
 

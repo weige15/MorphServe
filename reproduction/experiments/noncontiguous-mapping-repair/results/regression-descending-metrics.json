@@ -1,0 +1,39 @@
+{
+  "allocator_delta_bytes": 0,
+  "block_table": [
+    [
+      0,
+      2,
+      14,
+      15
+    ]
+  ],
+  "device": "NVIDIA GeForce RTX 3090",
+  "expected": [
+    2.1015625,
+    2.126953125,
+    2.150390625,
+    2.17578125,
+    2.19921875,
+    2.224609375,
+    2.25,
+    2.2734375
+  ],
+  "group_blocks": 12,
+  "k_high_base": 130673039905792,
+  "k_low_base": 130673039901696,
+  "layer_stride_bytes": 4096,
+  "max_attention_abs_error": 0.0,
+  "output": [
+    2.1015625,
+    2.126953125,
+    2.150390625,
+    2.17578125,
+    2.19921875,
+    2.224609375,
+    2.25,
+    2.2734375
+  ],
+  "owner_base": 130673039900672,
+  "packed_prefixes_preserved": true
+}

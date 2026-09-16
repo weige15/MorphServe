@@ -1,0 +1,6 @@
+test_two_reclaimed_regions_store_and_attention (reproduction.tests.test_candidate_kv_mapping.CandidateKVMappingTests.test_two_reclaimed_regions_store_and_attention) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.234s
+
+OK
