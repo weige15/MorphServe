@@ -1,36 +1,69 @@
 # MorphServe reproduction workspace
 
-Evidence-backed reproduction of the supplied 19-page MorphServe conference paper. The investigation is **in progress**; no headline paper claim has been reproduced yet.
+## What This Project Does
 
-## Start here
+Auditable reproduction of the supplied 19-page MorphServe paper. It preserves reported values separately from measurements, vendors immutable public snapshots, tests a repaired independent reconstruction, and records negative results/blockers. No headline paper claim is currently reproduced.
 
-- [`research-state.yaml`](research-state.yaml) — checkpoint and next action.
-- [`docs/paper-evidence-brief.md`](docs/paper-evidence-brief.md) — full visual paper audit, exact Tables 1–8, Figures 1–7, equations, and Algorithm 1.
-- [`docs/source-map.md`](docs/source-map.md) — paper requirement → source file/mechanism map.
-- [`docs/claim-register.md`](docs/claim-register.md) — reported values, evidence requirements, and current status.
-- [`docs/author-artifact-audit.md`](docs/author-artifact-audit.md) — official README-only repo and candidate project-account code audit.
-- [`configs/paper-reference-values.json`](configs/paper-reference-values.json) — machine-readable reported values, never measured output.
-- [`results/raw/environment.json`](results/raw/environment.json) — host, GPU, PCIe, software, model inventory, and hashes.
+## Quickstart
 
-## Important source status
-
-- `vendor/author-morphserve/` is an exact archive of `MorphServe/MorphServe@85c4fbf...`, but its author identity is not linked by the supplied paper or official lab repository. It is labeled a **candidate project-account artifact**, not verified author code.
-- `vendor/swiftllm-upstream/` is `interestingLSY/swiftLLM@682cf9a...` for reconstruction/comparison.
-- Both vendor trees are immutable and covered by `MANIFEST.sha256`; fixes belong in a separate runtime tree.
-- `ds2-lab/MorphServe@1c42999...` is README-only and says full code will be released later.
-
-The PDF contains Tables 1–8 only. There is no Table 9, and the objective's `[5.5223, 0.1241, 27.68]` target is PDF Table 2, not Table 4. This mismatch is retained explicitly.
-
-## Re-capture environment
+Requirements: Linux, Python 3.12, `uv`, CUDA 12.x, and an NVIDIA GPU for GPU runners. Scripts create `reproduction/.venv`; model/data paths default to the locally audited assets.
 
 ```bash
-PY=/nfs/home/s314511048/precision-batching/.venv/bin/python
-$PY scripts/capture_environment.py \
-  --output results/raw/environment.json \
-  --asset /path/to/model/snapshot \
-  --asset /path/to/quantized/model
+# Setup-free CPU checks
+PYTHONPATH="$PWD/reproduction/runtime:$PWD/reproduction/runtime/candidate-python" \
+  python3 -m unittest reproduction.tests.test_profiling \
+  reproduction.tests.test_candidate_runtime -v
+
+# Current state and evidence
+cat reproduction/research-state.yaml
 ```
 
-## Current checkpoint
+## Common Commands
 
-Checkpoint 1 (materials/environment audit) is complete. Checkpoint 2 is testing the candidate source unmodified, then will build a clearly labeled reconstruction only where evidence requires it. See `experiments/candidate-artifact-smoke/protocol.md`.
+```bash
+# Synthetic C++/KV/event GPU gates
+CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_candidate_memory_manager_test.sh
+CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_candidate_kv_mapping_test.sh
+CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_candidate_lifetime_test.sh
+
+# Full-model modified-condition gates
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_candidate_fp16_baseline.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_static_autoawq_baseline.sh       # expected exit 1: exact-repeat gate
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_autoawq_layer_switch.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_active_kv_switch.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_lis_real_pilot.sh
+```
+
+## Project Structure
+
+- `vendor/`: immutable candidate MorphServe and SwiftLLM snapshots.
+- `runtime/`: independent repaired C++/Python reconstruction and LIS/AutoAWQ adapters.
+- `experiments/`: locked protocols, raw logs, metrics, analyses, and negative results.
+- `profiles/`: saved offline layer orders.
+- `configs/paper-reference-values.json`: paper values only, never measurements.
+- `docs/`: source map, claim register, paper audit, and artifact audit.
+- `doc/`: onboarding and debug reports.
+
+## Testing
+
+Passing tests/runners must do real work and save raw evidence. The main verified surfaces are FP16 parity, real W4 switching, physical KV reclaim/mapping, event lifetime, active-KV same-history continuity, and a real three-layer conditioned-MDS profile. Check each runner's `run.exitcode`/`test.exitcode` and `verification.log`; do not rely only on console `OK`.
+
+## Documentation Map
+
+- [Onboarding and handoff](doc/onboarding.md)
+- [Research state](research-state.yaml)
+- [Paper evidence brief](docs/paper-evidence-brief.md)
+- [Source-to-implementation map](docs/source-map.md)
+- [Claim register](docs/claim-register.md)
+- [Public artifact audit](docs/author-artifact-audit.md)
+- [Research findings](findings.md)
+- [Research log](research-log.md)
+
+## Troubleshooting
+
+- Official `ds2-lab/MorphServe` is README-only; do not treat it as released code.
+- Candidate source is not runnable unmodified; see `experiments/candidate-artifact-smoke/`.
+- Candidate C++ originally segfaulted at shutdown; see `doc/debug-report.md`.
+- AutoAWQ split-K logits are not bit deterministic; see `doc/debug-report-autoawq-repeat.md`.
+- First-call multi-second attention logs are Triton JIT, not steady-state timings.
+- Verify a GPU is actually free with `nvidia-smi`; saved before/after snapshots identify contention.
