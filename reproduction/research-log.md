@@ -286,3 +286,7 @@ Attempt 1 completed all actions but used an incorrect free-block assertion for a
 ## 2026-09-16 — real two-request reclaimed ownership
 
 Attempt 1 exposed an inference-mode context bug in executor shrink; after the scoped fix, request 0/1 allocated `[0,1,2,3,4]` and `[5]`, placing IDs 4/5 in reclaimed group 0. Recovery removed free groups 26/24, refused occupied layer 25 while preserving counts, rows, K/V sentinel, state and FCFS, then succeeded after real BlockManager frees. Final FP16/capacity were exact and ordinary preemptions remained zero. Model decode concurrency and timed arrivals are still untested.
+
+## 2026-09-16 — replay harness and primary trace recovery
+
+Four replay tests pass for independent scheduled submissions, complete error/timeout/token accounting, explicit TTFT/TPOT and type-7 percentiles, and raw-summary regeneration. Primary Azure Code/Conversation and BurstGPT v1.1 files were recovered and hashed. Exact paper replay remains blocked: Azure file, both 72-s offsets, scaling operation and context mapping are absent. First/densest Burst windows contain 2/1,666 requests, proving that an unsourced window choice would dominate outcomes.

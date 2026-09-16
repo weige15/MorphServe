@@ -57,6 +57,7 @@ Passing tests/runners must do real work and save raw evidence. The main verified
 - [Source-to-implementation map](docs/source-map.md)
 - [Claim register](docs/claim-register.md)
 - [Public artifact audit](docs/author-artifact-audit.md)
+- [Public trace audit](docs/trace-audit.md)
 - [Research findings](findings.md)
 - [Research log](research-log.md)
 

@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: bounded scheduled-arrival replay with complete request/timing accounting
+      next_gate: frozen modified-condition GPU arrival replay with complete accounting
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Real multi-request ownership and recovery are correct. A trace-independent replay harness can
-  now submit arrivals independently of completion and persist complete TTFT/TPOT/queue/token/error
-  records; exact paper replay remains blocked by unspecified windows/context mapping.
-active_protocol: experiments/multirequest-ownership/protocol.md
+  The replay harness is correct and primary trace files are identified, but exact windows/scaling
+  are irrecoverable. A small synthetic GPU trace frozen before outcomes can validate end-to-end
+  timestamp/token accounting without being mislabeled as Azure/BurstGPT reproduction.
+active_protocol: experiments/replay-harness/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Implement and test scheduled-arrival replay/accounting independent of server completions.
-  - Freeze one synthetic modified-condition trace before GPU outcomes and run a bounded serving replay.
-  - Recheck public trace repositories for exact windows before any Azure/BurstGPT claim.
+  - Freeze one synthetic modified-condition trace before GPU outcomes and run bounded serving replay.
+  - Add adapter metadata for queue, precision changes, KV capacity/occupancy and preemptions.
+  - Do not select Azure/BurstGPT windows without author offsets.

@@ -6,7 +6,7 @@ Status vocabulary: **reproduced**, **approximate/modified-condition**, **blocked
 
 | ID | Paper location / scope | Reported reference | Required comparison/evidence | Current status |
 |---|---|---|---|---|
-| H1 | Abstract; §5.1 aggregate | Average SLO-violation reduction 92.45% | Exact matrix requests, 2 s TTFT SLO, per-cell violations and denominator, aggregation script | **Blocked exact**: trace windows, mapping, configs, and raw logs unavailable |
+| H1 | Abstract; §5.1 aggregate | Average SLO-violation reduction 92.45% | Exact matrix requests, 2 s TTFT SLO, per-cell violations and denominator, aggregation script | **Blocked exact**: primary trace files recovered/hashes saved, but Azure file choice, both 72-s offsets, scaling operation, context mapping/config/raw logs remain unavailable |
 | H2 | §5.1, accuracy mode | P95 TTFT 2.2×–3.9× better than FP16 | Per-cell P95 from same hardware/workload and quality evidence | **Unverified** |
 | H3 | §5.1, default mode | P95 TTFT 2.9×–15.7× better than FP16 | Same as H2, default-mode config fixed before run | **Unverified**; mode config unavailable |
 | H4 | §5.1, performance mode | P95 TTFT 3.4×–19.5× better than FP16 | Same as H2, performance-mode config fixed before run | **Unverified**; mode config unavailable |

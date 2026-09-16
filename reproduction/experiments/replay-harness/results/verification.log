@@ -1,0 +1,10 @@
+$ PYTHONPATH=reproduction/runtime python3 -m unittest reproduction.tests.test_replay -v
+test_arrivals_are_independent_and_all_records_accounted (reproduction.tests.test_replay.ReplayTests.test_arrivals_are_independent_and_all_records_accounted) ... ok
+test_artifacts_regenerate_summary (reproduction.tests.test_replay.ReplayTests.test_artifacts_regenerate_summary) ... ok
+test_percentile_definition_and_invalid_trace (reproduction.tests.test_replay.ReplayTests.test_percentile_definition_and_invalid_trace) ... ok
+test_timeout_and_error_remain_in_output (reproduction.tests.test_replay.ReplayTests.test_timeout_and_error_remain_in_output) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.105s
+
+OK

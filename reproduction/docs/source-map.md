@@ -63,7 +63,7 @@ Paper-specified settings: WikiText-2; calibration sequence length 2,048; cosine 
 | Models | Vicuna 7B v1.5, Llama 2 7B, Llama 3 8B, CodeLlama 34B | Exact repository/revision and base/chat/instruct status for all but named Vicuna version; only local Llama 3.1 8B base and derived AWQ assets are available. |
 | Hardware | L4 24 GB + 256 GB RAM for 7B/8B; A100 80 GB + 2 TB for 34B | Local host is 7× RTX 3090 24 GB with 125 GiB RAM, not an exact hardware match. |
 | Lengths | MHA 512/256; GQA 1024/512 | Prompt construction, truncation side, EOS, forced output length, and decoding parameters unresolved. |
-| Traces | 72 s Azure and BurstGPT segments; 4.75× and 1.75× downscaling | Exact files, window offsets, operation defining “downscaling,” sampling seed, and request/context assignment unavailable. |
+| Traces | 72 s Azure and BurstGPT segments; 4.75× and 1.75× downscaling | Primary Azure Code/Conversation and pre-paper BurstGPT v1.1 files recovered/hashes audited in `docs/trace-audit.md`; exact file/window/scaling/context mapping remain unavailable. |
 | Tasks | GovReport, QMSum, English-translated DuReader, Multi-News | Splits, translation artifact, prompts, preprocessing, metrics/packages/revisions, and sample IDs unavailable. |
 | Controller modes | default, performance, accuracy | Thresholds, persistence, swap increments/limits, and recovery policy unavailable. Paper examples (85% KV, 100 ms queue) are not complete mode configurations. |
 | Baselines | FP16, static AWQ INT4, LLM-PQ, PyramidKV, three MorphServe modes | LLM-PQ layer plan, PyramidKV configuration, common scheduler settings, and exact baseline source revisions unavailable. |

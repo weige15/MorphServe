@@ -1,0 +1,116 @@
+{
+  "files": {
+    "azure_code": {
+      "bytes": 320117,
+      "duration_s": 3435.9480559825897,
+      "end": 3435.9480559825897,
+      "fields": [
+        "TIMESTAMP",
+        "ContextTokens",
+        "GeneratedTokens"
+      ],
+      "first_72s": {
+        "count": 63,
+        "start": 0.0
+      },
+      "max_count_72s": {
+        "count": 827,
+        "last_arrival": 925.838840007782,
+        "start": 854.0805220603943,
+        "width_s": 72.0
+      },
+      "output_tokens": {
+        "max": 1899,
+        "min": 6
+      },
+      "path": "/tmp/AzurePublicDataset/data/AzureLLMInferenceTrace_code.csv",
+      "prompt_tokens": {
+        "max": 7437,
+        "min": 3
+      },
+      "requests": 8819,
+      "sha256": "54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6",
+      "start": 0.0
+    },
+    "azure_conversation": {
+      "bytes": 719188,
+      "duration_s": 3501.7219371795654,
+      "end": 3501.7219371795654,
+      "fields": [
+        "TIMESTAMP",
+        "ContextTokens",
+        "GeneratedTokens"
+      ],
+      "first_72s": {
+        "count": 249,
+        "start": 0.0
+      },
+      "max_count_72s": {
+        "count": 616,
+        "last_arrival": 1706.6915831565857,
+        "start": 1634.7545809745789,
+        "width_s": 72.0
+      },
+      "output_tokens": {
+        "max": 1000,
+        "min": 7
+      },
+      "path": "/tmp/AzurePublicDataset/data/AzureLLMInferenceTrace_conv.csv",
+      "prompt_tokens": {
+        "max": 14050,
+        "min": 2
+      },
+      "requests": 19366,
+      "sha256": "2f1e5b666d4e3055fdbba98598ce2ec307767b9064e03e2fa46676dbcc7d0bf8",
+      "start": 0.0
+    },
+    "burstgpt_1_v1.1": {
+      "bytes": 52283111,
+      "duration_s": 5269968.0,
+      "end": 5269973.0,
+      "fields": [
+        "Timestamp",
+        "Model",
+        "Request tokens",
+        "Response tokens",
+        "Total tokens",
+        "Log Type"
+      ],
+      "first_72s": {
+        "count": 2,
+        "start": 5.0
+      },
+      "max_count_72s": {
+        "count": 1666,
+        "last_arrival": 4450097.0,
+        "start": 4450025.0,
+        "width_s": 72.0
+      },
+      "output_tokens": {
+        "max": 7315,
+        "min": 0
+      },
+      "path": "/tmp/BurstGPT_1_v1.1.csv",
+      "prompt_tokens": {
+        "max": 29665,
+        "min": 0
+      },
+      "requests": 1429737,
+      "sha256": "4bb3783693d0a435686fbfc885615d2349bd067239079fa4b749f2e679e12122",
+      "start": 5.0
+    }
+  },
+  "policy": "Max-count and first-window statistics are source characterization only; neither window is selected for a paper-result comparison.",
+  "schema_version": 1,
+  "sources": {
+    "azure_data_introducing_commit": "790921015d50dd6aae7f7e47f39ba0e235ad6b08",
+    "azure_repo_commit": "207bed67dd10090b28ad4f745b2cfd41a11aace4",
+    "burst_release": "v1.1 (2024-06-13; available before MorphServe paper)"
+  },
+  "unresolved": {
+    "azure_file_choice": "paper says Azure 2023 but not Code vs Conversation",
+    "context_mapping": "paper does not publish sampled dataset IDs/order/seed",
+    "downscaling_operation": "4.75x/1.75x do not specify timestamp multiply/divide, thinning, or sampling",
+    "window_offsets": "paper does not identify any 72-second start"
+  }
+}
