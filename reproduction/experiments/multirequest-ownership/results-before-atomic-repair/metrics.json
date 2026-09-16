@@ -1,0 +1,203 @@
+{
+  "counts_before": [
+    5,
+    1
+  ],
+  "executor_log": [
+    [
+      "morph",
+      25
+    ],
+    [
+      "expand",
+      25,
+      615
+    ],
+    [
+      "morph",
+      24
+    ],
+    [
+      "expand",
+      24,
+      615
+    ],
+    [
+      "morph",
+      26
+    ],
+    [
+      "expand",
+      26,
+      615
+    ],
+    [
+      "shrink",
+      26,
+      615
+    ],
+    [
+      "restore",
+      26
+    ],
+    [
+      "shrink",
+      24,
+      615
+    ],
+    [
+      "restore",
+      24
+    ],
+    [
+      "shrink",
+      25,
+      615
+    ],
+    [
+      "restore",
+      25
+    ]
+  ],
+  "final": {
+    "active_layers": [],
+    "fp16_logits_exact": true,
+    "groups": 0,
+    "num_blocks": 4,
+    "num_free_blocks": 4,
+    "queues_unchanged": true,
+    "request_counts": [
+      0,
+      0
+    ],
+    "rows": {
+      "0": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "1": [
+        5
+      ]
+    }
+  },
+  "final_recovery": {
+    "active_layers": [],
+    "command": {
+      "expand_kv": false,
+      "layer_delta": -1,
+      "mode": "accuracy",
+      "pressure_count": 0,
+      "quantized_layers": 0,
+      "reason": "persistent_recovery",
+      "recovery_count": 0,
+      "sample_timestamp_s": 1.4000000000000006,
+      "shrink_kv_before_restore": true
+    },
+    "error": null,
+    "queues_after": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+    "queues_before": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+    "selected_layers": [
+      25
+    ],
+    "success": true
+  },
+  "gate": {
+    "after_free_recovery_succeeded": true,
+    "fcfs_unchanged": true,
+    "final_baseline_state": true,
+    "final_fp16_exact": true,
+    "free_groups_recovered_lifo": true,
+    "occupied_group_refused": true,
+    "ordinary_preemptions_zero": true,
+    "predicted_allocations": true,
+    "refusal_preserved_state": true,
+    "request_counts": true
+  },
+  "ordinary_preemptions": 0,
+  "passed": true,
+  "recovery_events": [
+    {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.65,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "queues_after": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+      "queues_before": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+      "selected_layers": [
+        26
+      ],
+      "success": true
+    },
+    {
+      "active_layers": [
+        25
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 1,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.9000000000000002,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "queues_after": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+      "queues_before": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+      "selected_layers": [
+        24
+      ],
+      "success": true
+    }
+  ],
+  "refusal_state": {
+    "active_layers": [
+      25
+    ],
+    "counts_unchanged": true,
+    "event_success": false,
+    "group_layers": [
+      25
+    ],
+    "queues_unchanged": true,
+    "rows_unchanged": true,
+    "selected": [
+      25
+    ],
+    "sentinel_unchanged": true
+  },
+  "rows_before": {
+    "0": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "1": [
+      5
+    ]
+  },
+  "schema_version": 1,
+  "sentinel_before": [
+    Infinity,
+    -Infinity
+  ]
+}
