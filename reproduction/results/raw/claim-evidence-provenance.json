@@ -1446,6 +1446,20 @@
       "tracked": true,
       "worktree_status": null
     },
+    "results/raw/post-expansion-preflight-rereview.md": {
+      "artifact_last_commit": "07dd6bd5037c6dfb025422f94cda603d70974e5d",
+      "bytes": 5709,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "158a6dcebe1ffffddf5852ced3d1f8a9e4300090707c558fa2b7d6b1b3783142",
+      "tracked": true,
+      "worktree_status": null
+    },
     "results/raw/trace-window-inference-commands.txt": {
       "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
       "bytes": 695,
@@ -1462,7 +1476,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "e257043c7058892481cb6ca6c26a77ec82e2df64",
+  "repository_head_at_generation": "07dd6bd5037c6dfb025422f94cda603d70974e5d",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
