@@ -2,6 +2,7 @@
 runtime/**/__pycache__/
 runtime/**/*.pyc
 tests/__pycache__/
+scripts/__pycache__/
 results/tmp/
 results/**/*.tmp
 runtime/**/*.egg-info/
