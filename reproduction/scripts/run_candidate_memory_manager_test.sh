@@ -3,16 +3,18 @@ set -euo pipefail
 
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 VENDOR="$ROOT/vendor/author-morphserve"
+CSRC=${MORPHSERVE_CSRC:-"$ROOT/runtime/candidate-csrc"}
 VENV="$ROOT/.venv"
 TMP="$ROOT/results/tmp/candidate-memory-manager"
-OUT="$ROOT/experiments/candidate-memory-manager/results"
+OUT=${MORPHSERVE_TEST_RESULT_DIR:-"$ROOT/experiments/candidate-memory-manager/results"}
 GPU=${CUDA_VISIBLE_DEVICES:-0}
 mkdir -p "$OUT" "$ROOT/results/tmp"
 rm -rf "$TMP"
 mkdir -p "$TMP"
-cp -a "$VENDOR/csrc" "$TMP/csrc"
+cp -a "$CSRC" "$TMP/csrc"
 
 cat > "$OUT/commands.txt" <<EOF
+MORPHSERVE_CSRC="$CSRC"
 uv venv --clear --python python3.12 "$VENV"
 uv pip install --python "$VENV/bin/python" torch==2.4.0 setuptools==84.0.0 ninja==1.13.0
 (cd "$TMP/csrc" && CUDA_HOME=/usr/local/cuda-12.4 "$VENV/bin/python" setup.py build_ext --inplace)
