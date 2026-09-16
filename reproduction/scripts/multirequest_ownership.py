@@ -107,6 +107,7 @@ def main():
         "rows": {"0": manager.block_table[0, :5].cpu().tolist(), "1": manager.block_table[1, :1].cpu().tolist()},
         "fp16_logits_exact": bool(torch.equal(final_logits, baseline)), "fp16_region_bytes_exact": final_region_exact,
         "pending_layer_events": sorted(model.layer_transfer_events), "allocator": allocator_state(),
+        "executor_poisoned": executor.poisoned, "coordinator_poisoned": coordinator.poisoned,
         "queues_unchanged": queue_state(scheduler) == initial_queues,
     }
     gate = {
@@ -118,7 +119,7 @@ def main():
         "after_free_recovery_succeeded": final_recovery["success"] and final_recovery["selected_layers"] == [25],
         "final_baseline_state": final["active_layers"] == [] and final["groups"] == 0 and final["allocator"] == initial_allocator and final["request_counts"] == [0,0],
         "final_fp16_exact": final["fp16_logits_exact"] and all(final["fp16_region_bytes_exact"].values()),
-        "no_pending_layer_events": not final["pending_layer_events"], "fcfs_unchanged": final["queues_unchanged"],
+        "no_pending_layer_events": not final["pending_layer_events"], "not_poisoned": not final["executor_poisoned"] and not final["coordinator_poisoned"], "fcfs_unchanged": final["queues_unchanged"],
         "ordinary_preemptions_zero": len(queue_state(scheduler).swapped) == len(initial_queues.swapped),
     }
     ordinary_preemptions = max(0, len(queue_state(scheduler).swapped) - len(initial_queues.swapped))

@@ -95,6 +95,7 @@ def main():
         "fp16_logits_exact": bool(torch.equal(rollback_logits, baseline)),
         "fp16_region_bytes_exact": rollback_region_exact,
         "pending_layer_events": sorted(model.layer_transfer_events),
+        "executor_poisoned": executor.poisoned,
         "partial_group_was_acquired": any(row[0] == "expand" for row in executor.log),
     }
     executor.fail_expand_calls.clear()
@@ -151,9 +152,11 @@ def main():
         "fp16_logits_exact": final_exact,
         "fp16_region_bytes_exact": final_region_exact,
         "pending_layer_events": sorted(model.layer_transfer_events),
+        "executor_poisoned": executor.poisoned,
+        "coordinator_poisoned": coordinator.poisoned,
     }
     gate = {
-        "injected_failure_rolled_back": not after_failure["success"] and after_failure["restore_success"] and after_failure["partial_group_was_acquired"] and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["allocator"] == initial_allocator and after_failure["fp16_logits_exact"] and all(after_failure["fp16_region_bytes_exact"].values()) and not after_failure["pending_layer_events"],
+        "injected_failure_rolled_back": not after_failure["success"] and after_failure["restore_success"] and after_failure["partial_group_was_acquired"] and not after_failure["executor_poisoned"] and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["allocator"] == initial_allocator and after_failure["fp16_logits_exact"] and all(after_failure["fp16_region_bytes_exact"].values()) and not after_failure["pending_layer_events"],
         "profile_order_active": active_state["executor_layers"] == layers == active_state["group_layers"],
         "real_w4_modules": all(classes == ["WQLinear_GEMM"] for classes in active_state["module_classes"].values()),
         "capacity_physically_expanded": active_state["num_blocks"] > 4 and active_state["num_free_blocks"] == active_state["num_blocks"],
@@ -164,6 +167,7 @@ def main():
         "final_fp16_logits_exact": final_exact,
         "final_fp16_region_bytes_exact": all(final_region_exact.values()),
         "no_pending_layer_events": not final_state["pending_layer_events"],
+        "not_poisoned": not final_state["executor_poisoned"] and not final_state["coordinator_poisoned"],
     }
     payload = {
         "schema_version": 1,
