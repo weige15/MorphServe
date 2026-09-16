@@ -1,6 +1,6 @@
 project: MorphServe evidence-backed reproduction
 status: active
-updated_utc: '2026-09-16T20:20:00Z'
+updated_utc: '2026-09-16T20:43:00Z'
 checkpoint:
   current: 2
   name: faithful implementation and profiling
@@ -72,8 +72,8 @@ blocked_exact_inputs:
   - verified author link for candidate code
 active_hypothesis: >-
   Async full-layer transfers enqueue correctly and restore exact bytes, but attempt 1 did not prove
-  compute overlap because of decode JIT and an enclosing-interval metric. Transaction/alignment defects
-  are repaired; a warmed pre-layer-event rerun and corrected replay await >17 GiB free GPU headroom.
+  compute overlap. Atomic recovery, checked rollback poisoning, and fail-closed activity-trace analysis
+  pass CPU tests; real CUDA activity, executor, ownership and replay reruns await >17 GiB free GPU headroom.
 active_protocol: experiments/async-layer-transfer/protocol.md
 resource_accounting:
   saved_gpu_runner_process_wall_seconds: 807.058078905
@@ -83,6 +83,6 @@ resource_accounting:
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Run the frozen three-repeat full-layer overlap pilot when a GPU has >17 GiB free.
-  - Re-run transactional real-executor and corrected synthetic replay on the async implementation.
+  - Run the frozen three-repeat full-layer overlap pilot plus CUDA activity trace when a GPU has >17 GiB free.
+  - Re-run transactional real-executor, ownership, async seam and corrected synthetic replay.
   - Use frozen Figure-1 candidate windows only as plot-inferred modified conditions.
