@@ -1,0 +1,187 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([8, 32, 8, 16, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([8, 32, 8, 16, 128])
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.08 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.64 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    1071.39 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    7.19 ms.
+[PagedAttention-Serving] Total time: 1079.22 ms.
+
+[LlamaTransformerLayer-Serving] Layer 0 serving time exceeded 0.5 s with 1.22 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       144.89 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 144.94 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    1079.43 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1224.37 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.06 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.08 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    1062.51 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.07 ms.
+[PagedAttention-Serving] Total time: 1062.65 ms.
+
+[LlamaTransformerLayer-Serving] Layer 1 serving time exceeded 0.5 s with 1.19 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       130.55 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 130.66 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    1062.85 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1193.51 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.03 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.05 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    1031.26 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.07 ms.
+[PagedAttention-Serving] Total time: 1031.38 ms.
+
+[LlamaTransformerLayer-Serving] Layer 2 serving time exceeded 0.5 s with 1.17 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       135.00 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 135.04 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    1031.54 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1166.59 ms.
+
+{
+  "gate": {
+    "repeat_count": true,
+    "host_enqueue_nonblocking": true,
+    "same_history_w4_within_envelope": true,
+    "same_history_fp16_exact": false,
+    "overlap_observed": true,
+    "final_fp16_bytes_exact": true,
+    "final_state_fp16": true
+  },
+  "rows": [
+    {
+      "precision": "W4",
+      "transfer_bytes": 113328128,
+      "enqueue_host_ms": 0.372190959751606,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 15.475263595581055,
+      "decode_concurrent_ms": 3669.14892578125,
+      "decode_reference_ms": 64.1476821899414,
+      "copy_start_from_origin_ms": 0.05798399820923805,
+      "copy_end_from_origin_ms": 15.533247947692871,
+      "decode_start_from_origin_ms": 0.47366398572921753,
+      "decode_end_from_origin_ms": 3669.62255859375,
+      "overlap_ms": 15.059583961963654,
+      "exposed_decode_delta_ms": 3605.0012435913086,
+      "comparison": {
+        "relative_l2": 0.0005351604777388275,
+        "max_abs": 0.015625,
+        "top1_a": 279,
+        "top1_b": 279
+      }
+    },
+    {
+      "precision": "FP16",
+      "transfer_bytes": 436224000,
+      "enqueue_host_ms": 0.4183930577710271,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 58.292545318603516,
+      "decode_concurrent_ms": 69.06617736816406,
+      "decode_reference_ms": 57.687774658203125,
+      "copy_start_from_origin_ms": 0.08803199976682663,
+      "copy_end_from_origin_ms": 58.380577087402344,
+      "decode_start_from_origin_ms": 0.5707200169563293,
+      "decode_end_from_origin_ms": 69.63689422607422,
+      "overlap_ms": 57.809857070446014,
+      "exposed_decode_delta_ms": 11.378402709960938,
+      "comparison": {
+        "relative_l2": 0.0007404458010569215,
+        "max_abs": 0.015625,
+        "top1_a": 3363,
+        "top1_b": 3363
+      }
+    },
+    {
+      "precision": "W4",
+      "transfer_bytes": 113328128,
+      "enqueue_host_ms": 0.42653700802475214,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 15.17404842376709,
+      "decode_concurrent_ms": 62.8568000793457,
+      "decode_reference_ms": 64.66448211669922,
+      "copy_start_from_origin_ms": 0.05276799947023392,
+      "copy_end_from_origin_ms": 15.226816177368164,
+      "decode_start_from_origin_ms": 0.5182719826698303,
+      "decode_end_from_origin_ms": 63.37507247924805,
+      "overlap_ms": 14.708544194698334,
+      "exposed_decode_delta_ms": -1.8076820373535156,
+      "comparison": {
+        "relative_l2": 0.0010181780671700835,
+        "max_abs": 0.015625,
+        "top1_a": 13,
+        "top1_b": 13
+      }
+    },
+    {
+      "precision": "FP16",
+      "transfer_bytes": 436224000,
+      "enqueue_host_ms": 0.28869195375591516,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 57.894046783447266,
+      "decode_concurrent_ms": 66.99244689941406,
+      "decode_reference_ms": 54.942848205566406,
+      "copy_start_from_origin_ms": 0.05196800082921982,
+      "copy_end_from_origin_ms": 57.946014404296875,
+      "decode_start_from_origin_ms": 0.38499200344085693,
+      "decode_end_from_origin_ms": 67.37744140625,
+      "overlap_ms": 57.56102240085602,
+      "exposed_decode_delta_ms": 12.049598693847656,
+      "comparison": {
+        "relative_l2": 0.0012976998696103692,
+        "max_abs": 0.015625,
+        "top1_a": 578,
+        "top1_b": 578
+      }
+    },
+    {
+      "precision": "W4",
+      "transfer_bytes": 113328128,
+      "enqueue_host_ms": 0.41091907769441605,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 15.214079856872559,
+      "decode_concurrent_ms": 63.56563186645508,
+      "decode_reference_ms": 64.35785675048828,
+      "copy_start_from_origin_ms": 0.05276799947023392,
+      "copy_end_from_origin_ms": 15.266847610473633,
+      "decode_start_from_origin_ms": 0.5018879771232605,
+      "decode_end_from_origin_ms": 64.06752014160156,
+      "overlap_ms": 14.764959633350372,
+      "exposed_decode_delta_ms": -0.7922248840332031,
+      "comparison": {
+        "relative_l2": 0.0004894837620668113,
+        "max_abs": 0.015625,
+        "top1_a": 3805,
+        "top1_b": 3805
+      }
+    },
+    {
+      "precision": "FP16",
+      "transfer_bytes": 436224000,
+      "enqueue_host_ms": 0.2758899936452508,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 57.76911926269531,
+      "decode_concurrent_ms": 63.96601486206055,
+      "decode_reference_ms": 56.57040023803711,
+      "copy_start_from_origin_ms": 0.048576001077890396,
+      "copy_end_from_origin_ms": 57.81769561767578,
+      "decode_start_from_origin_ms": 0.3675520122051239,
+      "decode_end_from_origin_ms": 64.33356475830078,
+      "overlap_ms": 57.45014360547066,
+      "exposed_decode_delta_ms": 7.3956146240234375,
+      "comparison": {
+        "relative_l2": 0.0008877301006577909,
+        "max_abs": 0.0126953125,
+        "top1_a": 374,
+        "top1_b": 374
+      }
+    }
+  ]
+}

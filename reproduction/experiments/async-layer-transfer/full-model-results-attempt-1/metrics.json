@@ -1,0 +1,156 @@
+{
+  "classification": "modified-condition asynchronous full-model overlap",
+  "final_fp16_bytes_exact": true,
+  "gate": {
+    "final_fp16_bytes_exact": true,
+    "final_state_fp16": true,
+    "host_enqueue_nonblocking": true,
+    "overlap_observed": true,
+    "repeat_count": true,
+    "same_history_fp16_exact": false,
+    "same_history_w4_within_envelope": true
+  },
+  "layer": 25,
+  "passed": false,
+  "prompt_ids": [
+    128000,
+    26833,
+    92889,
+    1093,
+    264,
+    23153,
+    11,
+    3117,
+    3201
+  ],
+  "repeats": 3,
+  "rows": [
+    {
+      "comparison": {
+        "max_abs": 0.015625,
+        "relative_l2": 0.0005351604777388275,
+        "top1_a": 279,
+        "top1_b": 279
+      },
+      "copy_end_from_origin_ms": 15.533247947692871,
+      "copy_ms": 15.475263595581055,
+      "copy_start_from_origin_ms": 0.05798399820923805,
+      "decode_concurrent_ms": 3669.14892578125,
+      "decode_end_from_origin_ms": 3669.62255859375,
+      "decode_reference_ms": 64.1476821899414,
+      "decode_start_from_origin_ms": 0.47366398572921753,
+      "enqueue_host_ms": 0.372190959751606,
+      "exposed_decode_delta_ms": 3605.0012435913086,
+      "overlap_ms": 15.059583961963654,
+      "precision": "W4",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 113328128
+    },
+    {
+      "comparison": {
+        "max_abs": 0.015625,
+        "relative_l2": 0.0007404458010569215,
+        "top1_a": 3363,
+        "top1_b": 3363
+      },
+      "copy_end_from_origin_ms": 58.380577087402344,
+      "copy_ms": 58.292545318603516,
+      "copy_start_from_origin_ms": 0.08803199976682663,
+      "decode_concurrent_ms": 69.06617736816406,
+      "decode_end_from_origin_ms": 69.63689422607422,
+      "decode_reference_ms": 57.687774658203125,
+      "decode_start_from_origin_ms": 0.5707200169563293,
+      "enqueue_host_ms": 0.4183930577710271,
+      "exposed_decode_delta_ms": 11.378402709960938,
+      "overlap_ms": 57.809857070446014,
+      "precision": "FP16",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 436224000
+    },
+    {
+      "comparison": {
+        "max_abs": 0.015625,
+        "relative_l2": 0.0010181780671700835,
+        "top1_a": 13,
+        "top1_b": 13
+      },
+      "copy_end_from_origin_ms": 15.226816177368164,
+      "copy_ms": 15.17404842376709,
+      "copy_start_from_origin_ms": 0.05276799947023392,
+      "decode_concurrent_ms": 62.8568000793457,
+      "decode_end_from_origin_ms": 63.37507247924805,
+      "decode_reference_ms": 64.66448211669922,
+      "decode_start_from_origin_ms": 0.5182719826698303,
+      "enqueue_host_ms": 0.42653700802475214,
+      "exposed_decode_delta_ms": -1.8076820373535156,
+      "overlap_ms": 14.708544194698334,
+      "precision": "W4",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 113328128
+    },
+    {
+      "comparison": {
+        "max_abs": 0.015625,
+        "relative_l2": 0.0012976998696103692,
+        "top1_a": 578,
+        "top1_b": 578
+      },
+      "copy_end_from_origin_ms": 57.946014404296875,
+      "copy_ms": 57.894046783447266,
+      "copy_start_from_origin_ms": 0.05196800082921982,
+      "decode_concurrent_ms": 66.99244689941406,
+      "decode_end_from_origin_ms": 67.37744140625,
+      "decode_reference_ms": 54.942848205566406,
+      "decode_start_from_origin_ms": 0.38499200344085693,
+      "enqueue_host_ms": 0.28869195375591516,
+      "exposed_decode_delta_ms": 12.049598693847656,
+      "overlap_ms": 57.56102240085602,
+      "precision": "FP16",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 436224000
+    },
+    {
+      "comparison": {
+        "max_abs": 0.015625,
+        "relative_l2": 0.0004894837620668113,
+        "top1_a": 3805,
+        "top1_b": 3805
+      },
+      "copy_end_from_origin_ms": 15.266847610473633,
+      "copy_ms": 15.214079856872559,
+      "copy_start_from_origin_ms": 0.05276799947023392,
+      "decode_concurrent_ms": 63.56563186645508,
+      "decode_end_from_origin_ms": 64.06752014160156,
+      "decode_reference_ms": 64.35785675048828,
+      "decode_start_from_origin_ms": 0.5018879771232605,
+      "enqueue_host_ms": 0.41091907769441605,
+      "exposed_decode_delta_ms": -0.7922248840332031,
+      "overlap_ms": 14.764959633350372,
+      "precision": "W4",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 113328128
+    },
+    {
+      "comparison": {
+        "max_abs": 0.0126953125,
+        "relative_l2": 0.0008877301006577909,
+        "top1_a": 374,
+        "top1_b": 374
+      },
+      "copy_end_from_origin_ms": 57.81769561767578,
+      "copy_ms": 57.76911926269531,
+      "copy_start_from_origin_ms": 0.048576001077890396,
+      "decode_concurrent_ms": 63.96601486206055,
+      "decode_end_from_origin_ms": 64.33356475830078,
+      "decode_reference_ms": 56.57040023803711,
+      "decode_start_from_origin_ms": 0.3675520122051239,
+      "enqueue_host_ms": 0.2758899936452508,
+      "exposed_decode_delta_ms": 7.3956146240234375,
+      "overlap_ms": 57.45014360547066,
+      "precision": "FP16",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 436224000
+    }
+  ],
+  "schema_version": 1
+}
