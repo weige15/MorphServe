@@ -2,6 +2,8 @@
 set -euo pipefail
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); VENV="$ROOT/.venv"; LOCK="$ROOT/configs/fp16-requirements-lock.txt"; TMP="$ROOT/results/tmp/async-layer-transfer-csrc"; OUT="$ROOT/experiments/async-layer-transfer/results"; GPU=${CUDA_VISIBLE_DEVICES:-0}
 rm -rf "$OUT" "$TMP"; mkdir -p "$OUT" "$ROOT/results/tmp"; cp -a "$ROOT/runtime/candidate-csrc" "$TMP"
+git -C "$ROOT/.." rev-parse HEAD > "$OUT/source-revision.txt"
+git -C "$ROOT/.." status --short -- reproduction/runtime reproduction/tests/test_async_layer_transfer.py reproduction/scripts/run_async_layer_transfer_test.sh reproduction/configs/fp16-requirements-lock.txt > "$OUT/source-status.txt"
 cat > "$OUT/commands.txt" <<EOF
 uv venv --clear --python python3.12 "$VENV" && uv pip install --python "$VENV/bin/python" -r "$LOCK"
 (cd "$TMP" && CUDA_HOME=/usr/local/cuda-12.4 "$VENV/bin/python" setup.py build_ext --inplace)

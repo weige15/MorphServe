@@ -101,7 +101,8 @@ class AsyncLayerTransferTests(unittest.TestCase):
         manager=SimpleNamespace(num_blocks=2,num_free_blocks=2,is_block_free=torch.ones(2,dtype=torch.bool,device='cuda'),num_blocks_org=2)
         model=SimpleNamespace(gpu_block_manager=manager,k_cache_new=[],v_cache_new=[],kv_cache_new_block_size=0,last_forward_event=None,model_config=SimpleNamespace(num_layers=3),layer_quant_list=[],is_layer_quant_list=[False]*3,explicit_kv_regions=False)
         executor=object.__new__(RealMorphingExecutor); executor.model=model; executor.extension=Extension(); executor.copier=SimpleNamespace(wait_current=lambda _layer:False)
-        executor.fail_expand_calls=set(); executor.expand_calls=0; executor.kv_groups=[]; executor.active_layers=[]; executor.log=[]; executor.layer_stride_bytes=8; executor.poisoned=False
+        executor.backups={0:{"base":1024,"size":512},1:{"base":2048,"size":512}}; executor.packed={0:{"size":128},1:{"size":128}}
+        executor.fail_expand_calls=set(); executor.expand_calls=0; executor.kv_groups=[]; executor.active_layers=[0,1]; executor.log=[]; executor.layer_stride_bytes=8; executor.poisoned=False
 
         self.assertFalse(executor.expand_kv([0,1]))
 
