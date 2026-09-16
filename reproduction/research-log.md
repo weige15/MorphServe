@@ -206,3 +206,23 @@ The exact-repeat gate failed. Five repeats had stable top-1/top-5 but relative l
 ### Next step
 
 Use the independently measured repeat envelope to predeclare tolerances for controlled mixed-precision history tests. Build an explicitly labeled AutoAWQ adapter; do not present it as execution of the candidate's mismatched llm-awq interface.
+
+## 2026-09-16 — one-layer real AutoAWQ in-place switch
+
+### Hypothesis and command
+
+One layer's qweight/qzeros/scales can be packed into pinned CPU memory, copied into its existing FP16 GPU region, executed via `WQLinear_GEMM`, and restored without duplicate GPU allocation.
+
+```bash
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_autoawq_layer_switch.sh
+```
+
+### Outcome
+
+All gates passed. Layer 31 used 113,328,128 packed bytes inside a 436,224,000-byte FP16 region, leaving 322,895,872 bytes (74.02%) physically reclaimable after metadata. Twenty-three packed tensors and eight restored FP16 tensors were exact; seven real low-bit modules ran with zero allocator delta. Mixed logits differed from FP16 (relative L2 0.04193), repeated W4 stayed within the frozen split-K envelope (0.00106), and restored FP16 logits were bit-exact.
+
+Blocking operation walls were 15.67 ms W4 and 58.55 ms FP16 on RTX 3090, substantially slower than the paper's different-model/hardware 4/16 ms transfer examples and ~6 ms complete W4 swap. No overlap occurred, so timing claims are not reproduced.
+
+### Next step
+
+Extend the pilot to active KV/request state with the same precision history and reclaimed block attachment, then implement multiple-layer ordering/profiling. Keep this adapter labeled independent reconstruction.

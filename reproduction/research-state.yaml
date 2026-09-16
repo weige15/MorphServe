@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: fixed-W4 numerical execution and FP16/W4 controlled switching on local 8B
+      next_gate: active-KV same-history switching with reclaimed block attachment
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Real static AutoAWQ W4 execution is available and its repeat envelope is measured. A clearly
-  labeled adapter can reconstruct selected WQLinear_GEMM decoder layers in fixed GPU regions,
-  enabling controlled FP16/W4 history tests despite the candidate's unavailable llm-awq format.
-active_protocol: experiments/static-autoawq/protocol.md
+  One real W4 layer switches/restores exactly in a no-KV pilot and frees 322.9 MB. The same
+  adapter plus repaired KV/event machinery should preserve an active request across a
+  controlled FP16-to-W4-to-FP16 precision history without re-prefill or cache loss.
+active_protocol: experiments/autoawq-layer-switch/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Audit/pin candidate llm-awq dependency mismatch and implement the smallest real AutoAWQ W4 adapter.
-  - Test fixed-W4 logits and controlled FP16/W4 switching with the same precision history.
+  - Test active-KV FP16/W4/FP16 switching against a same-history reference, including reclaimed block attachment.
+  - Extend to multiple W4 layers using a frozen order.
   - Freeze real WikiText-2 metric collection choices around the tested LIS core.

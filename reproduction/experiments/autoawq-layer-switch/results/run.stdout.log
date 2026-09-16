@@ -1,0 +1,102 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+{
+  "gate": {
+    "initial_fp16_repeat_exact": true,
+    "quant_source_exact": true,
+    "quant_within_fp16_region": true,
+    "real_wqlinear_modules": true,
+    "mixed_repeat_within_envelope": true,
+    "mixed_topk_stable": true,
+    "mixed_differs_from_fp16": true,
+    "restore_source_exact": true,
+    "restore_base_stable": true,
+    "restored_logits_exact": true
+  },
+  "storage": {
+    "fp16_region_bytes": 436224000,
+    "packed_layer_bytes_including_metadata_and_norms": 113328128,
+    "reclaimed_bytes": 322895872,
+    "packed_by_suffix": {
+      "weight": 16384,
+      "qweight": 109051904,
+      "qzeros": 851968,
+      "scales": 3407872
+    },
+    "gpu_allocated_before": 16102629376,
+    "gpu_allocated_after_install": 16102629376,
+    "gpu_allocator_delta": 0,
+    "fp16_base": 128317940817920,
+    "quant_base": 128317940817920,
+    "quant_end": 128318054146048,
+    "restored_base": 128317940817920
+  },
+  "mixed_repeat": {
+    "exact": false,
+    "max_abs": 0.015625,
+    "mean_abs": 0.0023013469763100147,
+    "relative_l2": 0.0010612901533022523,
+    "top1_reference": 505,
+    "top1_candidate": 505,
+    "top5_reference": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "top5_candidate": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ]
+  },
+  "mixed_vs_fp16": {
+    "exact": false,
+    "max_abs": 0.5518798828125,
+    "mean_abs": 0.0935574620962143,
+    "relative_l2": 0.04192871227860451,
+    "top1_reference": 505,
+    "top1_candidate": 505,
+    "top5_reference": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "top5_candidate": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ]
+  },
+  "restored_vs_initial": {
+    "exact": true,
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "relative_l2": 0.0,
+    "top1_reference": 505,
+    "top1_candidate": 505,
+    "top5_reference": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "top5_candidate": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ]
+  }
+}

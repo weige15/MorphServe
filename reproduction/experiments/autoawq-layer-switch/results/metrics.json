@@ -1,0 +1,149 @@
+{
+  "classification": "modified-condition-one-layer-autoawq-switch",
+  "copies": {
+    "quant_wall_ms": 15.67468501161784,
+    "restore_wall_ms": 58.547477005049586
+  },
+  "device": "NVIDIA GeForce RTX 3090",
+  "gate": {
+    "initial_fp16_repeat_exact": true,
+    "mixed_differs_from_fp16": true,
+    "mixed_repeat_within_envelope": true,
+    "mixed_topk_stable": true,
+    "quant_source_exact": true,
+    "quant_within_fp16_region": true,
+    "real_wqlinear_modules": true,
+    "restore_base_stable": true,
+    "restore_source_exact": true,
+    "restored_logits_exact": true
+  },
+  "initial_fp16_repeat": {
+    "exact": true,
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "relative_l2": 0.0,
+    "top1_candidate": 505,
+    "top1_reference": 505,
+    "top5_candidate": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "top5_reference": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ]
+  },
+  "layer_id": 31,
+  "mixed_repeat": {
+    "exact": false,
+    "max_abs": 0.015625,
+    "mean_abs": 0.0023013469763100147,
+    "relative_l2": 0.0010612901533022523,
+    "top1_candidate": 505,
+    "top1_reference": 505,
+    "top5_candidate": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "top5_reference": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ]
+  },
+  "mixed_vs_fp16": {
+    "exact": false,
+    "max_abs": 0.5518798828125,
+    "mean_abs": 0.0935574620962143,
+    "relative_l2": 0.04192871227860451,
+    "top1_candidate": 505,
+    "top1_reference": 505,
+    "top5_candidate": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "top5_reference": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ]
+  },
+  "passed": true,
+  "prompt": "Life blooms like a flower, far away",
+  "quant_tensor_audit": {
+    "checked": 23,
+    "mismatches": []
+  },
+  "restore_tensor_audit": {
+    "checked": 8,
+    "mismatches": []
+  },
+  "restored_vs_initial": {
+    "exact": true,
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "relative_l2": 0.0,
+    "top1_candidate": 505,
+    "top1_reference": 505,
+    "top5_candidate": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "top5_reference": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ]
+  },
+  "schema_version": 1,
+  "storage": {
+    "fp16_base": 128317940817920,
+    "fp16_region_bytes": 436224000,
+    "gpu_allocated_after_install": 16102629376,
+    "gpu_allocated_before": 16102629376,
+    "gpu_allocator_delta": 0,
+    "packed_by_suffix": {
+      "qweight": 109051904,
+      "qzeros": 851968,
+      "scales": 3407872,
+      "weight": 16384
+    },
+    "packed_layer_bytes_including_metadata_and_norms": 113328128,
+    "quant_base": 128317940817920,
+    "quant_end": 128318054146048,
+    "reclaimed_bytes": 322895872,
+    "restored_base": 128317940817920
+  },
+  "token_ids": [
+    128000,
+    26833,
+    92889,
+    1093,
+    264,
+    23153,
+    11,
+    3117,
+    3201
+  ]
+}
