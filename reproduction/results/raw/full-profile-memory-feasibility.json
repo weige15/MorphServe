@@ -1,0 +1,28 @@
+{
+  "all_decoder_variants": {
+    "combined_bytes": 17585668096,
+    "combined_gib": 16.3779296875,
+    "fp16_bytes": 13959168000,
+    "w4_bytes": 3626500096
+  },
+  "classification": "resource blocker for paper-style simultaneous pinned full+W4 decoder variants",
+  "excess_over_soft_bytes": 741253120,
+  "feasible_simultaneously_pinned": false,
+  "limitations": [
+    "Does not include allocator alignment beyond measured per-layer regions.",
+    "Does not include embeddings, lm_head, KV cache, staging buffers, or runtime overhead.",
+    "Changing RLIMIT_MEMLOCK is not authorized by this project."
+  ],
+  "measured_layer_31": {
+    "fp16_region_bytes": 436224000,
+    "w4_bytes_including_norms_qweight_qzeros_scales": 113328128
+  },
+  "model": "local Llama 3.1 8B",
+  "rlimit_memlock": {
+    "hard_bytes": 16844414976,
+    "soft_bytes": 16844414976,
+    "soft_gib": 15.687583923339844
+  },
+  "schema_version": 1,
+  "uniform_decoder_layers": 32
+}
