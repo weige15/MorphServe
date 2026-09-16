@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-import gc
-
 import torch
 
-from .autoawq_adapter import AsyncLayerCopier, install_autoawq_layer, release_fp16_layer, restore_fp16_layer
+from .autoawq_adapter import AsyncLayerCopier, install_autoawq_layer
 
 
 class RealMorphingExecutor:
@@ -22,6 +20,14 @@ class RealMorphingExecutor:
         self.kv_groups = []
         self.log = []
         self.copier = AsyncLayerCopier(model, extension)
+        self.fp16_objects = {layer: model.transformer_layers[layer] for layer in backups}
+        self.prepared_quant = {}
+        for layer, source in packed.items():
+            current = model.transformer_layers[layer]
+            views = self.copier.views(layer, source["tensor_map"])
+            wrapper, modules = install_autoawq_layer(model, layer, views, source["tensor_map"])
+            self.prepared_quant[layer] = (wrapper, modules, views)
+            model.transformer_layers[layer] = current
         sizes = {value["size"] for value in backups.values()}
         if len(sizes) != 1:
             raise ValueError("executor requires equal FP16 layer strides")
@@ -48,13 +54,11 @@ class RealMorphingExecutor:
             if layer in self.active_layers:
                 raise RuntimeError(f"layer already W4: {layer}")
             source = self.packed[layer]
-            tensors, _ = self.copier.enqueue(
+            self.copier.enqueue(
                 layer, source["buffer"], source["size"], source["tensor_map"]
             )
-            release_fp16_layer(self.model, layer)
-            wrapper, modules = install_autoawq_layer(
-                self.model, layer, tensors, source["tensor_map"]
-            )
+            wrapper, modules, tensors = self.prepared_quant[layer]
+            self.model.transformer_layers[layer] = wrapper
             self.quant_objects[layer] = (wrapper, modules, tensors)
             self.active_layers.append(layer)
             self.log.append(("morph", layer))
@@ -139,18 +143,12 @@ class RealMorphingExecutor:
         if any(layer in grouped for layer in layers):
             return False
         for layer in layers:
-            self.model.transformer_layers[layer] = None
-            objects = self.quant_objects.pop(layer, None)
-            if objects is not None:
-                del objects
-            gc.collect()
+            self.quant_objects.pop(layer, None)
             source = self.backups[layer]
-            tensors, _ = self.copier.enqueue(
+            self.copier.enqueue(
                 layer, source["buffer"], source["size"], source["tensor_map"]
             )
-            restore_fp16_layer(
-                self.model, layer, tensors, source["tensor_map"]
-            )
+            self.model.transformer_layers[layer] = self.fp16_objects[layer]
             self.active_layers.remove(layer)
             self.log.append(("restore", layer))
         self._sync_model_state()

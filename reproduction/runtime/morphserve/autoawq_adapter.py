@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import gc
 import json
 from pathlib import Path
 from types import SimpleNamespace
@@ -56,12 +55,16 @@ class AsyncLayerCopier:
             ready = torch.cuda.Event(enable_timing=True)
             ready.record()
         self.model.layer_transfer_events[layer_id] = ready
+        return self.views(layer_id, tensor_map, region), ready
+
+    def views(self, layer_id: int, tensor_map: list[dict], region=None):
+        region = self.extension.get_layer_memory_org_gpu(layer_id) if region is None else region
         views = []
         for entry in tensor_map:
             _, info = next(iter(entry.items()))
             view = region[info["offset"]:info["offset"] + info["size"]]
             views.append(view.view(info["dtype"]).view(info["shape"]))
-        return views, ready
+        return views
 
     def wait_current(self, layer_id: int) -> bool:
         ready = self.model.layer_transfer_events.pop(layer_id, None)
@@ -159,7 +162,6 @@ def release_fp16_layer(model, layer_id: int) -> None:
         if hasattr(weight, name):
             delattr(weight, name)
     model.transformer_layers[layer_id] = None
-    gc.collect()
 
 
 def _dimensions(config, module_name: str) -> tuple[int, int]:
