@@ -26,3 +26,7 @@ Can the available local Llama 3.1 8B AutoAWQ W4 G128 zero-point checkpoint execu
 ## Boundaries
 
 This is a modified-condition static W4 mechanism baseline. It does not validate the candidate's unreleased llm-awq interface, in-place layer reconstruction, mixed precision, paper checkpoint, task quality, throughput, or latency. First-call compilation/warmup is excluded from performance claims.
+
+## Pre-registered diagnostic follow-up after exact-repeat failure
+
+The first run met every mechanism/numerical gate except bit-exact repeat logits. Source inspection shows AutoAWQ 0.2.9's small-input Triton path hard-codes `split_k_iters=8` and combines splits with `tl.atomic_add`, a plausible nondeterminism source. Keep the exact-repeat gate unchanged, run five W4 forwards, and record per-run max/relative difference and top-k stability. This follow-up quantifies the negative result; it does not convert the failed confirmatory gate into a pass.

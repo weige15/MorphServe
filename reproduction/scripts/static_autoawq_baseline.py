@@ -97,8 +97,12 @@ def main() -> int:
         unique_tensors.setdefault(tensor.data_ptr(), tensor.numel() * tensor.element_size())
 
     with torch.inference_mode():
-        first = w4(token_ids, use_cache=False, return_dict=True).logits[0, -1].detach().cpu()
-        second = w4(token_ids, use_cache=False, return_dict=True).logits[0, -1].detach().cpu()
+        repeats = [
+            w4(token_ids, use_cache=False, return_dict=True).logits[0, -1].detach().cpu()
+            for _ in range(5)
+        ]
+    first, second = repeats[0], repeats[-1]
+    repeat_diagnostics = [stats(first, value) for value in repeats]
     comparison = stats(fp16_logits, second)
     reference_top1 = int(fp16_logits.argmax())
     w4_top1 = int(second.argmax())
@@ -107,7 +111,7 @@ def main() -> int:
         "qweight_int32": dtype_sets["qweight"] == {"torch.int32"},
         "qzeros_int32": dtype_sets["qzeros"] == {"torch.int32"},
         "scales_fp16": dtype_sets["scales"] == {"torch.float16"},
-        "repeat_logits_exact": bool(torch.equal(first, second)),
+        "repeat_logits_exact": all(torch.equal(first, value) for value in repeats[1:]),
         "finite": comparison["finite_reference"] and comparison["finite_candidate"],
         "shape_match": comparison["shape_reference"] == comparison["shape_candidate"],
     }
@@ -151,6 +155,11 @@ def main() -> int:
             "fp16_top5": [int(x) for x in fp16_logits.topk(5).indices],
             "w4_top5": [int(x) for x in second.topk(5).indices],
             "repeat_exact": gate["repeat_logits_exact"],
+        },
+        "repeat_diagnostics": {
+            "comparisons_to_first": repeat_diagnostics,
+            "top1": [int(value.argmax()) for value in repeats],
+            "top5": [[int(x) for x in value.topk(5).indices] for value in repeats],
         },
         "gate": gate,
         "passed": all(gate.values()),
