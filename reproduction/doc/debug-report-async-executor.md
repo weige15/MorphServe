@@ -35,7 +35,7 @@ Scope: independent reconstruction only; immutable vendor is unchanged
 ## Repair evidence
 
 - 5 CUDA async tests: copy/order/use barrier, malformed source rejection, second-expansion rollback event, and no redundant event accumulation.
-- 9 transaction/controller tests: partial morph/restore rollback, all-before-mutation shrink, restore prevalidation and existing FCFS/action contracts.
+- 10 transaction/controller tests: partial morph/restore rollback, all-before-mutation shrink, restore prevalidation and existing FCFS/action contracts.
 - 3 rebuilt C++ memory-manager tests: normal physical reclaim/restore, tiny-tail rejection, and misaligned-region rejection.
 - Retry script now warms a real cached decode and records a pre-layer-wait event; it has not yet run because the free-memory preflight requires 17 GiB.
 

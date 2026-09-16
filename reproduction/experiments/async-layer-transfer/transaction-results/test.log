@@ -4,11 +4,12 @@ test_restore_copy_failure_rolls_back_to_original_w4_batch (reproduction.tests.te
 test_restore_rejects_invalid_batch_before_first_copy (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_restore_rejects_invalid_batch_before_first_copy) ... ok
 test_expand_exception_fails_closed_and_rolls_back (reproduction.tests.test_controller_integration.CoordinatorTests.test_expand_exception_fails_closed_and_rolls_back) ... ok
 test_failed_expand_rolls_back_in_reverse_order (reproduction.tests.test_controller_integration.CoordinatorTests.test_failed_expand_rolls_back_in_reverse_order) ... ok
+test_internally_rolled_back_morph_is_not_restored_twice (reproduction.tests.test_controller_integration.CoordinatorTests.test_internally_rolled_back_morph_is_not_restored_twice) ... ok
 test_pressure_uses_profile_order_and_preserves_fcfs (reproduction.tests.test_controller_integration.CoordinatorTests.test_pressure_uses_profile_order_and_preserves_fcfs) ... ok
 test_recovery_shrinks_before_restore_and_defers_if_occupied (reproduction.tests.test_controller_integration.CoordinatorTests.test_recovery_shrinks_before_restore_and_defers_if_occupied) ... ok
 test_successful_recovery_restores_after_shrink (reproduction.tests.test_controller_integration.CoordinatorTests.test_successful_recovery_restores_after_shrink) ... ok
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.077s
+Ran 10 tests in 0.004s
 
 OK

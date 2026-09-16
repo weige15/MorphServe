@@ -82,6 +82,17 @@ class CoordinatorTests(unittest.TestCase):
         self.assertEqual(coordinator.active_layers, [])
         self.assertEqual(coordinator.controller.quantized_layers, 0)
 
+    def test_internally_rolled_back_morph_is_not_restored_twice(self):
+        class RolledBackExecutor(FakeExecutor):
+            active_layers=[]
+            def morph_to_w4(self,layers): self.calls.append(("morph",list(layers))); return False
+            def restore_fp16(self,layers): raise AssertionError("double rollback")
+        executor=RolledBackExecutor(); coordinator=AdaptiveCoordinator([25,24,26],executor,monitor=ServingMonitor(alpha=1))
+
+        event=trigger_pressure(coordinator,scheduler())
+
+        self.assertFalse(event['success']); self.assertEqual(executor.calls,[("morph",[25,24])]); self.assertEqual(coordinator.controller.quantized_layers,0)
+
     def test_expand_exception_fails_closed_and_rolls_back(self):
         executor = FakeExecutor(raise_expand=True)
         coordinator = AdaptiveCoordinator([25, 24, 26], executor, monitor=ServingMonitor(alpha=1))

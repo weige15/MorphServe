@@ -9,7 +9,7 @@ Five CUDA tests pass on the public seams frozen in the protocol.
 - Pageable and oversize sources failed closed.
 - Async-model forwards do not accumulate the candidate blocking-restore event records; the single Python end-of-forward event is used instead.
 - A failure on the second expansion publishes a current-stream rollback barrier before restoring metadata.
-- Nine transaction/coordinator tests verify all-before-mutation shrink validation, partial morph rollback, restore rollback/prevalidation, FCFS preservation and action ordering.
+- Ten transaction/coordinator tests verify all-before-mutation shrink validation, partial morph rollback, restore rollback/prevalidation, FCFS preservation and action ordering.
 - Three rebuilt C++ tests include a misaligned registered-region guard, preventing unsigned reclaimed-capacity underflow.
 
 This establishes non-blocking host enqueue, event order, same-address views, transaction invariants, and the model-use barrier on a small CUDA region. It is supporting correctness evidence only: full-model attempt 1 was JIT-contaminated and used an insufficient overlap definition. The strengthened retry remains pending adequate GPU headroom.
