@@ -1,0 +1,48 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([4, 32, 8, 4, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([4, 32, 8, 4, 128])
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.78 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.33 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    1650.50 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    127.65 ms.
+[PagedAttention-Serving] Total time: 1778.48 ms.
+
+[LlamaTransformerLayer-Serving] Layer 0 serving time exceeded 0.5 s with 1.91 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       127.83 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 127.89 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    1778.73 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1906.62 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.68 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.06 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    1680.77 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.08 ms.
+[PagedAttention-Serving] Total time: 1680.91 ms.
+
+[LlamaTransformerLayer-Serving] Layer 1 serving time exceeded 0.5 s with 1.81 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       126.42 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 126.49 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    1681.12 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1807.61 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.66 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.05 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    1662.74 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.09 ms.
+[PagedAttention-Serving] Total time: 1662.87 ms.
+
+[LlamaTransformerLayer-Serving] Layer 2 serving time exceeded 0.5 s with 1.79 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       127.67 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 127.72 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    1663.11 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1790.83 ms.
+
