@@ -230,8 +230,9 @@
   "classification": "approximate plot-derived reference, not a measured result",
   "limitations": [
     "Plot digitization is approximate and partially occluded by legends.",
+    "PDF section 5 says the evaluation uses the representative 72-second snippets in Figure 1, but integer-bin matching cannot recover a sub-second boundary exactly.",
     "Correlation identifies arrival-shape candidates, not the unpublished downsampling seed/operation or request-to-context mapping.",
-    "Candidates are frozen before serving outcomes but are not author-confirmed exact offsets."
+    "Candidates are frozen before serving outcomes but are not explicit author-published offsets."
   ],
   "method": "integer-second vertices read from exact Matplotlib-color pixels; gaps/occluded points set to zero; values are approximate K context tokens/s",
   "schema_version": 1

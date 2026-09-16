@@ -96,7 +96,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | E5 | Paper L4/A100 hardware/RAM | BLOCKED | Local 7× RTX 3090/125 GiB differs materially. |
 | E6 | Exact 512/256 and 1024/512 lengths | MISSING headline runs | Short bounded correctness inputs only. |
 | E7 | Primary Azure/BurstGPT files | PARTIAL | Azure Code/Conversation and pre-paper BurstGPT v1.1 recovered; Figure 1a strongly resolves Azure Code. |
-| E8 | Exact 72-s offsets | PARTIAL/BLOCKED | Figure 1b uniquely ranks candidate starts 1073 and 1,781,278, frozen before outcomes; exact author confirmation and equivalence to main evaluation windows are absent. |
+| E8 | Exact 72-s offsets | PARTIAL/BLOCKED | Section 5 ties evaluation to Figure 1; shape matching uniquely ranks starts 1073 and 1,781,278, frozen before outcomes. Sub-second boundaries/aggregation remain approximate. |
 | E9 | Exact 4.75×/1.75× operation | BLOCKED exact / PASS reconstructed | Systematic index thinning is frozen and deterministic (94/123 requests), but author operation/seed remain unknown. |
 | E10 | Context sampling/mapping/seed | BLOCKED | No artifact. |
 | E11 | Scheduled arrivals independent of completion | PASS at replay seam | Four tests; real corrected GPU replay pending. |
@@ -172,4 +172,4 @@ The objective is **not achieved**. The smallest currently feasible next gates ar
 3. rerun corrected `run_synthetic_gpu_replay.sh`, preserving complete timestamps and excluding warmup;
 4. update `REPORT.md` and this audit from the resulting raw artifacts.
 
-Exact headline work remains blocked pending author confirmation of figure-inferred offsets plus scaling/context map, task artifacts/prompts/metrics, model revisions, controller/baseline configs, and paper-equivalent hardware. These blockers do not excuse the three feasible GPU reruns above once uncontended capacity is available.
+Exact headline work remains blocked pending exact sub-second boundaries plus scaling/context map, task artifacts/prompts/metrics, model revisions, controller/baseline configs, and paper-equivalent hardware. These blockers do not excuse the three feasible GPU reruns above once uncontended capacity is available.

@@ -49,7 +49,7 @@
     "frozen_before_serving_outcomes": true,
     "interval": "half-open [start, start + 72 seconds)",
     "unresolved": [
-      "whether Figure 1b uses exactly the main evaluation windows",
+      "sub-second start boundary and any plotting aggregation shift",
       "downsampling operation and random seed",
       "which requests survive downsampling",
       "request-to-task-context assignment and seed"

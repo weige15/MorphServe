@@ -17,11 +17,11 @@ A later source-only comparison digitized the approximate per-second token-volume
 - **Azure Code**, relative second **1073** (`2023-11-16 18:34:56.979960`), 443 raw requests in `[1073,1145)`. Context-volume Pearson correlation is 0.8793 versus 0.5706 for the runner-up.
 - **BurstGPT v1.1**, timestamp second **1,781,278**, 214 raw requests in `[1781278,1781350)`. Request-token Pearson correlation is 0.7356 versus 0.6173 for the runner-up among dense windows.
 
-Figure 1a independently matches Azure Code's zero intervals and ≈1.4M-token/min maximum, not the continuously busy Conversation file. These are strong **figure-inferred candidate windows**, frozen in `configs/figure1b-inferred-trace-windows.json`, but not author-confirmed exact settings: plot digitization is approximate, Figure 1b may be motivation rather than the exact Figure 4 evaluation input, and task-context replacement changes token volume.
+Figure 1a independently matches Azure Code's zero intervals and ≈1.4M-token/min maximum, not the continuously busy Conversation file. Section 5 explicitly says evaluation uses the representative 72-second snippets in Figure 1, so these are strong **figure-inferred evaluation-window candidates**, frozen in `configs/figure1b-inferred-trace-windows.json`. They remain approximate rather than explicit author-published offsets: digitization/integer binning cannot recover a sub-second boundary, and task-context replacement changes token volume.
 
 Exact-condition reproduction therefore remains blocked by:
 
-1. confirmation that Figure 1b and the main experiments use these same offsets;
+1. the exact sub-second boundaries/plot aggregation convention;
 2. whether 4.75×/1.75× means timestamp scaling, deterministic/stochastic thinning, or another operation and its seed;
 3. sampled task examples, mapping order, or seed.
 

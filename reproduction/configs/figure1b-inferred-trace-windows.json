@@ -24,7 +24,7 @@
     "paper_factor": 1.75
   },
   "unresolved": [
-    "whether Figure 1b uses exactly the main evaluation windows",
+    "sub-second start boundary and any plotting aggregation shift",
     "downsampling operation and random seed",
     "which requests survive downsampling",
     "request-to-task-context assignment and seed"

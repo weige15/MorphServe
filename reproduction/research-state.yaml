@@ -62,7 +62,7 @@ local_resources:
     - exact Llama 3 8B revision
     - CodeLlama 34B
 blocked_exact_inputs:
-  - author confirmation of Figure-1-inferred Azure/BurstGPT windows and exact downscaling operation
+  - exact sub-second boundaries for Figure-1-inferred windows and exact downscaling operation
   - request-to-context mapping and seed
   - English-translated DuReader artifact
   - exact prompts, splits, decoding, EOS and metric revisions
