@@ -30,6 +30,8 @@ The official lab repository does not release implementation code. A separate pro
 
 7. **Real LIS order exposed a vendor KV-address bug; correctness now requires a slower explicit fallback.** Vendor fused `[25,24,26]` maps group 2 into layer 23. Reconstructed per-region store/attention dispatch fixes the address and matches dense oracles, while descending equal-stride layouts may retain the fused fast path. Launch overhead remains unmeasured.
 
+8. **Transactional real GPU actions now follow controller/profile semantics.** Accuracy-mode pressure activates `[25,24,26]`, grows 4→1,849 physical blocks, selects explicit mapping, rolls back injected expansion failure, and recovers LIFO to bit-exact FP16 without touching FCFS queues. Active multi-request ownership remains the next risk.
+
 ## Open questions
 
 - Does the candidate C++ extension build against the available PyTorch/CUDA toolchain without source repair?

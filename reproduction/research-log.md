@@ -278,3 +278,7 @@ The real LIS prefix `[25,24,26]` was applied to a four-region synthetic layout. 
 ### Explicit-region repair
 
 The independent runtime now masks/remaps one block table per region and repairs the candidate multi-kernel attention helper. The same `[25,24,26]` test writes layer 26, leaves layer 23 untouched, and matches a dense oracle with max error 0. The descending fused regression remains max-error 0. This restores correctness but adds launches and is not yet a performance-equivalent paper reproduction.
+
+## 2026-09-16 — transactional real GPU executor
+
+Attempt 1 completed all actions but used an incorrect free-block assertion for a no-request pool; raw results were preserved. The corrected run passed: injected first expansion failure rolled back layer 25/capacity/state; three accuracy-mode actions activated `[25,24,26]`, attached 615 blocks each (4→1,849), and selected explicit mapping; recovery shrank/restored `26→24→25`; final FP16 logits/capacity were exact and FCFS queues unchanged. No active requests were present, so serving concurrency remains open.

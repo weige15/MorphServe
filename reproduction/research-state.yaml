@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: transactional real-executor integration with arbitrary profile order
+      next_gate: active multi-request ownership, shrink refusal, and rollback under real executor
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Explicit-region remapping fixes arbitrary LIS order while preserving the descending fast path.
-  A transactional real-executor adapter can now select the safe path by address layout and expose
-  allocation failure/rollback before multi-request workload replay.
-active_protocol: experiments/noncontiguous-mapping-repair/protocol.md
+  Transactional real GPU actions work without requests. With multiple active sequences, reclaimed
+  group ownership should make recovery refuse occupied tails, preserve FCFS/request progress, and
+  succeed only after blocks are migrated/freed with lifetime events satisfied.
+active_protocol: experiments/real-executor/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Add transactional real-executor integration and inject allocation failure/rollback.
-  - Re-run active-KV same-history using explicit fallback for `[25,24,26]` multi-layer order.
-  - Begin multi-request workload instrumentation only after those gates.
+  - Exercise real executor with multiple active request IDs and occupied reclaimed groups.
+  - Verify shrink refusal, migration/free recovery, request/token/KV preservation, and preemption accounting.
+  - Begin bounded arrival replay instrumentation only after those gates.
