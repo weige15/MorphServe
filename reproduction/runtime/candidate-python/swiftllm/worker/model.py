@@ -80,6 +80,8 @@ class LlamaModel(nn.Module):
         self.is_layer_quant_list = [False] * self.model_config.num_layers
         self.next_unquantized_layer = self.model_config.num_layers - 1
         self.explicit_kv_regions = False
+        self.layer_transfer_events = {}
+        self.last_forward_event = None
 
         
     @torch.inference_mode()
@@ -301,6 +303,9 @@ class LlamaModel(nn.Module):
         # print('\n' + "~"*18, "LlamaModel._forward() self.transformer_layers:", '~'*18)
         # 3. Process through each transformer layer:
         for layer in self.transformer_layers:
+            transfer_ready = self.layer_transfer_events.pop(layer.layer_id, None)
+            if transfer_ready is not None:
+                torch.cuda.current_stream().wait_event(transfer_ready)
             # Layer is a Hugging Face LlamaDecoderLayer, use the original forward method: Otherwise, use the custom forward method
             input_embds = layer.forward(
                 input_embds,
@@ -329,6 +334,8 @@ class LlamaModel(nn.Module):
             # Recording here protects every reclaimed region until this forward is done.
             for reclaimed_layer_id in self.layer_quant_list:
                 swiftllm_c.record_layer_memory_use(reclaimed_layer_id)
+        self.last_forward_event = torch.cuda.Event()
+        self.last_forward_event.record()
         # print('\n' + "~"*18, "LlamaModel._forward() after call the post layer, return the output tokens.", '~'*18, '\n')
         return output_tokens
     

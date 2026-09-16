@@ -6,7 +6,7 @@ import gc
 
 import torch
 
-from .autoawq_adapter import install_autoawq_layer, release_fp16_layer, restore_fp16_layer
+from .autoawq_adapter import AsyncLayerCopier, install_autoawq_layer, release_fp16_layer, restore_fp16_layer
 
 
 class RealMorphingExecutor:
@@ -21,6 +21,7 @@ class RealMorphingExecutor:
         self.quant_objects = {}
         self.kv_groups = []
         self.log = []
+        self.copier = AsyncLayerCopier(model, extension)
         sizes = {value["size"] for value in backups.values()}
         if len(sizes) != 1:
             raise ValueError("executor requires equal FP16 layer strides")
@@ -46,10 +47,13 @@ class RealMorphingExecutor:
         for layer in layers:
             if layer in self.active_layers:
                 raise RuntimeError(f"layer already W4: {layer}")
+            source = self.packed[layer]
+            tensors, _ = self.copier.enqueue(
+                layer, source["buffer"], source["size"], source["tensor_map"]
+            )
             release_fp16_layer(self.model, layer)
-            tensors = self.extension.replace_layer_org2quant(layer)
             wrapper, modules = install_autoawq_layer(
-                self.model, layer, tensors, self.packed[layer]["tensor_map"]
+                self.model, layer, tensors, source["tensor_map"]
             )
             self.quant_objects[layer] = (wrapper, modules, tensors)
             self.active_layers.append(layer)
@@ -74,6 +78,7 @@ class RealMorphingExecutor:
                 self.expand_calls += 1
                 if self.expand_calls in self.fail_expand_calls:
                     raise RuntimeError(f"injected KV expansion failure {self.expand_calls}")
+                self.copier.wait_current(layer)
                 k_cache, v_cache = self.extension.acquire_new_kvcache(layer)
                 if self.kv_groups and k_cache.shape[0] != self.kv_groups[0]["k"].shape[0]:
                     raise RuntimeError("reclaimed groups have unequal block counts")
@@ -139,9 +144,12 @@ class RealMorphingExecutor:
             if objects is not None:
                 del objects
             gc.collect()
-            tensors = self.extension.replace_layer_quant2org(layer)
+            source = self.backups[layer]
+            tensors, _ = self.copier.enqueue(
+                layer, source["buffer"], source["size"], source["tensor_map"]
+            )
             restore_fp16_layer(
-                self.model, layer, tensors, self.backups[layer]["tensor_map"]
+                self.model, layer, tensors, source["tensor_map"]
             )
             self.active_layers.remove(layer)
             self.log.append(("restore", layer))

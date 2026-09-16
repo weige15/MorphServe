@@ -9,6 +9,7 @@ Current scoped changes:
 - Llama 3 RoPE construction matching Transformers' wavelength cutoffs/interpolation;
 - tied/untied `lm_head` key selection from checkpoint metadata;
 - evidence-only `return_logits` option; default greedy behavior is unchanged;
-- one `record_layer_memory_use` call per reclaimed region at the end of a forward, after the default stream's waits on decode-attention streams.
+- one `record_layer_memory_use` call per reclaimed region at the end of a forward, after the default stream's waits on decode-attention streams;
+- one Python CUDA completion event per forward plus a just-in-time wait immediately before a layer whose independent asynchronous replacement is pending.
 
-No controller-mode policy, AWQ compatibility layer, or experiment-specific threshold has been added yet.
+Controller policy, AutoAWQ adaptation, and asynchronous copy orchestration remain isolated under `runtime/morphserve`; no experiment-tuned threshold is embedded here.
