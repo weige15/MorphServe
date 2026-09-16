@@ -1,7 +1,7 @@
 # Debug report: asynchronous executor transactional and timing defects
 
 Date: 2026-09-17  
-Status: diagnosed before repair  
+Status: transactional/alignment repairs verified at unit/CUDA seams; full-model rerun pending  
 Scope: independent reconstruction only; immutable vendor is unchanged
 
 ## Symptoms and evidence
@@ -32,6 +32,13 @@ Scope: independent reconstruction only; immutable vendor is unchanged
 7. Keep byte-exact restoration as the FP16 storage gate; use the existing `<0.005` same-history numerical envelope plus top-1 match for separate request logits.
 8. Add targeted tests for occupied-second-group shrink, second-layer morph failure, second expansion failure/event ordering, and alignment boundary. Re-run full executor/ownership/full overlap only after these pass.
 
+## Repair evidence
+
+- 5 CUDA async tests: copy/order/use barrier, malformed source rejection, second-expansion rollback event, and no redundant event accumulation.
+- 9 transaction/controller tests: partial morph/restore rollback, all-before-mutation shrink, restore prevalidation and existing FCFS/action contracts.
+- 3 rebuilt C++ memory-manager tests: normal physical reclaim/restore, tiny-tail rejection, and misaligned-region rejection.
+- Retry script now warms a real cached decode and records a pre-layer-wait event; it has not yet run because the free-memory preflight requires 17 GiB.
+
 ## Boundaries
 
-No paper timing conclusion is valid from attempt 1. The three later W4 copies (~15.2 ms) and FP16 copies (~57.8 ms) are local modified-condition diagnostics; the first timed decode is JIT-contaminated and the overlap definition is insufficient.
+No paper overlap conclusion is valid from attempt 1. Its three W4 copies (15.174–15.475 ms) and FP16 copies (57.769–58.293 ms) are valid local modified-condition transfer diagnostics; the first timed decode is JIT-contaminated and the original overlap definition is insufficient.
