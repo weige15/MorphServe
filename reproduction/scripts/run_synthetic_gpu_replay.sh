@@ -6,7 +6,7 @@ free_mib=$(nvidia-smi -i "$GPU" --query-gpu=memory.free --format=csv,noheader,no
 if (( free_mib < 17408 )); then printf 'GPU %s has %s MiB free; full-model replay requires at least 17408 MiB.\n' "$GPU" "$free_mib" >&2; exit 75; fi
 rm -rf "$OUT"; mkdir -p "$OUT"
 git -C "$ROOT/.." rev-parse HEAD > "$OUT/source-revision.txt"
-git -C "$ROOT/.." status --short -- reproduction/runtime reproduction/scripts/synthetic_gpu_replay.py reproduction/scripts/run_synthetic_gpu_replay.sh > "$OUT/source-status.txt"
+git -C "$ROOT/.." status --short -- reproduction/runtime reproduction/scripts/synthetic_gpu_replay.py reproduction/scripts/run_synthetic_gpu_replay.sh reproduction/configs/fp16-requirements-lock.txt reproduction/configs/synthetic-gpu-replay.json > "$OUT/source-status.txt"
 rm -rf "$TMP"; mkdir -p "$TMP"; cp -a "$ROOT/runtime/candidate-csrc" "$TMP/csrc"
 cat > "$OUT/commands.txt" <<EOF
 uv venv --clear --python python3.12 "$VENV" && uv pip install --python "$VENV/bin/python" -r "$LOCK"

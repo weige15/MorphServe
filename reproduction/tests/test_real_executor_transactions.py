@@ -15,11 +15,16 @@ class FakeCopier:
     def wait_current(self,layer): self.waits.append(layer); return False
 
 
+class RejectingExtension:
+    def __init__(self): self.acquire_calls=[]
+    def acquire_new_kvcache(self,layer): self.acquire_calls.append(layer); raise AssertionError('preflight should reject before acquisition')
+
+
 def bare_executor():
     executor=object.__new__(RealMorphingExecutor)
     executor.model=SimpleNamespace(model_config=SimpleNamespace(num_layers=3),transformer_layers=['f0','f1','f2'],layer_quant_list=[],is_layer_quant_list=[False]*3,explicit_kv_regions=False)
-    executor.extension=SimpleNamespace(); executor.backups={0:{'buffer':'f0b','size':8,'tensor_map':[]},1:{'buffer':'f1b','size':8,'tensor_map':[]}}
-    executor.packed={0:{'buffer':'q0b','size':4,'tensor_map':[]},1:{'buffer':'q1b','size':4,'tensor_map':[]}}
+    executor.extension=SimpleNamespace(); executor.backups={0:{'buffer':'f0b','base':1024,'size':512,'tensor_map':[]},1:{'buffer':'f1b','base':2048,'size':512,'tensor_map':[]}}
+    executor.packed={0:{'buffer':'q0b','size':128,'tensor_map':[]},1:{'buffer':'q1b','size':128,'tensor_map':[]}}
     executor.fp16_objects={0:'f0',1:'f1'}; executor.prepared_quant={0:('q0',[],[]),1:('q1',[],[])}
     executor.active_layers=[]; executor.quant_objects={}; executor.kv_groups=[]; executor.log=[]; executor.layer_stride_bytes=8; executor.poisoned=False
     executor.fail_expand_calls=set(); executor.expand_calls=0
@@ -27,6 +32,43 @@ def bare_executor():
 
 
 class RealExecutorTransactionTests(unittest.TestCase):
+    def _expansion_executor(self):
+        executor=bare_executor(); executor.copier=FakeCopier(); executor.extension=RejectingExtension()
+        manager=SimpleNamespace(num_blocks_org=4,num_blocks=4,num_free_blocks=4,is_block_free=torch.ones(4,dtype=torch.bool))
+        executor.model.gpu_block_manager=manager; executor.model.k_cache_new=[]; executor.model.v_cache_new=[]; executor.model.kv_cache_new_block_size=0
+        return executor
+
+    def test_expand_rejects_invalid_batches_before_acquisition(self):
+        cases=(
+            ('empty',[],[],[]),
+            ('non_integer',['0'],[],[]),
+            ('duplicate',[0,0],[0],[]),
+            ('inactive',[0],[],[]),
+            ('already_grouped',[0],[0],[{'layer':0,'k':'k0','v':'v0'}]),
+            ('unregistered',[2],[2],[]),
+        )
+        for name,layers,active,groups in cases:
+            with self.subTest(name=name):
+                executor=self._expansion_executor(); executor.active_layers=active; executor.kv_groups=groups
+                manager=executor.model.gpu_block_manager
+                before=(list(executor.kv_groups),list(executor.model.k_cache_new),list(executor.model.v_cache_new),manager.num_blocks,manager.num_free_blocks,manager.is_block_free.clone())
+
+                self.assertFalse(executor.expand_kv(layers))
+
+                self.assertEqual(executor.extension.acquire_calls,[]); self.assertEqual(executor.copier.waits,[]); self.assertEqual(executor.expand_calls,0)
+                self.assertEqual(executor.kv_groups,before[0]); self.assertEqual(executor.model.k_cache_new,before[1]); self.assertEqual(executor.model.v_cache_new,before[2])
+                self.assertEqual((manager.num_blocks,manager.num_free_blocks),before[3:5]); self.assertTrue(torch.equal(manager.is_block_free,before[5]))
+                self.assertEqual(executor.log[-1][0],'expand_rejected')
+
+    def test_expand_rejects_overlapping_registered_regions_before_acquisition(self):
+        executor=self._expansion_executor(); executor.active_layers=[0]
+        executor.backups[1]['base']=1280
+
+        self.assertFalse(executor.expand_kv([0]))
+
+        self.assertEqual(executor.extension.acquire_calls,[]); self.assertEqual(executor.copier.waits,[]); self.assertEqual(executor.expand_calls,0)
+        self.assertIn('overlap',executor.log[-1][1])
+
     def test_morph_failure_rolls_back_only_committed_layers(self):
         executor=bare_executor(); executor.copier=FakeCopier(fail_source='q1b')
 

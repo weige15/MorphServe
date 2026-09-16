@@ -73,6 +73,45 @@ class RealMorphingExecutor:
         self.model.kv_cache_new_block_size = snapshot["group_size"]
         self._sync_model_state()
 
+    def _expand_rejection_reason(self, layers):
+        if not layers:
+            return "empty expansion batch"
+        if any(not isinstance(layer, int) for layer in layers):
+            return "expansion batch contains a non-integer layer"
+        if len(set(layers)) != len(layers):
+            return "expansion batch contains duplicate layers"
+        grouped = [group["layer"] for group in self.kv_groups]
+        if len(set(grouped)) != len(grouped):
+            return "existing KV groups contain duplicate layers"
+        if any(layer not in self.active_layers for layer in layers):
+            return "KV expansion requires active W4 layers"
+        if any(layer in grouped for layer in layers):
+            return "layer already has a reclaimed KV group"
+        if any(layer not in self.backups or layer not in self.packed for layer in layers):
+            return "layer is not registered for FP16/W4 replacement"
+
+        regions = []
+        try:
+            for layer, backup in self.backups.items():
+                start = int(backup["base"])
+                end = start + int(backup["size"])
+                if start < 0 or end <= start:
+                    return f"layer {layer} has an invalid registered GPU region"
+                regions.append((start, end, layer))
+            regions.sort()
+            for previous, current in zip(regions, regions[1:]):
+                if current[0] < previous[1]:
+                    return f"registered GPU regions overlap for layers {previous[2]} and {current[2]}"
+            for layer in layers:
+                backup = self.backups[layer]
+                quant_size = int(self.packed[layer]["size"])
+                aligned_start = (int(backup["base"]) + quant_size + 255) & ~255
+                if quant_size < 0 or aligned_start >= int(backup["base"]) + int(backup["size"]):
+                    return f"layer {layer} has no valid reclaimed KV region"
+        except (KeyError, TypeError, ValueError, OverflowError) as exc:
+            return f"invalid registered layer metadata: {exc}"
+        return None
+
     @torch.inference_mode()
     def morph_to_w4(self, layers):
         if self.poisoned or len(set(layers)) != len(layers) or any(
@@ -120,7 +159,12 @@ class RealMorphingExecutor:
 
     @torch.inference_mode()
     def expand_kv(self, layers):
+        layers = list(layers)
         if self.poisoned:
+            return False
+        rejection = self._expand_rejection_reason(layers)
+        if rejection is not None:
+            self.log.append(("expand_rejected", rejection))
             return False
         manager = self.model.gpu_block_manager
         snapshot = self._snapshot_kv_state()

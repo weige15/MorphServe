@@ -51,7 +51,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | C7 | Real asynchronous copy, separate morph/decode streams | PARTIAL | Candidate is blocking. Independent persistent-stream copier passes small CUDA seam; full-layer run pending. |
 | C8 | Explicit lifetime/event synchronization | PASS at seams | Uncoordinated race corrupts 1,530 bytes; C++ region barrier and Python last-forward/layer-ready barriers pass. |
 | C9 | No whole-model reload/per-request routing/fake W4 | PASS for tested paths | Same base region and packed kernels used. |
-| C10 | Physical KV blocks in reclaimed weight bytes | PASS at earlier seam / current integration pending | Physical reclaimed storage and zero allocator delta pass; 615 blocks/layer was measured only in the historical pre-atomic executor pilot. |
+| C10 | Physical KV blocks in reclaimed weight bytes | PASS at earlier seam / current integration pending | Physical reclaimed storage and zero allocator delta pass; current executor rejects inactive, duplicate, already-grouped, unregistered and overlapping ranges before acquisition. The 615 blocks/layer measurement is historical pre-atomic evidence. |
 | C11 | Non-contiguous mapping and custom Triton lookup | PASS after repair | Vendor fixed-stride corruption found; explicit-region store/attention matches dense oracle error 0. |
 | C12 | Shrink safely before FP16 restore | PASS in current CPU transactions / historical GPU evidence | Current transaction tests cover all-before-mutation shrink and compensation; occupied-group refusal/LIFO GPU evidence predates atomic repair. |
 | C13 | Preserve KV, request progress, no re-prefill/eviction/restart | PASS for bounded pilot | Active FP16→W4×4→FP16 same-history test and exact occupied-block migration. |
@@ -78,7 +78,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | D5 | KV address/content preservation | PASS at seams / historical ownership evidence | Synthetic, dense-oracle and active migration are current seam evidence; two-request sentinels are historical pre-atomic evidence. |
 | D6 | Expansion/shrink/restoration | PASS at tested seams; async real-GPU rerun pending | Historical 4→1,849→4 evidence plus all-before-mutation shrink, partial morph/restore rollback, atomic post-shrink compensation, fail-closed poisoning and second-expansion barrier tests. |
 | D7 | Repeated adaptation during prefill and decode | PARTIAL | Repeated synthetic cycles and four active decode steps; full async alternating 3× run pending. |
-| D8 | Allocation failure and rollback | PASS in current CPU transactions / historical GPU evidence | Current tests cover expansion exceptions and reverse rollback; exact-state injected GPU failure predates atomic repairs and awaits rerun. |
+| D8 | Allocation failure and rollback | PASS in current CPU transactions / historical GPU evidence | Current tests cover preflight rejection with zero acquisition/mutation, expansion exceptions and reverse rollback; exact-state injected GPU failure predates atomic repairs and awaits rerun. |
 | D9 | Race/lifetime hazard | PASS/NEGATIVE+REPAIR | Corruption reproduced; event-safe repair reaches zero corruption. |
 | D10 | Oscillating pressure | PASS at controller seam | CPU controller persistence test; real multi-request oscillating serving not yet timed. |
 | D11 | Same-precision-history reference | PASS where used | Active-KV protocol; full async pilot also designed this way but pending. |
