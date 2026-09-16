@@ -68,9 +68,9 @@ Evidence: `experiments/candidate-fp16-baseline/results-attempt-3/metrics.json`.
 | Async host enqueue | 0.276–0.427 ms; transfer incomplete at return in 6/6 cases |
 | Paper example (different Llama 2/L4-like PCIe Gen4 condition) | ≈4/16 ms transfer; ≈6 ms complete W4 |
 
-The isolated local transfer timings are stable but do not reproduce the paper examples, under different model/layer, RTX 3090/host and runtime conditions. Full-model attempt 1 does not establish hidden stall because its first decode was JIT-contaminated and its original overlap interval could include a layer wait; the strengthened pre-wait timeline is pending.
+The isolated local transfer timings are stable but do not reproduce the paper examples, under different model/layer, RTX 3090/host and runtime conditions. Full-model attempt 1 does not establish hidden stall because its first decode was JIT-contaminated and its original overlap interval could include a layer wait; the strengthened raw CUDA-activity run is pending.
 
-Evidence: `experiments/autoawq-layer-switch/results/metrics.json`.
+Evidence: `experiments/autoawq-layer-switch/results/metrics.json` and `experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json`.
 
 ### 4.3 Active state preservation
 
@@ -98,6 +98,8 @@ Eight-layer order: **`[25,24,26,27,28,29,30,31]`**.
 This does not reproduce a full 32-layer paper order or the under-15-minute claim. Profile: `profiles/llama31-8b-wikitext2-layers24-31.json`.
 
 ### 4.5 Transactional controller/executor
+
+The following are executed historical modified-condition GPU results. Subsequent asynchronous/atomic recovery repairs pass CPU/CUDA seams but require the queued real-GPU reruns before they are evidence for the current revision.
 
 Accuracy-mode modified-condition pilot:
 
