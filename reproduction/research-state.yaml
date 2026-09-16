@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: normalized runtime no-morph viability and real WikiText-2 metric collection
+      next_gate: repaired candidate memory-manager exits cleanly, then normalized no-morph runtime
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,18 +71,18 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The candidate project-account artifact contains the core low-bit swap and reclaimed-KV
-  mechanisms but is not runnable unmodified; a minimal, separately labeled package/config
-  normalization can expose those mechanisms without silently redesigning them. Algorithm 1
-  selection logic is independently testable before model-specific metric collection.
-active_protocol: experiments/lis-algorithm/protocol.md
+  The candidate memory-manager's physical reclaim mechanism works in-process, but static
+  pybind11 metadata causes a confirmed shutdown segfault. Replacing persisted Python objects
+  with native C++ metadata in a separate reconstruction should preserve address behavior and
+  make the same correctness gate exit cleanly.
+active_protocol: experiments/candidate-memory-manager/protocol.md
 resource_accounting:
-  gpu_experiment_seconds: 0
+  gpu_experiment_seconds: '<5 seconds of synthetic kernels; primary process wall time recorded in candidate-memory-manager/results/wall-time.json'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Create a separate reconstruction tree for minimal package/config/checkpoint compatibility fixes.
-  - Freeze and implement real WikiText-2 metric collection around the tested conditioned-MDS core.
-  - Exercise synthetic layer swap and reclaimed-KV mapping before full-model serving.
-  - Run no-morph FP16 parity before any serving comparison.
+  - Apply the diagnosed native C++ tensor-metadata repair in a separate reconstruction tree.
+  - Rerun the identical memory-manager GPU gate and require process exit 0.
+  - Create minimal package/config/checkpoint compatibility fixes.
+  - Freeze real WikiText-2 metric collection choices and run no-morph FP16 parity.

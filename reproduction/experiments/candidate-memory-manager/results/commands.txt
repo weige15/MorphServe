@@ -1,0 +1,4 @@
+uv venv --clear --python python3.12 "/nfs/home/s314511048/MorphServe/reproduction/.venv"
+uv pip install --python "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" torch==2.4.0 setuptools==84.0.0 ninja==1.13.0
+(cd "/nfs/home/s314511048/MorphServe/reproduction/results/tmp/candidate-memory-manager/csrc" && CUDA_HOME=/usr/local/cuda-12.4 "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" setup.py build_ext --inplace)
+CUDA_VISIBLE_DEVICES=0 PYTHONPATH="/nfs/home/s314511048/MorphServe/reproduction/results/tmp/candidate-memory-manager/csrc:/nfs/home/s314511048/MorphServe/reproduction/runtime" MORPHSERVE_TEST_OUTPUT="/nfs/home/s314511048/MorphServe/reproduction/experiments/candidate-memory-manager/results/metrics.json" "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" -m unittest "/nfs/home/s314511048/MorphServe/reproduction/tests/test_candidate_memory_manager.py" -v

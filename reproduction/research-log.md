@@ -77,3 +77,23 @@ The retained red/green loop ends with 4/4 passing tests. The conditioned algorit
 ### Resource cost and next step
 
 CPU-only and zero GPU experiment time. Next, freeze model representation/calibration choices and implement real WikiText-2 metric collection; selection-logic success alone is not a model-profile reproduction.
+
+## 2026-09-16 — candidate C++ memory-manager GPU check
+
+### Hypothesis
+
+A synthetic FP16-sized owner and packed replacement will demonstrate whether the candidate extension converts reclaimed weight bytes into actual bounded KV storage rather than counters.
+
+### Command and observed outcome
+
+```bash
+CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_candidate_memory_manager_test.sh
+```
+
+Both tests completed their assertions. The packed view reused the owner base; a 3,072-byte tail exposed 12 correctly bounded K/V blocks; writes changed the owner; allocator delta was zero; undersized allocation failed; restoration recovered original bytes. After unittest printed `OK`, however, Python segfaulted and returned 139.
+
+Targeted controls plus `cuda-gdb` localized the crash to global destruction of static `pybind11::object` tensor metadata after Python finalization, not to CUDA storage. The diagnosis and minimal repair are in `doc/debug-report.md`. This is an evidence-backed negative result for the released extension's process lifetime.
+
+### Resource cost and next step
+
+Sub-second synthetic kernels ran on one RTX 3090 across isolated probes; no model load. Implement the diagnosed native-metadata repair only in a separate reconstruction source, then rerun the identical gate. Do not proceed to full-model or timing claims while exit safety fails.

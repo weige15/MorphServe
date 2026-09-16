@@ -1,0 +1,23 @@
+{
+  "acquire_and_zero_ms": 0.104032002389431,
+  "allocator_delta_bytes": 0,
+  "copy_ms": 0.13312000036239624,
+  "device": "NVIDIA GeForce RTX 3090",
+  "k_base": 130894264271872,
+  "kv_blocks": 12,
+  "kv_shape": [
+    12,
+    2,
+    1,
+    4,
+    8
+  ],
+  "original_bytes": 4096,
+  "owner_base": 130894264270848,
+  "owner_end": 130894264274944,
+  "packed_base": 130894264270848,
+  "packed_bytes": 1024,
+  "reclaimed_bytes": 3072,
+  "restore_ms": 0.12905600666999817,
+  "v_base": 130894264273408
+}

@@ -1,0 +1,8 @@
+/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:258: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at ../torch/csrc/utils/tensor_numpy.cpp:84.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+test_in_place_copy_reclaimed_views_and_restore (reproduction.tests.test_candidate_memory_manager.CandidateMemoryManagerTests.test_in_place_copy_reclaimed_views_and_restore) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.406s
+
+OK

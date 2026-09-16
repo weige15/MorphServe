@@ -1,0 +1,1 @@
+import torch, swiftllm_c; x=torch.empty(16,dtype=torch.uint8,pin_memory=True); swiftllm_c.register_layer_memory_quant(3001,x.data_ptr(),x.numel()); print("registered range")

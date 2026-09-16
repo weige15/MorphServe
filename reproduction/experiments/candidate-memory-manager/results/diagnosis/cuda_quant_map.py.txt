@@ -1,0 +1,1 @@
+import torch, swiftllm_c; owner=torch.empty(4096,dtype=torch.uint8,device="cuda"); x=torch.empty(16,dtype=torch.uint8,pin_memory=True); m=[{"x":{"offset":0,"shape":[16],"dtype":torch.uint8,"size":16,"is_param":True}}]; swiftllm_c.register_layer_memory_org_gpu(5002,owner.data_ptr(),4096); swiftllm_c.register_layer_memory_tensor_map_quant(5002,m); print("done",flush=True)

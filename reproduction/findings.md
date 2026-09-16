@@ -9,7 +9,7 @@ The official lab repository does not release implementation code. A separate pro
 ## Patterns and insights
 
 1. **Paper mechanism and candidate code align structurally but diverge operationally.** The code implements the unusual reclaimed-layer-tail KV mapping described by the paper, which is unlikely to be generic SwiftLLM boilerplate. Yet its `cudaMemcpyAsync` path immediately synchronizes, the controller is capacity-triggered rather than mode-based, and no LIS profiler is present.
-2. **The strongest near-term evidence will be mechanism correctness, not headline latency.** Exact Figure 4/Table 2 reproduction is blocked by unavailable model/data/trace/config/hardware details. Synthetic address/content/lifetime tests and a modified-condition Llama 3.1 8B run can still establish or refute the released mechanism.
+2. **Mechanism correctness already exposed a release-blocking lifetime defect.** One synthetic reclaimed region produced correct bounded K/V views, zero allocator-byte increase, writable physical storage, and same-base restoration. The process then segfaulted at exit because static C++ maps retained `py::object` metadata past Python finalization. Exact Figure 4/Table 2 reproduction remains blocked; correctness repair precedes any performance run.
 3. **Existing local work prevents redundant baseline discovery.** The prior `precision-batching` repository already pinned SwiftLLM, captured the same host, built its extension, located Llama assets, and found Llama 3 FP16 parity bugs. Those findings should inform the reconstruction, while its fake weight-quantization path must not be confused with MorphServe.
 4. **The supplied paper contains internal reference errors.** It has only Tables 1–8; user/objective labels for Tables 4/9 conflict with the rendered target PDF. The exact numeric `[TTFT, TPOT, F1]` target belongs to PDF Table 2. Reference values must follow the actual PDF and preserve this mismatch.
 
@@ -18,6 +18,7 @@ The official lab repository does not release implementation code. A separate pro
 - Never call `ds2-lab/MorphServe` an implementation release.
 - Never call `MorphServe/MorphServe` verified author code without a primary identity/link.
 - Never credit `cudaMemcpyAsync` as overlap when the caller immediately synchronizes.
+- Never retain `py::object` in process-static C++ containers; parse registration dictionaries into native metadata before storing them.
 - Keep physical GPU address reuse distinct from Python/C++ tensor-pointer or object reconstruction.
 - The LIS equations are cosine similarities with `argmax`; appendix prose saying “angular distance,” “weight sensitivity,” or input independence is inconsistent and must not override the equations.
 - FP16 restoration affects future tokens only; historical W4 tokens remain part of the trajectory.

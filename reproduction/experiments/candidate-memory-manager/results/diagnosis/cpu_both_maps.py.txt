@@ -1,0 +1,1 @@
+import torch, swiftllm_c; x=torch.empty(16,dtype=torch.uint8,pin_memory=True); m=[{"x":{"offset":0,"shape":[16],"dtype":torch.uint8,"size":16,"is_param":True}}]; swiftllm_c.register_layer_memory_tensor_map_quant(5003,m); swiftllm_c.register_layer_memory_tensor_map_org(5003,m); print("done",flush=True)

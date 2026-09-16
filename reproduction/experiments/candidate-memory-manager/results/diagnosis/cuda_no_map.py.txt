@@ -1,0 +1,1 @@
+import torch, swiftllm_c; owner=torch.empty(4096,dtype=torch.uint8,device="cuda"); swiftllm_c.register_layer_memory_org_gpu(5001,owner.data_ptr(),4096); print("done",flush=True)
