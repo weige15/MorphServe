@@ -1,0 +1,18 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:01,  1.59it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.52it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:02<00:00,  1.37it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.96it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.75it/s]
+/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/awq/__init__.py:21: DeprecationWarning: 
+I have left this message as the final dev message to help you transition.
+
+Important Notice:
+- AutoAWQ is officially deprecated and will no longer be maintained.
+- The last tested configuration used Torch 2.6.0 and Transformers 4.51.3.
+- If future versions of Transformers break AutoAWQ compatibility, please report the issue to the Transformers project.
+
+Alternative:
+- AutoAWQ has been adopted by the vLLM Project: https://github.com/vllm-project/llm-compressor
+
+For further inquiries, feel free to reach out:
+- X: https://x.com/casper_hansen_
+- LinkedIn: https://www.linkedin.com/in/casper-hansen-804005170/
+
+  warnings.warn(_FINAL_DEV_MESSAGE, category=DeprecationWarning, stacklevel=1)
+Replacing layers...:   0%|          | 0/32 [00:00<?, ?it/s]Replacing layers...:   3%|▎         | 1/32 [00:00<00:04,  7.26it/s]Replacing layers...:   6%|▋         | 2/32 [00:00<00:04,  7.44it/s]Replacing layers...:   9%|▉         | 3/32 [00:00<00:03,  7.34it/s]Replacing layers...:  12%|█▎        | 4/32 [00:00<00:03,  7.68it/s]Replacing layers...:  16%|█▌        | 5/32 [00:00<00:03,  7.63it/s]Replacing layers...:  19%|█▉        | 6/32 [00:00<00:03,  7.75it/s]Replacing layers...:  22%|██▏       | 7/32 [00:00<00:03,  7.89it/s]Replacing layers...:  25%|██▌       | 8/32 [00:01<00:03,  7.97it/s]Replacing layers...:  28%|██▊       | 9/32 [00:01<00:02,  8.07it/s]Replacing layers...:  31%|███▏      | 10/32 [00:01<00:02,  8.10it/s]Replacing layers...:  34%|███▍      | 11/32 [00:01<00:02,  8.16it/s]Replacing layers...:  38%|███▊      | 12/32 [00:01<00:02,  8.07it/s]Replacing layers...:  41%|████      | 13/32 [00:01<00:02,  8.15it/s]Replacing layers...:  44%|████▍     | 14/32 [00:01<00:02,  8.13it/s]Replacing layers...:  47%|████▋     | 15/32 [00:01<00:02,  8.16it/s]Replacing layers...:  50%|█████     | 16/32 [00:02<00:01,  8.15it/s]Replacing layers...:  53%|█████▎    | 17/32 [00:02<00:01,  8.20it/s]Replacing layers...:  56%|█████▋    | 18/32 [00:02<00:01,  8.18it/s]Replacing layers...:  59%|█████▉    | 19/32 [00:02<00:01,  8.20it/s]Replacing layers...:  62%|██████▎   | 20/32 [00:02<00:01,  8.18it/s]Replacing layers...:  66%|██████▌   | 21/32 [00:02<00:01,  8.23it/s]Replacing layers...:  69%|██████▉   | 22/32 [00:02<00:01,  8.23it/s]Replacing layers...:  72%|███████▏  | 23/32 [00:02<00:01,  8.21it/s]Replacing layers...:  75%|███████▌  | 24/32 [00:02<00:00,  8.12it/s]Replacing layers...:  78%|███████▊  | 25/32 [00:03<00:00,  7.54it/s]Replacing layers...:  81%|████████▏ | 26/32 [00:03<00:00,  7.67it/s]Replacing layers...:  84%|████████▍ | 27/32 [00:03<00:00,  7.82it/s]Replacing layers...:  88%|████████▊ | 28/32 [00:03<00:00,  7.95it/s]Replacing layers...:  91%|█████████ | 29/32 [00:03<00:00,  8.09it/s]Replacing layers...:  94%|█████████▍| 30/32 [00:03<00:00,  8.14it/s]Replacing layers...:  97%|█████████▋| 31/32 [00:03<00:00,  8.23it/s]Replacing layers...: 100%|██████████| 32/32 [00:03<00:00,  8.30it/s]Replacing layers...: 100%|██████████| 32/32 [00:03<00:00,  8.03it/s]

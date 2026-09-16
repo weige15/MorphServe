@@ -1,0 +1,5 @@
+Using Python 3.12.3 environment at: reproduction/.venv
+Resolved 58 packages in 307ms
+Installed 2 packages in 46ms
+ + autoawq==0.2.9
+ + zstandard==0.25.0

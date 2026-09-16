@@ -1,0 +1,126 @@
+{
+  "classification": "modified-condition-static-autoawq-w4",
+  "config": {
+    "quantization_config": {
+      "bits": 4,
+      "group_size": 128,
+      "modules_to_not_convert": null,
+      "quant_method": "awq",
+      "version": "gemm",
+      "zero_point": true
+    },
+    "sha256": "f43d421c9be84ac8d666ca5db2144ae4286c26069501040690141e8236d61910"
+  },
+  "environment": {
+    "autoawq": "0.2.9",
+    "cuda_runtime": "12.1",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "python": "3.12.3",
+    "torch": "2.4.0+cu121",
+    "transformers": "4.51.3"
+  },
+  "files": {
+    "model-00001-of-00002.safetensors": {
+      "bytes": 3997272472,
+      "sha256": "ff2c33ee642bfbc846f830a606a62ee837eec248c58d10bce1631ff4d32220e4"
+    },
+    "model-00002-of-00002.safetensors": {
+      "bytes": 1730665920,
+      "sha256": "68a024d7310d2d9fa14eb1ad0941b3c179adddf0cb7f006681ce9cf62d5a5d65"
+    }
+  },
+  "gate": {
+    "finite": true,
+    "packed_modules_present": true,
+    "qweight_int32": true,
+    "qzeros_int32": true,
+    "repeat_logits_exact": false,
+    "scales_fp16": true,
+    "shape_match": true
+  },
+  "logits": {
+    "finite_candidate": true,
+    "finite_reference": true,
+    "fp16_top1": 505,
+    "fp16_top5": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "max_abs": 2.94140625,
+    "mean_abs": 0.8687763214111328,
+    "relative_l2": 0.35148298740386963,
+    "repeat_exact": false,
+    "shape_candidate": [
+      128256
+    ],
+    "shape_reference": [
+      128256
+    ],
+    "top1_match": true,
+    "w4_top1": 505,
+    "w4_top5": [
+      505,
+      11,
+      304,
+      198,
+      627
+    ]
+  },
+  "packed": {
+    "decoder_packed_bytes_including_metadata": 3625975808,
+    "dtypes": {
+      "bias": [],
+      "qweight": [
+        "torch.int32"
+      ],
+      "qzeros": [
+        "torch.int32"
+      ],
+      "scales": [
+        "torch.float16"
+      ]
+    },
+    "module_class": "awq.modules.linear.gemm.WQLinear_GEMM",
+    "module_count": 224,
+    "module_examples": [
+      "model.layers.0.self_attn.q_proj",
+      "model.layers.0.self_attn.k_proj",
+      "model.layers.0.self_attn.v_proj",
+      "model.layers.0.self_attn.o_proj",
+      "model.layers.0.mlp.gate_proj",
+      "model.layers.0.mlp.up_proj",
+      "model.layers.0.mlp.down_proj",
+      "model.layers.1.self_attn.q_proj",
+      "model.layers.1.self_attn.k_proj",
+      "model.layers.1.self_attn.v_proj"
+    ],
+    "storage_bytes": {
+      "bias": 0,
+      "qweight": 3489660928,
+      "qzeros": 27262976,
+      "scales": 109051904
+    },
+    "total_unique_state_bytes": 5727854592
+  },
+  "passed": false,
+  "paths": {
+    "fp16": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "w4": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp"
+  },
+  "prompt": "Life blooms like a flower, far away",
+  "schema_version": 1,
+  "token_ids": [
+    128000,
+    26833,
+    92889,
+    1093,
+    264,
+    23153,
+    11,
+    3117,
+    3201
+  ]
+}
