@@ -11,14 +11,14 @@
       "sha256": "2a2f6c0990f9a12b2024e999ea27bfa9255709bc555f9073fcc55231e52788ac"
     },
     {
-      "bytes": 1880,
+      "bytes": 2259,
       "path": "commands.txt",
-      "sha256": "9f44405c3570f36ab0e048f4c9d738dc049b8df996525b499c70927f999df3a9"
+      "sha256": "5c68d2d854e4704f4e0c776985fa786ac1720278c3b330e65612086860345b14"
     },
     {
-      "bytes": 163,
+      "bytes": 288,
       "path": "create_venv.stderr.log",
-      "sha256": "2677ab06c3ad5d8547c105940fde13f961fd51659e3702665e3ccc00c30ac568"
+      "sha256": "39fd569bb20a9ca3a1e710319d2716111081d4dd4401c2abfedb2e1eb8329980"
     },
     {
       "bytes": 0,
@@ -66,6 +66,16 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
+      "bytes": 320,
+      "path": "import_extension_after_torch.stderr.log",
+      "sha256": "55506f33147c050bb29f7db2b58a80e2742ce6f6501d2089998d4e4aaa364b6b"
+    },
+    {
+      "bytes": 524,
+      "path": "import_extension_after_torch.stdout.log",
+      "sha256": "3c06280c6a5dde1a74147ca39ae162bfc0f8c6358e969fae31d95319d4791197"
+    },
+    {
       "bytes": 124,
       "path": "import_morphserve.stderr.log",
       "sha256": "591f17da926f1ef046cb9029fed0ef884f9a74beee66ba07ba1f287aba31cacd"
@@ -86,9 +96,9 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "bytes": 858,
+      "bytes": 82,
       "path": "install_build_stack.stderr.log",
-      "sha256": "5dc10c40104e18de25e04da97aa516bcfba9cedf90a01fe2c271d27af19e987d"
+      "sha256": "861d0a20113d988c692d640cf7214f9930d8eef2d44d66ee60de4adb4a2f7afb"
     },
     {
       "bytes": 0,
@@ -106,9 +116,9 @@
       "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025"
     },
     {
-      "bytes": 218,
+      "bytes": 249,
       "path": "status.tsv",
-      "sha256": "d01ccedbdcd54d59374de70cb257a7054afbad070e9305e1470c387685dd5759"
+      "sha256": "eea3e2f2b7428843b874185a1ac544dcf8915f543dcd1c34f0a47d25bff0c99d"
     }
   ],
   "candidate_commit": "85c4fbf753b6eb47613bdd7ea423c38b48054544",
@@ -116,11 +126,12 @@
   "schema_version": 1,
   "status": {
     "build_extension": 0,
-    "create_venv": 0,
+    "create_venv": 2,
     "editable_install_unmodified": 2,
     "engine_config_probe": 1,
     "import_MorphServe": 1,
     "import_extension": 1,
+    "import_extension_after_torch": 0,
     "import_morphserve": 1,
     "import_swiftllm": 1,
     "install_build_stack": 0,

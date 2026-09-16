@@ -55,3 +55,7 @@ The editable install, all documented Python package imports, and CLI-to-dataclas
 ### Resource cost and next step
 
 No GPU work or model load. Run one changed-hypothesis follow-up that preloads PyTorch before importing the extension; do not retry any unchanged packaging/config failure.
+
+### Follow-up outcome
+
+The frozen follow-up `import torch; import swiftllm_c` succeeded against the freshly built extension and exposed 13 bindings, including layer registration/replacement and reclaimed-KV operations. This narrows the failure: the C++ source is buildable/importable, while the released Python package and CLI remain non-runnable. The repeat runner's venv-creation step returned 2 because the venv already existed; dependency and build probes still ran, and this harness idempotence issue will be fixed without changing the observed mechanism result.

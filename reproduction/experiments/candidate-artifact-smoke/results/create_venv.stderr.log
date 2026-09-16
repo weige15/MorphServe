@@ -1,3 +1,4 @@
 Using CPython 3.12.3 interpreter at: /usr/bin/python3.12
 Creating virtual environment at: reproduction/.venv
-Activate with: source reproduction/.venv/bin/activate
+error: Failed to create virtual environment
+  Caused by: A virtual environment already exists at `/nfs/home/s314511048/MorphServe/reproduction/.venv`. Use `--clear` to replace it

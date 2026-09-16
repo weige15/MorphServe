@@ -1,5 +1,5 @@
 manifest_before	0
-create_venv	0
+create_venv	2
 editable_install_unmodified	2
 import_MorphServe	1
 import_morphserve	1
@@ -7,5 +7,6 @@ import_swiftllm	1
 install_build_stack	0
 build_extension	0
 import_extension	1
+import_extension_after_torch	0
 engine_config_probe	1
 manifest_after	0
