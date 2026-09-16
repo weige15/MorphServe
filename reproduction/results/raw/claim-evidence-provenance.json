@@ -1432,6 +1432,72 @@
       "tracked": true,
       "worktree_status": null
     },
+    "results/raw/pending-gpu-readiness-after-race.json": {
+      "artifact_last_commit": "b5cbe5c79aa635e8d2fc94a623efa32a0c266055",
+      "bytes": 3756,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H12",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "b859807076bff7255545e60c658f9486da8d73dfc45d3a1fe91a461c2c12be83",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "results/raw/pending-gpu-readiness.json": {
+      "artifact_last_commit": "b5cbe5c79aa635e8d2fc94a623efa32a0c266055",
+      "bytes": 3597,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H12",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "ac96243583bb1d5812dd9e327d70b5e2d872d3af205d2e22b89e06fb0883c2b5",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "results/raw/pending-gpu-rerun-attempt.txt": {
+      "artifact_last_commit": "b5cbe5c79aa635e8d2fc94a623efa32a0c266055",
+      "bytes": 890,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H12",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "493f72911dc44b3982e96df1c32817307c2fc1c360989460fb5c68a64cd358d3",
+      "tracked": true,
+      "worktree_status": null
+    },
     "results/raw/post-atomic-readiness-review.md": {
       "artifact_last_commit": "e257043c7058892481cb6ca6c26a77ec82e2df64",
       "bytes": 8799,
@@ -1473,10 +1539,28 @@
       "sha256": "e28e671ed5289f0af6fe6481ca8d8283e6621e6a35b537cdf74ccd3adebd5dc2",
       "tracked": true,
       "worktree_status": null
+    },
+    "scripts/capture_gpu_readiness.py": {
+      "artifact_last_commit": "b5cbe5c79aa635e8d2fc94a623efa32a0c266055",
+      "bytes": 3046,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "commands"
+        },
+        {
+          "claim": "H12",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "4a43ab817361adf7b4649740af0406859ef71d7cf14cb51a777adad4bbb1dd2a",
+      "tracked": true,
+      "worktree_status": null
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "07dd6bd5037c6dfb025422f94cda603d70974e5d",
+  "repository_head_at_generation": "b5cbe5c79aa635e8d2fc94a623efa32a0c266055",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
