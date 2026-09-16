@@ -77,6 +77,7 @@ def main():
 
     with torch.inference_mode():
         manager.free_blocks_for_seqs(torch.tensor([0, 1], dtype=torch.int32, device="cuda"))
+    manager.num_free_blocks = int(manager.num_free_blocks.item()) if isinstance(manager.num_free_blocks, torch.Tensor) else manager.num_free_blocks
     torch.cuda.synchronize()
     final_recovery = samples(5, 0.5, 0.01)
     final_logits = model.forward([ids], [0], [], ignore_kvcache=True, return_logits=True)[0].detach().cpu()
@@ -99,6 +100,6 @@ def main():
     }
     payload = {"schema_version":1,"rows_before":rows_before,"counts_before":counts_before,"sentinel_before":sentinel_before,"recovery_events":[recovery26,recovery24],"refusal_state":refusal_state,"final_recovery":final_recovery,"final":final,"executor_log":executor.log,"ordinary_preemptions":0,"gate":gate,"passed":all(gate.values())}
     Path(args.output).write_text(json.dumps(payload,indent=2,sort_keys=True,default=str)+"\n")
-    print(json.dumps({"gate":gate,"rows_before":rows_before,"refusal":refusal_state,"final":final},indent=2)); return 0 if payload["passed"] else 1
+    print(json.dumps({"gate":gate,"rows_before":rows_before,"refusal":refusal_state,"final":final},indent=2,default=str)); return 0 if payload["passed"] else 1
 
 if __name__ == "__main__": raise SystemExit(main())

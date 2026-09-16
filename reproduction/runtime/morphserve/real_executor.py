@@ -41,6 +41,7 @@ class RealMorphingExecutor:
                 for index, group in enumerate(self.kv_groups)
             )
 
+    @torch.inference_mode()
     def morph_to_w4(self, layers):
         for layer in layers:
             if layer in self.active_layers:
@@ -56,6 +57,7 @@ class RealMorphingExecutor:
         self._sync_model_state()
         return True
 
+    @torch.inference_mode()
     def expand_kv(self, layers):
         manager = self.model.gpu_block_manager
         snapshot = {
@@ -100,6 +102,7 @@ class RealMorphingExecutor:
             self._sync_model_state()
             return False
 
+    @torch.inference_mode()
     def shrink_kv_before_restore(self, layers):
         manager = self.model.gpu_block_manager
         expected = [group["layer"] for group in reversed(self.kv_groups[-len(layers):])]
@@ -125,6 +128,7 @@ class RealMorphingExecutor:
         self._sync_model_state()
         return True
 
+    @torch.inference_mode()
     def restore_fp16(self, layers):
         grouped = {group["layer"] for group in self.kv_groups}
         if any(layer in grouped for layer in layers):
