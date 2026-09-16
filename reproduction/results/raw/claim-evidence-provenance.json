@@ -431,8 +431,8 @@
       "worktree_status": null
     },
     "experiments/async-layer-transfer/analysis.md": {
-      "artifact_last_commit": "3fe6a96fb02b33cc23c91dc3bc43555c97a03c2b",
-      "bytes": 1929,
+      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+      "bytes": 2298,
       "referenced_by": [
         {
           "claim": "H12",
@@ -444,7 +444,7 @@
         }
       ],
       "run_source_revision": null,
-      "sha256": "d373d24f02dd78bfb68e3c785b66db5e21a54c7614aacf27f26d16e674d1a38f",
+      "sha256": "fbd874a09b739bebda6264337b05dcb5b9ea4b9cb327b28d640551bd84335739",
       "tracked": true,
       "worktree_status": null
     },
@@ -547,14 +547,14 @@
           "field": "commands"
         }
       ],
-      "run_source_revision": null,
+      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
       "sha256": "e1c38dd1b85ffd534d7f7b508d4f804170b4f73aa6f662c6ce985bc8ea129bae",
       "tracked": true,
       "worktree_status": null
     },
     "experiments/async-layer-transfer/results/metrics.json": {
-      "artifact_last_commit": "7d44d46b1fa6628e66aac858bb9a1770909f19a9",
-      "bytes": 221,
+      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+      "bytes": 222,
       "referenced_by": [
         {
           "claim": "H12",
@@ -565,8 +565,64 @@
           "field": "raw"
         }
       ],
-      "run_source_revision": null,
-      "sha256": "3aef80a1e61a308134370f99cad783865695fe249453b86ee94415b30cd2e74d",
+      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
+      "sha256": "8e315463cf3a0d6c954a972c755c6b14e0c1e936ef51b3e2fb80a037d65a3fb5",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/results/source-revision.txt": {
+      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+      "bytes": 41,
+      "referenced_by": [
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
+      "sha256": "76d476e7d7228f16ca319344ab2aee389eccee27b86638e67662e5ad18ab0395",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/results/source-status.txt": {
+      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+      "bytes": 0,
+      "referenced_by": [
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/results/test.exitcode": {
+      "artifact_last_commit": "466707c9e2899288f25cd8c8980f7aeeaeecf62d",
+      "bytes": 2,
+      "referenced_by": [
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/results/test.log": {
+      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+      "bytes": 1032,
+      "referenced_by": [
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
+      "sha256": "8817e58ab9eb81eef02835b51c90a7ff268a89d793058be22aaf2c588379f372",
       "tracked": true,
       "worktree_status": null
     },
@@ -1560,7 +1616,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "b5cbe5c79aa635e8d2fc94a623efa32a0c266055",
+  "repository_head_at_generation": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
