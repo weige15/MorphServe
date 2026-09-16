@@ -43,6 +43,7 @@ public:
     static void register_layer_memory_quant(int layer_id, int64_t start_addr_int, size_t size);
     static void register_layer_memory_tensor_map_quant(int layer_id, const PythonTensorMap& tensor_map);
     static void register_layer_memory_tensor_map_org(int layer_id, const PythonTensorMap& tensor_map);
+    static void record_layer_memory_use(int layer_id);
     
     // Register KV cache info
     static void register_kv_cache_info(int64_t num_layers, int64_t num_kv_heads, int64_t block_size, int64_t head_dim);
@@ -75,6 +76,7 @@ private:
     static std::unordered_map<int, MemoryRange> layer_memory_map_quant;
     static std::unordered_map<int, std::vector<TensorInfo>> layer_memory_tensor_map_quant;
     static std::unordered_map<int, std::vector<TensorInfo>> layer_memory_tensor_map_org;
+    static std::unordered_map<int, std::vector<cudaEvent_t>> layer_use_events;
 };
 
 } // namespace swiftllm

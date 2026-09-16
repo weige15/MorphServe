@@ -16,6 +16,8 @@ PYBIND11_MODULE(swiftllm_c, m) {
         "Register layer memory tensor map");
   m.def("register_layer_memory_tensor_map_org", &swiftllm::MemoryManager::register_layer_memory_tensor_map_org, 
         "Register layer memory tensor map");
+  m.def("record_layer_memory_use", &swiftllm::MemoryManager::record_layer_memory_use,
+        "Record completion of queued work using a reclaimed layer region");
   m.def("register_kv_cache_info", &swiftllm::MemoryManager::register_kv_cache_info, 
         "Register KV cache info");
   m.def("acquire_new_kvcache", &swiftllm::MemoryManager::acquire_new_kvcache, 

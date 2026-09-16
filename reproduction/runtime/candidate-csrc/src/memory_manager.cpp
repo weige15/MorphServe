@@ -1,5 +1,7 @@
 // memory_manager.cpp
 #include "memory_manager.h"
+#include <ATen/cuda/CUDAContext.h>
+#include <algorithm>
 #include <sstream>
 
 namespace swiftllm {
@@ -11,6 +13,7 @@ std::unordered_map<int, MemoryRange> MemoryManager::layer_memory_map_org_cpu;
 std::unordered_map<int, MemoryRange> MemoryManager::layer_memory_map_quant;
 std::unordered_map<int, std::vector<TensorInfo>> MemoryManager::layer_memory_tensor_map_quant;
 std::unordered_map<int, std::vector<TensorInfo>> MemoryManager::layer_memory_tensor_map_org;
+std::unordered_map<int, std::vector<cudaEvent_t>> MemoryManager::layer_use_events;
 
 namespace {
 
@@ -73,6 +76,33 @@ void MemoryManager::register_layer_memory_tensor_map_org(int layer_id, const Pyt
     //         std::cout << "  " << name << ": " << info << std::endl;
     //     }
     // }
+}
+
+void MemoryManager::record_layer_memory_use(int layer_id) {
+    auto& events = layer_use_events[layer_id];
+    events.erase(std::remove_if(events.begin(), events.end(), [](cudaEvent_t event) {
+        cudaError_t status = cudaEventQuery(event);
+        if (status == cudaSuccess) {
+            cudaEventDestroy(event);
+            return true;
+        }
+        if (status != cudaErrorNotReady) {
+            throw std::runtime_error("CUDA event query failed: " + std::string(cudaGetErrorString(status)));
+        }
+        return false;
+    }), events.end());
+
+    cudaEvent_t event;
+    cudaError_t status = cudaEventCreateWithFlags(&event, cudaEventDisableTiming);
+    if (status != cudaSuccess) {
+        throw std::runtime_error("CUDA event creation failed: " + std::string(cudaGetErrorString(status)));
+    }
+    status = cudaEventRecord(event, at::cuda::getCurrentCUDAStream());
+    if (status != cudaSuccess) {
+        cudaEventDestroy(event);
+        throw std::runtime_error("CUDA event record failed: " + std::string(cudaGetErrorString(status)));
+    }
+    events.push_back(event);
 }
 
 void MemoryManager::register_kv_cache_info(int64_t num_layers, int64_t num_kv_heads, int64_t block_size, int64_t head_dim) {
@@ -323,6 +353,18 @@ std::vector<torch::Tensor> MemoryManager::replace_layer_quant2org(int layer_id) 
             std::string(cudaGetErrorString(cuda_status)));
     }
 
+    auto use_events = layer_use_events.find(layer_id);
+    if (use_events != layer_use_events.end()) {
+        for (cudaEvent_t event : use_events->second) {
+            cuda_status = cudaStreamWaitEvent(stream, event, 0);
+            if (cuda_status != cudaSuccess) {
+                cudaStreamDestroy(stream);
+                throw std::runtime_error("CUDA stream wait event failed: " +
+                    std::string(cudaGetErrorString(cuda_status)));
+            }
+        }
+    }
+
     // Time the memory copy operation
     // auto start_time = std::chrono::high_resolution_clock::now();
 
@@ -349,6 +391,13 @@ std::vector<torch::Tensor> MemoryManager::replace_layer_quant2org(int layer_id) 
             std::string(cudaGetErrorString(cuda_status)));
     }
     
+    if (use_events != layer_use_events.end()) {
+        for (cudaEvent_t event : use_events->second) {
+            cudaEventDestroy(event);
+        }
+        layer_use_events.erase(use_events);
+    }
+
     // auto end_time_swap = std::chrono::high_resolution_clock::now();
     // auto duration_swap = std::chrono::duration_cast<std::chrono::milliseconds>(end_time_swap - start_time).count();
     

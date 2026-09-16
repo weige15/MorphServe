@@ -6,7 +6,7 @@ VENDOR="$ROOT/vendor/author-morphserve"
 CSRC="$ROOT/runtime/candidate-csrc"
 VENV="$ROOT/.venv"
 TMP="$ROOT/results/tmp/candidate-lifetime"
-OUT="$ROOT/experiments/candidate-lifetime/results"
+OUT=${MORPHSERVE_TEST_RESULT_DIR:-"$ROOT/experiments/candidate-lifetime/results"}
 GPU=${CUDA_VISIBLE_DEVICES:-0}
 mkdir -p "$OUT" "$ROOT/results/tmp"
 rm -rf "$TMP"
