@@ -570,6 +570,60 @@
       "tracked": true,
       "worktree_status": null
     },
+    "experiments/async-layer-transfer/transaction-results/commands.txt": {
+      "artifact_last_commit": "7d44d46b1fa6628e66aac858bb9a1770909f19a9",
+      "bytes": 225,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "commands"
+        },
+        {
+          "claim": "H28",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "d4a91aee21d6dff6cd1a59cb08d8ce05b4d02499f93168c0af379dd456f2b654",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/transaction-results/test.exitcode": {
+      "artifact_last_commit": "7d44d46b1fa6628e66aac858bb9a1770909f19a9",
+      "bytes": 2,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/transaction-results/test.log": {
+      "artifact_last_commit": "0688b9df718d5c4db1f4a50a3a88bec685e072fd",
+      "bytes": 3223,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "fcc735f64180a9a24925412c06b495ef09af7b66c2dd6d3b0b45fe122b938780",
+      "tracked": true,
+      "worktree_status": null
+    },
     "experiments/autoawq-layer-switch/analysis.md": {
       "artifact_last_commit": "83b4c31ab212ec4615d4e55671b223dd3396f847",
       "bytes": 2110,
@@ -1394,7 +1448,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "0dc6fb45766991da617fda374903429e173997bc",
+  "repository_head_at_generation": "6c41567cd338533cf91fd6f32f18a5648c637727",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
