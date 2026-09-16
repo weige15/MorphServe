@@ -1,0 +1,6 @@
+.venv/
+runtime/**/__pycache__/
+runtime/**/*.pyc
+results/tmp/
+results/**/*.tmp
+runtime/**/*.egg-info/

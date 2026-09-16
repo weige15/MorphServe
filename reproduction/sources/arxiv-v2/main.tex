@@ -1,0 +1,658 @@
+\documentclass{article}
+
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{xcolor}         % colors
+\usepackage{xspace}
+
+\usepackage{subcaption}     
+\usepackage{graphicx}  
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{amsfonts}       
+% \usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+\usepackage{float}
+
+
+% \newcommand{\system}{\small\textsf{MorphServe}\xspace}
+\newcommand{\system}{{MorphServe}\xspace}
+\newcommand{\quant}{\small\textsf{LayerSwapper}\xspace}
+\newcommand{\kvc}{\small\textsf{KVResizer}\xspace}
+
+\newcommand{\layermorphing}{{Sensitivity-Aware}\xspace}
+\newcommand{\kvmorphing}{{Pressure-Aware}\xspace}
+
+\newcommand{\FlashAttention}{\textsc{FlashAttention}\xspace} 
+\newcommand{\Sarathi}{\textsc{Sarathi}\xspace} 
+\newcommand{\PagedAttention}{\text{PagedAttention}\xspace}
+
+
+\newcommand{\bl}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\zeyu}[1]{{\color{blue}[Zeyu: #1]}}
+
+
+% \usepackage{mlsys2025}
+\usepackage[accepted]{mlsys2025}
+
+%% yue: the following line is added to toggle the page number
+%% comment it out to disable page number
+\pagestyle{plain}
+
+
+\mlsystitlerunning{MorphServe: Efficient and Workload-Aware LLM Serving via Runtime Quantized Layer Swapping and KV Cache Resizing}
+
+
+\begin{document}
+
+\twocolumn[
+\mlsystitle{MorphServe: Efficient and Workload-Aware LLM Serving via Runtime Quantized Layer Swapping and KV Cache Resizing}
+
+% It is OKAY to include author information, even for blind
+% submissions: the style file will automatically remove it for you
+% unless you've provided the [accepted] option to the mlsys2025
+% package.
+
+% List of affiliations: The first argument should be a (short)
+% identifier you will use later to specify author affiliations
+% Academic affiliations should list Department, University, City, Region, Country
+% Industry affiliations should list Company, City, Region, Country
+
+% You can specify symbols, otherwise they are numbered in order.
+% Ideally, you should not use this facility. Affiliations will be numbered
+% in order of appearance and this is the preferred way.
+% \mlsyssetsymbol{equal}{*}
+
+\begin{mlsysauthorlist}
+\mlsysauthor{Zhaoyuan Su}{uva}
+\mlsysauthor{Zeyu Zhang}{uva}
+\mlsysauthor{Tingfeng Lan}{uva}
+\mlsysauthor{Zirui Wang}{uva}
+\mlsysauthor{Haiying Shen}{uva}
+\mlsysauthor{Juncheng Yang}{harvard}
+\mlsysauthor{Yue Cheng}{uva}
+\end{mlsysauthorlist}
+
+\mlsysaffiliation{uva}{University of Virginia}
+\mlsysaffiliation{harvard}{Harvard University}
+
+% \mlsyscorrespondingauthor{Cieua Vvvvv}{c.vvvvv@googol.com}
+% \mlsyscorrespondingauthor{Eee Pppp}{ep@eden.co.uk}
+
+% You may provide any keywords that you
+% find helpful for describing your paper; these are used to populate
+% the "keywords" metadata in the PDF but will not be shown in the document
+\mlsyskeywords{Machine Learning, MLSys}
+
+\vskip 0.3in
+
+\begin{abstract}
+Efficiently serving large language models (LLMs) under dynamic and bursty workloads remains a key challenge for real-world deployment. Existing serving frameworks and static model compression techniques fail to adapt to workload fluctuations, leading to either service-level objective (SLO) violations under full-precision serving or persistent accuracy degradation with static quantization. To deal with these issues, we present {\system}, a dynamic, workload-aware LLM serving framework based on \emph{morphological adaptation}. {\system} introduces two asynchronous, token-level runtime mechanisms: \emph{quantized layer swapping}, which selectively replaces less impactful layers with quantized alternatives during high-load periods, and \emph{pressure-aware KV cache resizing}, which dynamically adjusts KV cache capacity in response to memory pressure. These mechanisms enable state-preserving transitions with minimum runtime overhead and are fully compatible with modern scheduling and attention techniques. Extensive experiments on Vicuna and Llama family models with real-world workloads demonstrate that {\system} reduces average SLO violations by 92.45\% and improves the P95 TTFT latency by $2.2$-\emph{$3.9\times$} compared to full-precision serving, without compromising generation quality. These results establish {\system} as a practical and elastic solution for LLM deployment in dynamic environments. 
+\end{abstract}
+]
+
+\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
+
+% \input{main_tex}
+
+\section{Introduction}
+\label{sec:intro}
+
+The rise of large language models (LLMs) has made efficient and reliable serving a core challenge in modern AI infrastructure. Systems like vLLM~\cite{kwon2023efficient_vllm} and Orca~\cite{yu2022orca} optimize throughput via {\PagedAttention}~\cite{kwon2023efficient_vllm} and continuous batching~\cite{yu2022orca, sun2024llumnix, he2024deferred_llm_batching}, but assume fixed-precision execution and stable workloads. In contrast, real-world LLM workloads are dynamic and bursty~\cite{wang2024burstgpt, patel2024splitwise, azure_LLM_inference_trace}, with fluctuating request rates and context lengths. Even brief load spikes can cause memory exhaustion or queueing delays, leading to SLO violations---such as increased time-to-first-token (TTFT) and time-per-output-token (TOPT)---that degrade both user experience and system throughput. 
+
+One naive solution is to statically over-provision GPU resources to accommodate worst-case traffic spikes. 
+However, over-provisioning leads to substantial cost inefficiencies during underutilized periods~\cite{jaiswal2025serving_provisioning, fu2024serverlessllm}. Moreover, edge deployments lack the flexibility for dynamic scaling altogether~\cite{cai2024edge_llm}. Thus, the inability to elastically match model resource usage to real-time demand results in either SLO violations under pressure, or significant resource waste during low-load intervals.
+
+Model compression techniques, such as quantization~\cite{lin2024awq, frantar2022gptq, lin2024duquant, shao2023omniquant}, pruning~\cite{ma2023llm_pruning, sreenivas2024llm_pruning, gao2024disp_pruning}, or low-rank approximation~\cite{hu2022lora, wu2024dlora}, offer an alternative approach by statically reducing the resource footprint of deployed LLMs. While these methods are effective in lowering memory and compute demands, they introduce irreversible accuracy degradation that persists even during periods of low load, when full-precision inference could be served without penalty. This results in a rigid, suboptimal quality--efficiency tradeoff that fails to align with workload variability. Key-value cache (KVC) compression~\cite{cai2024pyramidkv, zhou2024dynamickv, li2024snapkv} and eviction~\cite{liu2023scissorhands, feng2024ada} methods have been proposed to further reduce memory usage. However, these techniques often rely on fixed heuristics, cannot adapt to different workloads, lack compatibility with modern attention variants like Grouped Query Attention (GQA)~\cite{ainslie2023gqa, chen2024optimised_gqa, chinnakonduru2024weighted_gqa} and Multi-Head Latent Attention (MLA)~\cite{meng2025transmla, liu2024deepseek}, and remain inflexible to runtime serving conditions.
+
+To handle dynamic workloads and address the above issues, in this paper, we present {\system}, a dynamic, workload-aware LLM serving framework based on morphological adaptation. {\system} continuously monitors system load and morphs model components—transformer layers and KVC blocks—on the fly in response to real-time memory pressure. When resource usage surges, {\system} reduces model footprint by replacing selected full-precision layers with lightweight quantized alternatives and expands KVC capacity by dynamically attaching additional memory blocks. These adaptations are reversed as pressure subsides, restoring full precision and reclaiming memory from KVC without interrupting inference.
+
+{\system} contributes the following:
+(1) A \textit{runtime layer swapping} mechanism that enables \textit{workload-aware mixed-precision serving}, allowing quantized and full-precision layers to coexist and be dynamically reconfigured based on runtime pressure without model flushing or architectural changes.
+(2) A \textit{pressure-aware KVC resizing} mechanism that elastically adjusts KV cache capacity, supporting efficient batch prefilling and decoding under bursty traffic.
+(3) A tunable runtime policy that \textit{navigates the accuracy–latency Pareto frontier}, balancing high-fidelity and low-latency objectives.
+(4) Full compatibility with existing KVC compression and eviction schemes, enabling further efficiency gains with minimal accuracy degradation.
+
+To achieve this, {\system} introduces two complementary morphing mechanisms, both designed to support asynchronous and compatible kernel executions with minimal overhead:
+{\quant} identifies low-impact transformer layers by a sensitivity-based profiling, selectively and asynchronously replacing them with lower-precision alternatives at runtime. 
+{\kvc} adaptively adjusts KVC capacity under memory pressure and runs in parallel with decoding using separate CUDA streams, ensuring seamless execution. 
+
+% Across extensive experiments on Llama 2~\cite{touvron2023llama2}, Llama 3~\cite{grattafiori2024llama3}, CodeLlama~\cite{roziere2023codellama}, and Vicuna~\cite{vicuna} using four datasets~\cite{gov_report, zhong2021qmsum, he2017dureader, fabbri2019multi} under Azure LLM Inference~\cite{azure_LLM_inference_trace} and BurstGPT~\cite{wang2024burstgpt} traces, {\system} reduces average SLO violations by 92.45\% and P95 TTFT latency by 2.2$\times$–3.9$\times$ over full-precision serving, while preserving comparable accuracy. Compared to static quantization via AWQ~\cite{lin2024awq}, {\system} reduces F1 and Rouge-L degradation by up to 88.85\% and improves memory utilization by 29.29\%. These results demonstrate {\system}'s ability to adapt to dynamic workloads while balancing latency and accuracy.
+
+Across extensive experiments on Llama 2, Llama 3, CodeLlama, and Vicuna using four datasets~\cite{gov_report, zhong2021qmsum, he2017dureader, fabbri2019multi} under Azure LLM Inference~\cite{azure_LLM_inference_trace} and BurstGPT~\cite{wang2024burstgpt} traces, {\system} reduces average SLO violations by 92.45\% and P95 TTFT latency by 2.2$\times$–3.9$\times$ over full-precision serving, while preserving comparable accuracy. Compared to static quantization via AWQ~\cite{lin2024awq}, {\system} reduces F1 and Rouge-L degradation by up to 88.85\% and improves memory utilization by 29.29\%. These results demonstrate {\system}'s ability to adapt to dynamic workloads while balancing latency and accuracy.
+
+\section{Related Work}
+
+\noindent\textbf{LLM Serving Systems.}
+TorchServe~\cite{torchserve} and NVIDIA Triton~\cite{triton} provide general-purpose serving frameworks for parallel inference. 
+% Recent systems specialize in LLM serving~\cite{fast_transformer, li2023alpaserve, wu2023fast_inference, zhou2022pets_serving, yu2022orca, kwon2023efficient_vllm, agrawal2023sarathi, wu2023fastserve, tgi}, improving scheduling and memory management. 
+Recent systems specialize in LLM serving~\cite{fast_transformer, tgi}, improving scheduling and memory management. 
+Orca~\cite{yu2022orca} introduces continuous batching, and vLLM~\cite{kwon2023efficient_vllm} proposes PagedAttention, both aimed at improving throughput. 
+{\Sarathi}~\cite{agrawal2023sarathi} and FastServe~\cite{wu2023fastserve} further reduce queuing delays via chunked prefill or preemptive scheduling. 
+Despite these advances, existing systems assume fixed precision and static memory provisioning, which limits their responsiveness to bursty workloads. 
+In contrast, {\system} enables fully online, workload-aware adaptation through runtime quantized layer swapping and elastic KV cache resizing, achieving smooth performance-accuracy tradeoffs under overload.
+
+\noindent\textbf{LLM Post-Training Quantization.}
+Post-training quantization (PTQ) reduces inference cost by compressing model weights~\cite{dettmers2023spqr, kim2023squeezellm, li2024norm_quant, zhao2024atom, lin2024awq, frantar2022gptq, xiao2023smoothquant, lin2024duquant}. 
+Round-to-nearest schemes~\cite{yao2023comprehensive_quant, nagel2021white_paper_quantization} are simple but inaccurate for outlier-heavy layers. 
+Non-uniform and calibration-based methods, including AdaRound~\cite{nagel2020up_adaround}, ZeroQuant~\cite{yao2022zeroquant}, GPTQ~\cite{frantar2022gptq}, and AWQ~\cite{lin2024awq}, achieve higher fidelity via adaptive rounding or activation statistics. 
+Activation quantization has also been explored (e.g., SmoothQuant~\cite{xiao2023smoothquant}, QServe~\cite{lin2024qserve}, DuQuant~\cite{lin2024duquant}), but remains static and incurs irreversible degradation even when resources permit full precision. 
+{\system} provides a systematic solution that dynamically switches between different precision layers based on real-time service pressure, compatible with any weight quantization method, such as GPTQ and AWQ.
+
+\noindent\textbf{{Mixed-Precision and Adaptive-Depth Inference.}}
+Mixed-precision execution improves efficiency by leveraging lower-bit operations~\cite{reggiani2023mix_precision, huang2021mixed_precision, wang2020towards_bitsplit, chen2024progressive_quant, frantar2025marlin_mixed_precision, dong2019hawq_mixed_precision, risso2022channel_mixed_precision}. 
+Hardware-level methods (Mix-GEMM~\cite{reggiani2023mix_precision}, Bit-Split~\cite{wang2020towards_bitsplit}) and prompt-aware schemes (PMPD~\cite{chen2024progressive_quant}, MARLIN~\cite{frantar2025marlin_mixed_precision}) adjust precision based on token entropy or pre-computed sensitivity. 
+{Recent adaptive-depth and early-exit frameworks (e.g., FlexiDepth~\cite{luo2025adaptive}, LayerSkip~\cite{Elhoushi_2024}) reduce computation via layer skipping but require architectural modification and lack real-time adaptation.} 
+{In contrast, {\system} achieves dynamic, workload-aware mixed-precision serving guided by runtime telemetry, coupling token-level precision with system load for smooth efficiency--accuracy balancing.}
+
+\section{Motivation}
+\label{sec:motivation}
+
+\begin{figure*}[t]
+    \centering
+        \begin{subfigure}[t]{0.24\textwidth}
+        \includegraphics[width=\linewidth]{motivation_combined_workload_invocations_tokens.pdf}
+        \caption{}
+        \label{fig:workloads}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.24\textwidth}
+        \includegraphics[width=\linewidth]{motivation_fp16_vs_morphserve_ttft_tokens.pdf}
+        \caption{}
+        \label{fig:saturation_point}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.24\textwidth}
+        \includegraphics[width=\linewidth]{motivation_acc_degradation_w4_vs_morphserve_tokens.pdf}
+        \caption{}
+        \label{fig:static_compression}
+        \end{subfigure}
+        \begin{subfigure}[t]{0.23\textwidth}
+        \includegraphics[width=\linewidth]{motivation_slo_violation_vs_acc_degradation_w4_fp16_pareto_frontier.pdf}
+        \caption{}
+        \label{fig:parato_tradeoff}
+        \end{subfigure}
+    \vspace{-5pt}
+    \caption{
+    \textbf{Motivation for dynamic adaptation design in LLM serving.}
+    (a) Real-world LLM workloads are highly dynamic and bursty in request and token volume.
+    (b) Full-precision serving suffers TTFT spikes and SLO violations when workload exceeds the saturation point.
+    (c) Statically quantized model causes constant accuracy degradation even during low-load periods when it is possible to serve full-precision models. 
+    (d) {\system} dynamically adapts to resource pressure and consistently achieves an optimal balance between SLO compliance and accuracy.}
+    \vspace{-15pt}
+    \label{fig:motivations}
+\end{figure*}
+
+
+\textbf{Real-world LLM workloads are highly bursty.}
+LLM serving systems face highly dynamic and bursty traffic patterns in real-world scenarios. As shown in \hyperref[fig:workloads]{Figure~\ref{fig:workloads}}, the production
+workloads of Microsoft Azure LLM services~\cite{azure_LLM_inference_trace, stojkovic2025dynamollm} and BurstGPT~\cite{wang2024burstgpt} reveal rapid fluctuations in both the request arrival rates (i.e., request bursts) and the volumes of tokens. These fluctuations reflect the \textit{non-stationary nature} of practical LLM inference workloads, which deviates from the traditional assumptions of most serving schemes~\cite{kwon2023efficient_vllm, yu2022orca, jaiswal2025serving_provisioning}.
+
+\textbf{Request burst leads to long TTFT and SLO violation.}
+As system load increases, even small surges can cause sharp spikes in TTFT latency. In this work, we set the TTFT SLO threshold to 2~seconds, consistent with prior work~\cite{xiong2024layerkv, gao2024cost_cachedattention, qiao2024conserve}. As shown in \hyperref[fig:saturation_point]{Figure~\ref{fig:saturation_point}}, full-precision serving quickly exceeds the SLO threshold once it reaches the \textbf{saturation point}: defined as \textit{the load level at which GPU memory becomes insufficient to schedule new requests for prefilling or to continue decoding for the ongoing batch}. 
+At this point, incoming requests are forced to wait until memory is reclaimed, \textit{incurring significant queueing latency with SLO violation}.  
+
+\textbf{Static quantization trades quality for efficiency irrespective of load.} 
+To mitigate resource constraints, static quantization methods~\cite{lin2024awq,frantar2022gptq,lin2024duquant} have been widely adopted. However, these methods introduce persistent accuracy degradation across all conditions, regardless of whether the system is overloaded.
+As shown in \hyperref[fig:static_compression]{Figure~\ref{fig:static_compression}}, the INT4 quantized model with AWQ~\cite{lin2024awq} consistently degrades accuracy, measured by F1 score following~\cite{lin2024duquant}, on the {\small\texttt{GovReport}} dataset from LongBench~\cite{bai2023longbench}, even during periods when full-precision inference is feasible. This demonstrates that static quantization over-prioritizes efficiency, sacrificing quality during low-load intervals.
+
+\textbf{Workload-aware adaptation achieves optimal tradeoffs.}
+As shown in the Pareto analysis in \hyperref[fig:parato_tradeoff]{Figure~\ref{fig:parato_tradeoff}}, {\system} achieves superior tradeoffs by aligning dynamic quantization with real-time workload conditions.
+{A key insight in MorphServe is \textit{adaptive mixed-precision LLM serving}, where quantized and full-precision layers can coexist and are dynamically reconfigured.}
+This contrasts with static quantization and recent dynamic methods~\cite{chen2024progressive_quant, frantar2025marlin_mixed_precision, reggiani2023mix_precision}, which prioritize serving performance or hardware efficiency but overlook runtime workload variability.
+Most importantly, {\system} enables smooth navigation along the accuracy---efficiency Pareto frontier, from uncompressed, high-accuracy models to highly quantized, efficient ones.
+
+
+\section{System Design}
+\label{sec:design}
+
+{\system} is designed with three primary objectives: 
+(1)~Dynamic adaptation: Respond to real-time workload demands and GPU memory pressure by dynamically adjusting model layer configuration and KVC capacity on the fly during inference.
+(2)~Accuracy preservation: Ensure no degradation under light or moderate load, and introduce only minimal, necessary, and fine-grained token-level accuracy loss to sustain serving performance beyond the saturation point. 
+(3)~Low overhead: Minimize the performance impact of dynamic adaptation by leveraging asynchronous execution and overlapping. 
+
+\subsection{Architecture and Workflow}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.78\textwidth]{morphserve_overall_design_offline_0516.pdf}
+    \caption{
+    \textbf{{MorphServe} dynamic adaptation workflow.} 
+    Incoming requests (1) and real-time telemetry from workers (2) are aggregated by the Serving Monitor and sent to the Request Dispatcher (3).
+    The Dispatcher routes requests to workers (4) and forwards runtime metrics to the Morphing Controller (5), which detects resource pressure and issues adaptation commands (5').
+    % to reconfigure model layers and KVC (5'). 
+    Responses (6) are returned to users, with only a small portion of tokens (in green) generated by mixed-precision layers.
+    % enabling seamless adaptation.
+    % Layer swapping follows an offline-profiled sequence, and quantized model variants are preloaded into CPU-pinned memory. 
+    }
+    \label{fig:system_design}
+    \vspace*{-1.25em} 
+\end{figure*}
+
+\noindent\textbf{System Architecture.}  
+As illustrated in \hyperref[fig:system_design]{Figure~\ref{fig:system_design}}, {\system} consists of three core components—\textit{Serving Monitor}, \textit{Morphing Controller}, and \textit{Morphing Executor}, which together form a feedback-driven control loop for dynamic adaptation. 
+
+\begin{itemize}[noitemsep,leftmargin=*]
+\vspace*{-0.5em}
+
+    \item \textit{Serving Monitor} collects runtime metrics from all workers, including GPU memory utilization, request queue depth, throughput, and token-level latency (TTFT and TPOT). These metrics are smoothed over short time windows to identify workload shifts and early signs of system saturation. 
+    
+    \item \textit{Morphing Controller} serves as the global GPU memory manager. When monitored metrics exceed user-predefined thresholds (e.g., KVC memory usage over 85\%, queueing delay over 100 ms), 
+    it decides whether to trigger \textit{selective layer swapping} (\hyperref[sec:runtime_swapping]{Section~\ref{sec:runtime_swapping}}) and \textit{elastic KVC resizing} (\hyperref[sec:kv_morphing]{Section~\ref{sec:kv_morphing}}),
+    and dispatches corresponding instructions to the target workers.   
+    
+    \item \textit{Morphing Executor} resides on each worker and executes adaptation commands locally. It dynamically reconfigures the model using {\quant} (\hyperref[sec:runtime_swapping]{Section~\ref{sec:runtime_swapping}}), which switches a selective set of layers between full-precision and pre-quantized layers, or between different quantization levels (e.g., from INT8 to INT4) to reduce resource usage and improve inference latency under pressure. In addition, it applies {\kvc} (\hyperref[sec:kv_morphing]{Section~\ref{sec:kv_morphing}}) to adjust KVC memory allocation by elastically expanding or shrinking the number of KVC blocks as needed. 
+    All adaptations are asynchronous overlapping communication and computation~\cite{async_cuda_stream} with preallocated memory buffers to seamlessly overlap with ongoing inference.  
+
+\vspace*{-0.5em}
+\end{itemize}
+
+
+{\system}'s adaptive and versatile architecture enables efficient and timely operation across diverse and bursty workloads, ensuring serving quality under pressure while avoiding unnecessary degradation during underloaded periods. 
+
+\noindent\textbf{Token-level Workload 
+Adaptation.}
+Unlike existing model and KVC compression schemes, which affect  
+the entire request~\cite{model_compression_2018_iclr, lin2024awq, frantar2022gptq, lin2024duquant, zhao2024atom}, {\system} enables \emph{fine-grained, token-level} workload adaptation. 
+During a single request’s decoding phase, {\system} may temporarily replace a subset of layers. For example, switching 2 layers from full-precision to INT4 when saturation is detected (examples shown in \hyperref[sec:runtime_swapping]{Section~\ref{sec:runtime_swapping}}). This allows early tokens to be generated at full precision, while only later tokens experience minimal accuracy degradation. Once the pressure subsides, the affected layers are restored to full precision, enabling continued decoding at the original accuracy. As a result, accuracy degradation is confined to a small portion of tokens, even within a single request. 
+
+\noindent\textbf{State-Preserving Morphing During Inference.}
+A key feature of {\system}’s serving workflow is its ability to seamlessly adapt model layer precision and elastically resize KVC capacity on-the-fly during request execution, 
+\emph{without model flushing or re-prefilling}. 
+When system pressure triggers adaptation, the Morphing Controller can selectively swap model layers without disrupting the attention state or decoding progress, avoiding expensive \textit{serving pauses} and \textit{recomputation}. 
+This design allows {\system} to intervene mid-inference at the token level, preserving continuity in generation and enabling real-time adaptation with minimal runtime interference. 
+
+\subsection{Offline Profiling for Layer Swapping Sequence}
+\label{sec:offline_profiling}
+
+To identify a layer swapping sequence that minimizes accuracy impact during runtime, {\system} performs \textit{offline profiling} to construct a prioritized swapping order based on sensitivity analysis. In this subsection, we describe how {\system} profiles and ranks layers to establish this sequence with a focus on accuracy and robustness.
+
+\noindent\textbf{Problem Statement.} 
+The objective is to minimize cumulative accuracy degradation over the time interval during which one or more layers are quantized.
+
+Let $f(x_t)$ denote the full-precision model output at time $t$, and $f^{(Q_t)}(x_t)$ the output when a subset of layers $Q_t$ are quantized at that time. The cumulative degradation over the interval $[t_1, t_n]$ can be formulated as: \vspace{-20pt}
+
+\begin{equation}
+\min_{\{n_k\}} \sum_{t = t_1}^{t_n} \Delta(f(x_t), f^{(Q_t)}(x_t))
+\label{eq:objective}
+\end{equation}
+
+This problem has a sequential and state-dependent structure: each swapping decision impacts downstream accuracy until the corresponding layer is restored to full precision. Selecting which layers to replace introduces combinatorial complexity, making exact optimization intractable. To address this, {\system} performs offline profiling using hybrid sensitivity metrics to evaluate the accuracy impact of each layer. The resulting sequence provides a prioritized order of layers that can be replaced with minimal expected accuracy degradation. We now describe the sensitivity metrics and the greedy policy used to construct this sequence.
+
+\noindent\textbf{Independence of Layer Quantization Effects.}
+To validate the independence of layer-wise quantization effects, we incrementally quantized the early layers of Llama 2 7B. We observed that the additional perplexity from quantizing a layer remained nearly constant across all settings. This supports the assumption that quantization impact is approximately additive across layers. For detailed results, please refer to \hyperref[appendix:layer_independence]{Appendix} Table 4.
+
+\noindent\textbf{Sensitivity Analysis for Layer Swapping.}
+To construct the swapping sequence, {\system} estimates the sensitivity of each decoder layer using cosine similarity-based local and global metrics that capture its impact on overall model accuracy. These sensitivity scores are used to rank layers, providing a prioritized order that approximates the optimal swapping strategy. \vspace{-5pt}
+
+\begin{itemize}[leftmargin=*]
+    \item \textit{Layer Transformation Sensitivity (LTS)} measures the direct change between a layer’s input and output: \vspace{-5pt}
+    \begin{equation}
+    \text{LTS}_p = \cos\left(h_p(x), x_p\right)
+    \label{eq:IOA}
+    \end{equation}
+    where \( x_p \) is the input and \( h_p(x) \) is the output of layer \( p \). Lower similarity indicates stronger transformations and higher potential sensitivity to layer swapping.
+
+    \item \textit{Layer Replacement Sensitivity (LRS)} quantifies the output distortion caused by replacing the original layer with its quantized version:\vspace{-5pt}
+    \begin{equation}
+    \text{LRS}_p = \cos\left(h_p(x), h_p^Q(x)\right)
+    \label{eq:MES}
+    \end{equation}
+    where \( h_p^Q(x) \) is the output of layer \( p \) with quantized weights. Lower similarity implies greater deviation due to replacement. 
+
+    \item \textit{Model Degradation Sensitivity (MDS)} measures the model-level accuracy impact from replacing a layer \( p \) given the current set of quantized layers \( Q \):\vspace{-5pt}
+    \begin{equation}
+    \text{MDS}_p^{(Q)} = \cos\left(f^{(Q)}(x), f^{(Q \cup \{p\})}(x)\right)
+    \label{eq:TLI}
+    \end{equation}
+    where \( f^{(Q)}(x) \) is the model output with layers \( Q \) replaced. This state-aware metric captures the incremental global degradation introduced by swapping layer \( p \) in the current context. \vspace{-5pt}
+\end{itemize}
+
+We combine these metrics into a unified \textbf{Layer Importance Score (LIS)}: 
+
+% \vspace{-5pt}
+\begin{equation}
+\text{LIS}_p = \alpha_1 \cdot \text{LTS}_p + \alpha_2 \cdot \text{LRS}_p + \beta \cdot \text{MDS}_p^{(Q)}
+\label{eq:LIS}
+\end{equation}
+% \vspace{-5pt}
+
+In this formulation, $\mathrm{LTS}_p$ and $\mathrm{LRS}_p$ are \textit{local sensitivity metrics} that evaluate the behavior of the layer $p$ in isolation, while $\mathrm{MDS}^{(Q)}_p$ is a \textit{global metric} that measures the model-level degradation when replacing $p$, given the current replaced layer set $\mathcal{Q}$. For a given model, the LIS for each layer is computed \textit{offline during profiling}, and the resulting sequence is stored and used directly at runtime. This design avoids any runtime recomputation or decision-making overhead.
+We use a weighted combination of three sensitivity metrics to compute the LIS: weight sensitivity ({$\alpha_1$}), quantization distortion ({$\alpha_2$}), and end-to-end degradation ({$\beta$}), with $\alpha_1=\alpha_2=0.25$ and $\beta=0.5$. This configuration emphasizes stability and user-perceived quality while retaining fine-grained layer-local signals. Compared to a uniform weighting scheme, our setting yields more consistent layer rankings and improved performance. Full results and ablations appear in {Appendix} Table 1.
+
+\noindent\textbf{Metric Choice in Sensitivity Computation.}
+{We use cosine similarity instead of the L2 norm to assess layer sensitivity,
+as it captures direction-based shifts across transformer layers and mitigates
+scale noise. This choice follows analyses of layer relevance in
+Transformers~\cite{whatmatters2025,transformer-layers-as-painters,jiang2025tracing}.
+Cosine-based LIS yields lower perplexity than L2 variants across quantization levels, confirming its suitability for layer profiling. Our detailed evaluation comparison is in {Appendix} Table 2. 
+
+
+
+\subsection{{\quant}: Runtime Layer Swapping}
+\label{sec:runtime_swapping}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.98\textwidth]{Layer_KV_Morphing_0515_new.pdf}
+    \caption{\textbf{Synergy of dynamic layer swapping and elastic KVC resizing.  }
+    Figure~(a)–(d) illustrate the model state morphing process: starting from full-precision serving (a), selected layers (b) are replaced with quantized versions (c) without disrupting the inference computation. This process leads to 
+    mixed-precision layer serving (d). 
+    Figure~(e) shows the detailed decoder layer swapping mechanism. 
+    Figure~(f) demonstrates KVC block management under {\kvc}, where newly vacant memory blocks are dynamically reallocated to KVC or deallocated from KVC based on real-time workload shifts. 
+    {\kvc} reduces the request preemption rate for decoding and incoming request queueing time for prefilling. 
+    }
+    \label{fig:layer_morphing}
+    \vspace{-12pt} 
+\end{figure*}
+
+To enable efficient and non-disruptive layer replacement during inference, {\system} leverages the precomputed layer swapping sequence from offline profiling to guide the dynamic runtime adaptation mechanism. This mechanism consists of two key components: (1)~model preloading with kernel precompilation, which ensures that both full-precision and quantized versions of layers are memory-resident and ready for execution; 
+and (2)~asynchronous layer swapping, which allows selected layers to be swapped between CPU and GPU memory on-the-fly without blocking inference.  
+
+\begin{itemize}[leftmargin=*]
+    \item \textit{Model Preloading and Kernel Precompilation.}
+    Prior to serving, all decoder layer variants (e.g., FP16, INT8, INT4, and INT3)\footnote{{``INT\#'' denotes \textit{weight-only quantization} (W\#). 
+    % as activation or KV-cache quantization causes accuracy loss and runtime overhead. 
+    % MorphServe only adopts weight quantization and relieves memory pressure via elastic KV-cache resizing (\hyperref[sec:kv_morphing]{Section~\ref{sec:kv_morphing}}).
+    }}
+    are preloaded into a contiguous, pinned CPU memory region, while the full-precision model replica is loaded into a preallocated contiguous GPU memory, as shown in the \hyperref[fig:system_design]{Figure~\ref{fig:system_design}}.
+    {\system} tracks the memory addresses of all layer variants, enabling efficient direct memory copies for layer swapping. 
+    To avoid runtime latency, inference kernels corresponding to precision levels are precompiled in advance. 
+    We also implement kernel fusion to optimize performance, while the rest of the serving pipeline reuses state-of-the-art techniques---such as {\PagedAttention}~\cite{kwon2023efficient_vllm} and {\FlashAttention}~\cite{dao2022flashattention, dao2023flashattention_v2}---to ensure compatibility and efficiency.
+
+    \item \textit{Asynchronous In-place Layer Swapping.}  
+    At runtime, {\system} performs in-place layer swapping using asynchronous CUDA streams to avoid interference with ongoing decoding. As illustrated in \hyperref[fig:layer_morphing]{Figure~\ref{fig:layer_morphing}}, when layers 28 and 29 are selected for replacement, the swapping process is launched asynchronously while earlier layers (e.g., 0–27) continue computation without interruption. Full-precision layers are safely discarded from GPU memory since their backup copies reside in pinned CPU memory, and quantized variants are copied into the same memory addresses to avoid pointer remapping. Due to the relatively compact size of each decoder layer (e.g., ~0.4 GB for FP16 and ~0.1 GB for INT4 in Llama 2 7B), the PCIe transfer latency is minimal - approximately 4 ms for INT4 and 16 ms for FP16 for Llama2 7B on PCIe Gen4 with up to 26-28 GB/s bandwidth. In practice, the complete layer swapping process for an INT4 variant—including memory transfer and reconstruction—takes approximately 6 ms and is fully overlapped with decoding, resulting in negligible TPOT overhead. Additional performance breakdowns are provided in \hyperref[sec:experiment]{Section~\ref{sec:experiment}}.
+\end{itemize}
+
+% Put the picture here just for a better position
+\begin{figure*}[t!]
+    \centering
+    \includegraphics[width=0.88\textwidth]{ttft_p95_vs_acc_better.pdf}
+    \vspace{-0.5em} 
+    \caption{
+    \textbf{{MorphServe} provides the best latency–accuracy tradeoff across four models and two traces, with four datasets.}
+        {MorphServe} in accuracy mode (dark green) reduces P95 TTFT by $2.2\times$–$3.9\times$ compared to full-precision serving while maintaining comparable generation quality. In performance mode (light green), {\system} consistently outperforms INT4 quantized models in output quality with no additional latency overhead.}
+    \label{fig:ttft_acc}
+    \vspace{-1.5em} 
+\end{figure*}
+
+
+\subsection{{\kvc}: Elastic KVC Resizing}
+\label{sec:kv_morphing}
+
+To support bursty workloads and fluctuating memory demands, {\system} integrates dynamic layer swapping with {\kvc}, a mechanism for elastic resizing of KVC blocks.
+{\kvc does not quantize or compress existing KV caches.
+It reallocates GPU memory freed by weight quantization (e.g., FP16$\!\rightarrow$W4)
+to elastically expand the KV cache capacity during high load.}
+This section addresses two key questions:
+(1) how {\kvc} dynamically allocates and releases KVC blocks in response to runtime memory pressure, and
+(2) how it collaborates with layer swapping to maintain serving efficiency under peak load.
+
+{\kvc} is triggered when the Serving Monitor detects insufficient GPU memory to allocate KVC blocks for incoming request \emph{prefilling} or ongoing \emph{decoding}. To free memory, {\system} initiates layer swapping, replacing selected full-precision layers with quantized variants. This reduces the model’s memory footprint—e.g., replacing an FP16 layer with INT4 can save up to \emph{75\%} memory, as shown in \hyperref[fig:layer_morphing]{Figure~\ref{fig:layer_morphing}}—enabling allocation of new KVC blocks.
+
+{\kvc} extends {\PagedAttention}~\cite{kwon2023efficient_vllm} with kernel-level support for \emph{on-demand KVC block allocation/deallocation}, implemented through memory mapping without requiring kernel recompilation. All resizing operations are executed asynchronously using separate CUDA streams to avoid interference with ongoing decoding.
+
+Unlike static preallocation strategies (e.g., in vLLM~\cite{kwon2023efficient_vllm}), {\kvc} adjusts KVC capacity dynamically based on real-time memory availability. Once the pressure subsides, both temporary KVC blocks and quantized layers are released and restored to their full-precision state, ensuring memory reuse and accuracy recovery.
+
+As a result, {\kvc} enhances system efficiency across both the prefilling and decoding phases under high-load conditions.
+
+\begin{itemize}[leftmargin=*]
+    \item \textit{Reducing Queueing Time and TTFT During Prefilling.}  
+    Under static scheduling, incoming requests may queue indefinitely when no GPU memory is available for KV allocation. Since FIFO schedulers typically release memory only after a request finishes decoding, long queueing delays directly translate into TTFT violations. In {\system}, {\kvc} is triggered when the queue length or wait time exceeds a threshold, proactively attaching new KV blocks to admit pending requests. This significantly reduces queueing time and improves TTFT under bursty traffic.
+
+    \item \textit{Reducing Preemption and Improving TPOT During Decoding.}  
+    In the decoding phase, requests are preempted if no KV blocks are available, forcing swaps to host memory or full recomputation, both of which introduce delays and degrade TPOT and end-to-end latency. By dynamically attaching KV blocks at runtime, {\system} reduces preemption events and maintains decoding continuity, leading to better overall system responsiveness.
+\end{itemize}\vspace{-10pt} 
+
+Together, these improvements enable {\system} to utilize GPU memory more efficiently across load conditions, mitigate bottlenecks under saturation, and achieve a balanced trade-off between accuracy and responsiveness in volatile serving scenarios.
+
+% \bl{{\system} performs layer swapping and KV resizing asynchronously,
+% overlapping reconfiguration with decoding via CUDA streams to prevent pauses during inference.
+% On Llama 2 7B, an INT4 swap takes only 6 ms and is fully hidden by overlap,
+% while synchronized updates add $\approx$8.5\% latency,
+% ensuring continuous low-latency serving under dynamic workloads.}
+
+% {Using weight-only quantization, {\system} maintains stable, layer-wise accuracy
+% and avoids the irreversible degradation of KV quantization.
+% By reallocating freed memory to KV blocks, it preserves quality while boosting throughput,
+% achieving up to 2.47$\times$ larger KV capacity and 2.9-4$\times$ speedup over FP16
+% (\hyperref[sec:experiment]{Section~\ref{sec:experiment}}).}
+
+\section{Experiment}
+\label{sec:experiment}
+
+\begin{table*}[t]
+\caption{Impact of mixed-precision serving on Llama 3 8B (BookSum Chapters dataset, 6K input / 2K output tokens).}\label{tab:mixed_precision_long}
+\centering
+\resizebox{0.9\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Generation Strategy} & \textbf{F1 Score} & \textbf{ROUGE-L} & \textbf{Within Accuracy Bound} \\ \hline
+All tokens with INT4 (W4) & 14.4716 & 12.1598 & \textbf{Lower Bound} \\ \hline
+First 1K tokens FP16, Last 1K tokens W4 & 16.6112 & 15.2346 & \textbf{Yes} \\ \hline
+First 1K tokens W4, Last 1K tokens FP16 & 14.7101 & 12.3213 & \textbf{Yes} \\ \hline
+First 512 FP16, Middle 1K W4, Last 512 FP16 & 16.0802 & 14.4013 & \textbf{Yes} \\ \hline
+First 512 W4, Middle 1K FP16, Last 512 W4 & 16.0413 & 13.1127 & \textbf{Yes} \\ \hline
+Switch precision every 256 tokens, starting with W4 & 15.2634 & 13.0353 & \textbf{Yes} \\ \hline
+Switch precision every 256 tokens, starting with FP16 & 16.0012 & 14.0146 & \textbf{Yes} \\ \hline
+All tokens with full precision (FP16) & \textbf{17.6458} & \textbf{15.4847} & \textbf{Upper Bound} \\ \hline
+\end{tabular}
+}
+\end{table*}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.94\textwidth]{request_arrival_time_KVC_adaptation_1_row.pdf}
+    \caption{\textbf{MorphServe dynamically adapts KVC block capacity to workload fluctuations. }
+   The red line indicates the KV cache capacity under full-precision serving. {\system} (green) elastically attaches new KV blocks during peak loads, pushing the saturation boundary and preventing request preemption or KVC swapping in the full-precision baseline (blue). Static quantization (orange) underutilizes memory due to its fixed configuration, even when resource headroom is available.}
+    \label{fig:kvc_adaptation}
+    % \vspace{-12pt} 
+\end{figure*}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.94\textwidth]{PRS_TTFT.pdf}
+    \caption{{\system} delays saturation and achieves up to $1.83\times$ throughput than full-precision serving under increasing request rates.}  
+    \label{fig:rps_ttft}
+    % \vspace{-12pt} 
+\end{figure*}
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.94\textwidth]{tpot_cdf_1_row.pdf}
+    \caption{\textbf{{\system} incurs negligible runtime overhead while improving tail TPOT latency.}
+        MorphServe (green) achieves comparable average TPOT latency to the full-precision baseline (blue), while reducing P99 latency by up to $1.23\times$. Performance mode (light green) improves the average TPOT by up to $1.17\times$ through aggressive layer morphing.
+    }  
+    \label{fig:tpot_cdf}
+    % \vspace{-12pt} 
+\end{figure*}
+
+\begin{table*}[h]
+\caption{\textbf{Performance of MorphServe with AWQ and uniform INT4 quantization vs. FP16 on Llama 2 7B, 
+using the DuReader dataset and BurstGPT trace.} MorphServe improves accuracy over static
+quantization, reducing accuracy degradation by 83.57\% for AWQ, 74.67\% for Uniform, while
+lowering P95 TTFT by over 77\% compared to FP16.}\label{tab:perf_ablation_llama2}
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Quantization (INT4) & Metric & Static Quantization & {\system} & Full Precision \\
+\hline
+& TTFT P95 (s) & 1.1686 & 1.2420 & 5.5223 \\
+\cline{2-5}
+AWQ & TPOT P99 (s) & 0.0735 & 0.1064 & 0.1241 \\
+\cline{2-5}
+& F1 Score & 25.55 & 27.33 & 27.68 \\
+\hline
+& TTFT P95 (s) & 1.1321 & 1.2144 & 5.5223 \\
+\cline{2-5}
+Uniform & TPOT P99 (s) & 0.0728 & 0.1053 & 0.1241 \\
+\cline{2-5}
+& F1 Score & 24.87 & 26.94 & 27.68 \\
+\hline
+\end{tabular}
+\end{table*}
+
+\begin{table*}[h]
+\caption{Cross-dataset evaluation of LIS profiles---perplexity on C4 using LIS calibrated on WikiText-2.}\label{tab:cross_dataset}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Method} & \textbf{1} & \textbf{2} & \textbf{4} & \textbf{8} & \textbf{16} & \textbf{32 (Fully Quantized)} \\ \hline
+Front-to-Back & \textbf{7.0793} & 7.0822 & 7.0933 & 7.1119 & 7.1524 & \textbf{7.2463} \\ \hline
+Back-to-Front & 7.0871 & 7.0938 & 7.1031 & 7.1224 & 7.1712 & \textbf{7.2463} \\ \hline
+Random & 7.0871 & 7.0913 & 7.1012 & 7.1234 & 7.1676 & \textbf{7.2463} \\ \hline
+LIS & 7.0801 & \textbf{7.0818} & \textbf{7.0912} & \textbf{7.1107} & \textbf{7.1497} & \textbf{7.2463} \\ \hline
+\end{tabular}
+\end{table*}
+
+\textbf{Evaluation Setup}.
+We evaluate {\system} across a diverse range of LLM architectures, workload traces, and tasks. 
+We consider four representative models: Vicuna 7B v1.5~\cite{vicuna_7b_v1.5}, Llama 2 7B~\cite{touvron2023llama2}, Llama 3 8B~\cite{grattafiori2024llama3}, and CodeLlama 34B~\cite{roziere2023codellama}, spanning multiple scales and attention types---including Multi-Head Attention (MHA)~\cite{vaswani2017attention} and Grouped-Query Attention (GQA)~\cite{ainslie2023gqa}.
+We test two real-world LLM inference workload traces: the BurstGPT trace~\cite{wang2024burstgpt} and the Azure LLM Inference trace~\cite{stojkovic2025dynamollm, azure_LLM_inference_trace}. 
+We report results from a representative 72-second trace snippet (\hyperref[fig:motivations]{Figure~\ref{fig:motivations}}) for both workloads, though {\system} is effective across the full traces.
+The request arrival rates
+of each trace are downscaled by 1.75$\times$ and 4.75$\times$ to fit our hardware environment. 
+To evaluate generation quality, 
+we use four public datasets: GovReport~\cite{gov_report} and Multi-News~\cite{fabbri2019multi} (long-form summarization), QMSum~\cite{zhong2021qmsum} (query-based summarization), and DuReader~\cite{he2017dureader} (reading comprehension). 
+For each test, we align workload timestamps with context passages from the datasets. Prompt and response lengths are set to \emph{512} and \emph{256} tokens for Vicuna 7B v1.5 and Llama 2 7B, and to \emph{1024} and \emph{512} tokens for Llama 3 8B and CodeLlama 34B. We report F1 and Rouge-L scores to assess generation quality. End-to-end experiments for Vicuna 7B v1.5, Llama 2 7B, and Llama 3 8B are conducted on an NVIDIA L4 GPU with 24 GB HBM and 256 GB of CPU DRAM, while CodeLlama 34B is evaluated on an A100 server with 80 GB HBM and 2 TB of CPU DRAM.
+
+\textbf{Implementation.}
+{\system} is implemented on top of SwiftLLM~\cite{jiang2024neo_swiftLLM, swiftllm_github_repo}, a lightweight and modular LLM inference framework that reproduces vLLM~\cite{kwon2023efficient_vllm} performance with simplified components. 
+We added approximately 2,200 lines of Python and 500 lines of C++/CUDA to support {\system}’s optimized KVC management and attention kernel extensions, which enable efficient layer swapping and KVC resizing at runtime.  
+
+\textbf{Comparison Scope and Baselines.} LLM serving frameworks differ widely in objectives: static systems like vLLM~\cite{kwon2023efficient_vllm}, Sarathi~\cite{agrawal2023sarathi}, and FastServe~\cite {wu2023fastserve} focus on fixed-precision serving, while speculative or input-aware approaches like MARLIN~\cite{frantar2025marlin_mixed_precision}, LayerSkip~\cite{Elhoushi_2024}, and FlexiDepth~\cite{luo2025adaptive} optimize inference paths offline. In contrast, MorphServe adapts in real time, dynamically navigating the performance–accuracy tradeoff during live serving. We benchmark against two representative baselines: FP16 (upper-bound accuracy) and INT4 (performance-optimized static quantization). MorphServe is evaluated in two runtime modes: \textbf{accuracy mode}, which conservatively triggers layer swapping to preserve quality, and \textbf{performance mode}, which aggressively swaps layers to improve throughput under memory pressure. All setups use the same inference engine, and AWQ~\cite{lin2024awq} is adopted for its efficient kernel support, though MorphServe is quantization-method agnostic.
+
+
+% \textbf{Baselines.}
+% We include the full-precision (FP16) model as an upper-bound reference and an INT4 quantized model as a static compression baseline. For quantization, we adopt AWQ~\cite{lin2024awq} due to its efficient inference kernel support; however, the setup is compatible with any post-training quantization method and can be replaced accordingly. To evaluate the flexibility of {\system}, we configure it in two runtime modes: In \emph{accuracy mode}, {\system} prioritizes output quality by raising the threshold for triggering layer swapping and limiting the number of quantized layer replacements, thereby minimizing accuracy degradation. In \emph{performance mode}, {\system} enables more aggressive 
+% layer swapping to improve throughput and reduce latency under memory pressure. All baselines and {\system} configurations are evaluated on the same serving engine to ensure fair comparison. 
+
+% \textbf{Comparison Scope and Rationale.}
+% {LLM serving frameworks vary widely in goals and assumptions, making a strict one-to-one comparison impractical. Static systems such as vLLM~\cite{kwon2023efficient_vllm}, Sarathi~\cite{agrawal2023sarathi}, and FastServe~\cite{wu2023fastserve} optimize fixed-precision serving, while other frameworks (e.g., MARLIN~\cite{frantar2025marlin_mixed_precision}, LayerSkip~\cite{Elhoushi_2024}, and FlexiDepth~\cite{luo2025adaptive}) target offline or speculative efficiency without real-time adaptation. In contrast, {\system} dynamically balances performance and accuracy during live inference, bridging static quantized and full-precision regimes. We therefore use INT4 and FP16 as representative baselines that bound the efficiency–accuracy spectrum of prior methods, consistent with industrial practice~\cite{torchserve,triton,yu2022orca}.}
+
+
+\subsection{Main Results}
+
+
+\textbf{TTFT and Accuracy.}
+As shown in \hyperref[fig:ttft_acc]{Figure~\ref{fig:ttft_acc}}, {\system} significantly reduces P95 TTFT latency (95th-percentile TTFT latency) while preserving output quality in all model-trace-dataset configurations. Compared to full-precision baselines, {\system} reduces the P95 TTFT by $2.9\times$–$15.7\times$ ($2.2\times$–$3.9\times$ in accuracy mode and $3.4\times$–$19.5\times$ in performance mode) while maintaining quality within $0.51\%$–$3.82\%$ degradation on F1 or Rouge-L scores, as low as $0.11\%$–$2.18\%$ in accuracy mode.
+In contrast, static quantization exhibits $2.34\%$-$9.47\%$ degradation compared to full-precision inference, due to suffering from persistent quality loss across the entire serving lifetime. In particular, {\system} excels in long-context datasets such as GovReport, leveraging {\quant} and {\kvc} to optimize memory and computing efficiency. {\system} with different configurations (green stars) visualizes the ability to navigate the latency-accuracy Pareto frontier, offering the best balance of performance and quality based on real-time workload shifts.  
+
+
+\textbf{Generation Quality under Mixed-Precision Serving.}
+MorphServe adopts a conservative adaptation strategy, replacing full-precision layers with high-quality quantized counterparts (e.g., AWQ) rather than skipping them at the token level~\cite{dynamic-layer-selection}. This design preserves stable and bounded generation quality during dynamic adaptation. As shown in \hyperref[tab:mixed_precision_long]{Table~\ref{tab:mixed_precision_long}}, even for long-context tasks (BookSum Chapters, 6K input and 2K output tokens), all mixed-precision configurations maintain performance between the fully quantized and full-precision bounds, ensuring controllable quality under frequent precision switching. Additional perplexity evaluations across models are provided in \hyperref[appendix:eval]{Appendix}. A verbatim example of MorphServe’s output under mixed-precision serving is also in the \hyperref[appendix:eval]{Appendix}.
+
+\textbf{Workload Adaptation and Saturation Resilience.}
+As shown in \hyperref[fig:kvc_adaptation]{Figure~\ref{fig:kvc_adaptation}}, {\system} adaptively manages KVC block capacity in response to fluctuating load. In the full-precision baseline, KVC usage saturates the static capacity during peak periods, resulting in elevated queueing delays, request preemption, and frequent KVC swapping, which can lead to SLO violations. Static quantization, while reducing the memory footprint, 
+degrades model accuracy and underutilizes GPU memory, even during low-load periods. 
+{\system} attaches new blocks during bursty traffic and releases them as load subsides, enabled by the synergistic {\quant} and {\kvc} mechanism. 
+{\system} improves overall KVC memory utilization and output accuracy by $29.29\%$ and $3.58\%$, respectively, compared to static quantization. The adaptation allows {\system} to expand KVC usage by up to $32.97\%$ beyond the full-precision limit when needed, and reduce the queueing delay by up to $3.8\times$. 
+{\system} also mitigates request preemption and KVC swapping under saturation conditions. 
+This enhances system responsiveness and improves token-level efficiency, contributing to reduced end-to-end request latency.  
+
+
+
+
+
+
+\textbf{Throughput.} 
+In \hyperref[fig:rps_ttft]{Figure~\ref{fig:rps_ttft}}, we compare {\system} with baselines on DuReader under varying request rates. All configurations maintain low TTFT at low RPS, but as load increases, full-precision inference encounters the threshold, where TTFT spikes abruptly due to memory exhaustion and queueing delays. In contrast, {\system} consistently pushes back this saturation point, achieving $1.6\times$–$1.83\times$ higher throughput than full-precision serving across all evaluated models.
+
+
+% \textbf{CPU Memory Overhead.}
+% Compared with full-precision serving, {\system} adds modest host-memory usage
+% by storing both full-precision and quantized transformer layers.
+% The overhead is bounded, as quantized weights (e.g., W8, W4, W3)
+% are much smaller, keeping total memory typically within 2$\times$ of the original model.
+% In multi-GPU deployments, quantized CPU-resident weights are shared across GPUs,
+% avoiding redundant copies.
+% On an NVIDIA A100 8$\times$80GB server with 2 TB host memory,
+% the total footprint---including swapped-out FP16 layers and INT4 variants of CodeLlama~34B---occupied only $4.42\%$ of host memory, imposing negligible bandwidth or capacity cost.
+% These results confirm that {\system}’s host-memory overhead remains practical
+% for both cloud-scale and high-end edge deployments.
+
+\textbf{TPOT Tail Latency.}
+\hyperref[fig:tpot_cdf]{Figure~\ref{fig:tpot_cdf}} presents the cumulative distribution (CDF) of
+time-per-output-token (TPOT) across two datasets and four models under the Azure LLM trace.
+{\system} delivers average TPOT comparable to full-precision serving while improving
+P95 and P99 tail latency by up to $1.06\times$ and $1.23\times$, respectively.
+These gains arise from eliminating preemption stalls and avoiding KVC swapping or recomputation,
+the main sources of long-tail delays.
+In performance mode, TPOT decreases by $1.11$-$1.17\times$,
+whereas accuracy mode adds up to $1.06\times$ overhead due to preserving more FP16 layers
+and applying stricter layer-swapping thresholds, occasionally causing short queuing under load.
+The improvement results from faster inference on quantized layers and highly efficient
+swapping kernels, 
+% (e.g., $\sim$6\,ms for a Llama 2 7B INT4 attention layer)
+confirming that {\system} introduces negligible runtime overhead while effectively reducing tail latency.
+
+% {\system} also supports an optional offline calibration step to pre-compute
+% layer sensitivity for more accurate morphing.
+% This once-for-all process improves the accuracy--latency tradeoff, but is not required for functionality.
+% Given its offline nature and short duration, its overhead is negligible in practice.
+% Details of the procedure are provided in the \hyperref[sec:appendix]{Appendix}.
+
+
+\subsection{Ablation Study}
+\textbf{Effectiveness Across Quantization Algorithms.}
+{{\system} is agnostic to specific quantization schemes.
+We evaluate it under both AWQ and uniform INT4 using identical datasets and traces.
+As shown in \hyperref[tab:perf_ablation_llama2]{Table~\ref{tab:perf_ablation_llama2}} (and Table 5 in the appendix),
+{\system} consistently improves F1 and Rouge-L over static quantization
+while maintaining significant latency advantages over full-precision serving.
+These results confirm that its gains arise from runtime adaptation
+rather than the choice of quantization algorithm.}
+
+\textbf{Generalization of Layer Importance Score.}
+{\hyperref[tab:cross_dataset]{Table~\ref{tab:cross_dataset}} shows the generalization of LIS profiles, which consistently outperforms front-to-back, back-to-front, and random layer orders on C4 with calibration on Wiki2,
+indicating that LIS captures intrinsic layer importance and generalizes across datasets without re-profiling.}
+
+\section{Discussion and Future Work}
+
+\noindent\textbf{User Tolerance.}
+{Since fully quantized models (e.g., AWQ) are widely acceptable, 
+{\system}'s outputs remain within user tolerance. 
+It maintains full-precision decoding under light load and bounds quality variation 
+under adaptation, achieving stable perceptual quality with adaptive efficiency.}
+
+\noindent\textbf{Scalability.}
+{{\system} scales naturally to distributed serving with data, tensor, pipeline, 
+and sequence parallelism. Each GPU runs an independent executor that swaps layers 
+and resizes KV caches locally.}
+
+\noindent\textbf{Fairness.}
+The continuous batching~\cite{yu2022orca} preserves FIFO ordering, 
+while chunked prefill~\cite{agrawal2023sarathi} and fine-grained KV management~\cite{kwon2023efficient_vllm}
+prevent starvation. 
+Combined with these, MorphServe serving ensures fair and stable serving under bursty conditions.
+
+\noindent\textbf{Future Work.}
+{{\system} can extend beyond weight-only quantization to include activation and 
+KV quantization. Such extensions promise higher efficiency but raise calibration 
+and scheduling challenges. We plan to explore these for edge deployment and 
+robust, energy-efficient adaptation.}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This paper presents {\system}, a novel workload-aware LLM serving framework based on morphological adaptation. Guided by a unified Layer Importance Score, {\system} dynamically adjusts model precision through {\quant} and KV cache memory capacity through {\kvc}, in a coordinated manner based on real-time resource usage.  
+{\system} maintains high-quality inference under normal conditions and adapts gracefully during overload periods. 
+% Our design achieves substantial improvements in SLO compliance rates, memory efficiency, and serving robustness, while incurring minimal quality loss and runtime overhead.
+Extensive experiments show that {\system} improves SLO compliance, memory efficiency, and robustness, while maintaining high generation quality along the efficiency–accuracy Pareto frontier.
+
+
+% \newpage
+% \input{appendix}
+
+\newpage
+\bibliography{reference}
+\bibliographystyle{mlsys2025}
+
+\newpage
+\input{appendix}
+
+\end{document}

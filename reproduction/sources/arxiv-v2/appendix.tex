@@ -1,0 +1,271 @@
+\section*{Appendix Overview}
+\label{sec:appendix}
+\begin{itemize}
+    \item Section A: Layer Swapping Sequence Profiling
+    \item Section B: Additional Experimental Results
+    \item Section C: Implementation Details
+    \item Section D: Limitations and Broader Impacts
+\end{itemize}
+
+\section*{A \quad Layer Swapping Sequence Profiling}
+\label{sec:layer_profiling}
+
+{\system} supports an optional offline profiling for the layer swapping sequence to further preserve model accuracy during runtime layer adaptation. This process consists of two key components: 
+The \emph{Layer Importance Score (LIS)}, which ranks layers by combining the individual characteristics of each layer and its cumulative impact on overall model output;
+and a \emph{greedy selection policy} that constructs the layer swapping sequence used during inference. 
+
+
+\subsection*{A.1 \quad Layer Importance Score (LIS)}
+\label{appendix:LIS}
+
+\noindent\textbf{Motivation and Design.}
+The \emph{Layer Importance Score (LIS)} is defined as:
+\begin{equation}
+\text{LIS}_p = \alpha_1 \cdot \text{LTS}_p + \alpha_2 \cdot \text{LRS}_p + \beta \cdot \text{MDS}_p^{(Q)}
+\label{eq:LIS}
+\end{equation}
+
+Here, $p$ indexes the candidate layer, $Q$ denotes the current set of quantized layers, and $\alpha_1$, $\alpha_2$, and $\beta$ are weighting coefficients.
+LIS 
+combines both \emph{layer-level} and \emph{model-level} sensitivity metrics to achieve accurate and generalizable layer ranking. Layer-level sensitivity captures how critical a single layer is by evaluating the degree of change between its input and output,
+and quantization distortion. However, relying solely on layer-level metrics may lead to locally optimal sequences that ignore the cumulative impact on model output.
+In contrast, model-level sensitivity measures the overall accuracy degradation introduced by swapping a given layer within the current model state. While this provides global awareness, depending exclusively on it risks overfitting to the specific calibration dataset.
+To balance generality and robustness, LIS combines both global and local sensitivity metrics, \emph{without relying on backpropagation or reconstruction}.
+This design ensures that the resulting layer swapping sequence preserves model accuracy while remaining data-agnostic and transferable across workloads. 
+
+\noindent\textbf{Hyperparameter Selection.}
+To balance robustness and accuracy, we define the hyperparameters of LIS as follows:
+{$\alpha_1$} captures weight sensitivity (e.g., norm-based changes after quantization), {$\alpha_2$} measures quantization distortion in activation space (e.g., cosine similarity), and {$\beta$} reflects model-level degradation (e.g., perplexity under greedy layer removal).
+
+\begin{table*}[h]
+\caption{Perplexity comparison of LIS under different ($\alpha_1$,$\alpha_2$,$\beta$) hyperparameter settings across quantization levels on Llama 2 7B using WikiText-2.}
+\label{table:perp_comp_lis}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\# Layers Quantized & 1 & 2 & 4 & 8 & 16 & 32 (Fully Quantized) \\ \hline
+LIS (0.33,0.33,0.33) & \textbf{5.4732} & 5.4748 & 5.4786 & 5.4905 & 5.5257 & \textbf{5.6002} \\ \hline
+LIS (0.25,0.25,0.5) & \textbf{5.4732} & \textbf{5.4743} & \textbf{5.4779} & \textbf{5.4875} & \textbf{5.5215} & \textbf{5.6002} \\ \hline
+\end{tabular}
+\end{table*}
+
+We empirically choose $\alpha_1=\alpha_2=0.25$ and $\beta=0.5$, ensuring $\alpha_1 + \alpha_2 + \beta = 1.0$. This heuristic gives slightly more emphasis to {$\beta$} due to its stability across inputs and its direct alignment with user-perceived output quality. Relying only on {$\beta$}, however, risks overlooking layers with high local distortion, while {$\alpha_1$} and {$\alpha_2$} alone are more sensitive to input variance.
+We compare this configuration to a baseline with uniform weighting ($\alpha_1=\alpha_2= \beta = 0.33$). As shown in the \hyperref[table:perp_comp_lis]{Table~\ref{table:perp_comp_lis}}, our setting produces lower perplexity across quantization levels and leads to more stable LIS rankings.
+
+\noindent\textbf{Cosine Similarity.}  
+LIS adopts cosine similarity as a lightweight and stable proxy for semantic drift during profiling. All sensitivity metrics are derived by quantifying the directional change between intermediate or final representations before and after layer morphing. Specifically, the cosine similarity between two vectors $\mathbf{a}$ and $\mathbf{b}$ is computed as: \vspace{-5pt}
+\begin{equation}
+\cos(\mathbf{a}, \mathbf{b}) = \frac{\mathbf{a} \cdot \mathbf{b}}{\|\mathbf{a}\| \, \|\mathbf{b}\|}
+\label{eq:cosine}
+\end{equation}
+A higher similarity indicates smaller representational deviation and thus lower sensitivity to swapping.
+
+\begin{table*}[h]
+\caption{Perplexity comparison of LIS using L2 Norm vs. cosine similarity across quantization levels on
+Llama 2 7B with WikiText-2.}\label{table:cosine_l2}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\# Layers Quantized & 1 & 2 & 4 & 8 & 16 & 32 (Fully Quantized) \\ \hline
+LIS - L2 Norm & 5.4733 & 5.4776 & 5.4848 & 5.5021 & 5.5321 & \textbf{5.6002} \\ \hline
+LIS - Cosine Similarity & \textbf{5.4732} & \textbf{5.4743} & \textbf{5.4779} & \textbf{5.4875} & \textbf{5.5215} & \textbf{5.6002} \\ \hline
+\end{tabular}
+\end{table*}
+
+
+\noindent\textbf{Interpreting Layer-level and Model-level Sensitivity.} 
+\textit{Layer Transformation Sensitivity (LTS)} measures the angular distance between a layer's input and output. A high LTS indicates weak transformation, suggesting the layer contributes minimally to representation learning.  
+\textit{Layer Replacement Sensitivity (LRS)} quantifies the similarity between the outputs of the full-precision and quantized versions of the same layer. A high LRS implies low distortion and minimal risk of quality degradation upon replacement. Both LTS and LRS are computed independently of model outputs and remain consistent across input samples, making them robust to dataset shifts.  
+\textit{Model Degradation Sensitivity (MDS)} captures the similarity between model outputs with and without a candidate layer replaced, conditioned on the current swapped set $Q$. A high MDS indicates minimal incremental impact when replacing the layer in context. MDS preserves overall model accuracy during sequential morphing.  
+By combining local (LTS, LRS) and global (MDS) sensitivity metrics, {\system} avoids overfitting to specific calibration and achieves generalizable layer importance rankings across diverse datasets.
+
+\subsection*{A.2 \quad Greedy Selection Policy}
+Due to the combinatorial complexity of searching for the optimal layer swapping order, {\system} adopts a heuristic greedy strategy that incrementally constructs the morphing sequence based on the Layer Importance Score (LIS).
+
+
+\noindent\textbf{Profiling Setting.}
+Following the setup in~\cite{lin2024duquant, shao2023omniquant, ma2024affinequant}, we use a small calibration subset from the WikiText2 dataset, with the sequence length of 2,048. While LIS incorporates static layer-level metrics and model-level output feedback, its design avoids overfitting the specific calibration set. Once computed, the LIS ranking is fixed and reused across deployments, requiring no online re-tuning.
+
+\noindent\textbf{Greedy Selection.}
+{\system} employs a greedy selection policy guided by sensitivity metrics to construct an effective layer morphing sequence. The goal is to minimize cumulative degradation by progressively swapping the least impactful layers based on the LIS. 
+
+\begin{algorithm}[t]
+\caption{Swapping Sequence Profiling Based on Layer Importance Scoring (LIS)}
+\label{alg:lis}
+\begin{algorithmic}[1]
+\Require Full-precision model $\mathcal{M}$, quantized model $\mathcal{M}^Q$, calibration dataset $\mathcal{D}$, params $(\alpha_1, \alpha_2, \beta)$
+\For{each layer $i$}
+    \State Compute $\text{LTS}_i = \text{CosSim}(\text{Input}_i, \text{Output}_i)$
+    \State Compute $\text{LRS}_i = \text{CosSim}(\text{Output}_i, \text{Output}_i^Q)$
+\EndFor
+\State Initialize set of quantized layers $Q \gets \emptyset$
+\For{$t = 1$ to $L$}
+    \For{each unquantized layer $j \notin Q$}
+        \State Temporarily quantize layer $j$ and evaluate model outputs
+        \State Compute $\text{MDS}_j^{(Q)} = \text{CosSim}(f^{(Q)}(x), f^{(Q \cup \{j\})}(x))$
+        \State Compute $\text{LIS}_j = \alpha_1 \cdot \text{LTS}_j + \alpha_2 \cdot \text{LRS}_j + \beta \cdot \text{MDS}_j^{(Q)}$
+    \EndFor
+    \State Select $j^* = \arg\max_j \text{LIS}_j$
+    \State Add $j^*$ to $Q$ and replace corresponding layer in $\mathcal{M}$
+\EndFor
+\Return Ordered layer swap sequence $Q$
+\end{algorithmic}
+\end{algorithm}
+
+As shown in \hyperref[alg:lis]{Algorithm~\ref{alg:lis}}, we first compute two input-independent metrics, LTS and LRS, for each layer using a small calibration dataset. Then, in each iteration, the algorithm evaluates every candidate layer by computing its MDS, conditioned on the current quantized set $Q$. The layer with the highest LIS is selected, added to $Q$, and swapped into the model. This process continues until all layers are ranked. 
+The final sequence is fixed and reused at runtime.
+
+\subsection*{A.3 \quad Evaluation}\label{appendix:eval}
+
+To evaluate the effectiveness and generalizability of the LIS-based layer selection strategy, we compare it against several ordering baselines using perplexity across four models: Vicuna~\cite{vicuna_7b_v1.5}, Llama 2~\cite{touvron2023llama2}, Llama 3~\cite{grattafiori2024llama3}, and CodeLlama~\cite{roziere2023codellama}. 
+The comparison includes the following baselines:
+\emph{Front-to-Back}---layers are swapped sequentially from the input (first layer) to the output (last layer);
+\emph{Back-to-Front}---the reverse order, starting from the final layer and proceeding backward; 
+\emph{Random}---a randomly shuffled layer order, averaged over multiple runs to reduce variance. 
+\vspace{-5pt}
+
+\begin{table*}[ht]
+\centering
+\small
+\caption{Perplexity results on WikiText2 under different layer swapping strategies for Vicuna 7B v1.5, Llama 2 7B, Llama 3 8B, and CodeLlama 34B. Each method is evaluated as the number of quantized (INT4) layers increases from 0 (fully FP16) to 32 or 48 (fully INT4).} \label{tab:perp_results_on_wikitext2}
+\label{table:ppl}
+\begin{tabular}{cc|ccccccc}
+\toprule
+\multirow{2}{*}{\textbf{Model}} & \multirow{2}{*}{\textbf{Method}} & \multicolumn{7}{|c}{\textbf{\# Swapped Decoder Layer}} \\
+ & & \multicolumn{1}{|c}{\textbf{0 (FP16)}} & \multicolumn{1}{c}{\textbf{1}} & \multicolumn{1}{c}{\textbf{2}} & \multicolumn{1}{c}{\textbf{4}} & \multicolumn{1}{c}{\textbf{8}} & \multicolumn{1}{c}{\textbf{16}} & \multicolumn{1}{c}{\textbf{32 (INT4)}} \\
+\midrule
+\multirow{4}{*}{Vicuna 7B} 
+& Front-to-Back & \multirow{4}{*}{\textbf{6.78}} & 6.79 & \textbf{6.78} & \textbf{6.79} & 6.80 & \textbf{6.84} & \multirow{4}{*}{\textbf{6.98}} \\
+& Back-to-Front &                       & 6.82 & 6.83 & 6.84 & 6.86 & 6.91 &            \\
+& Random        &                       & \textbf{6.78} & 6.79 & 6.80 & 6.82 & 6.87 &            \\
+& LIS (ours)           &                       & \textbf{6.78} & \textbf{6.78} & \textbf{6.79} & \textbf{6.79} & \textbf{6.84} &            \\
+\midrule
+\multirow{4}{*}{Llama 2 7B} 
+& Front-to-Back & \multirow{4}{*}{\textbf{5.47}} & \textbf{5.47} & \textbf{5.47} & \textbf{5.48} & 5.50 & 5.54 & \multirow{4}{*}{\textbf{5.60}} \\
+& Back-to-Front &                       & 5.48 & 5.48 & 5.49 & 5.50 & 5.53 &            \\
+& Random        &                       & \textbf{5.47} & 5.48 & \textbf{5.48} & 5.50 & 5.53 &            \\
+& LIS (ours)           &                       & \textbf{5.47} & \textbf{5.47} & \textbf{5.48} & \textbf{5.49} & \textbf{5.52} &            \\
+\midrule
+\multirow{4}{*}{Llama 3 8B} 
+& Front-to-Back & \multirow{4}{*}{\textbf{6.14}} & \textbf{6.15} & 6.16 & 6.19 & 6.23 & 6.34 & \multirow{4}{*}{\textbf{6.53}} \\
+& Back-to-Front &                       & 6.17 & 6.18 & 6.20 & 6.24 & 6.33 &            \\
+& Random        &                       & \textbf{6.15} & 6.16 & \textbf{6.18} & 6.24 & 6.34 &            \\
+& LIS (ours)          &                       & \textbf{6.15} & \textbf{6.15} & \textbf{6.18} & \textbf{6.22} & \textbf{6.32} &            \\
+\midrule
+\multirow{4}{*}{CodeLlama 34B}
+& Front-to-Back & \multirow{4}{*}{\textbf{5.47}} & \textbf{5.47} & \textbf{5.47} & 5.48 & \textbf{5.48} & \textbf{5.49} & \multirow{4}{*}{\textbf{5.53}} \\
+& Back-to-Front &                       & \textbf{5.47} & 5.48 & 5.48 & \textbf{5.48} & \textbf{5.49} &            \\
+& Random        &                       & \textbf{5.47} & \textbf{5.47} & 5.48 & \textbf{5.48} & \textbf{5.49} &       \multirow{2}{*}{\textbf{(48 INT4)}}     \\
+& LIS (ours)          &                       & \textbf{5.47} & \textbf{5.47} & \textbf{5.47} & \textbf{5.48} & \textbf{5.49} &            \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+As shown in \hyperref[table:ppl]{Table~\ref{table:ppl}}, the LIS-based greedy selection strategy achieves strong and consistent perplexity results across all models and layer swapping levels, outperforming or matching heuristic baselines. Notably, the Front-to-Back strategy remains highly competitive, likely due to the model's ability to correct errors introduced in early swapped layers, making them safer to morph first. Due to its simplicity and effectiveness, {\system} adopts Front-to-Back as the default swapping policy when deploying new models or offline profiling is unavailable.
+
+The LIS-based profiling is an optional, offline process that requires no runtime computation. For a 32-layer model, generating the full LIS sequence takes under 15 minutes on a single GPU. The process is efficiently parallelizable and only needs to be performed once per model. Once computed, the LIS ranking is reused during inference without incurring any runtime performance overhead. This design ensures that profiling enhances accuracy without sacrificing {\system}’s practicality in large-scale, latency-sensitive deployments.
+
+
+\section*{B \quad Additional Experimental Results}
+
+\subsection*{B.1 \quad Independence of Layer Quantization Effects}
+\label{appendix:layer_independence}
+
+To demonstrate the independence of layer quantization effects, we conducted a direct validation using Llama 2 7B on the WikiText dataset. We progressively quantized the first $N$ layers ($N = 0, 1, 2, 4, 8, 16$) and measured the additional perplexity increase by further quantizing either layer 19 or layer 24. As shown in \hyperref[tab:independence_of_layer]{Table~\ref{tab:independence_of_layer}}, the added perplexity from quantizing layer 19 remains consistently around 0.0035, regardless of how many earlier layers were already quantized. A similar pattern holds for layer 24 (0.0018-0.0020). This result provides support for the independence of layer-wise quantization effects.
+
+
+
+\begin{table*}[h]
+\caption{Evaluating independence of layer-wise quantization effects on perplexity under different quantization conditions.}
+\label{tab:independence_of_layer}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\textbf{Quantized Layers} & \textbf{None} & \textbf{First 1 Layer} & \textbf{First 2 Layers} & \textbf{First 4} & \textbf{First 8} & \textbf{First 16} \\ \hline
+PPL & 5.472089& 5.473293& 5.474974& 5.484205& 5.503622 &5.539723 \\ \hline
+PPL (+ layer 19 quant.) & 5.475612 &5.476802& 5.478512& 5.487739& 5.507146& 5.543575 \\ \hline
+\textbf{Effect (layer 19)} & \textbf{0.003523} & \textbf{0.003509} & \textbf{0.003538} & \textbf{0.003533} & \textbf{0.003524} & \textbf{0.003852} \\ \hline
+PPL (+ layer 24 quant.) & 5.473969 & 5.475141 & 5.476794 & 5.486121 & 5.505570 & 5.541744 \\ \hline
+\textbf{Effect (layer 24)} & \textbf{0.001880} & \textbf{0.001848} & \textbf{0.001820} & \textbf{0.001916} & \textbf{0.001948} & \textbf{0.002021} \\ \hline
+\end{tabular}
+}
+\end{table*}
+
+
+\subsection*{B.2 \quad A Verbatim Example for Mixed-Precision Serving}\label{appendix:verbatim_example}
+
+{We further conducted a verbatim experiment to show {\system}'s mixed-precision performance using Llama 3 8B Instruct, generating 128 output tokens under different serving scenarios with the following input prompt: \textit{``Zebras are primarily grazers and can subsist on lower-quality vegetation. They are preyed on mainly by lions, and typically flee when threatened but also bite and kick.''}}
+
+{
+\begin{itemize}
+    \item Response (FP16): That's correct! Zebras are indeed primarily grazers, and they are able to survive on a diet of lower-quality vegetation, such as grasses and shrubs. This is because they have a specialized digestive system...
+    \item Response (Mixed-serving case 1): That's correct! Zebras are indeed primarily grazers (FP16), and they are well adapted to survive on a diet of grasses, leaves (W4), and other low-quality vegetation. Their digestive system is designed (FP16)...
+    \item Response (Mixed-serving case 2): That's correct! Zebras are indeed primarily grazers (W4), and they are able to survive on a diet of lower-quality vegetation (FP16). Their digestive system is specially designed to break down and extract nutrients (W4)...
+    \item Response (W4): That's correct! Zebras are indeed primarily grazers, and they are well adapted to survive on a diet of grasses, leaves, and other low-quality vegetation. Their digestive system is designed to break down...
+\end{itemize}
+}
+
+{{\system}'s mixed-precision serving allocates compute budget adaptively, ensuring robust performance without compromising user experience.}
+
+\subsection*{B.3 \quad Effectiveness Across Quantization Algorithms}\label{appendix:effective_across_quant}
+
+{\hyperref[tab:perf_ablation_vicuna]{Table~\ref{tab:perf_ablation_vicuna}} shows the performance of {\system} with AWQ and Uniform INT4 quantization vs. FP16 on Vicuna 7B v1.5, using the QMSum dataset and Azure trace.}
+
+
+\begin{table*}[h]
+\caption{Performance of {\system} with AWQ and Uniform INT4 quantization vs. FP16 on Vicuna 7B v1.5, using the QMSum dataset and Azure trace.} \label{tab:perf_ablation_vicuna}
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Quantization (INT4) & Metric & Static Quantization & {\system} & Full Precision \\
+\hline
+& TTFT P95 (s) & 0.4086 & 0.7281 & 6.2376 \\
+\cline{2-5}
+AWQ & TPOT P99 (s) & 0.0846 & 0.1123 & 0.1384 \\
+\cline{2-5}
+& F1 Score & 11.77 & 12.85 & 13.01 \\
+\hline
+& TTFT P95 (s) & 0.3958 & 0.7034 & 6.2376 \\
+\cline{2-5}
+Uniform & TPOT P99 (s) & 0.0820 & 0.1095 & 0.1384 \\
+\cline{2-5}
+& F1 Score & 11.32 & 12.57 & 13.01 \\
+\hline
+\end{tabular}
+\end{table*}
+
+\section*{C \quad Implementation Details}
+\label{sec:implementation}
+\noindent\textbf{Implementation.}
+{\system} is built on top of SwiftLLM~\cite{swiftllm_github_repo, jiang2024neo_swiftLLM}, with approximately \emph{2,200 lines of Python} and \emph{500 lines of C++/CUDA}. It adds runtime support for dynamic layer swapping and elastic KVC resizing with minimal changes to the scheduler and attention mechanisms, such as {\FlashAttention}~\cite{dao2022flashattention, dao2023flashattention_v2} and {\PagedAttention}~\cite{kwon2023efficient_vllm}, and remains compatible with state-of-the-art LLM inference engines such as vLLM~\cite{kwon2023efficient_vllm}.
+At initialization, full-precision and quantized transformer layer weights (\emph{FP16, W8, W4}) are preloaded into pinned CPU memory, and all \emph{GEMM} kernels are precompiled using dummy data to eliminate runtime compilation overhead. GPU memory regions for each layer are preallocated, enabling in-place weight swapping via \emph{cudaMemcpyAsync} without pointer remapping. For KV cache resizing, we extend {\PagedAttention} to support block-level reallocation and remapping through dynamic memory registration. Morphing and decoding are executed on separate CUDA streams to ensure efficient asynchronization and minimize interference with token generation. 
+
+\noindent\textbf{Experiment Settings.} 
+We evaluate {\system} on four representative open-weight LLMs: Vicuna 7B, Llama 2 7B, Llama 3 8B, and CodeLlama 34B. Models with 7B/8B parameters are run on NVIDIA L4 GPUs (24~GB),
+while the 34B model is evaluated on an NVIDIA A100 GPU (80~GB). For models using Multi-Head Attention (MHA), we set context lengths to 512 for prompts and 256 for responses; for Grouped-Query Attention (GQA) models, we use 1024/512. All models are loaded with pre-quantized AWQ INT4 weights.
+
+\noindent\textbf{Serving Traces.}
+The \textbf{Azure LLM Inference Dataset 2023 trace}~\cite{azure_LLM_inference_trace, patel2024splitwise} is a publicly released dataset capturing anonymized LLM request logs from Azure’s cloud infrastructure. It includes request arrival times, prompt, and output lengths statistics. The dataset is publicly available at \href{https://github.com/Azure/AzurePublicDataset}{\url{https://github.com/Azure/AzurePublicDataset}}. For our evaluation, we sample 72 seconds of traffic with a downscaling factor of $4.75\times$ to match the hardware memory footprint and enable simulation of large-batch request bursts. 
+\textbf{BurstGPT}~\cite{wang2024burstgpt} is a real-world LLM inference workload trace collected from a university campus. It captures naturally occurring burst patterns resulting from student and faculty interactions with deployed chatbots and LLM-based tools. The trace includes detailed request metadata such as arrival timestamps, prompt lengths, and session-level characteristics, enabling realistic simulation of latency-sensitive serving conditions. It is publicly available at \href{https://github.com/HPMLL/BurstGPT}{\url{https://github.com/HPMLL/BurstGPT}}. For our evaluation, we also extract a 72-second segment and apply a $1.75\times$ downscaling factor to simulate saturation-level conditions. This trace is used to benchmark {\system}’s responsiveness and adaptation under real-world burst traffic.
+
+\noindent\textbf{Evaluation Datasets.}
+\textbf{GovReport}~\cite{gov_report} is a long-form summarization dataset consisting of U.S. government reports paired with expert-written summaries. It is publicly available at \href{https://huggingface.co/datasets/launch/gov_report}{\url{https://huggingface.co/datasets/launch/gov\_report}}. We use it to benchmark summarization quality and stress-test long input handling. Average document length exceeds 2,000 tokens, making it suitable for evaluating memory-intensive generation.
+\textbf{QMSum}~\cite{zhong2021qmsum} is a query-based meeting summarization dataset comprising multi-party meeting transcripts with user-specified queries and corresponding abstractive summaries. Available at \href{https://github.com/Yale-LILY/QMSum}{\url{https://github.com/Yale-LILY/QMSum}}, it tests both summarization and task-oriented comprehension under long-context inputs.
+\textbf{DuReader}~\cite{he2017dureader} is a Chinese machine reading comprehension dataset with over human-annotated question-answer pairs from Baidu search logs. It covers open-domain QA with a range of answer formats. We use the English-translated version and evaluate factual correctness. The dataset is hosted at \href{https://github.com/baidu/DuReader}{\url{https://github.com/baidu/DuReader}}.
+\textbf{Multi-News}~\cite{fabbri2019multi} is a multi-document summarization dataset containing news articles from multiple sources clustered around the same event, with human-written summaries. It is accessible at \href{https://github.com/Alex-Fabbri/Multi-News}{\url{https://github.com/Alex-Fabbri/Multi-News}}. This dataset evaluates the model’s ability to synthesize content across multiple documents and is especially useful for benchmarking performance on broad-context summarization.
+
+To construct realistic evaluation workloads, we align request arrival traces--which provide only timestamps and arrival rates--with benchmark datasets that contain task-specific input contexts but no temporal information, pairing each incoming request with a sampled context to form a complete sequence of timestamped, content-rich requests.
+
+
+\section*{D \quad Limitations and Broader Impacts}
+\label{sec:limit_impact}
+
+\noindent\textbf{Limitations.}
+While {\system} is practical and effective for dynamic LLM serving, several limitations remain.
+To support runtime layer swapping, {\system} stores both full-precision and quantized variants in host memory. Although this increases memory usage, the overhead is typically under $2\times$ the model size and is well accommodated by modern LLM serving clusters. Future work may further reduce this cost by streaming layers from SSD to host memory on demand or directly fetching them from SSD via GPUDirect Storage (GDS)~\cite{nvidia_gds}.
+{\system} currently applies morphing at the transformer layer level. While effective, finer-grained adaptation, such as independently adjusting attention and MLP submodules, could unlock additional efficiency and precision flexibility.
+{\system} reacts to system pressure in real time but does not anticipate upcoming surges. Integrating lightweight workload forecasting could enable proactive morphing decisions and further improve responsiveness under bursty traffic.
+
+\noindent\textbf{Broader Impacts.}
+{\system} is designed to improve the efficiency and elasticity of LLM serving under real-world, dynamic workloads. Its ability to reduce tail latency and alleviate memory pressure during high-traffic scenarios enhances the responsiveness and accessibility of language models, especially in environments with constrained compute resources such as edge devices or public-serving infrastructures. By allowing runtime trade-off navigation between accuracy and latency, {\system} enables system designers to align inference behavior with user-facing service priorities, such as delivering faster responses for interactive applications, without requiring permanently quantized models or over-provisioned compute clusters. This flexibility supports broader deployment of LLMs across diverse platforms and use cases, contributing to the democratization of AI capabilities.

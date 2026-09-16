@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "source": {
+    "pdf": "references/morphserve-2506.02006-v2.pdf",
+    "pdf_sha256": "e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30",
+    "arxiv_id": "2506.02006v2",
+    "arxiv_source_sha256": "bd617e0f54c7a27aa8a46ab569fbe7f594c4067099967a864078b9dacdc4406c",
+    "note": "Reported reference values only; never substitute these for measurements. Table numbers follow the supplied PDF, while source labels preserve the LaTeX identifiers."
+  },
+  "headline_claims": {
+    "average_slo_violation_reduction_percent": 92.45,
+    "p95_ttft_speedup_vs_fp16_accuracy_mode_range": [2.2, 3.9],
+    "p95_ttft_speedup_vs_fp16_default_mode_range": [2.9, 15.7],
+    "p95_ttft_speedup_vs_fp16_performance_mode_range": [3.4, 19.5],
+    "quality_degradation_range_percent_all_modes": [0.51, 3.82],
+    "quality_degradation_range_percent_accuracy_mode": [0.11, 2.18],
+    "accuracy_mode_llm_pq_quality_gap_closure_average_percent": 41.3,
+    "accuracy_mode_llm_pq_quality_gap_closure_max_percent": 82.3,
+    "accuracy_mode_p95_ttft_speedup_vs_pyramidkv_average": 1.73,
+    "accuracy_mode_p95_ttft_speedup_vs_pyramidkv_max": 2.4,
+    "maximum_throughput_speedup_vs_fp16": 1.83,
+    "maximum_p99_tpot_reduction_factor": 1.23,
+    "maximum_performance_mode_average_tpot_improvement_factor": 1.17
+  },
+  "table_1_mixed_precision_booksum": {
+    "latex_label": "tab:mixed_precision_long",
+    "model": "Llama 3 8B",
+    "dataset": "BookSum Chapters",
+    "input_tokens": 6000,
+    "output_tokens": 2000,
+    "rows": [
+      {"strategy": "all_w4", "f1": 14.4716, "rouge_l": 12.1598},
+      {"strategy": "first_1k_fp16_last_1k_w4", "f1": 16.6112, "rouge_l": 15.2346},
+      {"strategy": "first_1k_w4_last_1k_fp16", "f1": 14.7101, "rouge_l": 12.3213},
+      {"strategy": "first_512_fp16_middle_1k_w4_last_512_fp16", "f1": 16.0802, "rouge_l": 14.4013},
+      {"strategy": "first_512_w4_middle_1k_fp16_last_512_w4", "f1": 16.0413, "rouge_l": 13.1127},
+      {"strategy": "alternate_256_start_w4", "f1": 15.2634, "rouge_l": 13.0353},
+      {"strategy": "alternate_256_start_fp16", "f1": 16.0012, "rouge_l": 14.0146},
+      {"strategy": "all_fp16", "f1": 17.6458, "rouge_l": 15.4847}
+    ]
+  },
+  "table_2_llama2_dureader_burstgpt": {
+    "latex_label": "tab:perf_ablation_llama2",
+    "model": "Llama 2 7B",
+    "dataset": "DuReader English-translated",
+    "trace": "BurstGPT",
+    "metrics": {
+      "AWQ": {
+        "static": {"p95_ttft_s": 1.1686, "p99_tpot_s": 0.0735, "f1": 25.55},
+        "morphserve": {"p95_ttft_s": 1.2420, "p99_tpot_s": 0.1064, "f1": 27.33},
+        "fp16": {"p95_ttft_s": 5.5223, "p99_tpot_s": 0.1241, "f1": 27.68}
+      },
+      "uniform_int4": {
+        "static": {"p95_ttft_s": 1.1321, "p99_tpot_s": 0.0728, "f1": 24.87},
+        "morphserve": {"p95_ttft_s": 1.2144, "p99_tpot_s": 0.1053, "f1": 26.94},
+        "fp16": {"p95_ttft_s": 5.5223, "p99_tpot_s": 0.1241, "f1": 27.68}
+      }
+    }
+  },
+  "table_8_vicuna_qmsum_azure": {
+    "latex_label": "tab:perf_ablation_vicuna",
+    "model": "Vicuna 7B v1.5",
+    "dataset": "QMSum",
+    "trace": "Azure LLM Inference Dataset 2023",
+    "paper_table_metric": "F1",
+    "metrics": {
+      "AWQ": {
+        "static": {"p95_ttft_s": 0.4086, "p99_tpot_s": 0.0846, "f1": 11.77},
+        "morphserve": {"p95_ttft_s": 0.7281, "p99_tpot_s": 0.1123, "f1": 12.85},
+        "fp16": {"p95_ttft_s": 6.2376, "p99_tpot_s": 0.1384, "f1": 13.01}
+      },
+      "uniform_int4": {
+        "static": {"p95_ttft_s": 0.3958, "p99_tpot_s": 0.0820, "f1": 11.32},
+        "morphserve": {"p95_ttft_s": 0.7034, "p99_tpot_s": 0.1095, "f1": 12.57},
+        "fp16": {"p95_ttft_s": 6.2376, "p99_tpot_s": 0.1384, "f1": 13.01}
+      }
+    }
+  },
+  "table_3_cross_dataset_c4": {
+    "latex_label": "tab:cross_dataset",
+    "calibration": "WikiText-2",
+    "evaluation": "C4 perplexity",
+    "quantized_layers": [1, 2, 4, 8, 16, 32],
+    "rows": {
+      "front_to_back": [7.0793, 7.0822, 7.0933, 7.1119, 7.1524, 7.2463],
+      "back_to_front": [7.0871, 7.0938, 7.1031, 7.1224, 7.1712, 7.2463],
+      "random": [7.0871, 7.0913, 7.1012, 7.1234, 7.1676, 7.2463],
+      "lis": [7.0801, 7.0818, 7.0912, 7.1107, 7.1497, 7.2463]
+    }
+  },
+  "table_4_lis_weights": {
+    "latex_label": "table:perp_comp_lis",
+    "model": "Llama 2 7B",
+    "dataset": "WikiText-2",
+    "quantized_layers": [1, 2, 4, 8, 16, 32],
+    "rows": {
+      "weights_0.33_0.33_0.33": [5.4732, 5.4748, 5.4786, 5.4905, 5.5257, 5.6002],
+      "weights_0.25_0.25_0.5": [5.4732, 5.4743, 5.4779, 5.4875, 5.5215, 5.6002]
+    }
+  },
+  "table_5_cosine_vs_l2": {
+    "latex_label": "table:cosine_l2",
+    "model": "Llama 2 7B",
+    "dataset": "WikiText-2",
+    "quantized_layers": [1, 2, 4, 8, 16, 32],
+    "rows": {
+      "l2": [5.4733, 5.4776, 5.4848, 5.5021, 5.5321, 5.6002],
+      "cosine": [5.4732, 5.4743, 5.4779, 5.4875, 5.5215, 5.6002]
+    }
+  },
+  "table_7_layer_effect_independence": {
+    "latex_label": "tab:independence_of_layer",
+    "model": "Llama 2 7B",
+    "dataset": "WikiText",
+    "first_n_quantized": [0, 1, 2, 4, 8, 16],
+    "base_ppl": [5.472089, 5.473293, 5.474974, 5.484205, 5.503622, 5.539723],
+    "ppl_plus_layer_19": [5.475612, 5.476802, 5.478512, 5.487739, 5.507146, 5.543575],
+    "effect_layer_19": [0.003523, 0.003509, 0.003538, 0.003533, 0.003524, 0.003852],
+    "ppl_plus_layer_24": [5.473969, 5.475141, 5.476794, 5.486121, 5.505570, 5.541744],
+    "effect_layer_24": [0.001880, 0.001848, 0.001820, 0.001916, 0.001948, 0.002021]
+  },
+  "table_6_ordering_wikitext2": {
+    "latex_label": "tab:perp_results_on_wikitext2",
+    "quantized_layers": [0, 1, 2, 4, 8, 16, "fully_quantized"],
+    "fully_quantized_layer_count": {"Vicuna 7B": 32, "Llama 2 7B": 32, "Llama 3 8B": 32, "CodeLlama 34B": 48},
+    "rows": {
+      "Vicuna 7B": {
+        "front_to_back": [6.78, 6.79, 6.78, 6.79, 6.80, 6.84, 6.98],
+        "back_to_front": [6.78, 6.82, 6.83, 6.84, 6.86, 6.91, 6.98],
+        "random": [6.78, 6.78, 6.79, 6.80, 6.82, 6.87, 6.98],
+        "lis": [6.78, 6.78, 6.78, 6.79, 6.79, 6.84, 6.98]
+      },
+      "Llama 2 7B": {
+        "front_to_back": [5.47, 5.47, 5.47, 5.48, 5.50, 5.54, 5.60],
+        "back_to_front": [5.47, 5.48, 5.48, 5.49, 5.50, 5.53, 5.60],
+        "random": [5.47, 5.47, 5.48, 5.48, 5.50, 5.53, 5.60],
+        "lis": [5.47, 5.47, 5.47, 5.48, 5.49, 5.52, 5.60]
+      },
+      "Llama 3 8B": {
+        "front_to_back": [6.14, 6.15, 6.16, 6.19, 6.23, 6.34, 6.53],
+        "back_to_front": [6.14, 6.17, 6.18, 6.20, 6.24, 6.33, 6.53],
+        "random": [6.14, 6.15, 6.16, 6.18, 6.24, 6.34, 6.53],
+        "lis": [6.14, 6.15, 6.15, 6.18, 6.22, 6.32, 6.53]
+      },
+      "CodeLlama 34B": {
+        "front_to_back": [5.47, 5.47, 5.47, 5.48, 5.48, 5.49, 5.53],
+        "back_to_front": [5.47, 5.47, 5.48, 5.48, 5.48, 5.49, 5.53],
+        "random": [5.47, 5.47, 5.47, 5.48, 5.48, 5.49, 5.53],
+        "lis": [5.47, 5.47, 5.47, 5.47, 5.48, 5.49, 5.53]
+      }
+    }
+  },
+  "mechanism_timing_claims": {
+    "llama2_7b_fp16_layer_size_gb_approx": 0.4,
+    "llama2_7b_int4_layer_size_gb_approx": 0.1,
+    "pcie_gen4_bandwidth_gbps_range": [26, 28],
+    "int4_transfer_ms_approx": 4,
+    "fp16_transfer_ms_approx": 16,
+    "complete_int4_swap_ms_approx": 6,
+    "lis_32_layer_profile_minutes_upper_bound": 15
+  }
+}

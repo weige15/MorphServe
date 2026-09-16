@@ -1,0 +1,87 @@
+project: MorphServe evidence-backed reproduction
+status: active
+updated_utc: '2026-09-16T15:31:00Z'
+checkpoint:
+  current: 2
+  name: faithful implementation and profiling
+  checkpoints:
+    - id: 1
+      name: materials and environment audit
+      status: complete
+      evidence:
+        - docs/paper-evidence-brief.md
+        - docs/source-map.md
+        - docs/claim-register.md
+        - docs/author-artifact-audit.md
+        - results/raw/environment.json
+        - sources/remote-audit/
+    - id: 2
+      name: faithful implementation and profiling
+      status: active
+      next_gate: candidate artifact build/import and no-morph viability
+    - id: 3
+      name: correctness and state-preservation tests
+      status: pending
+    - id: 4
+      name: prioritized main experiments and ablations
+      status: pending
+    - id: 5
+      name: final audit and report
+      status: pending
+source_truth:
+  pdf: ../references/morphserve-2506.02006-v2.pdf
+  pdf_sha256: e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30
+  arxiv: 2506.02006v2
+source_status:
+  official_lab_repo:
+    url: https://github.com/ds2-lab/MorphServe
+    commit: 1c42999ded0014717e48c947d13450848cc1b796
+    status: readme_only
+  candidate_project_repo:
+    url: https://github.com/MorphServe/MorphServe
+    commit: 85c4fbf753b6eb47613bdd7ea423c38b48054544
+    status: partial_implementation_authorship_unresolved
+  swiftllm:
+    url: https://github.com/interestingLSY/swiftLLM
+    commit: 682cf9a28f97f7490409981a2f181528f377eb5d
+local_resources:
+  gpu: 7x NVIDIA GeForce RTX 3090 24576 MiB
+  gpu_deviation: paper uses L4 24 GB for 7B/8B and A100 80 GB for 34B
+  host_ram: 125 GiB
+  host_ram_deviation: paper uses 256 GB or 2 TB
+  memlock_limit_kib: 16449624
+  disk_available_approx: 4.4 TiB
+  exact_model_assets:
+    - Llama 3.1 8B base snapshot d04e592bb4f6aa9cfee91e2e20afa771667e1d4b
+    - local Llama 3.1 8B AutoAWQ W4 G128 zero-point derivative
+  supporting_assets:
+    - Llama 3.2 1B Instruct snapshot 9213176726f574b556790deb65791e0c5aa438b6
+  unavailable_paper_models:
+    - Vicuna 7B v1.5
+    - Llama 2 7B
+    - exact Llama 3 8B revision
+    - CodeLlama 34B
+blocked_exact_inputs:
+  - exact 72-second Azure and BurstGPT windows and downscaling operation
+  - request-to-context mapping and seed
+  - English-translated DuReader artifact
+  - exact prompts, splits, decoding, EOS and metric revisions
+  - default/performance/accuracy controller configurations
+  - LLM-PQ and PyramidKV baseline configurations
+  - paper hardware
+  - verified author link for candidate code
+active_hypothesis: >-
+  The candidate project-account artifact contains the core low-bit swap and reclaimed-KV
+  mechanisms but is not runnable unmodified; a minimal, separately labeled package/config
+  normalization can expose those mechanisms without silently redesigning them.
+active_protocol: experiments/candidate-artifact-smoke/protocol.md
+resource_accounting:
+  gpu_experiment_seconds: 0
+  paid_compute_used: false
+  external_uploads: false
+  agent_tokens: tracked_by_runtime_separately
+next_actions:
+  - Execute unmodified candidate package/install/import/build probes and preserve failures.
+  - Create a separate reconstruction tree for minimal packaging/config compatibility fixes.
+  - Add conditioned-MDS Algorithm 1 unit tests and implementation.
+  - Exercise synthetic layer swap and reclaimed-KV mapping before full-model serving.

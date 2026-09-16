@@ -1,0 +1,409 @@
+{
+  "assets": [
+    {
+      "exists": true,
+      "files": [
+        {
+          "bytes": 826,
+          "relative_path": "config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/cccf055d6f8f210387a248c91dc40e0c7a4bafab",
+          "sha256": "54acfad3cffe057640904ca8a1e83525e6551c70c7a04c641f5a9eda0bbf64bd"
+        },
+        {
+          "bytes": 185,
+          "relative_path": "generation_config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/fc9506438b7b55383dc04c0816561442324846c3",
+          "sha256": "e645194d2dd27c86ed34a5a23f306c1a0fd79a42123c26551b7251c700a3379d"
+        },
+        {
+          "bytes": 4976698672,
+          "relative_path": "model-00001-of-00004.safetensors",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/f8b9704ab09cdeb097aa4a0a24bca96f906eec36bad63ab495bc21475058601b",
+          "sha256": "f8b9704ab09cdeb097aa4a0a24bca96f906eec36bad63ab495bc21475058601b"
+        },
+        {
+          "bytes": 4999802720,
+          "relative_path": "model-00002-of-00004.safetensors",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/c28b25e7541751056ee126627e007f8d4288319733285e9f7b17b9ff6eb313f0",
+          "sha256": "c28b25e7541751056ee126627e007f8d4288319733285e9f7b17b9ff6eb313f0"
+        },
+        {
+          "bytes": 4915916176,
+          "relative_path": "model-00003-of-00004.safetensors",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/d8e9504dd4e4a146d484c52a97584ec14dac92237c46b064934af67a85e7d383",
+          "sha256": "d8e9504dd4e4a146d484c52a97584ec14dac92237c46b064934af67a85e7d383"
+        },
+        {
+          "bytes": 1168138808,
+          "relative_path": "model-00004-of-00004.safetensors",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/e4486f35c040f683f7d790354f66c169c109eb9fa0954a4a35d7c458a108405d",
+          "sha256": "e4486f35c040f683f7d790354f66c169c109eb9fa0954a4a35d7c458a108405d"
+        },
+        {
+          "bytes": 23950,
+          "relative_path": "model.safetensors.index.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/0fd8120f1c6acddc268ebc2583058efaf699a771",
+          "sha256": "146776fce3f6db1103aa6f249e65ee5544c5923ce6f971b092eee79aa6e5d37b"
+        },
+        {
+          "bytes": 2183982,
+          "relative_path": "original/tokenizer.model",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55",
+          "sha256": "82e9d31979e92ab929cd544440f129d9ecd797b69e327f80f17e1c50d5551b55"
+        },
+        {
+          "bytes": 73,
+          "relative_path": "special_tokens_map.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/d8cd5076496dbe4be2320312abc10adc43097b81",
+          "sha256": "462d91939dbc37178aa5a3eae7068d1990ccc92e09f288cc71f42cdf139d69cc"
+        },
+        {
+          "bytes": 9085658,
+          "relative_path": "tokenizer.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/f916e71031fa08f3c6ef1680a590c15b52d3cdd9",
+          "sha256": "76e48799b099d43365bd24ccd8ecc5aedac831718da780552f03b0a6eb4412aa"
+        },
+        {
+          "bytes": 50500,
+          "relative_path": "tokenizer_config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/blobs/cb9ec25536e44d86778b10509d3e5bdca459a5cf",
+          "sha256": "8004530facf809ac432114de2a4dcc65fcb632da5ec16d666091aeb6a2ee444a"
+        }
+      ],
+      "path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+      "total_bytes": 16071901550
+    },
+    {
+      "exists": true,
+      "files": [
+        {
+          "bytes": 877,
+          "relative_path": "config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.2-1B-Instruct/blobs/3e3aaf51a035cb5092d9f6827a0dc074657ba88c",
+          "sha256": "2febf68cea25bf4611be02b7536f2488a5ba523bb1134986e3610152abe74fdb"
+        },
+        {
+          "bytes": 189,
+          "relative_path": "generation_config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.2-1B-Instruct/blobs/75ae08310d6d23df373ee2644b497192b3cce6d8",
+          "sha256": "88effbb63300dbbc7390143fbbdd9d9fa50587b37e8bfd16c8c90d4970a74a36"
+        },
+        {
+          "bytes": 2471645608,
+          "relative_path": "model.safetensors",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.2-1B-Instruct/blobs/1ff795ff6a07e6a68085d206fb84417da2f083f68391c2843cd2b8ac6df8538f",
+          "sha256": "1ff795ff6a07e6a68085d206fb84417da2f083f68391c2843cd2b8ac6df8538f"
+        },
+        {
+          "bytes": 296,
+          "relative_path": "special_tokens_map.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.2-1B-Instruct/blobs/02ee80b6196926a5ad790a004d9efd6ab1ba6542",
+          "sha256": "6f38c73729248f6c127296386e3cdde96e254636cc58b4169d3fd32328d9a8ec"
+        },
+        {
+          "bytes": 9085657,
+          "relative_path": "tokenizer.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.2-1B-Instruct/blobs/5cc5f00a5b203e90a27a3bd60d1ec393b07971e8",
+          "sha256": "79e3e522635f3171300913bb421464a87de6222182a0570b9b2ccba2a964b2b4"
+        },
+        {
+          "bytes": 54528,
+          "relative_path": "tokenizer_config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.2-1B-Instruct/blobs/4ff488a165e900e5129cda7c20ab32d568d2a475",
+          "sha256": "9823dcfdc1121869029da45192238e85cf44f0b232a6d9dc20e4fe6f4242a14e"
+        }
+      ],
+      "path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.2-1B-Instruct/snapshots/9213176726f574b556790deb65791e0c5aa438b6",
+      "total_bytes": 2480787155
+    },
+    {
+      "exists": true,
+      "files": [
+        {
+          "bytes": 1019,
+          "relative_path": "config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp/config.json",
+          "sha256": "f43d421c9be84ac8d666ca5db2144ae4286c26069501040690141e8236d61910"
+        },
+        {
+          "bytes": 180,
+          "relative_path": "generation_config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp/generation_config.json",
+          "sha256": "ff430424d2a41cb066ce82b53358d55f1d142995223fb23e3f634736f2f1aa8b"
+        },
+        {
+          "bytes": 3997272472,
+          "relative_path": "model-00001-of-00002.safetensors",
+          "resolved_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp/model-00001-of-00002.safetensors",
+          "sha256": "ff2c33ee642bfbc846f830a606a62ee837eec248c58d10bce1631ff4d32220e4"
+        },
+        {
+          "bytes": 1730665920,
+          "relative_path": "model-00002-of-00002.safetensors",
+          "resolved_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp/model-00002-of-00002.safetensors",
+          "sha256": "68a024d7310d2d9fa14eb1ad0941b3c179adddf0cb7f006681ce9cf62d5a5d65"
+        },
+        {
+          "bytes": 60512,
+          "relative_path": "model.safetensors.index.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp/model.safetensors.index.json",
+          "sha256": "3f15d6929b622d055c487feaefb17767dd1a36ded8a46aa63a751b331e5f0684"
+        },
+        {
+          "bytes": 301,
+          "relative_path": "special_tokens_map.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp/special_tokens_map.json",
+          "sha256": "cc2e013b7545f183ef03e079a3c91c6f364fa37e4068c512d7dd843e59024535"
+        },
+        {
+          "bytes": 17209920,
+          "relative_path": "tokenizer.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp/tokenizer.json",
+          "sha256": "6b9e4e7fb171f92fd137b777cc2714bf87d11576700a1dcd7a399e7bbe39537b"
+        },
+        {
+          "bytes": 50526,
+          "relative_path": "tokenizer_config.json",
+          "resolved_path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp/tokenizer_config.json",
+          "sha256": "babefc68107163310a6cb953878ee7c32e45979729943d291f2604ad9d264793"
+        }
+      ],
+      "path": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp",
+      "total_bytes": 5745260850
+    }
+  ],
+  "captured_at_utc": "2026-09-16T15:25:22Z",
+  "commands": {
+    "df": {
+      "command": [
+        "df",
+        "-B1",
+        "."
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Filesystem                    1B-blocks           Used     Available Use% Mounted on\n192.168.88.100:/nfs/home 35860569849856 29472101236736 4768264093696  87% /nfs/home\n"
+    },
+    "free": {
+      "command": [
+        "free",
+        "-b"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "               total        used        free      shared  buff/cache   available\nMem:     134755336192 11348410368  5988999168    37531648 119285547008 123406925824\nSwap:     8589930496   954990592  7634939904\n"
+    },
+    "lscpu": {
+      "command": [
+        "lscpu"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  48\nOn-line CPU(s) list:                     0-47\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Xeon(R) Silver 4214R CPU @ 2.40GHz\nCPU family:                              6\nModel:                                   85\nThread(s) per core:                      2\nCore(s) per socket:                      12\nSocket(s):                               2\nStepping:                                7\nCPU(s) scaling MHz:                      33%\nCPU max MHz:                             3500.0000\nCPU min MHz:                             1000.0000\nBogoMIPS:                                4800.00\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l3 cdp_l3 intel_ppin ssbd mba ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm mpx rdt_a avx512f avx512dq rdseed adx smap clflushopt clwb intel_pt avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local dtherm ida arat pln pts hwp hwp_act_window hwp_epp hwp_pkg_req vnmi pku ospke avx512_vnni md_clear flush_l1d arch_capabilities ibpb_exit_to_user\nVirtualization:                          VT-x\nL1d cache:                               768 KiB (24 instances)\nL1i cache:                               768 KiB (24 instances)\nL2 cache:                                24 MiB (24 instances)\nL3 cache:                                33 MiB (2 instances)\nNUMA node(s):                            2\nNUMA node0 CPU(s):                       0-11,24-35\nNUMA node1 CPU(s):                       12-23,36-47\nVulnerability Gather data sampling:      Mitigation; Microcode\nVulnerability Indirect target selection: Mitigation; Aligned branch/return thunks\nVulnerability Itlb multihit:             KVM: Mitigation: VMX disabled\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Mitigation; Clear CPU buffers; SMT vulnerable\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Mitigation; Enhanced IBRS\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS SW sequence; BHI SW loop, KVM SW loop\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Mitigation; TSX disabled\nVulnerability Vmscape:                   Mitigation; IBPB before exit to userspace\n"
+    },
+    "nvcc": {
+      "command": [
+        "nvcc",
+        "--version"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2024 NVIDIA Corporation\nBuilt on Tue_Feb_27_16:19:38_PST_2024\nCuda compilation tools, release 12.4, V12.4.99\nBuild cuda_12.4.r12.4/compiler.33961263_0\n"
+    },
+    "nvidia_smi_full": {
+      "command": [
+        "nvidia-smi"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Wed Sep 16 23:25:21 2026       \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.159.03             Driver Version: 580.159.03     CUDA Version: 13.0     |\n+-----------------------------------------+------------------------+----------------------+\n| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |\n| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |\n|                                         |                        |               MIG M. |\n|=========================================+========================+======================|\n|   0  NVIDIA GeForce RTX 3090        On  |   00000000:1D:00.0 Off |                  N/A |\n| 30%   32C    P8             30W /  275W |       4MiB /  24576MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n|   1  NVIDIA GeForce RTX 3090        On  |   00000000:1E:00.0 Off |                  N/A |\n| 30%   33C    P8             23W /  275W |       4MiB /  24576MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n|   2  NVIDIA GeForce RTX 3090        On  |   00000000:20:00.0 Off |                  N/A |\n| 30%   32C    P8             30W /  275W |       4MiB /  24576MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n|   3  NVIDIA GeForce RTX 3090        On  |   00000000:21:00.0 Off |                  N/A |\n| 30%   28C    P8             28W /  275W |       4MiB /  24576MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n|   4  NVIDIA GeForce RTX 3090        On  |   00000000:22:00.0 Off |                  N/A |\n| 30%   27C    P8             27W /  275W |       4MiB /  24576MiB |      0%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n|   5  NVIDIA GeForce RTX 3090        On  |   00000000:23:00.0 Off |                  N/A |\n| 39%   77C    P2            274W /  275W |   10696MiB /  24576MiB |    100%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n|   6  NVIDIA GeForce RTX 3090        On  |   00000000:24:00.0 Off |                  N/A |\n| 40%   78C    P2            273W /  275W |    8396MiB /  24576MiB |    100%      Default |\n|                                         |                        |                  N/A |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processes:                                                                              |\n|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |\n|        ID   ID                                                               Usage      |\n|=========================================================================================|\n|    5   N/A  N/A         3265592      C   python                                10686MiB |\n|    6   N/A  N/A         3267469      C   python                                 8386MiB |\n+-----------------------------------------------------------------------------------------+\n"
+    },
+    "nvidia_smi_processes": {
+      "command": [
+        "nvidia-smi",
+        "--query-compute-apps=gpu_uuid,pid,process_name,used_memory",
+        "--format=csv,noheader"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "GPU-f11c2303-9ae6-0a80-c02f-18cdaafc1ec9, 3265592, python, 10686 MiB\nGPU-c57c604b-c51a-e97a-81f6-5e32fed68688, 3267469, python, 8386 MiB\n"
+    },
+    "nvidia_topology": {
+      "command": [
+        "nvidia-smi",
+        "topo",
+        "-m"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "\t\u001b[4mGPU0\tGPU1\tGPU2\tGPU3\tGPU4\tGPU5\tGPU6\tCPU Affinity\tNUMA Affinity\tGPU NUMA ID\u001b[0m\nGPU0\t X \tPIX\tPIX\tPXB\tPXB\tPXB\tPXB\t0-11,24-35\t0\t\tN/A\nGPU1\tPIX\t X \tPIX\tPXB\tPXB\tPXB\tPXB\t0-11,24-35\t0\t\tN/A\nGPU2\tPIX\tPIX\t X \tPXB\tPXB\tPXB\tPXB\t0-11,24-35\t0\t\tN/A\nGPU3\tPXB\tPXB\tPXB\t X \tPIX\tPIX\tPIX\t0-11,24-35\t0\t\tN/A\nGPU4\tPXB\tPXB\tPXB\tPIX\t X \tPIX\tPIX\t0-11,24-35\t0\t\tN/A\nGPU5\tPXB\tPXB\tPXB\tPIX\tPIX\t X \tPIX\t0-11,24-35\t0\t\tN/A\nGPU6\tPXB\tPXB\tPXB\tPIX\tPIX\tPIX\t X \t0-11,24-35\t0\t\tN/A\n\nLegend:\n\n  X    = Self\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\n  PIX  = Connection traversing at most a single PCIe bridge\n  NV#  = Connection traversing a bonded set of # NVLinks\n"
+    },
+    "pip_freeze": {
+      "command": [
+        "/nfs/home/s314511048/precision-batching/.venv/bin/python",
+        "-m",
+        "pip",
+        "freeze"
+      ],
+      "returncode": 1,
+      "stderr": "/nfs/home/s314511048/precision-batching/.venv/bin/python: No module named pip\n",
+      "stdout": ""
+    },
+    "ulimit_all": {
+      "command": [
+        "bash",
+        "-lc",
+        "ulimit -a"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "real-time non-blocking time  (microseconds, -R) unlimited\ncore file size              (blocks, -c) 0\ndata seg size               (kbytes, -d) unlimited\nscheduling priority                 (-e) 0\nfile size                   (blocks, -f) unlimited\npending signals                     (-i) 513724\nmax locked memory           (kbytes, -l) 16449624\nmax memory size             (kbytes, -m) unlimited\nopen files                          (-n) 1048576\npipe size                (512 bytes, -p) 8\nPOSIX message queues         (bytes, -q) 819200\nreal-time priority                  (-r) 0\nstack size                  (kbytes, -s) 8192\ncpu time                   (seconds, -t) unlimited\nmax user processes                  (-u) 513724\nvirtual memory              (kbytes, -v) unlimited\nfile locks                          (-x) unlimited\n"
+    },
+    "ulimit_memlock": {
+      "command": [
+        "bash",
+        "-lc",
+        "ulimit -l"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "16449624\n"
+    },
+    "uname": {
+      "command": [
+        "uname",
+        "-a"
+      ],
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "Linux basic-2 6.8.0-124-generic #124-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 13:00:45 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux\n"
+    }
+  },
+  "cwd": "/nfs/home/s314511048/MorphServe",
+  "environment": {
+    "HF_HOME": "/nfs/home/s314511048/.cache/huggingface"
+  },
+  "executables": {
+    "git": "/usr/bin/git",
+    "mutool": "/usr/bin/mutool",
+    "nvcc": "/usr/local/cuda-12.4/bin/nvcc",
+    "nvidia-smi": "/usr/bin/nvidia-smi",
+    "python": null,
+    "python3": "/usr/bin/python3",
+    "uv": "/nfs/home/s314511048/.local/bin/uv"
+  },
+  "gpus": [
+    {
+      "current_link_speed": "2.5 GT/s PCIe",
+      "current_link_width": "16",
+      "driver_version": "580.159.03",
+      "index": "0",
+      "max_link_speed": "16.0 GT/s PCIe",
+      "max_link_width": "16",
+      "memory_total_mib": "24576",
+      "name": "NVIDIA GeForce RTX 3090",
+      "pci_bus_id": "00000000:1D:00.0"
+    },
+    {
+      "current_link_speed": "2.5 GT/s PCIe",
+      "current_link_width": "16",
+      "driver_version": "580.159.03",
+      "index": "1",
+      "max_link_speed": "16.0 GT/s PCIe",
+      "max_link_width": "16",
+      "memory_total_mib": "24576",
+      "name": "NVIDIA GeForce RTX 3090",
+      "pci_bus_id": "00000000:1E:00.0"
+    },
+    {
+      "current_link_speed": "2.5 GT/s PCIe",
+      "current_link_width": "16",
+      "driver_version": "580.159.03",
+      "index": "2",
+      "max_link_speed": "16.0 GT/s PCIe",
+      "max_link_width": "16",
+      "memory_total_mib": "24576",
+      "name": "NVIDIA GeForce RTX 3090",
+      "pci_bus_id": "00000000:20:00.0"
+    },
+    {
+      "current_link_speed": "2.5 GT/s PCIe",
+      "current_link_width": "16",
+      "driver_version": "580.159.03",
+      "index": "3",
+      "max_link_speed": "16.0 GT/s PCIe",
+      "max_link_width": "16",
+      "memory_total_mib": "24576",
+      "name": "NVIDIA GeForce RTX 3090",
+      "pci_bus_id": "00000000:21:00.0"
+    },
+    {
+      "current_link_speed": "2.5 GT/s PCIe",
+      "current_link_width": "16",
+      "driver_version": "580.159.03",
+      "index": "4",
+      "max_link_speed": "16.0 GT/s PCIe",
+      "max_link_width": "16",
+      "memory_total_mib": "24576",
+      "name": "NVIDIA GeForce RTX 3090",
+      "pci_bus_id": "00000000:22:00.0"
+    },
+    {
+      "current_link_speed": "8.0 GT/s PCIe",
+      "current_link_width": "16",
+      "driver_version": "580.159.03",
+      "index": "5",
+      "max_link_speed": "16.0 GT/s PCIe",
+      "max_link_width": "16",
+      "memory_total_mib": "24576",
+      "name": "NVIDIA GeForce RTX 3090",
+      "pci_bus_id": "00000000:23:00.0"
+    },
+    {
+      "current_link_speed": "8.0 GT/s PCIe",
+      "current_link_width": "16",
+      "driver_version": "580.159.03",
+      "index": "6",
+      "max_link_speed": "16.0 GT/s PCIe",
+      "max_link_width": "16",
+      "memory_total_mib": "24576",
+      "name": "NVIDIA GeForce RTX 3090",
+      "pci_bus_id": "00000000:24:00.0"
+    }
+  ],
+  "hostname": "basic-2",
+  "packages": {
+    "accelerate": "1.15.0",
+    "awq": "unavailable: ModuleNotFoundError: No module named 'awq'",
+    "datasets": "3.6.0",
+    "evaluate": "unavailable: ModuleNotFoundError: No module named 'evaluate'",
+    "ray": "2.58.0",
+    "safetensors": "0.8.0",
+    "torch": "2.4.0+cu121",
+    "transformers": "4.51.3",
+    "triton": "3.0.0",
+    "vllm_flash_attn": "2.6.2"
+  },
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.39",
+  "python": {
+    "executable": "/nfs/home/s314511048/precision-batching/.venv/bin/python",
+    "version": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]"
+  },
+  "schema_version": 1,
+  "torch": {
+    "cuda_available": true,
+    "cuda_device_count": 7,
+    "cuda_runtime": "12.1",
+    "cudnn": 90100,
+    "devices": [
+      "NVIDIA GeForce RTX 3090",
+      "NVIDIA GeForce RTX 3090",
+      "NVIDIA GeForce RTX 3090",
+      "NVIDIA GeForce RTX 3090",
+      "NVIDIA GeForce RTX 3090",
+      "NVIDIA GeForce RTX 3090",
+      "NVIDIA GeForce RTX 3090"
+    ],
+    "version": "2.4.0+cu121"
+  }
+}
