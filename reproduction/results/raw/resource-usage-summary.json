@@ -1,9 +1,9 @@
 {
   "definition": "Sum of saved test/run process wall intervals only; includes load/JIT/execution but excludes environment install/build and is not CUDA kernel time or exclusive GPU allocation time.",
-  "failed_records": 10,
-  "process_wall_seconds_total": 761.584550348,
-  "process_wall_seconds_with_gpu_snapshots": 761.584550348,
-  "record_count": 22,
+  "failed_records": 12,
+  "process_wall_seconds_total": 807.058078905,
+  "process_wall_seconds_with_gpu_snapshots": 807.058078905,
+  "record_count": 25,
   "records": [
     {
       "exit_code": 1,
@@ -16,6 +16,24 @@
       "gpu_snapshot_present": true,
       "path": "experiments/active-kv-switch/results-attempt-2/wall-time.json",
       "process_wall_seconds": 43.804177458
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/async-layer-transfer/alignment-results/wall-time.json",
+      "process_wall_seconds": 2.6156485
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/async-layer-transfer/alignment-results-attempt-1/wall-time.json",
+      "process_wall_seconds": 2.840274872
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/async-layer-transfer/full-model-results-attempt-1/wall-time.json",
+      "process_wall_seconds": 40.017605185
     },
     {
       "exit_code": 0,
@@ -139,6 +157,6 @@
     }
   ],
   "schema_version": 1,
-  "successful_records": 12,
+  "successful_records": 13,
   "unknown_exit_records": 0
 }
