@@ -1,0 +1,80 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([8, 32, 8, 16, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([8, 32, 8, 16, 128])
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.01 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.36 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    1003.46 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    7.10 ms.
+[PagedAttention-Serving] Total time: 1010.92 ms.
+
+[LlamaTransformerLayer-Serving] Layer 0 serving time exceeded 0.5 s with 1.15 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       140.73 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 140.79 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    1011.12 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1151.91 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 0.95 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.04 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    947.30 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.07 ms.
+[PagedAttention-Serving] Total time: 947.40 ms.
+
+[LlamaTransformerLayer-Serving] Layer 1 serving time exceeded 0.5 s with 1.09 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       143.79 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 143.84 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    947.56 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1091.41 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 1.06 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.04 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    1061.03 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.07 ms.
+[PagedAttention-Serving] Total time: 1061.13 ms.
+
+[LlamaTransformerLayer-Serving] Layer 2 serving time exceeded 0.5 s with 1.19 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       131.16 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 131.20 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    1061.30 ms.
+[LlamaTransformerLayer-Serving] Total time:                  1192.50 ms.
+
+{
+  "gate": {
+    "submit_span_under_100ms": true,
+    "all_complete": true,
+    "all_ids_once": true,
+    "required_metadata": true,
+    "final_kv_fully_free": true,
+    "preemptions_zero": true,
+    "summary_regenerates": true
+  },
+  "summary": {
+    "schema_version": 1,
+    "request_count": 3,
+    "completed_count": 3,
+    "error_count": 0,
+    "timeout_count": 0,
+    "submitted_ids": [
+      "syn-0",
+      "syn-1",
+      "syn-2"
+    ],
+    "total_emitted_tokens": 9,
+    "p95_ttft_s": 0.18464389559812844,
+    "p99_tpot_s": 3.6352927813422866,
+    "percentile_definition": "Hyndman-Fan type 7 linear interpolation over per-request TTFT and per-token TPOT intervals"
+  },
+  "submit_times": [
+    0.00014337897300720215,
+    0.01096562691964209,
+    0.021242835908196867
+  ]
+}

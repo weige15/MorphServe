@@ -1,0 +1,322 @@
+{
+  "gate": {
+    "all_complete": true,
+    "all_ids_once": true,
+    "final_kv_fully_free": true,
+    "preemptions_zero": true,
+    "required_metadata": true,
+    "submit_span_under_100ms": true,
+    "summary_regenerates": true
+  },
+  "metadata": {
+    "classification": "modified-condition synthetic replay",
+    "config": {
+      "block_size": 16,
+      "classification": "modified-condition synthetic replay",
+      "deviations": [
+        "Synthetic arrivals, not Azure or BurstGPT",
+        "Short prompts/outputs, not paper 1024/512",
+        "Single worker and token-step serialization, no continuous batching",
+        "No MorphServe controller actions; accounting baseline only"
+      ],
+      "frozen_before_gpu_outcomes": true,
+      "model": "local Llama 3.1 8B base",
+      "precision": "FP16 only",
+      "request_timeout_s": 120,
+      "requests": [
+        {
+          "output_len": 3,
+          "prompt": "Life blooms like a flower, far away",
+          "reference": null,
+          "request_id": "syn-0",
+          "scheduled_s": 0.0
+        },
+        {
+          "output_len": 3,
+          "prompt": "The quick brown fox jumps over",
+          "reference": null,
+          "request_id": "syn-1",
+          "scheduled_s": 0.01
+        },
+        {
+          "output_len": 3,
+          "prompt": "In a distant future, humanity",
+          "reference": null,
+          "request_id": "syn-2",
+          "scheduled_s": 0.02
+        }
+      ]
+    },
+    "final_kv_capacity": 8,
+    "final_kv_free": 8,
+    "init_seconds": 14.25021760596428,
+    "schema_version": 1,
+    "summary": {
+      "completed_count": 3,
+      "error_count": 0,
+      "p95_ttft_s": 0.18464389559812844,
+      "p99_tpot_s": 3.6352927813422866,
+      "percentile_definition": "Hyndman-Fan type 7 linear interpolation over per-request TTFT and per-token TPOT intervals",
+      "request_count": 3,
+      "schema_version": 1,
+      "submitted_ids": [
+        "syn-0",
+        "syn-1",
+        "syn-2"
+      ],
+      "timeout_count": 0,
+      "total_emitted_tokens": 9
+    },
+    "warmup_excluded": true,
+    "warmup_seconds": 4.586611418053508
+  },
+  "passed": true,
+  "records": [
+    {
+      "actual_submit_s": 0.00014337897300720215,
+      "adapter_events": [
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 1,
+          "precision": "FP16",
+          "preemptions": 0
+        },
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 3,
+          "precision": "FP16",
+          "preemptions": 0
+        },
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 3,
+          "precision": "FP16",
+          "preemptions": 0
+        }
+      ],
+      "completion_s": 3.8204415870131925,
+      "error": null,
+      "first_token_s": 0.07547565700951964,
+      "mean_tpot_s": 1.8507594079710543,
+      "metadata": {
+        "generated_text": " from the city",
+        "kv_samples": [
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 1,
+            "precision": "FP16",
+            "preemptions": 0
+          },
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 3,
+            "precision": "FP16",
+            "preemptions": 0
+          },
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 3,
+            "precision": "FP16",
+            "preemptions": 0
+          }
+        ],
+        "precision_changes": [],
+        "preemptions": 0,
+        "queue_delays_s": [
+          3.832043148577213e-06,
+          0.13693227397743613,
+          0.04280107200611383
+        ],
+        "queued_time_s": 0.17973717802669853
+      },
+      "output_len": 3,
+      "prompt": "Life blooms like a flower, far away",
+      "reference": null,
+      "request_id": "syn-0",
+      "scheduled_s": 0.0,
+      "scheduled_ttft_s": 0.07547565700951964,
+      "submit_lag_s": 0.00014337897300720215,
+      "timed_out": false,
+      "token_count": 3,
+      "token_ids": [
+        505,
+        279,
+        3363
+      ],
+      "token_timestamps_s": [
+        0.07547565700951964,
+        3.712790895951912,
+        3.7769944729516283
+      ],
+      "tpot_intervals_s": [
+        3.637315238942392,
+        0.06420357699971646
+      ],
+      "ttft_s": 0.07533227803651243
+    },
+    {
+      "actual_submit_s": 0.01096562691964209,
+      "adapter_events": [
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 2,
+          "precision": "FP16",
+          "preemptions": 0
+        },
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 3,
+          "precision": "FP16",
+          "preemptions": 0
+        },
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 3,
+          "precision": "FP16",
+          "preemptions": 0
+        }
+      ],
+      "completion_s": 3.8210404879646376,
+      "error": null,
+      "first_token_s": 0.13728031096979976,
+      "mean_tpot_s": 1.8305317420163192,
+      "metadata": {
+        "generated_text": " the lazy dog",
+        "kv_samples": [
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 2,
+            "precision": "FP16",
+            "preemptions": 0
+          },
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 3,
+            "precision": "FP16",
+            "preemptions": 0
+          },
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 3,
+            "precision": "FP16",
+            "preemptions": 0
+          }
+        ],
+        "precision_changes": [],
+        "preemptions": 0,
+        "queue_delays_s": [
+          0.06454467494040728,
+          3.575521501014009,
+          0.04286699905060232
+        ],
+        "queued_time_s": 3.6829331750050187
+      },
+      "output_len": 3,
+      "prompt": "The quick brown fox jumps over",
+      "reference": null,
+      "request_id": "syn-1",
+      "scheduled_s": 0.01,
+      "scheduled_ttft_s": 0.12728031096979975,
+      "submit_lag_s": 0.0009656269196420906,
+      "timed_out": false,
+      "token_count": 3,
+      "token_ids": [
+        279,
+        16053,
+        5679
+      ],
+      "token_timestamps_s": [
+        0.13728031096979976,
+        3.734146397910081,
+        3.798343795002438
+      ],
+      "tpot_intervals_s": [
+        3.596866086940281,
+        0.06419739709235728
+      ],
+      "ttft_s": 0.12631468405015767
+    },
+    {
+      "actual_submit_s": 0.021242835908196867,
+      "adapter_events": [
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 3,
+          "precision": "FP16",
+          "preemptions": 0
+        },
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 3,
+          "precision": "FP16",
+          "preemptions": 0
+        },
+        {
+          "kv_capacity": 8,
+          "kv_occupancy": 3,
+          "precision": "FP16",
+          "preemptions": 0
+        }
+      ],
+      "completion_s": 3.8215825589140877,
+      "error": null,
+      "first_token_s": 0.2123677550116554,
+      "mean_tpot_s": 1.8036416364484467,
+      "metadata": {
+        "generated_text": " has been driven",
+        "kv_samples": [
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 3,
+            "precision": "FP16",
+            "preemptions": 0
+          },
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 3,
+            "precision": "FP16",
+            "preemptions": 0
+          },
+          {
+            "kv_capacity": 8,
+            "kv_occupancy": 3,
+            "precision": "FP16",
+            "preemptions": 0
+          }
+        ],
+        "precision_changes": [],
+        "preemptions": 0,
+        "queue_delays_s": [
+          0.11606815201230347,
+          3.521786830970086,
+          0.042781850905157626
+        ],
+        "queued_time_s": 3.6806368338875473
+      },
+      "output_len": 3,
+      "prompt": "In a distant future, humanity",
+      "reference": null,
+      "request_id": "syn-2",
+      "scheduled_s": 0.02,
+      "scheduled_ttft_s": 0.1923677550116554,
+      "submit_lag_s": 0.001242835908196866,
+      "timed_out": false,
+      "token_count": 3,
+      "token_ids": [
+        706,
+        1027,
+        16625
+      ],
+      "token_timestamps_s": [
+        0.2123677550116554,
+        3.7555796509841457,
+        3.8196510279085487
+      ],
+      "tpot_intervals_s": [
+        3.5432118959724903,
+        0.06407137692440301
+      ],
+      "ttft_s": 0.19112491910345852
+    }
+  ]
+}
