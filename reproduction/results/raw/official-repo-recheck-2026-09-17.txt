@@ -1,0 +1,12 @@
+Captured: 2026-09-17T02:57:39+08:00
+
+$ git ls-remote --heads --tags https://github.com/ds2-lab/MorphServe.git
+1c42999ded0014717e48c947d13450848cc1b796	refs/heads/main
+
+$ GET https://api.github.com/repos/ds2-lab/MorphServe/branches
+main 1c42999ded0014717e48c947d13450848cc1b796
+
+$ GET https://api.github.com/repos/ds2-lab/MorphServe/releases
+release_count 0
+
+Conclusion: no new public branch, tag, release, or commit since the pinned audit.

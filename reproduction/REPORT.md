@@ -65,7 +65,7 @@ Evidence: `experiments/candidate-fp16-baseline/results-attempt-3/metrics.json`.
 | Blocking FP16 restore wall | 58.55 ms |
 | Paper example (different Llama 2/L4-like PCIe Gen4 condition) | ≈4/16 ms transfer; ≈6 ms complete W4 |
 
-The local timing does not reproduce the paper examples and includes stream creation/synchronization/reconstruction. No overlap timeline has yet established hidden stall.
+The original local timing does not reproduce the paper examples and includes stream creation/synchronization/reconstruction. A later independent persistent-stream path passes small-region event ordering, but no full-layer overlap timeline has yet established hidden stall.
 
 Evidence: `experiments/autoawq-layer-switch/results/metrics.json`.
 
@@ -112,6 +112,14 @@ Two-request ownership pilot:
 
 Evidence: `experiments/real-executor/` and `experiments/multirequest-ownership/`.
 
+### 4.6 Asynchronous copy seam
+
+The immutable candidate remains blocking (`cudaMemcpyAsync` followed by immediate stream synchronization). The independent reconstruction now exposes the registered GPU layer region, prebuilds FP16/W4 wrapper variants, and queues pinned copies on one persistent morphing stream. A model-wide last-forward event protects old use; the decode stream waits only immediately before the replaced layer.
+
+A 4 MiB correctness pilot enqueued in 0.222 ms while its injected prior-use event was unfinished; CUDA copy time was 0.605 ms, address was unchanged, and all bytes matched. The model-use barrier and invalid-source checks passed. This is supporting evidence only; the frozen three-repeat full-layer/decode pilot is awaiting an uncontended GPU with sufficient headroom.
+
+Evidence: `experiments/async-layer-transfer/`.
+
 ## 5. Claim-by-claim status
 
 | ID | Paper claim/location | Reported | Observed/agreement | Classification and evidence |
@@ -127,7 +135,7 @@ Evidence: `experiments/real-executor/` and `experiments/multirequest-ownership/`
 | H9 | Fig. 6 throughput | up to 1.83× FP16 | No valid common-engine RPS sweep | **Unverified** |
 | H10 | Fig. 7 TPOT | P99 up to 1.23×; average up to 1.17× | Synthetic replay attempt 1 JIT-contaminated; corrected retry resource-blocked | **Remaining uncertainty** |
 | H11 | §4.3 transfer | ≈4 ms W4, ≈16 ms FP16 | 15.67/58.55 ms blocking modified operation | **Tested-not-reproduced under modified conditions** |
-| H12 | §4.3 complete swap/overlap | ≈6 ms, hidden | 15.67 ms blocking, no proven overlap | **Tested-not-reproduced** |
+| H12 | §4.3 complete swap/overlap | ≈6 ms, hidden | Candidate 15.67 ms blocking; independent 4-MiB async seam passes, full-layer timeline pending | **Modified-condition partial; numerical claim unverified** |
 | H13 | Appendix A profile time | <15 min for 32 layers | 8-layer inner 58.14 s; full simultaneous pin blocked | **Full claim unverified** |
 | H14 | Table 1 BookSum schedules | exact 8-row F1/ROUGE-L | Exact sample/prompts/checkpoint unavailable | **Blocked exact** |
 | H15 | PDF Table 2 AWQ/DuReader/Burst | FP16 `[5.5223,.1241,27.68]`; AWQ `[1.1686,.0735,25.55]`; MorphServe `[1.2420,.1064,27.33]` | No exact Llama 2/translated DuReader/window/controller | **Blocked exact** |
@@ -139,7 +147,7 @@ Evidence: `experiments/real-executor/` and `experiments/multirequest-ownership/`
 | H21 | Table 7 layer independence | layer-19/24 PPL effects | Exact Llama 2 assets unavailable | **Blocked exact** |
 | H22 | Table 6 ordering | four models, CodeLlama 48 endpoint | 8-layer local order only | **Modified-condition partial** |
 | H23 | §4.2/Algorithm 1 | conditioned argmax LIS | 8 layers, 36 sets, saved real order | **Modified-condition expanded reproduction** |
-| H24 | §4.3 in-place W4/FP16 | real packed same-address swapping | Real W4 same base; exact restore; zero allocator delta | **Modified-condition partial** |
+| H24 | §4.3 in-place W4/FP16 | real packed same-address swapping | Real W4 same base/exact restore/zero allocator delta; persistent copier and prebuilt variants pass small seam | **Modified-condition partial; full async rerun pending** |
 | H25 | §4.4 non-contiguous KV | physical arbitrary-region capacity | Vendor corruption found; explicit fallback + ownership tests pass | **Modified-condition repaired** |
 | H26 | §4.1 controller | persistent coordinated adaptation, 3 modes | Frozen reconstructed modes, real transactional GPU + two-request tests | **Modified-condition partial** |
 | H27 | Appendix C added LOC | ≈2200 Python +500 C++/CUDA | Base commit unavailable | **Blocked exact** |
@@ -155,7 +163,7 @@ Evidence: `experiments/real-executor/` and `experiments/multirequest-ownership/`
 4. Candidate fixed-stride KV mapping silently corrupts unrelated layers for real LIS order `[25,24,26]`.
 5. Candidate public llm-awq API/checkpoint assumptions match neither public llm-awq nor local AutoAWQ.
 6. AutoAWQ split-K fused logits are not bit-exact across repeats.
-7. Local blocking layer swaps are much slower than paper examples and not overlapped.
+7. Candidate/local blocking-path swaps are much slower than paper examples; the new independent async path lacks a completed full-layer overlap run.
 8. Full local all-variant pinning exceeds memlock.
 9. Exact trace/task/controller identity is absent.
 

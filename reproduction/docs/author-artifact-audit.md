@@ -4,7 +4,7 @@ Captured: see `../sources/remote-audit/CAPTURED_AT`. All GitHub API responses us
 
 ## Finding 1 — official lab repository is still README-only
 
-`https://github.com/ds2-lab/MorphServe` has one public branch (`main`) at commit `1c42999ded0014717e48c947d13450848cc1b796`, no public tags, no releases, and a recursive tree containing only `LICENSE` and `README.md`. Its README states: “The full code will be released soon.” This repository cannot support an author-code execution.
+Rechecked 2026-09-17 (`results/raw/official-repo-recheck-2026-09-17.txt`): `https://github.com/ds2-lab/MorphServe` still has one public branch (`main`) at commit `1c42999ded0014717e48c947d13450848cc1b796`, no public tags, no releases, and a recursive tree containing only `LICENSE` and `README.md`. Its README states: “The full code will be released soon.” This repository cannot support an author-code execution.
 
 The local project remote is `weige15/MorphServe`, not the lab repository. It initially contained only `README.md` and the supplied paper.
 

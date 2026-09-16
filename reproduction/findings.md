@@ -33,6 +33,7 @@ The official lab repository does not release implementation code. A separate pro
 8. **Real ownership/recovery now covers multiple request IDs.** Accuracy-mode actions grow 4→1,849 blocks; request 0/1 occupy reclaimed IDs 4/5; LIFO recovery removes free groups but refuses occupied layer 25 without changing counts/rows/sentinel/FCFS, then succeeds after real frees with zero preemptions and exact FP16.
 
 9. **Public trace identity is only partially recoverable.** Azure offers separate Code/Conversation files; defensible pre-paper BurstGPT is v1.1. Their first versus densest 72-second windows differ dramatically (Burst 2 vs 1,666 requests), so selecting a window without author offsets would materially determine the result. Exact scaling/mapping also remains unknown.
+10. **A minimal independent async seam is viable.** A persistent morph stream enqueued a 4 MiB pinned copy while prior use was unfinished, retained the GPU address, and became visible only through the layer-local wait. This repairs the candidate's host-blocking design but does not establish full-layer decode overlap until the frozen GPU pilot runs.
 
 ## Open questions
 

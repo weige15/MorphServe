@@ -11,7 +11,8 @@ required=[
  'experiments/candidate-fp16-baseline/results-attempt-3/metrics.json',
  'experiments/autoawq-layer-switch/results/metrics.json','experiments/active-kv-switch/results-attempt-2/metrics.json',
  'experiments/lis-real-8layer/results/metrics.json','experiments/real-executor/results/metrics.json',
- 'experiments/multirequest-ownership/results/metrics.json','profiles/llama31-8b-wikitext2-layers24-31.json',
+ 'experiments/multirequest-ownership/results/metrics.json','experiments/async-layer-transfer/results/metrics.json',
+ 'profiles/llama31-8b-wikitext2-layers24-31.json',
 ]
 missing=[path for path in required if not (ROOT/path).is_file()]
 assert not missing,missing
@@ -31,8 +32,10 @@ static=json.load(open(ROOT/'experiments/static-autoawq/results/metrics.json'))
 assert static['passed'] is False and static['gate']['repeat_logits_exact'] is False
 memory=json.load(open(ROOT/'results/raw/full-profile-memory-feasibility.json'))
 assert memory['feasible_simultaneously_pinned'] is False
+async_copy=json.load(open(ROOT/'experiments/async-layer-transfer/results/metrics.json'))['copy']
+assert async_copy['bytes_exact'] and async_copy['same_address'] and async_copy['prior_unfinished_after_enqueue']
 report=(ROOT/'REPORT.md').read_text()
 for phrase in ('partial / exact reproduction blocked','no Table 9','92.45%','[25,24,26]'):
     assert phrase in report,phrase
 print('report artifact verification: PASS')
-print(json.dumps({'positive_gates':checks,'expected_negative_static_repeat':True,'expected_memlock_blocker':True},sort_keys=True))
+print(json.dumps({'positive_gates':checks,'async_copy_gate':True,'expected_negative_static_repeat':True,'expected_memlock_blocker':True},sort_keys=True))

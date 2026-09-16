@@ -3,6 +3,6 @@ test_pinned_copy_waits_for_prior_use_without_blocking_host (reproduction.tests.t
 test_rejects_unpinned_and_oversize_sources (reproduction.tests.test_async_layer_transfer.AsyncLayerTransferTests.test_rejects_unpinned_and_oversize_sources) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.862s
+Ran 3 tests in 0.860s
 
 OK

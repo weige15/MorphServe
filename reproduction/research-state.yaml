@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: frozen modified-condition GPU arrival replay with complete accounting
+      next_gate: full-layer CUDA overlap plus corrected GPU arrival replay
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The frozen synthetic replay accounting works, but corrected steady-state GPU replay is waiting
-  on sufficient GPU headroom after a recorded external-process OOM. Exact Azure/BurstGPT remains
-  blocked independently by missing window/scaling/context identity.
-active_protocol: experiments/synthetic-gpu-replay/protocol.md
+  Event-safe asynchronous copying works on a small real CUDA region, while full-layer overlap and
+  corrected steady-state replay both await an uncontended GPU with >17 GiB headroom. Exact
+  Azure/BurstGPT remains blocked independently by missing window/scaling/context identity.
+active_protocol: experiments/async-layer-transfer/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Retry the unchanged corrected synthetic replay only when a GPU has >17 GiB free.
-  - Preserve initialization-contaminated attempt separately from steady-state metrics.
+  - Run the frozen three-repeat full-layer overlap pilot when a GPU has >17 GiB free.
+  - Re-run transactional real-executor and corrected synthetic replay on the async implementation.
   - Do not select Azure/BurstGPT windows without author offsets.

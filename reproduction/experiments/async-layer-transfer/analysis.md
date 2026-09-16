@@ -2,8 +2,8 @@
 
 Three CUDA tests pass on the public seams frozen in the protocol.
 
-- A 4,194,304-byte pinned-host copy was enqueued in 0.248 ms while the injected prior-use event was still unfinished.
-- The separate-stream copy itself measured 0.663 ms between CUDA events.
+- A 4,194,304-byte pinned-host copy was enqueued in 0.222 ms while the injected prior-use event was still unfinished.
+- The separate-stream copy itself measured 0.605 ms between CUDA events.
 - The returned typed view retained the registered destination address and all bytes matched after the just-in-time wait.
 - A synthetic `LlamaModel._forward` waited immediately before the affected layer, observed the copied value, consumed the pending event, and recorded a new end-of-forward lifetime event.
 - Pageable and oversize sources failed closed.

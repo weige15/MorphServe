@@ -294,3 +294,7 @@ Four replay tests pass for independent scheduled submissions, complete error/tim
 ## 2026-09-17 — frozen synthetic GPU replay attempts
 
 Attempt 1 passed accounting but prefill-only warmup leaked decode Triton JIT into timed TPOT; preserved as initialization evidence. The corrected warmup adds a cached decode step. Attempt 2 then encountered a transient external-GPU OOM before model load (10.32 GiB occupied; 12.95 GiB free versus 14.96-GiB model allocation). All GPUs became occupied, so no safe unchanged retry was possible without evicting others or changing the model. Retry remains queued for sufficient headroom.
+
+## 2026-09-17 — independent asynchronous layer-copy seam
+
+The candidate's synchronized-per-call copy path was retained, and a labeled independent path was added using a non-owning registered-region view, pinned copies on one persistent morph stream, prebuilt precision wrappers, a model-wide last-forward event, and a just-in-time wait before the affected layer. Three small CUDA tests pass: prior use was unfinished when 4 MiB enqueue returned (0.222 ms), copy took 0.605 ms, bytes/address were exact, model use observed the copy, and malformed sources failed closed. A three-repeat full-layer same-history overlap pilot is frozen, but every GPU remains externally occupied and none has the >17 GiB headroom required for the 8B model. The official lab repository was rechecked and remains at README-only commit `1c42999...` with no tags/releases.

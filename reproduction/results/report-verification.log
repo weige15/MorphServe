@@ -1,2 +1,2 @@
 report artifact verification: PASS
-{"expected_memlock_blocker": true, "expected_negative_static_repeat": true, "positive_gates": {"active_kv": true, "executor": true, "fp16": true, "lis8": true, "ownership": true, "switch": true}}
+{"async_copy_gate": true, "expected_memlock_blocker": true, "expected_negative_static_repeat": true, "positive_gates": {"active_kv": true, "executor": true, "fp16": true, "lis8": true, "ownership": true, "switch": true}}
