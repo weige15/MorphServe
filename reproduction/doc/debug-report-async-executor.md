@@ -40,7 +40,7 @@ Scope: independent reconstruction only; immutable vendor is unchanged
 ## Repair evidence
 
 - 5 CUDA async tests: copy/order/use barrier, malformed source rejection, second-expansion rollback event, and no redundant event accumulation.
-- 14 transaction/controller tests: partial morph/restore rollback, exact post-shrink compensation, ignored-rollback false/exception poisoning, rollback-copy double failure, all-before-mutation shrink, restore prevalidation and FCFS/action contracts.
+- 15 transaction/controller tests: partial morph/restore rollback, exact post-shrink compensation, ignored-rollback false/exception poisoning, rollback-copy double failure, all-before-mutation shrink, restore prevalidation and FCFS/action contracts.
 - 3 fail-closed CUDA-trace analyzer tests: require size-matched H2D, another stream, and actual kernel/copy activity intersection; reject enclosing intervals, wrong sizes and same-stream activity.
 - 3 rebuilt C++ memory-manager tests: normal physical reclaim/restore, tiny-tail rejection, and misaligned-region rejection.
 - Retry script now warms a real cached decode, records the supporting pre-layer-wait event, and exports a separate CUDA activity trace; it has not yet run because the free-memory preflight requires 17 GiB.

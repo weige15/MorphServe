@@ -80,6 +80,14 @@ class RealExecutorTransactionTests(unittest.TestCase):
         self.assertTrue(executor.poisoned); self.assertEqual(executor.active_layers,[0]); self.assertEqual(executor.model.transformer_layers[:2],['q0','f1'])
         calls=list(executor.copier.calls); self.assertFalse(executor.restore_fp16([0])); self.assertEqual(executor.copier.calls,calls)
 
+    def test_restore_rollback_copy_failure_preserves_truthful_partial_state(self):
+        executor=bare_executor(); executor.copier=FakeCopier(fail_sources={'f1b','q0b'}); executor.active_layers=[0,1]
+        executor.quant_objects={0:executor.prepared_quant[0],1:executor.prepared_quant[1]}; executor.model.transformer_layers[:2]=['q0','q1']
+
+        self.assertFalse(executor.restore_fp16([0,1]))
+
+        self.assertTrue(executor.poisoned); self.assertEqual(executor.active_layers,[1]); self.assertEqual(executor.model.transformer_layers[:2],['f0','q1']); self.assertEqual(set(executor.quant_objects),{1})
+
     def test_restore_rejects_invalid_batch_before_first_copy(self):
         executor=bare_executor(); executor.copier=FakeCopier(); executor.active_layers=[0]; executor.quant_objects={0:executor.prepared_quant[0]}; executor.model.transformer_layers[0]='q0'
 

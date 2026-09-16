@@ -4,6 +4,7 @@ test_multi_layer_shrink_validates_all_occupancy_before_mutation (reproduction.te
 test_recovery_restores_exact_kv_metadata_if_fp16_restore_fails (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_recovery_restores_exact_kv_metadata_if_fp16_restore_fails) ... ok
 test_restore_copy_failure_rolls_back_to_original_w4_batch (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_restore_copy_failure_rolls_back_to_original_w4_batch) ... ok
 test_restore_rejects_invalid_batch_before_first_copy (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_restore_rejects_invalid_batch_before_first_copy) ... ok
+test_restore_rollback_copy_failure_preserves_truthful_partial_state (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_restore_rollback_copy_failure_preserves_truthful_partial_state) ... ok
 test_expand_exception_fails_closed_and_rolls_back (reproduction.tests.test_controller_integration.CoordinatorTests.test_expand_exception_fails_closed_and_rolls_back) ... ok
 test_failed_expand_rolls_back_in_reverse_order (reproduction.tests.test_controller_integration.CoordinatorTests.test_failed_expand_rolls_back_in_reverse_order) ... ok
 test_failed_pressure_rollback_poisoned_on_false_or_exception (reproduction.tests.test_controller_integration.CoordinatorTests.test_failed_pressure_rollback_poisoned_on_false_or_exception) ... ok
@@ -14,6 +15,6 @@ test_recovery_shrinks_before_restore_and_defers_if_occupied (reproduction.tests.
 test_successful_recovery_restores_after_shrink (reproduction.tests.test_controller_integration.CoordinatorTests.test_successful_recovery_restores_after_shrink) ... ok
 
 ----------------------------------------------------------------------
-Ran 14 tests in 0.007s
+Ran 15 tests in 0.006s
 
 OK
