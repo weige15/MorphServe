@@ -1,0 +1,144 @@
+{
+  "definition": "Sum of saved test/run process wall intervals only; includes load/JIT/execution but excludes environment install/build and is not CUDA kernel time or exclusive GPU allocation time.",
+  "failed_records": 10,
+  "process_wall_seconds_total": 761.584550348,
+  "process_wall_seconds_with_gpu_snapshots": 761.584550348,
+  "record_count": 22,
+  "records": [
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/active-kv-switch/results/wall-time.json",
+      "process_wall_seconds": 40.299340084
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/active-kv-switch/results-attempt-2/wall-time.json",
+      "process_wall_seconds": 43.804177458
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/autoawq-layer-switch/results/wall-time.json",
+      "process_wall_seconds": 37.559270118
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/candidate-fp16-baseline/results/wall-time.json",
+      "process_wall_seconds": 5.544731572
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/candidate-fp16-baseline/results-attempt-2/wall-time.json",
+      "process_wall_seconds": 18.605010085
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/candidate-fp16-baseline/results-attempt-3/wall-time.json",
+      "process_wall_seconds": 61.218043583
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/candidate-kv-mapping/results/wall-time.json",
+      "process_wall_seconds": 8.057881183
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/candidate-lifetime/results/wall-time.json",
+      "process_wall_seconds": 3.459767632
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/candidate-lifetime-barrier/results/wall-time.json",
+      "process_wall_seconds": 3.75931511
+    },
+    {
+      "exit_code": 139,
+      "gpu_snapshot_present": true,
+      "path": "experiments/candidate-memory-manager/results/wall-time.json",
+      "process_wall_seconds": 3.933469563
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/candidate-memory-manager-repair/results/wall-time.json",
+      "process_wall_seconds": 2.941437043
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/lis-real-8layer/results/wall-time.json",
+      "process_wall_seconds": 92.77902983
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/lis-real-8layer/results-attempt-1/wall-time.json",
+      "process_wall_seconds": 92.837994186
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/lis-real-pilot/results/wall-time.json",
+      "process_wall_seconds": 45.220359522
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/multirequest-ownership/results/wall-time.json",
+      "process_wall_seconds": 38.233873322
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/multirequest-ownership/results-attempt-1/wall-time.json",
+      "process_wall_seconds": 35.925992365
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/real-executor/results/wall-time.json",
+      "process_wall_seconds": 35.343308172
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/real-executor/results-attempt-1/wall-time.json",
+      "process_wall_seconds": 34.843935672
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/static-autoawq/results/wall-time.json",
+      "process_wall_seconds": 48.288360557
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/static-autoawq/results-initial/wall-time.json",
+      "process_wall_seconds": 49.601794524
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/synthetic-gpu-replay/results-attempt-1/wall-time.json",
+      "process_wall_seconds": 35.338572253
+    },
+    {
+      "exit_code": 1,
+      "gpu_snapshot_present": true,
+      "path": "experiments/synthetic-gpu-replay/results-attempt-2/wall-time.json",
+      "process_wall_seconds": 23.988886514
+    }
+  ],
+  "schema_version": 1,
+  "successful_records": 12,
+  "unknown_exit_records": 0
+}

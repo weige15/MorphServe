@@ -76,7 +76,9 @@ active_hypothesis: >-
   provides candidate trace offsets, but exact replay remains blocked by confirmation/scaling/context identity.
 active_protocol: experiments/async-layer-transfer/protocol.md
 resource_accounting:
-  gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
+  saved_gpu_runner_process_wall_seconds: 761.584550348
+  process_wall_caveat: includes load/JIT/test work, excludes install/build, and is not CUDA kernel or exclusive allocation time
+  agent_elapsed_seconds_at_2026_09_17_continuation: 11760
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately

@@ -36,7 +36,7 @@ Primary evidence:
 
 ## 3. Reproduction environment
 
-Paper hardware: L4 24 GB + 256 GB RAM for 7B/8B and A100 80 GB + 2 TB for 34B. Local hardware is 7× RTX 3090 24 GB with 125 GiB RAM and 16,844,414,976-byte memlock. Driver/CUDA/PyTorch/Triton/checkpoint hashes and PCIe link evidence are in `results/raw/environment.json`.
+Paper hardware: L4 24 GB + 256 GB RAM for 7B/8B and A100 80 GB + 2 TB for 34B. Local hardware is 7× RTX 3090 24 GB with 125 GiB RAM and 16,844,414,976-byte memlock. Driver/CUDA/PyTorch/Triton/checkpoint hashes and PCIe link evidence are in `results/raw/environment.json`. Saved GPU-runner intervals total 761.585 process-wall seconds across 22 successful/failed records; this includes model load/JIT/test work and is not kernel or exclusive GPU time (`results/raw/resource-usage-summary.json`).
 
 Main local model is **Llama 3.1 8B base**, snapshot `d04e592...`, not a silently substituted exact “Llama 3 8B” paper revision. W4 is a local AutoAWQ G128 zero-point GEMM derivative. All results using these are labeled modified condition.
 

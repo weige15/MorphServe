@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 required=[
  'REPORT.md','docs/paper-evidence-brief.md','docs/source-map.md','docs/claim-register.md','docs/trace-audit.md',
- 'results/raw/environment.json','results/raw/public-trace-audit.json','results/raw/figure1b-trace-window-inference.json',
+ 'results/raw/environment.json','results/raw/resource-usage-summary.json','results/raw/public-trace-audit.json','results/raw/figure1b-trace-window-inference.json',
  'results/raw/full-profile-memory-feasibility.json','traces/figure1b-inferred/summary.json',
  'traces/figure1b-inferred/azure-code-systematic-4.75x.jsonl','traces/figure1b-inferred/burstgpt-v1.1-systematic-1.75x.jsonl',
  'experiments/candidate-fp16-baseline/results-attempt-3/metrics.json',

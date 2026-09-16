@@ -35,7 +35,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | B5 | Record GPU/RAM/memlock/PCIe/software/model/data/disk | PASS | `results/raw/environment.json`, trace hashes and memory feasibility JSON. |
 | B6 | Isolated environment and lock | PASS | `reproduction/.venv`, `configs/fp16-requirements-lock.txt`, per-run install logs. |
 | B7 | No purchase/quota/access bypass/credential exposure/publication | PASS | No such operation in logs; Git work remains local/ahead of origin. |
-| B8 | Track agent and GPU budgets separately | PARTIAL | Goal runtime/token usage supplied by harness; per-run wall times and GPU snapshots saved, but no aggregate GPU-hours ledger. |
+| B8 | Track agent and GPU budgets separately | PASS with caveat | `results/raw/resource-usage-summary.json`: 761.585 s saved GPU-runner process wall across 22 records; explicitly not kernel/exclusive GPU time. Harness agent time is separate in state. |
 | B9 | Full all-variant pinning feasibility | BLOCKED | Requires 17,585,668,096 pinned bytes vs 16,844,414,976 memlock; 741,253,120-byte shortfall before overhead. |
 
 ## C. Implementation constraints
