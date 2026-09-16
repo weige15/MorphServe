@@ -1,0 +1,123 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([4, 32, 8, 4, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([4, 32, 8, 4, 128])
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 2.68 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.04 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    2680.00 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.12 ms.
+[PagedAttention-Serving] Total time: 2680.15 ms.
+
+[LlamaTransformerLayer-Serving] Layer 0 serving time exceeded 0.5 s with 2.86 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       177.91 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 177.96 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    2680.44 ms.
+[LlamaTransformerLayer-Serving] Total time:                  2858.40 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 3.05 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.15 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    3046.67 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.08 ms.
+[PagedAttention-Serving] Total time: 3046.90 ms.
+
+[LlamaTransformerLayer-Serving] Layer 1 serving time exceeded 0.5 s with 3.50 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       454.46 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 454.64 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    3047.17 ms.
+[LlamaTransformerLayer-Serving] Total time:                  3501.82 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 2.76 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.04 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    2762.74 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.10 ms.
+[PagedAttention-Serving] Total time: 2762.89 ms.
+
+[LlamaTransformerLayer-Serving] Layer 2 serving time exceeded 0.5 s with 2.91 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       151.74 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 151.79 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    2763.13 ms.
+[LlamaTransformerLayer-Serving] Total time:                  2914.91 ms.
+
+{
+  "gate": {
+    "prompt_cache_unchanged_at_switch": true,
+    "quant_source_exact": true,
+    "reclaimed_block_allocated": true,
+    "w4_steps_top1_match": true,
+    "w4_steps_within_envelope": true,
+    "reclaimed_k_within_envelope": true,
+    "reclaimed_v_within_envelope": true,
+    "migration_exact": true,
+    "block_table_preserved": true,
+    "restore_source_exact": true,
+    "final_top1_match": true,
+    "final_within_envelope": true
+  },
+  "per_w4_step": [
+    {
+      "exact": false,
+      "max_abs": 0.015625,
+      "relative_l2": 0.0006085321656428277,
+      "top1_reference": 279,
+      "top1_candidate": 279,
+      "forced_input": 505,
+      "reference_output": 279
+    },
+    {
+      "exact": false,
+      "max_abs": 0.015625,
+      "relative_l2": 0.0005825834814459085,
+      "top1_reference": 3363,
+      "top1_candidate": 3363,
+      "forced_input": 279,
+      "reference_output": 3363
+    },
+    {
+      "exact": false,
+      "max_abs": 0.015625,
+      "relative_l2": 0.0008777323528192937,
+      "top1_reference": 11,
+      "top1_candidate": 11,
+      "forced_input": 3363,
+      "reference_output": 11
+    },
+    {
+      "exact": false,
+      "max_abs": 0.015625,
+      "relative_l2": 0.0006719292141497135,
+      "top1_reference": 304,
+      "top1_candidate": 304,
+      "forced_input": 11,
+      "reference_output": 304
+    }
+  ],
+  "reclaimed_k": {
+    "exact": false,
+    "max_abs": 0.0078125,
+    "relative_l2": 9.523183689452708e-05,
+    "top1_reference": null,
+    "top1_candidate": null
+  },
+  "reclaimed_v": {
+    "exact": false,
+    "max_abs": 0.00390625,
+    "relative_l2": 0.0002074913791147992,
+    "top1_reference": null,
+    "top1_candidate": null
+  },
+  "final": {
+    "exact": false,
+    "max_abs": 0.0078125,
+    "relative_l2": 0.00035419262712821364,
+    "top1_reference": 279,
+    "top1_candidate": 279
+  }
+}

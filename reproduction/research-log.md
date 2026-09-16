@@ -226,3 +226,21 @@ Blocking operation walls were 15.67 ms W4 and 58.55 ms FP16 on RTX 3090, substan
 ### Next step
 
 Extend the pilot to active KV/request state with the same precision history and reclaimed block attachment, then implement multiple-layer ordering/profiling. Keep this adapter labeled independent reconstruction.
+
+## 2026-09-16 — active-KV same-history switch
+
+### Hypothesis and command
+
+An active request can use a reclaimed block during four W4 decode steps, migrate it safely, restore FP16, and continue without re-prefill while matching a reference with the same precision/token history.
+
+```bash
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_active_kv_switch.sh
+```
+
+Attempt 1 reached reference decode then failed on a test-harness inference-tensor reset outside `torch.inference_mode`; no system result. The changed retry fixed only reset/migration context.
+
+Attempt 2 passed all gates. The fourth W4 decode allocated reclaimed virtual block 3 (615 tail slots available). W4 step relative logit L2 was 0.00058–0.00088 with matching top-1; reclaimed K/V relative L2 was 0.000095/0.000207; byte-exact migration retained block table `[0,1,2,3]`; final FP16 top-1 matched at relative L2 0.000354. No re-prefill, eviction, model reload, or scheduler restart occurred.
+
+### Interpretation
+
+This is strong modified-condition state-preservation evidence for one request/layer/block. Occupied-block migration is a reconstruction choice, and first-call multi-second logs are Triton JIT initialization, not steady-state latency.

@@ -31,6 +31,6 @@ The official lab repository does not release implementation code. A separate pro
 - Does the candidate C++ extension build against the available PyTorch/CUDA toolchain without source repair?
 - Can the candidate package be normalized with only naming/config/checkpoint-loader changes, or are deeper correctness fixes required?
 - Does reclaimed KV memory stay within registered layer bounds for multiple non-contiguous swapped layers?
-- Do full-model call sites consistently record the new lifetime event after every reclaimed-region store/attention/swap use?
+- Does the active-KV result survive multiple requests/layers, real block size 16, concurrent decode streams, and oscillating pressure without explicit occupied-block migration?
 - Can a real AWQ W4 layer execute numerically in the fixed FP16 region on RTX 3090?
 - What exact representation and reduction should be frozen for LIS when the paper gives only vector-level cosine notation?

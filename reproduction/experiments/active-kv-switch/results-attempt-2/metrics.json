@@ -1,0 +1,243 @@
+{
+  "classification": "modified-condition-active-kv-same-history",
+  "final_fp16": {
+    "exact": false,
+    "max_abs": 0.0078125,
+    "relative_l2": 0.00035419262712821364,
+    "top1_candidate": 279,
+    "top1_reference": 279
+  },
+  "forced_history": [
+    505,
+    279,
+    3363,
+    11,
+    304
+  ],
+  "gate": {
+    "block_table_preserved": true,
+    "final_top1_match": true,
+    "final_within_envelope": true,
+    "migration_exact": true,
+    "prompt_cache_unchanged_at_switch": true,
+    "quant_source_exact": true,
+    "reclaimed_block_allocated": true,
+    "reclaimed_k_within_envelope": true,
+    "reclaimed_v_within_envelope": true,
+    "restore_source_exact": true,
+    "w4_steps_top1_match": true,
+    "w4_steps_within_envelope": true
+  },
+  "passed": true,
+  "per_w4_step": [
+    {
+      "exact": false,
+      "forced_input": 505,
+      "max_abs": 0.015625,
+      "reference_output": 279,
+      "relative_l2": 0.0006085321656428277,
+      "top1_candidate": 279,
+      "top1_reference": 279
+    },
+    {
+      "exact": false,
+      "forced_input": 279,
+      "max_abs": 0.015625,
+      "reference_output": 3363,
+      "relative_l2": 0.0005825834814459085,
+      "top1_candidate": 3363,
+      "top1_reference": 3363
+    },
+    {
+      "exact": false,
+      "forced_input": 3363,
+      "max_abs": 0.015625,
+      "reference_output": 11,
+      "relative_l2": 0.0008777323528192937,
+      "top1_candidate": 11,
+      "top1_reference": 11
+    },
+    {
+      "exact": false,
+      "forced_input": 11,
+      "max_abs": 0.015625,
+      "reference_output": 304,
+      "relative_l2": 0.0006719292141497135,
+      "top1_candidate": 304,
+      "top1_reference": 304
+    }
+  ],
+  "precision_schedule": [
+    "FP16 prefill",
+    "W4 layer 31 x4 decode",
+    "FP16 x1 decode"
+  ],
+  "prompt_ids": [
+    128000,
+    26833,
+    92889,
+    1093,
+    264,
+    23153,
+    11,
+    3117,
+    3201
+  ],
+  "quant_tensor_audit": [
+    {
+      "exact": true,
+      "name": "input_layernorm.weight"
+    },
+    {
+      "exact": true,
+      "name": "post_attention_layernorm.weight"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.q_proj.qweight"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.q_proj.qzeros"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.q_proj.scales"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.k_proj.qweight"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.k_proj.qzeros"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.k_proj.scales"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.v_proj.qweight"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.v_proj.qzeros"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.v_proj.scales"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.o_proj.qweight"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.o_proj.qzeros"
+    },
+    {
+      "exact": true,
+      "name": "self_attn.o_proj.scales"
+    },
+    {
+      "exact": true,
+      "name": "mlp.gate_proj.qweight"
+    },
+    {
+      "exact": true,
+      "name": "mlp.gate_proj.qzeros"
+    },
+    {
+      "exact": true,
+      "name": "mlp.gate_proj.scales"
+    },
+    {
+      "exact": true,
+      "name": "mlp.up_proj.qweight"
+    },
+    {
+      "exact": true,
+      "name": "mlp.up_proj.qzeros"
+    },
+    {
+      "exact": true,
+      "name": "mlp.up_proj.scales"
+    },
+    {
+      "exact": true,
+      "name": "mlp.down_proj.qweight"
+    },
+    {
+      "exact": true,
+      "name": "mlp.down_proj.qzeros"
+    },
+    {
+      "exact": true,
+      "name": "mlp.down_proj.scales"
+    }
+  ],
+  "reclaimed_block_k": {
+    "exact": false,
+    "max_abs": 0.0078125,
+    "relative_l2": 9.523183689452708e-05,
+    "top1_candidate": null,
+    "top1_reference": null
+  },
+  "reclaimed_block_v": {
+    "exact": false,
+    "max_abs": 0.00390625,
+    "relative_l2": 0.0002074913791147992,
+    "top1_candidate": null,
+    "top1_reference": null
+  },
+  "reclaimed_group_blocks": 615,
+  "reference_block_table_after_w4": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "restore_tensor_audit": [
+    {
+      "exact": true,
+      "name": "attn_norm"
+    },
+    {
+      "exact": true,
+      "name": "q_proj"
+    },
+    {
+      "exact": true,
+      "name": "k_proj"
+    },
+    {
+      "exact": true,
+      "name": "v_proj"
+    },
+    {
+      "exact": true,
+      "name": "o_proj"
+    },
+    {
+      "exact": true,
+      "name": "ffn_norm"
+    },
+    {
+      "exact": true,
+      "name": "up_gate_proj"
+    },
+    {
+      "exact": true,
+      "name": "down_proj"
+    }
+  ],
+  "schema_version": 1,
+  "system_allocated_block_id": 3,
+  "system_block_table_after_migration": [
+    0,
+    1,
+    2,
+    3
+  ]
+}
