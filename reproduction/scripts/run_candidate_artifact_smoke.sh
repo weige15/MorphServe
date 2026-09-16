@@ -15,7 +15,8 @@ cp -a "$VENDOR" "$TMP"
 run_logged() {
   local name=$1
   shift
-  printf '%q ' "$@" >> "$OUT/commands.txt"
+  printf '%q' "$1" >> "$OUT/commands.txt"
+  printf ' %q' "${@:2}" >> "$OUT/commands.txt"
   printf '\n' >> "$OUT/commands.txt"
   "$@" >"$OUT/${name}.stdout.log" 2>"$OUT/${name}.stderr.log"
   local rc=$?
@@ -29,7 +30,7 @@ run_logged() {
 ) > "$OUT/manifest-before.log" 2>&1
 printf 'manifest_before\t%s\n' "$?" >> "$OUT/status.tsv"
 
-run_logged create_venv uv venv --python python3.12 "$VENV"
+run_logged create_venv uv venv --clear --python python3.12 "$VENV"
 
 # Exact documented top-level editable install, on a byte-identical disposable copy.
 run_logged editable_install_unmodified uv pip install --python "$VENV/bin/python" -e "$TMP"
