@@ -1,0 +1,14 @@
+Attempt: current-revision real-executor GPU rerun
+Source revision at attempt: c8da54afbbf05e71068188e74fc40d96d10e3708
+Command: CUDA_VISIBLE_DEVICES=4 reproduction/scripts/run_real_executor_pilot.sh
+Exit code: 75
+Runner stderr: GPU 4 has 15009 MiB free; real-executor pilot requires at least 17408 MiB.
+
+Immediately preceding point-in-time snapshot:
+  reproduction/results/raw/pending-gpu-readiness.json
+  GPU 4: 24,124 MiB free, 0% utilization; decision ready.
+Immediate post-refusal snapshot:
+  reproduction/results/raw/pending-gpu-readiness-after-race.json
+  GPU 4: 15,009 MiB free, 100% utilization, external PID 1377007 using 9,106 MiB; no eligible GPU.
+
+Classification: transient external resource race safely rejected before output deletion, environment setup, model load, or GPU experiment execution. This is blocker evidence, not an experiment result. No unchanged retry was made.

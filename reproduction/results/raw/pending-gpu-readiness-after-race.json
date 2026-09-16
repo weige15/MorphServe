@@ -1,0 +1,122 @@
+{
+  "captured_at_utc": "2026-09-16T21:37:11.038690+00:00",
+  "compute_apps": [
+    {
+      "gpu_uuid": "GPU-384b6377-8f0c-e3d2-8b3a-b3408b54fd53",
+      "pid": 1217284,
+      "used_memory_mib": 10592
+    },
+    {
+      "gpu_uuid": "GPU-24d15e85-4019-bdb1-5135-bca2be34d1aa",
+      "pid": 1218897,
+      "used_memory_mib": 10592
+    },
+    {
+      "gpu_uuid": "GPU-ac0202b3-4185-bf4f-4ec5-442aa7701c93",
+      "pid": 1217286,
+      "used_memory_mib": 10572
+    },
+    {
+      "gpu_uuid": "GPU-bc868077-1737-9b6d-c46b-73c51a34da95",
+      "pid": 1217287,
+      "used_memory_mib": 10572
+    },
+    {
+      "gpu_uuid": "GPU-f4871bda-940b-f124-851a-ba9ed142b6c6",
+      "pid": 1377007,
+      "used_memory_mib": 9106
+    },
+    {
+      "gpu_uuid": "GPU-f11c2303-9ae6-0a80-c02f-18cdaafc1ec9",
+      "pid": 3265592,
+      "used_memory_mib": 10686
+    },
+    {
+      "gpu_uuid": "GPU-c57c604b-c51a-e97a-81f6-5e32fed68688",
+      "pid": 3267469,
+      "used_memory_mib": 8386
+    }
+  ],
+  "compute_apps_query_command": "nvidia-smi --query-compute-apps=gpu_uuid,pid,used_memory --format=csv,noheader,nounits",
+  "decision": "blocked_below_frozen_headroom_threshold",
+  "eligible_gpu_indices": [],
+  "gpu_query_command": "nvidia-smi --query-gpu=index,uuid,name,memory.total,memory.used,memory.free,utilization.gpu --format=csv,noheader,nounits",
+  "gpus": [
+    {
+      "index": 0,
+      "meets_free_memory_threshold": false,
+      "memory_free_mib": 13523,
+      "memory_total_mib": 24576,
+      "memory_used_mib": 10602,
+      "name": "NVIDIA GeForce RTX 3090",
+      "utilization_percent": 99,
+      "uuid": "GPU-384b6377-8f0c-e3d2-8b3a-b3408b54fd53"
+    },
+    {
+      "index": 1,
+      "meets_free_memory_threshold": false,
+      "memory_free_mib": 13523,
+      "memory_total_mib": 24576,
+      "memory_used_mib": 10602,
+      "name": "NVIDIA GeForce RTX 3090",
+      "utilization_percent": 100,
+      "uuid": "GPU-24d15e85-4019-bdb1-5135-bca2be34d1aa"
+    },
+    {
+      "index": 2,
+      "meets_free_memory_threshold": false,
+      "memory_free_mib": 13543,
+      "memory_total_mib": 24576,
+      "memory_used_mib": 10582,
+      "name": "NVIDIA GeForce RTX 3090",
+      "utilization_percent": 100,
+      "uuid": "GPU-ac0202b3-4185-bf4f-4ec5-442aa7701c93"
+    },
+    {
+      "index": 3,
+      "meets_free_memory_threshold": false,
+      "memory_free_mib": 13543,
+      "memory_total_mib": 24576,
+      "memory_used_mib": 10582,
+      "name": "NVIDIA GeForce RTX 3090",
+      "utilization_percent": 99,
+      "uuid": "GPU-bc868077-1737-9b6d-c46b-73c51a34da95"
+    },
+    {
+      "index": 4,
+      "meets_free_memory_threshold": false,
+      "memory_free_mib": 15009,
+      "memory_total_mib": 24576,
+      "memory_used_mib": 9116,
+      "name": "NVIDIA GeForce RTX 3090",
+      "utilization_percent": 100,
+      "uuid": "GPU-f4871bda-940b-f124-851a-ba9ed142b6c6"
+    },
+    {
+      "index": 5,
+      "meets_free_memory_threshold": false,
+      "memory_free_mib": 13429,
+      "memory_total_mib": 24576,
+      "memory_used_mib": 10696,
+      "name": "NVIDIA GeForce RTX 3090",
+      "utilization_percent": 100,
+      "uuid": "GPU-f11c2303-9ae6-0a80-c02f-18cdaafc1ec9"
+    },
+    {
+      "index": 6,
+      "meets_free_memory_threshold": false,
+      "memory_free_mib": 15729,
+      "memory_total_mib": 24576,
+      "memory_used_mib": 8396,
+      "name": "NVIDIA GeForce RTX 3090",
+      "utilization_percent": 100,
+      "uuid": "GPU-c57c604b-c51a-e97a-81f6-5e32fed68688"
+    }
+  ],
+  "max_free_mib": 15729,
+  "minimum_free_bytes": 18253611008,
+  "minimum_free_mib": 17408,
+  "schema_version": 1,
+  "scope": "Point-in-time resource readiness only; not GPU time, ownership, or experiment evidence.",
+  "source_revision": "c8da54afbbf05e71068188e74fc40d96d10e3708"
+}

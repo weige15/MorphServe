@@ -82,7 +82,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | D9 | Race/lifetime hazard | PASS/NEGATIVE+REPAIR | Corruption reproduced; event-safe repair reaches zero corruption. |
 | D10 | Oscillating pressure | PASS at controller seam | CPU controller persistence test; real multi-request oscillating serving not yet timed. |
 | D11 | Same-precision-history reference | PASS where used | Active-KV protocol; full async pilot also designed this way but pending. |
-| D12 | Inspect actual CUDA overlap | MISSING valid full-model | Attempt 1 is rejected. Retry demotes event intervals to supporting bounds, exports a raw CUDA activity trace, and requires size-matched H2D/kernel activity intersection on different streams; three fail-closed parser tests pass, real trace pending. |
+| D12 | Inspect actual CUDA overlap | MISSING valid full-model | Attempt 1 is rejected. Retry demotes event intervals to supporting bounds, exports a raw CUDA activity trace, and requires size-matched H2D/kernel activity intersection on different streams; four fail-closed parser tests pass. A transient 24,124-MiB free window was externally claimed before launch; guard exit 75 and before/after snapshots are preserved under `results/raw/pending-gpu-*`. |
 | D13 | CPU/tiny/simulation only supporting | PASS in classification | Report does not promote them to headline evidence. |
 
 ## E. Exact experimental setup and data
@@ -140,7 +140,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | G8 | Predeclare tolerances before target inspection | PARTIAL | W4 repeat envelope derived independently; many exact experiments never reached. |
 | G9 | Preserve failures/negative results | PASS | Multiple numbered attempts, SIGSEGV/race/mapping/JIT/OOM evidence retained. |
 | G10 | Regenerate plots/tables from raw | PARTIAL | Summaries and verifier check saved JSON. `figures/gen_fig_transfer_diagnostics.py` regenerates CSV/PDF/PNG byte-identically from raw attempt-1 metrics and fails closed if the source run is not rejected; unavailable numbered-paper plots remain absent. |
-| G11 | Every claimed result links command/config/raw/comparison | PASS for paths; historical source-revision caveat | `configs/claim-evidence-map.json` maps H1–H30 to paper references, commands, frozen configs/protocols, raw artifacts, comparisons and limitations. `results/raw/claim-evidence-provenance.json` hashes/Git-audits all 75 linked files. Older runners did not save the exact source revision; their artifact commit is not mislabeled as executed-source proof, while pending runners now write `source-revision.txt`. |
+| G11 | Every claimed result links command/config/raw/comparison | PASS for paths; historical source-revision caveat | `configs/claim-evidence-map.json` maps H1–H30 to paper references, commands, frozen configs/protocols, raw artifacts, comparisons and limitations. `results/raw/claim-evidence-provenance.json` hashes/Git-audits all 79 linked files. Older runners did not save the exact source revision; their artifact commit is not mislabeled as executed-source proof, while pending runners now write `source-revision.txt`. |
 | G12 | Tests execute real work, not canned success | PASS for inspected tests | CUDA tests mutate/compare actual storage; CPU tests compute policy/profile/replay behavior. |
 
 ## H. Iteration/checkpoint and finalization policy
@@ -167,7 +167,7 @@ The vendor manifest proves only that the candidate snapshot was not modified. Un
 
 The objective is **not achieved**. The smallest currently feasible next gates are:
 
-1. when one GPU has >17 GiB free, run `CUDA_VISIBLE_DEVICES=<free> reproduction/scripts/run_async_full_model_overlap.sh` and inspect all three repeats rather than accepting its exit code alone;
+1. when one GPU again has >17 GiB free, run `CUDA_VISIBLE_DEVICES=<free> reproduction/scripts/run_async_full_model_overlap.sh` and inspect all three repeats rather than accepting its exit code alone; the 2026-09-16 free window was lost to an external process before the first model runner and was safely rejected at preflight;
 2. rerun `run_real_executor_pilot.sh` and `run_multirequest_ownership.sh` against the asynchronous executor; expansion-preflight and runner-provenance fixes have an independent PASS readiness review at `results/raw/post-expansion-preflight-rereview.md`;
 3. rerun corrected `run_synthetic_gpu_replay.sh`, preserving complete timestamps and excluding warmup;
 4. update `REPORT.md` and this audit from the resulting raw artifacts.
