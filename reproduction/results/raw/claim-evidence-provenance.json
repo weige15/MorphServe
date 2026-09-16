@@ -141,8 +141,8 @@
       "worktree_status": null
     },
     "docs/author-artifact-audit.md": {
-      "artifact_last_commit": "062e51a98d219be3b2bab96eab88fe9dd26151e3",
-      "bytes": 7554,
+      "artifact_last_commit": "fd8200882de08348acae35a67a79af4a1828d92b",
+      "bytes": 7818,
       "referenced_by": [
         {
           "claim": "H27",
@@ -150,7 +150,7 @@
         }
       ],
       "run_source_revision": null,
-      "sha256": "a5ca8f5c74f04509d322274ccb1af757b83288127279649a63537ba09fe0a73a",
+      "sha256": "ba20dfc66f02b208d741640dce0a4aadda0f24049a61db5c6a5666f49e55f50e",
       "tracked": true,
       "worktree_status": null
     },
@@ -1394,7 +1394,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "062e51a98d219be3b2bab96eab88fe9dd26151e3",
+  "repository_head_at_generation": "fd8200882de08348acae35a67a79af4a1828d92b",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
