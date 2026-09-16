@@ -4,7 +4,7 @@ Base: `vendor/author-morphserve/MorphServe/` from `MorphServe/MorphServe@85c4fbf
 
 Current scoped changes:
 
-- lazy package exports to avoid importing optional morphing dependencies for FP16-only use;
+- lazy package exports and lazy ROUGE dependency loading so FP16 core import does not require optional morphing/evaluation packages;
 - complete `EngineConfig` field/default/CLI mapping;
 - Llama 3 RoPE construction matching Transformers' wavelength cutoffs/interpolation;
 - tied/untied `lm_head` key selection from checkpoint metadata;

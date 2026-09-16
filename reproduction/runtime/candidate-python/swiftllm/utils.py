@@ -1,4 +1,3 @@
-import evaluate
 import numpy as np
 
 def cdiv(a: int, b: int):
@@ -115,6 +114,7 @@ def F1_calculate(predictions, references):
     return f1_list
 
 def rouge_calculate(predictions, references):
+    import evaluate
     rouge = evaluate.load("rouge")
     assert len(predictions) == len(references)
     org_rouge1_score_list = []
