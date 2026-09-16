@@ -122,7 +122,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | F7 | Figures 5–7 | PARTIAL/MISSING | Physical capacity behavior shown; no exact 72-s capacity plot, saturation RPS or valid P99 TPOT. |
 | F8 | Tables 2–8 ablations | PARTIAL/BLOCKED | LIS algorithm/order subset measured; exact model/task/perplexity tables not reproduced. |
 | F9 | Table 1 BookSum 6K/2K every schedule | BLOCKED | Exact BookSum sample/prompt/decoding and memory resources absent. |
-| F10 | 4/16/6 ms transfer and hidden stall | NEGATIVE/PARTIAL | Blocking modified path 15.67/58.55 ms; async full-layer timing pending. |
+| F10 | 4/16/6 ms transfer and hidden stall | NEGATIVE/PARTIAL | Three isolated async copies: W4 median 15.214 ms, FP16 57.894 ms; no valid hidden-stall timeline yet. |
 | F11 | Sub-15-minute 32-layer profiling | PARTIAL/BLOCKED | Eight-layer inner 58.14 s; full setup memlock blocked. |
 | F12 | CodeLlama 48-layer endpoint | BLOCKED | Model unavailable. |
 

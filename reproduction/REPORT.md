@@ -63,9 +63,12 @@ Evidence: `experiments/candidate-fp16-baseline/results-attempt-3/metrics.json`.
 | GPU allocator delta | 0 bytes |
 | Blocking W4 operation wall | 15.67 ms |
 | Blocking FP16 restore wall | 58.55 ms |
+| Async W4 H2D CUDA copy, 3 repeats | 15.174–15.475 ms; median 15.214 ms (7.32–7.47 GB/s) |
+| Async FP16 H2D CUDA copy, 3 repeats | 57.769–58.293 ms; median 57.894 ms (7.48–7.55 GB/s) |
+| Async host enqueue | 0.276–0.427 ms; transfer incomplete at return in 6/6 cases |
 | Paper example (different Llama 2/L4-like PCIe Gen4 condition) | ≈4/16 ms transfer; ≈6 ms complete W4 |
 
-The original local timing does not reproduce the paper examples and includes stream creation/synchronization/reconstruction. A later independent persistent-stream path passes small-region event ordering, but no full-layer overlap timeline has yet established hidden stall.
+The isolated local transfer timings are stable but do not reproduce the paper examples, under different model/layer, RTX 3090/host and runtime conditions. Full-model attempt 1 does not establish hidden stall because its first decode was JIT-contaminated and its original overlap interval could include a layer wait; the strengthened pre-wait timeline is pending.
 
 Evidence: `experiments/autoawq-layer-switch/results/metrics.json`.
 
