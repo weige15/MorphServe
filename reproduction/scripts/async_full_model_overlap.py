@@ -33,12 +33,12 @@ def main():
 
     # Compile both precision paths and one real cached decode outside timed regions.
     model.forward([ids],[7],[],ignore_kvcache=True,return_logits=True).cpu()
-    executor.morph_to_w4([a.layer])
+    assert executor.morph_to_w4([a.layer])
     warm_logits=model.forward([ids],[6],[],return_logits=True)[0]
     warm_token=int(warm_logits.argmax().cpu())
     model.forward([[warm_token]],[6],[len(ids)+1],return_logits=True).cpu()
     model.free_seqs_resources([6])
-    executor.restore_fp16([a.layer]); model.forward([ids],[7],[],ignore_kvcache=True,return_logits=True).cpu()
+    assert executor.restore_fp16([a.layer]); model.forward([ids],[7],[],ignore_kvcache=True,return_logits=True).cpu()
 
     first0=int(model.forward([ids],[0],[],return_logits=True)[0].argmax().cpu())
     first1=int(model.forward([ids],[1],[],return_logits=True)[0].argmax().cpu())
@@ -52,7 +52,8 @@ def main():
         with torch.cuda.stream(executor.copier.stream):
             executor.copier.stream.wait_event(origin); copy_start.record()
         host_start=time.perf_counter()
-        (executor.morph_to_w4 if precision=='W4' else executor.restore_fp16)([a.layer])
+        changed=(executor.morph_to_w4 if precision=='W4' else executor.restore_fp16)([a.layer])
+        if not changed: raise RuntimeError(f'{precision} transition failed')
         host_ms=(time.perf_counter()-host_start)*1000
         ready=model.layer_transfer_events[a.layer]; ready_at_return=ready.query()
         decode_start.record(); async_logits=model.forward([[input_token]],[0],[length],return_logits=True)[0]; decode_end.record()

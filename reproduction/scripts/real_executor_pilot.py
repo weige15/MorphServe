@@ -58,9 +58,25 @@ def main():
     ids = tokenizer("Life blooms like a flower, far away", return_tensors="pt").input_ids[0].tolist()
     baseline = model.forward([ids], [0], [], ignore_kvcache=True, return_logits=True)[0].detach().cpu()
 
-    executor = RealMorphingExecutor(model, swiftllm_c, backups, packed, fail_expand_calls={1})
+    executor = RealMorphingExecutor(model, swiftllm_c, backups, packed, fail_expand_calls={2})
     scheduler = SimpleNamespace(waiting_q=[3, 4], running_q=[1, 2], swapped_q=[5])
     initial_queues = queue_state(scheduler)
+
+    morph_started = executor.morph_to_w4(layers[:2])
+    expand_completed = executor.expand_kv(layers[:2])
+    restore_completed = executor.restore_fp16(list(reversed(layers[:2])))
+    rollback_logits = model.forward([ids], [0], [], ignore_kvcache=True, return_logits=True)[0].detach().cpu()
+    after_failure = {
+        "success": morph_started and expand_completed,
+        "restore_success": restore_completed,
+        "executor_layers": list(executor.active_layers),
+        "kv_groups": len(executor.kv_groups),
+        "num_blocks": model.gpu_block_manager.num_blocks,
+        "queues_unchanged": queue_state(scheduler) == initial_queues,
+        "fp16_logits_exact": bool(torch.equal(rollback_logits, baseline)),
+        "partial_group_was_acquired": any(row[0] == "expand" for row in executor.log),
+    }
+    executor.fail_expand_calls.clear()
     coordinator = AdaptiveCoordinator(layers, executor, mode="accuracy", monitor=ServingMonitor(alpha=1))
     timestamp = 0.0
 
@@ -72,17 +88,6 @@ def main():
             timestamp += 0.05
         return event
 
-    failed = pressure_action()
-    after_failure = {
-        "success": failed["success"],
-        "controller_layers": coordinator.controller.quantized_layers,
-        "coordinator_layers": list(coordinator.active_layers),
-        "executor_layers": list(executor.active_layers),
-        "kv_groups": len(executor.kv_groups),
-        "num_blocks": model.gpu_block_manager.num_blocks,
-        "queues_unchanged": queue_state(scheduler) == initial_queues,
-    }
-    executor.fail_expand_calls.clear()
     successful_events = [pressure_action() for _ in layers]
     active_state = {
         "coordinator_layers": list(coordinator.active_layers),
@@ -120,7 +125,7 @@ def main():
         "fp16_logits_exact": final_exact,
     }
     gate = {
-        "injected_failure_rolled_back": not after_failure["success"] and after_failure["controller_layers"] == 0 and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["num_blocks"] == 4,
+        "injected_failure_rolled_back": not after_failure["success"] and after_failure["restore_success"] and after_failure["partial_group_was_acquired"] and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["num_blocks"] == 4 and after_failure["fp16_logits_exact"],
         "profile_order_active": active_state["executor_layers"] == layers == active_state["group_layers"],
         "real_w4_modules": all(classes == ["WQLinear_GEMM"] for classes in active_state["module_classes"].values()),
         "capacity_physically_expanded": active_state["num_blocks"] > 4 and active_state["num_free_blocks"] == active_state["num_blocks"],
