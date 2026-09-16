@@ -266,3 +266,7 @@ A byte audit found all 32 decoder FP16+W4 variants require 17,585,668,096 pinned
 ## 2026-09-16 — reconstructed controller core
 
 Because the paper gives only example 85% KV/100-ms queue thresholds, the protocol froze explicit non-author settings before evaluation: EMA 0.25; 3-sample pressure; 5-sample recovery; 1/2/4 layers per accuracy/default/performance action with maxima 4/8/16. Six tests pass for complete signal collection, persistence, hysteresis, mode bounds, oscillation resistance, coordinated KV commands, and invalid inputs. This is CPU policy-core evidence only; engine/GPU integration is next.
+
+## 2026-09-16 — controller/executor integration seam
+
+Five fake-executor tests pass. Pressure follows the frozen profile and copies W4 before KV expansion; expansion failure/exception rolls back FP16 in reverse order; recovery shrinks KV before restore and defers if unsafe; FCFS request order never changes. This validates command semantics/rollback only. Real GPU executor integration and concurrent allocation failures remain open.

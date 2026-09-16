@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The eight-layer profiler and controller core are independently correct. A minimal engine seam
-  can feed real monitor samples into the frozen controller and translate commands to executor
-  actions without changing FCFS scheduling; fake-executor integration should precede GPU actions.
-active_protocol: experiments/controller-core/protocol.md
+  The fake-executor integration preserves FCFS/action safety. A real executor adapter can reuse
+  the tested AutoAWQ, reclaimed-KV, migration, and event primitives, but must first expose
+  transactional allocation failure/rollback without assuming a single active request.
+active_protocol: experiments/controller-integration/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Integrate monitor/controller commands with a fake executor while preserving FCFS batches.
-  - Add real executor actions only after command/order/rollback tests.
+  - Add a transactional real-executor adapter around tested layer/KV primitives and inject allocation failure.
+  - Exercise multi-request block ownership and rollback before workload replay.
   - Design a staged full-profile strategy that does not misrepresent paper-style all-variant pinning.
