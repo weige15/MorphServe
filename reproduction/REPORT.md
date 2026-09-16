@@ -127,7 +127,7 @@ Evidence: `experiments/async-layer-transfer/`. The separately valid transfer sub
 
 ## 5. Claim-by-claim status
 
-`configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. `results/raw/claim-evidence-provenance.json` hashes and Git-audits all 70 referenced artifacts. Empty command/raw lists explicitly mean that no measurement is claimed. Historical runners predate exact source-revision capture, so their artifact commit is preserved but is not presented as proof of the executed source tree; pending runners write `source-revision.txt`.
+`configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. `results/raw/claim-evidence-provenance.json` hashes and Git-audits all 73 referenced artifacts. Empty command/raw lists explicitly mean that no measurement is claimed. Historical runners predate exact source-revision capture, so their artifact commit is preserved but is not presented as proof of the executed source tree; pending runners write `source-revision.txt`.
 
 | ID | Paper claim/location | Reported | Observed/agreement | Classification and evidence |
 |---|---|---|---|---|
