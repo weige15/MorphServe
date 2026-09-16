@@ -37,3 +37,7 @@ The C++ extension may build after selecting the existing PyTorch 2.4/CUDA 12.4 e
 ## Follow-up gate
 
 Only after this protocol may a separate `runtime/` reconstruction normalize package names, CLI/config plumbing, and supported checkpoint loading. Mechanism semantics must remain unchanged until independent correctness tests expose a specific defect.
+
+## Pre-registered follow-up after initial result
+
+The initial extension import failed with `libc10.so: cannot open shared object file`, but the probe imported `swiftllm_c` before `torch`. PyTorch extensions commonly rely on PyTorch loading its shared libraries first. The changed hypothesis is that `import torch; import swiftllm_c` will succeed without rebuilding or changing source. Run exactly this additional probe once, preserve both import outcomes, and do not reinterpret the known packaging/config failures.

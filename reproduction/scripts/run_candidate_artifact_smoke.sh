@@ -47,6 +47,8 @@ run_logged install_build_stack uv pip install --python "$VENV/bin/python" \
 run_logged build_extension bash -lc "cd '$TMP/csrc' && CUDA_HOME=/usr/local/cuda-12.4 '$VENV/bin/python' setup.py build_ext --inplace"
 run_logged import_extension env PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="$TMP/csrc" "$VENV/bin/python" -c \
   'import swiftllm_c; print(swiftllm_c.__file__); print(sorted(x for x in dir(swiftllm_c) if not x.startswith("_")))'
+run_logged import_extension_after_torch env PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="$TMP/csrc" "$VENV/bin/python" -c \
+  'import torch; import swiftllm_c; print(torch.__version__); print(swiftllm_c.__file__); print(sorted(x for x in dir(swiftllm_c) if not x.startswith("_")))'
 
 # Static dataclass/parser construction probe, loaded directly to isolate it from broken package imports.
 run_logged engine_config_probe env PYTHONDONTWRITEBYTECODE=1 "$VENV/bin/python" - "$TMP/MorphServe/engine_config.py" <<'PY'
