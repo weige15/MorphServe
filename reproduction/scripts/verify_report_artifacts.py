@@ -15,7 +15,7 @@ required=[
  'experiments/autoawq-layer-switch/results/metrics.json','experiments/active-kv-switch/results-attempt-2/metrics.json',
  'experiments/lis-real-8layer/results/metrics.json','experiments/real-executor/results/metrics.json',
  'experiments/multirequest-ownership/results/metrics.json','experiments/async-layer-transfer/results/metrics.json',
- 'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json',
+ 'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json','experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json',
  'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode',
  'profiles/llama31-8b-wikitext2-layers24-31.json',
 ]
@@ -46,6 +46,10 @@ assert (ROOT/'experiments/async-layer-transfer/alignment-results/test.exitcode')
 assert (ROOT/'experiments/async-layer-transfer/transaction-results/test.exitcode').read_text().strip()=='0'
 full_async_attempt=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json'))
 assert not full_async_attempt['passed'] and full_async_attempt['gate']['final_fp16_bytes_exact']
+transfer_summary=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json'))
+assert transfer_summary['precisions']['W4']['repeats']==3 and transfer_summary['precisions']['FP16']['repeats']==3
+assert 15.17 < transfer_summary['precisions']['W4']['copy_ms']['median'] < 15.22
+assert 57.89 < transfer_summary['precisions']['FP16']['copy_ms']['median'] < 57.90
 windows=json.load(open(ROOT/'results/raw/figure1b-trace-window-inference.json'))
 assert windows['azure_code']['inferred_start_s']==1073 and windows['burstgpt_1_v1.1']['inferred_start_s']==1781278
 trace_summary=json.load(open(ROOT/'traces/figure1b-inferred/summary.json'))

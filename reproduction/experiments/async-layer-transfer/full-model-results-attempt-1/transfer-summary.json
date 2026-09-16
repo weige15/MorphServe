@@ -1,0 +1,47 @@
+{
+  "classification": "isolated transfer subset; no overlap or paper-agreement claim",
+  "precisions": {
+    "FP16": {
+      "bytes": 436224000,
+      "copy_ms": {
+        "max": 58.292545318603516,
+        "median": 57.894046783447266,
+        "min": 57.76911926269531
+      },
+      "effective_gbps": {
+        "max": 7.55116237823092,
+        "median": 7.534867991379084,
+        "min": 7.483358251312852
+      },
+      "enqueue_host_ms": {
+        "max": 0.4183930577710271,
+        "median": 0.28869195375591516,
+        "min": 0.2758899936452508
+      },
+      "incomplete_at_host_return": 3,
+      "repeats": 3
+    },
+    "W4": {
+      "bytes": 113328128,
+      "copy_ms": {
+        "max": 15.475263595581055,
+        "median": 15.214079856872559,
+        "min": 15.17404842376709
+      },
+      "effective_gbps": {
+        "max": 7.46854925166143,
+        "median": 7.448897933108127,
+        "min": 7.323179169132907
+      },
+      "enqueue_host_ms": {
+        "max": 0.42653700802475214,
+        "median": 0.41091907769441605,
+        "min": 0.372190959751606
+      },
+      "incomplete_at_host_return": 3,
+      "repeats": 3
+    }
+  },
+  "schema_version": 1,
+  "source_run_passed": false
+}
