@@ -19,7 +19,7 @@ The official lab repository does not release implementation code. A separate pro
 - Never call `MorphServe/MorphServe` verified author code without a primary identity/link.
 - Never credit `cudaMemcpyAsync` as overlap when the caller immediately synchronizes.
 - Never retain `py::object` in process-static C++ containers; parse registration dictionaries into native metadata before storing them.
-- Never restore an FP16 layer region based only on free-block counters. The executor must wait on all in-flight KV/attention users of that reclaimed region before copy/rebinding.
+- Never restore an FP16 layer region based only on free-block counters. The reconstructed `record_layer_memory_use` barrier works, but every stream/call site must record use before restoration is safe.
 - Keep physical GPU address reuse distinct from Python/C++ tensor-pointer or object reconstruction.
 - The LIS equations are cosine similarities with `argmax`; appendix prose saying “angular distance,” “weight sensitivity,” or input independence is inconsistent and must not override the equations.
 - FP16 restoration affects future tokens only; historical W4 tokens remain part of the trajectory.
@@ -30,6 +30,6 @@ The official lab repository does not release implementation code. A separate pro
 - Does the candidate C++ extension build against the available PyTorch/CUDA toolchain without source repair?
 - Can the candidate package be normalized with only naming/config/checkpoint-loader changes, or are deeper correctness fixes required?
 - Does reclaimed KV memory stay within registered layer bounds for multiple non-contiguous swapped layers?
-- Do store and attention kernels preserve content under expand/shrink/restore and repeated prefill/decode adaptation?
+- Do full-model call sites consistently record the new lifetime event after every reclaimed-region store/attention/swap use?
 - Can a real AWQ W4 layer execute numerically in the fixed FP16 region on RTX 3090?
 - What exact representation and reduction should be frozen for LIS when the paper gives only vector-level cosine notation?

@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: explicit region-lifetime event barrier, then normalized no-morph runtime
+      next_gate: integrate event recording into normalized no-morph/morph runtime
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,15 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The confirmed in-flight corruption can be prevented by an explicit per-region CUDA completion
-  event that restoration must wait on after occupancy reaches zero. This barrier must be added
-  before any asynchronous model integration.
-active_protocol: experiments/candidate-lifetime/protocol.md
+  The event primitive prevents synthetic in-flight corruption. A minimal normalized candidate
+  package can wire it to reclaimed-region kernel call sites while fixing package/config/checkpoint
+  plumbing, enabling no-morph FP16 parity before AWQ model integration.
+active_protocol: experiments/candidate-lifetime-barrier/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<20 seconds of synthetic kernels/JIT; process wall times recorded under candidate-*/results/wall-time.json'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Implement and test an explicit per-region CUDA lifetime barrier for restore.
-  - Create minimal package/config/checkpoint compatibility fixes.
+  - Create minimal package/config/checkpoint compatibility fixes and event-recording call sites.
   - Freeze real WikiText-2 metric collection choices and run no-morph FP16 parity.

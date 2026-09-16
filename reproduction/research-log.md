@@ -154,3 +154,23 @@ The counterexample was confirmed: restore returned while the writer event was in
 ### Interpretation and next step
 
 The candidate's free-block check is insufficient for paper-style asynchronous overlap. Add explicit per-region CUDA lifetime events in the reconstruction before claiming safe restore or overlap. Full-model integration remains blocked until this correctness condition is enforced.
+
+## 2026-09-16 — explicit reclaimed-region event barrier
+
+### Hypothesis and scoped change
+
+Recording a timing-disabled event on every stream using a reclaimed region and making restore wait on all recorded events should eliminate the confirmed race without changing address/capacity behavior.
+
+### Command and outcome
+
+```bash
+CUDA_VISIBLE_DEVICES=0 \
+MORPHSERVE_TEST_RESULT_DIR="$PWD/reproduction/experiments/candidate-lifetime-barrier/results" \
+reproduction/scripts/run_candidate_lifetime_test.sh
+```
+
+The unrecorded sensitivity case still corrupted 1,530 bytes. In the recorded case the writer was unfinished before restore, restore waited ~103 ms, and final corruption was 0. Three event-protected immediate restore cycles had stable addresses, exact bytes, and zero allocator deltas. Prior memory-manager and two-region Triton regressions also passed.
+
+### Scope and next step
+
+The C++ primitive is correct in this modified synthetic condition. It does not help unless all Python/Triton call sites record use. Integrate that call at the model executor boundary, then normalize package/config/checkpoint loading and run no-morph FP16 parity.
