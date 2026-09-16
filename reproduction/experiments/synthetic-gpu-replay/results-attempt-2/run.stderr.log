@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/synthetic_gpu_replay.py", line 82, in <module>
+    if __name__=='__main__': raise SystemExit(main())
+                                              ^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/synthetic_gpu_replay.py", line 27, in main
+    model=LlamaModel(engine_config,args.model); model.load_weights(); model.init_kvcache_and_swap(8)
+                                                ^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/candidate-python/swiftllm/worker/model.py", line 93, in load_weights
+    self.weight = load_weights(
+                  ^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/candidate-python/swiftllm/worker/weight.py", line 252, in load_weights
+    gpu_buffer = torch.empty(total_elements, dtype=dtype, device="cuda")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 14.96 GiB. GPU 0 has a total capacity of 23.56 GiB of which 12.95 GiB is free. Process 1218897 has 10.32 GiB memory in use. Including non-PyTorch memory, this process has 256.00 MiB memory in use. Of the allocated memory 0 bytes is allocated by PyTorch, and 0 bytes is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
