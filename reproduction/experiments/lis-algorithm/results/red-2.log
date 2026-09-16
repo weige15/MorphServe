@@ -1,0 +1,20 @@
+test_recomputes_mds_for_every_remaining_candidate (reproduction.tests.test_profiling.RankLayersTests.test_recomputes_mds_for_every_remaining_candidate) ... ok
+test_rejects_invalid_local_metrics (reproduction.tests.test_profiling.RankLayersTests.test_rejects_invalid_local_metrics) ... ERROR
+test_saves_complete_profile_as_canonical_json (reproduction.tests.test_profiling.RankLayersTests.test_saves_complete_profile_as_canonical_json) ... ok
+test_ties_use_lowest_layer_index (reproduction.tests.test_profiling.RankLayersTests.test_ties_use_lowest_layer_index) ... ok
+
+======================================================================
+ERROR: test_rejects_invalid_local_metrics (reproduction.tests.test_profiling.RankLayersTests.test_rejects_invalid_local_metrics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/nfs/home/s314511048/MorphServe/reproduction/tests/test_profiling.py", line 52, in test_rejects_invalid_local_metrics
+    rank_layers({0: 0.5}, {1: 0.5}, lambda _layer, _quantized: 0.5)
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/morphserve/profiling.py", line 23, in rank_layers
+    score = 0.25 * float(lts[layer]) + 0.25 * float(lrs[layer]) + 0.5 * mds_value
+                                                    ~~~^^^^^^^
+KeyError: 0
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.003s
+
+FAILED (errors=1)

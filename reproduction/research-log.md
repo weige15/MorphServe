@@ -58,4 +58,22 @@ No GPU work or model load. Run one changed-hypothesis follow-up that preloads Py
 
 ### Follow-up outcome
 
-The frozen follow-up `import torch; import swiftllm_c` succeeded against the freshly built extension and exposed 13 bindings, including layer registration/replacement and reclaimed-KV operations. This narrows the failure: the C++ source is buildable/importable, while the released Python package and CLI remain non-runnable. The repeat runner's venv-creation step returned 2 because the venv already existed; dependency and build probes still ran, and this harness idempotence issue will be fixed without changing the observed mechanism result.
+The frozen follow-up `import torch; import swiftllm_c` succeeded against the freshly built extension and exposed 13 bindings, including layer registration/replacement and reclaimed-KV operations. This narrows the failure: the C++ source is buildable/importable, while the released Python package and CLI remain non-runnable. The repeat runner's venv-creation step returned 2 because the venv already existed; dependency and build probes still ran, and this harness idempotence issue was fixed without changing the observed mechanism result.
+
+## 2026-09-16 — Algorithm 1 conditioned-MDS selection
+
+### Hypothesis and seam
+
+A three-layer worked example with state-dependent MDS will distinguish the paper's greedy conditioned algorithm from a one-time/static MDS ranking. The public seam is `rank_layers(lts, lrs, mds)` plus canonical `save_profile`.
+
+### Command and outcome
+
+```bash
+PYTHONPATH="$PWD/reproduction/runtime" python3 -m unittest reproduction.tests.test_profiling -v
+```
+
+The retained red/green loop ends with 4/4 passing tests. The conditioned algorithm makes six MDS calls, selects `[0,2,1]`, while a static-MDS comparator selects `[0,1,2]`. Literal LIS weights, `argmax`, deterministic reconstructed tie-breaking, validation, and full-history JSON are covered.
+
+### Resource cost and next step
+
+CPU-only and zero GPU experiment time. Next, freeze model representation/calibration choices and implement real WikiText-2 metric collection; selection-logic success alone is not a model-profile reproduction.

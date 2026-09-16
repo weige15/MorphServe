@@ -1,0 +1,12 @@
+$ PYTHONPATH="$PWD/reproduction/runtime" python3 -m unittest discover -s reproduction/tests -v
+test_recomputes_mds_for_every_remaining_candidate (test_profiling.RankLayersTests.test_recomputes_mds_for_every_remaining_candidate) ... ok
+test_rejects_invalid_local_metrics (test_profiling.RankLayersTests.test_rejects_invalid_local_metrics) ... ok
+test_saves_complete_profile_as_canonical_json (test_profiling.RankLayersTests.test_saves_complete_profile_as_canonical_json) ... ok
+test_ties_use_lowest_layer_index (test_profiling.RankLayersTests.test_ties_use_lowest_layer_index) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+$ python3 -m py_compile reproduction/runtime/morphserve/*.py reproduction/tests/*.py
+$ git diff --check

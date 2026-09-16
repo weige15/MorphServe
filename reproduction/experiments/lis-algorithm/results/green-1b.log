@@ -1,0 +1,6 @@
+test_recomputes_mds_for_every_remaining_candidate (reproduction.tests.test_profiling.RankLayersTests.test_recomputes_mds_for_every_remaining_candidate) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

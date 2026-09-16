@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: candidate artifact build/import and no-morph viability
+      next_gate: normalized runtime no-morph viability and real WikiText-2 metric collection
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -73,15 +73,16 @@ blocked_exact_inputs:
 active_hypothesis: >-
   The candidate project-account artifact contains the core low-bit swap and reclaimed-KV
   mechanisms but is not runnable unmodified; a minimal, separately labeled package/config
-  normalization can expose those mechanisms without silently redesigning them.
-active_protocol: experiments/candidate-artifact-smoke/protocol.md
+  normalization can expose those mechanisms without silently redesigning them. Algorithm 1
+  selection logic is independently testable before model-specific metric collection.
+active_protocol: experiments/lis-algorithm/protocol.md
 resource_accounting:
   gpu_experiment_seconds: 0
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Execute unmodified candidate package/install/import/build probes and preserve failures.
-  - Create a separate reconstruction tree for minimal packaging/config compatibility fixes.
-  - Add conditioned-MDS Algorithm 1 unit tests and implementation.
+  - Create a separate reconstruction tree for minimal package/config/checkpoint compatibility fixes.
+  - Freeze and implement real WikiText-2 metric collection around the tested conditioned-MDS core.
   - Exercise synthetic layer swap and reclaimed-KV mapping before full-model serving.
+  - Run no-morph FP16 parity before any serving comparison.

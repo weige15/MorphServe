@@ -1,0 +1,21 @@
+test_recomputes_mds_for_every_remaining_candidate (reproduction.tests.test_profiling.RankLayersTests.test_recomputes_mds_for_every_remaining_candidate) ... FAIL
+
+======================================================================
+FAIL: test_recomputes_mds_for_every_remaining_candidate (reproduction.tests.test_profiling.RankLayersTests.test_recomputes_mds_for_every_remaining_candidate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/nfs/home/s314511048/MorphServe/reproduction/tests/test_profiling.py", line 29, in test_recomputes_mds_for_every_remaining_candidate
+    self.assertEqual(
+AssertionError: Lists differ: [0.8500000000000001, 0.8, 0.75] != [0.85, 0.8, 0.75]
+
+First differing element 0:
+0.8500000000000001
+0.85
+
+- [0.8500000000000001, 0.8, 0.75]
++ [0.85, 0.8, 0.75]
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

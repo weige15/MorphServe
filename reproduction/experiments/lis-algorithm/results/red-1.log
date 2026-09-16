@@ -1,0 +1,19 @@
+test_profiling (unittest.loader._FailedTest.test_profiling) ... ERROR
+
+======================================================================
+ERROR: test_profiling (unittest.loader._FailedTest.test_profiling)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_profiling
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/tests/test_profiling.py", line 3, in <module>
+    from morphserve.profiling import rank_layers
+ModuleNotFoundError: No module named 'morphserve'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
