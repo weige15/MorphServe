@@ -13,10 +13,15 @@ cat reproduction/research-state.yaml
 PYTHONPATH="$PWD/reproduction/runtime:$PWD/reproduction/runtime/candidate-python" \
   python3 -m unittest reproduction.tests.test_profiling \
   reproduction.tests.test_candidate_runtime reproduction.tests.test_controller \
-  reproduction.tests.test_controller_integration -v
+  reproduction.tests.test_controller_integration reproduction.tests.test_replay -v
+
+# Requires the runner-created venv because it imports torch.
+PYTHONPATH="$PWD/reproduction/runtime:$PWD/reproduction/runtime/candidate-python" \
+  reproduction/.venv/bin/python -m unittest \
+  reproduction.tests.test_real_executor_transactions -v
 ```
 
-Expected CPU result: sixteen tests pass. GPU runners create/clear `reproduction/.venv`, install pinned cached dependencies, save commands/logs/metrics, and return a nonzero code when a predeclared gate fails.
+Expected setup-free result: twenty tests pass; four executor transaction tests pass in the populated venv. GPU runners create/clear `reproduction/.venv`, install pinned dependencies, save commands/logs/metrics, and return nonzero when a predeclared gate fails. Full 8B reruns exit 75 before setup when the selected physical GPU has under 17 GiB free.
 
 Representative GPU gates:
 
@@ -25,6 +30,10 @@ CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_candidate_kv_mapping_test.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_autoawq_layer_switch.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_active_kv_switch.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_lis_real_pilot.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_real_executor_pilot.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_multirequest_ownership.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_async_full_model_overlap.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_synthetic_gpu_replay.sh
 ```
 
 ## Important Files
@@ -36,11 +45,14 @@ CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_lis_real_pilot.sh
 | `docs/paper-evidence-brief.md` | Visual audit of all 19 pages, Tables 1–8, Figures 1–7, equations |
 | `docs/source-map.md` | Paper requirement → source/artifact mapping |
 | `docs/claim-register.md` | Claim status and required evidence |
+| `docs/completion-audit.md` | Explicit requirement-to-artifact checklist; currently rejects completion |
+| `docs/trace-audit.md`, `docs/task-artifact-audit.md` | Inferred trace windows and pinned task-source gaps |
+| `REPORT.md` | Current claim-by-claim report |
 | `configs/paper-reference-values.json` | Paper-reported references only |
 | `vendor/author-morphserve/` | Immutable candidate artifact at `85c4fbf...` |
 | `runtime/candidate-csrc/` | Native-metadata/event-safe repaired C++ reconstruction |
 | `runtime/candidate-python/` | Normalized candidate Python fork |
-| `runtime/morphserve/` | Tested LIS core and independent AutoAWQ adapter |
+| `runtime/morphserve/` | LIS, controller, replay, AutoAWQ adapter and transactional async executor |
 | `experiments/*/protocol.md` | Pre-registered experiment contract |
 | `experiments/*/results*/` | Raw logs, metrics, commands, verification |
 | `profiles/` | Frozen offline layer order artifacts |
@@ -56,10 +68,12 @@ Paper flow: Serving Monitor → Morphing Controller → per-worker Executor → 
 2. real AutoAWQ per-layer packed variants in pinned CPU memory;
 3. repaired C++ same-address copy and reclaimed-tail storage;
 4. candidate Triton KV store/PagedAttention virtual block mapping;
-5. explicit per-region CUDA lifetime events;
-6. independent Algorithm 1 conditioned-MDS profiler.
+5. explicit lifetime events plus a persistent morph stream and just-in-time layer waits;
+6. physical arbitrary-region KV mapping and transactional ownership-aware recovery;
+7. reconstructed monitor/controller modes and scheduled-arrival accounting;
+8. independent Algorithm 1 conditioned-MDS profiler.
 
-Controller modes, workload replay, multi-request pressure, and paper baselines remain incomplete. Exact author code provenance is unresolved.
+Controller settings remain reconstructed, not author-recovered. Full-model overlap and corrected replay reruns are pending uncontended GPU memory. Exact paper baselines, task mappings, scaling operation, model revisions and author-code provenance remain unresolved.
 
 ## Development Workflow
 
@@ -85,6 +99,12 @@ Controller modes, workload replay, multi-request pressure, and paper baselines r
 | W4 switch | `run_autoawq_layer_switch.sh` | real W4, same base, exact FP16 restore |
 | Active KV | `run_active_kv_switch.sh` | same-history gates and migration pass |
 | LIS pilot | `run_lis_real_pilot.sh` | 6 conditioned calls, saved `[29,30,31]` profile |
+| Expanded LIS | existing `experiments/lis-real-8layer/` command log | 36 conditioned calls, saved `[25,24,26,27,28,29,30,31]` |
+| Real executor | `run_real_executor_pilot.sh` | partial-expansion rollback, 4→1,849→4 blocks, exact final FP16 |
+| Ownership | `run_multirequest_ownership.sh` | occupied reclaimed group refuses shrink without mutation |
+| Replay accounting | Quickstart replay tests | independent arrivals and complete success/error/timeout records |
+| Async seam | `run_async_layer_transfer_test.sh` | five CUDA event/copy/rollback checks pass |
+| Async full model | `run_async_full_model_overlap.sh` | attempt 1 rejected; strengthened pre-wait timeline rerun still pending |
 
 ## Troubleshooting
 
@@ -96,7 +116,9 @@ Controller modes, workload replay, multi-request pressure, and paper baselines r
 | `evaluate` missing during core import | Normalized runtime lazy-loads it only for ROUGE |
 | W4 repeats differ slightly | Expected AutoAWQ split-K atomic variance; use frozen envelope, not exact equality |
 | Multi-second first decode | Triton JIT; warm/precompile before timing |
+| Runner exits 75 before setup | Selected GPU has <17 GiB free; choose a genuinely free GPU, never evict another user's process |
 | CUDA OOM/unexpected latency | Inspect saved `nvidia-before.csv`; another process may occupy the physical GPU |
+| Async full-model attempt shows multi-second first decode | Decode PagedAttention JIT was not warmed; attempt 1 is preserved/rejected and retry warms a real cached decode |
 | Full 32-layer pinned variants fail | Audit the 16.45-GB memlock limit before retrying; do not bypass limits |
 
 ## Documentation Freshness Checklist

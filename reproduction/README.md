@@ -13,7 +13,7 @@ Requirements: Linux, Python 3.12, `uv`, CUDA 12.x, and an NVIDIA GPU for GPU run
 PYTHONPATH="$PWD/reproduction/runtime:$PWD/reproduction/runtime/candidate-python" \
   python3 -m unittest reproduction.tests.test_profiling \
   reproduction.tests.test_candidate_runtime reproduction.tests.test_controller \
-  reproduction.tests.test_controller_integration -v
+  reproduction.tests.test_controller_integration reproduction.tests.test_replay -v
 
 # Current state and evidence
 cat reproduction/research-state.yaml
@@ -33,12 +33,16 @@ CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_static_autoawq_baseline.sh      
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_autoawq_layer_switch.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_active_kv_switch.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_lis_real_pilot.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_real_executor_pilot.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_multirequest_ownership.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_async_full_model_overlap.sh
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_synthetic_gpu_replay.sh
 ```
 
 ## Project Structure
 
 - `vendor/`: immutable candidate MorphServe and SwiftLLM snapshots.
-- `runtime/`: independent repaired C++/Python reconstruction and LIS/AutoAWQ adapters.
+- `runtime/`: repaired candidate runtime plus independent LIS, controller, replay, AutoAWQ and async transactional executor.
 - `experiments/`: locked protocols, raw logs, metrics, analyses, and negative results.
 - `profiles/`: saved offline layer orders.
 - `configs/paper-reference-values.json`: paper values only, never measurements.
@@ -47,7 +51,7 @@ CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_lis_real_pilot.sh
 
 ## Testing
 
-Passing tests/runners must do real work and save raw evidence. The main verified surfaces are FP16 parity, real W4 switching, physical KV reclaim/mapping, event lifetime, active-KV same-history continuity, and a real three-layer conditioned-MDS profile. Check each runner's `run.exitcode`/`test.exitcode` and `verification.log`; do not rely only on console `OK`.
+Passing tests/runners must do real work and save raw evidence. Verified surfaces include FP16 parity, real W4 switching, physical arbitrary-region KV mapping, lifetime/rollback transactions, active multi-request continuity, eight-layer conditioned MDS, replay accounting, and nonblocking CUDA copy seams. Full-model async overlap attempt 1 is deliberately rejected; inspect attempt notes and every `run.exitcode`/`test.exitcode`, not only console `OK`.
 
 ## Documentation Map
 
@@ -71,4 +75,4 @@ Passing tests/runners must do real work and save raw evidence. The main verified
 - Candidate C++ originally segfaulted at shutdown; see `doc/debug-report.md`.
 - AutoAWQ split-K logits are not bit deterministic; see `doc/debug-report-autoawq-repeat.md`.
 - First-call multi-second attention logs are Triton JIT, not steady-state timings.
-- Verify a GPU is actually free with `nvidia-smi`; saved before/after snapshots identify contention.
+- Verify a GPU is actually free with `nvidia-smi`; saved before/after snapshots identify contention. Pending 8B runners exit 75 below 17 GiB free rather than evicting other users or repeating OOMs.
