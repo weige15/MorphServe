@@ -67,6 +67,14 @@ async_copy=json.load(open(ROOT/'experiments/async-layer-transfer/results/metrics
 assert async_copy['bytes_exact'] and async_copy['same_address'] and async_copy['prior_unfinished_after_enqueue']
 assert (ROOT/'experiments/async-layer-transfer/alignment-results/test.exitcode').read_text().strip()=='0'
 assert (ROOT/'experiments/async-layer-transfer/transaction-results/test.exitcode').read_text().strip()=='0'
+transaction_log=(ROOT/'experiments/async-layer-transfer/transaction-results/test.log').read_text()
+assert 'Ran 16 tests' in transaction_log and transaction_log.rstrip().endswith('OK')
+for test_name in (
+    'test_double_copy_failure_poisoned_executor_blocks_further_actions',
+    'test_poisoned_recovery_does_not_reattach_invalid_kv_snapshot',
+    'test_recovery_restore_failure_is_atomically_compensated',
+):
+    assert test_name in transaction_log,test_name
 assert (ROOT/'experiments/async-layer-transfer/activity-analysis-results/test.exitcode').read_text().strip()=='0'
 full_async_attempt=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json'))
 assert not full_async_attempt['passed'] and full_async_attempt['gate']['final_fp16_bytes_exact']
