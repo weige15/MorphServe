@@ -1,0 +1,190 @@
+{
+  "counts_before": [
+    5,
+    1
+  ],
+  "executor_log": [
+    [
+      "morph",
+      25
+    ],
+    [
+      "expand",
+      25,
+      615
+    ],
+    [
+      "morph",
+      24
+    ],
+    [
+      "expand",
+      24,
+      615
+    ],
+    [
+      "morph",
+      26
+    ],
+    [
+      "expand",
+      26,
+      615
+    ]
+  ],
+  "final": {
+    "active_layers": [
+      25,
+      24,
+      26
+    ],
+    "fp16_logits_exact": false,
+    "groups": 2,
+    "num_blocks": 1234,
+    "num_free_blocks": "tensor(1234, device='cuda:0')",
+    "queues_unchanged": true,
+    "request_counts": [
+      0,
+      0
+    ],
+    "rows": {
+      "0": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "1": [
+        5
+      ]
+    }
+  },
+  "final_recovery": {
+    "active_layers": [
+      25,
+      24,
+      26
+    ],
+    "command": {
+      "expand_kv": false,
+      "layer_delta": -1,
+      "mode": "accuracy",
+      "pressure_count": 0,
+      "quantized_layers": 2,
+      "reason": "persistent_recovery",
+      "recovery_count": 0,
+      "sample_timestamp_s": 1.4000000000000006,
+      "shrink_kv_before_restore": true
+    },
+    "error": null,
+    "queues_after": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+    "queues_before": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+    "selected_layers": [
+      26
+    ],
+    "success": false
+  },
+  "gate": {
+    "after_free_recovery_succeeded": false,
+    "fcfs_unchanged": true,
+    "final_baseline_state": false,
+    "final_fp16_exact": false,
+    "free_groups_recovered_lifo": false,
+    "occupied_group_refused": false,
+    "ordinary_preemptions_zero": true,
+    "predicted_allocations": true,
+    "refusal_preserved_state": true,
+    "request_counts": true
+  },
+  "ordinary_preemptions": 0,
+  "passed": false,
+  "recovery_events": [
+    {
+      "active_layers": [
+        25,
+        24,
+        26
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.65,
+        "shrink_kv_before_restore": true
+      },
+      "error": "RuntimeError: Inplace update to inference tensor outside InferenceMode is not allowed.You can make a clone to get a normal tensor before doing inplace update.See https://github.com/pytorch/rfcs/pull/17 for more details.",
+      "queues_after": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+      "queues_before": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+      "selected_layers": [
+        26
+      ],
+      "success": false
+    },
+    {
+      "active_layers": [
+        25,
+        24,
+        26
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.9000000000000002,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "queues_after": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+      "queues_before": "QueueState(waiting=(2,), running=(0, 1), swapped=())",
+      "selected_layers": [
+        26
+      ],
+      "success": false
+    }
+  ],
+  "refusal_state": {
+    "active_layers": [
+      25,
+      24,
+      26
+    ],
+    "counts_unchanged": true,
+    "event_success": false,
+    "group_layers": [
+      25,
+      24
+    ],
+    "queues_unchanged": true,
+    "rows_unchanged": true,
+    "selected": [
+      26
+    ],
+    "sentinel_unchanged": true
+  },
+  "rows_before": {
+    "0": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "1": [
+      5
+    ]
+  },
+  "schema_version": 1,
+  "sentinel_before": [
+    Infinity,
+    -Infinity
+  ]
+}
