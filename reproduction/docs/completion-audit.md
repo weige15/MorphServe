@@ -48,7 +48,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | C4 | Contiguous pinned FP16/W4 variants | PARTIAL | Tested per-layer pinned buffers; full 32-layer simultaneous setup blocked by memlock. |
 | C5 | Preallocate GPU regions and preserve same address | PASS (modified) | One-layer exact address/storage/allocator tests; `experiments/autoawq-layer-switch/`. |
 | C6 | Warm/precompile applicable GEMM before timing | PARTIAL | Static/switch pilots warm paths; full-async and synthetic retry code now warms real cached decode, pending rerun. |
-| C7 | Real asynchronous copy, separate morph/decode streams | PARTIAL | Candidate is blocking. Independent persistent-stream copier passes small CUDA seam; full-layer run pending. |
+| C7 | Real asynchronous copy, separate morph/decode streams | PARTIAL | Candidate is blocking. Independent persistent-stream copier passes five current-revision CUDA tests with clean source-status; the GPU was 100% externally occupied, so timings are supporting diagnostics only. Full-layer run pending. |
 | C8 | Explicit lifetime/event synchronization | PASS at seams | Uncoordinated race corrupts 1,530 bytes; C++ region barrier and Python last-forward/layer-ready barriers pass. |
 | C9 | No whole-model reload/per-request routing/fake W4 | PASS for tested paths | Same base region and packed kernels used. |
 | C10 | Physical KV blocks in reclaimed weight bytes | PASS at earlier seam / current integration pending | Physical reclaimed storage and zero allocator delta pass; current executor rejects inactive, duplicate, already-grouped, unregistered and overlapping ranges before acquisition. The 615 blocks/layer measurement is historical pre-atomic evidence. |
@@ -140,7 +140,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | G8 | Predeclare tolerances before target inspection | PARTIAL | W4 repeat envelope derived independently; many exact experiments never reached. |
 | G9 | Preserve failures/negative results | PASS | Multiple numbered attempts, SIGSEGV/race/mapping/JIT/OOM evidence retained. |
 | G10 | Regenerate plots/tables from raw | PARTIAL | Summaries and verifier check saved JSON. `figures/gen_fig_transfer_diagnostics.py` regenerates CSV/PDF/PNG byte-identically from raw attempt-1 metrics and fails closed if the source run is not rejected; unavailable numbered-paper plots remain absent. |
-| G11 | Every claimed result links command/config/raw/comparison | PASS for paths; historical source-revision caveat | `configs/claim-evidence-map.json` maps H1–H30 to paper references, commands, frozen configs/protocols, raw artifacts, comparisons and limitations. `results/raw/claim-evidence-provenance.json` hashes/Git-audits all 79 linked files. Older runners did not save the exact source revision; their artifact commit is not mislabeled as executed-source proof, while pending runners now write `source-revision.txt`. |
+| G11 | Every claimed result links command/config/raw/comparison | PASS for paths; historical source-revision caveat | `configs/claim-evidence-map.json` maps H1–H30 to paper references, commands, frozen configs/protocols, raw artifacts, comparisons and limitations. `results/raw/claim-evidence-provenance.json` hashes/Git-audits all 83 linked files. Older runners did not save the exact source revision; their artifact commit is not mislabeled as executed-source proof, while pending runners now write `source-revision.txt`. |
 | G12 | Tests execute real work, not canned success | PASS for inspected tests | CUDA tests mutate/compare actual storage; CPU tests compute policy/profile/replay behavior. |
 
 ## H. Iteration/checkpoint and finalization policy
@@ -168,7 +168,7 @@ The vendor manifest proves only that the candidate snapshot was not modified. Un
 The objective is **not achieved**. The smallest currently feasible next gates are:
 
 1. when one GPU again has >17 GiB free, run `CUDA_VISIBLE_DEVICES=<free> reproduction/scripts/run_async_full_model_overlap.sh` and inspect all three repeats rather than accepting its exit code alone; the 2026-09-16 free window was lost to an external process before the first model runner and was safely rejected at preflight;
-2. rerun `run_real_executor_pilot.sh` and `run_multirequest_ownership.sh` against the asynchronous executor; expansion-preflight and runner-provenance fixes have an independent PASS readiness review at `results/raw/post-expansion-preflight-rereview.md`;
+2. rerun `run_real_executor_pilot.sh` and `run_multirequest_ownership.sh` against the asynchronous executor; the small current-revision CUDA seam now passes, and expansion-preflight/runner-provenance fixes have an independent PASS readiness review at `results/raw/post-expansion-preflight-rereview.md`;
 3. rerun corrected `run_synthetic_gpu_replay.sh`, preserving complete timestamps and excluding warmup;
 4. update `REPORT.md` and this audit from the resulting raw artifacts.
 

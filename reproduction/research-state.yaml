@@ -86,5 +86,5 @@ resource_accounting:
   agent_tokens: tracked_by_runtime_separately
 next_actions:
   - Run the frozen three-repeat full-layer overlap pilot plus CUDA activity trace when a GPU has >17 GiB free.
-  - Re-run transactional real-executor, ownership, async seam and corrected synthetic replay; require empty source-status sidecars.
+  - Run transactional real-executor, ownership, full-layer async overlap and corrected synthetic replay; require empty source-status sidecars. The current-revision small CUDA seam passes.
   - Use frozen Figure-1 candidate windows only as plot-inferred modified conditions.
