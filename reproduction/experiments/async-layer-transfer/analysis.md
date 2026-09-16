@@ -1,11 +1,15 @@
 # Asynchronous layer-transfer correctness pilot
 
-Three CUDA tests pass on the public seams frozen in the protocol.
+Five CUDA tests pass on the public seams frozen in the protocol.
 
-- A 4,194,304-byte pinned-host copy was enqueued in 0.222 ms while the injected prior-use event was still unfinished.
-- The separate-stream copy itself measured 0.605 ms between CUDA events.
+- A 4,194,304-byte pinned-host copy was enqueued in 0.206 ms while the injected prior-use event was still unfinished.
+- The separate-stream copy itself measured 0.578 ms between CUDA events.
 - The returned typed view retained the registered destination address and all bytes matched after the just-in-time wait.
 - A synthetic `LlamaModel._forward` waited immediately before the affected layer, observed the copied value, consumed the pending event, and recorded a new end-of-forward lifetime event.
 - Pageable and oversize sources failed closed.
+- Async-model forwards do not accumulate the candidate blocking-restore event records; the single Python end-of-forward event is used instead.
+- A failure on the second expansion publishes a current-stream rollback barrier before restoring metadata.
+- Nine transaction/coordinator tests verify all-before-mutation shrink validation, partial morph rollback, restore rollback/prevalidation, FCFS preservation and action ordering.
+- Three rebuilt C++ tests include a misaligned registered-region guard, preventing unsigned reclaimed-capacity underflow.
 
-This establishes non-blocking host enqueue, event order, same-address views, and the model-use barrier on a small CUDA region. It is supporting correctness evidence only: the GPU was externally busy, the payload is not a decoder layer, and no decode/copy overlap or paper latency result is inferred. The full-model pilot remains pending adequate GPU headroom.
+This establishes non-blocking host enqueue, event order, same-address views, transaction invariants, and the model-use barrier on a small CUDA region. It is supporting correctness evidence only: full-model attempt 1 was JIT-contaminated and used an insufficient overlap definition. The strengthened retry remains pending adequate GPU headroom.

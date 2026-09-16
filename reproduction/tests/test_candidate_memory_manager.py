@@ -111,6 +111,17 @@ class CandidateMemoryManagerTests(unittest.TestCase):
         if output:
             Path(output).write_text(json.dumps(metrics, indent=2, sort_keys=True) + "\n")
 
+    def test_rejects_alignment_past_registered_region(self):
+        layer_id = 1003
+        owner = torch.empty(201, dtype=torch.uint8, device="cuda")
+        packed_cpu = torch.empty(1, dtype=torch.uint8, pin_memory=True)
+        swiftllm_c.register_layer_memory_org_gpu(layer_id, owner.data_ptr() + 1, 200)
+        swiftllm_c.register_layer_memory_quant(layer_id, packed_cpu.data_ptr(), packed_cpu.numel())
+        swiftllm_c.register_kv_cache_info(2, 1, 4, 8)
+
+        with self.assertRaisesRegex(RuntimeError, "No aligned space"):
+            swiftllm_c.acquire_new_kvcache(layer_id)
+
     def test_rejects_tail_smaller_than_one_kv_block(self):
         layer_id = 1002
         owner = torch.empty(1024, dtype=torch.uint8, device="cuda")
@@ -119,7 +130,7 @@ class CandidateMemoryManagerTests(unittest.TestCase):
         swiftllm_c.register_layer_memory_quant(layer_id, packed_cpu.data_ptr(), packed_cpu.numel())
         swiftllm_c.register_kv_cache_info(2, 1, 4, 8)
 
-        with self.assertRaisesRegex(RuntimeError, "No space available"):
+        with self.assertRaisesRegex(RuntimeError, r"No (aligned )?space available"):
             swiftllm_c.acquire_new_kvcache(layer_id)
 
 

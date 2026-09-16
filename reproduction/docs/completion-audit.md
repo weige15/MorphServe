@@ -76,13 +76,13 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | D3 | LIS argmax/conditioned-MDS test | PASS | Four unit tests plus 36 real conditioned evaluations. |
 | D4 | Mixed-precision numerical test | PASS (bounded) | Active W4 steps same-history rel-L2 0.00058–0.00088, top-1 match. |
 | D5 | KV address/content preservation | PASS | Synthetic, dense-oracle, active migration, two-request sentinels. |
-| D6 | Expansion/shrink/restoration | PASS | Transactional 4→1,849→4 blocks; exact final FP16. |
+| D6 | Expansion/shrink/restoration | PASS at tested seams; async full rerun pending | Transactional 4→1,849→4 evidence plus all-before-mutation shrink, partial morph/restore rollback and second-expansion barrier tests. |
 | D7 | Repeated adaptation during prefill and decode | PARTIAL | Repeated synthetic cycles and four active decode steps; full async alternating 3× run pending. |
 | D8 | Allocation failure and rollback | PASS | Injected expansion failure restores exact state/queues. |
 | D9 | Race/lifetime hazard | PASS/NEGATIVE+REPAIR | Corruption reproduced; event-safe repair reaches zero corruption. |
 | D10 | Oscillating pressure | PASS at controller seam | CPU controller persistence test; real multi-request oscillating serving not yet timed. |
 | D11 | Same-precision-history reference | PASS where used | Active-KV protocol; full async pilot also designed this way but pending. |
-| D12 | Inspect actual CUDA overlap | MISSING full-model | Small async seam proves ordering/nonblocking, not decoder overlap. Frozen `scripts/run_async_full_model_overlap.sh`. |
+| D12 | Inspect actual CUDA overlap | MISSING valid full-model | Attempt 1 is rejected (decode JIT and enclosing-interval false-positive risk). Retry records actual pre-layer-compute/copy intersection. |
 | D13 | CPU/tiny/simulation only supporting | PASS in classification | Report does not promote them to headline evidence. |
 
 ## E. Exact experimental setup and data

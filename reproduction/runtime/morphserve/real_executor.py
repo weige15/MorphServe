@@ -19,6 +19,7 @@ class RealMorphingExecutor:
         self.quant_objects = {}
         self.kv_groups = []
         self.log = []
+        self.model.async_layer_transfers = True
         self.copier = AsyncLayerCopier(model, extension)
         self.fp16_objects = {layer: model.transformer_layers[layer] for layer in backups}
         self.prepared_quant = {}
@@ -50,18 +51,37 @@ class RealMorphingExecutor:
 
     @torch.inference_mode()
     def morph_to_w4(self, layers):
-        for layer in layers:
-            if layer in self.active_layers:
-                raise RuntimeError(f"layer already W4: {layer}")
-            source = self.packed[layer]
-            self.copier.enqueue(
-                layer, source["buffer"], source["size"], source["tensor_map"]
-            )
-            wrapper, modules, tensors = self.prepared_quant[layer]
-            self.model.transformer_layers[layer] = wrapper
-            self.quant_objects[layer] = (wrapper, modules, tensors)
-            self.active_layers.append(layer)
-            self.log.append(("morph", layer))
+        if len(set(layers)) != len(layers) or any(
+            layer in self.active_layers or layer not in self.prepared_quant
+            for layer in layers
+        ):
+            return False
+        committed = []
+        try:
+            for layer in layers:
+                source = self.packed[layer]
+                self.copier.enqueue(
+                    layer, source["buffer"], source["size"], source["tensor_map"]
+                )
+                wrapper, modules, tensors = self.prepared_quant[layer]
+                self.model.transformer_layers[layer] = wrapper
+                self.quant_objects[layer] = (wrapper, modules, tensors)
+                self.active_layers.append(layer)
+                committed.append(layer)
+                self.log.append(("morph", layer))
+        except Exception as exc:
+            for layer in reversed(committed):
+                source = self.backups[layer]
+                self.copier.enqueue(
+                    layer, source["buffer"], source["size"], source["tensor_map"]
+                )
+                self.model.transformer_layers[layer] = self.fp16_objects[layer]
+                self.quant_objects.pop(layer, None)
+                self.active_layers.remove(layer)
+                self.log.append(("morph_rollback", layer))
+            self.log.append(("morph_failed", str(exc)))
+            self._sync_model_state()
+            return False
         self._sync_model_state()
         return True
 
@@ -69,9 +89,9 @@ class RealMorphingExecutor:
     def expand_kv(self, layers):
         manager = self.model.gpu_block_manager
         snapshot = {
-            "num_blocks": manager.num_blocks,
-            "num_free": manager.num_free_blocks,
-            "is_free": manager.is_block_free,
+            "num_blocks": int(manager.num_blocks),
+            "num_free": manager.num_free_blocks.clone() if isinstance(manager.num_free_blocks, torch.Tensor) else int(manager.num_free_blocks),
+            "is_free": manager.is_block_free.clone(),
             "k_len": len(self.model.k_cache_new),
             "v_len": len(self.model.v_cache_new),
             "group_len": len(self.kv_groups),
@@ -100,6 +120,9 @@ class RealMorphingExecutor:
             self._sync_model_state()
             return True
         except Exception as exc:
+            rollback_ready = torch.cuda.Event()
+            rollback_ready.record()
+            self.model.last_forward_event = rollback_ready
             manager.num_blocks = snapshot["num_blocks"]
             manager.num_free_blocks = snapshot["num_free"]
             manager.is_block_free = snapshot["is_free"]
@@ -119,12 +142,13 @@ class RealMorphingExecutor:
             return False
         group_size = self.model.kv_cache_new_block_size
         original = manager.num_blocks_org
-        for _layer in layers:
-            group_index = len(self.kv_groups) - 1
+        for offset, _layer in enumerate(layers):
+            group_index = len(self.kv_groups) - 1 - offset
             start = original + group_index * group_size
             end = start + group_size
             if not bool(manager.is_block_free[start:end].all()):
                 return False
+        for _layer in layers:
             group = self.kv_groups.pop()
             self.model.k_cache_new.pop()
             self.model.v_cache_new.pop()
@@ -140,16 +164,37 @@ class RealMorphingExecutor:
     @torch.inference_mode()
     def restore_fp16(self, layers):
         grouped = {group["layer"] for group in self.kv_groups}
-        if any(layer in grouped for layer in layers):
+        if len(set(layers)) != len(layers) or any(
+            layer in grouped or layer not in self.active_layers
+            for layer in layers
+        ):
             return False
-        for layer in layers:
-            self.quant_objects.pop(layer, None)
-            source = self.backups[layer]
-            self.copier.enqueue(
-                layer, source["buffer"], source["size"], source["tensor_map"]
-            )
-            self.model.transformer_layers[layer] = self.fp16_objects[layer]
-            self.active_layers.remove(layer)
-            self.log.append(("restore", layer))
+        active_before = list(self.active_layers)
+        restored = []
+        try:
+            for layer in layers:
+                source = self.backups[layer]
+                self.copier.enqueue(
+                    layer, source["buffer"], source["size"], source["tensor_map"]
+                )
+                self.model.transformer_layers[layer] = self.fp16_objects[layer]
+                self.quant_objects.pop(layer, None)
+                self.active_layers.remove(layer)
+                restored.append(layer)
+                self.log.append(("restore", layer))
+        except Exception as exc:
+            for layer in reversed(restored):
+                source = self.packed[layer]
+                self.copier.enqueue(
+                    layer, source["buffer"], source["size"], source["tensor_map"]
+                )
+                wrapper, modules, tensors = self.prepared_quant[layer]
+                self.model.transformer_layers[layer] = wrapper
+                self.quant_objects[layer] = (wrapper, modules, tensors)
+                self.log.append(("restore_rollback", layer))
+            self.active_layers = active_before
+            self.log.append(("restore_failed", str(exc)))
+            self._sync_model_state()
+            return False
         self._sync_model_state()
         return True

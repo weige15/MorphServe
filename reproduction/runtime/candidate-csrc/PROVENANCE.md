@@ -7,7 +7,8 @@ Scoped repairs:
 1. `src/memory_manager.h` and `.cpp` parse Python registration dictionaries into native `TensorInfo` records before persistence. This fixes the diagnosed interpreter-shutdown crash caused by process-static `py::object` values.
 2. `record_layer_memory_use(layer_id)` records an event on the current CUDA stream. FP16 restore waits for all recorded events for that reclaimed region before copying, then destroys them. Call sites must explicitly record every stream that uses a region.
 3. `get_layer_memory_org_gpu(layer_id)` exposes a non-owning byte view for the independent persistent-stream copier under `runtime/morphserve`; it does not alter the immutable candidate's blocking copy functions.
+4. Reclaimed-tail arithmetic rejects a 256-byte aligned start outside the registered layer region before unsigned subtraction.
 
-Copy addresses, K/V capacity arithmetic, storage ownership, and the candidate's original synchronous copy API are otherwise unchanged.
+Copy addresses, valid-region K/V capacity arithmetic, storage ownership, and the candidate's original synchronous copy API are otherwise unchanged.
 
 Evidence: `doc/debug-report.md`, `experiments/candidate-memory-manager-repair/`, and `experiments/candidate-lifetime-barrier/`.

@@ -15,6 +15,8 @@ required=[
  'experiments/autoawq-layer-switch/results/metrics.json','experiments/active-kv-switch/results-attempt-2/metrics.json',
  'experiments/lis-real-8layer/results/metrics.json','experiments/real-executor/results/metrics.json',
  'experiments/multirequest-ownership/results/metrics.json','experiments/async-layer-transfer/results/metrics.json',
+ 'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json',
+ 'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode',
  'profiles/llama31-8b-wikitext2-layers24-31.json',
 ]
 missing=[path for path in required if not (ROOT/path).is_file()]
@@ -37,6 +39,10 @@ memory=json.load(open(ROOT/'results/raw/full-profile-memory-feasibility.json'))
 assert memory['feasible_simultaneously_pinned'] is False
 async_copy=json.load(open(ROOT/'experiments/async-layer-transfer/results/metrics.json'))['copy']
 assert async_copy['bytes_exact'] and async_copy['same_address'] and async_copy['prior_unfinished_after_enqueue']
+assert (ROOT/'experiments/async-layer-transfer/alignment-results/test.exitcode').read_text().strip()=='0'
+assert (ROOT/'experiments/async-layer-transfer/transaction-results/test.exitcode').read_text().strip()=='0'
+full_async_attempt=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json'))
+assert not full_async_attempt['passed'] and full_async_attempt['gate']['final_fp16_bytes_exact']
 windows=json.load(open(ROOT/'results/raw/figure1b-trace-window-inference.json'))
 assert windows['azure_code']['inferred_start_s']==1073 and windows['burstgpt_1_v1.1']['inferred_start_s']==1781278
 trace_summary=json.load(open(ROOT/'traces/figure1b-inferred/summary.json'))

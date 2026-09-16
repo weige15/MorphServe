@@ -81,7 +81,9 @@ class LlamaModel(nn.Module):
         self.next_unquantized_layer = self.model_config.num_layers - 1
         self.explicit_kv_regions = False
         self.layer_transfer_events = {}
+        self.layer_transfer_wait_events = {}
         self.last_forward_event = None
+        self.async_layer_transfers = False
 
         
     @torch.inference_mode()
@@ -305,6 +307,9 @@ class LlamaModel(nn.Module):
         for layer in self.transformer_layers:
             transfer_ready = self.layer_transfer_events.pop(layer.layer_id, None)
             if transfer_ready is not None:
+                pre_wait = torch.cuda.Event(enable_timing=True)
+                pre_wait.record()
+                self.layer_transfer_wait_events[layer.layer_id] = pre_wait
                 torch.cuda.current_stream().wait_event(transfer_ready)
             # Layer is a Hugging Face LlamaDecoderLayer, use the original forward method: Otherwise, use the custom forward method
             input_embds = layer.forward(
@@ -329,9 +334,9 @@ class LlamaModel(nn.Module):
 
         # 5. Postprocessing: Convert final embeddings into output tokens/logits.
         output_tokens = self.post_layer.forward(input_embds, infer_state, return_logits=return_logits)
-        if not infer_state.ignore_kvcache:
-            # Default stream transitively waits on each layer's decode-attention event.
-            # Recording here protects every reclaimed region until this forward is done.
+        if not infer_state.ignore_kvcache and not self.async_layer_transfers:
+            # The blocking C++ restore consumes these per-region events. The async
+            # reconstruction instead waits on last_forward_event below.
             for reclaimed_layer_id in self.layer_quant_list:
                 swiftllm_c.record_layer_memory_use(reclaimed_layer_id)
         self.last_forward_event = torch.cuda.Event()

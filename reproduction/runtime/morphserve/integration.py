@@ -50,7 +50,10 @@ class AdaptiveCoordinator:
                 if success:
                     self.active_layers.extend(selected)
                 else:
-                    self.executor.restore_fp16(list(reversed(selected)))
+                    active = getattr(self.executor, "active_layers", None)
+                    rollback = list(reversed(selected)) if active is None else [layer for layer in reversed(selected) if layer in active]
+                    if rollback:
+                        self.executor.restore_fp16(rollback)
                     self.controller.quantized_layers -= delta
             elif delta < 0:
                 selected = list(reversed(self.active_layers[-abs(delta):]))
@@ -67,7 +70,10 @@ class AdaptiveCoordinator:
             error = f"{type(exc).__name__}: {exc}"
             if delta > 0 and selected:
                 try:
-                    self.executor.restore_fp16(list(reversed(selected)))
+                    active = getattr(self.executor, "active_layers", None)
+                    rollback = list(reversed(selected)) if active is None else [layer for layer in reversed(selected) if layer in active]
+                    if rollback:
+                        self.executor.restore_fp16(rollback)
                 except Exception as rollback_exc:
                     error += f"; rollback {type(rollback_exc).__name__}: {rollback_exc}"
             self.controller.quantized_layers -= delta

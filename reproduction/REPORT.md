@@ -116,7 +116,7 @@ Evidence: `experiments/real-executor/` and `experiments/multirequest-ownership/`
 
 The immutable candidate remains blocking (`cudaMemcpyAsync` followed by immediate stream synchronization). The independent reconstruction now exposes the registered GPU layer region, prebuilds FP16/W4 wrapper variants, and queues pinned copies on one persistent morphing stream. A model-wide last-forward event protects old use; the decode stream waits only immediately before the replaced layer.
 
-A 4 MiB correctness pilot enqueued in 0.222 ms while its injected prior-use event was unfinished; CUDA copy time was 0.605 ms, address was unchanged, and all bytes matched. The model-use barrier and invalid-source checks passed. This is supporting evidence only; the frozen three-repeat full-layer/decode pilot is awaiting an uncontended GPU with sufficient headroom.
+A 4 MiB correctness pilot enqueued in 0.206 ms while its injected prior-use event was unfinished; CUDA copy time was 0.578 ms, address was unchanged, and all bytes matched. Model-use, partial-expansion barrier, no-redundant-event, transaction, alignment and invalid-source checks pass. Full-model attempt 1 confirmed nonblocking 113/436 MB copies and exact final FP16 bytes, but is rejected for decode JIT contamination, an over-strict separate-request bit-exact gate, and an insufficient enclosing-interval overlap definition. The strengthened retry awaits an uncontended GPU.
 
 Evidence: `experiments/async-layer-transfer/`.
 

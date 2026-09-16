@@ -1,0 +1,23 @@
+/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:258: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at ../torch/csrc/utils/tensor_numpy.cpp:84.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+test_async_layer_transfer (unittest.loader._FailedTest.test_async_layer_transfer) ... ERROR
+
+======================================================================
+ERROR: test_async_layer_transfer (unittest.loader._FailedTest.test_async_layer_transfer)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_async_layer_transfer
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/tests/test_async_layer_transfer.py", line 12, in <module>
+    from morphserve.autoawq_adapter import AsyncLayerCopier
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/morphserve/autoawq_adapter.py", line 10, in <module>
+    from safetensors import safe_open
+ModuleNotFoundError: No module named 'safetensors'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

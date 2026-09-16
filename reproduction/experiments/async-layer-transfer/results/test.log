@@ -1,8 +1,10 @@
+test_async_model_does_not_accumulate_blocking_restore_events (reproduction.tests.test_async_layer_transfer.AsyncLayerTransferTests.test_async_model_does_not_accumulate_blocking_restore_events) ... ok
 test_model_waits_immediately_before_affected_layer (reproduction.tests.test_async_layer_transfer.AsyncLayerTransferTests.test_model_waits_immediately_before_affected_layer) ... ok
+test_partial_expansion_failure_publishes_rollback_barrier (reproduction.tests.test_async_layer_transfer.AsyncLayerTransferTests.test_partial_expansion_failure_publishes_rollback_barrier) ... ok
 test_pinned_copy_waits_for_prior_use_without_blocking_host (reproduction.tests.test_async_layer_transfer.AsyncLayerTransferTests.test_pinned_copy_waits_for_prior_use_without_blocking_host) ... ok
 test_rejects_unpinned_and_oversize_sources (reproduction.tests.test_async_layer_transfer.AsyncLayerTransferTests.test_rejects_unpinned_and_oversize_sources) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.860s
+Ran 5 tests in 1.128s
 
 OK

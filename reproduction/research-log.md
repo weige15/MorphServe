@@ -297,7 +297,7 @@ Attempt 1 passed accounting but prefill-only warmup leaked decode Triton JIT int
 
 ## 2026-09-17 — independent asynchronous layer-copy seam
 
-The candidate's synchronized-per-call copy path was retained, and a labeled independent path was added using a non-owning registered-region view, pinned copies on one persistent morph stream, prebuilt precision wrappers, a model-wide last-forward event, and a just-in-time wait before the affected layer. Three small CUDA tests pass: prior use was unfinished when 4 MiB enqueue returned (0.222 ms), copy took 0.605 ms, bytes/address were exact, model use observed the copy, and malformed sources failed closed. A three-repeat full-layer same-history overlap pilot is frozen, but every GPU remains externally occupied and none has the >17 GiB headroom required for the 8B model. The official lab repository was rechecked and remains at README-only commit `1c42999...` with no tags/releases.
+The candidate's synchronized-per-call copy path was retained, and a labeled independent path was added using a non-owning registered-region view, pinned copies on one persistent morph stream, prebuilt precision wrappers, a model-wide last-forward event, and a just-in-time wait before the affected layer. Five small CUDA tests pass: prior use was unfinished when 4 MiB enqueue returned (0.206 ms), copy took 0.578 ms, bytes/address were exact, model use observed the copy, partial expansion published a rollback barrier, redundant blocking-path events were suppressed, and malformed sources failed closed. A three-repeat full-layer same-history overlap pilot is frozen, but every GPU remains externally occupied and none has the >17 GiB headroom required for the 8B model. The official lab repository was rechecked and remains at README-only commit `1c42999...` with no tags/releases.
 
 ## 2026-09-17 — Figure 1 trace-window inference
 
@@ -306,3 +306,7 @@ Approximate Figure 1b token-volume shapes were digitized and matched against eve
 ## 2026-09-17 — task source audit
 
 Primary GovReport, QMSum, DuReader, Multi-News, LongBench and pre-paper BookSum source revisions were pinned. The paper-linked `baidu/DuReader@c625076...` recursive tree contains 303 paths but no English/translation artifact and has no releases, contradicting the practical implication of Appendix C's “hosted at” statement. Public task sources remain usable only for modified-condition pilots because exact splits, sampled rows, prompts, mapping seeds, decoding and metric versions are absent.
+
+## 2026-09-17 — full async attempt 1 and transactional review
+
+Three W4/FP16 cycles ran on Llama 3.1 8B. Host enqueue was nonblocking; W4 same-history relative L2 stayed 0.00049–0.00102 with top-1 matches; final FP16 bytes/state were exact. The run is rejected as steady-state overlap evidence: first W4 decode included PagedAttention JIT (3.67 s), separate FP16 requests were not bit-exact despite rel-L2 0.00074–0.00130/top-1 matches, and interval intersection could count layer-wait idle time. Review also found partial expansion/shrink/morph transaction defects and alignment underflow. Repairs now pass five CUDA seam, nine transaction/controller and three C++ alignment tests; the retry adds real decode warmup and a pre-layer-wait event to measure actual compute/copy intersection.

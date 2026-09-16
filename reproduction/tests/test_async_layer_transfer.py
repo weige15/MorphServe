@@ -4,11 +4,13 @@ import time
 import unittest
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 import torch
 import swiftllm_c
 
 from morphserve.autoawq_adapter import AsyncLayerCopier
+from morphserve.real_executor import RealMorphingExecutor
 from swiftllm.worker.model import LlamaModel
 
 
@@ -52,7 +54,7 @@ class AsyncLayerTransferTests(unittest.TestCase):
             prior.record()
 
         model=object.__new__(LlamaModel); torch.nn.Module.__init__(model)
-        model.last_forward_event=prior; model.layer_transfer_events={}; model.layer_quant_list=[]
+        model.last_forward_event=prior; model.layer_transfer_events={}; model.layer_transfer_wait_events={}; model.layer_quant_list=[]
         model.k_cache=model.v_cache=None; model.k_cache_new=model.v_cache_new=[]
         model.pre_layer=SimpleNamespace(forward=lambda _:torch.zeros((1,1),device='cuda'))
         class Layer:
@@ -70,8 +72,42 @@ class AsyncLayerTransferTests(unittest.TestCase):
 
         self.assertEqual(result.item(),73)
         self.assertNotIn(layer_id,model.layer_transfer_events)
+        self.assertTrue(model.layer_transfer_wait_events[layer_id].query())
         self.assertIsNot(model.last_forward_event,prior)
         self.assertTrue(model.last_forward_event.query())
+
+    def test_async_model_does_not_accumulate_blocking_restore_events(self):
+        model=object.__new__(LlamaModel); torch.nn.Module.__init__(model)
+        model.last_forward_event=None; model.layer_transfer_events={}; model.layer_transfer_wait_events={}; model.layer_quant_list=[9]; model.async_layer_transfers=True
+        model.k_cache=model.v_cache=None; model.k_cache_new=model.v_cache_new=[]
+        model.gpu_block_manager=SimpleNamespace(block_table=None)
+        model.pre_layer=SimpleNamespace(forward=lambda _:torch.zeros((1,1),device='cuda'))
+        model.transformer_layers=[SimpleNamespace(layer_id=9,forward=lambda x,*_:x)]
+        model.post_layer=SimpleNamespace(forward=lambda x,_state,return_logits=False:x)
+        with patch.object(swiftllm_c,'record_layer_memory_use',side_effect=AssertionError('redundant C++ event')):
+            model._forward(torch.tensor([1],device='cuda'),SimpleNamespace(ignore_kvcache=False))
+        torch.cuda.synchronize()
+        self.assertTrue(model.last_forward_event.query())
+
+    def test_partial_expansion_failure_publishes_rollback_barrier(self):
+        class Extension:
+            calls=0
+            def acquire_new_kvcache(self,_layer):
+                self.calls+=1
+                if self.calls==2: raise RuntimeError('second expansion failed')
+                k=torch.ones((1,1),device='cuda'); v=torch.ones((1,1),device='cuda')
+                torch.cuda._sleep(400_000_000); k.zero_(); v.zero_()
+                return k,v
+        manager=SimpleNamespace(num_blocks=2,num_free_blocks=2,is_block_free=torch.ones(2,dtype=torch.bool,device='cuda'),num_blocks_org=2)
+        model=SimpleNamespace(gpu_block_manager=manager,k_cache_new=[],v_cache_new=[],kv_cache_new_block_size=0,last_forward_event=None,model_config=SimpleNamespace(num_layers=3),layer_quant_list=[],is_layer_quant_list=[False]*3,explicit_kv_regions=False)
+        executor=object.__new__(RealMorphingExecutor); executor.model=model; executor.extension=Extension(); executor.copier=SimpleNamespace(wait_current=lambda _layer:False)
+        executor.fail_expand_calls=set(); executor.expand_calls=0; executor.kv_groups=[]; executor.active_layers=[]; executor.log=[]; executor.layer_stride_bytes=8
+
+        self.assertFalse(executor.expand_kv([0,1]))
+
+        self.assertIsNotNone(model.last_forward_event); self.assertFalse(model.last_forward_event.query())
+        model.last_forward_event.synchronize()
+        self.assertEqual((manager.num_blocks,manager.num_free_blocks),(2,2)); self.assertEqual(model.k_cache_new,[]); self.assertEqual(executor.kv_groups,[])
 
     def test_rejects_unpinned_and_oversize_sources(self):
         layer=4102; owner=torch.zeros(1024,dtype=torch.uint8,device='cuda')

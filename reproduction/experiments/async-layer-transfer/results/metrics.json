@@ -2,8 +2,8 @@
   "copy": {
     "bytes": 4194304,
     "bytes_exact": true,
-    "copy_device_ms": 0.6050879955291748,
-    "enqueue_host_ms": 0.2220680471509695,
+    "copy_device_ms": 0.5778560042381287,
+    "enqueue_host_ms": 0.2056020312011242,
     "prior_unfinished_after_enqueue": true,
     "same_address": true
   }

@@ -25,9 +25,9 @@ When GPU headroom permits, use local Llama 3.1 8B layer 25:
 
 - warm FP16 and W4 kernels;
 - start an asynchronous W4 copy before a decode step;
-- record CUDA events for transfer and decode on separate streams;
+- record CUDA events for transfer, decode, and the point immediately before the affected-layer wait on separate streams;
 - verify same-history W4 output and exact FP16 restoration;
-- report transfer, decode, concurrent wall/exposed stall, and overlap evidence separately;
+- report transfer, decode, actual pre-layer-compute overlap, remaining transfer at the layer wait, concurrent wall/exposed stall, and enclosing-interval overlap separately;
 - perform at least three timed repeats if resources permit.
 
 ## Classification

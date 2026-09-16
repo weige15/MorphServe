@@ -148,9 +148,12 @@ std::tuple<torch::Tensor, torch::Tensor> MemoryManager::acquire_new_kvcache(int 
     char* layer_end = static_cast<char*>(org_range.start_addr) + quant_range.size;
     void* new_kv_start = reinterpret_cast<void*>((reinterpret_cast<uintptr_t>(layer_end) + 255) & ~255);
 
-    // Calculate maximum number of new blocks that can fit
-    size_t available_memory = org_range.size - (static_cast<char*>(new_kv_start) - 
-        static_cast<char*>(org_range.start_addr));
+    // Calculate maximum number of new blocks that can fit.
+    size_t aligned_offset = static_cast<char*>(new_kv_start) - static_cast<char*>(org_range.start_addr);
+    if (aligned_offset >= org_range.size) {
+        throw std::runtime_error("No aligned space available for new KV cache blocks");
+    }
+    size_t available_memory = org_range.size - aligned_offset;
     
     // kv_slot_size = (k+v) * num_layers * num_kv_heads * head_dim * fp16_2bytes
     size_t kv_slot_size = 2 * kv_cache_info.num_layers * kv_cache_info.num_kv_heads * kv_cache_info.head_dim * 2; 
