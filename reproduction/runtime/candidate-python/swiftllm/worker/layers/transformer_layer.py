@@ -10,8 +10,8 @@ from swiftllm.worker.infer_state import LlamaInferState
 from swiftllm.worker.kernels.linear import linear
 from swiftllm.worker.kernels.rmsnorm import fused_add_rmsnorm_inplace
 from swiftllm.worker.kernels.rotary_emb import rotary_embedding_inplace
-from swiftllm.worker.kernels.paged_attn import paged_attention
-from swiftllm.worker.kernels.kvcache_mgmt import store_kvcache, store_kvcache_performance_test
+from swiftllm.worker.kernels.paged_attn import paged_attention, paged_attention_multi_kernels
+from swiftllm.worker.kernels.kvcache_mgmt import store_kvcache, store_kvcache_explicit_regions, store_kvcache_performance_test
 from swiftllm.worker.kernels.silu_and_mul import silu_and_mul_inplace
 
 debug_print = False
@@ -114,7 +114,7 @@ class LlamaTransformerLayer:
         # Executed on the default CUDA stream
         # This includes Triton kernels, which are asynchronous on the GPU.
         if not infer_state.ignore_kvcache:
-            store_kvcache(
+            (store_kvcache_explicit_regions if infer_state.explicit_kv_regions else store_kvcache)(
                 k, v,   
                 k_cache, v_cache,
                 k_cache_new, v_cache_new,
@@ -178,7 +178,7 @@ class LlamaTransformerLayer:
                 # Wait for the store_kvcache operation to complete (up to the store_kvcache_event.record() call) on the default stream
                 torch.cuda.current_stream().wait_event(store_kvcache_event)
                 end_time_wait_store_kvcache_event = time.perf_counter()
-                paged_attention(
+                (paged_attention_multi_kernels if infer_state.explicit_kv_regions else paged_attention)(
                     q[infer_state.num_prefill_tokens:, :, :],
                     k_cache, v_cache, k_cache_new, v_cache_new, block_table,
                     self.model_config, self.engine_config, infer_state,
@@ -426,7 +426,7 @@ class AWQTransformerLayer():
 
         if not infer_state.ignore_kvcache:
             # print("~"*18, "storing kvcache, LlamaTransformerLayer.forward:", '~'*18)
-            store_kvcache(
+            (store_kvcache_explicit_regions if infer_state.explicit_kv_regions else store_kvcache)(
                 k, v,
                 k_cache, v_cache,
                 k_cache_new, v_cache_new,
@@ -495,7 +495,7 @@ class AWQTransformerLayer():
             with torch.cuda.stream(self.decoding_piggyback_stream):
                 torch.cuda.current_stream().wait_event(store_kvcache_event)
                 end_time_wait_store_kvcache_event = time.perf_counter()
-                paged_attention(
+                (paged_attention_multi_kernels if infer_state.explicit_kv_regions else paged_attention)(
                     q[infer_state.num_prefill_tokens:, :, :],
                     k_cache, v_cache, k_cache_new, v_cache_new, block_table,
                     self.model_config, self.engine_config, infer_state,

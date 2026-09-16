@@ -31,3 +31,4 @@ class LlamaInferState:
     position_sin: torch.Tensor	# [num_tokens, hidden_size]
 
     ignore_kvcache: bool    # Skip storing the key/value cache, useful when profiling the number of kv blocks
+    explicit_kv_regions: bool = False

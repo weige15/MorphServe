@@ -79,6 +79,7 @@ class LlamaModel(nn.Module):
         self.layer_quant_list = list()
         self.is_layer_quant_list = [False] * self.model_config.num_layers
         self.next_unquantized_layer = self.model_config.num_layers - 1
+        self.explicit_kv_regions = False
 
         
     @torch.inference_mode()
@@ -466,7 +467,8 @@ class LlamaModel(nn.Module):
             position_cos = self._cos_cached[position_indices],
             position_sin = self._sin_cached[position_indices],
 
-            ignore_kvcache = ignore_kvcache
+            ignore_kvcache = ignore_kvcache,
+            explicit_kv_regions = self.explicit_kv_regions,
         )
 
         # print the debug information during the real inference
