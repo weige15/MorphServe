@@ -10,6 +10,7 @@ Can one active Llama 3.1 8B request continue through FP16 prefill → four one-l
 
 Use one loaded normalized candidate model and fork from a byte-for-byte snapshot immediately after FP16 prefill:
 
+- Use PagedAttention block size 4, so the 9-token prompt occupies original blocks 0–2 and the fourth W4 decode allocates block 3.
 - Reference branch: layer-31 AutoAWQ tensors live in separate GPU allocations; the fourth W4 decode allocates original KV block 3.
 - In-place branch: reset to the same prefill snapshot, install layer 31 in-place, reduce original capacity to the three occupied prompt blocks, attach the reclaimed tail, and force the fourth W4 decode to allocate virtual block 3 in reclaimed group 0.
 - Feed the reference branch's greedy token at every step to both branches, so precision/token history is identical even if atomic W4 logits vary.
