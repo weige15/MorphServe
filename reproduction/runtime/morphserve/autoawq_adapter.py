@@ -104,6 +104,16 @@ def load_packed_layer(model_path: str | Path, layer_id: int, extension) -> dict:
     return {"buffer": buffer, "size": total, "tensor_map": tensor_map}
 
 
+def materialize_packed_tensors(packed: dict, device: str = "cuda") -> list[torch.Tensor]:
+    tensors = []
+    for entry in packed["tensor_map"]:
+        _, info = next(iter(entry.items()))
+        byte_view = packed["buffer"][info["offset"]:info["offset"] + info["size"]]
+        tensor = byte_view.view(info["dtype"]).view(info["shape"]).to(device)
+        tensors.append(tensor)
+    return tensors
+
+
 def release_fp16_layer(model, layer_id: int) -> None:
     weight = model.transformer_layers[layer_id].weight
     for name in FP16_ATTRIBUTES:
