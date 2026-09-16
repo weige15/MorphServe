@@ -244,3 +244,15 @@ Attempt 2 passed all gates. The fourth W4 decode allocated reclaimed virtual blo
 ### Interpretation
 
 This is strong modified-condition state-preservation evidence for one request/layer/block. Occupied-block migration is a reconstruction choice, and first-call multi-second logs are Triton JIT initialization, not steady-state latency.
+
+## 2026-09-16 — real WikiText-2 conditioned LIS pilot
+
+### Hypothesis and command
+
+The tested Algorithm 1 core can drive real FP16/W4 metric collection for layers 29–31 on one exact 2,048-token WikiText-2 sequence.
+
+```bash
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_lis_real_pilot.sh
+```
+
+All gates passed. The profiler executed six candidate calls, retained LTS/LRS/MDS histories, selected `[29,30,31]`, restored 56 tensors and final FP16 logits exactly, and saved an immutable profile. Inner work took 14.83 s; runner wall with model/data load was 45.22 s. This is a bounded modified-condition pilot, not a full 32-layer order or under-15-minute reproduction.

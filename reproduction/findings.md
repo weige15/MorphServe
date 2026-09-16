@@ -26,6 +26,8 @@ The official lab repository does not release implementation code. A separate pro
 - FP16 restoration affects future tokens only; historical W4 tokens remain part of the trajectory.
 - Local RTX 3090 results are modified-condition evidence, not exact L4/A100 reproduction.
 
+6. **Real conditioned profiling is feasible and auditable, but the full search remains the expensive missing piece.** A 2,048-token WikiText-2 pilot over layers 29–31 executed all six conditioned candidate sets in 14.83 s inner time and selected `[29,30,31]`; LTS dominated the ordering while MDS changed with Q. Representation/sample choices are now explicit rather than silently author-attributed.
+
 ## Open questions
 
 - Does the candidate C++ extension build against the available PyTorch/CUDA toolchain without source repair?

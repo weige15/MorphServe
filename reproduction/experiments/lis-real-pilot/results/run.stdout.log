@@ -1,0 +1,92 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+{
+  "order": [
+    29,
+    30,
+    31
+  ],
+  "lts": {
+    "29": 0.9492411613464355,
+    "30": 0.895855724811554,
+    "31": 0.5562435984611511
+  },
+  "lrs": {
+    "29": 0.9997166395187378,
+    "30": 0.9992213249206543,
+    "31": 0.9983987212181091
+  },
+  "mds_calls": [
+    {
+      "layer": 29,
+      "quantized_before": [],
+      "set": [
+        29
+      ],
+      "value": 0.9983512759208679
+    },
+    {
+      "layer": 30,
+      "quantized_before": [],
+      "set": [
+        30
+      ],
+      "value": 0.9986203908920288
+    },
+    {
+      "layer": 31,
+      "quantized_before": [],
+      "set": [
+        31
+      ],
+      "value": 0.9980236291885376
+    },
+    {
+      "layer": 30,
+      "quantized_before": [
+        29
+      ],
+      "set": [
+        29,
+        30
+      ],
+      "value": 0.9985061883926392
+    },
+    {
+      "layer": 31,
+      "quantized_before": [
+        29
+      ],
+      "set": [
+        29,
+        31
+      ],
+      "value": 0.9979360103607178
+    },
+    {
+      "layer": 31,
+      "quantized_before": [
+        29,
+        30
+      ],
+      "set": [
+        29,
+        30,
+        31
+      ],
+      "value": 0.9978642463684082
+    }
+  ],
+  "elapsed": 14.825671377009712,
+  "gate": {
+    "sequence_length_2048": true,
+    "local_metrics_complete": true,
+    "conditioned_mds_calls_6": true,
+    "all_unique_sets_evaluated": true,
+    "profile_steps_3": true,
+    "all_restores_exact": true,
+    "final_fp16_logits_exact": true
+  }
+}

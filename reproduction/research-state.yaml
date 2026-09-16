@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: real WikiText-2 LIS metric collection and frozen layer order
+      next_gate: expand real LIS pilot beyond three layers within pinned-memory budget
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Active one-layer state preservation now works in a modified condition. The next highest-value
-  gap is paper-faithful offline profiling: freeze representation/reduction/sample choices,
-  collect real FP16/W4 local metrics on WikiText-2, and feed the tested conditioned-MDS core.
-active_protocol: experiments/active-kv-switch/protocol.md
+  The real three-layer LIS pilot is correct and fast. Expanding the same frozen protocol to a
+  larger layer subset should test interaction/order stability, while a full 32-layer all-variant
+  pinned run may exceed the host's 16.45-GB memlock limit (FP16 backups plus W4 metadata).
+active_protocol: experiments/lis-real-pilot/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Freeze real WikiText-2 metric representation/sample choices around the tested LIS core.
-  - Run a bounded real profiler pilot, then extend to multiple W4 layers using its frozen order.
+  - Expand the frozen real profiler to a larger subset and measure ordering/interaction stability.
+  - Audit full 32-layer pinned-byte requirements against memlock before launching the full search.
   - Add controller modes only after profiling and multi-request state tests.
