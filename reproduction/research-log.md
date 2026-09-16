@@ -136,3 +136,21 @@ The process exited 0. Prefill and decode writes landed exactly in virtual blocks
 ### Interpretation and resource cost
 
 This is positive modified-condition mechanism evidence, not proof of arbitrary non-contiguous allocation. The candidate derives group pointers by fixed layer-stride subtraction. First-call wall time was 8.06 s and PagedAttention printed 877 ms because Triton compiled on demand; those values are initialization evidence and excluded from timing claims. Next gates are occupied/in-flight shrink and repeated adaptation, then model integration.
+
+## 2026-09-16 — in-flight restore and repeated adaptation
+
+### Hypothesis
+
+Candidate restore has no event barrier for reclaimed storage, so a delayed non-default-stream write can complete after FP16 restoration and corrupt weights. Explicit waiting should prevent corruption; synchronized cycles should remain stable.
+
+### Command and outcome
+
+```bash
+CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_candidate_lifetime_test.sh
+```
+
+The counterexample was confirmed: restore returned while the writer event was incomplete, and the later write left 1,530 bytes different from original. The explicit-wait control had 0 corrupt bytes. Separately, five synchronized quantize/reclaim/write/release/restore cycles reused one base, restored exact bytes each time, and had zero allocator deltas.
+
+### Interpretation and next step
+
+The candidate's free-block check is insufficient for paper-style asynchronous overlap. Add explicit per-region CUDA lifetime events in the reconstruction before claiming safe restore or overlap. Full-model integration remains blocked until this correctness condition is enforced.

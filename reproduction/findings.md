@@ -19,6 +19,7 @@ The official lab repository does not release implementation code. A separate pro
 - Never call `MorphServe/MorphServe` verified author code without a primary identity/link.
 - Never credit `cudaMemcpyAsync` as overlap when the caller immediately synchronizes.
 - Never retain `py::object` in process-static C++ containers; parse registration dictionaries into native metadata before storing them.
+- Never restore an FP16 layer region based only on free-block counters. The executor must wait on all in-flight KV/attention users of that reclaimed region before copy/rebinding.
 - Keep physical GPU address reuse distinct from Python/C++ tensor-pointer or object reconstruction.
 - The LIS equations are cosine similarities with `argmax`; appendix prose saying “angular distance,” “weight sensitivity,” or input independence is inconsistent and must not override the equations.
 - FP16 restoration affects future tokens only; historical W4 tokens remain part of the trajectory.

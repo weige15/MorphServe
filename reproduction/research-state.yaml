@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: occupied/in-flight shrink plus repeated adaptation, then normalized no-morph runtime
+      next_gate: explicit region-lifetime event barrier, then normalized no-morph runtime
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Fixed-stride two-tail mapping is correct in the synthetic oracle. The next material risk is
-  restoration while reclaimed blocks are occupied or kernels are in flight, plus repeated
-  expand/shrink cycles; candidate Python checks occupancy but not CUDA event lifetime.
-active_protocol: experiments/candidate-kv-mapping/protocol.md
+  The confirmed in-flight corruption can be prevented by an explicit per-region CUDA completion
+  event that restoration must wait on after occupancy reaches zero. This barrier must be added
+  before any asynchronous model integration.
+active_protocol: experiments/candidate-lifetime/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<20 seconds of synthetic kernels/JIT; process wall times recorded under candidate-*/results/wall-time.json'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Test safe occupied/in-flight shrink and repeated expand/restore.
+  - Implement and test an explicit per-region CUDA lifetime barrier for restore.
   - Create minimal package/config/checkpoint compatibility fixes.
   - Freeze real WikiText-2 metric collection choices and run no-morph FP16 parity.

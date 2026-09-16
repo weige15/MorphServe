@@ -1,0 +1,2 @@
+lifetime verification: PASS (negative race confirmed)
+{"explicit_wait_control": {"corrupt_bytes": 0}, "repeated_cycles": {"allocator_deltas_bytes": [0, 0, 0, 0, 0], "cycles": 5, "exact_restore_each_cycle": true, "owner_base_stable": true}, "unsafe_race": {"corrupt_bytes_after_writer": 1530, "restore_wall_ms": 1.7030419548973441, "writer_done_when_restore_returned": false}}
