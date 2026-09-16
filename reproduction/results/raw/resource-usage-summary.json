@@ -108,12 +108,6 @@
       "process_wall_seconds": 45.220359522
     },
     {
-      "exit_code": 0,
-      "gpu_snapshot_present": true,
-      "path": "experiments/multirequest-ownership/results/wall-time.json",
-      "process_wall_seconds": 38.233873322
-    },
-    {
       "exit_code": 1,
       "gpu_snapshot_present": true,
       "path": "experiments/multirequest-ownership/results-attempt-1/wall-time.json",
@@ -122,14 +116,20 @@
     {
       "exit_code": 0,
       "gpu_snapshot_present": true,
-      "path": "experiments/real-executor/results/wall-time.json",
-      "process_wall_seconds": 35.343308172
+      "path": "experiments/multirequest-ownership/results-before-atomic-repair/wall-time.json",
+      "process_wall_seconds": 38.233873322
     },
     {
       "exit_code": 1,
       "gpu_snapshot_present": true,
       "path": "experiments/real-executor/results-attempt-1/wall-time.json",
       "process_wall_seconds": 34.843935672
+    },
+    {
+      "exit_code": 0,
+      "gpu_snapshot_present": true,
+      "path": "experiments/real-executor/results-before-atomic-repair/wall-time.json",
+      "process_wall_seconds": 35.343308172
     },
     {
       "exit_code": 1,

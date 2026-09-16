@@ -1,2 +1,2 @@
 report artifact verification: PASS
-{"async_copy_gate": true, "expected_memlock_blocker": true, "expected_negative_static_repeat": true, "positive_gates": {"active_kv": true, "executor": true, "fp16": true, "lis8": true, "ownership": true, "switch": true}, "trace_manifest_gate": true}
+{"async_copy_gate": true, "current_positive_gates": {"active_kv": true, "fp16": true, "lis8": true, "switch": true}, "expected_memlock_blocker": true, "expected_negative_static_repeat": true, "supporting_historical_gates": {"executor_pre_atomic": true, "ownership_pre_atomic": true}, "trace_manifest_gate": true}

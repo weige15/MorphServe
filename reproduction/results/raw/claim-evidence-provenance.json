@@ -967,8 +967,8 @@
       "worktree_status": null
     },
     "experiments/multirequest-ownership/analysis.md": {
-      "artifact_last_commit": "3fe6a96fb02b33cc23c91dc3bc43555c97a03c2b",
-      "bytes": 1250,
+      "artifact_last_commit": "0dc6fb45766991da617fda374903429e173997bc",
+      "bytes": 1620,
       "referenced_by": [
         {
           "claim": "H8",
@@ -984,7 +984,7 @@
         }
       ],
       "run_source_revision": null,
-      "sha256": "935ce414e4dd859d3cc7dcf470f21036cc7559b38cba1c34794ebec5a0640638",
+      "sha256": "0e2f8dbab5f46cc8884c4a8516e10f4acba847bbf67bce013a5a78f57422b63e",
       "tracked": true,
       "worktree_status": null
     },
@@ -1010,8 +1010,8 @@
       "tracked": true,
       "worktree_status": null
     },
-    "experiments/multirequest-ownership/results/commands.txt": {
-      "artifact_last_commit": "967671bc64e81b3cc6303ce15eaa5f5cec222bbb",
+    "experiments/multirequest-ownership/results-before-atomic-repair/commands.txt": {
+      "artifact_last_commit": "38a0cfe44ba40cc974452097a74840e83fea5779",
       "bytes": 1306,
       "referenced_by": [
         {
@@ -1032,8 +1032,8 @@
       "tracked": true,
       "worktree_status": null
     },
-    "experiments/multirequest-ownership/results/metrics.json": {
-      "artifact_last_commit": "967671bc64e81b3cc6303ce15eaa5f5cec222bbb",
+    "experiments/multirequest-ownership/results-before-atomic-repair/metrics.json": {
+      "artifact_last_commit": "38a0cfe44ba40cc974452097a74840e83fea5779",
       "bytes": 3712,
       "referenced_by": [
         {
@@ -1111,8 +1111,8 @@
       "worktree_status": null
     },
     "experiments/real-executor/analysis.md": {
-      "artifact_last_commit": "e4cc016f3cb6d25ddf36e59e5a05fc21cae5f73c",
-      "bytes": 1322,
+      "artifact_last_commit": "0dc6fb45766991da617fda374903429e173997bc",
+      "bytes": 1695,
       "referenced_by": [
         {
           "claim": "H8",
@@ -1124,7 +1124,7 @@
         }
       ],
       "run_source_revision": null,
-      "sha256": "39c2b189a91224f418edb59bb5949e18bfd9eb12f0ffa3b1aa29cb559cf91781",
+      "sha256": "b25bd9c310eb68b06ef94b4c0ee0c94a8358336f73e96c296093833679ba34e3",
       "tracked": true,
       "worktree_status": null
     },
@@ -1142,8 +1142,8 @@
       "tracked": true,
       "worktree_status": null
     },
-    "experiments/real-executor/results/commands.txt": {
-      "artifact_last_commit": "e4cc016f3cb6d25ddf36e59e5a05fc21cae5f73c",
+    "experiments/real-executor/results-before-atomic-repair/commands.txt": {
+      "artifact_last_commit": "38a0cfe44ba40cc974452097a74840e83fea5779",
       "bytes": 1290,
       "referenced_by": [
         {
@@ -1160,8 +1160,8 @@
       "tracked": true,
       "worktree_status": null
     },
-    "experiments/real-executor/results/metrics.json": {
-      "artifact_last_commit": "e4cc016f3cb6d25ddf36e59e5a05fc21cae5f73c",
+    "experiments/real-executor/results-before-atomic-repair/metrics.json": {
+      "artifact_last_commit": "38a0cfe44ba40cc974452097a74840e83fea5779",
       "bytes": 6189,
       "referenced_by": [
         {
@@ -1394,7 +1394,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "fd8200882de08348acae35a67a79af4a1828d92b",
+  "repository_head_at_generation": "0dc6fb45766991da617fda374903429e173997bc",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
