@@ -1,0 +1,2 @@
+expanded eight-layer LIS: PASS
+{"elapsed": 58.141378429019824, "gate": {"all_restores_exact": true, "all_unique_sets_evaluated": true, "candidate_counts_descend": true, "conditioned_mds_call_count": true, "final_fp16_logits_exact": true, "local_metrics_complete": true, "profile_step_count": true, "sequence_length_2048": true}, "order": [25, 24, 26, 27, 28, 29, 30, 31]}

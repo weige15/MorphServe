@@ -256,3 +256,9 @@ CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_lis_real_pilot.sh
 ```
 
 All gates passed. The profiler executed six candidate calls, retained LTS/LRS/MDS histories, selected `[29,30,31]`, restored 56 tensors and final FP16 logits exactly, and saved an immutable profile. Inner work took 14.83 s; runner wall with model/data load was 45.22 s. This is a bounded modified-condition pilot, not a full 32-layer order or under-15-minute reproduction.
+
+## 2026-09-16 — expanded eight-layer real LIS
+
+Attempt 1 completed all 36 model evaluations but the generic runner retained three-layer gate constants and exited 1; raw model results were preserved. After generalizing only the verifier counts, the identical frozen protocol passed and selected `[25,24,26,27,28,29,30,31]`. The shared tail kept `[29,30,31]`; 336 restores and final FP16 logits were exact. Inner work took 58.14 s, full wall 92.78 s.
+
+A byte audit found all 32 decoder FP16+W4 variants require 17,585,668,096 pinned bytes versus a 16,844,414,976-byte memlock limit, exceeding it by 741,253,120 bytes before staging/runtime overhead. This blocks the paper-style simultaneous pinning condition locally; limits will not be raised autonomously.
