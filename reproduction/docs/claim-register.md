@@ -11,8 +11,8 @@ Status vocabulary: **reproduced**, **approximate/modified-condition**, **blocked
 | H3 | §5.1, default mode | P95 TTFT 2.9×–15.7× better than FP16 | Same as H2, default-mode config fixed before run | **Unverified**; mode config unavailable |
 | H4 | §5.1, performance mode | P95 TTFT 3.4×–19.5× better than FP16 | Same as H2, performance-mode config fixed before run | **Unverified**; mode config unavailable |
 | H5 | §5.1 quality scope | F1/ROUGE-L degradation 0.51%–3.82%; accuracy mode 0.11%–2.18% | Generated texts, references, exact metric implementation and absolute/relative calculations | **Unverified** |
-| H6 | §5.1 vs LLM-PQ | Accuracy mode closes quality gap 41.3% average, up to 82.3% | Recovered LLM-PQ plan and gap-closure denominator per cell | **Blocked exact**: layer plan/config absent |
-| H7 | §5.1 vs PyramidKV | Accuracy-mode P95 TTFT 1.73× average, up to 2.4× | Exact PyramidKV policy with FP16 weights on common engine/workload | **Blocked exact**: policy/config absent |
+| H6 | User objective only; absent from target PDF | LLM-PQ gap closure 41.3% average, 82.3% max | Full-text/LaTeX/table/reference audit of supplied v2 | **Not a target-paper claim**: neither LLM-PQ nor these values occur in the supplied PDF/source; do not manufacture this baseline |
+| H7 | User objective only; absent from target PDF | PyramidKV TTFT 1.73× average, 2.4× max | Full-text/LaTeX/table audit; PyramidKV occurs only as related-work citation | **Not a target-paper result**: no PyramidKV experiment/config/value exists in target v2 |
 | H8 | Fig. 5 | Dynamic KVC capacity follows load, prevents preemption/swap seen in FP16 | Physical capacity/occupancy time series, preemptions, block addresses | **Unverified**; candidate mechanism found |
 | H9 | Fig. 6 | Saturation delayed; throughput up to 1.83× FP16 | Arrival-rate sweep, all arrivals accounted through completion/timeout, ≥3 repeats if feasible | **Unverified** |
 | H10 | Fig. 7 | P99 TPOT up to 1.23× lower; performance-mode mean TPOT up to 1.17× better | Token timing logs and exact CDF/percentile regeneration | **Unverified** |

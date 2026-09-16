@@ -14,13 +14,16 @@
     "p95_ttft_speedup_vs_fp16_performance_mode_range": [3.4, 19.5],
     "quality_degradation_range_percent_all_modes": [0.51, 3.82],
     "quality_degradation_range_percent_accuracy_mode": [0.11, 2.18],
-    "accuracy_mode_llm_pq_quality_gap_closure_average_percent": 41.3,
-    "accuracy_mode_llm_pq_quality_gap_closure_max_percent": 82.3,
-    "accuracy_mode_p95_ttft_speedup_vs_pyramidkv_average": 1.73,
-    "accuracy_mode_p95_ttft_speedup_vs_pyramidkv_max": 2.4,
     "maximum_throughput_speedup_vs_fp16": 1.83,
     "maximum_p99_tpot_reduction_factor": 1.23,
     "maximum_performance_mode_average_tpot_improvement_factor": 1.17
+  },
+  "objective_only_values_not_found_in_target_pdf": {
+    "note": "These values occur only in the user-provided objective, not in the supplied PDF text, tables, figures, LaTeX source, or bibliography baseline discussion. They are not paper reference values.",
+    "accuracy_mode_llm_pq_quality_gap_closure_average_percent": 41.3,
+    "accuracy_mode_llm_pq_quality_gap_closure_max_percent": 82.3,
+    "accuracy_mode_p95_ttft_speedup_vs_pyramidkv_average": 1.73,
+    "accuracy_mode_p95_ttft_speedup_vs_pyramidkv_max": 2.4
   },
   "table_1_mixed_precision_booksum": {
     "latex_label": "tab:mixed_precision_long",

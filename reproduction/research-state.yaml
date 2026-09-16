@@ -67,7 +67,7 @@ blocked_exact_inputs:
   - English-translated DuReader artifact
   - exact prompts, splits, decoding, EOS and metric revisions
   - default/performance/accuracy controller configurations
-  - LLM-PQ and PyramidKV baseline configurations
+  - target-PDF static AWQ and controller-mode configurations (objective-added LLM-PQ/PyramidKV comparisons are absent from v2)
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-

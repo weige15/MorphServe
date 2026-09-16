@@ -132,8 +132,8 @@ Evidence: `experiments/async-layer-transfer/`.
 | H3 | §5.1 default P95 TTFT | 2.9×–15.7× | Not measured | **Blocked exact** |
 | H4 | §5.1 performance P95 TTFT | 3.4×–19.5× | Not measured | **Blocked exact** |
 | H5 | §5.1 quality degradation | 0.51%–3.82%; accuracy 0.11%–2.18% | No exact task corpus/generated outputs | **Blocked exact** |
-| H6 | §5.1 LLM-PQ gap closure | 41.3% average, 82.3% max | Baseline plan unavailable | **Blocked exact** |
-| H7 | §5.1 PyramidKV comparison | 1.73× average, 2.4× max | Exact policy/config unavailable | **Blocked exact** |
+| H6 | User objective only; absent from PDF | 41.3% average, 82.3% max LLM-PQ gap closure | No occurrence in target PDF/LaTeX | **Not a target-paper claim; not reproduced** |
+| H7 | User objective only; absent from PDF | 1.73× average, 2.4× max vs PyramidKV | PyramidKV appears only as related-work citation | **Not a target-paper result; not reproduced** |
 | H8 | Fig. 5 dynamic capacity | load-following KV expansion | Real physical expansion/recovery shown in pilots, not 72-s trace | **Modified-condition partial** |
 | H9 | Fig. 6 throughput | up to 1.83× FP16 | No valid common-engine RPS sweep | **Unverified** |
 | H10 | Fig. 7 TPOT | P99 up to 1.23×; average up to 1.17× | Synthetic replay attempt 1 JIT-contaminated; corrected retry resource-blocked | **Remaining uncertainty** |
@@ -207,7 +207,7 @@ Every experiment directory includes its locked protocol, commands, raw logs, mac
 1. Official implementation/config/raw-result release or author verification of the candidate repository.
 2. Exact Azure/BurstGPT file, 72-second offsets, scaling algorithm and request-to-context mapping.
 3. English-translated DuReader artifact, sample IDs, prompts, splits, decoding/EOS and metric versions.
-4. Exact default/accuracy/performance controller configs and LLM-PQ/PyramidKV plans.
+4. Exact default/accuracy/performance controller configs. LLM-PQ/PyramidKV plans would be needed only for the objective-added comparisons, which are absent from target v2.
 5. Exact model/tokenizer/AWQ revisions for all four models.
 6. Paper-equivalent L4/A100 hosts and sufficient pinned-memory allowance for all variants.
 

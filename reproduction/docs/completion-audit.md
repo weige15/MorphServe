@@ -107,7 +107,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | E16 | English-translated DuReader | BLOCKED/NEGATIVE | Linked pinned tree has 303 paths, no English/translation artifact and no releases despite paper saying it is hosted there. |
 | E17 | Multi-News preprocessing/prompts/metric | BLOCKED | Public repo pinned; exact split/rows/prompt/reference formatting absent. |
 | E18 | Figure 4 model×trace×task matrix | MISSING/BLOCKED | No exact input/config set. |
-| E19 | Same-engine FP16/static AWQ/LLM-PQ/PyramidKV/MorphServe modes | BLOCKED exact | Static FP16/W4 exist; LLM-PQ/PyramidKV plans and author modes unavailable. |
+| E19 | Same-engine target-PDF baselines | PARTIAL/BLOCKED | PDF scope is FP16/static AWQ/MorphServe modes; static paths exist, author modes missing. Objective-added LLM-PQ/PyramidKV comparisons are absent from target v2. |
 
 ## F. Prioritized numerical claims and ablations
 
@@ -117,8 +117,8 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | F2 | Table-target references kept as references | PASS | `[5.5223,.1241,27.68]`, `[1.1686,.0735,25.55]`, `[1.2420,.1064,27.33]` only in reference/report fields. |
 | F3 | Headline 92.45% SLO reduction | BLOCKED | No exact matrix/raw denominator. |
 | F4 | Mode-specific TTFT improvements | BLOCKED | No exact modes/workloads/hardware. |
-| F5 | LLM-PQ quality-gap closure | BLOCKED | Baseline precision plan unavailable. |
-| F6 | PyramidKV TTFT comparison | BLOCKED | Baseline policy/config unavailable. |
+| F5 | Objective-added LLM-PQ quality-gap closure | NOT A TARGET-PDF CLAIM | LLM-PQ and 41.3%/82.3% do not occur in supplied PDF/LaTeX. |
+| F6 | Objective-added PyramidKV TTFT comparison | NOT A TARGET-PDF RESULT | PyramidKV is related-work citation only; 1.73×/2.4× do not occur. |
 | F7 | Figures 5–7 | PARTIAL/MISSING | Physical capacity behavior shown; no exact 72-s capacity plot, saturation RPS or valid P99 TPOT. |
 | F8 | Tables 2–8 ablations | PARTIAL/BLOCKED | LIS algorithm/order subset measured; exact model/task/perplexity tables not reproduced. |
 | F9 | Table 1 BookSum 6K/2K every schedule | BLOCKED | Exact BookSum sample/prompt/decoding and memory resources absent. |
@@ -172,4 +172,4 @@ The objective is **not achieved**. The smallest currently feasible next gates ar
 3. rerun corrected `run_synthetic_gpu_replay.sh`, preserving complete timestamps and excluding warmup;
 4. update `REPORT.md` and this audit from the resulting raw artifacts.
 
-Exact headline work remains blocked pending exact sub-second boundaries plus scaling/context map, task artifacts/prompts/metrics, model revisions, controller/baseline configs, and paper-equivalent hardware. These blockers do not excuse the three feasible GPU reruns above once uncontended capacity is available.
+Exact headline work remains blocked pending exact sub-second boundaries plus scaling/context map, task artifacts/prompts/metrics, model revisions, target-PDF controller configs, and paper-equivalent hardware. These blockers do not excuse the three feasible GPU reruns above once uncontended capacity is available.

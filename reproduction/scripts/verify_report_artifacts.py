@@ -35,6 +35,9 @@ checks={
 assert all(checks.values()),checks
 static=json.load(open(ROOT/'experiments/static-autoawq/results/metrics.json'))
 assert static['passed'] is False and static['gate']['repeat_logits_exact'] is False
+references=json.load(open(ROOT/'configs/paper-reference-values.json'))
+assert not any('llm_pq' in key or 'pyramidkv' in key for key in references['headline_claims'])
+assert 'objective_only_values_not_found_in_target_pdf' in references
 memory=json.load(open(ROOT/'results/raw/full-profile-memory-feasibility.json'))
 assert memory['feasible_simultaneously_pinned'] is False
 async_copy=json.load(open(ROOT/'experiments/async-layer-transfer/results/metrics.json'))['copy']

@@ -517,6 +517,8 @@ These are not backed by sufficient per-run raw data in the PDF:
 
 12. **Low — terminology/typesetting issues.** TOPT on p.1 becomes TPOT elsewhere; Eq.1 contains undefined `n_k` and \(\Delta\); Algorithm 1’s final `end for` and `return` collide; Table 6’s header says 32 INT4 although CodeLlama ends at 48. (`references/morphserve-2506.02006-v2.pdf`, pp.1, 4, 16–17)
 
+13. **Objective/PDF mismatch — unsourced baselines.** The user objective adds LLM-PQ gap-closure values (41.3%/82.3%) and PyramidKV TTFT values (1.73×/2.4×). Neither result occurs in the target PDF or LaTeX source: LLM-PQ is absent and PyramidKV appears only as a related-work citation. They must not be treated as paper reference values.
+
 ## 9. Minimum faithful reproduction checklist
 
 A defensible reproduction should therefore:

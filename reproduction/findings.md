@@ -36,6 +36,7 @@ The official lab repository does not release implementation code. A separate pro
 10. **A minimal independent async seam is viable.** A persistent morph stream enqueued a 4 MiB pinned copy while prior use was unfinished, retained the GPU address, and became visible only through the layer-local wait. This repairs the candidate's host-blocking design but does not establish full-layer decode overlap until the frozen GPU pilot runs.
 11. **The linked DuReader source does not contain the claimed English artifact.** The pinned 303-path tree has no English/translation file and no release. Exact translated-DuReader quality claims are an evidence blocker, not merely a local download problem.
 12. **Batch morphing needed stronger transactions than the first pilot exercised.** Partial expansion zeroing could race restore, and multi-layer shrink could mutate before detecting a later occupied group. Event-barrier and validate-before-commit repairs now pass targeted tests; full-model reruns are still required.
+13. **LLM-PQ/PyramidKV headline comparisons are not in the target paper.** The objective-supplied 41.3%/82.3% and 1.73×/2.4× values have no occurrence in the v2 PDF or LaTeX; PyramidKV is only cited as related work and LLM-PQ is absent. They are preserved as objective-only data, not paper references.
 
 ## Open questions
 

@@ -66,7 +66,7 @@ Paper-specified settings: WikiText-2; calibration sequence length 2,048; cosine 
 | Traces | 72 s Azure and BurstGPT segments; 4.75× and 1.75× downscaling | Primary traces recovered. Section 5 ties evaluation to Figure 1; source-only shape matching yields starts 1073 s and 1,781,278 s. Exact sub-second boundaries, scaling/thinning operation and context mapping remain unavailable. |
 | Tasks | GovReport, QMSum, English-translated DuReader, Multi-News | Primary repos/HF revisions pinned in `docs/task-artifact-audit.md`; splits/prompts/metrics/sample IDs remain unavailable, and the linked DuReader tree contains no English artifact. |
 | Controller modes | default, performance, accuracy | Thresholds, persistence, swap increments/limits, and recovery policy unavailable. Paper examples (85% KV, 100 ms queue) are not complete mode configurations. |
-| Baselines | FP16, static AWQ INT4, LLM-PQ, PyramidKV, three MorphServe modes | LLM-PQ layer plan, PyramidKV configuration, common scheduler settings, and exact baseline source revisions unavailable. |
+| Baselines | Target PDF §5 uses FP16 and static AWQ INT4 plus MorphServe modes | The user objective adds LLM-PQ/PyramidKV claims, but LLM-PQ is absent from the PDF/source and PyramidKV appears only in related work. They are not target-v2 experimental baselines. |
 
 ## Explicit inconsistencies to preserve
 
