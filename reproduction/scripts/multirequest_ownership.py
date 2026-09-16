@@ -30,6 +30,20 @@ def main():
     layers = [25, 24, 26]
     config = EngineConfig(org_model_path=args.fp16_model, block_size=4, num_cpu_blocks=0, max_seqs_in_block_table=8, max_blocks_per_seq=32, max_batch_size=8, max_tokens_in_batch=2048)
     model = LlamaModel(config, args.fp16_model); model.load_weights(); model.init_kvcache_and_swap(4)
+    manager = model.gpu_block_manager
+
+    def allocator_state():
+        free = manager.num_free_blocks
+        return {
+            "num_blocks": int(manager.num_blocks),
+            "num_free_blocks": int(free.item()) if isinstance(free, torch.Tensor) else int(free),
+            "is_block_free": manager.is_block_free.cpu().tolist(),
+            "k_cache_new_len": len(model.k_cache_new),
+            "v_cache_new_len": len(model.v_cache_new),
+            "kv_cache_new_block_size": int(model.kv_cache_new_block_size),
+        }
+
+    initial_allocator = allocator_state()
     backups = {layer: backup_fp16_layer(model, layer, swiftllm_c) for layer in layers}
     packed = {layer: load_packed_layer(args.w4_model, layer, swiftllm_c) for layer in layers}
     tokenizer = AutoTokenizer.from_pretrained(args.fp16_model, local_files_only=True)
@@ -51,7 +65,6 @@ def main():
     for _ in layers:
         samples(3, 0.9, 0.11)
 
-    manager = model.gpu_block_manager
     with torch.inference_mode():
         manager.allocate_blocks_for_seqs(torch.tensor([0], dtype=torch.int32, device="cuda"), torch.tensor([20], dtype=torch.int32, device="cuda"))
         manager.allocate_blocks_for_seqs(torch.tensor([1], dtype=torch.int32, device="cuda"), torch.tensor([4], dtype=torch.int32, device="cuda"))
@@ -64,6 +77,7 @@ def main():
 
     recovery26 = samples(5, 0.5, 0.01)
     recovery24 = samples(5, 0.5, 0.01)
+    allocator_before_refusal = allocator_state()
     refused25 = samples(5, 0.5, 0.01)
     rows_after_refusal = {"0": manager.block_table[0, :5].cpu().tolist(), "1": manager.block_table[1, :1].cpu().tolist()}
     counts_after_refusal = manager.num_seq_allocated_blocks[:2].cpu().tolist()
@@ -73,6 +87,7 @@ def main():
         "active_layers": list(executor.active_layers), "group_layers": [g["layer"] for g in executor.kv_groups],
         "rows_unchanged": rows_after_refusal == rows_before, "counts_unchanged": counts_after_refusal == counts_before,
         "sentinel_unchanged": sentinel_after == sentinel_before, "queues_unchanged": queue_state(scheduler) == initial_queues,
+        "allocator": allocator_state(),
     }
 
     with torch.inference_mode():
@@ -91,20 +106,23 @@ def main():
         "request_counts": manager.num_seq_allocated_blocks[:2].cpu().tolist(),
         "rows": {"0": manager.block_table[0, :5].cpu().tolist(), "1": manager.block_table[1, :1].cpu().tolist()},
         "fp16_logits_exact": bool(torch.equal(final_logits, baseline)), "fp16_region_bytes_exact": final_region_exact,
-        "pending_layer_events": sorted(model.layer_transfer_events), "queues_unchanged": queue_state(scheduler) == initial_queues,
+        "pending_layer_events": sorted(model.layer_transfer_events), "allocator": allocator_state(),
+        "queues_unchanged": queue_state(scheduler) == initial_queues,
     }
     gate = {
         "predicted_allocations": rows_before == {"0": [0,1,2,3,4], "1": [5]},
         "request_counts": counts_before == [5,1],
         "free_groups_recovered_lifo": recovery26["selected_layers"] == [26] and recovery24["selected_layers"] == [24],
         "occupied_group_refused": not refusal_state["event_success"] and refusal_state["selected"] == [25],
-        "refusal_preserved_state": all((refusal_state["rows_unchanged"], refusal_state["counts_unchanged"], refusal_state["sentinel_unchanged"], refusal_state["queues_unchanged"])),
+        "refusal_preserved_state": all((refusal_state["rows_unchanged"], refusal_state["counts_unchanged"], refusal_state["sentinel_unchanged"], refusal_state["queues_unchanged"])) and refusal_state["allocator"] == allocator_before_refusal and refusal_state["active_layers"] == [25] and refusal_state["group_layers"] == [25],
         "after_free_recovery_succeeded": final_recovery["success"] and final_recovery["selected_layers"] == [25],
-        "final_baseline_state": final["active_layers"] == [] and final["groups"] == 0 and final["num_blocks"] == final["num_free_blocks"] == 4 and final["request_counts"] == [0,0],
+        "final_baseline_state": final["active_layers"] == [] and final["groups"] == 0 and final["allocator"] == initial_allocator and final["request_counts"] == [0,0],
         "final_fp16_exact": final["fp16_logits_exact"] and all(final["fp16_region_bytes_exact"].values()),
-        "no_pending_layer_events": not final["pending_layer_events"], "fcfs_unchanged": final["queues_unchanged"], "ordinary_preemptions_zero": True,
+        "no_pending_layer_events": not final["pending_layer_events"], "fcfs_unchanged": final["queues_unchanged"],
+        "ordinary_preemptions_zero": len(queue_state(scheduler).swapped) == len(initial_queues.swapped),
     }
-    payload = {"schema_version":1,"rows_before":rows_before,"counts_before":counts_before,"sentinel_before":sentinel_before,"recovery_events":[recovery26,recovery24],"refusal_state":refusal_state,"final_recovery":final_recovery,"final":final,"executor_log":executor.log,"ordinary_preemptions":0,"gate":gate,"passed":all(gate.values())}
+    ordinary_preemptions = max(0, len(queue_state(scheduler).swapped) - len(initial_queues.swapped))
+    payload = {"schema_version":1,"initial_allocator":initial_allocator,"allocator_before_refusal":allocator_before_refusal,"rows_before":rows_before,"counts_before":counts_before,"sentinel_before":sentinel_before,"recovery_events":[recovery26,recovery24],"refusal_state":refusal_state,"final_recovery":final_recovery,"final":final,"executor_log":executor.log,"ordinary_preemptions":ordinary_preemptions,"gate":gate,"passed":all(gate.values())}
     Path(args.output).write_text(json.dumps(payload,indent=2,sort_keys=True,default=str)+"\n")
     print(json.dumps({"gate":gate,"rows_before":rows_before,"refusal":refusal_state,"final":final},indent=2,default=str)); return 0 if payload["passed"] else 1
 

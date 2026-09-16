@@ -52,6 +52,20 @@ def main():
     model = LlamaModel(config, args.fp16_model)
     model.load_weights()
     model.init_kvcache_and_swap(4)
+    manager = model.gpu_block_manager
+
+    def allocator_state():
+        free = manager.num_free_blocks
+        return {
+            "num_blocks": int(manager.num_blocks),
+            "num_free_blocks": int(free.item()) if isinstance(free, torch.Tensor) else int(free),
+            "is_block_free": manager.is_block_free.cpu().tolist(),
+            "k_cache_new_len": len(model.k_cache_new),
+            "v_cache_new_len": len(model.v_cache_new),
+            "kv_cache_new_block_size": int(model.kv_cache_new_block_size),
+        }
+
+    initial_allocator = allocator_state()
     backups = {layer: backup_fp16_layer(model, layer, swiftllm_c) for layer in layers}
     packed = {layer: load_packed_layer(args.w4_model, layer, swiftllm_c) for layer in layers}
     tokenizer = AutoTokenizer.from_pretrained(args.fp16_model, local_files_only=True)
@@ -76,6 +90,7 @@ def main():
         "executor_layers": list(executor.active_layers),
         "kv_groups": len(executor.kv_groups),
         "num_blocks": model.gpu_block_manager.num_blocks,
+        "allocator": allocator_state(),
         "queues_unchanged": queue_state(scheduler) == initial_queues,
         "fp16_logits_exact": bool(torch.equal(rollback_logits, baseline)),
         "fp16_region_bytes_exact": rollback_region_exact,
@@ -130,6 +145,7 @@ def main():
         "kv_groups": len(executor.kv_groups),
         "num_blocks": model.gpu_block_manager.num_blocks,
         "num_free_blocks": model.gpu_block_manager.num_free_blocks,
+        "allocator": allocator_state(),
         "explicit_kv_regions": model.explicit_kv_regions,
         "queues_unchanged": queue_state(scheduler) == initial_queues,
         "fp16_logits_exact": final_exact,
@@ -137,13 +153,13 @@ def main():
         "pending_layer_events": sorted(model.layer_transfer_events),
     }
     gate = {
-        "injected_failure_rolled_back": not after_failure["success"] and after_failure["restore_success"] and after_failure["partial_group_was_acquired"] and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["num_blocks"] == 4 and after_failure["fp16_logits_exact"] and all(after_failure["fp16_region_bytes_exact"].values()) and not after_failure["pending_layer_events"],
+        "injected_failure_rolled_back": not after_failure["success"] and after_failure["restore_success"] and after_failure["partial_group_was_acquired"] and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["allocator"] == initial_allocator and after_failure["fp16_logits_exact"] and all(after_failure["fp16_region_bytes_exact"].values()) and not after_failure["pending_layer_events"],
         "profile_order_active": active_state["executor_layers"] == layers == active_state["group_layers"],
         "real_w4_modules": all(classes == ["WQLinear_GEMM"] for classes in active_state["module_classes"].values()),
         "capacity_physically_expanded": active_state["num_blocks"] > 4 and active_state["num_free_blocks"] == active_state["num_blocks"],
         "explicit_mapping_selected": active_state["explicit_kv_regions"] is True,
         "recovery_lifo": [event["selected_layers"] for event in recovery_events] == [[26], [24], [25]],
-        "final_state_restored": final_state["controller_layers"] == 0 and final_state["executor_layers"] == [] and final_state["kv_groups"] == 0 and final_state["num_blocks"] == 4,
+        "final_state_restored": final_state["controller_layers"] == 0 and final_state["executor_layers"] == [] and final_state["kv_groups"] == 0 and final_state["allocator"] == initial_allocator,
         "fcfs_unchanged": after_failure["queues_unchanged"] and final_state["queues_unchanged"],
         "final_fp16_logits_exact": final_exact,
         "final_fp16_region_bytes_exact": all(final_region_exact.values()),
@@ -153,6 +169,7 @@ def main():
         "schema_version": 1,
         "profile_order": layers,
         "initial_num_blocks": 4,
+        "initial_allocator": initial_allocator,
         "after_injected_failure": after_failure,
         "successful_events": successful_events,
         "active_state": active_state,

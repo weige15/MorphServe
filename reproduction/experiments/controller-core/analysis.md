@@ -1,7 +1,8 @@
 # Reconstructed monitor/controller core result
 
-Six CPU tests pass for the frozen reconstruction:
+Seven CPU tests pass for the frozen reconstruction:
 
+- the machine-readable frozen config exactly matches code constants and all three mode definitions;
 - all seven paper signals are retained raw and EMA-smoothed;
 - pressure triggers only on the third persistent sample;
 - recovery triggers only on the fifth qualifying sample;
@@ -14,4 +15,4 @@ Six CPU tests pass for the frozen reconstruction:
 
 **Approximate/modified-condition policy-core implementation.** The paper and candidate artifacts do not specify these full mode configurations; they are frozen reconstruction choices, not recovered author settings. CPU policy tests do not establish integrated request scheduling, GPU behavior, or latency/quality improvements.
 
-Next gate: wire monitor samples and commands into the normalized engine with a fake executor first, then real layer/KV actions only after integration invariants pass.
+Next gate: rerun the repaired atomic coordinator/executor on a real GPU, then connect measured samples to a scheduled workload only after those invariants pass.

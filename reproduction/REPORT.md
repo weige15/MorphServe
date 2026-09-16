@@ -31,7 +31,7 @@ Primary evidence:
 | Arbitrary non-contiguous/profile order | **Vendor negative; reconstruction repaired** | Vendor `[25,24,26]` writes group 2 into layer 23. Explicit-region fallback writes layer 26 and matches dense attention error 0. |
 | CUDA lifetime safety | **Vendor negative; reconstruction repaired** | Uncoordinated restore corrupts 1,530 bytes. Recorded per-region events reduce corruption to 0. |
 | State preservation | **Modified-condition strong partial** | Active FP16→W4×4→FP16 request continues without re-prefill/eviction; same-history top-1 agrees; K/V migrated exactly. |
-| Controller | **Reconstructed, not author-recovered** | Frozen EMA/persistence/hysteresis/mode choices; policy, fake-executor, real transactional GPU, and two-request ownership gates pass. |
+| Controller | **Reconstructed, not author-recovered** | Frozen machine-readable EMA/persistence/hysteresis/mode choices in `configs/reconstructed-controller-modes.json`; policy, fake-executor, historical real transactional GPU, and two-request ownership gates pass. Async transactional repairs await real-GPU rerun. |
 | Full 32-layer preloading | **Local resource blocked** | Local FP16+W4 decoder variants require 17,585,668,096 pinned bytes, 741,253,120 bytes above memlock before overhead. |
 
 ## 3. Reproduction environment
@@ -119,11 +119,13 @@ Evidence: `experiments/real-executor/` and `experiments/multirequest-ownership/`
 
 The immutable candidate remains blocking (`cudaMemcpyAsync` followed by immediate stream synchronization). The independent reconstruction now exposes the registered GPU layer region, prebuilds FP16/W4 wrapper variants, and queues pinned copies on one persistent morphing stream. A model-wide last-forward event protects old use; the decode stream waits only immediately before the replaced layer.
 
-A 4 MiB correctness pilot enqueued in 0.206 ms while its injected prior-use event was unfinished; CUDA copy time was 0.578 ms, address was unchanged, and all bytes matched. Model-use, partial-expansion barrier, no-redundant-event, transaction, alignment and invalid-source checks pass. Full-model attempt 1 confirmed nonblocking 113/436 MB copies and exact final FP16 bytes, but is rejected for decode JIT contamination, an over-strict separate-request bit-exact gate, and an insufficient enclosing-interval overlap definition. The strengthened retry awaits an uncontended GPU.
+A 4 MiB correctness pilot enqueued in 0.206 ms while its injected prior-use event was unfinished; CUDA copy time was 0.578 ms, address was unchanged, and all bytes matched. Model-use, partial-expansion barrier, no-redundant-event, transaction, alignment and invalid-source checks pass. Full-model attempt 1 confirmed nonblocking 113/436 MB copies and exact final FP16 bytes, but is rejected for decode JIT contamination, an over-strict separate-request bit-exact gate, and an insufficient enclosing-interval overlap definition. Follow-up review found and prompted atomic post-shrink compensation, checked rollback failure/poisoning, and stricter allocator gates. The strengthened retry uses three unprofiled timing repeats plus a separate raw CUDA-activity cycle and requires size-matched H2D/kernel intersection on different streams; it awaits an uncontended GPU.
 
 Evidence: `experiments/async-layer-transfer/`. The separately valid transfer subset regenerates byte-identically as `figures/transfer-diagnostics.{csv,pdf,png}`; its caption explicitly excludes overlap and paper-agreement claims.
 
 ## 5. Claim-by-claim status
+
+`configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. Empty command/raw lists explicitly mean that no measurement is claimed.
 
 | ID | Paper claim/location | Reported | Observed/agreement | Classification and evidence |
 |---|---|---|---|---|

@@ -1,7 +1,21 @@
+import json
 import math
 import unittest
+from pathlib import Path
 
-from morphserve.controller import MODE_CONFIGS, SIGNALS, MorphingController, ServingMonitor
+from morphserve.controller import (
+    DEFAULT_EMA_ALPHA,
+    MODE_CONFIGS,
+    PRESSURE_KV_USAGE,
+    PRESSURE_QUEUE_DELAY_S,
+    PRESSURE_SAMPLES,
+    RECOVERY_KV_USAGE,
+    RECOVERY_QUEUE_DELAY_S,
+    RECOVERY_SAMPLES,
+    SIGNALS,
+    MorphingController,
+    ServingMonitor,
+)
 
 
 def metrics(kv=0.5, queue_delay=0.01):
@@ -43,6 +57,22 @@ class ServingMonitorTests(unittest.TestCase):
 
 
 class MorphingControllerTests(unittest.TestCase):
+    def test_machine_readable_reconstruction_config_matches_code(self):
+        path = Path(__file__).resolve().parents[1] / "configs" / "reconstructed-controller-modes.json"
+        config = json.loads(path.read_text())
+        self.assertEqual(config["monitor"]["ema_alpha_default"], DEFAULT_EMA_ALPHA)
+        self.assertEqual(config["monitor"]["signals"], list(SIGNALS))
+        self.assertEqual(config["pressure"]["kv_usage_gte"], PRESSURE_KV_USAGE)
+        self.assertEqual(config["pressure"]["queue_delay_s_gte"], PRESSURE_QUEUE_DELAY_S)
+        self.assertEqual(config["pressure"]["consecutive_samples"], PRESSURE_SAMPLES)
+        self.assertEqual(config["recovery"]["kv_usage_lte"], RECOVERY_KV_USAGE)
+        self.assertEqual(config["recovery"]["queue_delay_s_lte"], RECOVERY_QUEUE_DELAY_S)
+        self.assertEqual(config["recovery"]["consecutive_samples"], RECOVERY_SAMPLES)
+        self.assertEqual(
+            config["modes"],
+            {name: {"layers_per_action": value.layers_per_action, "max_quantized_layers": value.max_quantized_layers} for name, value in MODE_CONFIGS.items()},
+        )
+
     def test_persistent_pressure_and_recovery_coordinate_kv(self):
         controller = MorphingController("default")
         first = controller.update(sample(0, 0.9, 0.11))

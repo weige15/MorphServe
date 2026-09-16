@@ -18,14 +18,19 @@ def metrics(kv, delay):
 
 
 class FakeExecutor:
-    def __init__(self, expand=True, shrink=True, raise_expand=False):
+    def __init__(self, expand=True, shrink=True, restore=True, raise_expand=False, raise_restore=False):
         self.expand = expand
         self.shrink = shrink
+        self.restore = restore
         self.raise_expand = raise_expand
+        self.raise_restore = raise_restore
         self.calls = []
+        self.active_layers = []
+        self.poisoned = False
 
     def morph_to_w4(self, layers):
         self.calls.append(("morph", list(layers)))
+        self.active_layers.extend(layers)
         return True
 
     def expand_kv(self, layers):
@@ -40,7 +45,26 @@ class FakeExecutor:
 
     def restore_fp16(self, layers):
         self.calls.append(("restore", list(layers)))
+        if self.raise_restore:
+            raise RuntimeError("synthetic restore failure")
+        if not self.restore:
+            return False
+        remove = set(layers)
+        self.active_layers = [layer for layer in self.active_layers if layer not in remove]
         return True
+
+    def recover_fp16(self, layers):
+        active_before = list(self.active_layers)
+        if not self.shrink_kv_before_restore(layers):
+            return False
+        try:
+            success = self.restore_fp16(layers)
+        except Exception:
+            self.active_layers = active_before
+            return False
+        if not success:
+            self.active_layers = active_before
+        return success
 
 
 def scheduler():
@@ -93,6 +117,19 @@ class CoordinatorTests(unittest.TestCase):
 
         self.assertFalse(event['success']); self.assertEqual(executor.calls,[("morph",[25,24])]); self.assertEqual(coordinator.controller.quantized_layers,0)
 
+    def test_failed_pressure_rollback_poisoned_on_false_or_exception(self):
+        for kwargs in ({"restore": False}, {"raise_restore": True}):
+            with self.subTest(kwargs=kwargs):
+                executor = FakeExecutor(expand=False, **kwargs)
+                coordinator = AdaptiveCoordinator([25, 24, 26], executor, monitor=ServingMonitor(alpha=1))
+
+                event = trigger_pressure(coordinator, scheduler())
+
+                self.assertFalse(event["success"]); self.assertTrue(event["poisoned"])
+                self.assertEqual(coordinator.active_layers, [25, 24]); self.assertEqual(coordinator.controller.quantized_layers, 2)
+                with self.assertRaisesRegex(RuntimeError, "poisoned"):
+                    coordinator.step(scheduler(), 1.0, metrics(0.5, 0.01))
+
     def test_expand_exception_fails_closed_and_rolls_back(self):
         executor = FakeExecutor(raise_expand=True)
         coordinator = AdaptiveCoordinator([25, 24, 26], executor, monitor=ServingMonitor(alpha=1))
@@ -119,6 +156,19 @@ class CoordinatorTests(unittest.TestCase):
         self.assertEqual(executor.calls, [("shrink", [24, 25])])
         self.assertEqual(coordinator.active_layers, [25, 24])
         self.assertEqual(coordinator.controller.quantized_layers, 2)
+
+    def test_recovery_restore_failure_is_atomically_compensated(self):
+        for kwargs in ({"restore": False}, {"raise_restore": True}):
+            with self.subTest(kwargs=kwargs):
+                executor = FakeExecutor(**kwargs)
+                coordinator = AdaptiveCoordinator([25, 24, 26], executor, monitor=ServingMonitor(alpha=1))
+                sched = scheduler(); trigger_pressure(coordinator, sched); executor.calls.clear()
+                for index in range(5):
+                    event = coordinator.step(sched, 1 + index * 0.05, metrics(0.5, 0.01))
+
+                self.assertFalse(event["success"]); self.assertFalse(event["poisoned"])
+                self.assertEqual(executor.calls, [("shrink", [24, 25]), ("restore", [24, 25])])
+                self.assertEqual(executor.active_layers, [25, 24]); self.assertEqual(coordinator.active_layers, [25, 24]); self.assertEqual(coordinator.controller.quantized_layers, 2)
 
     def test_successful_recovery_restores_after_shrink(self):
         executor = FakeExecutor()

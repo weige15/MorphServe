@@ -2,6 +2,7 @@
 """Measure full-layer copy/decode overlap with same-precision-history requests."""
 
 import argparse
+import hashlib
 import json
 import time
 from pathlib import Path
@@ -11,6 +12,7 @@ from transformers import AutoTokenizer
 
 from morphserve.autoawq_adapter import backup_fp16_layer, load_packed_layer
 from morphserve.real_executor import RealMorphingExecutor
+from morphserve.trace_analysis import analyze_cuda_overlap_trace
 
 
 def compare(a,b):
@@ -19,7 +21,7 @@ def compare(a,b):
 
 
 def main():
-    p=argparse.ArgumentParser(); p.add_argument('--fp16-model',required=True); p.add_argument('--w4-model',required=True); p.add_argument('--output',required=True); p.add_argument('--layer',type=int,default=25); p.add_argument('--repeats',type=int,default=3); a=p.parse_args()
+    p=argparse.ArgumentParser(); p.add_argument('--fp16-model',required=True); p.add_argument('--w4-model',required=True); p.add_argument('--output',required=True); p.add_argument('--trace-output'); p.add_argument('--layer',type=int,default=25); p.add_argument('--repeats',type=int,default=3); a=p.parse_args()
     import swiftllm_c
     from swiftllm.engine_config import EngineConfig
     from swiftllm.worker.model import LlamaModel
@@ -74,12 +76,32 @@ def main():
         length=len(ids)+decode_index+1; row,forced=timed_phase('W4',forced,length); rows.append(row); forced_history.append(forced); decode_index+=1
         length=len(ids)+decode_index+1; row,forced=timed_phase('FP16',forced,length); rows.append(row); forced_history.append(forced); decode_index+=1
 
+    # A separate, untimed diagnostic cycle records actual CUDA activities. The
+    # event interval above remains only a supporting bound; pass/fail requires
+    # a size-matched H2D activity to intersect a kernel on another stream.
+    trace_path=Path(a.trace_output) if a.trace_output else Path(a.output).with_name('cuda-activity-trace.json')
+    trace_rows=[]
+    with torch.profiler.profile(activities=[torch.profiler.ProfilerActivity.CPU,torch.profiler.ProfilerActivity.CUDA]) as profiler:
+        for precision in ('W4','FP16'):
+            input_token=forced; length=len(ids)+decode_index+1
+            with torch.profiler.record_function(f'morphserve_overlap_{precision}'):
+                changed=(executor.morph_to_w4 if precision=='W4' else executor.restore_fp16)([a.layer])
+                if not changed: raise RuntimeError(f'{precision} trace transition failed')
+                traced=model.forward([[input_token]],[0],[length],return_logits=True)[0]
+                torch.cuda.synchronize()
+                forced=int(traced.argmax().cpu())
+            trace_rows.append({'precision':precision,'forced_input_token':input_token,'forced_output_token':forced,'decode_length':length})
+            decode_index+=1
+    trace_path.parent.mkdir(parents=True,exist_ok=True); profiler.export_chrome_trace(str(trace_path))
+    activity=analyze_cuda_overlap_trace(trace_path,{'W4':packed['size'],'FP16':backup['size']})
+    trace_sha256=hashlib.sha256(trace_path.read_bytes()).hexdigest()
+
     model.free_seqs_resources([0,1]); torch.cuda.synchronize()
     region=swiftllm_c.get_layer_memory_org_gpu(a.layer)
     restored_exact=bool(torch.equal(region[:backup['size']].cpu(),backup['buffer']))
     w4=[row for row in rows if row['precision']=='W4']; fp16=[row for row in rows if row['precision']=='FP16']
-    gate={"repeat_count":len(w4)==len(fp16)==a.repeats,"host_enqueue_nonblocking":all(not row['ready_at_enqueue_return'] for row in rows),"same_history_w4_within_envelope":all(row['comparison']['relative_l2']<0.005 and row['comparison']['top1_a']==row['comparison']['top1_b'] for row in w4),"same_history_fp16_within_envelope":all(row['comparison']['relative_l2']<0.005 and row['comparison']['top1_a']==row['comparison']['top1_b'] for row in fp16),"pre_layer_compute_overlap_observed":all(row['pre_layer_compute_overlap_ms']>0 for row in rows),"final_fp16_bytes_exact":restored_exact,"final_state_fp16":executor.active_layers==[]}
-    payload={"schema_version":1,"classification":"modified-condition asynchronous full-model overlap","layer":a.layer,"repeats":a.repeats,"request_ids":{"async":0,"same_history_reference":1},"prompt_ids":ids,"forced_history":forced_history,"rows":rows,"final_fp16_bytes_exact":restored_exact,"gate":gate,"passed":all(gate.values())}
+    gate={"repeat_count":len(w4)==len(fp16)==a.repeats,"host_enqueue_nonblocking":all(not row['ready_at_enqueue_return'] for row in rows),"same_history_w4_within_envelope":all(row['comparison']['relative_l2']<0.005 and row['comparison']['top1_a']==row['comparison']['top1_b'] for row in w4),"same_history_fp16_within_envelope":all(row['comparison']['relative_l2']<0.005 and row['comparison']['top1_a']==row['comparison']['top1_b'] for row in fp16),"pre_layer_interval_intersection_supporting":all(row['pre_layer_compute_overlap_ms']>0 for row in rows),"cuda_activity_kernel_copy_overlap":activity['passed'],"final_fp16_bytes_exact":restored_exact,"final_state_fp16":executor.active_layers==[] and not model.layer_transfer_events}
+    payload={"schema_version":1,"classification":"modified-condition asynchronous full-model overlap","layer":a.layer,"repeats":a.repeats,"request_ids":{"async":0,"same_history_reference":1},"prompt_ids":ids,"forced_history":forced_history,"trace_rows":trace_rows,"activity_trace":{"path":str(trace_path),"sha256":trace_sha256,"analysis":activity},"rows":rows,"final_fp16_bytes_exact":restored_exact,"gate":gate,"passed":all(gate.values())}
     Path(a.output).write_text(json.dumps(payload,indent=2,sort_keys=True)+'\n'); print(json.dumps({"gate":gate,"rows":rows},indent=2)); return 0 if payload['passed'] else 1
 
 if __name__=='__main__': raise SystemExit(main())

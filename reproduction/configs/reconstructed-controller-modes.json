@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "classification": "independent reconstruction; not author-recovered settings",
+  "frozen_before_serving_results": true,
+  "source": "runtime/morphserve/controller.py",
+  "monitor": {
+    "ema_alpha_default": 0.25,
+    "signals": [
+      "gpu_memory_usage",
+      "kv_usage",
+      "queue_depth",
+      "queue_delay_s",
+      "throughput_tokens_s",
+      "ttft_s",
+      "tpot_s"
+    ]
+  },
+  "pressure": {
+    "condition": "OR",
+    "kv_usage_gte": 0.85,
+    "queue_delay_s_gte": 0.100,
+    "consecutive_samples": 3
+  },
+  "recovery": {
+    "condition": "AND",
+    "kv_usage_lte": 0.65,
+    "queue_delay_s_lte": 0.025,
+    "consecutive_samples": 5,
+    "ordering": "shrink KV group before restoring FP16 layer"
+  },
+  "modes": {
+    "accuracy": {"layers_per_action": 1, "max_quantized_layers": 4},
+    "default": {"layers_per_action": 2, "max_quantized_layers": 8},
+    "performance": {"layers_per_action": 4, "max_quantized_layers": 16}
+  },
+  "limitations": [
+    "The paper's 85% KV-use and 100 ms queue-delay values are examples, not a complete three-mode configuration.",
+    "EMA alpha, persistence counts, recovery thresholds, action sizes and maxima were not recovered from author artifacts.",
+    "These values must not be relabeled as paper settings or tuned against paper outcomes."
+  ]
+}

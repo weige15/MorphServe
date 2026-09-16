@@ -14,6 +14,13 @@ SIGNALS = (
     "ttft_s",
     "tpot_s",
 )
+DEFAULT_EMA_ALPHA = 0.25
+PRESSURE_KV_USAGE = 0.85
+PRESSURE_QUEUE_DELAY_S = 0.100
+PRESSURE_SAMPLES = 3
+RECOVERY_KV_USAGE = 0.65
+RECOVERY_QUEUE_DELAY_S = 0.025
+RECOVERY_SAMPLES = 5
 
 
 @dataclass(frozen=True)
@@ -30,7 +37,7 @@ MODE_CONFIGS = {
 
 
 class ServingMonitor:
-    def __init__(self, alpha: float = 0.25):
+    def __init__(self, alpha: float = DEFAULT_EMA_ALPHA):
         if not 0 < alpha <= 1:
             raise ValueError("alpha must be in (0, 1]")
         self.alpha = alpha
@@ -72,15 +79,15 @@ class MorphingController:
         values = sample["smoothed"]
         if set(values) != set(SIGNALS) or any(not math.isfinite(float(values[name])) for name in SIGNALS):
             raise ValueError("invalid monitor sample")
-        pressure = values["kv_usage"] >= 0.85 or values["queue_delay_s"] >= 0.100
-        recovery = values["kv_usage"] <= 0.65 and values["queue_delay_s"] <= 0.025
+        pressure = values["kv_usage"] >= PRESSURE_KV_USAGE or values["queue_delay_s"] >= PRESSURE_QUEUE_DELAY_S
+        recovery = values["kv_usage"] <= RECOVERY_KV_USAGE and values["queue_delay_s"] <= RECOVERY_QUEUE_DELAY_S
         delta = 0
         reason = "neutral"
         if pressure:
             self.pressure_count += 1
             self.recovery_count = 0
             reason = "persistent_pressure"
-            if self.pressure_count >= 3 and self.quantized_layers < self.config.max_quantized_layers:
+            if self.pressure_count >= PRESSURE_SAMPLES and self.quantized_layers < self.config.max_quantized_layers:
                 delta = min(
                     self.config.layers_per_action,
                     self.config.max_quantized_layers - self.quantized_layers,
@@ -90,7 +97,7 @@ class MorphingController:
             self.recovery_count += 1
             self.pressure_count = 0
             reason = "persistent_recovery"
-            if self.recovery_count >= 5 and self.quantized_layers > 0:
+            if self.recovery_count >= RECOVERY_SAMPLES and self.quantized_layers > 0:
                 delta = -min(self.config.layers_per_action, self.quantized_layers)
                 self.recovery_count = 0
         else:

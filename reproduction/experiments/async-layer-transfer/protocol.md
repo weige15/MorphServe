@@ -23,11 +23,13 @@ On a small registered CUDA region, enqueue a delayed prior-use event and a pinne
 
 When GPU headroom permits, use local Llama 3.1 8B layer 25:
 
-- warm FP16 and W4 kernels;
+- warm FP16/W4 prefill and real cached-decode kernels outside timed regions;
 - start an asynchronous W4 copy before a decode step;
-- record CUDA events for transfer, decode, and the point immediately before the affected-layer wait on separate streams;
+- record CUDA events for transfer, decode, and the point immediately before the affected-layer wait on separate streams; classify that interval intersection as supporting evidence only because it includes CPU launch and possible GPU idle gaps;
+- after three unprofiled timing repeats, run a separate untimed W4→FP16 diagnostic cycle under `torch.profiler` and save the raw Chrome CUDA activity trace;
+- require a size-matched pinned H2D activity to intersect at least one actual CUDA kernel activity on another stream for both W4 and FP16; fail closed if markers, sizes, streams, or intersections cannot be established;
 - verify same-history W4 output and exact FP16 restoration;
-- report transfer, decode, actual pre-layer-compute overlap, remaining transfer at the layer wait, concurrent wall/exposed stall, and enclosing-interval overlap separately;
+- report transfer, decode, supporting pre-layer interval intersection, remaining transfer at the layer wait, concurrent wall/exposed stall, and activity-trace kernel/copy intersection separately;
 - perform at least three timed repeats if resources permit.
 
 ## Classification

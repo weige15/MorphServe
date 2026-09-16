@@ -18,9 +18,9 @@ Verify that real executor recovery respects occupied reclaimed blocks across mul
 
 - Real block tables allocate `[0,1,2,3,4]` and `[5]` as predicted.
 - First two LIFO groups shrink/restore; occupied group 0 refuses.
-- Refusal preserves request allocation counts, block-table rows, sentinel bytes, executor/controller state, and FCFS queues.
+- Refusal preserves request allocation counts, block-table rows, sentinel bytes, exact allocator/cache metadata, executor/controller/group layers, and FCFS queues.
 - After real frees, final recovery succeeds; all capacity/layer state returns to FP16 baseline and region bytes/logits are exact.
-- All layer-ready events are consumed; ordinary preemption/swap count remains zero and is reported separately.
+- All layer-ready events are consumed; ordinary preemption/swap count is derived from swapped-queue growth and reported separately.
 
 ## Boundary
 

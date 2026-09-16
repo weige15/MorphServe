@@ -8,7 +8,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 required=[
- 'REPORT.md','docs/paper-evidence-brief.md','docs/source-map.md','docs/claim-register.md','docs/trace-audit.md','docs/task-artifact-audit.md',
+ 'REPORT.md','docs/paper-evidence-brief.md','docs/source-map.md','docs/claim-register.md','docs/trace-audit.md','docs/task-artifact-audit.md','configs/claim-evidence-map.json',
  'results/raw/environment.json','results/raw/resource-usage-summary.json','results/raw/public-trace-audit.json','results/raw/figure1b-trace-window-inference.json',
  'results/raw/full-profile-memory-feasibility.json','traces/figure1b-inferred/summary.json',
  'traces/figure1b-inferred/azure-code-systematic-4.75x.jsonl','traces/figure1b-inferred/burstgpt-v1.1-systematic-1.75x.jsonl',
@@ -18,7 +18,7 @@ required=[
  'experiments/multirequest-ownership/results/metrics.json','experiments/async-layer-transfer/results/metrics.json',
  'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json','experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json',
  'figures/transfer-diagnostics.csv','figures/transfer-diagnostics.pdf','figures/transfer-diagnostics.png',
- 'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode',
+ 'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode','experiments/async-layer-transfer/activity-analysis-results/test.exitcode',
  'profiles/llama31-8b-wikitext2-layers24-31.json',
 ]
 missing=[path for path in required if not (ROOT/path).is_file()]
@@ -40,12 +40,20 @@ assert static['passed'] is False and static['gate']['repeat_logits_exact'] is Fa
 references=json.load(open(ROOT/'configs/paper-reference-values.json'))
 assert not any('llm_pq' in key or 'pyramidkv' in key for key in references['headline_claims'])
 assert 'objective_only_values_not_found_in_target_pdf' in references
+claim_map=json.load(open(ROOT/'configs/claim-evidence-map.json'))
+assert set(claim_map['claims'])=={f'H{i}' for i in range(1,31)}
+for claim,row in claim_map['claims'].items():
+    assert row['paper_reference'] and row['comparison'] and row['limitation'],claim
+    for field in ('paper_reference','commands','configs','raw','comparison'):
+        for path in row[field]:
+            assert (ROOT/path).is_file(),(claim,field,path)
 memory=json.load(open(ROOT/'results/raw/full-profile-memory-feasibility.json'))
 assert memory['feasible_simultaneously_pinned'] is False
 async_copy=json.load(open(ROOT/'experiments/async-layer-transfer/results/metrics.json'))['copy']
 assert async_copy['bytes_exact'] and async_copy['same_address'] and async_copy['prior_unfinished_after_enqueue']
 assert (ROOT/'experiments/async-layer-transfer/alignment-results/test.exitcode').read_text().strip()=='0'
 assert (ROOT/'experiments/async-layer-transfer/transaction-results/test.exitcode').read_text().strip()=='0'
+assert (ROOT/'experiments/async-layer-transfer/activity-analysis-results/test.exitcode').read_text().strip()=='0'
 full_async_attempt=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json'))
 assert not full_async_attempt['passed'] and full_async_attempt['gate']['final_fp16_bytes_exact']
 transfer_summary=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json'))
@@ -76,7 +84,9 @@ for line in (task_sources/'MANIFEST.sha256').read_text().splitlines():
     digest,name=line.split(maxsplit=1)
     assert hashlib.sha256((task_sources/name).read_bytes()).hexdigest()==digest
 report=(ROOT/'REPORT.md').read_text()
-for phrase in ('partial / exact reproduction blocked','no Table 9','92.45%','[25,24,26]'):
+for phrase in ('partial / exact reproduction blocked','no Table 9','92.45%','[25,24,26]','configs/claim-evidence-map.json'):
     assert phrase in report,phrase
+for index in range(1,31):
+    assert report.count(f'| H{index} |')==1,index
 print('report artifact verification: PASS')
 print(json.dumps({'positive_gates':checks,'async_copy_gate':True,'trace_manifest_gate':True,'expected_negative_static_repeat':True,'expected_memlock_blocker':True},sort_keys=True))

@@ -19,6 +19,7 @@ class RealMorphingExecutor:
         self.quant_objects = {}
         self.kv_groups = []
         self.log = []
+        self.poisoned = False
         self.model.async_layer_transfers = True
         self.copier = AsyncLayerCopier(model, extension)
         self.fp16_objects = {layer: model.transformer_layers[layer] for layer in backups}
@@ -49,9 +50,32 @@ class RealMorphingExecutor:
                 for index, group in enumerate(self.kv_groups)
             )
 
+    def _snapshot_kv_state(self):
+        manager = self.model.gpu_block_manager
+        return {
+            "num_blocks": int(manager.num_blocks),
+            "num_free": manager.num_free_blocks.clone() if isinstance(manager.num_free_blocks, torch.Tensor) else int(manager.num_free_blocks),
+            "is_free": manager.is_block_free.clone(),
+            "k_cache": list(self.model.k_cache_new),
+            "v_cache": list(self.model.v_cache_new),
+            "groups": list(self.kv_groups),
+            "group_size": self.model.kv_cache_new_block_size,
+        }
+
+    def _restore_kv_state(self, snapshot):
+        manager = self.model.gpu_block_manager
+        manager.num_blocks = snapshot["num_blocks"]
+        manager.num_free_blocks = snapshot["num_free"]
+        manager.is_block_free = snapshot["is_free"]
+        self.model.k_cache_new[:] = snapshot["k_cache"]
+        self.model.v_cache_new[:] = snapshot["v_cache"]
+        self.kv_groups[:] = snapshot["groups"]
+        self.model.kv_cache_new_block_size = snapshot["group_size"]
+        self._sync_model_state()
+
     @torch.inference_mode()
     def morph_to_w4(self, layers):
-        if len(set(layers)) != len(layers) or any(
+        if self.poisoned or len(set(layers)) != len(layers) or any(
             layer in self.active_layers or layer not in self.prepared_quant
             for layer in layers
         ):
@@ -70,16 +94,25 @@ class RealMorphingExecutor:
                 committed.append(layer)
                 self.log.append(("morph", layer))
         except Exception as exc:
+            rollback_error = None
             for layer in reversed(committed):
-                source = self.backups[layer]
-                self.copier.enqueue(
-                    layer, source["buffer"], source["size"], source["tensor_map"]
-                )
-                self.model.transformer_layers[layer] = self.fp16_objects[layer]
-                self.quant_objects.pop(layer, None)
-                self.active_layers.remove(layer)
-                self.log.append(("morph_rollback", layer))
+                try:
+                    source = self.backups[layer]
+                    self.copier.enqueue(
+                        layer, source["buffer"], source["size"], source["tensor_map"]
+                    )
+                    self.model.transformer_layers[layer] = self.fp16_objects[layer]
+                    self.quant_objects.pop(layer, None)
+                    self.active_layers.remove(layer)
+                    self.log.append(("morph_rollback", layer))
+                except Exception as rollback_exc:
+                    rollback_error = rollback_exc
+                    self.poisoned = True
+                    self.log.append(("morph_rollback_failed", layer, str(rollback_exc)))
+                    break
             self.log.append(("morph_failed", str(exc)))
+            if rollback_error is not None:
+                self.log.append(("executor_poisoned", "morph rollback incomplete"))
             self._sync_model_state()
             return False
         self._sync_model_state()
@@ -87,16 +120,10 @@ class RealMorphingExecutor:
 
     @torch.inference_mode()
     def expand_kv(self, layers):
+        if self.poisoned:
+            return False
         manager = self.model.gpu_block_manager
-        snapshot = {
-            "num_blocks": int(manager.num_blocks),
-            "num_free": manager.num_free_blocks.clone() if isinstance(manager.num_free_blocks, torch.Tensor) else int(manager.num_free_blocks),
-            "is_free": manager.is_block_free.clone(),
-            "k_len": len(self.model.k_cache_new),
-            "v_len": len(self.model.v_cache_new),
-            "group_len": len(self.kv_groups),
-            "group_size": self.model.kv_cache_new_block_size,
-        }
+        snapshot = self._snapshot_kv_state()
         try:
             for layer in layers:
                 self.expand_calls += 1
@@ -126,9 +153,9 @@ class RealMorphingExecutor:
             manager.num_blocks = snapshot["num_blocks"]
             manager.num_free_blocks = snapshot["num_free"]
             manager.is_block_free = snapshot["is_free"]
-            del self.model.k_cache_new[snapshot["k_len"]:]
-            del self.model.v_cache_new[snapshot["v_len"]:]
-            del self.kv_groups[snapshot["group_len"]:]
+            self.model.k_cache_new[:] = snapshot["k_cache"]
+            self.model.v_cache_new[:] = snapshot["v_cache"]
+            self.kv_groups[:] = snapshot["groups"]
             self.model.kv_cache_new_block_size = snapshot["group_size"]
             self.log.append(("expand_failed", str(exc)))
             self._sync_model_state()
@@ -136,6 +163,8 @@ class RealMorphingExecutor:
 
     @torch.inference_mode()
     def shrink_kv_before_restore(self, layers):
+        if self.poisoned:
+            return False
         manager = self.model.gpu_block_manager
         expected = [group["layer"] for group in reversed(self.kv_groups[-len(layers):])]
         if list(layers) != expected:
@@ -164,7 +193,7 @@ class RealMorphingExecutor:
     @torch.inference_mode()
     def restore_fp16(self, layers):
         grouped = {group["layer"] for group in self.kv_groups}
-        if len(set(layers)) != len(layers) or any(
+        if self.poisoned or len(set(layers)) != len(layers) or any(
             layer in grouped or layer not in self.active_layers
             for layer in layers
         ):
@@ -183,18 +212,47 @@ class RealMorphingExecutor:
                 restored.append(layer)
                 self.log.append(("restore", layer))
         except Exception as exc:
+            still_fp16 = set(restored)
+            rollback_error = None
             for layer in reversed(restored):
-                source = self.packed[layer]
-                self.copier.enqueue(
-                    layer, source["buffer"], source["size"], source["tensor_map"]
-                )
-                wrapper, modules, tensors = self.prepared_quant[layer]
-                self.model.transformer_layers[layer] = wrapper
-                self.quant_objects[layer] = (wrapper, modules, tensors)
-                self.log.append(("restore_rollback", layer))
-            self.active_layers = active_before
+                try:
+                    source = self.packed[layer]
+                    self.copier.enqueue(
+                        layer, source["buffer"], source["size"], source["tensor_map"]
+                    )
+                    wrapper, modules, tensors = self.prepared_quant[layer]
+                    self.model.transformer_layers[layer] = wrapper
+                    self.quant_objects[layer] = (wrapper, modules, tensors)
+                    still_fp16.remove(layer)
+                    self.log.append(("restore_rollback", layer))
+                except Exception as rollback_exc:
+                    rollback_error = rollback_exc
+                    self.poisoned = True
+                    self.log.append(("restore_rollback_failed", layer, str(rollback_exc)))
+                    break
+            self.active_layers = [layer for layer in active_before if layer not in still_fp16]
             self.log.append(("restore_failed", str(exc)))
+            if rollback_error is not None:
+                self.log.append(("executor_poisoned", "restore rollback incomplete"))
             self._sync_model_state()
             return False
         self._sync_model_state()
         return True
+
+    @torch.inference_mode()
+    def recover_fp16(self, layers):
+        """Atomically shrink reclaimed KV groups and restore their W4 layers."""
+        if self.poisoned:
+            return False
+        snapshot = self._snapshot_kv_state()
+        try:
+            if not self.shrink_kv_before_restore(layers):
+                return False
+            if self.restore_fp16(layers):
+                return True
+        except Exception as exc:
+            self.poisoned = True
+            self.log.append(("recovery_failed", str(exc)))
+        self._restore_kv_state(snapshot)
+        self.log.append(("recovery_rollback", list(layers)))
+        return False

@@ -1,0 +1,12 @@
+python3 reproduction/scripts/infer_trace_windows_from_figure.py \
+  --config reproduction/configs/figure1b-digitized.json \
+  --azure-code /tmp/AzurePublicDataset/data/AzureLLMInferenceTrace_code.csv \
+  --burst-v1 /tmp/BurstGPT_1_v1.1.csv \
+  --output reproduction/results/raw/figure1b-trace-window-inference.json
+
+python3 reproduction/scripts/build_inferred_trace_manifests.py \
+  --window-config reproduction/configs/figure1b-inferred-trace-windows.json \
+  --azure-code /tmp/AzurePublicDataset/data/AzureLLMInferenceTrace_code.csv \
+  --burst-v1 /tmp/BurstGPT_1_v1.1.csv \
+  --output-dir reproduction/traces/figure1b-inferred \
+  --summary reproduction/traces/figure1b-inferred/summary.json

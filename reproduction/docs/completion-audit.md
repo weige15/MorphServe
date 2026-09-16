@@ -47,7 +47,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | C3 | Account for quantization metadata | PASS | One layer uses 113,328,128 bytes including norms/qweight/qzeros/scales. |
 | C4 | Contiguous pinned FP16/W4 variants | PARTIAL | Tested per-layer pinned buffers; full 32-layer simultaneous setup blocked by memlock. |
 | C5 | Preallocate GPU regions and preserve same address | PASS (modified) | One-layer exact address/storage/allocator tests; `experiments/autoawq-layer-switch/`. |
-| C6 | Warm/precompile applicable GEMM before timing | PARTIAL | Static/switch pilots warm paths; synthetic attempt 1 exposed missing decode warmup and corrected code is pending rerun. |
+| C6 | Warm/precompile applicable GEMM before timing | PARTIAL | Static/switch pilots warm paths; full-async and synthetic retry code now warms real cached decode, pending rerun. |
 | C7 | Real asynchronous copy, separate morph/decode streams | PARTIAL | Candidate is blocking. Independent persistent-stream copier passes small CUDA seam; full-layer run pending. |
 | C8 | Explicit lifetime/event synchronization | PASS at seams | Uncoordinated race corrupts 1,530 bytes; C++ region barrier and Python last-forward/layer-ready barriers pass. |
 | C9 | No whole-model reload/per-request routing/fake W4 | PASS for tested paths | Same base region and packed kernels used. |
@@ -76,13 +76,13 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | D3 | LIS argmax/conditioned-MDS test | PASS | Four unit tests plus 36 real conditioned evaluations. |
 | D4 | Mixed-precision numerical test | PASS (bounded) | Active W4 steps same-history rel-L2 0.00058–0.00088, top-1 match. |
 | D5 | KV address/content preservation | PASS | Synthetic, dense-oracle, active migration, two-request sentinels. |
-| D6 | Expansion/shrink/restoration | PASS at tested seams; async full rerun pending | Transactional 4→1,849→4 evidence plus all-before-mutation shrink, partial morph/restore rollback and second-expansion barrier tests. |
+| D6 | Expansion/shrink/restoration | PASS at tested seams; async real-GPU rerun pending | Historical 4→1,849→4 evidence plus all-before-mutation shrink, partial morph/restore rollback, atomic post-shrink compensation, fail-closed poisoning and second-expansion barrier tests. |
 | D7 | Repeated adaptation during prefill and decode | PARTIAL | Repeated synthetic cycles and four active decode steps; full async alternating 3× run pending. |
 | D8 | Allocation failure and rollback | PASS | Injected expansion failure restores exact state/queues. |
 | D9 | Race/lifetime hazard | PASS/NEGATIVE+REPAIR | Corruption reproduced; event-safe repair reaches zero corruption. |
 | D10 | Oscillating pressure | PASS at controller seam | CPU controller persistence test; real multi-request oscillating serving not yet timed. |
 | D11 | Same-precision-history reference | PASS where used | Active-KV protocol; full async pilot also designed this way but pending. |
-| D12 | Inspect actual CUDA overlap | MISSING valid full-model | Attempt 1 is rejected (decode JIT and enclosing-interval false-positive risk). Retry records actual pre-layer-compute/copy intersection. |
+| D12 | Inspect actual CUDA overlap | MISSING valid full-model | Attempt 1 is rejected. Retry demotes event intervals to supporting bounds, exports a raw CUDA activity trace, and requires size-matched H2D/kernel activity intersection on different streams; three fail-closed parser tests pass, real trace pending. |
 | D13 | CPU/tiny/simulation only supporting | PASS in classification | Report does not promote them to headline evidence. |
 
 ## E. Exact experimental setup and data
@@ -140,7 +140,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | G8 | Predeclare tolerances before target inspection | PARTIAL | W4 repeat envelope derived independently; many exact experiments never reached. |
 | G9 | Preserve failures/negative results | PASS | Multiple numbered attempts, SIGSEGV/race/mapping/JIT/OOM evidence retained. |
 | G10 | Regenerate plots/tables from raw | PARTIAL | Summaries and verifier check saved JSON. `figures/gen_fig_transfer_diagnostics.py` regenerates CSV/PDF/PNG byte-identically from raw attempt-1 metrics and fails closed if the source run is not rejected; unavailable numbered-paper plots remain absent. |
-| G11 | Every claimed result links command/config/raw/comparison | PARTIAL | Strong for executed experiments; `REPORT.md` often links experiment directory rather than each individual file. |
+| G11 | Every claimed result links command/config/raw/comparison | PASS for current report; historical source-revision caveat | `configs/claim-evidence-map.json` maps H1–H30 to paper references, commands, frozen configs/protocols, raw artifacts, comparisons and limitations; verifier checks all paths. Older runners did not save the exact source revision, while pending runners now do. |
 | G12 | Tests execute real work, not canned success | PASS for inspected tests | CUDA tests mutate/compare actual storage; CPU tests compute policy/profile/replay behavior. |
 
 ## H. Iteration/checkpoint and finalization policy
@@ -159,7 +159,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 
 ## Verifier coverage audit
 
-`python3 reproduction/scripts/verify_report_artifacts.py` verifies file presence/JSON parseability, six positive experiment gates, the expected static-W4 nondeterminism, memlock blocker, small async-copy gate, inferred-window identities, deterministic trace-manifest hashes, task-source metadata hashes, and key report phrases. It **does not** establish author confirmation, exact scaling/context mapping, exact models, datasets, baselines, 32-layer profiling, full-layer overlap, main workload matrix, headline aggregates, or every prose claim. It is therefore a consistency check, not completion proof.
+`python3 reproduction/scripts/verify_report_artifacts.py` verifies file presence/JSON parseability, all 30 claim-evidence-map entries and their paths, six positive experiment gates, the expected static-W4 nondeterminism, memlock blocker, small async-copy gate, inferred-window identities, deterministic trace-manifest hashes, task-source metadata hashes, and key report phrases. It **does not** establish author confirmation, exact scaling/context mapping, exact models, datasets, baselines, 32-layer profiling, full-layer overlap, main workload matrix, headline aggregates, or every prose claim. It is therefore a consistency check, not completion proof.
 
 The vendor manifest proves only that the candidate snapshot was not modified. Unit-test green status proves only the named seams. Neither is accepted as completion evidence for the paper-level objective.
 
