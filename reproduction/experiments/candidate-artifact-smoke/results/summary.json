@@ -1,0 +1,130 @@
+{
+  "artifacts": [
+    {
+      "bytes": 636,
+      "path": "build_extension.stderr.log",
+      "sha256": "79b3ad38d3a2989739cbb5ad6b49897fb970f8ed02ca5aae2239d5240ccb6efa"
+    },
+    {
+      "bytes": 3489,
+      "path": "build_extension.stdout.log",
+      "sha256": "2a2f6c0990f9a12b2024e999ea27bfa9255709bc555f9073fcc55231e52788ac"
+    },
+    {
+      "bytes": 1880,
+      "path": "commands.txt",
+      "sha256": "9f44405c3570f36ab0e048f4c9d738dc049b8df996525b499c70927f999df3a9"
+    },
+    {
+      "bytes": 163,
+      "path": "create_venv.stderr.log",
+      "sha256": "2677ab06c3ad5d8547c105940fde13f961fd51659e3702665e3ccc00c30ac568"
+    },
+    {
+      "bytes": 0,
+      "path": "create_venv.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 533,
+      "path": "editable_install_unmodified.stderr.log",
+      "sha256": "d6a0795203931bdaea222d2aee86217317e032dd0c310418574ef54ad05d3873"
+    },
+    {
+      "bytes": 0,
+      "path": "editable_install_unmodified.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 157,
+      "path": "engine_config_probe.stderr.log",
+      "sha256": "3a3d6b9faf741c2c5b8c15a37b3cc13e1355c895699f905ce5bee5f2ff5324f5"
+    },
+    {
+      "bytes": 495,
+      "path": "engine_config_probe.stdout.log",
+      "sha256": "617ad4434d0ce0974c51f7264cddbdcb2b65e849ed13e351452604ab9f566a94"
+    },
+    {
+      "bytes": 309,
+      "path": "import_MorphServe.stderr.log",
+      "sha256": "ebb274e9dbfcb7ecfe5e0bacc53f3470e26e22b839ef08dd5b60a99dd5aefc07"
+    },
+    {
+      "bytes": 0,
+      "path": "import_MorphServe.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 156,
+      "path": "import_extension.stderr.log",
+      "sha256": "656d2e1067448deb8596326680a3a3af0bb5b0ca70a2baa8d07a5a4276ac1cda"
+    },
+    {
+      "bytes": 0,
+      "path": "import_extension.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 124,
+      "path": "import_morphserve.stderr.log",
+      "sha256": "591f17da926f1ef046cb9029fed0ef884f9a74beee66ba07ba1f287aba31cacd"
+    },
+    {
+      "bytes": 0,
+      "path": "import_morphserve.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 122,
+      "path": "import_swiftllm.stderr.log",
+      "sha256": "c84f7f4f60c68222afbcaa7c8647ce40b26714601e51380c9f5c5c779e4683f3"
+    },
+    {
+      "bytes": 0,
+      "path": "import_swiftllm.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 858,
+      "path": "install_build_stack.stderr.log",
+      "sha256": "5dc10c40104e18de25e04da97aa516bcfba9cedf90a01fe2c271d27af19e987d"
+    },
+    {
+      "bytes": 0,
+      "path": "install_build_stack.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 5724,
+      "path": "manifest-after.log",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025"
+    },
+    {
+      "bytes": 5724,
+      "path": "manifest-before.log",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025"
+    },
+    {
+      "bytes": 218,
+      "path": "status.tsv",
+      "sha256": "d01ccedbdcd54d59374de70cb257a7054afbad070e9305e1470c387685dd5759"
+    }
+  ],
+  "candidate_commit": "85c4fbf753b6eb47613bdd7ea423c38b48054544",
+  "classification": "not_unmodified_runnable",
+  "schema_version": 1,
+  "status": {
+    "build_extension": 0,
+    "create_venv": 0,
+    "editable_install_unmodified": 2,
+    "engine_config_probe": 1,
+    "import_MorphServe": 1,
+    "import_extension": 1,
+    "import_morphserve": 1,
+    "import_swiftllm": 1,
+    "install_build_stack": 0,
+    "manifest_after": 0,
+    "manifest_before": 0
+  }
+}

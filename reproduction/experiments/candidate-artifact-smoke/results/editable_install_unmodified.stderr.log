@@ -1,0 +1,14 @@
+Using Python 3.12.3 environment at: reproduction/.venv
+error: The build backend returned an error
+  Caused by: Call to `setuptools.build_meta:__legacy__.build_editable` failed (exit status: 1)
+
+[stdout]
+running egg_info
+writing MorphServe.egg-info/PKG-INFO
+writing dependency_links to MorphServe.egg-info/dependency_links.txt
+writing top-level names to MorphServe.egg-info/top_level.txt
+
+[stderr]
+error: package directory 'morphserve' does not exist
+
+hint: This usually indicates a problem with the package or the build environment.

@@ -35,3 +35,23 @@ No GPU experiments. Network traffic was limited to public source/API downloads. 
 ### Decision / next step
 
 Treat checkpoint 1 as complete. Prioritize the candidate artifact's unmodified build/import viability, record negative evidence, and make any compatibility repair only in a clearly separate reconstruction tree. Do not start headline serving runs before correctness gates.
+
+## 2026-09-16 — candidate artifact smoke, initial run
+
+### Hypothesis
+
+The candidate source will not install/import unmodified because of package naming and config plumbing, while its C++ source may still build.
+
+### Command
+
+```bash
+reproduction/scripts/run_candidate_artifact_smoke.sh
+```
+
+### Observed outcome
+
+The editable install, all documented Python package imports, and CLI-to-dataclass construction failed exactly at the predicted seams. The C++ extension compiled successfully. Direct extension import failed because `libc10.so` was not loaded; since the probe did not import PyTorch first, this is not yet a binary-incompatibility result. Both vendor-manifest checks passed. Full evidence is under `experiments/candidate-artifact-smoke/results/` and summarized in `analysis.md`.
+
+### Resource cost and next step
+
+No GPU work or model load. Run one changed-hypothesis follow-up that preloads PyTorch before importing the extension; do not retry any unchanged packaging/config failure.
