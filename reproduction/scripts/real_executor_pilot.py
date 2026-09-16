@@ -123,7 +123,7 @@ def main():
         "injected_failure_rolled_back": not after_failure["success"] and after_failure["controller_layers"] == 0 and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["num_blocks"] == 4,
         "profile_order_active": active_state["executor_layers"] == layers == active_state["group_layers"],
         "real_w4_modules": all(classes == ["WQLinear_GEMM"] for classes in active_state["module_classes"].values()),
-        "capacity_physically_expanded": active_state["num_blocks"] > 4 and active_state["num_free_blocks"] == active_state["num_blocks"] - 4,
+        "capacity_physically_expanded": active_state["num_blocks"] > 4 and active_state["num_free_blocks"] == active_state["num_blocks"],
         "explicit_mapping_selected": active_state["explicit_kv_regions"] is True,
         "recovery_lifo": [event["selected_layers"] for event in recovery_events] == [[26], [24], [25]],
         "final_state_restored": final_state["controller_layers"] == 0 and final_state["executor_layers"] == [] and final_state["kv_groups"] == 0 and final_state["num_blocks"] == 4,
