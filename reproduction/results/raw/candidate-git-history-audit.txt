@@ -1,0 +1,39 @@
+# Candidate repository history audit
+# command: git -C /tmp/author-morphserve remote get-url origin
+https://github.com/MorphServe/MorphServe.git
+# command: git -C /tmp/author-morphserve show-ref
+85c4fbf753b6eb47613bdd7ea423c38b48054544 refs/heads/main
+85c4fbf753b6eb47613bdd7ea423c38b48054544 refs/remotes/origin/HEAD
+85c4fbf753b6eb47613bdd7ea423c38b48054544 refs/remotes/origin/main
+# command: git -C /tmp/author-morphserve tag -l
+# command: git -C /tmp/author-morphserve rev-list --all --count
+24
+# command: git -C /tmp/author-morphserve log --all
+85c4fbf753b6eb47613bdd7ea423c38b48054544	2026-04-20T23:34:26-04:00	MorphServe	Update README.md
+56e5687bd5da2d41821940ad56c0f72cc4abd749	2025-06-29T17:58:51-04:00	MorphServe	Update README.md
+3f51987743a3ec2c4d5f28012200687803dfcae3	2025-06-29T17:58:18-04:00	MorphServe	Update README.md
+3d96ae839c1a6fbfb615c1011a07018ee5f2af36	2025-06-29T17:53:55-04:00	MorphServe	Update README.md
+2ff626ba89500bba92fb9759ef07926d89805b95	2025-06-29T17:49:13-04:00	MorphServe	Update README.md
+098ebd1dea5cf1cd45f8368082ae48a070b8154f	2025-06-29T17:48:53-04:00	MorphServe	Update README.md
+7e019cd888780e2535cc1d1f4d5f3f23c9d902c6	2025-06-29T21:48:05+00:00	MorphServe	update
+e6f55920485c0d2e5a23d70a276e8eb2dcbdb9fe	2025-06-02T16:25:23-04:00	MorphServe	Update README.md
+d71943b08a9586bb0507758614cb6beabd6b0302	2025-05-31T19:55:01+00:00	MorphServe	“update”
+bae9cb1155153c47db7942d1fd13a08b2ead7927	2025-05-25T13:14:39-04:00	MorphServe	Update README.md
+edf35ad561f662d9aedc5ea293203692b7476b13	2025-05-25T13:11:40-04:00	MorphServe	Update README.md
+d29c599e809ee2797a45dac7261ca0937e019878	2025-05-25T13:10:45-04:00	MorphServe	Update README.md
+4a9a3bdfaff20296ba124c440793c765c2236880	2025-05-25T13:09:37-04:00	MorphServe	Update README.md
+69f82712503e599a1a90de877cf6f338f8f07cd0	2025-05-23T08:26:40+00:00	MorphServe	update
+d23449496c437caf40fae6c901a8a1819cadec41	2025-05-23T08:21:10+00:00	MorphServe	MorphServe update
+3c7e3f54342f01b4a29be0b03f7cd6743903a846	2025-05-23T08:09:38+00:00	MorphServe	update
+ef2dd360952c26760dbd6421b687510d0987d078	2025-05-23T08:08:09+00:00	MorphServe	“update”
+0e318caf5432f525a82bd0b316da6278e2cb1e82	2025-05-23T03:49:14-04:00	MorphServe	Update README.md
+3dbcd0f8ab5c964f339a37484da96f8c046c1828	2025-05-23T07:43:49+00:00	MorphServe	“update”
+5a1677f898f25070c576a24519e6460e7c8b8c5f	2025-05-23T03:42:03-04:00	MorphServe	Update README.md
+e4441fcf92507f51ae0706419d203d54ef035091	2025-05-23T07:37:09+00:00	MorphServe	“update”
+e89eb5d89a10f9e03c6c2057e8efeefe09233983	2025-05-23T03:11:52-04:00	MorphServe	Update README.md
+a801e8526a2a2340f34b7049b6905e1d3bc88b6a	2025-05-23T03:09:26-04:00	MorphServe	Update README.md
+d8485743d35846d12dbbdab5fff6170dbb33d914	2025-05-23T03:07:52-04:00	MorphServe	Initial commit
+# non-README commits
+7e019cd888780e2535cc1d1f4d5f3f23c9d902c6	2025-06-29T21:48:05+00:00	update
+69f82712503e599a1a90de877cf6f338f8f07cd0	2025-05-23T08:26:40+00:00	update
+3c7e3f54342f01b4a29be0b03f7cd6743903a846	2025-05-23T08:09:38+00:00	update

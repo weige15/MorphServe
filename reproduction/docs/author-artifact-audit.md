@@ -21,6 +21,12 @@ This is strong circumstantial provenance, but not verified author attribution:
 
 Therefore the vendored snapshot at `../vendor/author-morphserve/` is labeled **candidate project-account artifact**, not verified author code. Its exact files are covered by `MANIFEST.sha256` and must remain immutable.
 
+### Repository-history and bytecode provenance
+
+A full local history audit (`results/raw/candidate-git-history-audit.txt`) finds 24 commits, one branch, and no tags. C++/build artifacts first appear in `3c7e3f5...`; all Python source arrives in one later commit, `7e019cd...`; subsequent non-README history contains only a requirements change. Thus no deleted experiment/config/profile files are recoverable from another public commit or ref.
+
+The committed snapshot also contains 24 timestamp-based CPython 3.11 `.pyc` files. A non-executing header/marshal inventory (`results/raw/candidate-pyc-audit.json`) shows compilation timestamps from 2025-03-12 through 2025-04-27 and embedded source paths under `/mnt/ssd_smart/alex/swiftLLM/swiftllm`. Sixteen headers match the current source byte count, while eight—including engine config, scheduler, engine, memory utilities and model files—do not. This supports SwiftLLM-derived development provenance but proves some bytecode was compiled from different source bytes; it neither authenticates authorship nor supplies trustworthy hidden paper configurations. No candidate bytecode was executed.
+
 ## Candidate artifact contents and gaps
 
 Present:

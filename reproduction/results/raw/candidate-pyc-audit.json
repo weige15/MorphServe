@@ -1,0 +1,290 @@
+{
+  "classification": "candidate-artifact bytecode provenance; no bytecode was executed",
+  "limitations": [
+    "A timestamp and source-size match is provenance metadata, not proof that source and bytecode are semantically identical.",
+    "A size mismatch proves the checked-in source is not byte-for-byte the source named by that timestamp-based pyc header.",
+    "The candidate repository is not verified as an author release."
+  ],
+  "records": [
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/__init__.py",
+      "current_source": "__init__.py",
+      "current_source_bytes": 293,
+      "header_source_bytes": 293,
+      "header_timestamp_utc": "2025-03-12T20:07:50+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "__pycache__/__init__.cpython-311.pyc",
+      "pyc_sha256": "9daf70cf21cb976e42d2d3425ca6240b4256edf7b2b1401ff46a0720a999dff8",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/engine_config.py",
+      "current_source": "engine_config.py",
+      "current_source_bytes": 2532,
+      "header_source_bytes": 2470,
+      "header_timestamp_utc": "2025-04-27T20:25:12+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "__pycache__/engine_config.cpython-311.pyc",
+      "pyc_sha256": "56393990dff3e62b21acd1bfe98bfcd85d4289d07084f438cb2a109187b3894b",
+      "source_size_matches": false
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/model_config.py",
+      "current_source": "model_config.py",
+      "current_source_bytes": 1920,
+      "header_source_bytes": 1920,
+      "header_timestamp_utc": "2025-03-31T21:38:10+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "__pycache__/model_config.cpython-311.pyc",
+      "pyc_sha256": "654c64f637b338602ca85bd913f2c7d133117ea6918a83dde51ddc6bca1e3799",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/utils.py",
+      "current_source": "utils.py",
+      "current_source_bytes": 5710,
+      "header_source_bytes": 1244,
+      "header_timestamp_utc": "2025-04-16T18:23:01+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "__pycache__/utils.cpython-311.pyc",
+      "pyc_sha256": "4940f68ee5b8084c46cefc423131f56399954ef88aa75aa2f55bdc1ed6048c77",
+      "source_size_matches": false
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/server/engine.py",
+      "current_source": "server/engine.py",
+      "current_source_bytes": 25688,
+      "header_source_bytes": 25048,
+      "header_timestamp_utc": "2025-04-27T19:19:35+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "server/__pycache__/engine.cpython-311.pyc",
+      "pyc_sha256": "e86c53b396c58ef6ec801f5850df451c62bcb55c3c0b22ce3990a598264e80e4",
+      "source_size_matches": false
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/server/memory_utils.py",
+      "current_source": "server/memory_utils.py",
+      "current_source_bytes": 33461,
+      "header_source_bytes": 33308,
+      "header_timestamp_utc": "2025-04-27T20:08:10+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "server/__pycache__/memory_utils.cpython-311.pyc",
+      "pyc_sha256": "db16d752870eaa848c82785e3b97c92d3ffe11936a8a0a5b2387511a022a9a1f",
+      "source_size_matches": false
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/server/quantized_layer_manager.py",
+      "current_source": "server/quantized_layer_manager.py",
+      "current_source_bytes": 16766,
+      "header_source_bytes": 16766,
+      "header_timestamp_utc": "2025-04-18T06:00:41+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "server/__pycache__/quantized_layer_manager.cpython-311.pyc",
+      "pyc_sha256": "7b9be7fa62c4f51111c87d00ecca1404fb7562885073a00548c78aef2073b0b3",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/server/scheduler.py",
+      "current_source": "server/scheduler.py",
+      "current_source_bytes": 16066,
+      "header_source_bytes": 13955,
+      "header_timestamp_utc": "2025-04-27T20:24:11+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "server/__pycache__/scheduler.cpython-311.pyc",
+      "pyc_sha256": "be793a0bfde2c7fd25c2d8d0d3e97052612c0ec8b81c9490301edba7f062ce03",
+      "source_size_matches": false
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/server/structs.py",
+      "current_source": "server/structs.py",
+      "current_source_bytes": 7615,
+      "header_source_bytes": 6775,
+      "header_timestamp_utc": "2025-04-27T15:16:15+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "server/__pycache__/structs.cpython-311.pyc",
+      "pyc_sha256": "e102fe9920a9e590304d3e1f71d0192c76615dae464c2bbf2b3b49461b3bbb50",
+      "source_size_matches": false
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/server/tokenization_engine.py",
+      "current_source": "server/tokenization_engine.py",
+      "current_source_bytes": 1369,
+      "header_source_bytes": 1369,
+      "header_timestamp_utc": "2025-03-29T16:58:21+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "server/__pycache__/tokenization_engine.cpython-311.pyc",
+      "pyc_sha256": "658d255b9a5a7dad6fe841bd148dac3fc174cec9808cb927fb263569f630979b",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/block_manager.py",
+      "current_source": "worker/block_manager.py",
+      "current_source_bytes": 6598,
+      "header_source_bytes": 6598,
+      "header_timestamp_utc": "2025-04-27T16:57:24+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/__pycache__/block_manager.cpython-311.pyc",
+      "pyc_sha256": "7242bcda0d6d0c0f0180177beef6dc17f041928d84ad353bb081d8300e2cc27c",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/infer_state.py",
+      "current_source": "worker/infer_state.py",
+      "current_source_bytes": 1303,
+      "header_source_bytes": 1303,
+      "header_timestamp_utc": "2025-04-25T21:34:38+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/__pycache__/infer_state.cpython-311.pyc",
+      "pyc_sha256": "8b8b3dcd0727b017f2bd8ac47b83d7bf7e770d547820a880df719dc9a6c98f44",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/model.py",
+      "current_source": "worker/model.py",
+      "current_source_bytes": 24079,
+      "header_source_bytes": 24004,
+      "header_timestamp_utc": "2025-04-26T04:51:37+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/__pycache__/model.cpython-311.pyc",
+      "pyc_sha256": "66efc8f1fa0db237a1265990226a2150ef6a9018e1e697c4b58a71cb60194c1f",
+      "source_size_matches": false
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/weight.py",
+      "current_source": "worker/weight.py",
+      "current_source_bytes": 15732,
+      "header_source_bytes": 15732,
+      "header_timestamp_utc": "2025-04-18T06:01:47+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/__pycache__/weight.cpython-311.pyc",
+      "pyc_sha256": "39baadcf0c5ff38926b64b6f51035775d5aa0f1649bddd9f9bda1b2bd5769586",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/kernels/block_mgmt.py",
+      "current_source": "worker/kernels/block_mgmt.py",
+      "current_source_bytes": 5868,
+      "header_source_bytes": 5868,
+      "header_timestamp_utc": "2025-04-25T16:23:39+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/kernels/__pycache__/block_mgmt.cpython-311.pyc",
+      "pyc_sha256": "a9bad7e0fdd6d470d6d45201797cb6acb99ec6effa47cc4b91d7e2eba9e81715",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/kernels/kvcache_mgmt.py",
+      "current_source": "worker/kernels/kvcache_mgmt.py",
+      "current_source_bytes": 28654,
+      "header_source_bytes": 28654,
+      "header_timestamp_utc": "2025-04-26T07:55:43+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/kernels/__pycache__/kvcache_mgmt.cpython-311.pyc",
+      "pyc_sha256": "fb8c7c6dfd3502e04dec92289f79d30091d822d657a6eaffef31b512bd9e7499",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/kernels/linear.py",
+      "current_source": "worker/kernels/linear.py",
+      "current_source_bytes": 437,
+      "header_source_bytes": 437,
+      "header_timestamp_utc": "2025-03-12T20:07:50+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/kernels/__pycache__/linear.cpython-311.pyc",
+      "pyc_sha256": "b0b727a781256f8f70c039c519060d2ca2ab3abd0596c4d55922b824e82ebfb6",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/kernels/paged_attn.py",
+      "current_source": "worker/kernels/paged_attn.py",
+      "current_source_bytes": 85102,
+      "header_source_bytes": 85102,
+      "header_timestamp_utc": "2025-04-25T23:08:59+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/kernels/__pycache__/paged_attn.cpython-311.pyc",
+      "pyc_sha256": "7db519d0b403ebc3d19f1d485b467c84a5195070a26e030e512563979502310f",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/kernels/rmsnorm.py",
+      "current_source": "worker/kernels/rmsnorm.py",
+      "current_source_bytes": 2262,
+      "header_source_bytes": 2262,
+      "header_timestamp_utc": "2025-03-12T20:07:50+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/kernels/__pycache__/rmsnorm.cpython-311.pyc",
+      "pyc_sha256": "2a246e175d270021d5295f858abcc7cc90178128963a05a0086c2796cfaa4ff1",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/kernels/rotary_emb.py",
+      "current_source": "worker/kernels/rotary_emb.py",
+      "current_source_bytes": 1892,
+      "header_source_bytes": 1892,
+      "header_timestamp_utc": "2025-03-12T20:07:50+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/kernels/__pycache__/rotary_emb.cpython-311.pyc",
+      "pyc_sha256": "94b2829c2b73fc9623573620e80a6085b286996cee04251932c59bdd5b192f18",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/kernels/silu_and_mul.py",
+      "current_source": "worker/kernels/silu_and_mul.py",
+      "current_source_bytes": 1098,
+      "header_source_bytes": 1098,
+      "header_timestamp_utc": "2025-03-12T20:07:50+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/kernels/__pycache__/silu_and_mul.cpython-311.pyc",
+      "pyc_sha256": "3d3f6b727c6cab46462ab36d0f08ec73bcc4baf38ec07d9a6a51ab47446f053d",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/layers/post_layer.py",
+      "current_source": "worker/layers/post_layer.py",
+      "current_source_bytes": 3102,
+      "header_source_bytes": 3102,
+      "header_timestamp_utc": "2025-03-27T23:10:49+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/layers/__pycache__/post_layer.cpython-311.pyc",
+      "pyc_sha256": "37ecf4d1fed74de5da931f9ab3058a49aa64ac8f11981cf1a3281ea7542111df",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/layers/pre_layer.py",
+      "current_source": "worker/layers/pre_layer.py",
+      "current_source_bytes": 526,
+      "header_source_bytes": 526,
+      "header_timestamp_utc": "2025-04-18T04:21:46+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/layers/__pycache__/pre_layer.cpython-311.pyc",
+      "pyc_sha256": "10a813c3a6f836334c4195b05f0bbd2a74ce4a16e785e09bfa032fdafa192e43",
+      "source_size_matches": true
+    },
+    {
+      "compiled_source_filename": "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/layers/transformer_layer.py",
+      "current_source": "worker/layers/transformer_layer.py",
+      "current_source_bytes": 42585,
+      "header_source_bytes": 42495,
+      "header_timestamp_utc": "2025-04-26T07:49:48+00:00",
+      "magic_hex": "a70d0d0a",
+      "pyc": "worker/layers/__pycache__/transformer_layer.cpython-311.pyc",
+      "pyc_sha256": "dbc62c78ea40b4496fc0c7418958f1fae09ada6730b73e6d1d50e9443d46e04b",
+      "source_size_matches": false
+    }
+  ],
+  "root": "reproduction/vendor/author-morphserve/MorphServe",
+  "schema_version": 1,
+  "summary": {
+    "compiled_path_prefixes": [
+      "/mnt/ssd_smart/alex/swiftLLM/swiftllm",
+      "/mnt/ssd_smart/alex/swiftLLM/swiftllm/server",
+      "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker",
+      "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/kernels",
+      "/mnt/ssd_smart/alex/swiftLLM/swiftllm/worker/layers"
+    ],
+    "cpython311_files": 24,
+    "earliest_header_timestamp_utc": "2025-03-12T20:07:50+00:00",
+    "latest_header_timestamp_utc": "2025-04-27T20:25:12+00:00",
+    "source_size_differs": 8,
+    "source_size_matches": 16
+  }
+}
