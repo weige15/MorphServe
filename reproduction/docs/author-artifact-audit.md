@@ -52,6 +52,7 @@ Absent or unusable as released:
 - Python destroys/reconstructs layer objects and C++ creates new tensor/storage views, contrary to a literal object-pointer interpretation of “without pointer remapping”;
 - candidate runtime swaps layers from the end toward the front, while the paper says Front-to-Back is the default for unprofiled models;
 - recovery checks only that the last reclaimed block range is free; it does not record/wait on in-flight CUDA consumers;
+- preemption accounting is internally disconnected: swap-out increments required config field `req_preempt`, while the metrics loop reports `ServerMetrics.preemption_count`, which is initialized to zero and never incremented anywhere in the candidate Python tree;
 - source contains explicit TODOs around new-KV attention correctness and profiling.
 
 ## SwiftLLM baseline
