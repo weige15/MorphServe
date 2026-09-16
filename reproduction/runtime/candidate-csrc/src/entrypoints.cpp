@@ -18,6 +18,8 @@ PYBIND11_MODULE(swiftllm_c, m) {
         "Register layer memory tensor map");
   m.def("record_layer_memory_use", &swiftllm::MemoryManager::record_layer_memory_use,
         "Record completion of queued work using a reclaimed layer region");
+  m.def("get_layer_memory_org_gpu", &swiftllm::MemoryManager::get_layer_memory_org_gpu,
+        "Return a non-owning byte view of a registered GPU layer region");
   m.def("register_kv_cache_info", &swiftllm::MemoryManager::register_kv_cache_info, 
         "Register KV cache info");
   m.def("acquire_new_kvcache", &swiftllm::MemoryManager::acquire_new_kvcache, 

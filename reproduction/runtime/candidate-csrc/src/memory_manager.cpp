@@ -78,6 +78,19 @@ void MemoryManager::register_layer_memory_tensor_map_org(int layer_id, const Pyt
     // }
 }
 
+torch::Tensor MemoryManager::get_layer_memory_org_gpu(int layer_id) {
+    auto it = layer_memory_map_org_gpu.find(layer_id);
+    if (it == layer_memory_map_org_gpu.end()) {
+        throw std::runtime_error("Layer not found in original GPU memory map");
+    }
+    auto options = torch::TensorOptions().dtype(torch::kUInt8).device(torch::kCUDA, 0);
+    return torch::from_blob(
+        it->second.start_addr,
+        {static_cast<int64_t>(it->second.size)},
+        options
+    );
+}
+
 void MemoryManager::record_layer_memory_use(int layer_id) {
     auto& events = layer_use_events[layer_id];
     events.erase(std::remove_if(events.begin(), events.end(), [](cudaEvent_t event) {

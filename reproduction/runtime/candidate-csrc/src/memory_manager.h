@@ -44,6 +44,7 @@ public:
     static void register_layer_memory_tensor_map_quant(int layer_id, const PythonTensorMap& tensor_map);
     static void register_layer_memory_tensor_map_org(int layer_id, const PythonTensorMap& tensor_map);
     static void record_layer_memory_use(int layer_id);
+    static torch::Tensor get_layer_memory_org_gpu(int layer_id);
     
     // Register KV cache info
     static void register_kv_cache_info(int64_t num_layers, int64_t num_kv_heads, int64_t block_size, int64_t head_dim);

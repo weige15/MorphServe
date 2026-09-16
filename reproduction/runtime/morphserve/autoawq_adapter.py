@@ -32,6 +32,45 @@ QUANT_MODULES = (
 )
 
 
+class AsyncLayerCopier:
+    """Queue pinned layer copies and expose same-address typed GPU views."""
+
+    def __init__(self, model, extension):
+        self.model = model
+        self.extension = extension
+        self.stream = torch.cuda.Stream()
+
+    def enqueue(self, layer_id: int, source: torch.Tensor, size: int, tensor_map: list[dict]):
+        if source.device.type != "cpu" or not source.is_pinned():
+            raise ValueError("layer source must be pinned CPU memory")
+        region = self.extension.get_layer_memory_org_gpu(layer_id)
+        if size > source.numel() or size > region.numel():
+            raise ValueError("layer copy exceeds source or destination region")
+        with torch.cuda.stream(self.stream):
+            previous = self.model.layer_transfer_events.get(layer_id)
+            if previous is not None:
+                self.stream.wait_event(previous)
+            if self.model.last_forward_event is not None:
+                self.stream.wait_event(self.model.last_forward_event)
+            region[:size].copy_(source[:size], non_blocking=True)
+            ready = torch.cuda.Event(enable_timing=True)
+            ready.record()
+        self.model.layer_transfer_events[layer_id] = ready
+        views = []
+        for entry in tensor_map:
+            _, info = next(iter(entry.items()))
+            view = region[info["offset"]:info["offset"] + info["size"]]
+            views.append(view.view(info["dtype"]).view(info["shape"]))
+        return views, ready
+
+    def wait_current(self, layer_id: int) -> bool:
+        ready = self.model.layer_transfer_events.pop(layer_id, None)
+        if ready is None:
+            return False
+        torch.cuda.current_stream().wait_event(ready)
+        return True
+
+
 def _tensor_info(name: str, tensor: torch.Tensor, offset: int) -> dict:
     return {name: {
         "offset": offset,
