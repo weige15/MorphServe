@@ -21,7 +21,7 @@ PYTHONPATH="$PWD/reproduction/runtime:$PWD/reproduction/runtime/candidate-python
   reproduction.tests.test_real_executor_transactions -v
 ```
 
-Expected setup-free result: twenty tests pass; four executor transaction tests pass in the populated venv. GPU runners create/clear `reproduction/.venv`, install pinned dependencies, save commands/logs/metrics, and return nonzero when a predeclared gate fails. Full 8B reruns exit 75 before setup when the selected physical GPU has under 17 GiB free.
+Expected setup-free result: twenty-one tests pass; four executor transaction tests pass in the populated venv. GPU runners create/clear `reproduction/.venv`, install pinned dependencies, save commands/logs/metrics, and return nonzero when a predeclared gate fails. Full 8B reruns exit 75 before setup when the selected physical GPU has under 17 GiB free.
 
 Representative GPU gates:
 
@@ -56,6 +56,7 @@ CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_synthetic_gpu_replay.sh
 | `experiments/*/protocol.md` | Pre-registered experiment contract |
 | `experiments/*/results*/` | Raw logs, metrics, commands, verification |
 | `profiles/` | Frozen offline layer order artifacts |
+| `figures/` | Raw-driven diagnostic plot, CSV and byte-identical regeneration instructions |
 | `doc/debug-report*.md` | Root-cause records and applied repairs |
 
 Local heavyweight assets remain outside Git under `/nfs/home/s314511048/.cache/`; their hashes are in `results/raw/environment.json`.
@@ -105,6 +106,7 @@ Controller settings remain reconstructed, not author-recovered. Full-model overl
 | Replay accounting | Quickstart replay tests | independent arrivals and complete success/error/timeout records |
 | Async seam | `run_async_layer_transfer_test.sh` | five CUDA event/copy/rollback checks pass |
 | Async full model | `run_async_full_model_overlap.sh` | attempt 1 rejected; strengthened pre-wait timeline rerun still pending |
+| Diagnostic plot | command in `figures/README.md` | CSV/PDF/PNG reproduce byte-identically from attempt-1 raw metrics |
 
 ## Troubleshooting
 

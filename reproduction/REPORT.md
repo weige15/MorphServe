@@ -121,7 +121,7 @@ The immutable candidate remains blocking (`cudaMemcpyAsync` followed by immediat
 
 A 4 MiB correctness pilot enqueued in 0.206 ms while its injected prior-use event was unfinished; CUDA copy time was 0.578 ms, address was unchanged, and all bytes matched. Model-use, partial-expansion barrier, no-redundant-event, transaction, alignment and invalid-source checks pass. Full-model attempt 1 confirmed nonblocking 113/436 MB copies and exact final FP16 bytes, but is rejected for decode JIT contamination, an over-strict separate-request bit-exact gate, and an insufficient enclosing-interval overlap definition. The strengthened retry awaits an uncontended GPU.
 
-Evidence: `experiments/async-layer-transfer/`.
+Evidence: `experiments/async-layer-transfer/`. The separately valid transfer subset regenerates byte-identically as `figures/transfer-diagnostics.{csv,pdf,png}`; its caption explicitly excludes overlap and paper-agreement claims.
 
 ## 5. Claim-by-claim status
 
@@ -198,9 +198,18 @@ CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_active_kv_switch.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_lis_real_pilot.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_real_executor_pilot.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_multirequest_ownership.sh
+
+rm -rf /tmp/morphserve-analysis-venv
+uv venv --python python3.12 /tmp/morphserve-analysis-venv
+uv pip install --python /tmp/morphserve-analysis-venv/bin/python \
+  -r reproduction/configs/analysis-requirements.txt
+/tmp/morphserve-analysis-venv/bin/python \
+  reproduction/figures/gen_fig_transfer_diagnostics.py \
+  --input reproduction/experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json \
+  --output-prefix reproduction/figures/transfer-diagnostics
 ```
 
-Every experiment directory includes its locked protocol, commands, raw logs, machine-readable metrics, and verification output.
+Every experiment directory includes its locked protocol, commands, raw logs, machine-readable metrics, and verification output. `figures/README.md` records expected hashes and the successful byte-for-byte regeneration check for the available local diagnostic plot; no unavailable numbered paper figure is presented as regenerated.
 
 ## 9. Smallest missing inputs/resources that unlock exact work
 

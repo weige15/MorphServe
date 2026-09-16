@@ -21,7 +21,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | A5 | Visually verify ambiguous equations/tables/footnotes | PASS | `docs/paper-evidence-brief.md`; explicit cosine equations take precedence over contradictory prose. |
 | A6 | Keep paper values separate from measurements | PASS | `configs/paper-reference-values.json`; measured metrics remain under experiment directories. |
 | A7 | Runnable reproduction workspace and commands | PARTIAL | `README.md`, `doc/onboarding.md`, per-experiment `commands.txt`; exact headline workspace cannot be runnable without missing assets. |
-| A8 | Raw artifacts, configs, profiles, tests, plots | PARTIAL | Raw logs/configs/profiles/tests exist; no headline matrix plots because no valid headline runs. |
+| A8 | Raw artifacts, configs, profiles, tests, plots | PARTIAL | Raw logs/configs/profiles/tests exist. A byte-identically regenerating local transfer diagnostic exists under `figures/`; no headline matrix plots exist because no valid headline runs. |
 | A9 | Final claim-by-claim report | PARTIAL | `REPORT.md` covers H1–H30 and current evidence, but remains explicitly active; full async/replay reruns are pending. |
 
 ## B. Provenance, authorization and environment
@@ -139,7 +139,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | G7 | Repeat timings ≥3 when budget permits | PARTIAL | Frozen async pilot requests 3; historical timings mostly one repeat. Current GPU resource prevents repeat. |
 | G8 | Predeclare tolerances before target inspection | PARTIAL | W4 repeat envelope derived independently; many exact experiments never reached. |
 | G9 | Preserve failures/negative results | PASS | Multiple numbered attempts, SIGSEGV/race/mapping/JIT/OOM evidence retained. |
-| G10 | Regenerate plots/tables from raw | PARTIAL | Summaries/report verifier regenerate/check saved JSON; no final plots exist. |
+| G10 | Regenerate plots/tables from raw | PARTIAL | Summaries and verifier check saved JSON. `figures/gen_fig_transfer_diagnostics.py` regenerates CSV/PDF/PNG byte-identically from raw attempt-1 metrics and fails closed if the source run is not rejected; unavailable numbered-paper plots remain absent. |
 | G11 | Every claimed result links command/config/raw/comparison | PARTIAL | Strong for executed experiments; `REPORT.md` often links experiment directory rather than each individual file. |
 | G12 | Tests execute real work, not canned success | PASS for inspected tests | CUDA tests mutate/compare actual storage; CPU tests compute policy/profile/replay behavior. |
 

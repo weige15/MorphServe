@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify REPORT.md's currently cited artifact surfaces."""
 
+import csv
 import hashlib
 import json
 from pathlib import Path
@@ -16,6 +17,7 @@ required=[
  'experiments/lis-real-8layer/results/metrics.json','experiments/real-executor/results/metrics.json',
  'experiments/multirequest-ownership/results/metrics.json','experiments/async-layer-transfer/results/metrics.json',
  'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json','experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json',
+ 'figures/transfer-diagnostics.csv','figures/transfer-diagnostics.pdf','figures/transfer-diagnostics.png',
  'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode',
  'profiles/llama31-8b-wikitext2-layers24-31.json',
 ]
@@ -50,6 +52,20 @@ transfer_summary=json.load(open(ROOT/'experiments/async-layer-transfer/full-mode
 assert transfer_summary['precisions']['W4']['repeats']==3 and transfer_summary['precisions']['FP16']['repeats']==3
 assert 15.17 < transfer_summary['precisions']['W4']['copy_ms']['median'] < 15.22
 assert 57.89 < transfer_summary['precisions']['FP16']['copy_ms']['median'] < 57.90
+figure_hashes={
+ 'figures/transfer-diagnostics.csv':'86bfb5f61bc609574062fa761d11bc43b7c7de39cd5a1e4083341fe64a6b713f',
+ 'figures/transfer-diagnostics.pdf':'04eefa73e916892f131db8cbd4ae1194927d92d4d9d590b0d26d580cfaae0ac8',
+ 'figures/transfer-diagnostics.png':'744de99e381e68b38fa01cbbf5b1a5b93d1aba0bfd908e3e1ce54b16a2ab0e80',
+}
+for path,digest in figure_hashes.items():
+    assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==digest
+with open(ROOT/'figures/transfer-diagnostics.csv',newline='') as handle:
+    figure_rows=list(csv.DictReader(handle))
+assert len(figure_rows)==len(full_async_attempt['rows'])==6
+for plotted,raw in zip(figure_rows,full_async_attempt['rows']):
+    assert plotted['precision']==raw['precision']
+    assert int(plotted['transfer_bytes'])==raw['transfer_bytes']
+    assert abs(float(plotted['copy_ms'])-raw['copy_ms']) < 1e-12
 windows=json.load(open(ROOT/'results/raw/figure1b-trace-window-inference.json'))
 assert windows['azure_code']['inferred_start_s']==1073 and windows['burstgpt_1_v1.1']['inferred_start_s']==1781278
 trace_summary=json.load(open(ROOT/'traces/figure1b-inferred/summary.json'))
