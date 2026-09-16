@@ -118,3 +118,21 @@ The same two GPU tests passed and the process exited 0. The extension also impor
 ### Resource cost and next step
 
 Primary verification used 2.94 s process wall time on one RTX 3090, dominated by startup; CUDA-event operations were each under 1.5 ms for tiny buffers and are not paper-comparable. Next test the candidate Triton mapping across at least two non-contiguous reclaimed layer regions before model integration.
+
+## 2026-09-16 — two-region Triton KV mapping
+
+### Hypothesis
+
+Candidate pointer arithmetic should resolve original cache plus two reclaimed tails when layers are contiguous/equal-stride and swapped back-to-front.
+
+### Command and outcome
+
+```bash
+CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_candidate_kv_mapping_test.sh
+```
+
+The process exited 0. Prefill and decode writes landed exactly in virtual blocks `[0,2,14,15]`; packed prefixes remained intact; allocator delta was zero; and combined PagedAttention matched an independent 13-token dense PyTorch oracle with max absolute error 0.0.
+
+### Interpretation and resource cost
+
+This is positive modified-condition mechanism evidence, not proof of arbitrary non-contiguous allocation. The candidate derives group pointers by fixed layer-stride subtraction. First-call wall time was 8.06 s and PagedAttention printed 877 ms because Triton compiled on demand; those values are initialization evidence and excluded from timing claims. Next gates are occupied/in-flight shrink and repeated adaptation, then model integration.

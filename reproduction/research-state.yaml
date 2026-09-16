@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: multi-region Triton KV mapping/content preservation, then normalized no-morph runtime
+      next_gate: occupied/in-flight shrink plus repeated adaptation, then normalized no-morph runtime
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,17 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The repaired memory manager safely exposes one reclaimed region. The candidate Triton
-  pointer arithmetic should map virtual block IDs across at least two non-contiguous reclaimed
-  layer tails while preserving stored K/V content, but this remains untested.
-active_protocol: experiments/candidate-memory-manager-repair/protocol.md
+  Fixed-stride two-tail mapping is correct in the synthetic oracle. The next material risk is
+  restoration while reclaimed blocks are occupied or kernels are in flight, plus repeated
+  expand/shrink cycles; candidate Python checks occupancy but not CUDA event lifetime.
+active_protocol: experiments/candidate-kv-mapping/protocol.md
 resource_accounting:
-  gpu_experiment_seconds: '<10 seconds of synthetic kernels; process wall times recorded under candidate-memory-manager*/results/wall-time.json'
+  gpu_experiment_seconds: '<20 seconds of synthetic kernels/JIT; process wall times recorded under candidate-*/results/wall-time.json'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Test multi-region Triton KV store/read mapping and content preservation.
   - Test safe occupied/in-flight shrink and repeated expand/restore.
   - Create minimal package/config/checkpoint compatibility fixes.
   - Freeze real WikiText-2 metric collection choices and run no-morph FP16 parity.
