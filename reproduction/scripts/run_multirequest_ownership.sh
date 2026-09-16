@@ -2,7 +2,10 @@
 set -euo pipefail
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); VENV="$ROOT/.venv"; LOCK="$ROOT/configs/fp16-requirements-lock.txt"; TMP="$ROOT/results/tmp/multirequest"; OUT="$ROOT/experiments/multirequest-ownership/results"
 FP16=${MORPHSERVE_FP16_MODEL_PATH:-/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b}; W4=${MORPHSERVE_W4_MODEL_PATH:-/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp}; GPU=${CUDA_VISIBLE_DEVICES:-1}
-mkdir -p "$OUT" "$ROOT/results/tmp"; rm -rf "$TMP"; mkdir -p "$TMP"; cp -a "$ROOT/runtime/candidate-csrc" "$TMP/csrc"
+mkdir -p "$OUT" "$ROOT/results/tmp"
+free_mib=$(nvidia-smi -i "$GPU" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
+if (( free_mib < 17408 )); then printf 'GPU %s has %s MiB free; ownership pilot requires at least 17408 MiB.\n' "$GPU" "$free_mib" >&2; exit 75; fi
+rm -rf "$TMP"; mkdir -p "$TMP"; cp -a "$ROOT/runtime/candidate-csrc" "$TMP/csrc"
 cat > "$OUT/commands.txt" <<EOF
 uv venv --clear --python python3.12 "$VENV" && uv pip install --python "$VENV/bin/python" -r "$LOCK" && uv pip install --python "$VENV/bin/python" autoawq==0.2.9 zstandard
 (cd "$TMP/csrc" && CUDA_HOME=/usr/local/cuda-12.4 "$VENV/bin/python" setup.py build_ext --inplace)
