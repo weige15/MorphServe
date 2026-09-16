@@ -49,8 +49,9 @@ def snapshot_state(model):
 
 
 def restore_state(model, state):
-    model.k_cache.copy_(state["k"])
-    model.v_cache.copy_(state["v"])
+    with torch.inference_mode():
+        model.k_cache.copy_(state["k"])
+        model.v_cache.copy_(state["v"])
     manager = model.gpu_block_manager
     manager.block_table = state["block_table"].clone()
     manager.num_seq_allocated_blocks = state["num_seq"].clone()
@@ -195,8 +196,9 @@ def main() -> int:
     # Preserve the occupied reclaimed block by migrating it to physical original block 3.
     migrated_k = k_new[0].clone()
     migrated_v = v_new[0].clone()
-    model.k_cache[3].copy_(k_new[0], non_blocking=True)
-    model.v_cache[3].copy_(v_new[0], non_blocking=True)
+    with torch.inference_mode():
+        model.k_cache[3].copy_(k_new[0], non_blocking=True)
+        model.v_cache[3].copy_(v_new[0], non_blocking=True)
     swiftllm_c.record_layer_memory_use(args.layer)
     manager.num_blocks_org = 4
     manager.num_blocks = 4
