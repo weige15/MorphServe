@@ -32,7 +32,12 @@ def main():
         return fn(*values)
 
     warm_ids=tokenizer("Warm up candidate kernels",return_tensors='pt').input_ids[0].tolist()
-    warm_start=time.perf_counter(); model.forward([warm_ids],[15],[]); model.free_seqs_resources([15]); torch.cuda.synchronize(); warm_seconds=time.perf_counter()-warm_start
+    warm_start=time.perf_counter()
+    warm_token=model.forward([warm_ids],[15],[])[0]
+    model.forward([[warm_token]],[15],[len(warm_ids)+1])
+    model.free_seqs_resources([15])
+    torch.cuda.synchronize()
+    warm_seconds=time.perf_counter()-warm_start
     manager=model.gpu_block_manager
     if isinstance(manager.num_free_blocks,torch.Tensor): manager.num_free_blocks=int(manager.num_free_blocks.item())
 
