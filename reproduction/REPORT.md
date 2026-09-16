@@ -127,7 +127,7 @@ Evidence: `experiments/async-layer-transfer/`. The separately valid transfer sub
 
 ## 5. Claim-by-claim status
 
-`configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. Empty command/raw lists explicitly mean that no measurement is claimed.
+`configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. `results/raw/claim-evidence-provenance.json` hashes and Git-audits all 68 referenced artifacts. Empty command/raw lists explicitly mean that no measurement is claimed. Historical runners predate exact source-revision capture, so their artifact commit is preserved but is not presented as proof of the executed source tree; pending runners write `source-revision.txt`.
 
 | ID | Paper claim/location | Reported | Observed/agreement | Classification and evidence |
 |---|---|---|---|---|
@@ -213,7 +213,7 @@ uv pip install --python /tmp/morphserve-analysis-venv/bin/python \
   --output-prefix reproduction/figures/transfer-diagnostics
 ```
 
-Every experiment directory includes its locked protocol, commands, raw logs, machine-readable metrics, and verification output. `figures/README.md` records expected hashes and the successful byte-for-byte regeneration check for the available local diagnostic plot; no unavailable numbered paper figure is presented as regenerated.
+Every experiment directory includes its locked protocol, commands, raw logs, machine-readable metrics, and verification output. Regenerate the claim provenance with `python3 reproduction/scripts/build_claim_evidence_provenance.py --map reproduction/configs/claim-evidence-map.json --output reproduction/results/raw/claim-evidence-provenance.json`, then run `python3 reproduction/scripts/verify_report_artifacts.py`. `figures/README.md` records expected hashes and the successful byte-for-byte regeneration check for the available local diagnostic plot; no unavailable numbered paper figure is presented as regenerated.
 
 ## 9. Smallest missing inputs/resources that unlock exact work
 

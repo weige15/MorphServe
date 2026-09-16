@@ -1,0 +1,1372 @@
+{
+  "artifacts": {
+    "configs/figure1b-inferred-trace-windows.json": {
+      "artifact_last_commit": "042b4d27032ca4c64675f5c51dad69f8e593dcdc",
+      "bytes": 1339,
+      "referenced_by": [
+        {
+          "claim": "H1",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "631f5001586511f22004b437843a2ba48b97acf0732ee4a6140296a2209b841e",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "configs/paper-reference-values.json": {
+      "artifact_last_commit": "e50e44231ce0fa7e3f86b50c4b1a1eb40b04ef77",
+      "bytes": 7533,
+      "referenced_by": [
+        {
+          "claim": "H1",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H2",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H3",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H4",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H5",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H6",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H7",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H9",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H10",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H11",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H12",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H13",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H14",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H15",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H16",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H17",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H18",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H19",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H20",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H21",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H22",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H27",
+          "field": "paper_reference"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "45241c88343367a91f79b8c22478e5cf27ad12a2b54a1185b4d94681a111dcdd",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "configs/reconstructed-controller-modes.json": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 1327,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "6a84a7dc6036e71ee96ae998709f6f15329d95db09c0eb999bcb8e24b3dde401",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "configs/synthetic-gpu-replay.json": {
+      "artifact_last_commit": "e03f25c9eb42c45f15349324acfc41f67cf33c3f",
+      "bytes": 887,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "6b43883d0abafd1138e553212c856f328db5b5702263d7e78c027f9e5a8b6e2f",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "docs/author-artifact-audit.md": {
+      "artifact_last_commit": "31c14e776f069dc67fb4f6ebd7c4815ff5f71a0c",
+      "bytes": 6406,
+      "referenced_by": [
+        {
+          "claim": "H27",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "93802d91a84a32388a333f55314cb97436bf66559105015f81268756013557a9",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "docs/claim-register.md": {
+      "artifact_last_commit": "3fe6a96fb02b33cc23c91dc3bc43555c97a03c2b",
+      "bytes": 10981,
+      "referenced_by": [
+        {
+          "claim": "H2",
+          "field": "comparison"
+        },
+        {
+          "claim": "H3",
+          "field": "comparison"
+        },
+        {
+          "claim": "H4",
+          "field": "comparison"
+        },
+        {
+          "claim": "H6",
+          "field": "comparison"
+        },
+        {
+          "claim": "H7",
+          "field": "comparison"
+        },
+        {
+          "claim": "H9",
+          "field": "comparison"
+        },
+        {
+          "claim": "H16",
+          "field": "comparison"
+        },
+        {
+          "claim": "H21",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "c257d2427ba831391aa09e9b982aae921db61cf2064bf12ec857c58a5ef831da",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "docs/paper-evidence-brief.md": {
+      "artifact_last_commit": "e50e44231ce0fa7e3f86b50c4b1a1eb40b04ef77",
+      "bytes": 38359,
+      "referenced_by": [
+        {
+          "claim": "H1",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H2",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H3",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H4",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H5",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H6",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H7",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H8",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H9",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H10",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H11",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H12",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H13",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H14",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H15",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H16",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H17",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H18",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H19",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H20",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H21",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H22",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H23",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H24",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H25",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H26",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H27",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H28",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H29",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H30",
+          "field": "paper_reference"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "637d3f796286a8baddd58b50fc6a543b29f516eeafeab274027e2b4d3e7e5b35",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "docs/task-artifact-audit.md": {
+      "artifact_last_commit": "fa7b680f6f09e54029a7a46a7df56b899d46310b",
+      "bytes": 2623,
+      "referenced_by": [
+        {
+          "claim": "H5",
+          "field": "comparison"
+        },
+        {
+          "claim": "H14",
+          "field": "comparison"
+        },
+        {
+          "claim": "H15",
+          "field": "comparison"
+        },
+        {
+          "claim": "H17",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "cacca64282c82f734db6941bfdb582ad6461f0f1dc39d1796f0529b5a2f9c32a",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "docs/trace-audit.md": {
+      "artifact_last_commit": "f67f6de70a60a857693b749565264e0d5ff98309",
+      "bytes": 3266,
+      "referenced_by": [
+        {
+          "claim": "H1",
+          "field": "comparison"
+        },
+        {
+          "claim": "H15",
+          "field": "comparison"
+        },
+        {
+          "claim": "H17",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "b44fed32fdf09fe7babd024f3ace22bad6abfcce305e64c08ba91dc66e06811c",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/active-kv-switch/analysis.md": {
+      "artifact_last_commit": "d0d81a1ac502b574ad7449e263884ba7955210d6",
+      "bytes": 2254,
+      "referenced_by": [
+        {
+          "claim": "H28",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "29d7b7533c0411c5d6227e50e7a12152d7ba921eeda615f011effd044a36ed9c",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/active-kv-switch/protocol.md": {
+      "artifact_last_commit": "ac35a21888905fe56ecd433e9bc2ae1934fd0876",
+      "bytes": 2702,
+      "referenced_by": [
+        {
+          "claim": "H28",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "5437e7d6f822a58cdb5c4344a29434c301d863aafaab70eae1d5c1a928bbb967",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/active-kv-switch/results-attempt-2/commands.txt": {
+      "artifact_last_commit": "d0d81a1ac502b574ad7449e263884ba7955210d6",
+      "bytes": 1306,
+      "referenced_by": [
+        {
+          "claim": "H28",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "1d0cd9913c48d5ca1cf6a6437f10ff60dc1190b4cf94e3aa86fdb2a9bfe9cd20",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/active-kv-switch/results-attempt-2/metrics.json": {
+      "artifact_last_commit": "d0d81a1ac502b574ad7449e263884ba7955210d6",
+      "bytes": 4689,
+      "referenced_by": [
+        {
+          "claim": "H28",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "a156812b87b48cb7fcb73ac4e337be404fe5fdffb7e51fee1c5befeaeb89c673",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/analysis.md": {
+      "artifact_last_commit": "3fe6a96fb02b33cc23c91dc3bc43555c97a03c2b",
+      "bytes": 1929,
+      "referenced_by": [
+        {
+          "claim": "H12",
+          "field": "comparison"
+        },
+        {
+          "claim": "H24",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "d373d24f02dd78bfb68e3c785b66db5e21a54c7614aacf27f26d16e674d1a38f",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/full-model-attempt-1.md": {
+      "artifact_last_commit": "ec3703185bfb5b2ab66a4c9621b6214fa817e087",
+      "bytes": 1227,
+      "referenced_by": [
+        {
+          "claim": "H12",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "3a8422348730f59585ce957da5ce7cce59010ab25191eb3aaa7474d1b7231de4",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/full-model-results-attempt-1/commands.txt": {
+      "artifact_last_commit": "ec3703185bfb5b2ab66a4c9621b6214fa817e087",
+      "bytes": 1318,
+      "referenced_by": [
+        {
+          "claim": "H11",
+          "field": "commands"
+        },
+        {
+          "claim": "H12",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "013625852649d7a44519426a14756c8d0d7f4373215916a182e5eb484f4498b3",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json": {
+      "artifact_last_commit": "ec3703185bfb5b2ab66a4c9621b6214fa817e087",
+      "bytes": 5112,
+      "referenced_by": [
+        {
+          "claim": "H11",
+          "field": "raw"
+        },
+        {
+          "claim": "H12",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "5c122f2bcaec58eebe7a9b01c60dd786818fb55832ff6704a3c0063230df4e96",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json": {
+      "artifact_last_commit": "5a301b52cf592e86f4d96d06042e83eccae2528a",
+      "bytes": 1201,
+      "referenced_by": [
+        {
+          "claim": "H11",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "e3eb35c5903e550cc864be41b0796e700563e290b9e29c6f2ccd2eca6c7e0cb3",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/protocol.md": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 2582,
+      "referenced_by": [
+        {
+          "claim": "H11",
+          "field": "configs"
+        },
+        {
+          "claim": "H12",
+          "field": "configs"
+        },
+        {
+          "claim": "H24",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "8d141da3ddf9e1f364974dea87ba74a008d2d0a0051b71eb179d3ff45c3560fb",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/results/commands.txt": {
+      "artifact_last_commit": "7d44d46b1fa6628e66aac858bb9a1770909f19a9",
+      "bytes": 972,
+      "referenced_by": [
+        {
+          "claim": "H12",
+          "field": "commands"
+        },
+        {
+          "claim": "H24",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "e1c38dd1b85ffd534d7f7b508d4f804170b4f73aa6f662c6ce985bc8ea129bae",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/results/metrics.json": {
+      "artifact_last_commit": "7d44d46b1fa6628e66aac858bb9a1770909f19a9",
+      "bytes": 221,
+      "referenced_by": [
+        {
+          "claim": "H12",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "3aef80a1e61a308134370f99cad783865695fe249453b86ee94415b30cd2e74d",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/autoawq-layer-switch/analysis.md": {
+      "artifact_last_commit": "83b4c31ab212ec4615d4e55671b223dd3396f847",
+      "bytes": 2110,
+      "referenced_by": [
+        {
+          "claim": "H11",
+          "field": "comparison"
+        },
+        {
+          "claim": "H24",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "10ffc25db84f4162956e9e900765435d21d07510f25644e6c0469ecbc10cd0ec",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/autoawq-layer-switch/protocol.md": {
+      "artifact_last_commit": "205e419dc6f9a01a06c6d8d140bd91926f387a9a",
+      "bytes": 2301,
+      "referenced_by": [
+        {
+          "claim": "H11",
+          "field": "configs"
+        },
+        {
+          "claim": "H24",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "e17c9fb1f994c8c91ac4f2de2e68d30fb99da6c12b33dd44e2661abdeda293c7",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/autoawq-layer-switch/results/commands.txt": {
+      "artifact_last_commit": "83b4c31ab212ec4615d4e55671b223dd3396f847",
+      "bytes": 1312,
+      "referenced_by": [
+        {
+          "claim": "H11",
+          "field": "commands"
+        },
+        {
+          "claim": "H24",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "6f06d8d0c5e3820a5e65eafa761936cb28ebd91a6518569c835a2abd91909260",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/autoawq-layer-switch/results/metrics.json": {
+      "artifact_last_commit": "83b4c31ab212ec4615d4e55671b223dd3396f847",
+      "bytes": 2916,
+      "referenced_by": [
+        {
+          "claim": "H11",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "b162abe220c2e62056005d62ed9d82ffb04849da6dd6051c5c77abc1e6d18643",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/candidate-fp16-baseline/analysis.md": {
+      "artifact_last_commit": "9b8297ca3931241f5b26ccf86a3450092fe9b505",
+      "bytes": 1958,
+      "referenced_by": [
+        {
+          "claim": "H29",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "b4827882dd142bb0256d01cee7e8ff2fc744b4a5c1cda8ec8fab36559e485beb",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/candidate-fp16-baseline/protocol.md": {
+      "artifact_last_commit": "7748dc1c4729101094529f0e32cd9675db432c8f",
+      "bytes": 2173,
+      "referenced_by": [
+        {
+          "claim": "H29",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "c4a55e33795163251e749102277510084de6574484d9401033f68aae6e025b0f",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/candidate-fp16-baseline/results-attempt-3/commands.txt": {
+      "artifact_last_commit": "9b8297ca3931241f5b26ccf86a3450092fe9b505",
+      "bytes": 1066,
+      "referenced_by": [
+        {
+          "claim": "H29",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "059c130f24b9de76dcec800e0fa2a6fe038ae7ab7e817e47f0b1239bc13581e2",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/candidate-fp16-baseline/results-attempt-3/metrics.json": {
+      "artifact_last_commit": "9b8297ca3931241f5b26ccf86a3450092fe9b505",
+      "bytes": 2036,
+      "referenced_by": [
+        {
+          "claim": "H29",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "b0ea58162b2e3aaed4b34ecb31bf92213e8fa747bbe7b2c9909c47f97a248407",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/controller-core/analysis.md": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 1158,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "45d2643d36151019bdf8a1aa9006cf0656e730db43c1227c41d7ee37e9e17b1e",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/controller-core/results/commands.txt": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 140,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "a26d564b082481455acc6e1638f2631dd64d77526d166ee725164b13e34f28bf",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/controller-core/results/test.log": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 1208,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "7f479fb124a61c57ad3804af014a62211be6ca43fd6a0666ec62103280d53277",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/controller-integration/analysis.md": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 1192,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "5f8b4b333c9088cf7e6020564a2fc1a64b45b259641a40d229d085548bbebab3",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/controller-integration/results/commands.txt": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 152,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "515cf8e72f156b52b3213ee4fe197325a59176bc776bd070210dee85edd5523b",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/controller-integration/results/test.log": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 1540,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "1e55b65d5cda0d021b5103c615f6e0cf0a648c552ec5b7c688cecd5fcf14af12",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/lis-algorithm/analysis.md": {
+      "artifact_last_commit": "a3572a8aa6c1bfb99ceaa703e04c1494b1dbf3d3",
+      "bytes": 1365,
+      "referenced_by": [
+        {
+          "claim": "H19",
+          "field": "comparison"
+        },
+        {
+          "claim": "H20",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "21bc917d58ccad0eba0ae2d4499ae7139a8c950baa6b712ebc7cdd9c54abe807",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/lis-algorithm/protocol.md": {
+      "artifact_last_commit": "c8c44702859370d535396793c27f5ee6e28b857a",
+      "bytes": 1693,
+      "referenced_by": [
+        {
+          "claim": "H19",
+          "field": "configs"
+        },
+        {
+          "claim": "H20",
+          "field": "configs"
+        },
+        {
+          "claim": "H23",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "635455f310db1a4b0882c4ef15ff0c8c7c41d97bf0f109c8efa9e0828c468f62",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/lis-algorithm/results/commands.txt": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 139,
+      "referenced_by": [
+        {
+          "claim": "H19",
+          "field": "commands"
+        },
+        {
+          "claim": "H20",
+          "field": "commands"
+        },
+        {
+          "claim": "H23",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "b443219c72caa2ed3fa7f65f6658656ef80be12a89a8ed39bc0e0b0f77250252",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/lis-algorithm/results/final-verification.log": {
+      "artifact_last_commit": "a3572a8aa6c1bfb99ceaa703e04c1494b1dbf3d3",
+      "bytes": 785,
+      "referenced_by": [
+        {
+          "claim": "H19",
+          "field": "raw"
+        },
+        {
+          "claim": "H20",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "f352da6c32819fa13da88ac30c280b990bc99c1b5b8da03839f4b99465e1a0c8",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/lis-real-8layer/analysis.md": {
+      "artifact_last_commit": "844a54b66349411ef6f7fb09e9f9005363c1898c",
+      "bytes": 1764,
+      "referenced_by": [
+        {
+          "claim": "H13",
+          "field": "comparison"
+        },
+        {
+          "claim": "H18",
+          "field": "comparison"
+        },
+        {
+          "claim": "H22",
+          "field": "comparison"
+        },
+        {
+          "claim": "H23",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "bc3489cbb35f9e55dbd03023a6d59e96cecebcdf9cdb7f13e04daefbc286d2be",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/lis-real-8layer/protocol.md": {
+      "artifact_last_commit": "d4b27c836e1d7a13e8d74039fe32951441a3fa7e",
+      "bytes": 1604,
+      "referenced_by": [
+        {
+          "claim": "H13",
+          "field": "configs"
+        },
+        {
+          "claim": "H18",
+          "field": "configs"
+        },
+        {
+          "claim": "H22",
+          "field": "configs"
+        },
+        {
+          "claim": "H23",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "a609189ffcc3c3694733c1f0db8fbaecacc9fd84aca296694c4198b93b1915ed",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/lis-real-8layer/results/commands.txt": {
+      "artifact_last_commit": "844a54b66349411ef6f7fb09e9f9005363c1898c",
+      "bytes": 1363,
+      "referenced_by": [
+        {
+          "claim": "H13",
+          "field": "commands"
+        },
+        {
+          "claim": "H18",
+          "field": "commands"
+        },
+        {
+          "claim": "H22",
+          "field": "commands"
+        },
+        {
+          "claim": "H23",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "315667df6f6912a3ebb7be16e65bab60db96d2c7ad51e31daaf0da60d739f9ab",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/lis-real-8layer/results/metrics.json": {
+      "artifact_last_commit": "844a54b66349411ef6f7fb09e9f9005363c1898c",
+      "bytes": 46839,
+      "referenced_by": [
+        {
+          "claim": "H13",
+          "field": "raw"
+        },
+        {
+          "claim": "H18",
+          "field": "raw"
+        },
+        {
+          "claim": "H22",
+          "field": "raw"
+        },
+        {
+          "claim": "H23",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "743ac0fc76b6f3b92bd4b1d4d2cf6d9854d743939cc220df08f0f9ec768689d3",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/multirequest-ownership/analysis.md": {
+      "artifact_last_commit": "3fe6a96fb02b33cc23c91dc3bc43555c97a03c2b",
+      "bytes": 1250,
+      "referenced_by": [
+        {
+          "claim": "H8",
+          "field": "comparison"
+        },
+        {
+          "claim": "H25",
+          "field": "comparison"
+        },
+        {
+          "claim": "H28",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "935ce414e4dd859d3cc7dcf470f21036cc7559b38cba1c34794ebec5a0640638",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/multirequest-ownership/protocol.md": {
+      "artifact_last_commit": "3fe6a96fb02b33cc23c91dc3bc43555c97a03c2b",
+      "bytes": 1873,
+      "referenced_by": [
+        {
+          "claim": "H8",
+          "field": "configs"
+        },
+        {
+          "claim": "H25",
+          "field": "configs"
+        },
+        {
+          "claim": "H28",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "fbd170d70ddec6179637684cfd94fdb8d3cc8a3132cee76f9c7f5bbbcada9202",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/multirequest-ownership/results/commands.txt": {
+      "artifact_last_commit": "967671bc64e81b3cc6303ce15eaa5f5cec222bbb",
+      "bytes": 1306,
+      "referenced_by": [
+        {
+          "claim": "H8",
+          "field": "commands"
+        },
+        {
+          "claim": "H25",
+          "field": "commands"
+        },
+        {
+          "claim": "H28",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "5ea51cfbe52feef87aee7f8f2e50ed1177a5877c938ae73f8b457c66df834a61",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/multirequest-ownership/results/metrics.json": {
+      "artifact_last_commit": "967671bc64e81b3cc6303ce15eaa5f5cec222bbb",
+      "bytes": 3712,
+      "referenced_by": [
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "2fa50f3d19e79d9523a64908307d53cd37018d06f6e672575cf257c44a1c4690",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/noncontiguous-mapping-repair/analysis.md": {
+      "artifact_last_commit": "057091c0979944c17434d4114a6c9f7f29e15589",
+      "bytes": 1024,
+      "referenced_by": [
+        {
+          "claim": "H25",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "91b9b096f83c30efb4d58e9ed9f639aaf6e913c39136d26741a7dbaadcbda8d7",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/noncontiguous-mapping-repair/protocol.md": {
+      "artifact_last_commit": "0a89466c0c59f707b76006686c0e17b3c5bb9dbc",
+      "bytes": 1472,
+      "referenced_by": [
+        {
+          "claim": "H25",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "ab3266f70d9aaa3081fefbceef7f2c31007a7ba6b1a4e3e68ed203ae95b1507e",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/noncontiguous-mapping-repair/results/commands.txt": {
+      "artifact_last_commit": "057091c0979944c17434d4114a6c9f7f29e15589",
+      "bytes": 537,
+      "referenced_by": [
+        {
+          "claim": "H25",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "0345eccea596299fc001075d98a2414ce19c7372f4a51a1e40b268721c6ec9fe",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/noncontiguous-mapping-repair/results/metrics.json": {
+      "artifact_last_commit": "057091c0979944c17434d4114a6c9f7f29e15589",
+      "bytes": 367,
+      "referenced_by": [
+        {
+          "claim": "H25",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "dfef75637b99bbbde3e5c4c0793dc02d5e8d3808719764b5fbac8bd90c93a8ed",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/real-executor/analysis.md": {
+      "artifact_last_commit": "e4cc016f3cb6d25ddf36e59e5a05fc21cae5f73c",
+      "bytes": 1322,
+      "referenced_by": [
+        {
+          "claim": "H8",
+          "field": "comparison"
+        },
+        {
+          "claim": "H26",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "39c2b189a91224f418edb59bb5949e18bfd9eb12f0ffa3b1aa29cb559cf91781",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/real-executor/protocol.md": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 2349,
+      "referenced_by": [
+        {
+          "claim": "H8",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "aa494e41bfbe7bea01408865b3874fe7e5d8b8b75015088a5ccfaab16d687b44",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/real-executor/results/commands.txt": {
+      "artifact_last_commit": "e4cc016f3cb6d25ddf36e59e5a05fc21cae5f73c",
+      "bytes": 1290,
+      "referenced_by": [
+        {
+          "claim": "H8",
+          "field": "commands"
+        },
+        {
+          "claim": "H26",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "478e1d998d9f3c3210870586ac7d7e8b914f295ea2d6db984016fe3e56d62e52",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/real-executor/results/metrics.json": {
+      "artifact_last_commit": "e4cc016f3cb6d25ddf36e59e5a05fc21cae5f73c",
+      "bytes": 6189,
+      "referenced_by": [
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "77a6545a38db435c9f7c23c4c0046804842c820512d1d5efc8df89c9be80f624",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/static-autoawq/analysis.md": {
+      "artifact_last_commit": "6252e41a0ce3effe3e89e9b1aa8cb58b95cd9569",
+      "bytes": 2009,
+      "referenced_by": [
+        {
+          "claim": "H30",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "8b405e08fa4a358a9023ee04d4f9210d66dbf2f8d2747095d54981426e3adce1",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/static-autoawq/protocol.md": {
+      "artifact_last_commit": "a8e2d7d6deeff09d30a0478fad2398594b78dcc3",
+      "bytes": 2208,
+      "referenced_by": [
+        {
+          "claim": "H30",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "49b0e1d933ed3adb2ce4eaf09042f860ef8e02feaf483760ddca34f35b028186",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/static-autoawq/results/commands.txt": {
+      "artifact_last_commit": "6252e41a0ce3effe3e89e9b1aa8cb58b95cd9569",
+      "bytes": 873,
+      "referenced_by": [
+        {
+          "claim": "H30",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "00fa68c0381d5465a5191f56b40fad16332cd7c93344585e8671e1da2ffdd0aa",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/static-autoawq/results/metrics.json": {
+      "artifact_last_commit": "6252e41a0ce3effe3e89e9b1aa8cb58b95cd9569",
+      "bytes": 5119,
+      "referenced_by": [
+        {
+          "claim": "H30",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "5cf1467dd09690eb91238feaf65fb908b29f6c0d43dcc43efb2f58a6c708545a",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/synthetic-gpu-replay/attempt-1.md": {
+      "artifact_last_commit": "3d792c8cc6d7007bc37b147518b701c3d8ff2472",
+      "bytes": 557,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "2d55532ff801f5aa7733b5171541967effd4295022e5b9a5f503bc6bab10c303",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/synthetic-gpu-replay/protocol.md": {
+      "artifact_last_commit": "3fe6a96fb02b33cc23c91dc3bc43555c97a03c2b",
+      "bytes": 1739,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "e3be558afc10162851adb15ea3c3d8766370c575b19729ee91626f9bb26261cc",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/synthetic-gpu-replay/results-attempt-1/commands.txt": {
+      "artifact_last_commit": "3d792c8cc6d7007bc37b147518b701c3d8ff2472",
+      "bytes": 1188,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "a2cc948abb15efa4d74f4561d27a65c30e66232b0c7afb10cbb1cc51455353f3",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/synthetic-gpu-replay/results-attempt-1/metrics.json": {
+      "artifact_last_commit": "3d792c8cc6d7007bc37b147518b701c3d8ff2472",
+      "bytes": 8327,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "e68f592bfb4b32bddf210bfba80969a2f8c9e5e8cd539ba09b16c74984ce2a8a",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/synthetic-gpu-replay/results-attempt-1/raw.jsonl": {
+      "artifact_last_commit": "3d792c8cc6d7007bc37b147518b701c3d8ff2472",
+      "bytes": 4006,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "1a87109eb32b20213914c1b21ef8214d800b7f0899a66afe934218765fc8e560",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "profiles/llama31-8b-wikitext2-layers24-31.json": {
+      "artifact_last_commit": "844a54b66349411ef6f7fb09e9f9005363c1898c",
+      "bytes": 34535,
+      "referenced_by": [
+        {
+          "claim": "H22",
+          "field": "raw"
+        },
+        {
+          "claim": "H23",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "dbf356acd424c3b76a6754d91da4d5e2f4113e9f5f92c620ef231c3ed9452104",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "results/raw/figure1b-trace-window-inference.json": {
+      "artifact_last_commit": "042b4d27032ca4c64675f5c51dad69f8e593dcdc",
+      "bytes": 6232,
+      "referenced_by": [
+        {
+          "claim": "H1",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "4c2889ca24a1a07bc51e6735ce5b90e4c2d582d7635312214aaf845e096fc216",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "results/raw/full-profile-memory-feasibility.json": {
+      "artifact_last_commit": "d4b27c836e1d7a13e8d74039fe32951441a3fa7e",
+      "bytes": 950,
+      "referenced_by": [
+        {
+          "claim": "H13",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "69fc999ff5b01cb3aad618a16596c970ab3ea1cf962830931a9e09f25ec8bc73",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "results/raw/trace-window-inference-commands.txt": {
+      "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
+      "bytes": 695,
+      "referenced_by": [
+        {
+          "claim": "H1",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "e28e671ed5289f0af6fe6481ca8d8283e6621e6a35b537cdf74ccd3adebd5dc2",
+      "tracked": true,
+      "worktree_status": null
+    }
+  },
+  "claim_map": "configs/claim-evidence-map.json",
+  "repository_head_at_generation": "0688b9df718d5c4db1f4a50a3a88bec685e072fd",
+  "schema_version": 1,
+  "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
+}

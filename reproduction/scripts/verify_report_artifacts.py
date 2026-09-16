@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 required=[
  'REPORT.md','docs/paper-evidence-brief.md','docs/source-map.md','docs/claim-register.md','docs/trace-audit.md','docs/task-artifact-audit.md','configs/claim-evidence-map.json',
- 'results/raw/environment.json','results/raw/resource-usage-summary.json','results/raw/public-trace-audit.json','results/raw/figure1b-trace-window-inference.json','results/raw/transaction-followup-review.md','results/raw/transaction-rereview.md',
+ 'results/raw/environment.json','results/raw/resource-usage-summary.json','results/raw/public-trace-audit.json','results/raw/figure1b-trace-window-inference.json','results/raw/claim-evidence-provenance.json','results/raw/transaction-followup-review.md','results/raw/transaction-rereview.md',
  'results/raw/full-profile-memory-feasibility.json','traces/figure1b-inferred/summary.json',
  'traces/figure1b-inferred/azure-code-systematic-4.75x.jsonl','traces/figure1b-inferred/burstgpt-v1.1-systematic-1.75x.jsonl',
  'experiments/candidate-fp16-baseline/results-attempt-3/metrics.json',
@@ -42,11 +42,18 @@ assert not any('llm_pq' in key or 'pyramidkv' in key for key in references['head
 assert 'objective_only_values_not_found_in_target_pdf' in references
 claim_map=json.load(open(ROOT/'configs/claim-evidence-map.json'))
 assert set(claim_map['claims'])=={f'H{i}' for i in range(1,31)}
+evidence_paths=set()
 for claim,row in claim_map['claims'].items():
     assert row['paper_reference'] and row['comparison'] and row['limitation'],claim
     for field in ('paper_reference','commands','configs','raw','comparison'):
         for path in row[field]:
             assert (ROOT/path).is_file(),(claim,field,path)
+            evidence_paths.add(path)
+provenance=json.load(open(ROOT/'results/raw/claim-evidence-provenance.json'))
+assert set(provenance['artifacts'])==evidence_paths
+for path,row in provenance['artifacts'].items():
+    assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==row['sha256'],path
+    assert row['tracked'] and row['artifact_last_commit'] and row['worktree_status'] is None,path
 memory=json.load(open(ROOT/'results/raw/full-profile-memory-feasibility.json'))
 assert memory['feasible_simultaneously_pinned'] is False
 async_copy=json.load(open(ROOT/'experiments/async-layer-transfer/results/metrics.json'))['copy']

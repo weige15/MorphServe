@@ -49,6 +49,7 @@ CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_synthetic_gpu_replay.sh
 | `docs/completion-audit.md` | Explicit requirement-to-artifact checklist; currently rejects completion |
 | `docs/trace-audit.md`, `docs/task-artifact-audit.md` | Inferred trace windows and pinned task-source gaps |
 | `REPORT.md` | Current claim-by-claim report |
+| `configs/claim-evidence-map.json`, `results/raw/claim-evidence-provenance.json` | H1–H30 links plus hashes/Git provenance for all referenced artifacts |
 | `configs/paper-reference-values.json` | Paper-reported references only |
 | `vendor/author-morphserve/` | Immutable candidate artifact at `85c4fbf...` |
 | `runtime/candidate-csrc/` | Native-metadata/event-safe repaired C++ reconstruction |
