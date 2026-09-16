@@ -169,12 +169,14 @@ def main() -> int:
     final_logits, _ = run()
     elapsed = time.perf_counter() - started
     final_exact = bool(torch.equal(final_logits, baseline_logits))
+    expected_evaluations = len(layers) * (len(layers) + 1) // 2
     gate = {
         "sequence_length_2048": len(token_ids) == 2048,
         "local_metrics_complete": set(lts) == set(layers) == set(lrs),
-        "conditioned_mds_calls_6": len(mds_calls) == 6,
-        "all_unique_sets_evaluated": len({tuple(item) for item in evaluated_sets}) == 6,
-        "profile_steps_3": len(profile["steps"]) == 3 and sorted(profile["order"]) == sorted(layers),
+        "conditioned_mds_call_count": len(mds_calls) == expected_evaluations,
+        "all_unique_sets_evaluated": len({tuple(item) for item in evaluated_sets}) == expected_evaluations,
+        "profile_step_count": len(profile["steps"]) == len(layers) and sorted(profile["order"]) == sorted(layers),
+        "candidate_counts_descend": [len(step["candidates"]) for step in profile["steps"]] == list(range(len(layers), 0, -1)),
         "all_restores_exact": all(restore_exact),
         "final_fp16_logits_exact": final_exact,
     }
@@ -204,6 +206,7 @@ def main() -> int:
         "lrs": lrs,
         "mds_calls": mds_calls,
         "evaluated_sets": evaluated_sets,
+        "expected_evaluations": expected_evaluations,
         "profile": profile,
         "copy_records": copy_records,
         "elapsed_seconds_including_model_forwards_and_copies": elapsed,
