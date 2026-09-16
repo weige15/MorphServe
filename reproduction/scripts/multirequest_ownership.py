@@ -81,12 +81,17 @@ def main():
     torch.cuda.synchronize()
     final_recovery = samples(5, 0.5, 0.01)
     final_logits = model.forward([ids], [0], [], ignore_kvcache=True, return_logits=True)[0].detach().cpu()
+    final_region_exact = {
+        str(layer): bool(torch.equal(swiftllm_c.get_layer_memory_org_gpu(layer)[:backups[layer]["size"]].cpu(), backups[layer]["buffer"]))
+        for layer in layers
+    }
     final = {
         "active_layers": list(executor.active_layers), "groups": len(executor.kv_groups),
         "num_blocks": manager.num_blocks, "num_free_blocks": manager.num_free_blocks,
         "request_counts": manager.num_seq_allocated_blocks[:2].cpu().tolist(),
         "rows": {"0": manager.block_table[0, :5].cpu().tolist(), "1": manager.block_table[1, :1].cpu().tolist()},
-        "fp16_logits_exact": bool(torch.equal(final_logits, baseline)), "queues_unchanged": queue_state(scheduler) == initial_queues,
+        "fp16_logits_exact": bool(torch.equal(final_logits, baseline)), "fp16_region_bytes_exact": final_region_exact,
+        "pending_layer_events": sorted(model.layer_transfer_events), "queues_unchanged": queue_state(scheduler) == initial_queues,
     }
     gate = {
         "predicted_allocations": rows_before == {"0": [0,1,2,3,4], "1": [5]},
@@ -96,7 +101,8 @@ def main():
         "refusal_preserved_state": all((refusal_state["rows_unchanged"], refusal_state["counts_unchanged"], refusal_state["sentinel_unchanged"], refusal_state["queues_unchanged"])),
         "after_free_recovery_succeeded": final_recovery["success"] and final_recovery["selected_layers"] == [25],
         "final_baseline_state": final["active_layers"] == [] and final["groups"] == 0 and final["num_blocks"] == final["num_free_blocks"] == 4 and final["request_counts"] == [0,0],
-        "final_fp16_exact": final["fp16_logits_exact"], "fcfs_unchanged": final["queues_unchanged"], "ordinary_preemptions_zero": True,
+        "final_fp16_exact": final["fp16_logits_exact"] and all(final["fp16_region_bytes_exact"].values()),
+        "no_pending_layer_events": not final["pending_layer_events"], "fcfs_unchanged": final["queues_unchanged"], "ordinary_preemptions_zero": True,
     }
     payload = {"schema_version":1,"rows_before":rows_before,"counts_before":counts_before,"sentinel_before":sentinel_before,"recovery_events":[recovery26,recovery24],"refusal_state":refusal_state,"final_recovery":final_recovery,"final":final,"executor_log":executor.log,"ordinary_preemptions":0,"gate":gate,"passed":all(gate.values())}
     Path(args.output).write_text(json.dumps(payload,indent=2,sort_keys=True,default=str)+"\n")

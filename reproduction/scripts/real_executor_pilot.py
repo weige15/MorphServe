@@ -66,6 +66,10 @@ def main():
     expand_completed = executor.expand_kv(layers[:2])
     restore_completed = executor.restore_fp16(list(reversed(layers[:2])))
     rollback_logits = model.forward([ids], [0], [], ignore_kvcache=True, return_logits=True)[0].detach().cpu()
+    rollback_region_exact = {
+        str(layer): bool(torch.equal(swiftllm_c.get_layer_memory_org_gpu(layer)[:backups[layer]["size"]].cpu(), backups[layer]["buffer"]))
+        for layer in layers[:2]
+    }
     after_failure = {
         "success": morph_started and expand_completed,
         "restore_success": restore_completed,
@@ -74,6 +78,8 @@ def main():
         "num_blocks": model.gpu_block_manager.num_blocks,
         "queues_unchanged": queue_state(scheduler) == initial_queues,
         "fp16_logits_exact": bool(torch.equal(rollback_logits, baseline)),
+        "fp16_region_bytes_exact": rollback_region_exact,
+        "pending_layer_events": sorted(model.layer_transfer_events),
         "partial_group_was_acquired": any(row[0] == "expand" for row in executor.log),
     }
     executor.fail_expand_calls.clear()
@@ -113,6 +119,10 @@ def main():
         recovery_events.append(event)
     final = model.forward([ids], [0], [], ignore_kvcache=True, return_logits=True)[0].detach().cpu()
     final_exact = bool(torch.equal(final, baseline))
+    final_region_exact = {
+        str(layer): bool(torch.equal(swiftllm_c.get_layer_memory_org_gpu(layer)[:backups[layer]["size"]].cpu(), backups[layer]["buffer"]))
+        for layer in layers
+    }
     final_state = {
         "controller_layers": coordinator.controller.quantized_layers,
         "coordinator_layers": list(coordinator.active_layers),
@@ -123,9 +133,11 @@ def main():
         "explicit_kv_regions": model.explicit_kv_regions,
         "queues_unchanged": queue_state(scheduler) == initial_queues,
         "fp16_logits_exact": final_exact,
+        "fp16_region_bytes_exact": final_region_exact,
+        "pending_layer_events": sorted(model.layer_transfer_events),
     }
     gate = {
-        "injected_failure_rolled_back": not after_failure["success"] and after_failure["restore_success"] and after_failure["partial_group_was_acquired"] and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["num_blocks"] == 4 and after_failure["fp16_logits_exact"],
+        "injected_failure_rolled_back": not after_failure["success"] and after_failure["restore_success"] and after_failure["partial_group_was_acquired"] and after_failure["executor_layers"] == [] and after_failure["kv_groups"] == 0 and after_failure["num_blocks"] == 4 and after_failure["fp16_logits_exact"] and all(after_failure["fp16_region_bytes_exact"].values()) and not after_failure["pending_layer_events"],
         "profile_order_active": active_state["executor_layers"] == layers == active_state["group_layers"],
         "real_w4_modules": all(classes == ["WQLinear_GEMM"] for classes in active_state["module_classes"].values()),
         "capacity_physically_expanded": active_state["num_blocks"] > 4 and active_state["num_free_blocks"] == active_state["num_blocks"],
@@ -134,6 +146,8 @@ def main():
         "final_state_restored": final_state["controller_layers"] == 0 and final_state["executor_layers"] == [] and final_state["kv_groups"] == 0 and final_state["num_blocks"] == 4,
         "fcfs_unchanged": after_failure["queues_unchanged"] and final_state["queues_unchanged"],
         "final_fp16_logits_exact": final_exact,
+        "final_fp16_region_bytes_exact": all(final_region_exact.values()),
+        "no_pending_layer_events": not final_state["pending_layer_events"],
     }
     payload = {
         "schema_version": 1,

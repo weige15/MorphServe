@@ -20,8 +20,8 @@ Connect `AdaptiveCoordinator` to a real normalized Llama 3.1 8B executor for pro
 1. Injected expansion failure leaves exact FP16/capacity/state and records reverse rollback.
 2. Successful actions follow `[25,24,26]`, use real WQLinear modules, and physically increase block capacity.
 3. Executor selects explicit-region mapping for the non-descending third group.
-4. Recovery shrinks each group before restoring its layer; final bytes/logits are exact to initial FP16.
-5. Coordinator and executor active-layer counts agree; FCFS queue order never changes.
+4. Recovery shrinks each group before restoring its layer; final region bytes/logits are exact to initial FP16.
+5. Coordinator and executor active-layer counts agree; all layer-ready events are consumed; FCFS queue order never changes.
 6. Process exits 0, vendor manifests unchanged, and memory/capacity/action logs saved.
 
 ## Boundary
