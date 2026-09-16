@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: active multi-request ownership, shrink refusal, and rollback under real executor
+      next_gate: bounded scheduled-arrival replay with complete request/timing accounting
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Transactional real GPU actions work without requests. With multiple active sequences, reclaimed
-  group ownership should make recovery refuse occupied tails, preserve FCFS/request progress, and
-  succeed only after blocks are migrated/freed with lifetime events satisfied.
-active_protocol: experiments/real-executor/protocol.md
+  Real multi-request ownership and recovery are correct. A trace-independent replay harness can
+  now submit arrivals independently of completion and persist complete TTFT/TPOT/queue/token/error
+  records; exact paper replay remains blocked by unspecified windows/context mapping.
+active_protocol: experiments/multirequest-ownership/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Exercise real executor with multiple active request IDs and occupied reclaimed groups.
-  - Verify shrink refusal, migration/free recovery, request/token/KV preservation, and preemption accounting.
-  - Begin bounded arrival replay instrumentation only after those gates.
+  - Implement and test scheduled-arrival replay/accounting independent of server completions.
+  - Freeze one synthetic modified-condition trace before GPU outcomes and run a bounded serving replay.
+  - Recheck public trace repositories for exact windows before any Azure/BurstGPT claim.

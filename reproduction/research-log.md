@@ -281,4 +281,8 @@ The independent runtime now masks/remaps one block table per region and repairs 
 
 ## 2026-09-16 — transactional real GPU executor
 
-Attempt 1 completed all actions but used an incorrect free-block assertion for a no-request pool; raw results were preserved. The corrected run passed: injected first expansion failure rolled back layer 25/capacity/state; three accuracy-mode actions activated `[25,24,26]`, attached 615 blocks each (4→1,849), and selected explicit mapping; recovery shrank/restored `26→24→25`; final FP16 logits/capacity were exact and FCFS queues unchanged. No active requests were present, so serving concurrency remains open.
+Attempt 1 completed all actions but used an incorrect free-block assertion for a no-request pool; raw results were preserved. The corrected run passed: injected first expansion failure rolled back layer 25/capacity/state; three accuracy-mode actions activated `[25,24,26]`, attached 615 blocks each (4→1,849), and selected explicit mapping; recovery shrank/restored `26→24→25`; final FP16 logits/capacity were exact and FCFS queues unchanged.
+
+## 2026-09-16 — real two-request reclaimed ownership
+
+Attempt 1 exposed an inference-mode context bug in executor shrink; after the scoped fix, request 0/1 allocated `[0,1,2,3,4]` and `[5]`, placing IDs 4/5 in reclaimed group 0. Recovery removed free groups 26/24, refused occupied layer 25 while preserving counts, rows, K/V sentinel, state and FCFS, then succeeded after real BlockManager frees. Final FP16/capacity were exact and ordinary preemptions remained zero. Model decode concurrency and timed arrivals are still untested.
