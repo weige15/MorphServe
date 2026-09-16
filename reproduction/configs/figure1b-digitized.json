@@ -1,0 +1,15 @@
+{
+  "classification": "approximate plot-derived reference, not a measured result",
+  "source": "supplied PDF page 3, Figure 1b",
+  "render": {"dpi": 180, "azure_color_rgb": [31, 119, 180], "burst_color_rgb": [255, 127, 14]},
+  "extraction": "integer-second vertices read from exact Matplotlib-color pixels; gaps/occluded points set to zero; values are approximate K context tokens/s",
+  "azure": {
+    "values": [5.5,1.5,0,1.1,6.1,2.3,1.1,0.8,0.8,13.7,3.6,6.3,5.7,12.6,38.0,10.5,5.7,1.0,3.6,0,1.3,8.4,7.6,5.3,2.3,3.8,5.7,10.7,3.6,3.4,11.8,8.6,2.7,1.1,2.7,1.5,1.3,3.8,3.0,1.5,1.1,1.5,1.1,0,0,0,0,0,0,0,0,0,0,0,1.5,5.0,2.7,3.0,2.1,0,0,2.1,12.0,11.8,9.1,9.5,11.0,9.7,11.6,8.6,0,0,1.5],
+    "minimum_nonzero_source_bins": 45
+  },
+  "burst": {
+    "values": [0.66,0.16,0.25,1.07,6.19,0.16,0.66,0.25,0.33,0.58,0,0.16,2.72,4.12,1.48,1.07,0.99,2.89,1.32,2.72,0.25,0.16,0.66,2.8,0.99,0.66,0,6.1,1.15,0.58,0.25,1.15,0.49,0.16,0.66,0,1.15,0.33,0.16,2.06,1.57,0.74,0.25,1.57,1.4,1.07,0.99,0.33,0.99,3.63,3.88,1.9,0.66,0.66,0.66,0.74,0.74,0.99,2.14,0.66,0,0.41,2.14,1.57,3.96,5.61,2.56,0.66,0.99,1.57,1.07,1.15,1.07],
+    "minimum_nonzero_source_bins": 60
+  },
+  "policy": "Window candidates are inferred solely from the paper figure and source traces before serving outcomes. They are not exact author-confirmed offsets."
+}

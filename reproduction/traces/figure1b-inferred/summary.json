@@ -1,0 +1,59 @@
+{
+  "azure": {
+    "first_s": 0.055799,
+    "last_s": 68.934987,
+    "raw_window_requests": 443,
+    "selected_requests": 94
+  },
+  "burstgpt": {
+    "first_s": 0.0,
+    "last_s": 71.0,
+    "raw_window_requests": 214,
+    "selected_requests": 123
+  },
+  "classification": "modified-condition trace manifest, not exact paper reconstruction",
+  "context_mapping": null,
+  "limitations": [
+    "Systematic thinning is a frozen reconstruction choice, not recovered author behavior.",
+    "No task contexts/prompts have been assigned; these files cannot produce quality metrics."
+  ],
+  "operation": "systematic index thinning: retain source-window row floor(k * factor) for k = 0,1,...; preserve original relative timestamps",
+  "schema_version": 1,
+  "sha256": {
+    "azure-code-systematic-4.75x.jsonl": "e15c75d1c3e25eb43778e466d7c8f3f045f26800d4ef9feeefeab32bdb9bb1b6",
+    "burstgpt-v1.1-systematic-1.75x.jsonl": "d5c391c913b369cf08744eb302b00f5733b08041cc45078c522fcb3a4bc25bd9"
+  },
+  "windows": {
+    "azure": {
+      "figure1b_context_shape_pearson": 0.8792976775180484,
+      "file": "AzureLLMInferenceTrace_code.csv",
+      "paper_factor": 4.75,
+      "raw_request_count": 443,
+      "relative_start_s": 1073,
+      "runner_up_pearson": 0.5705797850839815,
+      "sha256": "54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6",
+      "start_timestamp": "2023-11-16T18:34:56.979960"
+    },
+    "burstgpt": {
+      "figure1b_prompt_shape_pearson": 0.7355598570546976,
+      "file": "BurstGPT_1.csv",
+      "paper_factor": 1.75,
+      "raw_request_count": 214,
+      "release": "v1.1",
+      "runner_up_pearson": 0.6172931973485084,
+      "sha256": "4bb3783693d0a435686fbfc885615d2349bd067239079fa4b749f2e679e12122",
+      "start_timestamp_s": 1781278
+    },
+    "classification": "figure-inferred candidate windows; not author-confirmed exact settings",
+    "duration_s": 72,
+    "frozen_before_serving_outcomes": true,
+    "interval": "half-open [start, start + 72 seconds)",
+    "unresolved": [
+      "whether Figure 1b uses exactly the main evaluation windows",
+      "downsampling operation and random seed",
+      "which requests survive downsampling",
+      "request-to-task-context assignment and seed"
+    ],
+    "use_policy": "May be used only for explicitly figure-inferred modified-condition replay unless author artifacts confirm the offsets and scaling procedure."
+  }
+}

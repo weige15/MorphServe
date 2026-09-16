@@ -1,0 +1,10 @@
+{
+  "classification": "modified-condition trace manifest, not exact paper reconstruction",
+  "window_config": "figure1b-inferred-trace-windows.json",
+  "operation": "systematic index thinning: retain source-window row floor(k * factor) for k = 0,1,...; preserve original relative timestamps",
+  "rationale": "A deterministic request-rate reduction that preserves the inferred 72-second burst shape. The paper does not specify its operation or seed.",
+  "azure_factor": 4.75,
+  "burst_factor": 1.75,
+  "context_mapping": null,
+  "frozen_before_serving_outcomes": true
+}

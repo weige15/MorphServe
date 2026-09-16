@@ -95,9 +95,9 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | E4 | Exact CodeLlama 34B | BLOCKED | Checkpoint/hardware unavailable. |
 | E5 | Paper L4/A100 hardware/RAM | BLOCKED | Local 7× RTX 3090/125 GiB differs materially. |
 | E6 | Exact 512/256 and 1024/512 lengths | MISSING headline runs | Short bounded correctness inputs only. |
-| E7 | Primary Azure/BurstGPT files | PARTIAL | Azure Code/Conversation and pre-paper BurstGPT v1.1 recovered/hashes saved. Azure choice unresolved. |
-| E8 | Exact 72-s offsets | BLOCKED | Not in paper/candidate/history. First/densest counts show material sensitivity. |
-| E9 | Exact 4.75×/1.75× operation | BLOCKED | Multiply/divide/thin/sample unspecified. |
+| E7 | Primary Azure/BurstGPT files | PARTIAL | Azure Code/Conversation and pre-paper BurstGPT v1.1 recovered; Figure 1a strongly resolves Azure Code. |
+| E8 | Exact 72-s offsets | PARTIAL/BLOCKED | Figure 1b uniquely ranks candidate starts 1073 and 1,781,278, frozen before outcomes; exact author confirmation and equivalence to main evaluation windows are absent. |
+| E9 | Exact 4.75×/1.75× operation | BLOCKED exact / PASS reconstructed | Systematic index thinning is frozen and deterministic (94/123 requests), but author operation/seed remain unknown. |
 | E10 | Context sampling/mapping/seed | BLOCKED | No artifact. |
 | E11 | Scheduled arrivals independent of completion | PASS at replay seam | Four tests; real corrected GPU replay pending. |
 | E12 | Account all requests through completion/timeout | PASS at replay seam | Success/error/timeout/partial-token records and summary regeneration. |
@@ -159,7 +159,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 
 ## Verifier coverage audit
 
-`python3 reproduction/scripts/verify_report_artifacts.py` verifies file presence/JSON parseability, six positive experiment gates, the expected static-W4 nondeterminism, memlock blocker, small async-copy gate, and key report phrases. It **does not** verify exact models, source identity, trace windows, datasets, baselines, 32-layer profiling, full-layer overlap, main workload matrix, headline aggregates, or every prose claim. It is therefore a consistency check, not completion proof.
+`python3 reproduction/scripts/verify_report_artifacts.py` verifies file presence/JSON parseability, six positive experiment gates, the expected static-W4 nondeterminism, memlock blocker, small async-copy gate, inferred-window identities, deterministic trace-manifest hashes, and key report phrases. It **does not** establish author confirmation, exact scaling/context mapping, exact models, datasets, baselines, 32-layer profiling, full-layer overlap, main workload matrix, headline aggregates, or every prose claim. It is therefore a consistency check, not completion proof.
 
 The vendor manifest proves only that the candidate snapshot was not modified. Unit-test green status proves only the named seams. Neither is accepted as completion evidence for the paper-level objective.
 
@@ -172,4 +172,4 @@ The objective is **not achieved**. The smallest currently feasible next gates ar
 3. rerun corrected `run_synthetic_gpu_replay.sh`, preserving complete timestamps and excluding warmup;
 4. update `REPORT.md` and this audit from the resulting raw artifacts.
 
-Exact headline work remains blocked pending author trace offsets/scaling/context map, task artifacts/prompts/metrics, model revisions, controller/baseline configs, and paper-equivalent hardware. These blockers do not excuse the three feasible GPU reruns above once uncontended capacity is available.
+Exact headline work remains blocked pending author confirmation of figure-inferred offsets plus scaling/context map, task artifacts/prompts/metrics, model revisions, controller/baseline configs, and paper-equivalent hardware. These blockers do not excuse the three feasible GPU reruns above once uncontended capacity is available.

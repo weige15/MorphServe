@@ -124,7 +124,7 @@ Evidence: `experiments/async-layer-transfer/`.
 
 | ID | Paper claim/location | Reported | Observed/agreement | Classification and evidence |
 |---|---|---|---|---|
-| H1 | Abstract/§5.1 average SLO reduction | 92.45% | No exact replay/result | **Blocked exact**: file/window/scaling/context/mode/raw logs missing. `docs/trace-audit.md` |
+| H1 | Abstract/§5.1 average SLO reduction | 92.45% | No exact replay/result | **Blocked exact**: figure-inferred files/windows exist, but confirmation/scaling/context/mode/raw logs are missing. `docs/trace-audit.md` |
 | H2 | §5.1 accuracy P95 TTFT | 2.2×–3.9× FP16 | Not measured under paper conditions | **Blocked exact** |
 | H3 | §5.1 default P95 TTFT | 2.9×–15.7× | Not measured | **Blocked exact** |
 | H4 | §5.1 performance P95 TTFT | 3.4×–19.5× | Not measured | **Blocked exact** |
@@ -177,7 +177,7 @@ Recovered primary files:
 - Azure Conversation SHA `2f1e5b...`, 19,366 requests.
 - BurstGPT v1.1 SHA `4bb378...`, 1,429,737 requests.
 
-First/densest 72-second counts are Azure Code 63/827, Azure Conversation 249/616, BurstGPT 2/1,666. This sensitivity makes unsourced window choice unacceptable. Corrected synthetic GPU replay is pending sufficient GPU headroom; its first run is retained only as JIT-contaminated initialization evidence.
+Figure 1a matches Azure Code, not Conversation. Approximate Figure 1b shape matching ranks Azure relative second 1073 (443 requests/72 s; Pearson 0.8793) and BurstGPT timestamp 1,781,278 (214 requests/72 s; Pearson 0.7356), both with the same top candidate under request-count and token-volume rankings. They are frozen before serving outcomes as **figure-inferred candidate windows**, not exact author-confirmed offsets. A separately labeled deterministic systematic-thinning reconstruction produces 94 Azure and 123 Burst arrivals in `traces/figure1b-inferred/`; contexts remain unmapped. The unpublished author operation/seed and request-to-context map still block exact replay. Corrected synthetic GPU replay is pending sufficient GPU headroom; its first run is retained only as JIT-contaminated initialization evidence.
 
 ## 8. Reproduction commands
 

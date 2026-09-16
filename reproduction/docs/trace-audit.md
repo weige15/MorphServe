@@ -10,11 +10,21 @@ Primary public files were recovered and hashed in `results/raw/public-trace-audi
 
 BurstGPT v1.1 is the defensible release available before the MorphServe paper; current v2 was published in 2026 and must not silently replace it.
 
-Exact-condition reproduction remains blocked because neither paper nor public candidate history identifies:
+## Figure-derived window inference
 
-1. Azure Code versus Conversation;
-2. either 72-second start offset;
-3. whether 4.75×/1.75× means multiplying or dividing inter-arrivals, thinning, or stochastic downsampling;
-4. sampled task examples, mapping order, or seed.
+A later source-only comparison digitized the approximate per-second token-volume shapes in PDF Figure 1b and ranked every dense 73-bin source segment before any serving outcomes (`configs/figure1b-digitized.json`, `scripts/infer_trace_windows_from_figure.py`). Both request-count and source-token rankings select the same candidate for each trace:
 
-The first and densest windows differ by over an order of magnitude. Choosing either after observing serving outcomes would materially cherry-pick load. Densest-window calculations are therefore source characterization, not selected evaluation traces.
+- **Azure Code**, relative second **1073** (`2023-11-16 18:34:56.979960`), 443 raw requests in `[1073,1145)`. Context-volume Pearson correlation is 0.8793 versus 0.5706 for the runner-up.
+- **BurstGPT v1.1**, timestamp second **1,781,278**, 214 raw requests in `[1781278,1781350)`. Request-token Pearson correlation is 0.7356 versus 0.6173 for the runner-up among dense windows.
+
+Figure 1a independently matches Azure Code's zero intervals and ≈1.4M-token/min maximum, not the continuously busy Conversation file. These are strong **figure-inferred candidate windows**, frozen in `configs/figure1b-inferred-trace-windows.json`, but not author-confirmed exact settings: plot digitization is approximate, Figure 1b may be motivation rather than the exact Figure 4 evaluation input, and task-context replacement changes token volume.
+
+Exact-condition reproduction therefore remains blocked by:
+
+1. confirmation that Figure 1b and the main experiments use these same offsets;
+2. whether 4.75×/1.75× means timestamp scaling, deterministic/stochastic thinning, or another operation and its seed;
+3. sampled task examples, mapping order, or seed.
+
+The first and densest windows differ by over an order of magnitude. Choosing either after observing serving outcomes would materially cherry-pick load. They remain source characterization, while only the figure-inferred candidates may be used in predeclared modified-condition replays.
+
+For one explicit reconstruction, `configs/modified-trace-manifest.json` freezes systematic index thinning (retain row `floor(k×factor)`, preserve timestamps) before outcomes. It yields 94 Azure and 123 Burst requests under `traces/figure1b-inferred/`. This operation is deterministic and auditable but **not recovered author behavior**, and contexts remain intentionally unmapped.

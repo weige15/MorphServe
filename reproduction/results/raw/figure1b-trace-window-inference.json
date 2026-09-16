@@ -1,0 +1,238 @@
+{
+  "azure_code": {
+    "base_timestamp": "2023-11-16T18:17:03.979960",
+    "inferred_start_s": 1073,
+    "inferred_start_timestamp": "2023-11-16T18:34:56.979960",
+    "plot_alignment_bins": 73,
+    "rankings": {
+      "request_count": [
+        {
+          "nonzero_bins": 52,
+          "pearson": 0.7717161037818012,
+          "start_s": 1073
+        },
+        {
+          "nonzero_bins": 51,
+          "pearson": 0.5975231619698029,
+          "start_s": 1072
+        },
+        {
+          "nonzero_bins": 55,
+          "pearson": 0.5599802071122925,
+          "start_s": 848
+        },
+        {
+          "nonzero_bins": 56,
+          "pearson": 0.49137319873572427,
+          "start_s": 849
+        },
+        {
+          "nonzero_bins": 54,
+          "pearson": 0.47745355696565067,
+          "start_s": 847
+        },
+        {
+          "nonzero_bins": 54,
+          "pearson": 0.42995050098507664,
+          "start_s": 558
+        },
+        {
+          "nonzero_bins": 52,
+          "pearson": 0.4181541538903472,
+          "start_s": 560
+        },
+        {
+          "nonzero_bins": 53,
+          "pearson": 0.4084848640086209,
+          "start_s": 559
+        },
+        {
+          "nonzero_bins": 53,
+          "pearson": 0.33989963211005747,
+          "start_s": 846
+        },
+        {
+          "nonzero_bins": 51,
+          "pearson": 0.332469572180074,
+          "start_s": 1074
+        }
+      ],
+      "source_context_k_tokens": [
+        {
+          "nonzero_bins": 52,
+          "pearson": 0.8792976775180484,
+          "start_s": 1073
+        },
+        {
+          "nonzero_bins": 51,
+          "pearson": 0.5705797850839815,
+          "start_s": 1072
+        },
+        {
+          "nonzero_bins": 55,
+          "pearson": 0.5087083541909273,
+          "start_s": 848
+        },
+        {
+          "nonzero_bins": 54,
+          "pearson": 0.507291952450207,
+          "start_s": 847
+        },
+        {
+          "nonzero_bins": 56,
+          "pearson": 0.46347202220133626,
+          "start_s": 849
+        },
+        {
+          "nonzero_bins": 53,
+          "pearson": 0.41588790129063424,
+          "start_s": 559
+        },
+        {
+          "nonzero_bins": 53,
+          "pearson": 0.39274712557660024,
+          "start_s": 846
+        },
+        {
+          "nonzero_bins": 52,
+          "pearson": 0.3725387631434406,
+          "start_s": 560
+        },
+        {
+          "nonzero_bins": 54,
+          "pearson": 0.34952074098481767,
+          "start_s": 558
+        },
+        {
+          "nonzero_bins": 51,
+          "pearson": 0.3397097098952134,
+          "start_s": 1074
+        }
+      ]
+    },
+    "replay_window_s": 72,
+    "window_request_count": 443,
+    "window_source_context_tokens": 931691
+  },
+  "burstgpt_1_v1.1": {
+    "inferred_start_s": 1781278,
+    "plot_alignment_bins": 73,
+    "rankings": {
+      "request_count": [
+        {
+          "nonzero_bins": 69,
+          "pearson": 0.6436921745490647,
+          "start_s": 1781278
+        },
+        {
+          "nonzero_bins": 72,
+          "pearson": 0.5377548413700378,
+          "start_s": 2901021
+        },
+        {
+          "nonzero_bins": 62,
+          "pearson": 0.530572944944306,
+          "start_s": 1803920
+        },
+        {
+          "nonzero_bins": 64,
+          "pearson": 0.513187841024357,
+          "start_s": 2051384
+        },
+        {
+          "nonzero_bins": 60,
+          "pearson": 0.4976487391094561,
+          "start_s": 1783374
+        },
+        {
+          "nonzero_bins": 63,
+          "pearson": 0.49648745241250647,
+          "start_s": 2050466
+        },
+        {
+          "nonzero_bins": 62,
+          "pearson": 0.4844551549233877,
+          "start_s": 1783412
+        },
+        {
+          "nonzero_bins": 68,
+          "pearson": 0.4756251725347805,
+          "start_s": 1683683
+        },
+        {
+          "nonzero_bins": 65,
+          "pearson": 0.47313664622419427,
+          "start_s": 1792328
+        },
+        {
+          "nonzero_bins": 61,
+          "pearson": 0.47283410548229976,
+          "start_s": 1802997
+        }
+      ],
+      "source_request_k_tokens": [
+        {
+          "nonzero_bins": 69,
+          "pearson": 0.7355598570546976,
+          "start_s": 1781278
+        },
+        {
+          "nonzero_bins": 73,
+          "pearson": 0.6172931973485084,
+          "start_s": 5151148
+        },
+        {
+          "nonzero_bins": 60,
+          "pearson": 0.6041045730813694,
+          "start_s": 1355937
+        },
+        {
+          "nonzero_bins": 60,
+          "pearson": 0.5790359639708669,
+          "start_s": 3845287
+        },
+        {
+          "nonzero_bins": 63,
+          "pearson": 0.5689488571069651,
+          "start_s": 1353874
+        },
+        {
+          "nonzero_bins": 73,
+          "pearson": 0.5555223924907553,
+          "start_s": 5072566
+        },
+        {
+          "nonzero_bins": 67,
+          "pearson": 0.5502473324732606,
+          "start_s": 3671761
+        },
+        {
+          "nonzero_bins": 64,
+          "pearson": 0.5393108473010327,
+          "start_s": 1357000
+        },
+        {
+          "nonzero_bins": 69,
+          "pearson": 0.5369786349528965,
+          "start_s": 1441643
+        },
+        {
+          "nonzero_bins": 67,
+          "pearson": 0.535760504530677,
+          "start_s": 1265169
+        }
+      ]
+    },
+    "replay_window_s": 72,
+    "window_request_count": 214,
+    "window_source_request_tokens": 195599
+  },
+  "classification": "approximate plot-derived reference, not a measured result",
+  "limitations": [
+    "Plot digitization is approximate and partially occluded by legends.",
+    "Correlation identifies arrival-shape candidates, not the unpublished downsampling seed/operation or request-to-context mapping.",
+    "Candidates are frozen before serving outcomes but are not author-confirmed exact offsets."
+  ],
+  "method": "integer-second vertices read from exact Matplotlib-color pixels; gaps/occluded points set to zero; values are approximate K context tokens/s",
+  "schema_version": 1
+}

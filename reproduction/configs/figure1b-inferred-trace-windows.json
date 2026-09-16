@@ -1,0 +1,33 @@
+{
+  "classification": "figure-inferred candidate windows; not author-confirmed exact settings",
+  "frozen_before_serving_outcomes": true,
+  "duration_s": 72,
+  "interval": "half-open [start, start + 72 seconds)",
+  "azure": {
+    "file": "AzureLLMInferenceTrace_code.csv",
+    "sha256": "54e9a6d2a4bd06ba1e060304b900abbc74cbea53de96506e60fe5bb4f2277fb6",
+    "relative_start_s": 1073,
+    "start_timestamp": "2023-11-16T18:34:56.979960",
+    "raw_request_count": 443,
+    "figure1b_context_shape_pearson": 0.8792976775180484,
+    "runner_up_pearson": 0.5705797850839815,
+    "paper_factor": 4.75
+  },
+  "burstgpt": {
+    "file": "BurstGPT_1.csv",
+    "release": "v1.1",
+    "sha256": "4bb3783693d0a435686fbfc885615d2349bd067239079fa4b749f2e679e12122",
+    "start_timestamp_s": 1781278,
+    "raw_request_count": 214,
+    "figure1b_prompt_shape_pearson": 0.7355598570546976,
+    "runner_up_pearson": 0.6172931973485084,
+    "paper_factor": 1.75
+  },
+  "unresolved": [
+    "whether Figure 1b uses exactly the main evaluation windows",
+    "downsampling operation and random seed",
+    "which requests survive downsampling",
+    "request-to-task-context assignment and seed"
+  ],
+  "use_policy": "May be used only for explicitly figure-inferred modified-condition replay unless author artifacts confirm the offsets and scaling procedure."
+}

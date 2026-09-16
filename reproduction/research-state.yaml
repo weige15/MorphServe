@@ -62,7 +62,7 @@ local_resources:
     - exact Llama 3 8B revision
     - CodeLlama 34B
 blocked_exact_inputs:
-  - exact 72-second Azure and BurstGPT windows and downscaling operation
+  - author confirmation of Figure-1-inferred Azure/BurstGPT windows and exact downscaling operation
   - request-to-context mapping and seed
   - English-translated DuReader artifact
   - exact prompts, splits, decoding, EOS and metric revisions
@@ -72,8 +72,8 @@ blocked_exact_inputs:
   - verified author link for candidate code
 active_hypothesis: >-
   Event-safe asynchronous copying works on a small real CUDA region, while full-layer overlap and
-  corrected steady-state replay both await an uncontended GPU with >17 GiB headroom. Exact
-  Azure/BurstGPT remains blocked independently by missing window/scaling/context identity.
+  corrected steady-state replay both await an uncontended GPU with >17 GiB headroom. Figure 1
+  provides candidate trace offsets, but exact replay remains blocked by confirmation/scaling/context identity.
 active_protocol: experiments/async-layer-transfer/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
@@ -83,4 +83,4 @@ resource_accounting:
 next_actions:
   - Run the frozen three-repeat full-layer overlap pilot when a GPU has >17 GiB free.
   - Re-run transactional real-executor and corrected synthetic replay on the async implementation.
-  - Do not select Azure/BurstGPT windows without author offsets.
+  - Use frozen Figure-1 candidate windows only as plot-inferred modified conditions.
