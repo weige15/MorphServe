@@ -35,7 +35,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | B5 | Record GPU/RAM/memlock/PCIe/software/model/data/disk | PASS | `results/raw/environment.json`, trace hashes and memory feasibility JSON. |
 | B6 | Isolated environment and lock | PASS | `reproduction/.venv`, `configs/fp16-requirements-lock.txt`, per-run install logs. |
 | B7 | No purchase/quota/access bypass/credential exposure/publication | PASS | No such operation in logs; Git work remains local/ahead of origin. |
-| B8 | Track agent and GPU budgets separately | PASS with caveat | `results/raw/resource-usage-summary.json`: 807.058 s saved GPU-runner process wall across 25 records; explicitly not kernel/exclusive GPU time. Harness agent time is separate in state. |
+| B8 | Track agent and GPU budgets separately | PASS with caveat | `results/raw/resource-usage-summary.json`: 818.287 s saved GPU-runner process wall across 26 records; explicitly not kernel/exclusive GPU time. Harness agent time is separate in state. |
 | B9 | Full all-variant pinning feasibility | BLOCKED | Requires 17,585,668,096 pinned bytes vs 16,844,414,976 memlock; 741,253,120-byte shortfall before overhead. |
 
 ## C. Implementation constraints
@@ -140,7 +140,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | G8 | Predeclare tolerances before target inspection | PARTIAL | W4 repeat envelope derived independently; many exact experiments never reached. |
 | G9 | Preserve failures/negative results | PASS | Multiple numbered attempts, SIGSEGV/race/mapping/JIT/OOM evidence retained. |
 | G10 | Regenerate plots/tables from raw | PARTIAL | Summaries and verifier check saved JSON. `figures/gen_fig_transfer_diagnostics.py` regenerates CSV/PDF/PNG byte-identically from raw attempt-1 metrics and fails closed if the source run is not rejected; unavailable numbered-paper plots remain absent. |
-| G11 | Every claimed result links command/config/raw/comparison | PASS for paths; historical source-revision caveat | `configs/claim-evidence-map.json` maps H1–H30 to paper references, commands, frozen configs/protocols, raw artifacts, comparisons and limitations. `results/raw/claim-evidence-provenance.json` hashes/Git-audits all 83 linked files. Older runners did not save the exact source revision; their artifact commit is not mislabeled as executed-source proof, while pending runners now write `source-revision.txt`. |
+| G11 | Every claimed result links command/config/raw/comparison | PASS for paths; historical source-revision caveat | `configs/claim-evidence-map.json` maps H1–H30 to paper references, commands, frozen configs/protocols, raw artifacts, comparisons and limitations. `results/raw/claim-evidence-provenance.json` hashes/Git-audits all 84 linked files. Older runners did not save the exact source revision; their artifact commit is not mislabeled as executed-source proof, while pending runners now write `source-revision.txt`. |
 | G12 | Tests execute real work, not canned success | PASS for inspected tests | CUDA tests mutate/compare actual storage; CPU tests compute policy/profile/replay behavior. |
 
 ## H. Iteration/checkpoint and finalization policy

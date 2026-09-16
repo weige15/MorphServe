@@ -1,6 +1,6 @@
 Using Python 3.12.3 environment at: reproduction/.venv
-Resolved 102 packages in 625ms
-Installed 102 packages in 5.26s
+Resolved 102 packages in 122ms
+Installed 102 packages in 4.78s
  + accelerate==1.15.0
  + aiohappyeyeballs==2.7.1
  + aiohttp==3.14.3

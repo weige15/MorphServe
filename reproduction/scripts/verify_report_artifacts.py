@@ -19,7 +19,7 @@ required=[
  'experiments/real-executor/results-before-atomic-repair/metrics.json','experiments/real-executor/results-before-atomic-repair/CLASSIFICATION.md',
  'experiments/multirequest-ownership/results-before-atomic-repair/metrics.json','experiments/multirequest-ownership/results-before-atomic-repair/CLASSIFICATION.md',
  'experiments/async-layer-transfer/results/metrics.json','experiments/async-layer-transfer/results/test.exitcode','experiments/async-layer-transfer/results/test.log',
- 'experiments/async-layer-transfer/results/source-revision.txt','experiments/async-layer-transfer/results/source-status.txt',
+ 'experiments/async-layer-transfer/results/source-revision.txt','experiments/async-layer-transfer/results/source-status.txt','experiments/async-layer-transfer/results/wall-time.json',
  'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json','experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json',
  'figures/transfer-diagnostics.csv','figures/transfer-diagnostics.pdf','figures/transfer-diagnostics.png',
  'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode','experiments/async-layer-transfer/activity-analysis-results/test.exitcode',
@@ -73,6 +73,8 @@ assert 'Ran 5 tests' in async_log and async_log.rstrip().endswith('OK')
 assert (ROOT/'experiments/async-layer-transfer/results/source-status.txt').read_text()==''
 async_revision=(ROOT/'experiments/async-layer-transfer/results/source-revision.txt').read_text().strip()
 assert subprocess.run(['git','-C',str(ROOT.parent),'cat-file','-e',f'{async_revision}^{{commit}}']).returncode==0
+async_wall=json.load(open(ROOT/'experiments/async-layer-transfer/results/wall-time.json'))['test_wall_seconds']
+assert 0 < async_wall < 60
 assert (ROOT/'experiments/async-layer-transfer/alignment-results/test.exitcode').read_text().strip()=='0'
 assert (ROOT/'experiments/async-layer-transfer/transaction-results/test.exitcode').read_text().strip()=='0'
 transaction_log=(ROOT/'experiments/async-layer-transfer/transaction-results/test.log').read_text()
