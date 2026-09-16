@@ -1,5 +1,8 @@
+import json
+import os
 import time
 import unittest
+from pathlib import Path
 from types import SimpleNamespace
 
 import torch
@@ -11,6 +14,7 @@ from swiftllm.worker.model import LlamaModel
 
 @unittest.skipUnless(torch.cuda.is_available(), "CUDA required")
 class AsyncLayerTransferTests(unittest.TestCase):
+    metrics={}
     def test_pinned_copy_waits_for_prior_use_without_blocking_host(self):
         layer=4101; owner=torch.zeros(4*1024*1024,dtype=torch.uint8,device='cuda')
         source=((torch.arange(owner.numel(),dtype=torch.int64)%251).to(torch.uint8).pin_memory())
@@ -25,13 +29,17 @@ class AsyncLayerTransferTests(unittest.TestCase):
         tensor_map=[{"payload":{"offset":0,"shape":[owner.numel()],"dtype":torch.uint8,"size":owner.numel(),"is_param":True}}]
 
         started=time.perf_counter(); views,ready=copier.enqueue(layer,source,source.numel(),tensor_map); host_ms=(time.perf_counter()-started)*1000
+        prior_unfinished_after_enqueue=not prior.query()
+        self.assertTrue(prior_unfinished_after_enqueue)
         self.assertFalse(ready.query())
         self.assertEqual(views[0].data_ptr(),owner.data_ptr())
         copier.wait_current(layer); torch.cuda.synchronize()
 
+        device_ms=prior.elapsed_time(ready)
         self.assertTrue(torch.equal(owner.cpu(),source))
-        self.assertLess(host_ms,prior.elapsed_time(ready))
+        self.assertLess(host_ms,device_ms)
         self.assertNotIn(layer,model.layer_transfer_events)
+        self.metrics['copy']={"bytes":source.numel(),"enqueue_host_ms":host_ms,"prior_unfinished_after_enqueue":prior_unfinished_after_enqueue,"copy_device_ms":device_ms,"same_address":views[0].data_ptr()==owner.data_ptr(),"bytes_exact":True}
 
     def test_model_waits_immediately_before_affected_layer(self):
         layer_id=4103; owner=torch.full((1024,),17,dtype=torch.uint8,device='cuda')
@@ -74,6 +82,11 @@ class AsyncLayerTransferTests(unittest.TestCase):
             copier.enqueue(layer,torch.zeros(1024,dtype=torch.uint8),1024,tensor_map)
         with self.assertRaisesRegex(ValueError,'exceeds'):
             copier.enqueue(layer,torch.zeros(2048,dtype=torch.uint8).pin_memory(),2048,tensor_map)
+
+    @classmethod
+    def tearDownClass(cls):
+        output=os.environ.get('MORPHSERVE_TEST_OUTPUT')
+        if output: Path(output).write_text(json.dumps(cls.metrics,indent=2,sort_keys=True)+'\n')
 
 
 if __name__=='__main__': unittest.main()
