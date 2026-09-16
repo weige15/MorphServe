@@ -11,6 +11,7 @@ Scope: independent reconstruction only; immutable vendor is unchanged
 3. Read-only review found partial mutation paths in `RealMorphingExecutor`: expansion rollback can race queued KV zeroing; multi-layer shrink can remove a free newest group before discovering an occupied older group; morph/restore can partially mutate on later-layer failure.
 4. `acquire_new_kvcache` can unsigned-underflow if 256-byte alignment pushes the reclaimed start beyond the registered region.
 5. Follow-up review found two remaining cross-operation failures: successful KV shrink followed by failed FP16 restore was not compensated, and failed pressure rollback ignored a false/raised restore. It also correctly rejected `[decode_start, pre_wait]` as definitive kernel/copy overlap evidence. `results/raw/transaction-followup-review.md`.
+6. Re-review found the trace analyzer could accept missing stream metadata, poisoned recovery could reattach KV views into uncertain FP16/W4 storage, and the static swapped-queue proxy was not a preemption counter. `results/raw/transaction-rereview.md`.
 
 ## Root causes
 
@@ -40,8 +41,9 @@ Scope: independent reconstruction only; immutable vendor is unchanged
 ## Repair evidence
 
 - 5 CUDA async tests: copy/order/use barrier, malformed source rejection, second-expansion rollback event, and no redundant event accumulation.
-- 15 transaction/controller tests: partial morph/restore rollback, exact post-shrink compensation, ignored-rollback false/exception poisoning, rollback-copy double failure, all-before-mutation shrink, restore prevalidation and FCFS/action contracts.
-- 3 fail-closed CUDA-trace analyzer tests: require size-matched H2D, another stream, and actual kernel/copy activity intersection; reject enclosing intervals, wrong sizes and same-stream activity.
+- 16 transaction/controller tests: partial morph/restore rollback, exact post-shrink compensation, ignored-rollback false/exception poisoning, rollback-copy double failure, all-before-mutation shrink, restore prevalidation and FCFS/action contracts.
+- 4 fail-closed CUDA-trace analyzer tests: require size-matched H2D, explicit distinct stream IDs, and actual kernel/copy activity intersection; reject enclosing intervals, wrong sizes, same-stream activity and absent stream metadata.
+- Poisoned recovery keeps its truthful partial layer/KV state and does not reattach old reclaimed views; static pilots label scheduler preemption as not measured.
 - 3 rebuilt C++ memory-manager tests: normal physical reclaim/restore, tiny-tail rejection, and misaligned-region rejection.
 - Retry script now warms a real cached decode, records the supporting pre-layer-wait event, and exports a separate CUDA activity trace; it has not yet run because the free-memory preflight requires 17 GiB.
 

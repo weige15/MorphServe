@@ -253,6 +253,9 @@ class RealMorphingExecutor:
         except Exception as exc:
             self.poisoned = True
             self.log.append(("recovery_failed", str(exc)))
+        if self.poisoned:
+            self.log.append(("recovery_snapshot_not_reattached", "executor state is uncertain"))
+            return False
         self._restore_kv_state(snapshot)
         self.log.append(("recovery_rollback", list(layers)))
         return False

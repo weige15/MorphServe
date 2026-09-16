@@ -1,6 +1,7 @@
 test_double_copy_failure_poisoned_executor_blocks_further_actions (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_double_copy_failure_poisoned_executor_blocks_further_actions) ... ok
 test_morph_failure_rolls_back_only_committed_layers (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_morph_failure_rolls_back_only_committed_layers) ... ok
 test_multi_layer_shrink_validates_all_occupancy_before_mutation (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_multi_layer_shrink_validates_all_occupancy_before_mutation) ... ok
+test_poisoned_recovery_does_not_reattach_invalid_kv_snapshot (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_poisoned_recovery_does_not_reattach_invalid_kv_snapshot) ... ok
 test_recovery_restores_exact_kv_metadata_if_fp16_restore_fails (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_recovery_restores_exact_kv_metadata_if_fp16_restore_fails) ... ok
 test_restore_copy_failure_rolls_back_to_original_w4_batch (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_restore_copy_failure_rolls_back_to_original_w4_batch) ... ok
 test_restore_rejects_invalid_batch_before_first_copy (reproduction.tests.test_real_executor_transactions.RealExecutorTransactionTests.test_restore_rejects_invalid_batch_before_first_copy) ... ok
@@ -15,6 +16,6 @@ test_recovery_shrinks_before_restore_and_defers_if_occupied (reproduction.tests.
 test_successful_recovery_restores_after_shrink (reproduction.tests.test_controller_integration.CoordinatorTests.test_successful_recovery_restores_after_shrink) ... ok
 
 ----------------------------------------------------------------------
-Ran 15 tests in 0.006s
+Ran 16 tests in 0.008s
 
 OK

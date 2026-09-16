@@ -80,6 +80,19 @@ class RealExecutorTransactionTests(unittest.TestCase):
         self.assertTrue(executor.poisoned); self.assertEqual(executor.active_layers,[0]); self.assertEqual(executor.model.transformer_layers[:2],['q0','f1'])
         calls=list(executor.copier.calls); self.assertFalse(executor.restore_fp16([0])); self.assertEqual(executor.copier.calls,calls)
 
+    def test_poisoned_recovery_does_not_reattach_invalid_kv_snapshot(self):
+        executor=bare_executor(); executor.copier=FakeCopier(fail_sources={'f0b','q1b'}); executor.active_layers=[0,1]
+        executor.quant_objects={0:executor.prepared_quant[0],1:executor.prepared_quant[1]}; executor.model.transformer_layers[:2]=['q0','q1']
+        manager=SimpleNamespace(num_blocks_org=4,num_blocks=8,num_free_blocks=8,is_block_free=torch.ones(8,dtype=torch.bool))
+        executor.model.gpu_block_manager=manager; executor.model.k_cache_new=['k0','k1']; executor.model.v_cache_new=['v0','v1']; executor.model.kv_cache_new_block_size=2
+        executor.kv_groups=[{'layer':0,'k':SimpleNamespace(data_ptr=lambda:200),'v':'v0'},{'layer':1,'k':SimpleNamespace(data_ptr=lambda:100),'v':'v1'}]
+
+        self.assertFalse(executor.recover_fp16([1,0]))
+
+        self.assertTrue(executor.poisoned); self.assertEqual(executor.active_layers,[0]); self.assertEqual(executor.kv_groups,[])
+        self.assertEqual(executor.model.k_cache_new,[]); self.assertEqual(executor.model.v_cache_new,[]); self.assertEqual((manager.num_blocks,manager.num_free_blocks),(4,4))
+        self.assertIn(("recovery_snapshot_not_reattached", "executor state is uncertain"),executor.log)
+
     def test_restore_rollback_copy_failure_preserves_truthful_partial_state(self):
         executor=bare_executor(); executor.copier=FakeCopier(fail_sources={'f1b','q0b'}); executor.active_layers=[0,1]
         executor.quant_objects={0:executor.prepared_quant[0],1:executor.prepared_quant[1]}; executor.model.transformer_layers[:2]=['q0','q1']

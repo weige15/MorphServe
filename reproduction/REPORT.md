@@ -113,7 +113,7 @@ Two-request ownership pilot:
 
 - Request block rows `[0,1,2,3,4]` and `[5]` occupy reclaimed group 0.
 - Recovery removes free groups 26/24, refuses occupied group 25 while preserving rows/counts/sentinel/FCFS, then succeeds after real frees.
-- Ordinary preemptions: 0.
+- Swapped queue unchanged. Ordinary scheduler preemptions were not measured because this bounded static scheduler has no cumulative preemption counter.
 
 Evidence: `experiments/real-executor/` and `experiments/multirequest-ownership/`.
 

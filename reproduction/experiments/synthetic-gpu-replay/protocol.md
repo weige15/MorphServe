@@ -20,7 +20,7 @@ Connect the tested arrival replay harness to a real normalized Llama 3.1 8B FP16
 2. All IDs complete exactly once with three tokens and no timeout/error.
 3. Raw records contain scheduled/actual/queued/first/completion/token timestamps, TTFT/TPOT, precision, KV occupancy/capacity, preemptions and generated IDs.
 4. Summary regenerates from JSONL and reports explicit percentile definition.
-5. KV capacity returns fully free after all requests; preemptions/errors are zero.
+5. KV capacity returns fully free after all requests and errors are zero. This serialized adapter does not expose a real scheduler preemption counter, so preemptions must be recorded as not measured rather than zero.
 6. Initialization/warmup excluded from replay timestamps and process exits 0.
 
 ## Boundary

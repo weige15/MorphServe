@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); VENV="$ROOT/.venv"; LOCK="$ROOT/configs/fp16-requirements-lock.txt"; TMP="$ROOT/results/tmp/async-overlap"; OUT="$ROOT/experiments/async-layer-transfer/full-model-results"; FP16=${MORPHSERVE_MODEL_PATH:-/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b}; W4=${MORPHSERVE_W4_PATH:-/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp}; GPU=${CUDA_VISIBLE_DEVICES:-0}
-mkdir -p "$OUT" "$ROOT/results/tmp"
-rm -f "$OUT/metrics.json" "$OUT/cuda-activity-trace.json" "$OUT/run.exitcode" "$OUT/wall-time.json"
-git -C "$ROOT/.." rev-parse HEAD > "$OUT/source-revision.txt"
-git -C "$ROOT/.." status --short -- reproduction/runtime reproduction/scripts/async_full_model_overlap.py reproduction/scripts/run_async_full_model_overlap.sh > "$OUT/source-status.txt"
+mkdir -p "$ROOT/results/tmp"
 free_mib=$(nvidia-smi -i "$GPU" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
 if (( free_mib < 17408 )); then printf 'GPU %s has %s MiB free; full-model pilot requires at least 17408 MiB.\n' "$GPU" "$free_mib" >&2; exit 75; fi
+rm -rf "$OUT"; mkdir -p "$OUT"
+git -C "$ROOT/.." rev-parse HEAD > "$OUT/source-revision.txt"
+git -C "$ROOT/.." status --short -- reproduction/runtime reproduction/scripts/async_full_model_overlap.py reproduction/scripts/run_async_full_model_overlap.sh > "$OUT/source-status.txt"
 rm -rf "$TMP"; cp -a "$ROOT/runtime/candidate-csrc" "$TMP"
 cat > "$OUT/commands.txt" <<EOF
 uv venv --clear --python python3.12 "$VENV" && uv pip install --python "$VENV/bin/python" -r "$LOCK"

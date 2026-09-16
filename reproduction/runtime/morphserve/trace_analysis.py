@@ -71,10 +71,18 @@ def analyze_cuda_overlap_trace(path, expected_bytes):
             continue
         copy_event = max(size_matched, key=lambda event: float(event["dur"]))
         copy_interval = _interval(copy_event); copy_stream = _stream(copy_event)
+        if copy_stream is None:
+            phases[precision] = {
+                "passed": False,
+                "error": "size-matched H2D activity lacks stream metadata",
+                "expected_copy_bytes": int(byte_count),
+                "copy_duration_us": float(copy_event["dur"]),
+            }
+            continue
         overlaps = []
         for event in kernels:
             kernel_stream = _stream(event)
-            if copy_stream is not None and kernel_stream == copy_stream:
+            if kernel_stream is None or kernel_stream == copy_stream:
                 continue
             overlap_us = _overlap(copy_interval, _interval(event))
             if overlap_us > 0:

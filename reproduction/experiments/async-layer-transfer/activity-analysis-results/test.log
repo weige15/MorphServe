@@ -1,8 +1,9 @@
 test_rejects_enclosing_interval_without_kernel_copy_overlap (reproduction.tests.test_trace_analysis.TraceAnalysisTests.test_rejects_enclosing_interval_without_kernel_copy_overlap) ... ok
+test_rejects_missing_copy_or_kernel_stream_metadata (reproduction.tests.test_trace_analysis.TraceAnalysisTests.test_rejects_missing_copy_or_kernel_stream_metadata) ... ok
 test_rejects_wrong_size_and_same_stream_kernel (reproduction.tests.test_trace_analysis.TraceAnalysisTests.test_rejects_wrong_size_and_same_stream_kernel) ... ok
 test_requires_size_matched_htod_and_actual_kernel_intersection (reproduction.tests.test_trace_analysis.TraceAnalysisTests.test_requires_size_matched_htod_and_actual_kernel_intersection) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.002s
+Ran 4 tests in 0.002s
 
 OK

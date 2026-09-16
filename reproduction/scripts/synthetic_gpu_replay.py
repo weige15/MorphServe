@@ -60,12 +60,12 @@ def main():
                     token=(await loop.run_in_executor(pool,gpu_call,model.forward,inputs,[int(spec.request_id.split('-')[-1])],lengths))[0]
                     generated.append(int(token))
                     free=int(manager.num_free_blocks.item()) if isinstance(manager.num_free_blocks,torch.Tensor) else int(manager.num_free_blocks)
-                    sample={"precision":"FP16","kv_capacity":int(manager.num_blocks),"kv_occupancy":int(manager.num_blocks)-free,"preemptions":0}
+                    sample={"precision":"FP16","kv_capacity":int(manager.num_blocks),"kv_occupancy":int(manager.num_blocks)-free,"preemptions":None}
                     kv_samples.append(sample); emit(token,sample)
             async with lock:
                 await loop.run_in_executor(pool,gpu_call,model.free_seqs_resources,[int(spec.request_id.split('-')[-1])])
                 if isinstance(manager.num_free_blocks,torch.Tensor): manager.num_free_blocks=int(manager.num_free_blocks.item())
-            return {"queue_delays_s":queue_delays,"queued_time_s":sum(queue_delays),"precision_changes":[],"kv_samples":kv_samples,"preemptions":0,"generated_text":tokenizer.decode(generated)}
+            return {"queue_delays_s":queue_delays,"queued_time_s":sum(queue_delays),"precision_changes":[],"kv_samples":kv_samples,"preemptions":None,"scheduler_preemptions_measured":False,"generated_text":tokenizer.decode(generated)}
         return await run_replay(specs,submit,config_data['request_timeout_s'])
 
     try: records=asyncio.run(execute())
@@ -75,8 +75,8 @@ def main():
     metadata={"schema_version":1,"classification":config_data['classification'],"init_seconds":init_seconds,"warmup_seconds":warm_seconds,"warmup_excluded":True,"final_kv_capacity":int(manager.num_blocks),"final_kv_free":final_free,"config":config_data,"summary":summarize(records)}
     (out/'run-metadata.json').write_text(json.dumps(metadata,indent=2,sort_keys=True)+'\n')
     submit_times=[r['actual_submit_s'] for r in records]
-    required_metadata=all(all(key in r['metadata'] for key in ('queue_delays_s','precision_changes','kv_samples','preemptions','generated_text')) for r in records)
-    gate={"submit_span_under_100ms":max(submit_times)-min(submit_times)<0.1,"all_complete":all(r['error'] is None and r['token_count']==3 for r in records),"all_ids_once":len({r['request_id'] for r in records})==len(records)==3,"required_metadata":required_metadata,"final_kv_fully_free":final_free==manager.num_blocks,"preemptions_zero":all(r['metadata']['preemptions']==0 for r in records),"summary_regenerates":json.load(open(out/'summary.json'))==summarize(records)}
+    required_metadata=all(all(key in r['metadata'] for key in ('queue_delays_s','precision_changes','kv_samples','preemptions','scheduler_preemptions_measured','generated_text')) for r in records)
+    gate={"submit_span_under_100ms":max(submit_times)-min(submit_times)<0.1,"all_complete":all(r['error'] is None and r['token_count']==3 for r in records),"all_ids_once":len({r['request_id'] for r in records})==len(records)==3,"required_metadata":required_metadata,"final_kv_fully_free":final_free==manager.num_blocks,"preemptions_explicitly_not_measured":all(r['metadata']['preemptions'] is None and not r['metadata']['scheduler_preemptions_measured'] for r in records),"summary_regenerates":json.load(open(out/'summary.json'))==summarize(records)}
     result={"gate":gate,"passed":all(gate.values()),"records":records,"metadata":metadata}; (out/'metrics.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n'); print(json.dumps({"gate":gate,"summary":metadata['summary'],"submit_times":submit_times},indent=2)); return 0 if result['passed'] else 1
 
 if __name__=='__main__': raise SystemExit(main())

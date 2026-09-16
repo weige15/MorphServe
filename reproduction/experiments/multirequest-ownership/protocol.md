@@ -20,7 +20,7 @@ Verify that real executor recovery respects occupied reclaimed blocks across mul
 - First two LIFO groups shrink/restore; occupied group 0 refuses.
 - Refusal preserves request allocation counts, block-table rows, sentinel bytes, exact allocator/cache metadata, executor/controller/group layers, and FCFS queues.
 - After real frees, final recovery succeeds; all capacity/layer state returns to FP16 baseline and region bytes/logits are exact.
-- All layer-ready events are consumed; ordinary preemption/swap count is derived from swapped-queue growth and reported separately.
+- All layer-ready events are consumed and the swapped queue remains unchanged. This bounded `SimpleNamespace` scheduler has no cumulative preemption counter, so ordinary scheduler preemptions are explicitly recorded as not measured rather than inferred as zero.
 
 ## Boundary
 

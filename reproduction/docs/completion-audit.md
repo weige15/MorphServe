@@ -55,7 +55,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | C11 | Non-contiguous mapping and custom Triton lookup | PASS after repair | Vendor fixed-stride corruption found; explicit-region store/attention matches dense oracle error 0. |
 | C12 | Shrink safely before FP16 restore | PASS (modified) | Occupied-group refusal and LIFO recovery in two-request pilot. |
 | C13 | Preserve KV, request progress, no re-prefill/eviction/restart | PASS for bounded pilot | Active FP16→W4×4→FP16 same-history test and exact occupied-block migration. |
-| C14 | Measure ordinary scheduler preemption separately | PASS in ownership pilot | Recorded as zero; no main workload measurement yet. |
+| C14 | Measure ordinary scheduler preemption separately | PARTIAL | Ownership pilot proves unchanged FCFS/swapped queues but has no cumulative preemption counter and no decode scheduler; it now records preemptions as not measured rather than zero. |
 | C15 | Controller signals: memory/queue/throughput/TTFT/TPOT | PASS in reconstructed monitor | CPU tests cover all signals. |
 | C16 | Smoothing, persistence, coordinated action/recovery | PASS as reconstruction | Frozen choices and tests; settings not author-recovered. |
 | C17 | Default/performance/accuracy modes | PASS as reconstruction | Exposed and tested action sizes/maxima; not exact author modes. |
@@ -132,7 +132,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 |---|---|---|---|
 | G1 | Request IDs, inputs/references, generated text/counts | PASS at replay seam; pending real rerun | `runtime/morphserve/replay.py`, tests, synthetic attempt raw JSONL. |
 | G2 | Scheduled/actual/first/completion/token timestamps | PASS at replay seam | Same. |
-| G3 | Queue/errors/timeouts/preemptions/precision/KV occupancy | PASS at seam/bounded pilots | Synthetic attempt metadata plus ownership metrics; no headline workload. |
+| G3 | Queue/errors/timeouts/preemptions/precision/KV occupancy | PARTIAL | Queue/errors/timeouts/precision/KV occupancy are saved. Bounded adapters lack cumulative scheduler preemption counters and now record that field as not measured; no headline workload. |
 | G4 | Separate init/JIT/warmup | PASS in diagnosis, pending corrected result | Attempt 1 preserved and rejected for JIT contamination; corrected run OOM-blocked. |
 | G5 | Verify percentile definitions/units/denominators | PASS at replay seam | Hyndman-Fan type 7 explicitly implemented/tested. Headline denominators absent. |
 | G6 | Absolute/relative loss and gap closure distinct | PASS in report definitions; no exact quality run | No manufactured aggregate. |

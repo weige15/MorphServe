@@ -22,7 +22,7 @@ PYTHONPATH="$PWD/reproduction/runtime:$PWD/reproduction/runtime/candidate-python
   reproduction.tests.test_real_executor_transactions -v
 ```
 
-Expected setup-free result: twenty-seven tests pass; seven executor transaction tests pass in the populated venv. GPU runners create/clear `reproduction/.venv`, install pinned dependencies, save commands/logs/metrics, and return nonzero when a predeclared gate fails. Full 8B reruns exit 75 before setup when the selected physical GPU has under 17 GiB free.
+Expected setup-free result: twenty-eight tests pass; eight executor transaction tests pass in the populated venv. GPU runners create/clear `reproduction/.venv`, install pinned dependencies, save commands/logs/metrics, and return nonzero when a predeclared gate fails. Full 8B reruns exit 75 before setup when the selected physical GPU has under 17 GiB free.
 
 Representative GPU gates:
 

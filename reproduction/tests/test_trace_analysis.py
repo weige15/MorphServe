@@ -52,6 +52,22 @@ class TraceAnalysisTests(unittest.TestCase):
         self.assertFalse(result["passed"])
         self.assertIn("did not overlap", result["phases"]["W4"]["error"])
 
+    def test_rejects_missing_copy_or_kernel_stream_metadata(self):
+        for missing in ("copy", "kernel"):
+            with self.subTest(missing=missing):
+                events = []
+                for offset, precision, byte_count in ((0, "W4", 100), (1000, "FP16", 400)):
+                    events.extend([
+                        event(f"morphserve_overlap_{precision}", "cpu_op", offset, 500),
+                        event("Memcpy HtoD", "gpu_memcpy", offset + 100, 200, stream=None if missing == "copy" else 9, byte_count=byte_count),
+                        event("kernel", "kernel", offset + 150, 50, stream=None if missing == "kernel" else 7),
+                    ])
+
+                result = self.analyze(events)
+
+                self.assertFalse(result["passed"])
+                self.assertTrue(all(not row["passed"] for row in result["phases"].values()))
+
     def test_rejects_wrong_size_and_same_stream_kernel(self):
         events = [
             event("morphserve_overlap_W4", "cpu_op", 0, 500),

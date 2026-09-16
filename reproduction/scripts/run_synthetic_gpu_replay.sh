@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd); VENV="$ROOT/.venv"; LOCK="$ROOT/configs/fp16-requirements-lock.txt"; TMP="$ROOT/results/tmp/synthetic-replay"; OUT="$ROOT/experiments/synthetic-gpu-replay/results"; MODEL=${MORPHSERVE_MODEL_PATH:-/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b}; GPU=${CUDA_VISIBLE_DEVICES:-1}
-mkdir -p "$OUT" "$ROOT/results/tmp"
-git -C "$ROOT/.." rev-parse HEAD > "$OUT/source-revision.txt"
-git -C "$ROOT/.." status --short -- reproduction/runtime reproduction/scripts/synthetic_gpu_replay.py reproduction/scripts/run_synthetic_gpu_replay.sh > "$OUT/source-status.txt"
+mkdir -p "$ROOT/results/tmp"
 free_mib=$(nvidia-smi -i "$GPU" --query-gpu=memory.free --format=csv,noheader,nounits | tr -d ' ')
 if (( free_mib < 17408 )); then printf 'GPU %s has %s MiB free; full-model replay requires at least 17408 MiB.\n' "$GPU" "$free_mib" >&2; exit 75; fi
+rm -rf "$OUT"; mkdir -p "$OUT"
+git -C "$ROOT/.." rev-parse HEAD > "$OUT/source-revision.txt"
+git -C "$ROOT/.." status --short -- reproduction/runtime reproduction/scripts/synthetic_gpu_replay.py reproduction/scripts/run_synthetic_gpu_replay.sh > "$OUT/source-status.txt"
 rm -rf "$TMP"; mkdir -p "$TMP"; cp -a "$ROOT/runtime/candidate-csrc" "$TMP/csrc"
 cat > "$OUT/commands.txt" <<EOF
 uv venv --clear --python python3.12 "$VENV" && uv pip install --python "$VENV/bin/python" -r "$LOCK"

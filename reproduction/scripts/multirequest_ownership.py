@@ -120,10 +120,9 @@ def main():
         "final_baseline_state": final["active_layers"] == [] and final["groups"] == 0 and final["allocator"] == initial_allocator and final["request_counts"] == [0,0],
         "final_fp16_exact": final["fp16_logits_exact"] and all(final["fp16_region_bytes_exact"].values()),
         "no_pending_layer_events": not final["pending_layer_events"], "not_poisoned": not final["executor_poisoned"] and not final["coordinator_poisoned"], "fcfs_unchanged": final["queues_unchanged"],
-        "ordinary_preemptions_zero": len(queue_state(scheduler).swapped) == len(initial_queues.swapped),
+        "swapped_queue_unchanged": queue_state(scheduler).swapped == initial_queues.swapped,
     }
-    ordinary_preemptions = max(0, len(queue_state(scheduler).swapped) - len(initial_queues.swapped))
-    payload = {"schema_version":1,"initial_allocator":initial_allocator,"allocator_before_refusal":allocator_before_refusal,"rows_before":rows_before,"counts_before":counts_before,"sentinel_before":sentinel_before,"recovery_events":[recovery26,recovery24],"refusal_state":refusal_state,"final_recovery":final_recovery,"final":final,"executor_log":executor.log,"ordinary_preemptions":ordinary_preemptions,"gate":gate,"passed":all(gate.values())}
+    payload = {"schema_version":1,"initial_allocator":initial_allocator,"allocator_before_refusal":allocator_before_refusal,"rows_before":rows_before,"counts_before":counts_before,"sentinel_before":sentinel_before,"recovery_events":[recovery26,recovery24],"refusal_state":refusal_state,"final_recovery":final_recovery,"final":final,"executor_log":executor.log,"scheduler_preemptions_measured":False,"swapped_queue_before":list(initial_queues.swapped),"swapped_queue_after":list(queue_state(scheduler).swapped),"gate":gate,"passed":all(gate.values())}
     Path(args.output).write_text(json.dumps(payload,indent=2,sort_keys=True,default=str)+"\n")
     print(json.dumps({"gate":gate,"rows_before":rows_before,"refusal":refusal_state,"final":final},indent=2,default=str)); return 0 if payload["passed"] else 1
 
