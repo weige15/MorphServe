@@ -186,3 +186,23 @@ The corrected local snapshot loaded and the Transformers reference executed. Can
 ### Attempt 3 result
 
 The no-morph Llama 3.1 8B parity gate passed: top-1/top-5 exact, relative logit L2 0.0020401, max absolute error 0.0234375, and 291/291 loaded tensors exact. This is modified-condition numerical evidence with KV disabled. GPU 0 had another 6.9-GiB/100%-utilization process before and after, so all wall timings are excluded from performance claims. Candidate process-local peak was 16.17 GB.
+
+## 2026-09-16 — real static AutoAWQ W4 baseline
+
+### Hypothesis and command
+
+The local AutoAWQ W4 G128 zero-point asset should prove real packed low-bit execution and exact repeated logits.
+
+```bash
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_static_autoawq_baseline.sh
+```
+
+### Outcome
+
+The mechanism half was confirmed: 224 `WQLinear_GEMM` modules, INT32 qweight/qzeros, FP16 scales, and 3,625,975,808 decoder bytes including metadata. FP16 and W4 shared top-1 token 505; W4-vs-FP16 relative logit L2 was 0.35126.
+
+The exact-repeat gate failed. Five repeats had stable top-1/top-5 but relative logit differences up to 0.00493 and max absolute differences up to 0.05859. Source inspection identifies eight-way split-K plus `tl.atomic_add` in AutoAWQ's small-input Triton path. This remains an evidence-backed negative for bit-exact repeatability, not a reason to replace the real fused path with fake quantization.
+
+### Next step
+
+Use the independently measured repeat envelope to predeclare tolerances for controlled mixed-precision history tests. Build an explicitly labeled AutoAWQ adapter; do not present it as execution of the candidate's mismatched llm-awq interface.

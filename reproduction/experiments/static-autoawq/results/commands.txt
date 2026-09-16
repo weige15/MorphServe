@@ -1,0 +1,4 @@
+uv venv --clear --python python3.12 "/nfs/home/s314511048/MorphServe/reproduction/.venv"
+uv pip install --python "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" -r "/nfs/home/s314511048/MorphServe/reproduction/configs/fp16-requirements-lock.txt"
+uv pip install --python "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" autoawq==0.2.9 zstandard
+CUDA_VISIBLE_DEVICES=1 "/nfs/home/s314511048/MorphServe/reproduction/.venv/bin/python" "/nfs/home/s314511048/MorphServe/reproduction/scripts/static_autoawq_baseline.py" --fp16-model "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b" --w4-model "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp" --output "/nfs/home/s314511048/MorphServe/reproduction/experiments/static-autoawq/results/metrics.json"

@@ -1,0 +1,78 @@
+{
+  "gate": {
+    "packed_modules_present": true,
+    "qweight_int32": true,
+    "qzeros_int32": true,
+    "scales_fp16": true,
+    "repeat_logits_exact": false,
+    "finite": true,
+    "shape_match": true
+  },
+  "packed": {
+    "module_class": "awq.modules.linear.gemm.WQLinear_GEMM",
+    "module_count": 224,
+    "module_examples": [
+      "model.layers.0.self_attn.q_proj",
+      "model.layers.0.self_attn.k_proj",
+      "model.layers.0.self_attn.v_proj",
+      "model.layers.0.self_attn.o_proj",
+      "model.layers.0.mlp.gate_proj",
+      "model.layers.0.mlp.up_proj",
+      "model.layers.0.mlp.down_proj",
+      "model.layers.1.self_attn.q_proj",
+      "model.layers.1.self_attn.k_proj",
+      "model.layers.1.self_attn.v_proj"
+    ],
+    "storage_bytes": {
+      "qweight": 3489660928,
+      "qzeros": 27262976,
+      "scales": 109051904,
+      "bias": 0
+    },
+    "decoder_packed_bytes_including_metadata": 3625975808,
+    "dtypes": {
+      "qweight": [
+        "torch.int32"
+      ],
+      "qzeros": [
+        "torch.int32"
+      ],
+      "scales": [
+        "torch.float16"
+      ],
+      "bias": []
+    },
+    "total_unique_state_bytes": 5727854592
+  },
+  "logits": {
+    "shape_reference": [
+      128256
+    ],
+    "shape_candidate": [
+      128256
+    ],
+    "finite_reference": true,
+    "finite_candidate": true,
+    "max_abs": 2.94921875,
+    "mean_abs": 0.8684093952178955,
+    "relative_l2": 0.3512611389160156,
+    "fp16_top1": 505,
+    "w4_top1": 505,
+    "top1_match": true,
+    "fp16_top5": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "w4_top5": [
+      505,
+      11,
+      304,
+      198,
+      627
+    ],
+    "repeat_exact": false
+  }
+}

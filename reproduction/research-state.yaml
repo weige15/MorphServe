@@ -71,11 +71,10 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The normalized FP16 base is numerically valid. The remaining low-bit blocker is dependency and
-  checkpoint-format mismatch: candidate code targets an unpublished/modified llm-awq WQLinear
-  interface and .pt scaled_zeros state, while the local real W4 asset is AutoAWQ sharded
-  safetensors with qzeros. A clearly labeled AutoAWQ execution adapter may enable real W4 tests.
-active_protocol: experiments/candidate-fp16-baseline/protocol.md
+  Real static AutoAWQ W4 execution is available and its repeat envelope is measured. A clearly
+  labeled adapter can reconstruct selected WQLinear_GEMM decoder layers in fixed GPU regions,
+  enabling controlled FP16/W4 history tests despite the candidate's unavailable llm-awq format.
+active_protocol: experiments/static-autoawq/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
