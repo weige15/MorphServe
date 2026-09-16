@@ -12,10 +12,10 @@ cat reproduction/research-state.yaml
 
 PYTHONPATH="$PWD/reproduction/runtime:$PWD/reproduction/runtime/candidate-python" \
   python3 -m unittest reproduction.tests.test_profiling \
-  reproduction.tests.test_candidate_runtime -v
+  reproduction.tests.test_candidate_runtime reproduction.tests.test_controller -v
 ```
 
-Expected CPU result: five tests pass. GPU runners create/clear `reproduction/.venv`, install pinned cached dependencies, save commands/logs/metrics, and return a nonzero code when a predeclared gate fails.
+Expected CPU result: eleven tests pass. GPU runners create/clear `reproduction/.venv`, install pinned cached dependencies, save commands/logs/metrics, and return a nonzero code when a predeclared gate fails.
 
 Representative GPU gates:
 

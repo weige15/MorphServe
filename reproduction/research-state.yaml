@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: expand real LIS pilot beyond three layers within pinned-memory budget
+      next_gate: integrate reconstructed monitor/controller with normalized engine/executor seams
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The real three-layer LIS pilot is correct and fast. Expanding the same frozen protocol to a
-  larger layer subset should test interaction/order stability, while a full 32-layer all-variant
-  pinned run may exceed the host's 16.45-GB memlock limit (FP16 backups plus W4 metadata).
-active_protocol: experiments/lis-real-pilot/protocol.md
+  The eight-layer profiler and controller core are independently correct. A minimal engine seam
+  can feed real monitor samples into the frozen controller and translate commands to executor
+  actions without changing FCFS scheduling; fake-executor integration should precede GPU actions.
+active_protocol: experiments/controller-core/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Expand the frozen real profiler to a larger subset and measure ordering/interaction stability.
-  - Audit full 32-layer pinned-byte requirements against memlock before launching the full search.
-  - Add controller modes only after profiling and multi-request state tests.
+  - Integrate monitor/controller commands with a fake executor while preserving FCFS batches.
+  - Add real executor actions only after command/order/rollback tests.
+  - Design a staged full-profile strategy that does not misrepresent paper-style all-variant pinning.

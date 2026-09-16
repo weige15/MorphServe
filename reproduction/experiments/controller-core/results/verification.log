@@ -1,0 +1,12 @@
+$ PYTHONPATH=reproduction/runtime python3 -m unittest reproduction.tests.test_controller -v
+test_modes_obey_action_size_and_maximum (reproduction.tests.test_controller.MorphingControllerTests.test_modes_obey_action_size_and_maximum) ... ok
+test_oscillation_does_not_accumulate_persistence (reproduction.tests.test_controller.MorphingControllerTests.test_oscillation_does_not_accumulate_persistence) ... ok
+test_persistent_pressure_and_recovery_coordinate_kv (reproduction.tests.test_controller.MorphingControllerTests.test_persistent_pressure_and_recovery_coordinate_kv) ... ok
+test_unknown_mode_and_invalid_sample_fail_closed (reproduction.tests.test_controller.MorphingControllerTests.test_unknown_mode_and_invalid_sample_fail_closed) ... ok
+test_collects_and_smooths_every_paper_signal (reproduction.tests.test_controller.ServingMonitorTests.test_collects_and_smooths_every_paper_signal) ... ok
+test_rejects_invalid_metrics (reproduction.tests.test_controller.ServingMonitorTests.test_rejects_invalid_metrics) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK

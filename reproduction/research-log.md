@@ -262,3 +262,7 @@ All gates passed. The profiler executed six candidate calls, retained LTS/LRS/MD
 Attempt 1 completed all 36 model evaluations but the generic runner retained three-layer gate constants and exited 1; raw model results were preserved. After generalizing only the verifier counts, the identical frozen protocol passed and selected `[25,24,26,27,28,29,30,31]`. The shared tail kept `[29,30,31]`; 336 restores and final FP16 logits were exact. Inner work took 58.14 s, full wall 92.78 s.
 
 A byte audit found all 32 decoder FP16+W4 variants require 17,585,668,096 pinned bytes versus a 16,844,414,976-byte memlock limit, exceeding it by 741,253,120 bytes before staging/runtime overhead. This blocks the paper-style simultaneous pinning condition locally; limits will not be raised autonomously.
+
+## 2026-09-16 — reconstructed controller core
+
+Because the paper gives only example 85% KV/100-ms queue thresholds, the protocol froze explicit non-author settings before evaluation: EMA 0.25; 3-sample pressure; 5-sample recovery; 1/2/4 layers per accuracy/default/performance action with maxima 4/8/16. Six tests pass for complete signal collection, persistence, hysteresis, mode bounds, oscillation resistance, coordinated KV commands, and invalid inputs. This is CPU policy-core evidence only; engine/GPU integration is next.

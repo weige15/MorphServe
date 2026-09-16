@@ -12,7 +12,7 @@ Requirements: Linux, Python 3.12, `uv`, CUDA 12.x, and an NVIDIA GPU for GPU run
 # Setup-free CPU checks
 PYTHONPATH="$PWD/reproduction/runtime:$PWD/reproduction/runtime/candidate-python" \
   python3 -m unittest reproduction.tests.test_profiling \
-  reproduction.tests.test_candidate_runtime -v
+  reproduction.tests.test_candidate_runtime reproduction.tests.test_controller -v
 
 # Current state and evidence
 cat reproduction/research-state.yaml
