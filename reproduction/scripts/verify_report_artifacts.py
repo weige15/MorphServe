@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+"""Verify REPORT.md's currently cited artifact surfaces."""
+
+import json
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[1]
+required=[
+ 'REPORT.md','docs/paper-evidence-brief.md','docs/source-map.md','docs/claim-register.md','docs/trace-audit.md',
+ 'results/raw/environment.json','results/raw/public-trace-audit.json','results/raw/full-profile-memory-feasibility.json',
+ 'experiments/candidate-fp16-baseline/results-attempt-3/metrics.json',
+ 'experiments/autoawq-layer-switch/results/metrics.json','experiments/active-kv-switch/results-attempt-2/metrics.json',
+ 'experiments/lis-real-8layer/results/metrics.json','experiments/real-executor/results/metrics.json',
+ 'experiments/multirequest-ownership/results/metrics.json','profiles/llama31-8b-wikitext2-layers24-31.json',
+]
+missing=[path for path in required if not (ROOT/path).is_file()]
+assert not missing,missing
+for path in required:
+    if path.endswith('.json'):
+        json.load(open(ROOT/path))
+checks={
+ 'fp16':json.load(open(ROOT/'experiments/candidate-fp16-baseline/results-attempt-3/metrics.json'))['passed'],
+ 'switch':json.load(open(ROOT/'experiments/autoawq-layer-switch/results/metrics.json'))['passed'],
+ 'active_kv':json.load(open(ROOT/'experiments/active-kv-switch/results-attempt-2/metrics.json'))['passed'],
+ 'lis8':json.load(open(ROOT/'experiments/lis-real-8layer/results/metrics.json'))['passed'],
+ 'executor':json.load(open(ROOT/'experiments/real-executor/results/metrics.json'))['passed'],
+ 'ownership':json.load(open(ROOT/'experiments/multirequest-ownership/results/metrics.json'))['passed'],
+}
+assert all(checks.values()),checks
+static=json.load(open(ROOT/'experiments/static-autoawq/results/metrics.json'))
+assert static['passed'] is False and static['gate']['repeat_logits_exact'] is False
+memory=json.load(open(ROOT/'results/raw/full-profile-memory-feasibility.json'))
+assert memory['feasible_simultaneously_pinned'] is False
+report=(ROOT/'REPORT.md').read_text()
+for phrase in ('partial / exact reproduction blocked','no Table 9','92.45%','[25,24,26]'):
+    assert phrase in report,phrase
+print('report artifact verification: PASS')
+print(json.dumps({'positive_gates':checks,'expected_negative_static_repeat':True,'expected_memlock_blocker':True},sort_keys=True))

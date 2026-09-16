@@ -51,6 +51,7 @@ Passing tests/runners must do real work and save raw evidence. The main verified
 
 ## Documentation Map
 
+- [Current reproduction report](REPORT.md)
 - [Onboarding and handoff](doc/onboarding.md)
 - [Research state](research-state.yaml)
 - [Paper evidence brief](docs/paper-evidence-brief.md)
