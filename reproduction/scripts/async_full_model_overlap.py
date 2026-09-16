@@ -65,19 +65,21 @@ def main():
         pre_wait_time=origin.elapsed_time(pre_wait)
         enclosing_overlap=max(0.0,min(copy_end,decode_finish)-max(copy_begin,decode_begin))
         compute_overlap=max(0.0,min(copy_end,pre_wait_time)-max(copy_begin,decode_begin))
-        row={"precision":precision,"transfer_bytes":packed['size'] if precision=='W4' else backup['size'],"enqueue_host_ms":host_ms,"ready_at_enqueue_return":ready_at_return,"copy_ms":copy_start.elapsed_time(ready),"decode_concurrent_ms":decode_start.elapsed_time(decode_end),"decode_reference_ms":ref_start.elapsed_time(ref_end),"copy_start_from_origin_ms":copy_begin,"copy_end_from_origin_ms":copy_end,"decode_start_from_origin_ms":decode_begin,"pre_layer_wait_from_origin_ms":pre_wait_time,"decode_end_from_origin_ms":decode_finish,"enclosing_interval_overlap_ms":enclosing_overlap,"pre_layer_compute_overlap_ms":compute_overlap,"transfer_remaining_at_layer_ms":max(0.0,copy_end-pre_wait_time),"exposed_decode_delta_ms":decode_start.elapsed_time(decode_end)-ref_start.elapsed_time(ref_end),"comparison":compare(ref_cpu,async_cpu)}
-        return row,int(async_cpu.argmax())
+        output_token=int(async_cpu.argmax())
+        row={"precision":precision,"forced_input_token":input_token,"forced_output_token":output_token,"decode_length":length,"transfer_bytes":packed['size'] if precision=='W4' else backup['size'],"enqueue_host_ms":host_ms,"ready_at_enqueue_return":ready_at_return,"copy_ms":copy_start.elapsed_time(ready),"decode_concurrent_ms":decode_start.elapsed_time(decode_end),"decode_reference_ms":ref_start.elapsed_time(ref_end),"copy_start_from_origin_ms":copy_begin,"copy_end_from_origin_ms":copy_end,"decode_start_from_origin_ms":decode_begin,"pre_layer_wait_from_origin_ms":pre_wait_time,"decode_end_from_origin_ms":decode_finish,"enclosing_interval_overlap_ms":enclosing_overlap,"pre_layer_compute_overlap_ms":compute_overlap,"transfer_remaining_at_layer_ms":max(0.0,copy_end-pre_wait_time),"exposed_decode_delta_ms":decode_start.elapsed_time(decode_end)-ref_start.elapsed_time(ref_end),"comparison":compare(ref_cpu,async_cpu)}
+        return row,output_token
 
+    forced_history=[forced]
     for _ in range(a.repeats):
-        length=len(ids)+decode_index+1; row,forced=timed_phase('W4',forced,length); rows.append(row); decode_index+=1
-        length=len(ids)+decode_index+1; row,forced=timed_phase('FP16',forced,length); rows.append(row); decode_index+=1
+        length=len(ids)+decode_index+1; row,forced=timed_phase('W4',forced,length); rows.append(row); forced_history.append(forced); decode_index+=1
+        length=len(ids)+decode_index+1; row,forced=timed_phase('FP16',forced,length); rows.append(row); forced_history.append(forced); decode_index+=1
 
     model.free_seqs_resources([0,1]); torch.cuda.synchronize()
     region=swiftllm_c.get_layer_memory_org_gpu(a.layer)
     restored_exact=bool(torch.equal(region[:backup['size']].cpu(),backup['buffer']))
     w4=[row for row in rows if row['precision']=='W4']; fp16=[row for row in rows if row['precision']=='FP16']
     gate={"repeat_count":len(w4)==len(fp16)==a.repeats,"host_enqueue_nonblocking":all(not row['ready_at_enqueue_return'] for row in rows),"same_history_w4_within_envelope":all(row['comparison']['relative_l2']<0.005 and row['comparison']['top1_a']==row['comparison']['top1_b'] for row in w4),"same_history_fp16_within_envelope":all(row['comparison']['relative_l2']<0.005 and row['comparison']['top1_a']==row['comparison']['top1_b'] for row in fp16),"pre_layer_compute_overlap_observed":all(row['pre_layer_compute_overlap_ms']>0 for row in rows),"final_fp16_bytes_exact":restored_exact,"final_state_fp16":executor.active_layers==[]}
-    payload={"schema_version":1,"classification":"modified-condition asynchronous full-model overlap","layer":a.layer,"repeats":a.repeats,"prompt_ids":ids,"rows":rows,"final_fp16_bytes_exact":restored_exact,"gate":gate,"passed":all(gate.values())}
+    payload={"schema_version":1,"classification":"modified-condition asynchronous full-model overlap","layer":a.layer,"repeats":a.repeats,"request_ids":{"async":0,"same_history_reference":1},"prompt_ids":ids,"forced_history":forced_history,"rows":rows,"final_fp16_bytes_exact":restored_exact,"gate":gate,"passed":all(gate.values())}
     Path(a.output).write_text(json.dumps(payload,indent=2,sort_keys=True)+'\n'); print(json.dumps({"gate":gate,"rows":rows},indent=2)); return 0 if payload['passed'] else 1
 
 if __name__=='__main__': raise SystemExit(main())
