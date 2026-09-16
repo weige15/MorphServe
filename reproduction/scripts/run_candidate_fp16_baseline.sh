@@ -8,9 +8,13 @@ PYTHON_SRC="$ROOT/runtime/candidate-python"
 LOCK="$ROOT/configs/fp16-requirements-lock.txt"
 VENV="$ROOT/.venv"
 TMP="$ROOT/results/tmp/candidate-fp16"
-OUT="$ROOT/experiments/candidate-fp16-baseline/results"
-MODEL=${MODEL_PATH:-/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b}
+OUT=${MORPHSERVE_TEST_RESULT_DIR:-"$ROOT/experiments/candidate-fp16-baseline/results"}
+MODEL=${MORPHSERVE_MODEL_PATH:-/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b}
 GPU=${CUDA_VISIBLE_DEVICES:-0}
+if [[ ! -f "$MODEL/config.json" ]]; then
+  echo "model config not found: $MODEL" >&2
+  exit 2
+fi
 mkdir -p "$OUT" "$ROOT/results/tmp"
 rm -rf "$TMP"
 mkdir -p "$TMP"
