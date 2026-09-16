@@ -133,3 +133,7 @@ OK
 process exit code: 0
 vendor manifest before/after: OK
 ```
+
+## Applied Repair and Verification
+
+The repair was applied only to `runtime/candidate-csrc`; the immutable candidate archive was not changed. Registration dictionaries are now parsed into native `TensorInfo` records before persistence. The exact GPU gate passed, process exit was 0, Torch-preloaded import was 0, allocator delta remained 0, and both vendor-manifest checks passed. Evidence is in `experiments/candidate-memory-manager-repair/results/`.

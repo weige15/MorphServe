@@ -97,3 +97,24 @@ Targeted controls plus `cuda-gdb` localized the crash to global destruction of s
 ### Resource cost and next step
 
 Sub-second synthetic kernels ran on one RTX 3090 across isolated probes; no model load. Implement the diagnosed native-metadata repair only in a separate reconstruction source, then rerun the identical gate. Do not proceed to full-model or timing claims while exit safety fails.
+
+## 2026-09-16 — native metadata lifetime repair
+
+### Hypothesis and scoped change
+
+Parsing registration dictionaries into native `TensorInfo` records, while leaving all copy/address/KV behavior unchanged, should eliminate the confirmed shutdown crash.
+
+### Command and outcome
+
+```bash
+CUDA_VISIBLE_DEVICES=0 \
+MORPHSERVE_CSRC="$PWD/reproduction/runtime/candidate-csrc" \
+MORPHSERVE_TEST_RESULT_DIR="$PWD/reproduction/experiments/candidate-memory-manager-repair/results" \
+reproduction/scripts/run_candidate_memory_manager_test.sh
+```
+
+The same two GPU tests passed and the process exited 0. The extension also imported after Torch preload with all 13 bindings. Address, 12-block capacity, writable owner storage, undersized-tail failure, same-base restore, and zero allocator delta were preserved. Vendor manifests remained unchanged.
+
+### Resource cost and next step
+
+Primary verification used 2.94 s process wall time on one RTX 3090, dominated by startup; CUDA-event operations were each under 1.5 ms for tiny buffers and are not paper-comparable. Next test the candidate Triton mapping across at least two non-contiguous reclaimed layer regions before model integration.

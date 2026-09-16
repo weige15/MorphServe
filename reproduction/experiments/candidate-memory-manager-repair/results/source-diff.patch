@@ -1,0 +1,265 @@
+diff -ruN '--exclude=build' '--exclude=*.egg-info' reproduction/vendor/author-morphserve/csrc/PROVENANCE.md reproduction/runtime/candidate-csrc/PROVENANCE.md
+--- reproduction/vendor/author-morphserve/csrc/PROVENANCE.md	1970-01-01 08:00:00.000000000 +0800
++++ reproduction/runtime/candidate-csrc/PROVENANCE.md	2026-09-16 23:56:55.560497015 +0800
+@@ -0,0 +1,7 @@
++# Candidate C++ reconstruction provenance
++
++Base: `vendor/author-morphserve/csrc` from `MorphServe/MorphServe@85c4fbf753b6eb47613bdd7ea423c38b48054544`.
++
++Scoped repair: `src/memory_manager.h` and `.cpp` parse Python registration dictionaries into native `TensorInfo` records before persistence. This fixes the diagnosed interpreter-shutdown crash caused by process-static `py::object` values. Copy, synchronization, address arithmetic, K/V capacity, storage ownership, and pybind entrypoints are otherwise unchanged.
++
++Evidence: `doc/debug-report.md` and `experiments/candidate-memory-manager-repair/`.
+diff -ruN '--exclude=build' '--exclude=*.egg-info' reproduction/vendor/author-morphserve/csrc/src/memory_manager.cpp reproduction/runtime/candidate-csrc/src/memory_manager.cpp
+--- reproduction/vendor/author-morphserve/csrc/src/memory_manager.cpp	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-csrc/src/memory_manager.cpp	2026-09-16 23:56:39.396684488 +0800
+@@ -9,8 +9,29 @@
+ std::unordered_map<int, MemoryRange> MemoryManager::layer_memory_map_org_gpu;
+ std::unordered_map<int, MemoryRange> MemoryManager::layer_memory_map_org_cpu;
+ std::unordered_map<int, MemoryRange> MemoryManager::layer_memory_map_quant;
+-std::unordered_map<int, std::vector<std::map<std::string, std::map<std::string, py::object>>>> MemoryManager::layer_memory_tensor_map_quant;
+-std::unordered_map<int, std::vector<std::map<std::string, std::map<std::string, py::object>>>> MemoryManager::layer_memory_tensor_map_org;
++std::unordered_map<int, std::vector<TensorInfo>> MemoryManager::layer_memory_tensor_map_quant;
++std::unordered_map<int, std::vector<TensorInfo>> MemoryManager::layer_memory_tensor_map_org;
++
++namespace {
++
++std::vector<TensorInfo> parse_tensor_map(const PythonTensorMap& tensor_map) {
++    std::vector<TensorInfo> result;
++    result.reserve(tensor_map.size());
++    for (const auto& tensor_entry : tensor_map) {
++        for (const auto& [name, info] : tensor_entry) {
++            result.push_back({
++                name,
++                py::cast<size_t>(info.at("offset")),
++                py::cast<std::vector<int64_t>>(info.at("shape")),
++                py::cast<c10::ScalarType>(info.at("dtype")),
++                py::cast<size_t>(info.at("size")),
++            });
++        }
++    }
++    return result;
++}
++
++}  // namespace
+ 
+ 
+ void MemoryManager::register_layer_memory_org_gpu(int layer_id, int64_t start_addr_int, size_t size) {
+@@ -34,8 +55,8 @@
+     //           << start_addr << " with size " << size << " bytes" << std::endl;
+ }
+ 
+-void MemoryManager::register_layer_memory_tensor_map_quant(int layer_id, const std::vector<std::map<std::string, std::map<std::string, py::object>>>& tensor_map) {
+-    layer_memory_tensor_map_quant[layer_id] = tensor_map;
++void MemoryManager::register_layer_memory_tensor_map_quant(int layer_id, const PythonTensorMap& tensor_map) {
++    layer_memory_tensor_map_quant[layer_id] = parse_tensor_map(tensor_map);
+     // std::cout << "[MemoryManager] Registered layer " << layer_id << " tensor map" << std::endl;
+     // for (const auto& tensor_map : layer_memory_tensor_map_quant[layer_id]) {
+     //     for (const auto& [name, info] : tensor_map) {
+@@ -44,8 +65,8 @@
+     // }
+ }
+ 
+-void MemoryManager::register_layer_memory_tensor_map_org(int layer_id, const std::vector<std::map<std::string, std::map<std::string, py::object>>>& tensor_map) {
+-    layer_memory_tensor_map_org[layer_id] = tensor_map;
++void MemoryManager::register_layer_memory_tensor_map_org(int layer_id, const PythonTensorMap& tensor_map) {
++    layer_memory_tensor_map_org[layer_id] = parse_tensor_map(tensor_map);
+     // std::cout << "[MemoryManager] Registered layer " << layer_id << " tensor map" << std::endl;
+     // for (const auto& tensor_map : layer_memory_tensor_map_org[layer_id]) {
+     //     for (const auto& [name, info] : tensor_map) {
+@@ -237,42 +258,34 @@
+     std::vector<torch::Tensor> result_tensors;
+     
+     // std::cout << "[MemoryManager] Reconstructed layer " << layer_id << " tensor map" << std::endl;
+-    for (const auto& tensor_map : layer_memory_tensor_map_quant[layer_id]) {
+-        for (const auto& [name, info] : tensor_map) {
+-            size_t offset = py::cast<size_t>(info.at("offset"));
+-            std::vector<int64_t> shape = py::cast<std::vector<int64_t>>(info.at("shape"));
+-            c10::ScalarType dtype = py::cast<c10::ScalarType>(info.at("dtype"));
+-            size_t size = py::cast<size_t>(info.at("size"));
+-            // std::cout << "  " << name << ": " << offset << ", " << shape << ", " << dtype << ", " << size << std::endl;
+-            
+-            // Create tensor options
+-            auto options = torch::TensorOptions()
+-                .dtype(dtype)
+-                .device(torch::kCUDA, 0)
+-                .layout(torch::kStrided);
+-            
+-            // Pointer to this tensor within the GPU memory
+-            void* tensor_addr = static_cast<char*>(dst_addr) + offset;
+-            
+-            // Create storage
+-            auto storage = c10::Storage(
+-                c10::Storage::use_byte_size_t(),
+-                size,
+-                c10::DataPtr(tensor_addr, c10::Device(c10::DeviceType::CUDA, 0)),
+-                nullptr,
+-                false
+-            );
+-            
+-            // Create tensor from storage with correct shape
+-            auto tensor = torch::empty({}, options).set_(
+-                storage,
+-                0,
+-                shape,
+-                {} // Let PyTorch compute strides
+-            );
+-            
+-            result_tensors.push_back(tensor);
+-        }
++    for (const auto& info : layer_memory_tensor_map_quant[layer_id]) {
++        // Create tensor options
++        auto options = torch::TensorOptions()
++            .dtype(info.dtype)
++            .device(torch::kCUDA, 0)
++            .layout(torch::kStrided);
++
++        // Pointer to this tensor within the GPU memory
++        void* tensor_addr = static_cast<char*>(dst_addr) + info.offset;
++
++        // Create storage
++        auto storage = c10::Storage(
++            c10::Storage::use_byte_size_t(),
++            info.size,
++            c10::DataPtr(tensor_addr, c10::Device(c10::DeviceType::CUDA, 0)),
++            nullptr,
++            false
++        );
++
++        // Create tensor from storage with correct shape
++        auto tensor = torch::empty({}, options).set_(
++            storage,
++            0,
++            info.shape,
++            {} // Let PyTorch compute strides
++        );
++
++        result_tensors.push_back(tensor);
+     }
+     
+     // std::cout << "[MemoryManager] Replaced layer " << layer_id << std::endl
+@@ -351,44 +364,34 @@
+     std::vector<torch::Tensor> result_tensors;
+     
+     // Use the tensor map to reconstruct tensors
+-    for (const auto& tensor_map : layer_memory_tensor_map_org[layer_id]) {
+-        for (const auto& [name, info] : tensor_map) {
+-            size_t offset = py::cast<size_t>(info.at("offset"));
+-            std::vector<int64_t> shape = py::cast<std::vector<int64_t>>(info.at("shape"));
+-            c10::ScalarType dtype = py::cast<c10::ScalarType>(info.at("dtype"));
+-            size_t size = py::cast<size_t>(info.at("size"));
+-            
+-            // std::cout << "  Creating tensor for " << name << ": offset=" << offset << ", shape=" << shape 
+-            //           << ", dtype=" << dtype << ", size=" << size << std::endl;
+-            
+-            // Create tensor options
+-            auto options = torch::TensorOptions()
+-                .dtype(dtype)
+-                .device(torch::kCUDA, 0)
+-                .layout(torch::kStrided);
+-            
+-            // Pointer to this tensor within the GPU memory
+-            void* tensor_addr = static_cast<char*>(dst_addr) + offset;
+-            
+-            // Create storage
+-            auto storage = c10::Storage(
+-                c10::Storage::use_byte_size_t(),
+-                size,
+-                c10::DataPtr(tensor_addr, c10::Device(c10::DeviceType::CUDA, 0)),
+-                nullptr,
+-                false
+-            );
+-            
+-            // Create tensor from storage with correct shape
+-            auto tensor = torch::empty({}, options).set_(
+-                storage,
+-                0,
+-                shape,
+-                {} // Let PyTorch compute strides
+-            );
+-            
+-            result_tensors.push_back(tensor);
+-        }
++    for (const auto& info : layer_memory_tensor_map_org[layer_id]) {
++        // Create tensor options
++        auto options = torch::TensorOptions()
++            .dtype(info.dtype)
++            .device(torch::kCUDA, 0)
++            .layout(torch::kStrided);
++
++        // Pointer to this tensor within the GPU memory
++        void* tensor_addr = static_cast<char*>(dst_addr) + info.offset;
++
++        // Create storage
++        auto storage = c10::Storage(
++            c10::Storage::use_byte_size_t(),
++            info.size,
++            c10::DataPtr(tensor_addr, c10::Device(c10::DeviceType::CUDA, 0)),
++            nullptr,
++            false
++        );
++
++        // Create tensor from storage with correct shape
++        auto tensor = torch::empty({}, options).set_(
++            storage,
++            0,
++            info.shape,
++            {} // Let PyTorch compute strides
++        );
++
++        result_tensors.push_back(tensor);
+     }
+ 
+     // auto end_time = std::chrono::high_resolution_clock::now();
+diff -ruN '--exclude=build' '--exclude=*.egg-info' reproduction/vendor/author-morphserve/csrc/src/memory_manager.h reproduction/runtime/candidate-csrc/src/memory_manager.h
+--- reproduction/vendor/author-morphserve/csrc/src/memory_manager.h	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-csrc/src/memory_manager.h	2026-09-16 23:55:54.425229368 +0800
+@@ -5,6 +5,8 @@
+ #include <unordered_map>
+ #include <vector>
+ #include <iostream>
++#include <map>
++#include <string>
+ 
+ namespace swiftllm {
+ 
+@@ -21,14 +23,26 @@
+     int64_t head_dim;
+ };
+ 
++using PythonTensorInfo = std::map<std::string, py::object>;
++using PythonTensorEntry = std::map<std::string, PythonTensorInfo>;
++using PythonTensorMap = std::vector<PythonTensorEntry>;
++
++struct TensorInfo {
++    std::string name;
++    size_t offset;
++    std::vector<int64_t> shape;
++    c10::ScalarType dtype;
++    size_t size;
++};
++
+ class MemoryManager {
+ public:
+     // Register a layer's memory range
+     static void register_layer_memory_org_gpu(int layer_id, int64_t start_addr_int, size_t size);
+     static void register_layer_memory_org_cpu(int layer_id, int64_t start_addr_int, size_t size);
+     static void register_layer_memory_quant(int layer_id, int64_t start_addr_int, size_t size);
+-    static void register_layer_memory_tensor_map_quant(int layer_id, const std::vector<std::map<std::string, std::map<std::string, py::object>>>& tensor_map);
+-    static void register_layer_memory_tensor_map_org(int layer_id, const std::vector<std::map<std::string, std::map<std::string, py::object>>>& tensor_map);
++    static void register_layer_memory_tensor_map_quant(int layer_id, const PythonTensorMap& tensor_map);
++    static void register_layer_memory_tensor_map_org(int layer_id, const PythonTensorMap& tensor_map);
+     
+     // Register KV cache info
+     static void register_kv_cache_info(int64_t num_layers, int64_t num_kv_heads, int64_t block_size, int64_t head_dim);
+@@ -59,8 +73,8 @@
+     static std::unordered_map<int, MemoryRange> layer_memory_map_org_gpu;
+     static std::unordered_map<int, MemoryRange> layer_memory_map_org_cpu;
+     static std::unordered_map<int, MemoryRange> layer_memory_map_quant;
+-    static std::unordered_map<int, std::vector<std::map<std::string, std::map<std::string, py::object>>>> layer_memory_tensor_map_quant;
+-    static std::unordered_map<int, std::vector<std::map<std::string, std::map<std::string, py::object>>>> layer_memory_tensor_map_org;
++    static std::unordered_map<int, std::vector<TensorInfo>> layer_memory_tensor_map_quant;
++    static std::unordered_map<int, std::vector<TensorInfo>> layer_memory_tensor_map_org;
+ };
+ 
+ } // namespace swiftllm
+\ No newline at end of file

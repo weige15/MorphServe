@@ -1,0 +1,2 @@
+repair verification: PASS
+{"acquire_and_zero_ms": 0.13228799402713776, "allocator_delta_bytes": 0, "copy_ms": 1.4909440279006958, "device": "NVIDIA GeForce RTX 3090", "k_base": 130444836209664, "kv_blocks": 12, "kv_shape": [12, 2, 1, 4, 8], "original_bytes": 4096, "owner_base": 130444836208640, "owner_end": 130444836212736, "packed_base": 130444836208640, "packed_bytes": 1024, "reclaimed_bytes": 3072, "restore_ms": 0.1414400041103363, "v_base": 130444836211200}

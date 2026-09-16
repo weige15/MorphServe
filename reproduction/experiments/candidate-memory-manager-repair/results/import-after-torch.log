@@ -1,0 +1,5 @@
+/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:258: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at ../torch/csrc/utils/tensor_numpy.cpp:84.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+2.4.0+cu121
+/nfs/home/s314511048/MorphServe/reproduction/results/tmp/candidate-memory-manager/csrc/swiftllm_c.cpython-312-x86_64-linux-gnu.so
+['acquire_new_kvcache', 'get_freed_memory_size', 'register_kv_cache_info', 'register_layer_memory_org_cpu', 'register_layer_memory_org_gpu', 'register_layer_memory_quant', 'register_layer_memory_tensor_map_org', 'register_layer_memory_tensor_map_quant', 'replace_layer_org2quant', 'replace_layer_quant2org', 'swap_blocks', 'swap_blocks_new_kv_combined', 'verify_tensor_continuity']
