@@ -607,8 +607,8 @@
       "worktree_status": null
     },
     "experiments/async-layer-transfer/transaction-results/test.log": {
-      "artifact_last_commit": "0688b9df718d5c4db1f4a50a3a88bec685e072fd",
-      "bytes": 3223,
+      "artifact_last_commit": "e257043c7058892481cb6ca6c26a77ec82e2df64",
+      "bytes": 3651,
       "referenced_by": [
         {
           "claim": "H26",
@@ -620,7 +620,7 @@
         }
       ],
       "run_source_revision": null,
-      "sha256": "fcc735f64180a9a24925412c06b495ef09af7b66c2dd6d3b0b45fe122b938780",
+      "sha256": "2895217d939a579a49ef2d19ad43b825c99906a350378d5e423b416ec00179a5",
       "tracked": true,
       "worktree_status": null
     },
@@ -1432,6 +1432,20 @@
       "tracked": true,
       "worktree_status": null
     },
+    "results/raw/post-atomic-readiness-review.md": {
+      "artifact_last_commit": "e257043c7058892481cb6ca6c26a77ec82e2df64",
+      "bytes": 8799,
+      "referenced_by": [
+        {
+          "claim": "H26",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "cafbf47f60c50ad80b1420ec3569cad74fa4a3b4ef9b795e7421d8d4261ae705",
+      "tracked": true,
+      "worktree_status": null
+    },
     "results/raw/trace-window-inference-commands.txt": {
       "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
       "bytes": 695,
@@ -1448,7 +1462,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "6c41567cd338533cf91fd6f32f18a5648c637727",
+  "repository_head_at_generation": "e257043c7058892481cb6ca6c26a77ec82e2df64",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
