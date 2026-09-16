@@ -34,6 +34,7 @@ The official lab repository does not release implementation code. A separate pro
 
 9. **Public trace identity is partially recoverable from Figure 1.** Figure 1a identifies Azure Code, and dense-window shape matching uniquely ranks Azure second 1073 and BurstGPT v1.1 second 1,781,278 (Pearson 0.8793/0.7356). These are frozen plot-derived candidates, not author-confirmed offsets; exact thinning/scaling and context mapping remain unknown.
 10. **A minimal independent async seam is viable.** A persistent morph stream enqueued a 4 MiB pinned copy while prior use was unfinished, retained the GPU address, and became visible only through the layer-local wait. This repairs the candidate's host-blocking design but does not establish full-layer decode overlap until the frozen GPU pilot runs.
+11. **The linked DuReader source does not contain the claimed English artifact.** The pinned 303-path tree has no English/translation file and no release. Exact translated-DuReader quality claims are an evidence blocker, not merely a local download problem.
 
 ## Open questions
 

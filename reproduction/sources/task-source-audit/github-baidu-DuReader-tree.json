@@ -1,0 +1,2366 @@
+{
+  "sha": "c625076b06da8f56d59f19c41c73bd580a98a347",
+  "url": "https://api.github.com/repos/baidu/DuReader/git/trees/c625076b06da8f56d59f19c41c73bd580a98a347",
+  "tree": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8425401311f9475e9b4bea6597be74d604dbf7c3",
+      "size": 121,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8425401311f9475e9b4bea6597be74d604dbf7c3"
+    },
+    {
+      "path": "ACL2019-KTNET",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e5734b67070f4c362c2d0e64a7043a6ed53eb140",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/e5734b67070f4c362c2d0e64a7043a6ed53eb140"
+    },
+    {
+      "path": "ACL2019-KTNET/downloaded_files.md5",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "5bf550dd3e04a23bb1e681b9dc72f26f46f6d663",
+      "size": 1389,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5bf550dd3e04a23bb1e681b9dc72f26f46f6d663"
+    },
+    {
+      "path": "ACL2019-KTNET/images",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5bbe3e6edd1cd944f524f565a26cfd25014f2a81",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/5bbe3e6edd1cd944f524f565a26cfd25014f2a81"
+    },
+    {
+      "path": "ACL2019-KTNET/images/architecture.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b408b2174567568401ffddce5af2075da770e11c",
+      "size": 210852,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/b408b2174567568401ffddce5af2075da770e11c"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3e824ff9c17866d97a96d024375d5feae49b7be3",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/3e824ff9c17866d97a96d024375d5feae49b7be3"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/eval_record_nell.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "2aba6c7ac1e64720a072c76360abea331887c281",
+      "size": 1780,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/2aba6c7ac1e64720a072c76360abea331887c281"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/eval_record_twomemory.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "7987eea62de85bdc431bd0fbe0de1fdc3a39f9d4",
+      "size": 1959,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/7987eea62de85bdc431bd0fbe0de1fdc3a39f9d4"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/eval_record_wordnet.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "b96a1d1a53398fb2489c7c5dc80f3bb54200d206",
+      "size": 1781,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/b96a1d1a53398fb2489c7c5dc80f3bb54200d206"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/eval_squad_nell.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "a3d61032ba7eb250eb2ec8a5b9e7b50a2d774590",
+      "size": 1787,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/a3d61032ba7eb250eb2ec8a5b9e7b50a2d774590"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/eval_squad_twomemory.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "1747a8584a2622f2048b491beba0e1a276f72578",
+      "size": 1966,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/1747a8584a2622f2048b491beba0e1a276f72578"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/eval_squad_wordnet.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "e672d5abb879e0d75d6b1293d0b3f19d3f699817",
+      "size": 1788,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e672d5abb879e0d75d6b1293d0b3f19d3f699817"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_nell.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "f708f912e9e194b7a78baeb4b3e2e22dbb8e7b3b",
+      "size": 1828,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/f708f912e9e194b7a78baeb4b3e2e22dbb8e7b3b"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_nell_finetune.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "898a3e10d1c1b2edb91017a1d6c03fc9f164eb86",
+      "size": 1845,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/898a3e10d1c1b2edb91017a1d6c03fc9f164eb86"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_nell_pretrain.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "293693a1945dd74d25014fff18aaba3592d71087",
+      "size": 2040,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/293693a1945dd74d25014fff18aaba3592d71087"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_twomemory.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "fba712acee892ee08549f7b0a9c075f758fe25f7",
+      "size": 2007,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/fba712acee892ee08549f7b0a9c075f758fe25f7"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_twomemory_finetune.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "4deac0b4ae734e03eb93629682f4bbae6e59e54c",
+      "size": 2024,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/4deac0b4ae734e03eb93629682f4bbae6e59e54c"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_twomemory_pretrain.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "6e6de62bec257d7ad5d1da42c355f5b38997ff0c",
+      "size": 2219,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/6e6de62bec257d7ad5d1da42c355f5b38997ff0c"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_wordnet.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "c2a22fa359ab400854d8b60efb94bb795c308c6b",
+      "size": 1829,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c2a22fa359ab400854d8b60efb94bb795c308c6b"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_wordnet_finetune.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "ae755b8315adb64daa8ce67b7a67812a1aeacde1",
+      "size": 1844,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/ae755b8315adb64daa8ce67b7a67812a1aeacde1"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_record_wordnet_pretrain.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "013c70a2f6c674bec0a1ef6705f0d1de85de5580",
+      "size": 2025,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/013c70a2f6c674bec0a1ef6705f0d1de85de5580"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_nell.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "795cbeebb3de4d1945133f109c70a592f8586dc3",
+      "size": 1835,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/795cbeebb3de4d1945133f109c70a592f8586dc3"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_nell_finetune.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "ef1b9c8de6b5f3896361ae2c4fefc73403d91a98",
+      "size": 1848,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/ef1b9c8de6b5f3896361ae2c4fefc73403d91a98"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_nell_pretrain.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "b9e96c245801f4a0cc5820fd345bccde665f6fe3",
+      "size": 2022,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/b9e96c245801f4a0cc5820fd345bccde665f6fe3"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_twomemory.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "97e56d3d3c9d787cf760957794eed02609a5f2a0",
+      "size": 2014,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/97e56d3d3c9d787cf760957794eed02609a5f2a0"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_twomemory_finetune.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "478f010313d7fafef132e6e3b90f6206e9b244af",
+      "size": 2027,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/478f010313d7fafef132e6e3b90f6206e9b244af"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_twomemory_pretrain.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "a16ccbe984564a49bb861c400a6ac3d3fd686ce7",
+      "size": 2201,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/a16ccbe984564a49bb861c400a6ac3d3fd686ce7"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_wordnet.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "67be8a53b43b4fb6de242c90a23a476ed4eade23",
+      "size": 1836,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/67be8a53b43b4fb6de242c90a23a476ed4eade23"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_wordnet_finetune.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "99b80293fee210a95ef8db232ba667a523cc1068",
+      "size": 1847,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/99b80293fee210a95ef8db232ba667a523cc1068"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/run_squad_wordnet_pretrain.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "1724e82086b845b474c1321e0c5b9481260e5de3",
+      "size": 2007,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/1724e82086b845b474c1321e0c5b9481260e5de3"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "01c418095901b85528d3920bdc5bcfbbc1795973",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/01c418095901b85528d3920bdc5bcfbbc1795973"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/batching.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5341f6bb729137a17567c69db73cb52e1c2c3d32",
+      "size": 7515,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5341f6bb729137a17567c69db73cb52e1c2c3d32"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/batching_twomemory.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5eb510bdba1db5b464fe54ef6b2d447b37586c75",
+      "size": 7845,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5eb510bdba1db5b464fe54ef6b2d447b37586c75"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/eval",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9d1dcfdaf1a6857c5f83dc27019c7600e1ffaff8",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/9d1dcfdaf1a6857c5f83dc27019c7600e1ffaff8"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/eval/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/model",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2b520655a60cb0b6efc5200d1458c64ecb192c84",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/2b520655a60cb0b6efc5200d1458c64ecb192c84"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/model/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/model/bert.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8bf5c9bc12e214cd67ebfdb5dc9f261dbc53a1f9",
+      "size": 9301,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8bf5c9bc12e214cd67ebfdb5dc9f261dbc53a1f9"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/model/layers.py",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "03df9837c5a77d9af89f2cd8514c3923c5b7f9f0",
+      "size": 16307,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/03df9837c5a77d9af89f2cd8514c3923c5b7f9f0"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/model/transformer_encoder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5ff0506f256dbbf4e707fce52d23845e041c1abb",
+      "size": 13759,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5ff0506f256dbbf4e707fce52d23845e041c1abb"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/optimization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "23d5a249d924131c7fd3f53e33cff190b51505be",
+      "size": 5925,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/23d5a249d924131c7fd3f53e33cff190b51505be"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/reader",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "92a05c0791eced6fafe56cbbec74031ba73dbc69",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/92a05c0791eced6fafe56cbbec74031ba73dbc69"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/reader/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/reader/record.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c7c820cdf40535c894a6979fbf5020e5b9a697cf",
+      "size": 46614,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c7c820cdf40535c894a6979fbf5020e5b9a697cf"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/reader/record_twomemory.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2f743eff9f3088414e27f52518aa014d1530baef",
+      "size": 48218,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/2f743eff9f3088414e27f52518aa014d1530baef"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/reader/squad.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d05dcf45ede168db6f3f2ce092d858904b76f655",
+      "size": 45976,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d05dcf45ede168db6f3f2ce092d858904b76f655"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/reader/squad_twomemory.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "32b522ed3df1b833d9bff25e4056a9c4310740cb",
+      "size": 47595,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/32b522ed3df1b833d9bff25e4056a9c4310740cb"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/run_record.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7991d05d07679b4be3521458b3b4f7ea02186b4a",
+      "size": 29109,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/7991d05d07679b4be3521458b3b4f7ea02186b4a"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/run_record_twomemory.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5fd9fd5a688f0f84dd6d7f5aa76211d1738334a4",
+      "size": 31756,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5fd9fd5a688f0f84dd6d7f5aa76211d1738334a4"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/run_squad.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf0a225bcae788fa3ce7333b9e8bfe86c463a562",
+      "size": 29126,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/bf0a225bcae788fa3ce7333b9e8bfe86c463a562"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/run_squad_twomemory.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "514ae51fa806392a783dd9a20063a44df585477e",
+      "size": 31765,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/514ae51fa806392a783dd9a20063a44df585477e"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/tokenization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f906b537177dce430888fbc1738cd4b33906d705",
+      "size": 12486,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/f906b537177dce430888fbc1738cd4b33906d705"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/utils",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ec183c5417dc4179b646fd639b23664bbc8ce901",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/ec183c5417dc4179b646fd639b23664bbc8ce901"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/utils/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/utils/args.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8c6c98879c909ffd5052f412a3a19e4082778224",
+      "size": 1951,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8c6c98879c909ffd5052f412a3a19e4082778224"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/utils/fp16.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e153c2b9a1029897def264278c5dbe72e1f369f5",
+      "size": 3497,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e153c2b9a1029897def264278c5dbe72e1f369f5"
+    },
+    {
+      "path": "ACL2019-KTNET/reading_comprehension/src/utils/init.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "176b5a9fae9276e390dc419977dcb9288db5545f",
+      "size": 3184,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/176b5a9fae9276e390dc419977dcb9288db5545f"
+    },
+    {
+      "path": "ACL2019-KTNET/readme.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4e60f74b3a925aefcbb6f76215a90a3d7423de4c",
+      "size": 12954,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/4e60f74b3a925aefcbb6f76215a90a3d7423de4c"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cd429daa6cd032ab365920e6bfbab44802b8a2c6",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/cd429daa6cd032ab365920e6bfbab44802b8a2c6"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/ner_tagging_squad",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "aaae9ad4669fdbfd02abf9435604c6db29061e6a",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/aaae9ad4669fdbfd02abf9435604c6db29061e6a"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/ner_tagging_squad/tagging.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da531f980aa7a74def415e4de7d71f8a19c34e1a",
+      "size": 6094,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/da531f980aa7a74def415e4de7d71f8a19c34e1a"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/retrieve_nell",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8899c70359d313d591f6a25985bb1b4c0a4eb6fe",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/8899c70359d313d591f6a25985bb1b4c0a4eb6fe"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/retrieve_nell/nell_concept_list.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36b816bede8bc456ffda01351d47c9abd35604c0",
+      "size": 5357,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/36b816bede8bc456ffda01351d47c9abd35604c0"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/retrieve_nell/retrieve.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36f3fc9aeca368e585324e36dca694c24fb5b892",
+      "size": 9635,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/36f3fc9aeca368e585324e36dca694c24fb5b892"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/retrieve_wordnet",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "670f0a9b349ca42e0b31926f225a1b85d34ad1e1",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/670f0a9b349ca42e0b31926f225a1b85d34ad1e1"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/retrieve_wordnet/retrieve.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5cd6caf7e34945f300de58e863123d1f6119b5b9",
+      "size": 4496,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5cd6caf7e34945f300de58e863123d1f6119b5b9"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/retrieve_wordnet/wordnet-mlj12-definitions.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8fc1c4b8bafcfcbb4e8b8e1c94212f68a724f0d7",
+      "size": 4414562,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8fc1c4b8bafcfcbb4e8b8e1c94212f68a724f0d7"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_record",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5e5990273934db6e6e9afef0a029345551bd111e",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/5e5990273934db6e6e9afef0a029345551bd111e"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_record/do_tokenization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "994ace38c40a0d0b401daffffb8ec28b74b26f7b",
+      "size": 14186,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/994ace38c40a0d0b401daffffb8ec28b74b26f7b"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_record/tokenization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8cf83720d9ec212244f4659236e2436ab1245116",
+      "size": 11391,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8cf83720d9ec212244f4659236e2436ab1245116"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_record/vocab.cased.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2ea941cc79a6f3d7985ca6991ef4f67dad62af04",
+      "size": 213450,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/2ea941cc79a6f3d7985ca6991ef4f67dad62af04"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_record/vocab.uncased.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb140275c155a9c7c5a3b3e0e77a9e839594a938",
+      "size": 231508,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/fb140275c155a9c7c5a3b3e0e77a9e839594a938"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_squad",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "19fde0b635128906e5bfbe6bf59bdf14fc7b21fe",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/19fde0b635128906e5bfbe6bf59bdf14fc7b21fe"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_squad/do_tokenization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "58dbd1acd9dc8273af411cf40d2ef23be73ce244",
+      "size": 14918,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/58dbd1acd9dc8273af411cf40d2ef23be73ce244"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_squad/tokenization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8cf83720d9ec212244f4659236e2436ab1245116",
+      "size": 11391,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8cf83720d9ec212244f4659236e2436ab1245116"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_squad/vocab.cased.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2ea941cc79a6f3d7985ca6991ef4f67dad62af04",
+      "size": 213450,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/2ea941cc79a6f3d7985ca6991ef4f67dad62af04"
+    },
+    {
+      "path": "ACL2019-KTNET/retrieve_concepts/tokenization_squad/vocab.uncased.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb140275c155a9c7c5a3b3e0e77a9e839594a938",
+      "size": 231508,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/fb140275c155a9c7c5a3b3e0e77a9e839594a938"
+    },
+    {
+      "path": "DuQM",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "47afb51be08372302ba10efd9959bb83771330df",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/47afb51be08372302ba10efd9959bb83771330df"
+    },
+    {
+      "path": "DuQM/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb63e860d698dc671a9e0df3f1219f609fe0367e",
+      "size": 14339,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/cb63e860d698dc671a9e0df3f1219f609fe0367e"
+    },
+    {
+      "path": "DuQM/data.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dfb2d159d73c3ac05deee6e9642c64ec12351ba3",
+      "size": 2417,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/dfb2d159d73c3ac05deee6e9642c64ec12351ba3"
+    },
+    {
+      "path": "DuQM/model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbff11308424ed83e35b6390c2953f7ce96c12fd",
+      "size": 2227,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/bbff11308424ed83e35b6390c2953f7ce96c12fd"
+    },
+    {
+      "path": "DuQM/predict.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9caa67e7a173b1277f27531eb8f63d9485d67795",
+      "size": 4313,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/9caa67e7a173b1277f27531eb8f63d9485d67795"
+    },
+    {
+      "path": "DuQM/train.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0ea46d395d891f122924dc20275705edf602721f",
+      "size": 8821,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0ea46d395d891f122924dc20275705edf602721f"
+    },
+    {
+      "path": "DuReader-2.0",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d8415f9282161ea239c63fa4ffae67241ec43d67",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/d8415f9282161ea239c63fa4ffae67241ec43d67"
+    },
+    {
+      "path": "DuReader-2.0/.gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8425401311f9475e9b4bea6597be74d604dbf7c3",
+      "size": 121,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8425401311f9475e9b4bea6597be74d604dbf7c3"
+    },
+    {
+      "path": "DuReader-2.0/LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "size": 11358,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d645695673349e3947e8e5ae42332d0ac3164cd7"
+    },
+    {
+      "path": "DuReader-2.0/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8d133dd98e92679beba8319da4e80af05a7ff6cd",
+      "size": 11034,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8d133dd98e92679beba8319da4e80af05a7ff6cd"
+    },
+    {
+      "path": "DuReader-2.0/data",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9e832932e9f47bb41c9130b661d819c88cbeee13",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/9e832932e9f47bb41c9130b661d819c88cbeee13"
+    },
+    {
+      "path": "DuReader-2.0/data/demo",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3bdf6b806b1856cd7f6f696e219cfbacc4f389d8",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/3bdf6b806b1856cd7f6f696e219cfbacc4f389d8"
+    },
+    {
+      "path": "DuReader-2.0/data/demo/devset",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6a26739ecb0734fe1faa3ba8dd8daadcdd51890e",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/6a26739ecb0734fe1faa3ba8dd8daadcdd51890e"
+    },
+    {
+      "path": "DuReader-2.0/data/demo/devset/search.dev.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a2f949bf95e3f05338a4a661a2c8fbf44094186",
+      "size": 2759038,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/7a2f949bf95e3f05338a4a661a2c8fbf44094186"
+    },
+    {
+      "path": "DuReader-2.0/data/demo/testset",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ebfd6527bdfcf30986a7c929b2f6a720ecc8f082",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/ebfd6527bdfcf30986a7c929b2f6a720ecc8f082"
+    },
+    {
+      "path": "DuReader-2.0/data/demo/testset/search.test.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cee592a05133decb75ec6a8cd64bf4e59f4f7a4c",
+      "size": 2310940,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/cee592a05133decb75ec6a8cd64bf4e59f4f7a4c"
+    },
+    {
+      "path": "DuReader-2.0/data/demo/trainset",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "11f186e492f2aa18e5a4be161bd72d12dc1ce142",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/11f186e492f2aa18e5a4be161bd72d12dc1ce142"
+    },
+    {
+      "path": "DuReader-2.0/data/demo/trainset/search.train.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b8d151279e64ff3044b6560ca91766ac05007906",
+      "size": 3054051,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/b8d151279e64ff3044b6560ca91766ac05007906"
+    },
+    {
+      "path": "DuReader-2.0/data/download.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2c5e918fa2b9182c2cad1f99e8fb86110cc69357",
+      "size": 1184,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/2c5e918fa2b9182c2cad1f99e8fb86110cc69357"
+    },
+    {
+      "path": "DuReader-2.0/data/md5sum.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95af341ce1f48f8248db5f0bdaf7822f84c1066f",
+      "size": 111,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/95af341ce1f48f8248db5f0bdaf7822f84c1066f"
+    },
+    {
+      "path": "DuReader-2.0/paddle",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7169fc92a4a1f0f13e8a18802da276435fe2176d",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/7169fc92a4a1f0f13e8a18802da276435fe2176d"
+    },
+    {
+      "path": "DuReader-2.0/paddle/UPDATES.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cc0904c0292536462733e618bbb73c8149c67af1",
+      "size": 2361,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/cc0904c0292536462733e618bbb73c8149c67af1"
+    },
+    {
+      "path": "DuReader-2.0/paddle/args.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b3be2b4677cb92e4ead45bdf7b61d3a2fa859c0",
+      "size": 4927,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8b3be2b4677cb92e4ead45bdf7b61d3a2fa859c0"
+    },
+    {
+      "path": "DuReader-2.0/paddle/dataset.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7c583e100997b41aa5d5229c4c3f8fee59d7539f",
+      "size": 10095,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/7c583e100997b41aa5d5229c4c3f8fee59d7539f"
+    },
+    {
+      "path": "DuReader-2.0/paddle/paragraph_extraction.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0267eb1f8367b850b2c4436026ca0d1ebdab615c",
+      "size": 7413,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0267eb1f8367b850b2c4436026ca0d1ebdab615c"
+    },
+    {
+      "path": "DuReader-2.0/paddle/preprocess.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "af76549f4427a341fed341a7d09fd5bb7230de7b",
+      "size": 8099,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/af76549f4427a341fed341a7d09fd5bb7230de7b"
+    },
+    {
+      "path": "DuReader-2.0/paddle/rc_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d96c2dbd78abcda8fce6c5011d8782b8413292de",
+      "size": 11874,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d96c2dbd78abcda8fce6c5011d8782b8413292de"
+    },
+    {
+      "path": "DuReader-2.0/paddle/run.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3cb04b427edde706ab1c0b2d62bb633a2b3c6db5",
+      "size": 26264,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/3cb04b427edde706ab1c0b2d62bb633a2b3c6db5"
+    },
+    {
+      "path": "DuReader-2.0/paddle/run.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "332ecf34ff2bdbc226f52a1572a024c61d615aba",
+      "size": 1813,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/332ecf34ff2bdbc226f52a1572a024c61d615aba"
+    },
+    {
+      "path": "DuReader-2.0/paddle/vocab.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f1662cbcb27d9c012451c1b74cea6b4c60239710",
+      "size": 6700,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/f1662cbcb27d9c012451c1b74cea6b4c60239710"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "25bd8bdd1c8a72a9c8e80417c289a076bb594cde",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/25bd8bdd1c8a72a9c8e80417c289a076bb594cde"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/dataset.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "765f6a5ec1ede8ba69a717f8fe87c038e8c38008",
+      "size": 10019,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/765f6a5ec1ede8ba69a717f8fe87c038e8c38008"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/layers",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "99b1a8e09a536611c8ab7aba6abd88afcf324600",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/99b1a8e09a536611c8ab7aba6abd88afcf324600"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/layers/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a60b38058709436602c38d73fa95ab89951e4483",
+      "size": 887,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/a60b38058709436602c38d73fa95ab89951e4483"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/layers/basic_rnn.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eba9dc72665f9615a5a4fb882a3db707ea48c8bd",
+      "size": 3989,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/eba9dc72665f9615a5a4fb882a3db707ea48c8bd"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/layers/match_layer.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "57a8a02d09c0c8a4306eddbfc44848df4432b162",
+      "size": 4817,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/57a8a02d09c0c8a4306eddbfc44848df4432b162"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/layers/pointer_net.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a1fc29509bf04aa56e475eb90ca27eb6b2799be",
+      "size": 7823,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/2a1fc29509bf04aa56e475eb90ca27eb6b2799be"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/rc_model.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa76ec242107544c6bd22664eead486ab4995f69",
+      "size": 18623,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/fa76ec242107544c6bd22664eead486ab4995f69"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/run.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c4e0f0107f521da77c1f783c8a75054805b3d920",
+      "size": 11016,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c4e0f0107f521da77c1f783c8a75054805b3d920"
+    },
+    {
+      "path": "DuReader-2.0/tensorflow/vocab.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4b66dffa791698ea5194618a2ab755c810b2c8de",
+      "size": 6601,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/4b66dffa791698ea5194618a2ab755c810b2c8de"
+    },
+    {
+      "path": "DuReader-2.0/utils",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cd7a07fabfc1efef85b9c48d782b7e5ba7f0a494",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/cd7a07fabfc1efef85b9c48d782b7e5ba7f0a494"
+    },
+    {
+      "path": "DuReader-2.0/utils/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c4c8ce95fb22a23dec00649465d192d7793869a",
+      "size": 1251,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/3c4c8ce95fb22a23dec00649465d192d7793869a"
+    },
+    {
+      "path": "DuReader-2.0/utils/download_thirdparty.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "cc37da879971c2279edab220485d08d9b20c35fa",
+      "size": 1814,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/cc37da879971c2279edab220485d08d9b20c35fa"
+    },
+    {
+      "path": "DuReader-2.0/utils/dureader_eval.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f3839a46c9c63c83eccc332bbf385b0ce5fd5d46",
+      "size": 19017,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/f3839a46c9c63c83eccc332bbf385b0ce5fd5d46"
+    },
+    {
+      "path": "DuReader-2.0/utils/get_vocab.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4dc62a2410ffd37b3bf2be8c1c8df8b588dd5862",
+      "size": 2269,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/4dc62a2410ffd37b3bf2be8c1c8df8b588dd5862"
+    },
+    {
+      "path": "DuReader-2.0/utils/marco_tokenize_data.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7273e7046e82cd816298af81c175ab10136b16d0",
+      "size": 1388,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/7273e7046e82cd816298af81c175ab10136b16d0"
+    },
+    {
+      "path": "DuReader-2.0/utils/marcov1_to_dureader.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "022db4dd1bdf98d2a7e0ead659e988ff109b59e9",
+      "size": 1054,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/022db4dd1bdf98d2a7e0ead659e988ff109b59e9"
+    },
+    {
+      "path": "DuReader-2.0/utils/marcov2_to_v1_tojsonl.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c301e12f6edd566af2ede63c3c8780daedd75468",
+      "size": 368,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c301e12f6edd566af2ede63c3c8780daedd75468"
+    },
+    {
+      "path": "DuReader-2.0/utils/preprocess.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "af76549f4427a341fed341a7d09fd5bb7230de7b",
+      "size": 8099,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/af76549f4427a341fed341a7d09fd5bb7230de7b"
+    },
+    {
+      "path": "DuReader-2.0/utils/run_marco2dureader_preprocess.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fcb7d67a002ef15384b7c725eb14f3a4dd64ec9e",
+      "size": 884,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/fcb7d67a002ef15384b7c725eb14f3a4dd64ec9e"
+    },
+    {
+      "path": "DuReader-Checklist",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b31416e260acb0fbd59ff585d032e33db4981030",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/b31416e260acb0fbd59ff585d032e33db4981030"
+    },
+    {
+      "path": "DuReader-Checklist/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bbe425220c52c15773e86a5762a74b903746134c",
+      "size": 6258,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/bbe425220c52c15773e86a5762a74b903746134c"
+    },
+    {
+      "path": "DuReader-Checklist/checklist.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c61c70d1dc421456d415e26bd5dc05881a6f836",
+      "size": 476140,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/9c61c70d1dc421456d415e26bd5dc05881a6f836"
+    },
+    {
+      "path": "DuReader-Checklist/download.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59bfc190a84d95c50cc6a96971af0672a8b45516",
+      "size": 536,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/59bfc190a84d95c50cc6a96971af0672a8b45516"
+    },
+    {
+      "path": "DuReader-Checklist/evaluate.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dae4df3c684a55b795cf4ef0a4ce7816060a8e57",
+      "size": 8168,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/dae4df3c684a55b795cf4ef0a4ce7816060a8e57"
+    },
+    {
+      "path": "DuReader-Checklist/predict.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa4965ef8267f7f42c9c4f1bdc7c01b02cf6966b",
+      "size": 429,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/fa4965ef8267f7f42c9c4f1bdc7c01b02cf6966b"
+    },
+    {
+      "path": "DuReader-Checklist/run_eval.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d098634be4b7c2d5472219ff660f7be1d125c616",
+      "size": 242,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d098634be4b7c2d5472219ff660f7be1d125c616"
+    },
+    {
+      "path": "DuReader-Checklist/src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f1218d067794c481f774827db75e80e7ca74f5ad",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/f1218d067794c481f774827db75e80e7ca74f5ad"
+    },
+    {
+      "path": "DuReader-Checklist/src/args.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0d13b2fd3007ba8e94d30f990980d7143129fb2b",
+      "size": 4390,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0d13b2fd3007ba8e94d30f990980d7143129fb2b"
+    },
+    {
+      "path": "DuReader-Checklist/src/models.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "12cc767008691c847f6f6811562522c6270c43b7",
+      "size": 3251,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/12cc767008691c847f6f6811562522c6270c43b7"
+    },
+    {
+      "path": "DuReader-Checklist/src/run.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4f0eed2a5b240b20d6fb586033c3561483ab698",
+      "size": 16112,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d4f0eed2a5b240b20d6fb586033c3561483ab698"
+    },
+    {
+      "path": "DuReader-Checklist/src/squad.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "84b6145061120ab089ef79c3946d9b07ae4fb1e4",
+      "size": 11513,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/84b6145061120ab089ef79c3946d9b07ae4fb1e4"
+    },
+    {
+      "path": "DuReader-Checklist/train.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a9bf2612b2b427fe4f689b96eb41909753556c26",
+      "size": 700,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/a9bf2612b2b427fe4f689b96eb41909753556c26"
+    },
+    {
+      "path": "DuReader-Retrieval",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "85a65a472135b3c4c03e4e42f1b30f5a6aa2ecfd",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/85a65a472135b3c4c03e4e42f1b30f5a6aa2ecfd"
+    },
+    {
+      "path": "DuReader-Retrieval/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aa866f63c3a174473d47a2b1424962c0515884d4",
+      "size": 12677,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/aa866f63c3a174473d47a2b1424962c0515884d4"
+    },
+    {
+      "path": "DuReader-Retrieval/figures",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4e0e798a17f1c648f46f845e6a22326c9a8603a1",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/4e0e798a17f1c648f46f845e6a22326c9a8603a1"
+    },
+    {
+      "path": "DuReader-Retrieval/figures/example.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26e2a06ff525770eb50f2c5627efeeb73da52df1",
+      "size": 460395,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/26e2a06ff525770eb50f2c5627efeeb73da52df1"
+    },
+    {
+      "path": "DuReader-Robust",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ab9720a36d7d98eab0503bbbf0412f945ea93da9",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/ab9720a36d7d98eab0503bbbf0412f945ea93da9"
+    },
+    {
+      "path": "DuReader-Robust/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0fa28558fa9d4cadd8431fbde51a209995add433",
+      "size": 6538,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0fa28558fa9d4cadd8431fbde51a209995add433"
+    },
+    {
+      "path": "DuReader-Robust/download.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "36586f1122a904975cde3bd0e78ac0fb13eaa18c",
+      "size": 808,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/36586f1122a904975cde3bd0e78ac0fb13eaa18c"
+    },
+    {
+      "path": "DuReader-Robust/evaluate.py",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "cce71ebd6d382600879315ff38b6ee2145965ec5",
+      "size": 6416,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/cce71ebd6d382600879315ff38b6ee2145965ec5"
+    },
+    {
+      "path": "DuReader-Robust/md5.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c8f89eebf9442e895c10e97d4e5f33b7ea01bb1a",
+      "size": 201,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c8f89eebf9442e895c10e97d4e5f33b7ea01bb1a"
+    },
+    {
+      "path": "DuReader-Robust/paddlehub_baseline",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c93e8649354b9cd8d545c74122c687b7d7762958",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/c93e8649354b9cd8d545c74122c687b7d7762958"
+    },
+    {
+      "path": "DuReader-Robust/paddlehub_baseline/demo_dataset.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9a81bf7611d5a76f4d8f5459230d58011bf3ecf4",
+      "size": 6935,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/9a81bf7611d5a76f4d8f5459230d58011bf3ecf4"
+    },
+    {
+      "path": "DuReader-Robust/paddlehub_baseline/paddlehub_reading_comprehension.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ffbfce7ba6dc8c7c2fddad2d166991845720ab9b",
+      "size": 560,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/ffbfce7ba6dc8c7c2fddad2d166991845720ab9b"
+    },
+    {
+      "path": "DuReader-Robust/paddlehub_baseline/reading_comprehension.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60f31369cdb1e03f5545c8b9bfffe2b8cf569174",
+      "size": 4474,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/60f31369cdb1e03f5545c8b9bfffe2b8cf569174"
+    },
+    {
+      "path": "DuReader-Robust/predict.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "a4b20e9dc463e5404a081e69f4f2e69e00a8ce54",
+      "size": 934,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/a4b20e9dc463e5404a081e69f4f2e69e00a8ce54"
+    },
+    {
+      "path": "DuReader-Robust/src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f3c975db917a5ea7c98d4df08089fe7afc62c42e",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/f3c975db917a5ea7c98d4df08089fe7afc62c42e"
+    },
+    {
+      "path": "DuReader-Robust/src/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "DuReader-Robust/src/_ce.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c356bef632dfa9f9e184a2967eced54ccdd4db89",
+      "size": 1983,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c356bef632dfa9f9e184a2967eced54ccdd4db89"
+    },
+    {
+      "path": "DuReader-Robust/src/batching.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7a214700a9e2db27900602c235c32e435e7b85fb",
+      "size": 6843,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/7a214700a9e2db27900602c235c32e435e7b85fb"
+    },
+    {
+      "path": "DuReader-Robust/src/convert_params.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e2930defa01c6ab9be6e3f24e5956ce2dbecf4da",
+      "size": 8725,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e2930defa01c6ab9be6e3f24e5956ce2dbecf4da"
+    },
+    {
+      "path": "DuReader-Robust/src/dist_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "49df856d950a689951a6e070b1c1810be196f758",
+      "size": 1879,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/49df856d950a689951a6e070b1c1810be196f758"
+    },
+    {
+      "path": "DuReader-Robust/src/model",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "77ed6075a39ea2ca9974817c233a771d486a2366",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/77ed6075a39ea2ca9974817c233a771d486a2366"
+    },
+    {
+      "path": "DuReader-Robust/src/model/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "DuReader-Robust/src/model/ernie.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "25fb3adcbafc5e32d605051bcc6050927fb90183",
+      "size": 9030,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/25fb3adcbafc5e32d605051bcc6050927fb90183"
+    },
+    {
+      "path": "DuReader-Robust/src/model/transformer_encoder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93a77ebe480f0e4a8e2b4f2c0c18b23383075fb7",
+      "size": 12549,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/93a77ebe480f0e4a8e2b4f2c0c18b23383075fb7"
+    },
+    {
+      "path": "DuReader-Robust/src/optimization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0771ab77922dea90104ff67ab201bfb307212637",
+      "size": 7065,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0771ab77922dea90104ff67ab201bfb307212637"
+    },
+    {
+      "path": "DuReader-Robust/src/reader",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "946b4ee4ea8e90ede03e85ce10f67cd6a9d5c6bd",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/946b4ee4ea8e90ede03e85ce10f67cd6a9d5c6bd"
+    },
+    {
+      "path": "DuReader-Robust/src/reader/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "DuReader-Robust/src/reader/squad.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c49317db27733c58db0e97a0ef86b5a1e9abc332",
+      "size": 38118,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c49317db27733c58db0e97a0ef86b5a1e9abc332"
+    },
+    {
+      "path": "DuReader-Robust/src/run_mrc.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e61d6474171dfb2b12e85fd4a0690fe86086a3dd",
+      "size": 20132,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e61d6474171dfb2b12e85fd4a0690fe86086a3dd"
+    },
+    {
+      "path": "DuReader-Robust/src/tokenization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c3b9180076e7d3347a8af46648e47613adf5e34a",
+      "size": 14044,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c3b9180076e7d3347a8af46648e47613adf5e34a"
+    },
+    {
+      "path": "DuReader-Robust/src/utils",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "53ae616af45c99021a7e1e60dc43916329c01d4f",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/53ae616af45c99021a7e1e60dc43916329c01d4f"
+    },
+    {
+      "path": "DuReader-Robust/src/utils/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "DuReader-Robust/src/utils/args.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "66e9bb81a35bb4cc4c8c79cac4631841742bdeb8",
+      "size": 2205,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/66e9bb81a35bb4cc4c8c79cac4631841742bdeb8"
+    },
+    {
+      "path": "DuReader-Robust/src/utils/cards.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "70c58ee30da7f68f00d12af0b5dc1025dad42630",
+      "size": 821,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/70c58ee30da7f68f00d12af0b5dc1025dad42630"
+    },
+    {
+      "path": "DuReader-Robust/src/utils/fp16.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c68e1aceeeafdba34516769e380ca702c752946f",
+      "size": 9242,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c68e1aceeeafdba34516769e380ca702c752946f"
+    },
+    {
+      "path": "DuReader-Robust/src/utils/init.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "27f0a75feb965c7b609397161b072568926c5f64",
+      "size": 3091,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/27f0a75feb965c7b609397161b072568926c5f64"
+    },
+    {
+      "path": "DuReader-Robust/train.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "38696846c1ed44b6bcb817eaac4a96d4b8d58530",
+      "size": 1109,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/38696846c1ed44b6bcb817eaac4a96d4b8d58530"
+    },
+    {
+      "path": "DuReader-vis",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "06075ab3670ba91679de950fba6c2a5b1da5e381",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/06075ab3670ba91679de950fba6c2a5b1da5e381"
+    },
+    {
+      "path": "DuReader-vis/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c9f3ba995f667ed6069996ce6f3d46f224c36e51",
+      "size": 7599,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c9f3ba995f667ed6069996ce6f3d46f224c36e51"
+    },
+    {
+      "path": "DuReader-vis/images",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ea3cc75241d35b8e550c72e6f1551c6b4cdb77bf",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/ea3cc75241d35b8e550c72e6f1551c6b4cdb77bf"
+    },
+    {
+      "path": "DuReader-vis/images/intro-vis.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c2259b62b334cecc6a1b3d161bc618bd175fac1a",
+      "size": 145199,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c2259b62b334cecc6a1b3d161bc618bd175fac1a"
+    },
+    {
+      "path": "DuReader-vis/images/intro.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c2259b62b334cecc6a1b3d161bc618bd175fac1a",
+      "size": 145199,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c2259b62b334cecc6a1b3d161bc618bd175fac1a"
+    },
+    {
+      "path": "MRQA2019-D-NET",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e42b6c84fd02ac50b39b2166908279559fabcac8",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/e42b6c84fd02ac50b39b2166908279559fabcac8"
+    },
+    {
+      "path": "MRQA2019-D-NET/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97d6c1475bbe7c7768150182255a5568c923878f",
+      "size": 4162,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/97d6c1475bbe7c7768150182255a5568c923878f"
+    },
+    {
+      "path": "MRQA2019-D-NET/images",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ade3488ac6f10dd0bab8b5e5cbdd9e473da2d7f9",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/ade3488ac6f10dd0bab8b5e5cbdd9e473da2d7f9"
+    },
+    {
+      "path": "MRQA2019-D-NET/images/D-NET_framework.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9965b5ee31202c69030362a8a164b7c6c6c5586b",
+      "size": 393289,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/9965b5ee31202c69030362a8a164b7c6c6c5586b"
+    },
+    {
+      "path": "MRQA2019-D-NET/images/D-NET_server.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "08a366df8a7752727d2114283922240fba3ca038",
+      "size": 80320,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/08a366df8a7752727d2114283922240fba3ca038"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1ecb7cc20644759838d9246094bc470acb9ed6b2",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/1ecb7cc20644759838d9246094bc470acb9ed6b2"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "575c74fd5dd3b79d349b3b5906cbbadb384251b1",
+      "size": 5297,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/575c74fd5dd3b79d349b3b5906cbbadb384251b1"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/configs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d963f1036628566c2d5121697e65e4e070fe6637",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/d963f1036628566c2d5121697e65e4e070fe6637"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/configs/answer_matching.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "08ae49e881b34189aedb84fafac08ad90814d0b1",
+      "size": 110,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/08ae49e881b34189aedb84fafac08ad90814d0b1"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/configs/mask_language_model.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "87bf138141378d15fecd22ae26198dc2d41d0e95",
+      "size": 101,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/87bf138141378d15fecd22ae26198dc2d41d0e95"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/configs/mtl_config.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6e747b6e29b769feba9116728c87d4597c23eb67",
+      "size": 655,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/6e747b6e29b769feba9116728c87d4597c23eb67"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/configs/reading_comprehension.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d5044953a050b932b526b5b51479d4f54395fe8c",
+      "size": 312,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d5044953a050b932b526b5b51479d4f54395fe8c"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/run_build_palm.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "77ab9985de0b79d4579234df852dc2ce2639aa4f",
+      "size": 169,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/77ab9985de0b79d4579234df852dc2ce2639aa4f"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/run_evaluation.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "9110d2288e9c52b132c1d7271699b29aac739444",
+      "size": 2463,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/9110d2288e9c52b132c1d7271699b29aac739444"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/run_multi_task.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "e65d4cc2dd15c7e05b16ca9e4feabb4d7f26bfdf",
+      "size": 184,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e65d4cc2dd15c7e05b16ca9e4feabb4d7f26bfdf"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0c8102b862f20cf8ac292ffd504754760d962027",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/0c8102b862f20cf8ac292ffd504754760d962027"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/args.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b9be634f0f383db61eb667df2345a89262179fd8",
+      "size": 1639,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/b9be634f0f383db61eb667df2345a89262179fd8"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/combine.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d9f6b0fc03730a688387c4b3cc322f4f426147d0",
+      "size": 1565,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d9f6b0fc03730a688387c4b3cc322f4f426147d0"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/combine.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8173f047967d4a3342b3ca7589250b83c386ddae",
+      "size": 1033,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8173f047967d4a3342b3ca7589250b83c386ddae"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/convert_model_params.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b1c0652c9991467e59ef1e6414b05c8d6ccdb107",
+      "size": 8109,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/b1c0652c9991467e59ef1e6414b05c8d6ccdb107"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/convert_mrqa2squad.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a585c485ae0f676e6bb160815b42c66d529d3d8c",
+      "size": 5403,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/a585c485ae0f676e6bb160815b42c66d529d3d8c"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/convert_mrqa2squad.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eb323d3af5057949e0ecd23c816946ce884cbe50",
+      "size": 1498,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/eb323d3af5057949e0ecd23c816946ce884cbe50"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/dev",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "62b9ad0964fa7e4409d3f9559a7c46c77bcb2c49",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/62b9ad0964fa7e4409d3f9559a7c46c77bcb2c49"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/dev/md5sum_dev.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "faef333c91f691207d106b9f4a8b9542947f66ac",
+      "size": 625,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/faef333c91f691207d106b9f4a8b9542947f66ac"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/download_data.sh",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3661253b96e9cfea8463d014997155d6efab9eb5",
+      "size": 3237,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/3661253b96e9cfea8463d014997155d6efab9eb5"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/evaluate-v1.1.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0137fbca04cf93b3dbb5744832d25723420a4861",
+      "size": 3419,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0137fbca04cf93b3dbb5744832d25723420a4861"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/macro_avg.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dc0f9ff3a11a8e9572c6daba2415162a9a54a392",
+      "size": 1065,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/dc0f9ff3a11a8e9572c6daba2415162a9a54a392"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/train",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a2db33822be42b4ef295c3662bfe02e3a7d93c34",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/a2db33822be42b4ef295c3662bfe02e3a7d93c34"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/scripts/train/md5sum_train.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "68d9d2befc8c7e35d47264ae2d1043ed8c5999c7",
+      "size": 314,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/68d9d2befc8c7e35d47264ae2d1043ed8c5999c7"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/wget_data.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "546cbbff481d35422cbef3f4961fe3b0d5f480be",
+      "size": 406,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/546cbbff481d35422cbef3f4961fe3b0d5f480be"
+    },
+    {
+      "path": "MRQA2019-D-NET/multi_task_learning/wget_pretrained_model.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "ae8fb767f070dbea1a5a2076211f81260aa6115a",
+      "size": 139,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/ae8fb767f070dbea1a5a2076211f81260aa6115a"
+    },
+    {
+      "path": "MRQA2019-D-NET/server",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "34ce586845bebe86220aaa1f5522801e86f49d68",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/34ce586845bebe86220aaa1f5522801e86f49d68"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef31990a25736ffd9ddc37681d83a5dc7fb45c1d",
+      "size": 2478,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/ef31990a25736ffd9ddc37681d83a5dc7fb45c1d"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bd1495222a2ed5fdc5c96277514219ab266d26cd",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/bd1495222a2ed5fdc5c96277514219ab266d26cd"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/model_wrapper.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eac6fd036ecd1745a2d9f855bb42f4a278a0740a",
+      "size": 5144,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/eac6fd036ecd1745a2d9f855bb42f4a278a0740a"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/mrc_service.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e0f5bc4c8eece1c2daccbc70e1bfcf3063ec9f42",
+      "size": 7042,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e0f5bc4c8eece1c2daccbc70e1bfcf3063ec9f42"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f128c9840660c900510b2fd81b2ae729dc58c96e",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/f128c9840660c900510b2fd81b2ae729dc58c96e"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/__main__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf1dc9efefca3392147f10c6df875b4d864206ab",
+      "size": 243,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/cf1dc9efefca3392147f10c6df875b4d864206ab"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/algorithm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "72485884946d0ed77bdd393cfa0f2afe771e5f0e",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/72485884946d0ed77bdd393cfa0f2afe771e5f0e"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/algorithm/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/algorithm/multitask.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ea0182548b0a4d504edae9156b8e6b91ebcff1d",
+      "size": 2811,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8ea0182548b0a4d504edae9156b8e6b91ebcff1d"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/algorithm/optimization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f338263855b2e7aa09d916b12c8486579b5d571",
+      "size": 5561,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0f338263855b2e7aa09d916b12c8486579b5d571"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/extension",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6839a1d47a760a70888f552a10a52878cb4ebcac",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/6839a1d47a760a70888f552a10a52878cb4ebcac"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/extension/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/extension/fp16.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e153c2b9a1029897def264278c5dbe72e1f369f5",
+      "size": 3497,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e153c2b9a1029897def264278c5dbe72e1f369f5"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/module",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8254008dd6f909e60b6a3ce2d7a7cff8d0535dee",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/8254008dd6f909e60b6a3ce2d7a7cff8d0535dee"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/module/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "139597f9cb07c5d48bed18984ec4747f4b4f3438",
+      "size": 2,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/139597f9cb07c5d48bed18984ec4747f4b4f3438"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/module/transformer_encoder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da65ae820cb9478c52d6adc3f41f321d3f49b46f",
+      "size": 14071,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/da65ae820cb9478c52d6adc3f41f321d3f49b46f"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/nets",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9a9ca36bf9b159ce93b7394112070857821bc273",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/9a9ca36bf9b159ce93b7394112070857821bc273"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/nets/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/nets/bert.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e604a2cf957a487a434aed6184cfc4b101725ec",
+      "size": 8779,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8e604a2cf957a487a434aed6184cfc4b101725ec"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/nets/transformer_encoder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d1297efe517ec575cd8cdc78df0d1ef414d01a72",
+      "size": 12789,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d1297efe517ec575cd8cdc78df0d1ef414d01a72"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/toolkit",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5411c660737f5744ec1ff093f4fbe50b869b8145",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/5411c660737f5744ec1ff093f4fbe50b869b8145"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/toolkit/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "139597f9cb07c5d48bed18984ec4747f4b4f3438",
+      "size": 2,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/139597f9cb07c5d48bed18984ec4747f4b4f3438"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/toolkit/configure.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1472b858c25a46a406380f9b382ba27cf4d6bc03",
+      "size": 5171,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/1472b858c25a46a406380f9b382ba27cf4d6bc03"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/toolkit/init.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5aa7e1fd7585147f477be92f324e67e9654d7ae8",
+      "size": 2947,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5aa7e1fd7585147f477be92f324e67e9654d7ae8"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/pdnlp/toolkit/placeholder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e835038ee257d08f64b849855b30a0e9cd3d262b",
+      "size": 1878,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e835038ee257d08f64b849855b30a0e9cd3d262b"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/start.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "f0ca8c5109ce8f5a3d009d39383c9d0dd801387c",
+      "size": 141,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/f0ca8c5109ce8f5a3d009d39383c9d0dd801387c"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/start_service.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54d4bf84fc21cc9f5259a8db9191b2849645bfdf",
+      "size": 1049,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/54d4bf84fc21cc9f5259a8db9191b2849645bfdf"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/task_reader",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b32131f44951293b5a4903df79bd907452f4390e",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/b32131f44951293b5a4903df79bd907452f4390e"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/task_reader/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/task_reader/batching.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "13803cf79f00d7ea5857360eeceb2da354a5e626",
+      "size": 7017,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/13803cf79f00d7ea5857360eeceb2da354a5e626"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/task_reader/mrqa.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2f52a3acf72b4f46f2a875a5c3a29843973412d2",
+      "size": 37586,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/2f52a3acf72b4f46f2a875a5c3a29843973412d2"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/bert_server/task_reader/tokenization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59e035d92cb776f32be20360532b8c18c9b801e5",
+      "size": 12718,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/59e035d92cb776f32be20360532b8c18c9b801e5"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/client",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1044f3dc136801308589011a405bc7772f019c7b",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/1044f3dc136801308589011a405bc7772f019c7b"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/client/client.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a72fb266389d5c29d5e20436fe24093c74c6db93",
+      "size": 1164,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/a72fb266389d5c29d5e20436fe24093c74c6db93"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/client/demo.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3a45c97ec829bebd4ac3468ae4107012024d24fd",
+      "size": 127910,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/3a45c97ec829bebd4ac3468ae4107012024d24fd"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6abc454aad5166585a84c4051c9b60c827c9a347",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/6abc454aad5166585a84c4051c9b60c827c9a347"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/model_wrapper.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d72b5b1404ad632bc0addb9916ea7a5404870735",
+      "size": 5275,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d72b5b1404ad632bc0addb9916ea7a5404870735"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/mrc_service.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "895b0a31384d16e1d0437485709fb640166ba7bd",
+      "size": 7046,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/895b0a31384d16e1d0437485709fb640166ba7bd"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a3d06ed2d17315be29b3b2ca8d01314ffb2aba13",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/a3d06ed2d17315be29b3b2ca8d01314ffb2aba13"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/__main__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf1dc9efefca3392147f10c6df875b4d864206ab",
+      "size": 243,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/cf1dc9efefca3392147f10c6df875b4d864206ab"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/algorithm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "72485884946d0ed77bdd393cfa0f2afe771e5f0e",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/72485884946d0ed77bdd393cfa0f2afe771e5f0e"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/algorithm/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/algorithm/multitask.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ea0182548b0a4d504edae9156b8e6b91ebcff1d",
+      "size": 2811,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/8ea0182548b0a4d504edae9156b8e6b91ebcff1d"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/algorithm/optimization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f338263855b2e7aa09d916b12c8486579b5d571",
+      "size": 5561,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0f338263855b2e7aa09d916b12c8486579b5d571"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/extension",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6839a1d47a760a70888f552a10a52878cb4ebcac",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/6839a1d47a760a70888f552a10a52878cb4ebcac"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/extension/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/extension/fp16.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e153c2b9a1029897def264278c5dbe72e1f369f5",
+      "size": 3497,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e153c2b9a1029897def264278c5dbe72e1f369f5"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/module",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8254008dd6f909e60b6a3ce2d7a7cff8d0535dee",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/8254008dd6f909e60b6a3ce2d7a7cff8d0535dee"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/module/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "139597f9cb07c5d48bed18984ec4747f4b4f3438",
+      "size": 2,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/139597f9cb07c5d48bed18984ec4747f4b4f3438"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/module/transformer_encoder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da65ae820cb9478c52d6adc3f41f321d3f49b46f",
+      "size": 14071,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/da65ae820cb9478c52d6adc3f41f321d3f49b46f"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/nets",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "00fe23fdb6ac69058c0814cb897e9582c118e874",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/00fe23fdb6ac69058c0814cb897e9582c118e874"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/nets/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/nets/bert.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bcaee8f5501e2778182c233579a34692ce99d52",
+      "size": 8949,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/3bcaee8f5501e2778182c233579a34692ce99d52"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/toolkit",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5411c660737f5744ec1ff093f4fbe50b869b8145",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/5411c660737f5744ec1ff093f4fbe50b869b8145"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/toolkit/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "139597f9cb07c5d48bed18984ec4747f4b4f3438",
+      "size": 2,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/139597f9cb07c5d48bed18984ec4747f4b4f3438"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/toolkit/configure.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1472b858c25a46a406380f9b382ba27cf4d6bc03",
+      "size": 5171,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/1472b858c25a46a406380f9b382ba27cf4d6bc03"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/toolkit/init.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5aa7e1fd7585147f477be92f324e67e9654d7ae8",
+      "size": 2947,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5aa7e1fd7585147f477be92f324e67e9654d7ae8"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/pdnlp/toolkit/placeholder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e835038ee257d08f64b849855b30a0e9cd3d262b",
+      "size": 1878,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e835038ee257d08f64b849855b30a0e9cd3d262b"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/start.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "b4d990959b44817bb31fd21b34302d7d207ed3eb",
+      "size": 140,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/b4d990959b44817bb31fd21b34302d7d207ed3eb"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/start_service.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "05b59349fe0f6d949ee2e9311ed073ecf7f056e3",
+      "size": 1064,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/05b59349fe0f6d949ee2e9311ed073ecf7f056e3"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/task_reader",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "152323e4859bea985d3ec922f35d77bc548ff084",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/152323e4859bea985d3ec922f35d77bc548ff084"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/task_reader/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/task_reader/batching.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "13803cf79f00d7ea5857360eeceb2da354a5e626",
+      "size": 7017,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/13803cf79f00d7ea5857360eeceb2da354a5e626"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/task_reader/mrqa_infer.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2f52a3acf72b4f46f2a875a5c3a29843973412d2",
+      "size": 37586,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/2f52a3acf72b4f46f2a875a5c3a29843973412d2"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/ernie_server/task_reader/tokenization.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59e035d92cb776f32be20360532b8c18c9b801e5",
+      "size": 12718,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/59e035d92cb776f32be20360532b8c18c9b801e5"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/main_server.py",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "00f64bf43f0cacb3f0fd53be211f487b5425ae22",
+      "size": 3143,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/00f64bf43f0cacb3f0fd53be211f487b5425ae22"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/start.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "dec7f6c3ce65ad4f242635f2a1fa536d6541f4eb",
+      "size": 544,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/dec7f6c3ce65ad4f242635f2a1fa536d6541f4eb"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/wget_server_inference_model.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "c065d0d6822350cdf99d7333ce66a86b7ac14ef5",
+      "size": 310,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/c065d0d6822350cdf99d7333ce66a86b7ac14ef5"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "10ecf1908f7e85ccb1ad2cfffb61ee993d7f7f0c",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/10ecf1908f7e85ccb1ad2cfffb61ee993d7f7f0c"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/data_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "52a28036b20b8aa341e70032397265ce4f377124",
+      "size": 489,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/52a28036b20b8aa341e70032397265ce4f377124"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/model",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a185af4a15ecef51ca0a7b3864ac0c9ddda9a726",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/a185af4a15ecef51ca0a7b3864ac0c9ddda9a726"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/model/__init__.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/model/transformer_encoder.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "93a77ebe480f0e4a8e2b4f2c0c18b23383075fb7",
+      "size": 12549,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/93a77ebe480f0e4a8e2b4f2c0c18b23383075fb7"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/model/xlnet.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "79218e850a04f13fdcd5af0e68918a78cc2bcc3e",
+      "size": 8977,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/79218e850a04f13fdcd5af0e68918a78cc2bcc3e"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/modeling.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e7ba3cb736c7569cc159bcf6d50e2890c53e370",
+      "size": 29103,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/0e7ba3cb736c7569cc159bcf6d50e2890c53e370"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/prepro_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dbf40779f02d67bf7d5b721ac807f68ba4919c6e",
+      "size": 4897,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/dbf40779f02d67bf7d5b721ac807f68ba4919c6e"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/serve.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da020b5732192ec3cf768bd3b15b1bb3de436529",
+      "size": 1084,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/da020b5732192ec3cf768bd3b15b1bb3de436529"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/server_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "81989f4519c742bade01c703270c6957a9c85221",
+      "size": 7074,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/81989f4519c742bade01c703270c6957a9c85221"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/squad_reader.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cba4f24ec1f8567bd8747b945828a43e613d360f",
+      "size": 29861,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/cba4f24ec1f8567bd8747b945828a43e613d360f"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/squad_utils.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "99d57a1a9f33bae9d85b329fb177b88773568fce",
+      "size": 12251,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/99d57a1a9f33bae9d85b329fb177b88773568fce"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/start.sh",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "d8e924e645f26b123f79299f46e8e4f181ec95e5",
+      "size": 205,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d8e924e645f26b123f79299f46e8e4f181ec95e5"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/wrapper.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5129ee0644a508d430c4f434dafdd9a304ca44ca",
+      "size": 6251,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/5129ee0644a508d430c4f434dafdd9a304ca44ca"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/xlnet_config",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "da94e12223ca2d4dca65dd0a4f1a386f25b36ef1",
+      "url": "https://api.github.com/repos/baidu/DuReader/git/trees/da94e12223ca2d4dca65dd0a4f1a386f25b36ef1"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/xlnet_config/spiece.model",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9cdb90c57fde2a1e883ef1a944d4d22e3d25d2cf",
+      "size": 798011,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/9cdb90c57fde2a1e883ef1a944d4d22e3d25d2cf"
+    },
+    {
+      "path": "MRQA2019-D-NET/server/xlnet_server/xlnet_config/xlnet_config.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d136db32956086bbb14a281fe0f1e1f624f46b5",
+      "size": 178,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/4d136db32956086bbb14a281fe0f1e1f624f46b5"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d6b6fb9faaac50acc153117aa50cc6084cafd81b",
+      "size": 12189,
+      "url": "https://api.github.com/repos/baidu/DuReader/git/blobs/d6b6fb9faaac50acc153117aa50cc6084cafd81b"
+    }
+  ],
+  "truncated": false
+}

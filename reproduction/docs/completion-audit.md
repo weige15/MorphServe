@@ -102,10 +102,10 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | E11 | Scheduled arrivals independent of completion | PASS at replay seam | Four tests; real corrected GPU replay pending. |
 | E12 | Account all requests through completion/timeout | PASS at replay seam | Success/error/timeout/partial-token records and summary regeneration. |
 | E13 | 2-second TTFT SLO | MISSING actual trace run | Recorded target only. |
-| E14 | GovReport preprocessing/prompts/metric | BLOCKED | Exact sample IDs/templates/versions absent. |
-| E15 | QMSum preprocessing/prompts/F1/ROUGE-L scopes | BLOCKED | Exact artifact/settings absent. |
-| E16 | English-translated DuReader | BLOCKED | Candidate links Chinese upstream while calling it EN; no translated artifact found. |
-| E17 | Multi-News preprocessing/prompts/metric | BLOCKED | Exact artifact/settings absent. |
+| E14 | GovReport preprocessing/prompts/metric | BLOCKED | Public HF/LongBench revisions pinned; exact corpus variant/sample IDs/templates/versions absent. `docs/task-artifact-audit.md` |
+| E15 | QMSum preprocessing/prompts/F1/ROUGE-L scopes | BLOCKED | Public repo pinned; exact split/rows/query prompt/settings absent. |
+| E16 | English-translated DuReader | BLOCKED/NEGATIVE | Linked pinned tree has 303 paths, no English/translation artifact and no releases despite paper saying it is hosted there. |
+| E17 | Multi-News preprocessing/prompts/metric | BLOCKED | Public repo pinned; exact split/rows/prompt/reference formatting absent. |
 | E18 | Figure 4 model×trace×task matrix | MISSING/BLOCKED | No exact input/config set. |
 | E19 | Same-engine FP16/static AWQ/LLM-PQ/PyramidKV/MorphServe modes | BLOCKED exact | Static FP16/W4 exist; LLM-PQ/PyramidKV plans and author modes unavailable. |
 
@@ -159,7 +159,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 
 ## Verifier coverage audit
 
-`python3 reproduction/scripts/verify_report_artifacts.py` verifies file presence/JSON parseability, six positive experiment gates, the expected static-W4 nondeterminism, memlock blocker, small async-copy gate, inferred-window identities, deterministic trace-manifest hashes, and key report phrases. It **does not** establish author confirmation, exact scaling/context mapping, exact models, datasets, baselines, 32-layer profiling, full-layer overlap, main workload matrix, headline aggregates, or every prose claim. It is therefore a consistency check, not completion proof.
+`python3 reproduction/scripts/verify_report_artifacts.py` verifies file presence/JSON parseability, six positive experiment gates, the expected static-W4 nondeterminism, memlock blocker, small async-copy gate, inferred-window identities, deterministic trace-manifest hashes, task-source metadata hashes, and key report phrases. It **does not** establish author confirmation, exact scaling/context mapping, exact models, datasets, baselines, 32-layer profiling, full-layer overlap, main workload matrix, headline aggregates, or every prose claim. It is therefore a consistency check, not completion proof.
 
 The vendor manifest proves only that the candidate snapshot was not modified. Unit-test green status proves only the named seams. Neither is accepted as completion evidence for the paper-level objective.
 

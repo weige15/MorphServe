@@ -60,6 +60,7 @@ Passing tests/runners must do real work and save raw evidence. The main verified
 - [Claim register](docs/claim-register.md)
 - [Public artifact audit](docs/author-artifact-audit.md)
 - [Public trace audit](docs/trace-audit.md)
+- [Task/quality artifact audit](docs/task-artifact-audit.md)
 - [Research findings](findings.md)
 - [Research log](research-log.md)
 

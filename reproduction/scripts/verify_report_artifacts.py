@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 required=[
- 'REPORT.md','docs/paper-evidence-brief.md','docs/source-map.md','docs/claim-register.md','docs/trace-audit.md',
+ 'REPORT.md','docs/paper-evidence-brief.md','docs/source-map.md','docs/claim-register.md','docs/trace-audit.md','docs/task-artifact-audit.md',
  'results/raw/environment.json','results/raw/resource-usage-summary.json','results/raw/public-trace-audit.json','results/raw/figure1b-trace-window-inference.json',
  'results/raw/full-profile-memory-feasibility.json','traces/figure1b-inferred/summary.json',
  'traces/figure1b-inferred/azure-code-systematic-4.75x.jsonl','traces/figure1b-inferred/burstgpt-v1.1-systematic-1.75x.jsonl',
@@ -42,6 +42,10 @@ assert windows['azure_code']['inferred_start_s']==1073 and windows['burstgpt_1_v
 trace_summary=json.load(open(ROOT/'traces/figure1b-inferred/summary.json'))
 for name,digest in trace_summary['sha256'].items():
     assert hashlib.sha256((ROOT/'traces/figure1b-inferred'/name).read_bytes()).hexdigest()==digest
+task_sources=ROOT/'sources/task-source-audit'
+for line in (task_sources/'MANIFEST.sha256').read_text().splitlines():
+    digest,name=line.split(maxsplit=1)
+    assert hashlib.sha256((task_sources/name).read_bytes()).hexdigest()==digest
 report=(ROOT/'REPORT.md').read_text()
 for phrase in ('partial / exact reproduction blocked','no Table 9','92.45%','[25,24,26]'):
     assert phrase in report,phrase

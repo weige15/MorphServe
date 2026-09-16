@@ -302,3 +302,7 @@ The candidate's synchronized-per-call copy path was retained, and a labeled inde
 ## 2026-09-17 — Figure 1 trace-window inference
 
 Approximate Figure 1b token-volume shapes were digitized and matched against every dense source window without using serving outcomes. Figure 1a independently resolves Azure Code (zeros and ≈1.4M context tokens/min). Both request-count and token rankings select Azure relative second 1073 (443 requests in 72 s; context Pearson 0.8793, runner-up 0.5706) and BurstGPT v1.1 second 1,781,278 (214 requests; prompt Pearson 0.7356, runner-up 0.6173). Section 5 explicitly says evaluation uses the snippets in Figure 1. The offsets are still approximate plot-derived settings because sub-second boundaries, scaling/thinning and context mapping remain unknown.
+
+## 2026-09-17 — task source audit
+
+Primary GovReport, QMSum, DuReader, Multi-News, LongBench and pre-paper BookSum source revisions were pinned. The paper-linked `baidu/DuReader@c625076...` recursive tree contains 303 paths but no English/translation artifact and has no releases, contradicting the practical implication of Appendix C's “hosted at” statement. Public task sources remain usable only for modified-condition pilots because exact splits, sampled rows, prompts, mapping seeds, decoding and metric versions are absent.

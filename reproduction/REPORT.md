@@ -166,6 +166,7 @@ Evidence: `experiments/async-layer-transfer/`.
 7. Candidate/local blocking-path swaps are much slower than paper examples; the new independent async path lacks a completed full-layer overlap run.
 8. Full local all-variant pinning exceeds memlock.
 9. Exact trace/task/controller identity is absent.
+10. The paper-linked `baidu/DuReader@c625076...` tree contains no English/translation artifact or release despite Appendix C stating that the English-translated version is hosted there.
 
 Repairs are isolated under `runtime/` and never attributed to author code.
 
