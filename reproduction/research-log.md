@@ -182,3 +182,7 @@ The first bounded run did not load a model. The runner's generic `${MODEL_PATH}`
 ### Attempt 2
 
 The corrected local snapshot loaded and the Transformers reference executed. Candidate import then failed because core model code imports constants from `swiftllm.utils`, which eagerly imports optional package `evaluate` used only by ROUGE evaluation. No candidate model loaded and no parity metric was computed. The changed retry will lazy-import `evaluate` inside `rouge_calculate`; this changes no serving or metric semantics.
+
+### Attempt 3 result
+
+The no-morph Llama 3.1 8B parity gate passed: top-1/top-5 exact, relative logit L2 0.0020401, max absolute error 0.0234375, and 291/291 loaded tensors exact. This is modified-condition numerical evidence with KV disabled. GPU 0 had another 6.9-GiB/100%-utilization process before and after, so all wall timings are excluded from performance claims. Candidate process-local peak was 16.17 GB.

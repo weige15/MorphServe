@@ -1,0 +1,335 @@
+diff -ruN '--exclude=__pycache__' '--exclude=*.pyc' reproduction/vendor/author-morphserve/MorphServe/engine_config.py reproduction/runtime/candidate-python/swiftllm/engine_config.py
+--- reproduction/vendor/author-morphserve/MorphServe/engine_config.py	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-python/swiftllm/engine_config.py	2026-09-17 00:24:13.802164142 +0800
+@@ -1,94 +1,52 @@
+-import dataclasses
+ import argparse
++import dataclasses
++import json
++
+ 
+ @dataclasses.dataclass
+ class EngineConfig:
+-    
+-    # Model loading parameters
+     org_model_path: str
+-    use_dummy: bool
+-    # dequantized_model_path: str
+-    quantized_model_path: str
+-    quantized_q_config: dict
+-
+-    # PagedAttention-related parameters
+-    block_size: int
+-    gpu_mem_utilization: float
+-    gpu_kv_cache_threshold: float
+-    num_layers_to_quantize: int
+-    num_layers_to_quantize_max: int
+-    quant_serve: bool
+-    awq_mode: bool
+-    awq_half_mode: bool
+-    num_cpu_blocks: int
+-    max_seqs_in_block_table: int
+-    max_blocks_per_seq: int
+-
+-    # Scheduling-related parameters
+-    max_batch_size: int
+-    max_tokens_in_batch: int
+-
+-    req_preempt: int
+-    block_swap: int
++    use_dummy: bool = False
++    quantized_model_path: str | None = None
++    quantized_q_config: dict = dataclasses.field(
++        default_factory=lambda: {"w_bit": 4, "q_group_size": 128, "zero_point": True}
++    )
++    block_size: int = 16
++    gpu_mem_utilization: float = 0.97
++    gpu_kv_cache_threshold: float = 0.85
++    num_layers_to_quantize: int = 1
++    num_layers_to_quantize_max: int = 0
++    quant_serve: bool = False
++    awq_mode: bool = False
++    awq_half_mode: bool = False
++    num_cpu_blocks: int = 2048
++    max_seqs_in_block_table: int = 4096
++    max_blocks_per_seq: int = 32768
++    max_batch_size: int = 512
++    max_tokens_in_batch: int = 32768
++    req_preempt: int = 0
++    block_swap: int = 0
+ 
+     @staticmethod
+-    def add_cli_args(parser: argparse.ArgumentParser):
+-        """
+-        Add CLI arguments for the engine configuration
+-        """
+-        parser.add_argument(
+-            "--model-path",
+-            type=str,
+-            required=True,
+-            help="Path to the model directory (currently SwiftLLM does not support downloading from HuggingFace, so please download in advance)",
+-        )
+-        parser.add_argument(
+-            "--use-dummy",
+-            action="store_true",
+-            help="Use dummy weights (mainly for profiling)",
+-        )
+-
+-        parser.add_argument(
+-            "--block-size",
+-            type=int,
+-            default=16,
+-            help="Block size for PagedAttention",
+-        )
+-        parser.add_argument(
+-            "--gpu-mem-utilization",
+-            type=float,
+-            default=0.97,
+-            help="Fraction of GPU memory to be used",
+-        )
+-        parser.add_argument(
+-            "--num-cpu-blocks",
+-            type=int,
+-            default=2048,
+-            help="Number of CPU blocks",
+-        )
+-        parser.add_argument(
+-            "--max-seqs-in-block-table",
+-            type=int,
+-            default=4096,
+-            help="Maximum number of sequences in the block table",
+-        )
+-        parser.add_argument(
+-            "--max-blocks-per-seq",
+-            type=int,
+-            default=32768,
+-            help="Maximum number of blocks per sequence",
+-        )
+-
+-        parser.add_argument(
+-            "--max-batch-size",
+-            type=int,
+-            default=512,
+-            help="Maximum batch size",
+-        )
+-        parser.add_argument(
+-            "--max-tokens-in-batch",
+-            type=int,
+-            default=32768,
+-            help="Maximum number of tokens in a batch",
+-        )
+-        
++    def add_cli_args(parser: argparse.ArgumentParser) -> None:
++        parser.add_argument("--model-path", dest="org_model_path", required=True)
++        parser.add_argument("--use-dummy", action="store_true")
++        parser.add_argument("--quantized-model-path")
++        parser.add_argument(
++            "--quantized-q-config",
++            type=json.loads,
++            default={"w_bit": 4, "q_group_size": 128, "zero_point": True},
++        )
++        parser.add_argument("--block-size", type=int, default=16)
++        parser.add_argument("--gpu-mem-utilization", type=float, default=0.97)
++        parser.add_argument("--gpu-kv-cache-threshold", type=float, default=0.85)
++        parser.add_argument("--num-layers-to-quantize", type=int, default=1)
++        parser.add_argument("--num-layers-to-quantize-max", type=int, default=0)
++        parser.add_argument("--quant-serve", action="store_true")
++        parser.add_argument("--awq-mode", action="store_true")
++        parser.add_argument("--awq-half-mode", action="store_true")
++        parser.add_argument("--num-cpu-blocks", type=int, default=2048)
++        parser.add_argument("--max-seqs-in-block-table", type=int, default=4096)
++        parser.add_argument("--max-blocks-per-seq", type=int, default=32768)
++        parser.add_argument("--max-batch-size", type=int, default=512)
++        parser.add_argument("--max-tokens-in-batch", type=int, default=32768)
+diff -ruN '--exclude=__pycache__' '--exclude=*.pyc' reproduction/vendor/author-morphserve/MorphServe/__init__.py reproduction/runtime/candidate-python/swiftllm/__init__.py
+--- reproduction/vendor/author-morphserve/MorphServe/__init__.py	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-python/swiftllm/__init__.py	2026-09-17 00:23:53.201237713 +0800
+@@ -1,9 +1,18 @@
+-# Config class for the engine
+-from swiftllm.engine_config import EngineConfig
++"""Normalized package entry point for the candidate MorphServe source."""
+ 
+-# The Engine & RawRequest for online serving
+-from swiftllm.server.engine import Engine
+-from swiftllm.server.structs import RawRequest
++from .engine_config import EngineConfig
+ 
+-# The Model for offline inference
+-from swiftllm.worker.model import LlamaModel
++__all__ = ["EngineConfig", "Engine", "RawRequest", "LlamaModel"]
++
++
++def __getattr__(name):
++    if name == "Engine":
++        from .server.engine import Engine
++        return Engine
++    if name == "RawRequest":
++        from .server.structs import RawRequest
++        return RawRequest
++    if name == "LlamaModel":
++        from .worker.model import LlamaModel
++        return LlamaModel
++    raise AttributeError(name)
+diff -ruN '--exclude=__pycache__' '--exclude=*.pyc' reproduction/vendor/author-morphserve/MorphServe/model_config.py reproduction/runtime/candidate-python/swiftllm/model_config.py
+--- reproduction/vendor/author-morphserve/MorphServe/model_config.py	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-python/swiftllm/model_config.py	2026-09-17 00:24:21.962135079 +0800
+@@ -29,6 +29,7 @@
+         self.rms_norm_eps = model_config["rms_norm_eps"]
+         self.rope_scaling = model_config.get("rope_scaling", 1.0)
+         self.rope_theta = model_config.get("rope_theta", 10000)
++        self.tie_word_embeddings = model_config.get("tie_word_embeddings", False)
+         if self.rope_scaling is None:
+             self.rope_scaling = 1.0
+         assert model_config["hidden_act"] == "silu"
+diff -ruN '--exclude=__pycache__' '--exclude=*.pyc' reproduction/vendor/author-morphserve/MorphServe/utils.py reproduction/runtime/candidate-python/swiftllm/utils.py
+--- reproduction/vendor/author-morphserve/MorphServe/utils.py	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-python/swiftllm/utils.py	2026-09-17 00:35:00.607664385 +0800
+@@ -1,4 +1,3 @@
+-import evaluate
+ import numpy as np
+ 
+ def cdiv(a: int, b: int):
+@@ -115,6 +114,7 @@
+     return f1_list
+ 
+ def rouge_calculate(predictions, references):
++    import evaluate
+     rouge = evaluate.load("rouge")
+     assert len(predictions) == len(references)
+     org_rouge1_score_list = []
+diff -ruN '--exclude=__pycache__' '--exclude=*.pyc' reproduction/vendor/author-morphserve/MorphServe/worker/layers/post_layer.py reproduction/runtime/candidate-python/swiftllm/worker/layers/post_layer.py
+--- reproduction/vendor/author-morphserve/MorphServe/worker/layers/post_layer.py	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-python/swiftllm/worker/layers/post_layer.py	2026-09-17 00:25:26.793905634 +0800
+@@ -18,7 +18,8 @@
+     def forward(
+         self,
+         input_embds: torch.Tensor,	# [num_total_tokens, hidden_size]
+-        infer_state: LlamaInferState
++        infer_state: LlamaInferState,
++        return_logits: bool = False,
+     ) -> torch.Tensor:
+         
+         # --- New Code: Compute and print logits for all tokens ---
+@@ -67,7 +68,7 @@
+             self.model_config.rms_norm_eps
+         )
+         logits = linear(last_input, self.weights.lm_head)    # [batch_size, vocab_size]
+-        output_tokens = torch.argmax(logits, dim=1)
+-
+-        return output_tokens
++        if return_logits:
++            return logits
++        return torch.argmax(logits, dim=1)
+     
+\ No newline at end of file
+diff -ruN '--exclude=__pycache__' '--exclude=*.pyc' reproduction/vendor/author-morphserve/MorphServe/worker/model.py reproduction/runtime/candidate-python/swiftllm/worker/model.py
+--- reproduction/vendor/author-morphserve/MorphServe/worker/model.py	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-python/swiftllm/worker/model.py	2026-09-17 00:26:09.440756025 +0800
+@@ -228,15 +228,42 @@
+ 
+ 
+     def _init_to_get_rotary(self):
+-        rope_scaling_factor = self.model_config.rope_scaling
++        rope_scaling = self.model_config.rope_scaling
+         base = self.model_config.rope_theta
+         max_position_embeddings = self.model_config.max_position_embeddings
+-        max_seq_len = max_position_embeddings * rope_scaling_factor
++        dim = self.model_config.head_dim
++        inv_freq = 1.0 / (
++            base ** (torch.arange(0, dim, 2, device="cuda", dtype=torch.float32) / dim)
++        )
++        if isinstance(rope_scaling, dict) and rope_scaling.get("rope_type", "llama3") == "llama3":
++            factor = rope_scaling["factor"]
++            low_freq_factor = rope_scaling["low_freq_factor"]
++            high_freq_factor = rope_scaling["high_freq_factor"]
++            old_context_len = rope_scaling["original_max_position_embeddings"]
++            wavelength = 2 * math.pi / inv_freq
++            low_freq_wavelength = old_context_len / low_freq_factor
++            high_freq_wavelength = old_context_len / high_freq_factor
++            inv_freq_scaled = torch.where(
++                wavelength > low_freq_wavelength, inv_freq / factor, inv_freq
++            )
++            smooth_factor = (
++                (old_context_len / wavelength - low_freq_factor)
++                / (high_freq_factor - low_freq_factor)
++            )
++            smoothed_inv_freq = (
++                (1 - smooth_factor) * inv_freq_scaled / factor
++                + smooth_factor * inv_freq_scaled
++            )
++            is_medium_frequency = (
++                ~(wavelength < high_freq_wavelength)
++                * ~(wavelength > low_freq_wavelength)
++            )
++            inv_freq = torch.where(is_medium_frequency, smoothed_inv_freq, inv_freq_scaled)
++        elif not isinstance(rope_scaling, dict) and rope_scaling != 1.0:
++            inv_freq = inv_freq / float(rope_scaling)
+ 
+-        inv_freq = 1.0 / (base ** (torch.arange(0, self.model_config.head_dim, 2, device="cuda", dtype=torch.float32) / self.model_config.head_dim))
+-        t = torch.arange(max_seq_len + 128, device="cuda", dtype=torch.float32) / rope_scaling_factor
++        t = torch.arange(int(max_position_embeddings) + 128, device="cuda", dtype=torch.float32)
+         freqs = torch.outer(t, inv_freq)
+-
+         self._cos_cached = torch.cos(freqs).to(torch.float16)
+         self._sin_cached = torch.sin(freqs).to(torch.float16)
+ 
+@@ -245,6 +272,7 @@
+         self,
+         input_ids: torch.Tensor,    # [total_token_num]
+         infer_state: LlamaInferState,
++        return_logits: bool = False,
+     ) -> torch.Tensor:
+         """
+         Run a forward pass of the LlamaModel.
+@@ -294,7 +322,12 @@
+         # print('\n' + "~"*18, "LlamaModel._forward() after add the residual connection, call the post layer.", '~'*18, '\n')
+ 
+         # 5. Postprocessing: Convert final embeddings into output tokens/logits.
+-        output_tokens = self.post_layer.forward(input_embds, infer_state)
++        output_tokens = self.post_layer.forward(input_embds, infer_state, return_logits=return_logits)
++        if not infer_state.ignore_kvcache:
++            # Default stream transitively waits on each layer's decode-attention event.
++            # Recording here protects every reclaimed region until this forward is done.
++            for reclaimed_layer_id in self.layer_quant_list:
++                swiftllm_c.record_layer_memory_use(reclaimed_layer_id)
+         # print('\n' + "~"*18, "LlamaModel._forward() after call the post layer, return the output tokens.", '~'*18, '\n')
+         return output_tokens
+     
+@@ -305,7 +338,8 @@
+         seq_ids_list: list[int],     # [batch_size]
+         decoding_seq_lens_list: list[int], # [num_decoding_seqs]
+         ignore_kvcache: bool = False,   # Skip actions related to kv cache, useful when profiling the number of kv blocks
+-    ) -> list[int]:
++        return_logits: bool = False,
++    ) -> list[int] | torch.Tensor:
+         """
+         Run a forward pass of the LlamaModel.
+ 
+@@ -460,10 +494,12 @@
+         #     for k, v in vars(infer_state).items():
+         #         print(f"{k}: {v}")
+ 
+-        return self._forward(
++        output = self._forward(
+             torch.tensor(flattened_input_ids, dtype=torch.int32, device="cuda"),
+-            infer_state
+-        ).tolist()
++            infer_state,
++            return_logits=return_logits,
++        )
++        return output if return_logits else output.tolist()
+ 
+     def _swap(
+         self,
+diff -ruN '--exclude=__pycache__' '--exclude=*.pyc' reproduction/vendor/author-morphserve/MorphServe/worker/weight.py reproduction/runtime/candidate-python/swiftllm/worker/weight.py
+--- reproduction/vendor/author-morphserve/MorphServe/worker/weight.py	2026-04-21 11:34:26.000000000 +0800
++++ reproduction/runtime/candidate-python/swiftllm/worker/weight.py	2026-09-17 00:24:50.389034160 +0800
+@@ -168,7 +168,7 @@
+         ))
+         self.register_weight(RegisteredWeightItem(
+             "lm_head",
+-            "lm_head.weight",
++            "model.embed_tokens.weight" if self.model_config.tie_word_embeddings else "lm_head.weight",
+             (self.model_config.vocab_size, self.model_config.hidden_size),
+             self.dtype
+         ))

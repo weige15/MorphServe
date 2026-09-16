@@ -41,6 +41,7 @@ Absent or unusable as released:
 - top-level `setup.py` declares package `morphserve`, but the directory is `MorphServe` and every internal import targets `swiftllm`; unmodified editable installation cannot provide the expected module;
 - `EngineConfig.add_cli_args` defines only inherited core arguments, while the dataclass requires `quantized_model_path`, `quantized_q_config`, `gpu_kv_cache_threshold`, quantization limits/modes, `req_preempt`, and `block_swap`; `api_server.py` cannot construct the dataclass from its parser;
 - `AWQLayerManager` calls `torch.load` on one path, but the available public/local AWQ format is sharded safetensors;
+- candidate imports `mit-han-lab/llm-awq`'s `awq.quantize.qmodule.WQLinear` but constructs it with `qweight/scales/scaled_zeros` keyword arguments absent from the public class; the local AutoAWQ checkpoint instead stores `qweight/qzeros/scales`, so neither public dependency/checkpoint matches the released call site;
 - C++ copies use a new stream followed immediately by `cudaStreamSynchronize`, so the released path is blocking despite `cudaMemcpyAsync`;
 - Python destroys/reconstructs layer objects and C++ creates new tensor/storage views, contrary to a literal object-pointer interpretation of “without pointer remapping”;
 - candidate runtime swaps layers from the end toward the front, while the paper says Front-to-Back is the default for unprofiled models;

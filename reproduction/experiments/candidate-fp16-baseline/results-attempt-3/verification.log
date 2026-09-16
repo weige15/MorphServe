@@ -1,0 +1,2 @@
+normalized candidate FP16 parity: PASS
+{"gate": {"finite": true, "relative_l2_below_0.005": true, "shape_match": true, "top1_match": true, "weights_exact": true}, "logits": {"candidate_top1": 505, "candidate_top5": [505, 11, 304, 627, 323], "finite_candidate": true, "finite_reference": true, "max_abs": 0.0234375, "mean_abs": 0.00455237552523613, "reference_top1": 505, "reference_top5": [505, 11, 304, 627, 323], "relative_l2": 0.002040097489953041, "shape_candidate": [128256], "shape_reference": [128256]}, "weight_audit": {"checked": 291, "examples": [], "mismatches": 0}}

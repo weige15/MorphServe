@@ -1,0 +1,92 @@
+{
+  "candidate": {
+    "ignore_kvcache": true,
+    "peak_allocated_bytes": 16170331648,
+    "wall_seconds_including_load": 17.237888889038004
+  },
+  "classification": "modified-condition-fp16-baseline",
+  "environment": {
+    "cuda_runtime": "12.1",
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "python": "3.12.3",
+    "runtime_source_sha256": "c5ef9c44fa582ffa2b1b9cb9f143c607a6c0dc0fc7a02e7abf998e94e8fbc2a9",
+    "torch": "2.4.0+cu121",
+    "transformers": "4.51.3"
+  },
+  "gate": {
+    "finite": true,
+    "relative_l2_below_0.005": true,
+    "shape_match": true,
+    "top1_match": true,
+    "weights_exact": true
+  },
+  "logits": {
+    "candidate_top1": 505,
+    "candidate_top5": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "finite_candidate": true,
+    "finite_reference": true,
+    "max_abs": 0.0234375,
+    "mean_abs": 0.00455237552523613,
+    "reference_top1": 505,
+    "reference_top5": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "relative_l2": 0.002040097489953041,
+    "shape_candidate": [
+      128256
+    ],
+    "shape_reference": [
+      128256
+    ]
+  },
+  "model": {
+    "config_sha256": "54acfad3cffe057640904ca8a1e83525e6551c70c7a04c641f5a9eda0bbf64bd",
+    "path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "snapshot": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b"
+  },
+  "passed": true,
+  "prompt": "Life blooms like a flower, far away",
+  "schema_version": 1,
+  "token_ids": [
+    128000,
+    26833,
+    92889,
+    1093,
+    264,
+    23153,
+    11,
+    3117,
+    3201
+  ],
+  "token_text": [
+    "<|begin_of_text|>",
+    "Life",
+    "\u0120blooms",
+    "\u0120like",
+    "\u0120a",
+    "\u0120flower",
+    ",",
+    "\u0120far",
+    "\u0120away"
+  ],
+  "transformers": {
+    "attention": "eager",
+    "peak_allocated_bytes": 16071425536,
+    "wall_seconds_including_load": 11.633226202917285
+  },
+  "weight_audit": {
+    "checked": 291,
+    "examples": [],
+    "mismatches": 0
+  }
+}

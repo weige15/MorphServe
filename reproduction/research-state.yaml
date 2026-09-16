@@ -18,7 +18,7 @@ checkpoint:
     - id: 2
       name: faithful implementation and profiling
       status: active
-      next_gate: integrate event recording into normalized no-morph/morph runtime
+      next_gate: fixed-W4 numerical execution and FP16/W4 controlled switching on local 8B
     - id: 3
       name: correctness and state-preservation tests
       status: pending
@@ -71,15 +71,17 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The event primitive prevents synthetic in-flight corruption. A minimal normalized candidate
-  package can wire it to reclaimed-region kernel call sites while fixing package/config/checkpoint
-  plumbing, enabling no-morph FP16 parity before AWQ model integration.
-active_protocol: experiments/candidate-lifetime-barrier/protocol.md
+  The normalized FP16 base is numerically valid. The remaining low-bit blocker is dependency and
+  checkpoint-format mismatch: candidate code targets an unpublished/modified llm-awq WQLinear
+  interface and .pt scaled_zeros state, while the local real W4 asset is AutoAWQ sharded
+  safetensors with qzeros. A clearly labeled AutoAWQ execution adapter may enable real W4 tests.
+active_protocol: experiments/candidate-fp16-baseline/protocol.md
 resource_accounting:
-  gpu_experiment_seconds: '<20 seconds of synthetic kernels/JIT; process wall times recorded under candidate-*/results/wall-time.json'
+  gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Create minimal package/config/checkpoint compatibility fixes and event-recording call sites.
-  - Freeze real WikiText-2 metric collection choices and run no-morph FP16 parity.
+  - Audit/pin candidate llm-awq dependency mismatch and implement the smallest real AutoAWQ W4 adapter.
+  - Test fixed-W4 logits and controlled FP16/W4 switching with the same precision history.
+  - Freeze real WikiText-2 metric collection choices around the tested LIS core.

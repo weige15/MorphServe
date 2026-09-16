@@ -1,0 +1,48 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+{
+  "output": "/nfs/home/s314511048/MorphServe/reproduction/experiments/candidate-fp16-baseline/results-attempt-3/metrics.json",
+  "gate": {
+    "finite": true,
+    "shape_match": true,
+    "top1_match": true,
+    "relative_l2_below_0.005": true,
+    "weights_exact": true
+  },
+  "logits": {
+    "shape_reference": [
+      128256
+    ],
+    "shape_candidate": [
+      128256
+    ],
+    "finite_reference": true,
+    "finite_candidate": true,
+    "max_abs": 0.0234375,
+    "mean_abs": 0.00455237552523613,
+    "relative_l2": 0.002040097489953041,
+    "reference_top1": 505,
+    "candidate_top1": 505,
+    "reference_top5": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ],
+    "candidate_top5": [
+      505,
+      11,
+      304,
+      627,
+      323
+    ]
+  },
+  "weight_audit": {
+    "checked": 291,
+    "mismatches": 0,
+    "examples": []
+  }
+}
