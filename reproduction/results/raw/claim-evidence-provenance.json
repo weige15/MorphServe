@@ -431,8 +431,8 @@
       "worktree_status": null
     },
     "experiments/async-layer-transfer/analysis.md": {
-      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
-      "bytes": 2298,
+      "artifact_last_commit": "f5bf10bff869bbf489dea14bca42f03402addebe",
+      "bytes": 2458,
       "referenced_by": [
         {
           "claim": "H12",
@@ -444,7 +444,7 @@
         }
       ],
       "run_source_revision": null,
-      "sha256": "fbd874a09b739bebda6264337b05dcb5b9ea4b9cb327b28d640551bd84335739",
+      "sha256": "30b8f304ba9258f8015ead2c2b6d4ac00be762a96a858aec2bd529866ddb4c0b",
       "tracked": true,
       "worktree_status": null
     },
@@ -547,13 +547,13 @@
           "field": "commands"
         }
       ],
-      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
+      "run_source_revision": "14c006f5ce52f5eb6fbd7fabff046b03789d8ffc",
       "sha256": "e1c38dd1b85ffd534d7f7b508d4f804170b4f73aa6f662c6ce985bc8ea129bae",
       "tracked": true,
       "worktree_status": null
     },
     "experiments/async-layer-transfer/results/metrics.json": {
-      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+      "artifact_last_commit": "f5bf10bff869bbf489dea14bca42f03402addebe",
       "bytes": 222,
       "referenced_by": [
         {
@@ -565,13 +565,13 @@
           "field": "raw"
         }
       ],
-      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
-      "sha256": "8e315463cf3a0d6c954a972c755c6b14e0c1e936ef51b3e2fb80a037d65a3fb5",
+      "run_source_revision": "14c006f5ce52f5eb6fbd7fabff046b03789d8ffc",
+      "sha256": "956794624b52125f2cfe1abeb500bfd233d253d5f6ace7e1756ce27eccec388b",
       "tracked": true,
       "worktree_status": null
     },
     "experiments/async-layer-transfer/results/source-revision.txt": {
-      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+      "artifact_last_commit": "f5bf10bff869bbf489dea14bca42f03402addebe",
       "bytes": 41,
       "referenced_by": [
         {
@@ -579,8 +579,8 @@
           "field": "raw"
         }
       ],
-      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
-      "sha256": "76d476e7d7228f16ca319344ab2aee389eccee27b86638e67662e5ad18ab0395",
+      "run_source_revision": "14c006f5ce52f5eb6fbd7fabff046b03789d8ffc",
+      "sha256": "a423b8fb3451005eb084e863060af5d9b5719041cd81a189615b1d91ad385126",
       "tracked": true,
       "worktree_status": null
     },
@@ -593,7 +593,7 @@
           "field": "raw"
         }
       ],
-      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
+      "run_source_revision": "14c006f5ce52f5eb6fbd7fabff046b03789d8ffc",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "tracked": true,
       "worktree_status": null
@@ -607,13 +607,13 @@
           "field": "raw"
         }
       ],
-      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
+      "run_source_revision": "14c006f5ce52f5eb6fbd7fabff046b03789d8ffc",
       "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
       "tracked": true,
       "worktree_status": null
     },
     "experiments/async-layer-transfer/results/test.log": {
-      "artifact_last_commit": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+      "artifact_last_commit": "f5bf10bff869bbf489dea14bca42f03402addebe",
       "bytes": 1032,
       "referenced_by": [
         {
@@ -621,8 +621,22 @@
           "field": "raw"
         }
       ],
-      "run_source_revision": "696afde8f28c6a6bba634bb6e9ed1a785e821603",
-      "sha256": "8817e58ab9eb81eef02835b51c90a7ff268a89d793058be22aaf2c588379f372",
+      "run_source_revision": "14c006f5ce52f5eb6fbd7fabff046b03789d8ffc",
+      "sha256": "1b29232133f3295739778b2c9405938242427ce4bfb30d838e0f135121052d8f",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/results/wall-time.json": {
+      "artifact_last_commit": "f5bf10bff869bbf489dea14bca42f03402addebe",
+      "bytes": 40,
+      "referenced_by": [
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "14c006f5ce52f5eb6fbd7fabff046b03789d8ffc",
+      "sha256": "3e62412346787aeea612e1b1ab9cf4b3fcb8e43b78afd3eac4c20b31e78c9d39",
       "tracked": true,
       "worktree_status": null
     },
@@ -1616,7 +1630,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "846427f5aa65ae7853787f53a534c4cb1a059a2f",
+  "repository_head_at_generation": "f5bf10bff869bbf489dea14bca42f03402addebe",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
