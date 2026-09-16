@@ -1,0 +1,12 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:00<00:01,  1.56it/s]Loading checkpoint shards:  50%|█████     | 2/4 [00:01<00:01,  1.57it/s]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:01<00:00,  1.49it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  2.11it/s]Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.85it/s]
+Traceback (most recent call last):
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/fp16_candidate_parity.py", line 202, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/fp16_candidate_parity.py", line 125, in main
+    from swiftllm.worker.model import LlamaModel
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/candidate-python/swiftllm/worker/model.py", line 11, in <module>
+    from swiftllm.utils import GB, MB
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/candidate-python/swiftllm/utils.py", line 1, in <module>
+    import evaluate
+ModuleNotFoundError: No module named 'evaluate'

@@ -178,3 +178,7 @@ The C++ primitive is correct in this modified synthetic condition. It does not h
 ## 2026-09-16 — FP16 parity attempt 1 setup failure
 
 The first bounded run did not load a model. The runner's generic `${MODEL_PATH}` override collided with an inherited `MODEL_PATH=meta-llama/Meta-Llama-3.1-8B`, producing a nonexistent local path and an `HFValidationError`. Dependencies/extension built, but GPU experiment time was zero and no metrics were emitted. The changed retry will use `MORPHSERVE_MODEL_PATH` and an early `config.json` existence check. See `doc/debug-report-fp16-path.md`.
+
+### Attempt 2
+
+The corrected local snapshot loaded and the Transformers reference executed. Candidate import then failed because core model code imports constants from `swiftllm.utils`, which eagerly imports optional package `evaluate` used only by ROUGE evaluation. No candidate model loaded and no parity metric was computed. The changed retry will lazy-import `evaluate` inside `rouge_calculate`; this changes no serving or metric semantics.

@@ -1,0 +1,6 @@
+test_cli_builds_complete_no_morph_config (reproduction.tests.test_candidate_runtime.CandidateRuntimeNormalizationTests.test_cli_builds_complete_no_morph_config) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+OK
