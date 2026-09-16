@@ -16,6 +16,6 @@ test_recovery_shrinks_before_restore_and_defers_if_occupied (reproduction.tests.
 test_successful_recovery_restores_after_shrink (reproduction.tests.test_controller_integration.CoordinatorTests.test_successful_recovery_restores_after_shrink) ... ok
 
 ----------------------------------------------------------------------
-Ran 16 tests in 0.008s
+Ran 16 tests in 0.007s
 
 OK

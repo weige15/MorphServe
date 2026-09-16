@@ -7,12 +7,12 @@ from morphserve.real_executor import RealMorphingExecutor
 
 
 class FakeCopier:
-    def __init__(self,fail_source=None,fail_sources=()): self.fail_sources=set(fail_sources); self.fail_sources.add(fail_source) if fail_source is not None else None; self.calls=[]
+    def __init__(self,fail_source=None,fail_sources=()): self.fail_sources=set(fail_sources); self.fail_sources.add(fail_source) if fail_source is not None else None; self.calls=[]; self.waits=[]
     def enqueue(self,layer,source,size,tensor_map):
         self.calls.append((layer,source))
         if source in self.fail_sources: raise RuntimeError('injected copy failure')
         return [source],object()
-    def wait_current(self,layer): return False
+    def wait_current(self,layer): self.waits.append(layer); return False
 
 
 def bare_executor():
@@ -70,7 +70,7 @@ class RealExecutorTransactionTests(unittest.TestCase):
 
         self.assertEqual(executor.kv_groups,before[0]); self.assertEqual(executor.model.k_cache_new,before[1]); self.assertEqual(executor.model.v_cache_new,before[2])
         self.assertEqual((manager.num_blocks,manager.num_free_blocks),(before[3],before[4])); self.assertTrue(torch.equal(manager.is_block_free,before[5])); self.assertEqual(executor.model.kv_cache_new_block_size,before[6])
-        self.assertEqual(executor.active_layers,[0,1]); self.assertFalse(executor.poisoned)
+        self.assertEqual(executor.active_layers,[0,1]); self.assertFalse(executor.poisoned); self.assertEqual(executor.copier.waits,[1,0])
 
     def test_double_copy_failure_poisoned_executor_blocks_further_actions(self):
         executor=bare_executor(); executor.copier=FakeCopier(fail_sources={'q1b','f0b'})

@@ -256,6 +256,11 @@ class RealMorphingExecutor:
         if self.poisoned:
             self.log.append(("recovery_snapshot_not_reattached", "executor state is uncertain"))
             return False
+        # Reattached KV regions span all model layers, so their backing W4-copy
+        # events must order the default stream before any future KV allocation
+        # or layer-0 access; waiting only at the owning layer would be too late.
+        for layer in layers:
+            self.copier.wait_current(layer)
         self._restore_kv_state(snapshot)
         self.log.append(("recovery_rollback", list(layers)))
         return False
