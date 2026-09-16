@@ -71,16 +71,16 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The replay harness is correct and primary trace files are identified, but exact windows/scaling
-  are irrecoverable. A small synthetic GPU trace frozen before outcomes can validate end-to-end
-  timestamp/token accounting without being mislabeled as Azure/BurstGPT reproduction.
-active_protocol: experiments/replay-harness/protocol.md
+  The frozen synthetic replay accounting works, but corrected steady-state GPU replay is waiting
+  on sufficient GPU headroom after a recorded external-process OOM. Exact Azure/BurstGPT remains
+  blocked independently by missing window/scaling/context identity.
+active_protocol: experiments/synthetic-gpu-replay/protocol.md
 resource_accounting:
   gpu_experiment_seconds: '<3 minutes of synthetic/JIT/full-model correctness work; exact process wall times are stored per experiment'
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Freeze one synthetic modified-condition trace before GPU outcomes and run bounded serving replay.
-  - Add adapter metadata for queue, precision changes, KV capacity/occupancy and preemptions.
+  - Retry the unchanged corrected synthetic replay only when a GPU has >17 GiB free.
+  - Preserve initialization-contaminated attempt separately from steady-state metrics.
   - Do not select Azure/BurstGPT windows without author offsets.
