@@ -1,6 +1,6 @@
 project: MorphServe evidence-backed reproduction
 status: active
-updated_utc: '2026-09-16T19:00:00Z'
+updated_utc: '2026-09-16T20:20:00Z'
 checkpoint:
   current: 2
   name: faithful implementation and profiling
@@ -71,9 +71,9 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Event-safe asynchronous copying works on a small real CUDA region, while full-layer overlap and
-  corrected steady-state replay both await an uncontended GPU with >17 GiB headroom. Figure 1
-  provides candidate trace offsets, but exact replay remains blocked by confirmation/scaling/context identity.
+  Async full-layer transfers enqueue correctly and restore exact bytes, but attempt 1 did not prove
+  compute overlap because of decode JIT and an enclosing-interval metric. Transaction/alignment defects
+  are repaired; a warmed pre-layer-event rerun and corrected replay await >17 GiB free GPU headroom.
 active_protocol: experiments/async-layer-transfer/protocol.md
 resource_accounting:
   saved_gpu_runner_process_wall_seconds: 807.058078905
