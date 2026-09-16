@@ -1,9 +1,9 @@
 project: MorphServe evidence-backed reproduction
-status: active
-updated_utc: '2026-09-16T21:37:11Z'
+status: complete_bounded_partial_exact_blocked
+updated_utc: '2026-09-16T21:52:43Z'
 checkpoint:
-  current: 2
-  name: faithful implementation and profiling
+  current: 5
+  name: final audit and report
   checkpoints:
     - id: 1
       name: materials and environment audit
@@ -17,17 +17,25 @@ checkpoint:
         - sources/remote-audit/
     - id: 2
       name: faithful implementation and profiling
-      status: active
-      next_gate: full-layer CUDA overlap plus corrected GPU arrival replay
+      status: complete_modified_condition
+      optional_restart_gate: full-layer CUDA overlap plus corrected GPU arrival replay
     - id: 3
       name: correctness and state-preservation tests
-      status: pending
+      status: complete_modified_condition
     - id: 4
       name: prioritized main experiments and ablations
-      status: pending
+      status: blocked_partial
+      evidence:
+        - results/raw/pending-gpu-rerun-attempt.txt
+        - docs/completion-audit.md
     - id: 5
       name: final audit and report
-      status: pending
+      status: complete
+      evidence:
+        - REPORT.md
+        - configs/claim-evidence-map.json
+        - results/raw/claim-evidence-provenance.json
+        - docs/completion-audit.md
 source_truth:
   pdf: ../references/morphserve-2506.02006-v2.pdf
   pdf_sha256: e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30

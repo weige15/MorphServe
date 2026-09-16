@@ -1,8 +1,8 @@
 # Prompt-to-artifact completion audit
 
-**Audit state:** evolving; **goal not complete**  
+**Audit state:** final bounded audit
 **Audit date:** 2026-09-17  
-**Decision:** substantial partial reconstruction, but prioritized feasible GPU gates and many exact-condition claims remain incomplete or blocked.
+**Decision:** the permitted investigation is complete as a **partial / exact-condition-blocked reproduction**, not as confirmation of the paper's headline results. All currently feasible CPU and small-CUDA work is exhausted; four current-revision full-model reruns are explicitly resource-blocked and have tested restart commands.
 
 ## Objective restated as checkable deliverables
 
@@ -22,7 +22,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | A6 | Keep paper values separate from measurements | PASS | `configs/paper-reference-values.json`; measured metrics remain under experiment directories. |
 | A7 | Runnable reproduction workspace and commands | PARTIAL | `README.md`, `doc/onboarding.md`, per-experiment `commands.txt`; exact headline workspace cannot be runnable without missing assets. |
 | A8 | Raw artifacts, configs, profiles, tests, plots | PARTIAL | Raw logs/configs/profiles/tests exist. A byte-identically regenerating local transfer diagnostic exists under `figures/`; no headline matrix plots exist because no valid headline runs. |
-| A9 | Final claim-by-claim report | PARTIAL | `REPORT.md` covers H1–H30 and current evidence, but remains explicitly active; full async/replay reruns are pending. |
+| A9 | Final claim-by-claim report | PASS for bounded investigation | `REPORT.md` covers H1–H30, current and historical evidence, negative findings, blockers, restart commands and limitations. Missing full-model runs are classified as blocked rather than silently omitted. |
 
 ## B. Provenance, authorization and environment
 
@@ -147,15 +147,15 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 
 | ID | Requirement | Status | Evidence / gap |
 |---|---|---|---|
-| H1 | Five persisted checkpoints | PARTIAL | `research-state.yaml`: checkpoint 1 complete, checkpoint 2 active, 3–5 pending. |
+| H1 | Five persisted checkpoints | PASS for bounded investigation | `research-state.yaml`: materials complete; implementation/correctness complete under modified conditions; main experiments blocked/partial; final audit complete. |
 | H2 | Record hypothesis/change/command/outcome/cost/next step | PASS for meaningful attempts | `research-log.md`, protocols, attempt notes, command/wall-time files. |
 | H3 | Fix correctness before performance | PASS | Mapping/race/rollback fixes preceded timing work. |
 | H4 | Retry only with changed hypothesis/transient reason | PASS | JIT warmup fix and recorded external OOM; no blind loop. |
 | H5 | Continue other work when exact claims blocked | PASS | Independent profiling, KV, controller, replay and async work completed. |
-| H6 | Stop only when no meaningful permitted verification remains | NOT MET | Full async/replay/executor reruns remain feasible when a GPU becomes free. |
-| H7 | Final report classifications and implementation/result separation | PARTIAL | Current `REPORT.md` does this but remains active and must absorb pending reruns. |
+| H6 | Stop only when no meaningful permitted verification remains | MET by blocked-stop condition | The current small CUDA seam passes. Every GPU is externally occupied below the frozen 17,408-MiB threshold; a documented 24,124-MiB free window was lost to an external job before launch and the runner safely exited 75. Exact work is independently blocked by author code/config, models, trace mapping, translated data and paper hardware. No remaining CPU/small-CUDA check can establish the missing full-model or headline claims. |
+| H7 | Final report classifications and implementation/result separation | PASS | `REPORT.md` is final for this bounded resource state and clearly marks optional future reruns as missing evidence, not completed results. |
 | H8 | Full prompt-to-artifact completion audit | PASS as an audit artifact, outcome NOT COMPLETE | This document maps explicit requirements and rejects proxy completion. |
-| H9 | Call completion mechanism only after full audit | PASS so far | Goal remains active; no completion call. |
+| H9 | Call completion mechanism only after full audit | READY | This final audit supports closing the investigation as partial/exact-blocked; it does not support calling the paper fully reproduced. |
 
 ## Verifier coverage audit
 
@@ -163,13 +163,13 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 
 The vendor manifest proves only that the candidate snapshot was not modified. Unit-test green status proves only the named seams. Neither is accepted as completion evidence for the paper-level objective.
 
-## Current audit conclusion and next gates
+## Current audit conclusion and optional restart gates
 
-The objective is **not achieved**. The smallest currently feasible next gates are:
+The terminal deliverable—an evidence-backed, runnable, audited investigation—is achieved under the defined blocked-stop condition. The reproduction result itself is **partial / exact reproduction blocked**. The following are optional restart gates if external resources later change, not unperformed currently feasible work:
 
 1. when one GPU again has >17 GiB free, run `CUDA_VISIBLE_DEVICES=<free> reproduction/scripts/run_async_full_model_overlap.sh` and inspect all three repeats rather than accepting its exit code alone; the 2026-09-16 free window was lost to an external process before the first model runner and was safely rejected at preflight;
 2. rerun `run_real_executor_pilot.sh` and `run_multirequest_ownership.sh` against the asynchronous executor; the small current-revision CUDA seam now passes, and expansion-preflight/runner-provenance fixes have an independent PASS readiness review at `results/raw/post-expansion-preflight-rereview.md`;
 3. rerun corrected `run_synthetic_gpu_replay.sh`, preserving complete timestamps and excluding warmup;
 4. update `REPORT.md` and this audit from the resulting raw artifacts.
 
-Exact headline work remains blocked pending exact sub-second boundaries plus scaling/context map, task artifacts/prompts/metrics, model revisions, target-PDF controller configs, and paper-equivalent hardware. These blockers do not excuse the three feasible GPU reruns above once uncontended capacity is available.
+Exact headline work remains blocked pending exact sub-second boundaries plus scaling/context map, task artifacts/prompts/metrics, model revisions, target-PDF controller configs, and paper-equivalent hardware. Local current-revision full-model work additionally needs a stable RTX 3090 window with at least 17,408 MiB free. If any blocker changes, rerun the frozen commands and reopen the audit; no reported paper agreement should be inferred from the present package.

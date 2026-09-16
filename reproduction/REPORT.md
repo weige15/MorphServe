@@ -1,6 +1,6 @@
 # MorphServe Reproduction Report
 
-**Investigation status:** active / partial modified-condition reproduction  
+**Investigation status:** bounded investigation complete / partial modified-condition reproduction / exact conditions blocked
 **Paper target:** supplied 19-page `morphserve-2506.02006-v2.pdf`  
 **Overall result:** MorphServe's core ideas are partly supported by an independent RTX 3090 reconstruction, but no headline paper latency/quality aggregate or exact-condition table is reproduced. The official lab repository remains README-only. Several candidate-code correctness defects were found and repaired only in the labeled reconstruction.
 
@@ -12,7 +12,7 @@ Primary evidence:
 
 - Paper audit: `docs/paper-evidence-brief.md`
 - Source/implementation map: `docs/source-map.md`
-- Full living claim register: `docs/claim-register.md`
+- Claim register: `docs/claim-register.md`
 - Public code audit: `docs/author-artifact-audit.md`
 - Trace audit: `docs/trace-audit.md`
 - Environment/model hashes: `results/raw/environment.json`
@@ -228,4 +228,4 @@ Every experiment directory includes its locked protocol, commands, raw logs, mac
 
 The investigation supports MorphServe's **mechanical feasibility** under a labeled independent reconstruction: real same-address W4 replacement, physical KV reclamation, active state preservation, event-safe recovery, arbitrary-region mapping fallback, conditioned LIS, and coordinated controller actions all have executed evidence.
 
-It does **not** support the paper's headline performance/quality claims or exact result tables. Overall status is therefore **partial / exact reproduction blocked**, with several candidate-code negative findings and no manufactured agreement.
+It does **not** support the paper's headline performance/quality claims or exact result tables. Overall reproduction status is therefore **partial / exact reproduction blocked**, with several candidate-code negative findings and no manufactured agreement. The bounded investigation is closed at the recorded resource state: every currently feasible CPU and small-CUDA check is complete, while the four frozen full-model reruns require a stable GPU with at least 17,408 MiB free. Their tested restart commands remain in §8 and `docs/completion-audit.md`; future execution would reopen, not retroactively strengthen, this report.
