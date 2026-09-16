@@ -141,8 +141,8 @@
       "worktree_status": null
     },
     "docs/author-artifact-audit.md": {
-      "artifact_last_commit": "31c14e776f069dc67fb4f6ebd7c4815ff5f71a0c",
-      "bytes": 6406,
+      "artifact_last_commit": "062e51a98d219be3b2bab96eab88fe9dd26151e3",
+      "bytes": 7554,
       "referenced_by": [
         {
           "claim": "H27",
@@ -150,7 +150,7 @@
         }
       ],
       "run_source_revision": null,
-      "sha256": "93802d91a84a32388a333f55314cb97436bf66559105015f81268756013557a9",
+      "sha256": "a5ca8f5c74f04509d322274ccb1af757b83288127279649a63537ba09fe0a73a",
       "tracked": true,
       "worktree_status": null
     },
@@ -1322,6 +1322,34 @@
       "tracked": true,
       "worktree_status": null
     },
+    "results/raw/candidate-git-history-audit.txt": {
+      "artifact_last_commit": "062e51a98d219be3b2bab96eab88fe9dd26151e3",
+      "bytes": 3026,
+      "referenced_by": [
+        {
+          "claim": "H27",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "c80884c98746820d8bcb0a8bd713fae3826f03b69563bc5cab99b224acfcc11f",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "results/raw/candidate-pyc-audit.json": {
+      "artifact_last_commit": "062e51a98d219be3b2bab96eab88fe9dd26151e3",
+      "bytes": 13347,
+      "referenced_by": [
+        {
+          "claim": "H27",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "3b18fc9613aec1d3fda1c6a9287add531232160ad207b981462fc4268d43b778",
+      "tracked": true,
+      "worktree_status": null
+    },
     "results/raw/figure1b-trace-window-inference.json": {
       "artifact_last_commit": "042b4d27032ca4c64675f5c51dad69f8e593dcdc",
       "bytes": 6232,
@@ -1366,7 +1394,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "0688b9df718d5c4db1f4a50a3a88bec685e072fd",
+  "repository_head_at_generation": "062e51a98d219be3b2bab96eab88fe9dd26151e3",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
