@@ -2094,7 +2094,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "c6c5633c4a389fb6995c9237eb8a5977d2e0052d",
+  "repository_head_at_generation": "b7a3f195a197facc2e3e140e5cdf433e77eb9eff",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
