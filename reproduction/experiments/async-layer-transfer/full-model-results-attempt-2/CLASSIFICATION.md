@@ -1,0 +1,1 @@
+Preserved current-revision attempt: runner exit 1 because trace parser counted mirrored gpu_user_annotation events as duplicate phase markers. Parser repair selects the single host user_annotation marker; the raw trace itself contains size-matched H2D/kernel intersections on different streams.

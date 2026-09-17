@@ -1,0 +1,124 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([4, 32, 8, 4, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([4, 32, 8, 4, 128])
+{
+  "gate": {
+    "injected_failure_rolled_back": true,
+    "profile_order_active": true,
+    "real_w4_modules": true,
+    "capacity_physically_expanded": true,
+    "explicit_mapping_selected": true,
+    "recovery_lifo": true,
+    "final_state_restored": true,
+    "fcfs_unchanged": true,
+    "final_fp16_logits_exact": true,
+    "final_fp16_region_bytes_exact": true,
+    "no_pending_layer_events": true,
+    "not_poisoned": true
+  },
+  "after_failure": {
+    "success": false,
+    "restore_success": true,
+    "executor_layers": [],
+    "kv_groups": 0,
+    "num_blocks": 4,
+    "allocator": {
+      "num_blocks": 4,
+      "num_free_blocks": 4,
+      "is_block_free": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "k_cache_new_len": 0,
+      "v_cache_new_len": 0,
+      "kv_cache_new_block_size": 0
+    },
+    "queues_unchanged": true,
+    "fp16_logits_exact": true,
+    "fp16_region_bytes_exact": {
+      "25": true,
+      "24": true
+    },
+    "pending_layer_events": [],
+    "executor_poisoned": false,
+    "partial_group_was_acquired": true
+  },
+  "active": {
+    "coordinator_layers": [
+      25,
+      24,
+      26
+    ],
+    "executor_layers": [
+      25,
+      24,
+      26
+    ],
+    "group_layers": [
+      25,
+      24,
+      26
+    ],
+    "group_blocks": [
+      615,
+      615,
+      615
+    ],
+    "num_blocks": 1849,
+    "num_free_blocks": 1849,
+    "explicit_kv_regions": true,
+    "module_classes": {
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "k_addresses": [
+      128266380222464,
+      128265943998464,
+      128266816446464
+    ]
+  },
+  "final": {
+    "controller_layers": 0,
+    "coordinator_layers": [],
+    "executor_layers": [],
+    "kv_groups": 0,
+    "num_blocks": 4,
+    "num_free_blocks": 4,
+    "allocator": {
+      "num_blocks": 4,
+      "num_free_blocks": 4,
+      "is_block_free": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "k_cache_new_len": 0,
+      "v_cache_new_len": 0,
+      "kv_cache_new_block_size": 0
+    },
+    "explicit_kv_regions": false,
+    "queues_unchanged": true,
+    "fp16_logits_exact": true,
+    "fp16_region_bytes_exact": {
+      "25": true,
+      "24": true,
+      "26": true
+    },
+    "pending_layer_events": [],
+    "executor_poisoned": false,
+    "coordinator_poisoned": false
+  }
+}

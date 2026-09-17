@@ -76,7 +76,7 @@ Paper flow: Serving Monitor → Morphing Controller → per-worker Executor → 
 7. reconstructed monitor/controller modes and scheduled-arrival accounting;
 8. independent Algorithm 1 conditioned-MDS profiler.
 
-Controller settings remain reconstructed, not author-recovered. Full-model overlap and corrected replay reruns are pending uncontended GPU memory. Exact paper baselines, task mappings, scaling operation, model revisions and author-code provenance remain unresolved.
+Controller settings remain reconstructed, not author-recovered. The four current-revision full-model GPU verification surfaces now pass on RTX 3090 GPU 0: transactional executor, multi-request ownership, full-layer async overlap and corrected synthetic replay. Exact paper baselines, task mappings, scaling operation, model revisions and author-code provenance remain unresolved.
 
 ## Development Workflow
 
@@ -103,11 +103,11 @@ Controller settings remain reconstructed, not author-recovered. Full-model overl
 | Active KV | `run_active_kv_switch.sh` | same-history gates and migration pass |
 | LIS pilot | `run_lis_real_pilot.sh` | 6 conditioned calls, saved `[29,30,31]` profile |
 | Expanded LIS | existing `experiments/lis-real-8layer/` command log | 36 conditioned calls, saved `[25,24,26,27,28,29,30,31]` |
-| Real executor | `run_real_executor_pilot.sh` | partial-expansion rollback, 4→1,849→4 blocks, exact final FP16 |
-| Ownership | `run_multirequest_ownership.sh` | occupied reclaimed group refuses shrink without mutation |
-| Replay accounting | Quickstart replay tests | independent arrivals and complete success/error/timeout records |
+| Real executor | `run_real_executor_pilot.sh` | current atomic GPU run passes rollback, 4→1,849→4 blocks, exact final FP16 and clean state |
+| Ownership | `run_multirequest_ownership.sh` | current atomic GPU run passes occupied refusal, sentinels/counts/rows, post-release recovery and exact final FP16 |
+| Replay accounting | `run_synthetic_gpu_replay.sh` | corrected GPU replay passes independent 0/10/20-ms arrivals, 3/3 completion, 9/9 tokens, raw timestamp accounting and final KV release |
 | Async seam | `run_async_layer_transfer_test.sh` | five CUDA event/copy/rollback checks pass |
-| Async full model | `run_async_full_model_overlap.sh` | attempt 1 rejected; strengthened CUDA-activity-trace rerun still pending |
+| Async full model | `run_async_full_model_overlap.sh` | three W4/FP16 repeats plus raw distinct-stream CUDA activity overlap and exact final FP16 pass; rejected attempts preserved |
 | Diagnostic plot | command in `figures/README.md` | CSV/PDF/PNG reproduce byte-identically from attempt-1 raw metrics |
 
 ## Troubleshooting

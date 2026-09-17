@@ -17,13 +17,16 @@ required=[
  'experiments/autoawq-layer-switch/results/metrics.json','experiments/active-kv-switch/results-attempt-2/metrics.json',
  'experiments/lis-real-8layer/results/metrics.json',
  'experiments/real-executor/results-before-atomic-repair/metrics.json','experiments/real-executor/results-before-atomic-repair/CLASSIFICATION.md',
+ 'experiments/real-executor/results/metrics.json','experiments/real-executor/results/commands.txt','experiments/real-executor/results/source-revision.txt','experiments/real-executor/results/source-status.txt','experiments/real-executor/results/nvidia-before.csv','experiments/real-executor/results/nvidia-after.csv','experiments/real-executor/results/run.exitcode',
  'experiments/multirequest-ownership/results-before-atomic-repair/metrics.json','experiments/multirequest-ownership/results-before-atomic-repair/CLASSIFICATION.md',
+ 'experiments/multirequest-ownership/results/metrics.json','experiments/multirequest-ownership/results/commands.txt','experiments/multirequest-ownership/results/source-revision.txt','experiments/multirequest-ownership/results/source-status.txt','experiments/multirequest-ownership/results/nvidia-before.csv','experiments/multirequest-ownership/results/nvidia-after.csv','experiments/multirequest-ownership/results/run.exitcode',
  'experiments/async-layer-transfer/results/metrics.json','experiments/async-layer-transfer/results/test.exitcode','experiments/async-layer-transfer/results/test.log',
  'experiments/async-layer-transfer/results/source-revision.txt','experiments/async-layer-transfer/results/source-status.txt','experiments/async-layer-transfer/results/wall-time.json',
- 'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json','experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json',
+ 'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json','experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json','experiments/async-layer-transfer/full-model-results-attempt-2/metrics.json','experiments/async-layer-transfer/full-model-results-attempt-2/cuda-activity-trace.json','experiments/async-layer-transfer/full-model-results/metrics.json','experiments/async-layer-transfer/full-model-results/cuda-activity-trace.json','experiments/async-layer-transfer/full-model-results/commands.txt','experiments/async-layer-transfer/full-model-results/source-revision.txt','experiments/async-layer-transfer/full-model-results/source-status.txt','experiments/async-layer-transfer/full-model-results/nvidia-before.csv','experiments/async-layer-transfer/full-model-results/nvidia-after.csv','experiments/async-layer-transfer/full-model-results/run.exitcode',
  'figures/transfer-diagnostics.csv','figures/transfer-diagnostics.pdf','figures/transfer-diagnostics.png',
  'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode','experiments/async-layer-transfer/activity-analysis-results/test.exitcode',
  'profiles/llama31-8b-wikitext2-layers24-31.json',
+ 'experiments/synthetic-gpu-replay/results/raw.jsonl','experiments/synthetic-gpu-replay/results/metrics.json','experiments/synthetic-gpu-replay/results/summary.json','experiments/synthetic-gpu-replay/results/run-metadata.json','experiments/synthetic-gpu-replay/results/commands.txt','experiments/synthetic-gpu-replay/results/source-revision.txt','experiments/synthetic-gpu-replay/results/source-status.txt','experiments/synthetic-gpu-replay/results/nvidia-before.csv','experiments/synthetic-gpu-replay/results/nvidia-after.csv','experiments/synthetic-gpu-replay/results/run.exitcode',
 ]
 missing=[path for path in required if not (ROOT/path).is_file()]
 assert not missing,missing
@@ -35,6 +38,10 @@ checks={
  'switch':json.load(open(ROOT/'experiments/autoawq-layer-switch/results/metrics.json'))['passed'],
  'active_kv':json.load(open(ROOT/'experiments/active-kv-switch/results-attempt-2/metrics.json'))['passed'],
  'lis8':json.load(open(ROOT/'experiments/lis-real-8layer/results/metrics.json'))['passed'],
+ 'real_executor_current':json.load(open(ROOT/'experiments/real-executor/results/metrics.json'))['passed'],
+ 'ownership_current':json.load(open(ROOT/'experiments/multirequest-ownership/results/metrics.json'))['passed'],
+ 'async_full_model_current':json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results/metrics.json'))['passed'],
+ 'synthetic_replay_current':json.load(open(ROOT/'experiments/synthetic-gpu-replay/results/metrics.json'))['passed'],
 }
 historical_checks={
  'executor_pre_atomic':json.load(open(ROOT/'experiments/real-executor/results-before-atomic-repair/metrics.json'))['passed'],
@@ -88,6 +95,18 @@ for test_name in (
 ):
     assert test_name in transaction_log,test_name
 assert (ROOT/'experiments/async-layer-transfer/activity-analysis-results/test.exitcode').read_text().strip()=='0'
+for current_dir in ('real-executor/results','multirequest-ownership/results','async-layer-transfer/full-model-results','synthetic-gpu-replay/results'):
+    assert (ROOT/'experiments'/current_dir/'run.exitcode').read_text().strip()=='0',current_dir
+current_async=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results/metrics.json'))
+assert current_async['passed'] and current_async['gate']['cuda_activity_kernel_copy_overlap']
+activity=current_async['activity_trace']['analysis']
+assert activity['passed']
+assert activity['phases']['W4']['copy_stream'] != activity['phases']['W4']['kernel_stream']
+assert activity['phases']['FP16']['copy_stream'] != activity['phases']['FP16']['kernel_stream']
+current_replay=json.load(open(ROOT/'experiments/synthetic-gpu-replay/results/metrics.json'))
+assert current_replay['passed'] and current_replay['gate']['all_ids_once'] and current_replay['gate']['required_metadata']
+current_summary=json.load(open(ROOT/'experiments/synthetic-gpu-replay/results/summary.json'))
+assert current_summary['completed_count']==3 and current_summary['total_emitted_tokens']==9 and current_summary['error_count']==0 and current_summary['timeout_count']==0
 full_async_attempt=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json'))
 assert not full_async_attempt['passed'] and full_async_attempt['gate']['final_fp16_bytes_exact']
 transfer_summary=json.load(open(ROOT/'experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json'))

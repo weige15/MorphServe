@@ -1,8 +1,8 @@
 # MorphServe Reproduction Report
 
-**Investigation status:** bounded investigation complete / partial modified-condition reproduction / exact conditions blocked
+**Investigation status:** current-revision GPU implementation verification complete / partial modified-condition reproduction / exact paper conditions blocked
 **Paper target:** supplied 19-page `morphserve-2506.02006-v2.pdf`  
-**Overall result:** MorphServe's core ideas are partly supported by an independent RTX 3090 reconstruction, but no headline paper latency/quality aggregate or exact-condition table is reproduced. The official lab repository remains README-only. Several candidate-code correctness defects were found and repaired only in the labeled reconstruction.
+**Overall result:** all four frozen current-revision full-model GPU verification surfaces pass on one RTX 3090 under the labeled reconstruction. No headline paper latency/quality aggregate or exact-condition table is reproduced. The official lab repository remains README-only. Several candidate-code correctness defects were found and repaired only in the labeled reconstruction.
 
 ## 1. Scope and source truth
 
@@ -31,7 +31,7 @@ Primary evidence:
 | Arbitrary non-contiguous/profile order | **Vendor negative; reconstruction repaired** | Vendor `[25,24,26]` writes group 2 into layer 23. Explicit-region fallback writes layer 26 and matches dense attention error 0. |
 | CUDA lifetime safety | **Vendor negative; reconstruction repaired** | Uncoordinated restore corrupts 1,530 bytes. Recorded per-region events reduce corruption to 0. |
 | State preservation | **Modified-condition strong partial** | Active FP16→W4×4→FP16 request continues without re-prefill/eviction; same-history top-1 agrees; K/V migrated exactly. |
-| Controller | **Reconstructed, not author-recovered** | Frozen machine-readable EMA/persistence/hysteresis/mode choices in `configs/reconstructed-controller-modes.json`; policy/fake-executor gates pass, while preserved real transactional and ownership GPU runs are explicitly pre-atomic historical evidence. Async transactional repairs await real-GPU rerun. |
+| Controller | **Reconstructed, not author-recovered** | Frozen machine-readable EMA/persistence/hysteresis/mode choices in `configs/reconstructed-controller-modes.json`; current real-executor and ownership GPU gates pass on the independent atomic reconstruction. Settings remain not author-recovered. |
 | Full 32-layer preloading | **Local resource blocked** | Local FP16+W4 decoder variants require 17,585,668,096 pinned bytes, 741,253,120 bytes above memlock before overhead. |
 
 ## 3. Reproduction environment
@@ -68,7 +68,7 @@ Evidence: `experiments/candidate-fp16-baseline/results-attempt-3/metrics.json`.
 | Async host enqueue | 0.276–0.427 ms; transfer incomplete at return in 6/6 cases |
 | Paper example (different Llama 2/L4-like PCIe Gen4 condition) | ≈4/16 ms transfer; ≈6 ms complete W4 |
 
-The isolated local transfer timings are stable but do not reproduce the paper examples, under different model/layer, RTX 3090/host and runtime conditions. Full-model attempt 1 does not establish hidden stall because its first decode was JIT-contaminated and its original overlap interval could include a layer wait; the strengthened raw CUDA-activity run is pending.
+The isolated local transfer timings are stable but do not reproduce the paper examples, under different model/layer, RTX 3090/host and runtime conditions. The strengthened current-revision full-model run passes three unprofiled W4/FP16 timing repeats plus a separate raw CUDA-activity cycle. It establishes actual size-matched H2D/kernel intersection on distinct streams, but remains a modified-condition measurement rather than a paper-latency reproduction.
 
 Evidence: `experiments/autoawq-layer-switch/results/metrics.json` and `experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json`.
 
@@ -99,7 +99,7 @@ This does not reproduce a full 32-layer paper order or the under-15-minute claim
 
 ### 4.5 Transactional controller/executor
 
-The following are executed historical modified-condition GPU results. Subsequent asynchronous/atomic recovery repairs pass CPU/CUDA seams but require the queued real-GPU reruns before they are evidence for the current revision.
+The following historical results remain preserved for comparison. The current-revision rerun below executes the atomic implementation and is the evidence used for this goal.
 
 Accuracy-mode modified-condition pilot:
 
@@ -115,19 +115,19 @@ Two-request ownership pilot:
 - Recovery removes free groups 26/24, refuses occupied group 25 while preserving rows/counts/sentinel/FCFS, then succeeds after real frees.
 - Swapped queue unchanged. Ordinary scheduler preemptions were not measured because this bounded static scheduler has no cumulative preemption counter.
 
-Evidence: `experiments/real-executor/results-before-atomic-repair/` and `experiments/multirequest-ownership/results-before-atomic-repair/`. The duplicate unclassified `results/` directories were removed; pending runners recreate them only for a current-revision attempt.
+Historical evidence: `experiments/real-executor/results-before-atomic-repair/` and `experiments/multirequest-ownership/results-before-atomic-repair/`. Current-revision evidence: `experiments/real-executor/results/metrics.json` and `experiments/multirequest-ownership/results/metrics.json`, both passing with source-revision and GPU before/after sidecars. The historical directories remain explicitly classified and are not overwritten.
 
 ### 4.6 Asynchronous copy seam
 
 The immutable candidate remains blocking (`cudaMemcpyAsync` followed by immediate stream synchronization). The independent reconstruction now exposes the registered GPU layer region, prebuilds FP16/W4 wrapper variants, and queues pinned copies on one persistent morphing stream. A model-wide last-forward event protects old use; the decode stream waits only immediately before the replaced layer.
 
-A current-revision 4 MiB correctness pilot enqueued in 0.244 ms while its injected prior-use event was unfinished; the CUDA-event copy interval was 0.562 ms, address was unchanged, and all bytes matched. The device was externally occupied at 100%, so these durations are supporting diagnostics only. Model-use, partial-expansion barrier, no-redundant-event, transaction, alignment and invalid-source checks pass. Full-model attempt 1 confirmed nonblocking 113/436 MB copies and exact final FP16 bytes, but is rejected for decode JIT contamination, an over-strict separate-request bit-exact gate, and an insufficient enclosing-interval overlap definition. Follow-up reviews prompted atomic post-shrink compensation and fail-closed poisoning; the latest pre-rerun review additionally found that `expand_kv` accepted inactive, duplicate, already-grouped, and overlapping regions. The executor now rejects those batches before any wait/acquisition, with exact allocator/cache/group non-mutation tests; pending runners also include their lock/config inputs in source-status capture. A focused independent rereview found no bypass or regression and returned PASS for GPU-rerun readiness (`results/raw/post-expansion-preflight-rereview.md`). The strengthened retry uses three unprofiled timing repeats plus a separate raw CUDA-activity cycle and requires size-matched H2D/kernel intersection on different streams. A point-in-time check briefly found GPU 4 fully free (24,124 MiB), but an external process claimed 9,106 MiB before the first runner preflight; the runner safely exited 75 at 15,009 MiB without deleting output or loading the model. The before/after snapshots and command are preserved under `results/raw/pending-gpu-*`; no unchanged retry was made.
+A current-revision 4 MiB correctness pilot enqueued in 0.244 ms while its injected prior-use event was unfinished; the CUDA-event copy interval was 0.562 ms, address was unchanged, and all bytes matched. The device was externally occupied at 100%, so those durations remain supporting diagnostics. Model-use, partial-expansion barrier, no-redundant-event, transaction, alignment and invalid-source checks pass. The rejected full-model attempt 1 is preserved separately for its JIT and insufficient-interval defects. After the focused atomic repairs, the current full-model run passed three W4/FP16 timing repeats and the separate raw CUDA-activity gate. W4 copies were 14.8536–14.8766 ms and FP16 copies 53.1627–53.2377 ms; host enqueue was 0.213–0.397 ms and incomplete at return for all six rows. The raw trace found size-matched H2D copies on morph stream 17 intersecting kernels on decode stream 7 by 288.290 μs (W4) and 290.210 μs (FP16). Same-history top-1 and tolerance gates passed, and final FP16 bytes were exact. These are modified-condition measurements, not the paper's ≈4/16/6 ms examples.
 
 Evidence: `experiments/async-layer-transfer/`. The separately valid transfer subset regenerates byte-identically as `figures/transfer-diagnostics.{csv,pdf,png}`; its caption explicitly excludes overlap and paper-agreement claims.
 
 ## 5. Claim-by-claim status
 
-`configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. `results/raw/claim-evidence-provenance.json` hashes and Git-audits all 84 referenced artifacts. Empty command/raw lists explicitly mean that no measurement is claimed. Historical runners predate exact source-revision capture, so their artifact commit is preserved but is not presented as proof of the executed source tree; pending runners write `source-revision.txt`.
+`configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. `results/raw/claim-evidence-provenance.json` hashes and Git-audits the current linked artifacts. Empty command/raw lists explicitly mean that no measurement is claimed. Historical runners predate exact source-revision capture, so their artifact commit is preserved but is not presented as proof of the executed source tree; the four current runners write `source-revision.txt` and source-status sidecars.
 
 | ID | Paper claim/location | Reported | Observed/agreement | Classification and evidence |
 |---|---|---|---|---|
@@ -138,11 +138,11 @@ Evidence: `experiments/async-layer-transfer/`. The separately valid transfer sub
 | H5 | §5.1 quality degradation | 0.51%–3.82%; accuracy 0.11%–2.18% | No exact task corpus/generated outputs | **Blocked exact** |
 | H6 | User objective only; absent from PDF | 41.3% average, 82.3% max LLM-PQ gap closure | No occurrence in target PDF/LaTeX | **Not a target-paper claim; not reproduced** |
 | H7 | User objective only; absent from PDF | 1.73× average, 2.4× max vs PyramidKV | PyramidKV appears only as related-work citation | **Not a target-paper result; not reproduced** |
-| H8 | Fig. 5 dynamic capacity | load-following KV expansion | Historical pre-atomic pilots showed real physical expansion/recovery, not a 72-s trace; current atomic GPU rerun pending | **Modified-condition partial, current revision unverified** |
+| H8 | Fig. 5 dynamic capacity | load-following KV expansion | Current executor and ownership runs show real physical expansion/recovery, 615-block groups, and occupied-region refusal; no 72-s trace | **Modified-condition partial; current implementation verified** |
 | H9 | Fig. 6 throughput | up to 1.83× FP16 | No valid common-engine RPS sweep | **Unverified** |
-| H10 | Fig. 7 TPOT | P99 up to 1.23×; average up to 1.17× | Synthetic replay attempt 1 JIT-contaminated; corrected retry resource-blocked | **Remaining uncertainty** |
+| H10 | Fig. 7 TPOT | P99 up to 1.23×; average up to 1.17× | Corrected synthetic GPU replay passes independent arrivals, 3/3 completion, 9/9 tokens, raw timestamps and regenerated type-7 TTFT/TPOT; not paper trace replay | **Modified-condition instrumentation reproduced; paper claim unverified** |
 | H11 | §4.3 transfer | ≈4 ms W4, ≈16 ms FP16 | 15.67/58.55 ms blocking modified operation | **Tested-not-reproduced under modified conditions** |
-| H12 | §4.3 complete swap/overlap | ≈6 ms, hidden | Candidate 15.67 ms blocking; independent 4-MiB async seam passes, full-layer timeline pending | **Modified-condition partial; numerical claim unverified** |
+| H12 | §4.3 complete swap/overlap | ≈6 ms, hidden | Current full-layer W4/FP16 run passes raw activity overlap: 288.290/290.210 μs distinct-stream intersections; exposed delay remains 0.614–1.138 ms W4 and 37.781–37.895 ms FP16 | **Modified-condition overlap verified; paper numerical claim unverified** |
 | H13 | Appendix A profile time | <15 min for 32 layers | 8-layer inner 58.14 s; full simultaneous pin blocked | **Full claim unverified** |
 | H14 | Table 1 BookSum schedules | exact 8-row F1/ROUGE-L | Exact sample/prompts/checkpoint unavailable | **Blocked exact** |
 | H15 | PDF Table 2 AWQ/DuReader/Burst | FP16 `[5.5223,.1241,27.68]`; AWQ `[1.1686,.0735,25.55]`; MorphServe `[1.2420,.1064,27.33]` | No exact Llama 2/translated DuReader/window/controller | **Blocked exact** |
@@ -154,11 +154,11 @@ Evidence: `experiments/async-layer-transfer/`. The separately valid transfer sub
 | H21 | Table 7 layer independence | layer-19/24 PPL effects | Exact Llama 2 assets unavailable | **Blocked exact** |
 | H22 | Table 6 ordering | four models, CodeLlama 48 endpoint | 8-layer local order only | **Modified-condition partial** |
 | H23 | §4.2/Algorithm 1 | conditioned argmax LIS | 8 layers, 36 sets, saved real order | **Modified-condition expanded reproduction** |
-| H24 | §4.3 in-place W4/FP16 | real packed same-address swapping | Real W4 same base/exact restore/zero allocator delta; persistent copier and prebuilt variants pass small seam | **Modified-condition partial; full async rerun pending** |
-| H25 | §4.4 non-contiguous KV | physical arbitrary-region capacity | Vendor corruption found; explicit fallback CUDA test passed; ownership pilot is historical pre-atomic evidence | **Modified-condition repaired; current integrated rerun pending** |
-| H26 | §4.1 controller | persistent coordinated adaptation, 3 modes | Frozen reconstructed modes and current CPU transactions pass; real transactional/two-request GPU runs predate atomic repair | **Modified-condition partial; current GPU integration unverified** |
+| H24 | §4.3 in-place W4/FP16 | real packed same-address swapping | Real W4 same base/exact restore/zero allocator delta; current full-layer async W4/FP16 run passes three repeats, same-history gates, raw activity overlap and exact FP16 restoration | **Modified-condition implementation verified; paper timing unverified** |
+| H25 | §4.4 non-contiguous KV | physical arbitrary-region capacity | Vendor corruption found; explicit fallback CUDA test passed; current ownership run passes two-request reclaimed ownership, occupied refusal, sentinels/counts/rows and final recovery | **Modified-condition repaired and current integrated implementation verified** |
+| H26 | §4.1 controller | persistent coordinated adaptation, 3 modes | Frozen reconstructed modes and CPU transactions pass; current real executor and ownership GPU runs pass atomic morph/expand/shrink/restore and queue-preservation gates | **Modified-condition implementation verified; author settings unverified** |
 | H27 | Appendix C added LOC | ≈2200 Python +500 C++/CUDA | Base commit unavailable | **Blocked exact** |
-| H28 | state preservation | no flush/re-prefill/eviction | Active same-history pilot passes; two-request ownership evidence predates atomic repair | **Modified-condition partial; current ownership rerun pending** |
+| H28 | state preservation | no flush/re-prefill/eviction | Active same-history pilot plus current two-request ownership run pass migration/refusal/recovery, exact sentinels/counts and final FP16 restoration; no serving trace | **Modified-condition bounded state preservation verified** |
 | H29 | no-morph FP16 | baseline integrity | top-k match, rel L2 0.00204, exact weights | **Modified-condition reproduced numerically** |
 | H30 | supporting fixed W4 | real packed/deterministic behavior | Packed execution/storage verified; bit-exact repeats fail from atomic split-K, top-k stable | **Mixed result** |
 
@@ -170,7 +170,7 @@ Evidence: `experiments/async-layer-transfer/`. The separately valid transfer sub
 4. Candidate fixed-stride KV mapping silently corrupts unrelated layers for real LIS order `[25,24,26]`.
 5. Candidate public llm-awq API/checkpoint assumptions match neither public llm-awq nor local AutoAWQ.
 6. AutoAWQ split-K fused logits are not bit-exact across repeats.
-7. Candidate/local blocking-path swaps are much slower than paper examples; the new independent async path lacks a completed full-layer overlap run.
+7. Candidate/local blocking-path swaps are much slower than paper examples; the independent async path now has full-layer overlap evidence, but its RTX 3090 timings are not paper-condition results.
 8. Full local all-variant pinning exceeds memlock.
 9. Exact trace/task/controller identity is absent.
 10. The paper-linked `baidu/DuReader@c625076...` tree contains no English/translation artifact or release despite Appendix C stating that the English-translated version is hosted there.
@@ -185,7 +185,7 @@ Recovered primary files:
 - Azure Conversation SHA `2f1e5b...`, 19,366 requests.
 - BurstGPT v1.1 SHA `4bb378...`, 1,429,737 requests.
 
-Figure 1a matches Azure Code, not Conversation. Approximate Figure 1b shape matching ranks Azure relative second 1073 (443 requests/72 s; Pearson 0.8793) and BurstGPT timestamp 1,781,278 (214 requests/72 s; Pearson 0.7356), both with the same top candidate under request-count and token-volume rankings. Section 5 says evaluation uses the representative snippets in Figure 1, so these are frozen before serving outcomes as **figure-inferred evaluation-window candidates**, though sub-second boundaries remain approximate rather than explicitly published. A separately labeled deterministic systematic-thinning reconstruction produces 94 Azure and 123 Burst arrivals in `traces/figure1b-inferred/`; contexts remain unmapped. The unpublished author operation/seed and request-to-context map still block exact replay. Corrected synthetic GPU replay is pending sufficient GPU headroom; its first run is retained only as JIT-contaminated initialization evidence.
+Figure 1a matches Azure Code, not Conversation. Approximate Figure 1b shape matching ranks Azure relative second 1073 (443 requests/72 s; Pearson 0.8793) and BurstGPT timestamp 1,781,278 (214 requests/72 s; Pearson 0.7356), both with the same top candidate under request-count and token-volume rankings. Section 5 says evaluation uses the representative snippets in Figure 1, so these are frozen before serving outcomes as **figure-inferred evaluation-window candidates**, though sub-second boundaries remain approximate rather than explicitly published. A separately labeled deterministic systematic-thinning reconstruction produces 94 Azure and 123 Burst arrivals in `traces/figure1b-inferred/`; contexts remain unmapped. The unpublished author operation/seed and request-to-context map still block exact replay. The corrected synthetic GPU replay now passes as a short modified-condition instrumentation baseline; its raw records, warmup metadata, 3/3 completion and 9/9 token accounting are under `experiments/synthetic-gpu-replay/results/`. It is not Azure/BurstGPT or paper-latency evidence.
 
 ## 8. Reproduction commands
 
@@ -228,4 +228,4 @@ Every experiment directory includes its locked protocol, commands, raw logs, mac
 
 The investigation supports MorphServe's **mechanical feasibility** under a labeled independent reconstruction: real same-address W4 replacement, physical KV reclamation, active state preservation, event-safe recovery, arbitrary-region mapping fallback, conditioned LIS, and coordinated controller actions all have executed evidence.
 
-It does **not** support the paper's headline performance/quality claims or exact result tables. Overall reproduction status is therefore **partial / exact reproduction blocked**, with several candidate-code negative findings and no manufactured agreement. The bounded investigation is closed at the recorded resource state: every currently feasible CPU and small-CUDA check is complete, while the four frozen full-model reruns require a stable GPU with at least 17,408 MiB free. Their tested restart commands remain in §8 and `docs/completion-audit.md`; future execution would reopen, not retroactively strengthen, this report.
+It does **not** support the paper's headline performance/quality claims or exact result tables. Overall reproduction status remains **partial / exact reproduction blocked**, with several candidate-code negative findings and no manufactured agreement. This goal closes current-revision implementation verification: real transactional execution, two-request ownership/recovery, full-layer asynchronous W4/FP16 activity overlap, and corrected synthetic GPU replay all pass their frozen implementation/instrumentation gates on RTX 3090 GPU 0 with 24,124 MiB free before and after each run. The remaining blockers are paper-facing: exact author implementation/configuration, models, task artifacts, trace boundaries/mapping, and paper-equivalent hardware. This is not reproduction of the paper's headline results.

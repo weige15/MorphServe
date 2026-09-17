@@ -41,7 +41,17 @@ def analyze_cuda_overlap_trace(path, expected_bytes):
     phases = {}
     for precision, byte_count in expected_bytes.items():
         marker_name = f"morphserve_overlap_{precision}"
-        markers = [event for event in events if event.get("name") == marker_name and _interval(event)]
+        # PyTorch exports the host record_function as ``user_annotation`` and
+        # mirrors it on each CUDA stream as ``gpu_user_annotation``.  The
+        # mirrored events are not independent phase markers; counting them
+        # makes a valid trace look ambiguous.  Only the host annotation names
+        # the phase envelope used to associate its CUDA activities.
+        markers = [
+            event for event in events
+            if event.get("name") == marker_name
+            and event.get("cat") == "user_annotation"
+            and _interval(event)
+        ]
         if len(markers) != 1:
             phases[precision] = {"passed": False, "error": f"expected one {marker_name} marker, found {len(markers)}"}
             continue

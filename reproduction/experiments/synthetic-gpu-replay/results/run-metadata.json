@@ -1,0 +1,62 @@
+{
+  "classification": "modified-condition synthetic replay",
+  "config": {
+    "block_size": 16,
+    "classification": "modified-condition synthetic replay",
+    "deviations": [
+      "Synthetic arrivals, not Azure or BurstGPT",
+      "Short prompts/outputs, not paper 1024/512",
+      "Single worker and token-step serialization, no continuous batching",
+      "No MorphServe controller actions; accounting baseline only"
+    ],
+    "frozen_before_gpu_outcomes": true,
+    "model": "local Llama 3.1 8B base",
+    "precision": "FP16 only",
+    "request_timeout_s": 120,
+    "requests": [
+      {
+        "output_len": 3,
+        "prompt": "Life blooms like a flower, far away",
+        "reference": null,
+        "request_id": "syn-0",
+        "scheduled_s": 0.0
+      },
+      {
+        "output_len": 3,
+        "prompt": "The quick brown fox jumps over",
+        "reference": null,
+        "request_id": "syn-1",
+        "scheduled_s": 0.01
+      },
+      {
+        "output_len": 3,
+        "prompt": "In a distant future, humanity",
+        "reference": null,
+        "request_id": "syn-2",
+        "scheduled_s": 0.02
+      }
+    ]
+  },
+  "final_kv_capacity": 8,
+  "final_kv_free": 8,
+  "init_seconds": 13.303440501913428,
+  "schema_version": 1,
+  "summary": {
+    "completed_count": 3,
+    "error_count": 0,
+    "p95_ttft_s": 0.05971378864487633,
+    "p99_tpot_s": 0.06820050033857114,
+    "percentile_definition": "Hyndman-Fan type 7 linear interpolation over per-request TTFT and per-token TPOT intervals",
+    "request_count": 3,
+    "schema_version": 1,
+    "submitted_ids": [
+      "syn-0",
+      "syn-1",
+      "syn-2"
+    ],
+    "timeout_count": 0,
+    "total_emitted_tokens": 9
+  },
+  "warmup_excluded": true,
+  "warmup_seconds": 3.6216780999675393
+}

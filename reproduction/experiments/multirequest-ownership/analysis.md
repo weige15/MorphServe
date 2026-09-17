@@ -1,18 +1,17 @@
-# Real multi-request ownership/recovery result
+# Current-revision multi-request ownership result
 
-> **Historical evidence only.** The passing run is preserved under `results-before-atomic-repair/`; it predates later atomic recovery/poisoning repairs and is not current-revision GPU validation. `results/` is intentionally absent until the queued current runner succeeds.
+The current runner `CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_multirequest_ownership.sh` passed at HEAD `67bbdc2d7094c2b6dcaab6e58c745d1a1a0a815b`, with the runner's recorded source-status sidecar. GPU 0 had 24,124 MiB free before setup, before model load, and after teardown; no external compute process was present in the snapshots.
 
-All gates of that historical run passed:
+All current gates passed:
 
-- sequence 0 allocated blocks `[0,1,2,3,4]`; sequence 1 allocated `[5]`, so IDs 4/5 occupied reclaimed group 0;
-- free groups for layers 26 and 24 shrank/restored in LIFO order;
-- layer-25 recovery was refused while its group was occupied;
-- refusal preserved both allocation counts, block-table rows, K/V sentinel bytes, executor/controller state and FCFS/swapped queue state;
-- after real BlockManager frees for request IDs 0/1, recovery succeeded;
-- final capacity was 4/4 free blocks, request counts zero, no W4 groups/layers, and FP16 logits bit-exact.
+- request 0 owns block row `[0,1,2,3,4]` and request 1 owns `[5]`, placing reclaimed blocks in active use;
+- recovery removes free groups in LIFO order, then refuses the occupied layer-25 reclaimed region without mutating rows, counts, sentinels, allocator state, queues or event state;
+- after genuine request/block release, recovery succeeds;
+- final capacity returns to four fully free blocks, all W4 groups/layers and pending events are gone, FP16 bytes/logits are exact, and executor/coordinator are not poisoned;
+- FCFS and swapped-queue state remain unchanged. `scheduler_preemptions_measured` is explicitly false because this bounded adapter has no valid cumulative scheduler counter.
 
-Block-table row storage retains stale IDs after free while `num_seq_allocated_blocks=0`; kernels use the count as ownership authority. This matches candidate BlockManager behavior but should not be interpreted as live ownership.
+The passing machine-readable artifact is `results/metrics.json`; raw stdout/stderr, command, source revision/status, manifest checks and GPU before/pre-run/after snapshots are in the same directory. The earlier `results-before-atomic-repair/` run remains historical evidence and was not overwritten.
 
 ## Classification
 
-**Historical approximate/modified-condition multi-request ownership reproduction.** At the then-executed revision, real GPU allocation/free and shrink refusal were covered for two request IDs. The pilot does not validate the current atomic revision or execute concurrent model decode, scheduled arrivals, preemption, or token timing. Its static scheduler has no cumulative preemption counter, so it cannot support a measured zero-preemption claim.
+**Current-revision modified-condition multi-request ownership/recovery verification.** This validates real reclaimed-KV ownership and atomic recovery for two requests. It does not measure ordinary scheduler preemption, concurrent serving throughput, or paper workload latency.

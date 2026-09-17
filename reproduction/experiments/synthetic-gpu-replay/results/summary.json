@@ -1,0 +1,16 @@
+{
+  "completed_count": 3,
+  "error_count": 0,
+  "p95_ttft_s": 0.05971378864487633,
+  "p99_tpot_s": 0.06820050033857114,
+  "percentile_definition": "Hyndman-Fan type 7 linear interpolation over per-request TTFT and per-token TPOT intervals",
+  "request_count": 3,
+  "schema_version": 1,
+  "submitted_ids": [
+    "syn-0",
+    "syn-1",
+    "syn-2"
+  ],
+  "timeout_count": 0,
+  "total_emitted_tokens": 9
+}

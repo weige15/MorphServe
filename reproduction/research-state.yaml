@@ -1,9 +1,9 @@
 project: MorphServe evidence-backed reproduction
-status: complete_bounded_partial_exact_blocked
-updated_utc: '2026-09-16T21:52:43Z'
+status: complete_current_revision_gpu_verified_partial_exact_blocked
+updated_utc: '2026-09-17T19:50:00+08:00'
 checkpoint:
-  current: 5
-  name: final audit and report
+  current: 6
+  name: current-revision GPU closure and final audit
   checkpoints:
     - id: 1
       name: materials and environment audit
@@ -24,12 +24,20 @@ checkpoint:
       status: complete_modified_condition
     - id: 4
       name: prioritized main experiments and ablations
-      status: blocked_partial
+      status: complete_current_revision_modified_condition
       evidence:
-        - results/raw/pending-gpu-rerun-attempt.txt
-        - docs/completion-audit.md
+        - experiments/real-executor/results/metrics.json
+        - experiments/multirequest-ownership/results/metrics.json
+        - experiments/async-layer-transfer/full-model-results/metrics.json
+        - experiments/synthetic-gpu-replay/results/summary.json
     - id: 5
       name: final audit and report
+      status: superseded_by_current_gpu_closure
+      evidence:
+        - REPORT.md
+        - docs/completion-audit.md
+    - id: 6
+      name: current-revision GPU closure and final audit
       status: complete
       evidence:
         - REPORT.md
@@ -79,20 +87,20 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  Async full-layer transfers enqueue correctly and restore exact bytes, but attempt 1 did not prove
-  compute overlap. Atomic recovery, checked rollback poisoning, fail-closed expansion preflight and
-  activity-trace analysis pass CPU tests and independent readiness review. A transient 24,124-MiB
-  free window was externally claimed before runner preflight; real CUDA activity, executor,
-  ownership and replay reruns still await stable >17 GiB free GPU headroom.
+  The independent atomic reconstruction now passes all four current-revision full-model GPU
+  verification surfaces. Real executor rollback/recovery, two-request reclaimed-KV ownership,
+  full-layer W4/FP16 CUDA activity overlap, and corrected synthetic scheduled-arrival accounting
+  all pass on RTX 3090 GPU 0. These are modified-condition implementation measurements; paper
+  headline claims remain blocked by missing author inputs, workloads and hardware.
 active_protocol: experiments/async-layer-transfer/protocol.md
 resource_accounting:
-  saved_gpu_runner_process_wall_seconds: 818.287388887
+  saved_gpu_runner_process_wall_seconds: 961.666304627
   process_wall_caveat: includes load/JIT/test work, excludes install/build, and is not CUDA kernel or exclusive allocation time
   agent_elapsed_seconds_at_2026_09_16_checkpoint: 21132
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Run the frozen three-repeat full-layer overlap pilot plus CUDA activity trace when a GPU has >17 GiB free.
-  - Run transactional real-executor, ownership, full-layer async overlap and corrected synthetic replay; require empty source-status sidecars. The current-revision small CUDA seam passes.
-  - Use frozen Figure-1 candidate windows only as plot-inferred modified conditions.
+  - Preserve the four passing current-revision GPU artifacts and regenerate claim provenance after final report/map updates.
+  - Keep paper-facing claims blocked until exact author implementation/configuration, model/task assets, trace mapping and paper-equivalent hardware are available.
+  - Do not reinterpret modified-condition GPU implementation gates as paper latency, quality, throughput or exact-table reproduction.

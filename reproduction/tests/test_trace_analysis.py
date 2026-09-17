@@ -26,7 +26,7 @@ class TraceAnalysisTests(unittest.TestCase):
         events = []
         for offset, precision, byte_count in ((0, "W4", 100), (1000, "FP16", 400)):
             events.extend([
-                event(f"morphserve_overlap_{precision}", "cpu_op", offset, 500),
+                event(f"morphserve_overlap_{precision}", "user_annotation", offset, 500),
                 event("Memcpy HtoD (Pinned -> Device)", "gpu_memcpy", offset + 100, 250, stream=9, byte_count=byte_count),
                 event("pre_layer_gemm_kernel", "kernel", offset + 200, 100, stream=7),
             ])
@@ -39,10 +39,12 @@ class TraceAnalysisTests(unittest.TestCase):
 
     def test_rejects_enclosing_interval_without_kernel_copy_overlap(self):
         events = [
-            event("morphserve_overlap_W4", "cpu_op", 0, 500),
+            event("morphserve_overlap_W4", "user_annotation", 0, 500),
+            event("morphserve_overlap_W4", "gpu_user_annotation", 0, 500),
             event("Memcpy HtoD", "gpu_memcpy", 100, 100, stream=9, byte_count=100),
             event("kernel_after_copy", "kernel", 250, 100, stream=7),
-            event("morphserve_overlap_FP16", "cpu_op", 1000, 500),
+            event("morphserve_overlap_FP16", "user_annotation", 1000, 500),
+            event("morphserve_overlap_FP16", "gpu_user_annotation", 1000, 500),
             event("Memcpy HtoD", "gpu_memcpy", 1100, 100, stream=9, byte_count=400),
             event("kernel_after_copy", "kernel", 1250, 100, stream=7),
         ]
@@ -58,7 +60,7 @@ class TraceAnalysisTests(unittest.TestCase):
                 events = []
                 for offset, precision, byte_count in ((0, "W4", 100), (1000, "FP16", 400)):
                     events.extend([
-                        event(f"morphserve_overlap_{precision}", "cpu_op", offset, 500),
+                        event(f"morphserve_overlap_{precision}", "user_annotation", offset, 500),
                         event("Memcpy HtoD", "gpu_memcpy", offset + 100, 200, stream=None if missing == "copy" else 9, byte_count=byte_count),
                         event("kernel", "kernel", offset + 150, 50, stream=None if missing == "kernel" else 7),
                     ])
@@ -70,10 +72,10 @@ class TraceAnalysisTests(unittest.TestCase):
 
     def test_rejects_wrong_size_and_same_stream_kernel(self):
         events = [
-            event("morphserve_overlap_W4", "cpu_op", 0, 500),
+            event("morphserve_overlap_W4", "user_annotation", 0, 500),
             event("Memcpy HtoD", "gpu_memcpy", 100, 200, stream=9, byte_count=99),
             event("kernel", "kernel", 150, 50, stream=7),
-            event("morphserve_overlap_FP16", "cpu_op", 1000, 500),
+            event("morphserve_overlap_FP16", "user_annotation", 1000, 500),
             event("Memcpy HtoD", "gpu_memcpy", 1100, 200, stream=9, byte_count=400),
             event("kernel", "kernel", 1150, 50, stream=9),
         ]

@@ -1,0 +1,182 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([8, 32, 8, 16, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([8, 32, 8, 16, 128])
+{
+  "gate": {
+    "repeat_count": true,
+    "host_enqueue_nonblocking": true,
+    "same_history_w4_within_envelope": true,
+    "same_history_fp16_within_envelope": true,
+    "pre_layer_interval_intersection_supporting": true,
+    "cuda_activity_kernel_copy_overlap": true,
+    "final_fp16_bytes_exact": true,
+    "final_state_fp16": true
+  },
+  "rows": [
+    {
+      "precision": "W4",
+      "forced_input_token": 505,
+      "forced_output_token": 279,
+      "decode_length": 10,
+      "transfer_bytes": 113328128,
+      "enqueue_host_ms": 0.3973799757659435,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 14.862336158752441,
+      "decode_concurrent_ms": 21.89446449279785,
+      "decode_reference_ms": 21.187135696411133,
+      "copy_start_from_origin_ms": 0.042399998754262924,
+      "copy_end_from_origin_ms": 14.904735565185547,
+      "decode_start_from_origin_ms": 0.47920000553131104,
+      "pre_layer_wait_from_origin_ms": 17.044767379760742,
+      "decode_end_from_origin_ms": 22.37366485595703,
+      "enclosing_interval_overlap_ms": 14.425535559654236,
+      "pre_layer_compute_overlap_ms": 14.425535559654236,
+      "transfer_remaining_at_layer_ms": 0.0,
+      "exposed_decode_delta_ms": 0.7073287963867188,
+      "comparison": {
+        "relative_l2": 0.0005751056596636772,
+        "max_abs": 0.015625,
+        "top1_a": 279,
+        "top1_b": 279
+      }
+    },
+    {
+      "precision": "FP16",
+      "forced_input_token": 279,
+      "forced_output_token": 3363,
+      "decode_length": 11,
+      "transfer_bytes": 436224000,
+      "enqueue_host_ms": 0.23678503930568695,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 53.23769760131836,
+      "decode_concurrent_ms": 58.188289642333984,
+      "decode_reference_ms": 20.31532859802246,
+      "copy_start_from_origin_ms": 0.04966399818658829,
+      "copy_end_from_origin_ms": 53.28736114501953,
+      "decode_start_from_origin_ms": 0.3218879997730255,
+      "pre_layer_wait_from_origin_ms": 16.761695861816406,
+      "decode_end_from_origin_ms": 58.51017761230469,
+      "enclosing_interval_overlap_ms": 52.965473145246506,
+      "pre_layer_compute_overlap_ms": 16.43980786204338,
+      "transfer_remaining_at_layer_ms": 36.525665283203125,
+      "exposed_decode_delta_ms": 37.87296104431152,
+      "comparison": {
+        "relative_l2": 0.0005039593088440597,
+        "max_abs": 0.015625,
+        "top1_a": 3363,
+        "top1_b": 3363
+      }
+    },
+    {
+      "precision": "W4",
+      "forced_input_token": 3363,
+      "forced_output_token": 13,
+      "decode_length": 12,
+      "transfer_bytes": 113328128,
+      "enqueue_host_ms": 0.3286621067672968,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 14.876607894897461,
+      "decode_concurrent_ms": 21.475391387939453,
+      "decode_reference_ms": 20.861696243286133,
+      "copy_start_from_origin_ms": 0.04383999854326248,
+      "copy_end_from_origin_ms": 14.920448303222656,
+      "decode_start_from_origin_ms": 0.40556800365448,
+      "pre_layer_wait_from_origin_ms": 16.640127182006836,
+      "decode_end_from_origin_ms": 21.88096046447754,
+      "enclosing_interval_overlap_ms": 14.514880299568176,
+      "pre_layer_compute_overlap_ms": 14.514880299568176,
+      "transfer_remaining_at_layer_ms": 0.0,
+      "exposed_decode_delta_ms": 0.6136951446533203,
+      "comparison": {
+        "relative_l2": 0.000979255884885788,
+        "max_abs": 0.015625,
+        "top1_a": 13,
+        "top1_b": 13
+      }
+    },
+    {
+      "precision": "FP16",
+      "forced_input_token": 13,
+      "forced_output_token": 578,
+      "decode_length": 13,
+      "transfer_bytes": 436224000,
+      "enqueue_host_ms": 0.22048200480639935,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 53.162689208984375,
+      "decode_concurrent_ms": 58.14380645751953,
+      "decode_reference_ms": 20.36310386657715,
+      "copy_start_from_origin_ms": 0.04355200007557869,
+      "copy_end_from_origin_ms": 53.206241607666016,
+      "decode_start_from_origin_ms": 0.29600000381469727,
+      "pre_layer_wait_from_origin_ms": 16.826496124267578,
+      "decode_end_from_origin_ms": 58.4398078918457,
+      "enclosing_interval_overlap_ms": 52.91024160385132,
+      "pre_layer_compute_overlap_ms": 16.53049612045288,
+      "transfer_remaining_at_layer_ms": 36.37974548339844,
+      "exposed_decode_delta_ms": 37.78070259094238,
+      "comparison": {
+        "relative_l2": 0.0006471643573604524,
+        "max_abs": 0.01171875,
+        "top1_a": 578,
+        "top1_b": 578
+      }
+    },
+    {
+      "precision": "W4",
+      "forced_input_token": 578,
+      "forced_output_token": 3805,
+      "decode_length": 14,
+      "transfer_bytes": 113328128,
+      "enqueue_host_ms": 0.3214870812371373,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 14.853599548339844,
+      "decode_concurrent_ms": 21.900096893310547,
+      "decode_reference_ms": 20.762271881103516,
+      "copy_start_from_origin_ms": 0.04428799822926521,
+      "copy_end_from_origin_ms": 14.89788818359375,
+      "decode_start_from_origin_ms": 0.39878401160240173,
+      "pre_layer_wait_from_origin_ms": 16.9751033782959,
+      "decode_end_from_origin_ms": 22.298879623413086,
+      "enclosing_interval_overlap_ms": 14.499104171991348,
+      "pre_layer_compute_overlap_ms": 14.499104171991348,
+      "transfer_remaining_at_layer_ms": 0.0,
+      "exposed_decode_delta_ms": 1.1378250122070312,
+      "comparison": {
+        "relative_l2": 0.0005922993877902627,
+        "max_abs": 0.015625,
+        "top1_a": 3805,
+        "top1_b": 3805
+      }
+    },
+    {
+      "precision": "FP16",
+      "forced_input_token": 3805,
+      "forced_output_token": 374,
+      "decode_length": 15,
+      "transfer_bytes": 436224000,
+      "enqueue_host_ms": 0.21312700118869543,
+      "ready_at_enqueue_return": false,
+      "copy_ms": 53.230751037597656,
+      "decode_concurrent_ms": 58.22431945800781,
+      "decode_reference_ms": 20.329696655273438,
+      "copy_start_from_origin_ms": 0.04383999854326248,
+      "copy_end_from_origin_ms": 53.274593353271484,
+      "decode_start_from_origin_ms": 0.28911998867988586,
+      "pre_layer_wait_from_origin_ms": 16.817184448242188,
+      "decode_end_from_origin_ms": 58.5134391784668,
+      "enclosing_interval_overlap_ms": 52.9854733645916,
+      "pre_layer_compute_overlap_ms": 16.5280644595623,
+      "transfer_remaining_at_layer_ms": 36.4574089050293,
+      "exposed_decode_delta_ms": 37.894622802734375,
+      "comparison": {
+        "relative_l2": 0.0007446487434208393,
+        "max_abs": 0.01171875,
+        "top1_a": 374,
+        "top1_b": 374
+      }
+    }
+  ]
+}

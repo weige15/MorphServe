@@ -1,0 +1,370 @@
+{
+  "active_state": {
+    "coordinator_layers": [
+      25,
+      24,
+      26
+    ],
+    "executor_layers": [
+      25,
+      24,
+      26
+    ],
+    "explicit_kv_regions": true,
+    "group_blocks": [
+      615,
+      615,
+      615
+    ],
+    "group_layers": [
+      25,
+      24,
+      26
+    ],
+    "k_addresses": [
+      128266380222464,
+      128265943998464,
+      128266816446464
+    ],
+    "module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "num_blocks": 1849,
+    "num_free_blocks": 1849
+  },
+  "after_injected_failure": {
+    "allocator": {
+      "is_block_free": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "k_cache_new_len": 0,
+      "kv_cache_new_block_size": 0,
+      "num_blocks": 4,
+      "num_free_blocks": 4,
+      "v_cache_new_len": 0
+    },
+    "executor_layers": [],
+    "executor_poisoned": false,
+    "fp16_logits_exact": true,
+    "fp16_region_bytes_exact": {
+      "24": true,
+      "25": true
+    },
+    "kv_groups": 0,
+    "num_blocks": 4,
+    "partial_group_was_acquired": true,
+    "pending_layer_events": [],
+    "queues_unchanged": true,
+    "restore_success": true,
+    "success": false
+  },
+  "executor_log": [
+    [
+      "morph",
+      25
+    ],
+    [
+      "morph",
+      24
+    ],
+    [
+      "expand",
+      25,
+      615
+    ],
+    [
+      "expand_failed",
+      "injected KV expansion failure 2"
+    ],
+    [
+      "restore",
+      24
+    ],
+    [
+      "restore",
+      25
+    ],
+    [
+      "morph",
+      25
+    ],
+    [
+      "expand",
+      25,
+      615
+    ],
+    [
+      "morph",
+      24
+    ],
+    [
+      "expand",
+      24,
+      615
+    ],
+    [
+      "morph",
+      26
+    ],
+    [
+      "expand",
+      26,
+      615
+    ],
+    [
+      "shrink",
+      26,
+      615
+    ],
+    [
+      "restore",
+      26
+    ],
+    [
+      "shrink",
+      24,
+      615
+    ],
+    [
+      "restore",
+      24
+    ],
+    [
+      "shrink",
+      25,
+      615
+    ],
+    [
+      "restore",
+      25
+    ]
+  ],
+  "final_state": {
+    "allocator": {
+      "is_block_free": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "k_cache_new_len": 0,
+      "kv_cache_new_block_size": 0,
+      "num_blocks": 4,
+      "num_free_blocks": 4,
+      "v_cache_new_len": 0
+    },
+    "controller_layers": 0,
+    "coordinator_layers": [],
+    "coordinator_poisoned": false,
+    "executor_layers": [],
+    "executor_poisoned": false,
+    "explicit_kv_regions": false,
+    "fp16_logits_exact": true,
+    "fp16_region_bytes_exact": {
+      "24": true,
+      "25": true,
+      "26": true
+    },
+    "kv_groups": 0,
+    "num_blocks": 4,
+    "num_free_blocks": 4,
+    "pending_layer_events": [],
+    "queues_unchanged": true
+  },
+  "gate": {
+    "capacity_physically_expanded": true,
+    "explicit_mapping_selected": true,
+    "fcfs_unchanged": true,
+    "final_fp16_logits_exact": true,
+    "final_fp16_region_bytes_exact": true,
+    "final_state_restored": true,
+    "injected_failure_rolled_back": true,
+    "no_pending_layer_events": true,
+    "not_poisoned": true,
+    "profile_order_active": true,
+    "real_w4_modules": true,
+    "recovery_lifo": true
+  },
+  "initial_allocator": {
+    "is_block_free": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "k_cache_new_len": 0,
+    "kv_cache_new_block_size": 0,
+    "num_blocks": 4,
+    "num_free_blocks": 4,
+    "v_cache_new_len": 0
+  },
+  "initial_num_blocks": 4,
+  "passed": true,
+  "profile_order": [
+    25,
+    24,
+    26
+  ],
+  "recovery_events": [
+    {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.65,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "queues_before": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "selected_layers": [
+        26
+      ],
+      "success": true
+    },
+    {
+      "active_layers": [
+        25
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 1,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.9000000000000002,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "queues_before": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "selected_layers": [
+        24
+      ],
+      "success": true
+    },
+    {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.1500000000000004,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "queues_before": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "selected_layers": [
+        25
+      ],
+      "success": true
+    }
+  ],
+  "schema_version": 1,
+  "successful_events": [
+    {
+      "active_layers": [
+        25
+      ],
+      "command": {
+        "expand_kv": true,
+        "layer_delta": 1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 1,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.1,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "queues_before": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "selected_layers": [
+        25
+      ],
+      "success": true
+    },
+    {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": true,
+        "layer_delta": 1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.25,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "queues_before": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "selected_layers": [
+        24
+      ],
+      "success": true
+    },
+    {
+      "active_layers": [
+        25,
+        24,
+        26
+      ],
+      "command": {
+        "expand_kv": true,
+        "layer_delta": 1,
+        "mode": "accuracy",
+        "pressure_count": 0,
+        "quantized_layers": 3,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.39999999999999997,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "queues_before": "QueueState(waiting=(3, 4), running=(1, 2), swapped=(5,))",
+      "selected_layers": [
+        26
+      ],
+      "success": true
+    }
+  ]
+}

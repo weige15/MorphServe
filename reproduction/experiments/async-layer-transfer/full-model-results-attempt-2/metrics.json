@@ -1,0 +1,238 @@
+{
+  "activity_trace": {
+    "analysis": {
+      "passed": false,
+      "phases": {
+        "FP16": {
+          "error": "expected one morphserve_overlap_FP16 marker, found 4",
+          "passed": false
+        },
+        "W4": {
+          "error": "expected one morphserve_overlap_W4 marker, found 5",
+          "passed": false
+        }
+      },
+      "schema_version": 1
+    },
+    "path": "/nfs/home/s314511048/MorphServe/reproduction/experiments/async-layer-transfer/full-model-results/cuda-activity-trace.json",
+    "sha256": "6a77e1e3693f2f5805e0a1166e8e103d7ca79d2f078caf3ed02c2749d7d172f6"
+  },
+  "classification": "modified-condition asynchronous full-model overlap",
+  "final_fp16_bytes_exact": true,
+  "forced_history": [
+    505,
+    279,
+    3363,
+    13,
+    578,
+    3805,
+    374
+  ],
+  "gate": {
+    "cuda_activity_kernel_copy_overlap": false,
+    "final_fp16_bytes_exact": true,
+    "final_state_fp16": true,
+    "host_enqueue_nonblocking": true,
+    "pre_layer_interval_intersection_supporting": true,
+    "repeat_count": true,
+    "same_history_fp16_within_envelope": true,
+    "same_history_w4_within_envelope": true
+  },
+  "layer": 25,
+  "passed": false,
+  "prompt_ids": [
+    128000,
+    26833,
+    92889,
+    1093,
+    264,
+    23153,
+    11,
+    3117,
+    3201
+  ],
+  "repeats": 3,
+  "request_ids": {
+    "async": 0,
+    "same_history_reference": 1
+  },
+  "rows": [
+    {
+      "comparison": {
+        "max_abs": 0.00830078125,
+        "relative_l2": 0.0005206274217925966,
+        "top1_a": 279,
+        "top1_b": 279
+      },
+      "copy_end_from_origin_ms": 15.138496398925781,
+      "copy_ms": 15.100640296936035,
+      "copy_start_from_origin_ms": 0.037856001406908035,
+      "decode_concurrent_ms": 21.804096221923828,
+      "decode_end_from_origin_ms": 22.15318489074707,
+      "decode_length": 10,
+      "decode_reference_ms": 20.967008590698242,
+      "decode_start_from_origin_ms": 0.34908801317214966,
+      "enclosing_interval_overlap_ms": 14.789408385753632,
+      "enqueue_host_ms": 0.2754980232566595,
+      "exposed_decode_delta_ms": 0.8370876312255859,
+      "forced_input_token": 505,
+      "forced_output_token": 279,
+      "pre_layer_compute_overlap_ms": 14.789408385753632,
+      "pre_layer_wait_from_origin_ms": 16.86832046508789,
+      "precision": "W4",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 113328128,
+      "transfer_remaining_at_layer_ms": 0.0
+    },
+    {
+      "comparison": {
+        "max_abs": 0.01171875,
+        "relative_l2": 0.0005662254989147186,
+        "top1_a": 3363,
+        "top1_b": 3363
+      },
+      "copy_end_from_origin_ms": 59.048831939697266,
+      "copy_ms": 58.996543884277344,
+      "copy_start_from_origin_ms": 0.0522879995405674,
+      "decode_concurrent_ms": 63.89731216430664,
+      "decode_end_from_origin_ms": 64.25827026367188,
+      "decode_length": 11,
+      "decode_reference_ms": 20.31452751159668,
+      "decode_start_from_origin_ms": 0.3609600067138672,
+      "enclosing_interval_overlap_ms": 58.6878719329834,
+      "enqueue_host_ms": 0.2715759910643101,
+      "exposed_decode_delta_ms": 43.58278465270996,
+      "forced_input_token": 279,
+      "forced_output_token": 3363,
+      "pre_layer_compute_overlap_ms": 16.661216735839844,
+      "pre_layer_wait_from_origin_ms": 17.02217674255371,
+      "precision": "FP16",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 436224000,
+      "transfer_remaining_at_layer_ms": 42.026655197143555
+    },
+    {
+      "comparison": {
+        "max_abs": 0.013427734375,
+        "relative_l2": 0.0009656636393629014,
+        "top1_a": 13,
+        "top1_b": 13
+      },
+      "copy_end_from_origin_ms": 15.068127632141113,
+      "copy_ms": 15.02348804473877,
+      "copy_start_from_origin_ms": 0.04464000090956688,
+      "decode_concurrent_ms": 21.487232208251953,
+      "decode_end_from_origin_ms": 21.909088134765625,
+      "decode_length": 12,
+      "decode_reference_ms": 20.97907257080078,
+      "decode_start_from_origin_ms": 0.42185598611831665,
+      "enclosing_interval_overlap_ms": 14.646271646022797,
+      "enqueue_host_ms": 0.3452460514381528,
+      "exposed_decode_delta_ms": 0.5081596374511719,
+      "forced_input_token": 3363,
+      "forced_output_token": 13,
+      "pre_layer_compute_overlap_ms": 14.646271646022797,
+      "pre_layer_wait_from_origin_ms": 16.69487953186035,
+      "precision": "W4",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 113328128,
+      "transfer_remaining_at_layer_ms": 0.0
+    },
+    {
+      "comparison": {
+        "max_abs": 0.01171875,
+        "relative_l2": 0.0005905578727833927,
+        "top1_a": 578,
+        "top1_b": 578
+      },
+      "copy_end_from_origin_ms": 58.95132827758789,
+      "copy_ms": 58.90835189819336,
+      "copy_start_from_origin_ms": 0.04297599941492081,
+      "decode_concurrent_ms": 63.886558532714844,
+      "decode_end_from_origin_ms": 64.18870544433594,
+      "decode_length": 13,
+      "decode_reference_ms": 20.372480392456055,
+      "decode_start_from_origin_ms": 0.30214399099349976,
+      "enclosing_interval_overlap_ms": 58.64918428659439,
+      "enqueue_host_ms": 0.2266209339722991,
+      "exposed_decode_delta_ms": 43.51407814025879,
+      "forced_input_token": 13,
+      "forced_output_token": 578,
+      "pre_layer_compute_overlap_ms": 16.681183874607086,
+      "pre_layer_wait_from_origin_ms": 16.983327865600586,
+      "precision": "FP16",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 436224000,
+      "transfer_remaining_at_layer_ms": 41.968000411987305
+    },
+    {
+      "comparison": {
+        "max_abs": 0.01171875,
+        "relative_l2": 0.0004975636256858706,
+        "top1_a": 3805,
+        "top1_b": 3805
+      },
+      "copy_end_from_origin_ms": 15.05731201171875,
+      "copy_ms": 15.013983726501465,
+      "copy_start_from_origin_ms": 0.043327998369932175,
+      "decode_concurrent_ms": 21.57254409790039,
+      "decode_end_from_origin_ms": 21.977760314941406,
+      "decode_length": 14,
+      "decode_reference_ms": 20.774784088134766,
+      "decode_start_from_origin_ms": 0.4052160084247589,
+      "enclosing_interval_overlap_ms": 14.652096003293991,
+      "enqueue_host_ms": 0.3300789976492524,
+      "exposed_decode_delta_ms": 0.797760009765625,
+      "forced_input_token": 578,
+      "forced_output_token": 3805,
+      "pre_layer_compute_overlap_ms": 14.652096003293991,
+      "pre_layer_wait_from_origin_ms": 16.738975524902344,
+      "precision": "W4",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 113328128,
+      "transfer_remaining_at_layer_ms": 0.0
+    },
+    {
+      "comparison": {
+        "max_abs": 0.01171875,
+        "relative_l2": 0.0007803088519722223,
+        "top1_a": 374,
+        "top1_b": 374
+      },
+      "copy_end_from_origin_ms": 58.9634895324707,
+      "copy_ms": 58.919776916503906,
+      "copy_start_from_origin_ms": 0.04371200129389763,
+      "decode_concurrent_ms": 63.87126541137695,
+      "decode_end_from_origin_ms": 64.1827163696289,
+      "decode_length": 15,
+      "decode_reference_ms": 20.390207290649414,
+      "decode_start_from_origin_ms": 0.31145599484443665,
+      "enclosing_interval_overlap_ms": 58.65203353762627,
+      "enqueue_host_ms": 0.23501506075263023,
+      "exposed_decode_delta_ms": 43.48105812072754,
+      "forced_input_token": 3805,
+      "forced_output_token": 374,
+      "pre_layer_compute_overlap_ms": 16.613663405179977,
+      "pre_layer_wait_from_origin_ms": 16.925119400024414,
+      "precision": "FP16",
+      "ready_at_enqueue_return": false,
+      "transfer_bytes": 436224000,
+      "transfer_remaining_at_layer_ms": 42.03837013244629
+    }
+  ],
+  "schema_version": 1,
+  "trace_rows": [
+    {
+      "decode_length": 16,
+      "forced_input_token": 374,
+      "forced_output_token": 7878,
+      "precision": "W4"
+    },
+    {
+      "decode_length": 17,
+      "forced_input_token": 7878,
+      "forced_output_token": 11,
+      "precision": "FP16"
+    }
+  ]
+}
