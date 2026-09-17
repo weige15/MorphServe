@@ -14,4 +14,4 @@ The subsequent current output `full-model-results/metrics.json` passed all gates
 - same-history W4/FP16 numerical gates passed with top-1 agreement and relative-L2 below 0.005 for all rows;
 - the final FP16 region bytes were exact and executor/model state returned to FP16 with no pending transfer events.
 
-Raw `cuda-activity-trace.json`, command, source revision/status, manifest checks, GPU before/pre-run/after snapshots and logs are preserved in `full-model-results/`. The run is a modified-condition implementation/overlap measurement, not a reproduction of the paper's ≈4/16/6 ms examples or headline performance.
+Raw `cuda-activity-trace.json`, derived `activity-analysis.json` and `transfer-summary.json`, command, source revision/status, manifest checks, GPU before/pre-run/after snapshots and logs are preserved in `full-model-results/`. The run is a modified-condition implementation/overlap measurement, not a reproduction of the paper's ≈4/16/6 ms examples or headline performance.

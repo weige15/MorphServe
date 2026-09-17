@@ -125,6 +125,23 @@ A current-revision 4 MiB correctness pilot enqueued in 0.244 ms while its inject
 
 Evidence: `experiments/async-layer-transfer/`. The separately valid transfer subset regenerates byte-identically as `figures/transfer-diagnostics.{csv,pdf,png}`; its caption explicitly excludes overlap and paper-agreement claims.
 
+## 4.7 Current-revision GPU closure
+
+**Exact execution source revision:** `67bbdc2d7094c2b6dcaab6e58c745d1a1a0a815b`, recorded in each current runner's `source-revision.txt`; subsequent audit commits are direct descendants and preserve the run sidecars.
+
+| Surface | Command | GPU/provenance | Status |
+|---|---|---|---|
+| Transactional executor | `CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_real_executor_pilot.sh` | RTX 3090 GPU 0; 24,124 MiB free before/pre-run/after; manifests pass | **PASS** |
+| Multi-request ownership | `CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_multirequest_ownership.sh` | RTX 3090 GPU 0; 24,124 MiB free before/pre-run/after; manifests pass | **PASS** |
+| Full-layer async overlap | `CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_async_full_model_overlap.sh` | RTX 3090 GPU 0; 24,124 MiB free before/pre-run/after; manifests pass | **PASS** |
+| Corrected synthetic replay | `CUDA_VISIBLE_DEVICES=0 reproduction/scripts/run_synthetic_gpu_replay.sh` | RTX 3090 GPU 0; 24,124 MiB free before/pre-run/after; manifests pass | **PASS** |
+
+Main correctness evidence is exact rollback/final state for the executor, two-request occupied-region refusal plus post-release recovery for ownership, and exact final FP16 restoration for async swapping. Raw activity analysis proves size-matched H2D/kernel intersections on distinct streams 17/7 of 288.290 μs (W4) and 290.210 μs (FP16); transfer/decode/event summaries are in `full-model-results/{metrics,transfer-summary,activity-analysis}.json`. Replay accounts for all three independent arrivals exactly once, 3 tokens each (9 total), zero errors/timeouts, explicit KV occupancy/capacity and `preemptions: null`, with warmup/init excluded.
+
+Current claim classifications strengthened only for bounded implementation evidence: **H8, H10, H12, H24, H25, H26 and H28**. No paper headline claim changed to reproduced. Remaining blockers before paper-facing experiments are exact author code/configuration, exact model/task/data revisions and prompts, trace scaling/context mapping, controller settings, and paper-equivalent hardware.
+
+This closes current-revision implementation verification, not the paper's headline latency, quality, throughput or exact-table reproduction.
+
 ## 5. Claim-by-claim status
 
 `configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. `results/raw/claim-evidence-provenance.json` hashes and Git-audits the current linked artifacts. Empty command/raw lists explicitly mean that no measurement is claimed. Historical runners predate exact source-revision capture, so their artifact commit is preserved but is not presented as proof of the executed source tree; the four current runners write `source-revision.txt` and source-status sidecars.

@@ -1,0 +1,64 @@
+{
+  "analysis": {
+    "passed": true,
+    "phases": {
+      "FP16": {
+        "copy_duration_us": 52940.256,
+        "copy_name": "Memcpy HtoD (Pinned -> Device)",
+        "copy_stream": "17",
+        "expected_copy_bytes": 436224000,
+        "intersection_us": 290.2099609375,
+        "kernel_stream": "7",
+        "overlap_kernel_duration_us": 290.21,
+        "overlap_kernel_name": "ampere_fp16_s16816gemm_fp16_64x64_ldg8_f2f_stages_64x5_tn",
+        "passed": true
+      },
+      "W4": {
+        "copy_duration_us": 14697.163,
+        "copy_name": "Memcpy HtoD (Pinned -> Device)",
+        "copy_stream": "17",
+        "expected_copy_bytes": 113328128,
+        "intersection_us": 288.2900390625,
+        "kernel_stream": "7",
+        "overlap_kernel_duration_us": 288.29,
+        "overlap_kernel_name": "ampere_fp16_s16816gemm_fp16_64x64_ldg8_f2f_stages_64x5_tn",
+        "passed": true
+      }
+    },
+    "schema_version": 1
+  },
+  "classification": "raw CUDA activity gate summary",
+  "schema_version": 1,
+  "source_trace": {
+    "analysis": {
+      "passed": true,
+      "phases": {
+        "FP16": {
+          "copy_duration_us": 52940.256,
+          "copy_name": "Memcpy HtoD (Pinned -> Device)",
+          "copy_stream": "17",
+          "expected_copy_bytes": 436224000,
+          "intersection_us": 290.2099609375,
+          "kernel_stream": "7",
+          "overlap_kernel_duration_us": 290.21,
+          "overlap_kernel_name": "ampere_fp16_s16816gemm_fp16_64x64_ldg8_f2f_stages_64x5_tn",
+          "passed": true
+        },
+        "W4": {
+          "copy_duration_us": 14697.163,
+          "copy_name": "Memcpy HtoD (Pinned -> Device)",
+          "copy_stream": "17",
+          "expected_copy_bytes": 113328128,
+          "intersection_us": 288.2900390625,
+          "kernel_stream": "7",
+          "overlap_kernel_duration_us": 288.29,
+          "overlap_kernel_name": "ampere_fp16_s16816gemm_fp16_64x64_ldg8_f2f_stages_64x5_tn",
+          "passed": true
+        }
+      },
+      "schema_version": 1
+    },
+    "path": "/nfs/home/s314511048/MorphServe/reproduction/experiments/async-layer-transfer/full-model-results/cuda-activity-trace.json",
+    "sha256": "2606baa9d967861223eac532debe084717048b5ed74749661c3ef1fb5fd09439"
+  }
+}
