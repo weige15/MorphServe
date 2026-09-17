@@ -431,8 +431,8 @@
       "worktree_status": null
     },
     "experiments/async-layer-transfer/analysis.md": {
-      "artifact_last_commit": "c6c5633c4a389fb6995c9237eb8a5977d2e0052d",
-      "bytes": 2141,
+      "artifact_last_commit": "2cabcb114e966f004104741b68ab91e9674d4665",
+      "bytes": 2203,
       "referenced_by": [
         {
           "claim": "H12",
@@ -444,7 +444,7 @@
         }
       ],
       "run_source_revision": null,
-      "sha256": "bb9742e70ba3e39ec33e64dfbf3d5733fc8708978d7cc4cb73a7a4c14c5611ca",
+      "sha256": "d85d3b3a4bbae54dacba698a82b1703da7a73c57b25117a84758c8470ac1b1a3",
       "tracked": true,
       "worktree_status": null
     },
@@ -537,6 +537,24 @@
       ],
       "run_source_revision": "67bbdc2d7094c2b6dcaab6e58c745d1a1a0a815b",
       "sha256": "bc5f6795cb5e6828fbc5c6b604aef9b2f4d25ddecfffca34d76ee114f34e36e8",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/full-model-results/activity-analysis.json": {
+      "artifact_last_commit": "2cabcb114e966f004104741b68ab91e9674d4665",
+      "bytes": 2245,
+      "referenced_by": [
+        {
+          "claim": "H12",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "67bbdc2d7094c2b6dcaab6e58c745d1a1a0a815b",
+      "sha256": "1ee191aaa96a533eacc5d9fb75a95df618c8c73b2d2b88414318b9568b1fcb3d",
       "tracked": true,
       "worktree_status": null
     },
@@ -673,6 +691,24 @@
       ],
       "run_source_revision": "67bbdc2d7094c2b6dcaab6e58c745d1a1a0a815b",
       "sha256": "0b131162b5e3deeb971f36a852eefdca9cd971c9eb1321b35ac8ac41b69a2e64",
+      "tracked": true,
+      "worktree_status": null
+    },
+    "experiments/async-layer-transfer/full-model-results/transfer-summary.json": {
+      "artifact_last_commit": "2cabcb114e966f004104741b68ab91e9674d4665",
+      "bytes": 4561,
+      "referenced_by": [
+        {
+          "claim": "H12",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "67bbdc2d7094c2b6dcaab6e58c745d1a1a0a815b",
+      "sha256": "30136f600d7ca493c69a003c7cac72b40c0e3b2b5fdc6078c357f8b56637e566",
       "tracked": true,
       "worktree_status": null
     },
@@ -2094,7 +2130,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "b7a3f195a197facc2e3e140e5cdf433e77eb9eff",
+  "repository_head_at_generation": "2cabcb114e966f004104741b68ab91e9674d4665",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }
