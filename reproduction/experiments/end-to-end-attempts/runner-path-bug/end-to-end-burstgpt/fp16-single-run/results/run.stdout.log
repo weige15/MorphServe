@@ -1,0 +1,120 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([512, 32, 8, 16, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([512, 32, 8, 16, 128])
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 0.98 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.02 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    854.42 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    125.78 ms.
+[PagedAttention-Serving] Total time: 980.21 ms.
+
+[LlamaTransformerLayer-Serving] Layer 0 serving time exceeded 0.5 s with 0.98 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       0.13 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 0.16 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    980.36 ms.
+[LlamaTransformerLayer-Serving] Total time:                  980.52 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 0.86 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.04 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    862.22 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.06 ms.
+[PagedAttention-Serving] Total time: 862.31 ms.
+
+[LlamaTransformerLayer-Serving] Layer 1 serving time exceeded 0.5 s with 0.86 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       0.10 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 0.13 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    862.41 ms.
+[LlamaTransformerLayer-Serving] Total time:                  862.54 ms.
+
+
+[PagedAttention-Serving] PagedAttention serving time exceeded 0.5 s with 0.86 s.
+[PagedAttention-Serving] Time to intermediate_outputs_init: 0.03 ms.
+[PagedAttention-Serving] Time to paged_attention_phase1:    858.78 ms.
+[PagedAttention-Serving] Time to paged_attention_phase2:    0.05 ms.
+[PagedAttention-Serving] Total time: 858.87 ms.
+
+[LlamaTransformerLayer-Serving] Layer 2 serving time exceeded 0.5 s with 0.86 s.
+[LlamaTransformerLayer-Serving] Time to store kvcache:       0.10 ms.
+[LlamaTransformerLayer-Serving] Time to prefill attention:   0.00 ms.
+[LlamaTransformerLayer-Serving] Time to store kvcache event: 0.13 ms.
+[LlamaTransformerLayer-Serving] Time to decode attention:    859.01 ms.
+[LlamaTransformerLayer-Serving] Total time:                  859.14 ms.
+
+{
+  "passed": false,
+  "gate": {
+    "all_submitted_ids_once": true,
+    "all_completed_exact_512": false,
+    "raw_system_telemetry_present": true,
+    "controller_telemetry_present": true,
+    "morphing_observed": true,
+    "recovery_observed": true,
+    "final_no_pending_layer_events": true,
+    "final_executor_not_poisoned": true,
+    "summary_matches_record_count": true
+  },
+  "summary": {
+    "schema_version": 2,
+    "classification": "modified-condition end-to-end workload benchmark",
+    "configuration": "FP16",
+    "trace": "burstgpt-v1.1-systematic-1.75x.jsonl",
+    "request_count": 123,
+    "completed_count": 0,
+    "completion_rate": 0.0,
+    "error_count": 123,
+    "timeout_count": 123,
+    "ttft_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "tpot_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "queue_delay_s": {
+      "p50": null,
+      "p95": null,
+      "p99": null
+    },
+    "ttft_over_2s_count": 14,
+    "ttft_over_2s_fraction_submitted": 0.11382113821138211,
+    "ttft_over_2s_fraction_completed": null,
+    "completed_request_throughput_s": 0.0,
+    "output_token_throughput_s": 0.0,
+    "duration_s": 1871.0398853719234,
+    "max_queue_depth": 121,
+    "peak_kv_capacity_blocks": 512,
+    "peak_kv_used_blocks": 512,
+    "peak_kv_usage_fraction": 1.0,
+    "time_weighted_kv_capacity_blocks": 512.0,
+    "time_weighted_kv_used_blocks": 505.0031376700708,
+    "morph_count": 0,
+    "recovery_count": 0,
+    "duration_with_one_or_more_quantized_layers_s": 0,
+    "maximum_simultaneous_quantized_layers": 0,
+    "scheduler_preemption_count": null,
+    "scheduler_preemptions_measured": false,
+    "final_active_w4_layers": [],
+    "final_pending_layer_events": [],
+    "final_executor_poisoned": false,
+    "valid_for_comparison": false,
+    "percentile_definition": "Hyndman-Fan type 7 linear interpolation; TTFT per request and TPOT per generated-token interval",
+    "raw_accounting_definition": "every submitted request is retained exactly once, including errors/timeouts; invalid runs are excluded from comparison"
+  },
+  "final": {
+    "active_w4_layers": [],
+    "pending_layer_events": [],
+    "executor_poisoned": false,
+    "controller_poisoned": false,
+    "kv_capacity_blocks": 512,
+    "kv_free_blocks": 512
+  }
+}

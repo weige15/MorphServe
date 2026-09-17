@@ -1,0 +1,40 @@
+/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/awq/__init__.py:21: DeprecationWarning: 
+I have left this message as the final dev message to help you transition.
+
+Important Notice:
+- AutoAWQ is officially deprecated and will no longer be maintained.
+- The last tested configuration used Torch 2.6.0 and Transformers 4.51.3.
+- If future versions of Transformers break AutoAWQ compatibility, please report the issue to the Transformers project.
+
+Alternative:
+- AutoAWQ has been adopted by the vLLM Project: https://github.com/vllm-project/llm-compressor
+
+For further inquiries, feel free to reach out:
+- X: https://x.com/casper_hansen_
+- LinkedIn: https://www.linkedin.com/in/casper-hansen-804005170/
+
+  warnings.warn(_FINAL_DEV_MESSAGE, category=DeprecationWarning, stacklevel=1)
+Traceback (most recent call last):
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/end_to_end_benchmark.py", line 583, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/end_to_end_benchmark.py", line 526, in main
+    _warmup(model, executor, args.kind, payload, cfg, pre_origin, warm_events)
+  File "/nfs/home/s314511048/MorphServe/reproduction/scripts/end_to_end_benchmark.py", line 186, in _warmup
+    model.forward([[token]], [0], [len(warm_ids) + 1], ignore_kvcache=True)
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/candidate-python/swiftllm/worker/model.py", line 511, in forward
+    output = self._forward(
+             ^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/.venv/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/candidate-python/swiftllm/worker/model.py", line 315, in _forward
+    input_embds = layer.forward(
+                  ^^^^^^^^^^^^^^
+  File "/nfs/home/s314511048/MorphServe/reproduction/runtime/candidate-python/swiftllm/worker/layers/transformer_layer.py", line 174, in forward
+    assert not infer_state.ignore_kvcache
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,50 @@
+{
+  "classification": "modified-condition end-to-end workload benchmark",
+  "completed_count": 2,
+  "completed_request_throughput_s": 1.5124153411099486,
+  "completion_rate": 1.0,
+  "configuration": "MorphServe-default",
+  "duration_s": 1.3223880673758686,
+  "duration_with_one_or_more_quantized_layers_s": 1.0634188139811158,
+  "error_count": 0,
+  "final_active_w4_layers": [],
+  "final_executor_poisoned": false,
+  "final_pending_layer_events": [],
+  "max_queue_depth": 1,
+  "maximum_simultaneous_quantized_layers": 8,
+  "morph_count": 4,
+  "output_token_throughput_s": 12.099322728879589,
+  "peak_kv_capacity_blocks": 1736,
+  "peak_kv_usage_fraction": 0.126953125,
+  "peak_kv_used_blocks": 65,
+  "percentile_definition": "Hyndman-Fan type 7 linear interpolation; TTFT per request and TPOT per generated-token interval",
+  "queue_delay_s": {
+    "p50": 0.3100335265044123,
+    "p95": 0.5879822596674785,
+    "p99": 0.6126888137264177
+  },
+  "raw_accounting_definition": "every submitted request is retained exactly once, including errors/timeouts; invalid runs are excluded from comparison",
+  "recovery_count": 4,
+  "request_count": 2,
+  "scheduler_preemption_count": null,
+  "scheduler_preemptions_measured": false,
+  "schema_version": 2,
+  "time_weighted_kv_capacity_blocks": 1227.7296453403364,
+  "time_weighted_kv_used_blocks": 54.20289834532625,
+  "timeout_count": 0,
+  "tpot_s": {
+    "p50": 0.07837468106299639,
+    "p95": 0.1220627617323771,
+    "p99": 0.14067373395431784
+  },
+  "trace": "burstgpt-v1.1-systematic-1.75x.jsonl",
+  "ttft_over_2s_count": 0,
+  "ttft_over_2s_fraction_completed": 0.0,
+  "ttft_over_2s_fraction_submitted": 0.0,
+  "ttft_s": {
+    "p50": 0.3946420254651457,
+    "p95": 0.7061164883198217,
+    "p99": 0.7338031072402373
+  },
+  "valid_for_comparison": false
+}

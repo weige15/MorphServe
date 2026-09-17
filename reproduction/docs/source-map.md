@@ -1,15 +1,26 @@
 # MorphServe source-to-implementation map
 
-Status date: 2026-09-16 UTC. This map distinguishes the supplied conference-version PDF, verifiable public metadata, a candidate project-account code snapshot whose authorship is not yet independently linked, and reconstruction work. Reference values are isolated in `../configs/paper-reference-values.json`.
+Status date: 2026-09-17 UTC. This map distinguishes the authoritative supplied MLSys conference-final PDF, the preserved arXiv-v2 secondary source, verifiable public metadata, a candidate project-account code snapshot whose authorship is unresolved, and reconstruction work. Reference values are isolated in `../configs/paper-reference-values.json`.
 
-## Primary paper artifacts
+## Primary paper artifacts — conference final
 
 | Artifact | Pinned evidence | Role |
 |---|---|---|
-| Supplied paper | `../../references/morphserve-2506.02006-v2.pdf`; SHA-256 `e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30` | Target conference version, 19 pages |
-| arXiv v2 source | `../sources/morphserve-2506.02006v2-source.tar.gz`; SHA-256 `bd617e0f54c7a27aa8a46ab569fbe7f594c4067099967a864078b9dacdc4406c` | Exact equations, captions, tables, and vector figures; corroborating source only, not a replacement target |
-| Extracted paper text | `../sources/morphserve-2506.02006-v2.txt` | Search aid; visually inspect the PDF/vector figures for ambiguous layout |
-| Machine-readable references | `../configs/paper-reference-values.json` | Paper-reported values only; must remain separate from measured results |
+| Supplied conference-final paper | `../../references/morphserve-mlsys2026-conference-final.pdf`; SHA-256 `080ddcfe8c23e12bb421e4c1107c09246c82144345064018401b49e1a8dd2678` | **Primary target**, 20 pages, Proceedings of the 9th MLSys Conference (2026) |
+| Extracted conference-final text | `../sources/morphserve-mlsys2026-conference-final.txt`; SHA-256 `4045eb047ae9545aa4788028e3904c088a50b5dcc1928bb79c30c2bcdb37984a` | Search aid for the primary source; pages 8–11 and 17–20 were rendered and visually inspected |
+| Conference-final source audit | `../results/raw/conference-final-source-audit.json` | Absolute path, hash, page count, title/authors, Figures 1–7, Tables 1–9 and §5.1/Appendix C checks |
+| Version delta | `paper-version-delta.md` | Primary-vs-v2 numbering, wording, result, baseline, and Appendix C changes |
+| Machine-readable references | `../configs/paper-reference-values.json` | Conference-final paper-reported values only; never local measurements |
+
+The final adds LLM-PQ and PyramidKV result claims to §5.1, includes Table 9, adds the Table 5 runtime-vs-static-selective comparison, and expands Appendix C. Its exact 41.3%/82.3% LLM-PQ and 1.73×/2.4× PyramidKV values are paper references, not reproduction measurements.
+
+## Historical secondary paper artifacts — arXiv v2
+
+| Artifact | Pinned evidence | Role |
+|---|---|---|
+| arXiv-v2 PDF | `../../references/morphserve-2506.02006-v2.pdf`; SHA-256 `e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30` | Preserved historical source, 19 pages; Figures 1–7 and Tables 1–8; no Table 9 |
+| arXiv v2 source | `../sources/morphserve-2506.02006v2-source.tar.gz`; SHA-256 `bd617e0f54c7a27aa8a46ab569fbe7f594c4067099967a864078b9dacdc4406c` | Historical equations, captions, tables, and vector figures; corroborating source only |
+| Extracted v2 text | `../sources/morphserve-2506.02006-v2.txt` | Historical search aid; all old hashes/reports/evidence remain retained |
 
 ## Public code/source audit
 
@@ -43,6 +54,12 @@ Vendored trees have `MANIFEST.sha256` files. Runtime fixes must go in a separate
 | Scheduler/attention compatibility | Sections 4.1, 4.4; Appendix C | Forked SwiftLLM scheduler plus custom Triton attention/store kernels | Material changes are larger than “minimal” by diff against current SwiftLLM; base commit is unknown. Correctness must be tested rather than inferred. |
 | No-morph FP16 numerical base | Required verification surface | Normalized candidate `runtime/candidate-python`; `experiments/candidate-fp16-baseline/results-attempt-3/metrics.json` | Modified-condition Llama 3.1 8B: top-1/top-5 match Transformers, relative logit L2 0.00204, 291/291 weights exact. KV/scheduler path not covered. |
 | Metrics and raw request records | Section 5 setup and objective verification surface | `RequestMetrics`, `ServerMetrics`, utilities | Partial. No supplied replay scripts/configs/raw paper logs; scheduled arrival and complete token timing schema are absent. |
+
+## Common-engine end-to-end benchmark mapping
+
+The first workload comparison is a separate modified-condition layer over the repaired runtime. `scripts/end_to_end_benchmark.py` uses one SwiftLLM `LlamaModel` request path for FP16, all-real AutoAWQ W4, and reconstructed MorphServe-default. `configs/end-to-end-benchmark.json` freezes the 1,024-token payload, 512-token EOS-independent policy, base KV capacities, continuous-batch limits, timeout, and reconstructed controller reference. `traces/figure1b-inferred/` contains deterministic systematic-thinning manifests from figure-inferred windows, not the paper's recovered context map.
+
+Each selected run under `experiments/end-to-end-{burstgpt,azure}/` retains raw per-request token IDs/timestamps, system memory/KV/queue telemetry, controller events, summaries, commands, model/source status, GPU/process snapshots, and immutable vendor manifest checks. `experiments/end-to-end-report.md` and `figures/end-to-end/` are generated/compiled views. `results/raw/burstgpt-end-to-end-audit.json` is the required BurstGPT-before-Azure audit. All six runs pass modified-condition gates and are explicitly excluded from exact paper latency/quality claims.
 
 ## Offline profiling contract
 

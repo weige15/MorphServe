@@ -1,9 +1,9 @@
 project: MorphServe evidence-backed reproduction
-status: complete_current_revision_gpu_verified_partial_exact_blocked
-updated_utc: '2026-09-17T19:50:00+08:00'
+status: phase1_end_to_end_benchmark_complete_modified_condition
+updated_utc: '2026-09-18T00:20:00+08:00'
 checkpoint:
-  current: 6
-  name: current-revision GPU closure and final audit
+  current: 7
+  name: conference-final source correction and end-to-end workload benchmark
   checkpoints:
     - id: 1
       name: materials and environment audit
@@ -44,9 +44,27 @@ checkpoint:
         - configs/claim-evidence-map.json
         - results/raw/claim-evidence-provenance.json
         - docs/completion-audit.md
+    - id: 7
+      name: conference-final source correction and end-to-end workload benchmark
+      status: complete_modified_condition
+      evidence:
+        - docs/paper-version-delta.md
+        - results/raw/conference-final-source-audit.json
+        - sources/morphserve-mlsys2026-conference-final.txt
+        - configs/end-to-end-benchmark.json
+        - configs/request-payload-1024.json
+        - results/raw/burstgpt-end-to-end-audit.json
+        - experiments/end-to-end-report.md
+        - figures/end-to-end/comparison.json
+        - docs/completion-audit.md
 source_truth:
-  pdf: ../references/morphserve-2506.02006-v2.pdf
-  pdf_sha256: e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30
+  pdf: ../references/morphserve-mlsys2026-conference-final.pdf
+  pdf_sha256: 080ddcfe8c23e12bb421e4c1107c09246c82144345064018401b49e1a8dd2678
+  page_count: 20
+  title: MorphServe: Efficient and Workload-Aware LLM Serving via Runtime Quantized Layer Swapping and KV Cache Resizing
+  authors: [Zhaoyuan Su, Zeyu Zhang, Tingfeng Lan, Zirui Wang, Haiying Shen, Juncheng Yang, Yue Cheng]
+  historical_secondary_pdf: ../references/morphserve-2506.02006-v2.pdf
+  historical_secondary_pdf_sha256: e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30
   arxiv: 2506.02006v2
 source_status:
   official_lab_repo:
@@ -87,20 +105,21 @@ blocked_exact_inputs:
   - paper hardware
   - verified author link for candidate code
 active_hypothesis: >-
-  The independent atomic reconstruction now passes all four current-revision full-model GPU
-  verification surfaces. Real executor rollback/recovery, two-request reclaimed-KV ownership,
-  full-layer W4/FP16 CUDA activity overlap, and corrected synthetic scheduled-arrival accounting
-  all pass on RTX 3090 GPU 0. These are modified-condition implementation measurements; paper
-  headline claims remain blocked by missing author inputs, workloads and hardware.
-active_protocol: experiments/async-layer-transfer/protocol.md
+  The independent atomic reconstruction passes the four implementation gates and the first six
+  common-engine end-to-end runs. Under the frozen modified condition, all 123 BurstGPT and 94
+  Azure Code requests complete exactly 512 generated tokens; MorphServe-default performs real
+  W4/KV morphing and recovery, but is slower than FP16 in this saturated, queue-dominated run.
+  These are modified-condition measurements; paper headline and quality claims remain blocked by
+  missing author inputs, task/context mapping, controller settings and hardware.
+active_protocol: configs/end-to-end-benchmark.json
 resource_accounting:
-  saved_gpu_runner_process_wall_seconds: 961.666304627
+  saved_gpu_runner_process_wall_seconds: 3390.018022839
   process_wall_caveat: includes load/JIT/test work, excludes install/build, and is not CUDA kernel or exclusive allocation time
   agent_elapsed_seconds_at_2026_09_16_checkpoint: 21132
   paid_compute_used: false
   external_uploads: false
   agent_tokens: tracked_by_runtime_separately
 next_actions:
-  - Preserve the four passing current-revision GPU artifacts and regenerate claim provenance after final report/map updates.
+  - Regenerate claim provenance and run the repository artifact verifier after the end-to-end report/map updates.
   - Keep paper-facing claims blocked until exact author implementation/configuration, model/task assets, trace mapping and paper-equivalent hardware are available.
-  - Do not reinterpret modified-condition GPU implementation gates as paper latency, quality, throughput or exact-table reproduction.
+  - Do not reinterpret modified-condition GPU workload measurements as paper latency, quality, throughput or exact-table reproduction.

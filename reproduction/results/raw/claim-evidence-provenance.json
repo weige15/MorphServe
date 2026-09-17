@@ -1,5 +1,43 @@
 {
   "artifacts": {
+    "configs/end-to-end-benchmark.json": {
+      "artifact_last_commit": null,
+      "bytes": 1919,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "configs"
+        },
+        {
+          "claim": "H24",
+          "field": "configs"
+        },
+        {
+          "claim": "H25",
+          "field": "configs"
+        },
+        {
+          "claim": "H26",
+          "field": "configs"
+        },
+        {
+          "claim": "H28",
+          "field": "configs"
+        },
+        {
+          "claim": "H8",
+          "field": "configs"
+        },
+        {
+          "claim": "H9",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "5ccb6d61927bf98284e76854e9bbf19781c50e362dece86b917932d924beb568",
+      "tracked": false,
+      "worktree_status": "?? reproduction/configs/end-to-end-benchmark.json"
+    },
     "configs/figure1b-inferred-trace-windows.json": {
       "artifact_last_commit": "042b4d27032ca4c64675f5c51dad69f8e593dcdc",
       "bytes": 1339,
@@ -16,38 +54,10 @@
     },
     "configs/paper-reference-values.json": {
       "artifact_last_commit": "e50e44231ce0fa7e3f86b50c4b1a1eb40b04ef77",
-      "bytes": 7533,
+      "bytes": 22794,
       "referenced_by": [
         {
           "claim": "H1",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H2",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H3",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H4",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H5",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H6",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H7",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H9",
           "field": "paper_reference"
         },
         {
@@ -91,6 +101,10 @@
           "field": "paper_reference"
         },
         {
+          "claim": "H2",
+          "field": "paper_reference"
+        },
+        {
           "claim": "H20",
           "field": "paper_reference"
         },
@@ -105,12 +119,36 @@
         {
           "claim": "H27",
           "field": "paper_reference"
+        },
+        {
+          "claim": "H3",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H4",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H5",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H6",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H7",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H9",
+          "field": "paper_reference"
         }
       ],
       "run_source_revision": null,
-      "sha256": "45241c88343367a91f79b8c22478e5cf27ad12a2b54a1185b4d94681a111dcdd",
+      "sha256": "32183be6c95326aa72862d5ed571ff63229497d7882de4ca82dbb949855cf2f7",
       "tracked": true,
-      "worktree_status": null
+      "worktree_status": "M reproduction/configs/paper-reference-values.json"
     },
     "configs/reconstructed-controller-modes.json": {
       "artifact_last_commit": "641bbc940252ec004b250f310883c8f386608a03",
@@ -125,6 +163,44 @@
       "sha256": "6a84a7dc6036e71ee96ae998709f6f15329d95db09c0eb999bcb8e24b3dde401",
       "tracked": true,
       "worktree_status": null
+    },
+    "configs/request-payload-1024.json": {
+      "artifact_last_commit": null,
+      "bytes": 12144,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "configs"
+        },
+        {
+          "claim": "H24",
+          "field": "configs"
+        },
+        {
+          "claim": "H25",
+          "field": "configs"
+        },
+        {
+          "claim": "H26",
+          "field": "configs"
+        },
+        {
+          "claim": "H28",
+          "field": "configs"
+        },
+        {
+          "claim": "H8",
+          "field": "configs"
+        },
+        {
+          "claim": "H9",
+          "field": "configs"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "1a0a6df46b47ca9fe00b42e12b4234ccbf7580f4a1eda70a3999f90f42b1598a",
+      "tracked": false,
+      "worktree_status": "?? reproduction/configs/request-payload-1024.json"
     },
     "configs/synthetic-gpu-replay.json": {
       "artifact_last_commit": "e03f25c9eb42c45f15349324acfc41f67cf33c3f",
@@ -156,84 +232,48 @@
     },
     "docs/claim-register.md": {
       "artifact_last_commit": "3fe6a96fb02b33cc23c91dc3bc43555c97a03c2b",
-      "bytes": 10981,
+      "bytes": 12190,
       "referenced_by": [
-        {
-          "claim": "H2",
-          "field": "comparison"
-        },
-        {
-          "claim": "H3",
-          "field": "comparison"
-        },
-        {
-          "claim": "H4",
-          "field": "comparison"
-        },
-        {
-          "claim": "H6",
-          "field": "comparison"
-        },
-        {
-          "claim": "H7",
-          "field": "comparison"
-        },
-        {
-          "claim": "H9",
-          "field": "comparison"
-        },
         {
           "claim": "H16",
           "field": "comparison"
         },
         {
+          "claim": "H2",
+          "field": "comparison"
+        },
+        {
           "claim": "H21",
+          "field": "comparison"
+        },
+        {
+          "claim": "H3",
+          "field": "comparison"
+        },
+        {
+          "claim": "H4",
+          "field": "comparison"
+        },
+        {
+          "claim": "H6",
+          "field": "comparison"
+        },
+        {
+          "claim": "H7",
           "field": "comparison"
         }
       ],
       "run_source_revision": null,
-      "sha256": "c257d2427ba831391aa09e9b982aae921db61cf2064bf12ec857c58a5ef831da",
+      "sha256": "9bbdd6e9114978b97fe2b99ebb6075ed21159dd76ddd4dcb4a2d9762af08d0c7",
       "tracked": true,
-      "worktree_status": null
+      "worktree_status": "M reproduction/docs/claim-register.md"
     },
     "docs/paper-evidence-brief.md": {
       "artifact_last_commit": "e50e44231ce0fa7e3f86b50c4b1a1eb40b04ef77",
-      "bytes": 38359,
+      "bytes": 39814,
       "referenced_by": [
         {
           "claim": "H1",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H2",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H3",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H4",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H5",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H6",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H7",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H8",
-          "field": "paper_reference"
-        },
-        {
-          "claim": "H9",
           "field": "paper_reference"
         },
         {
@@ -274,6 +314,10 @@
         },
         {
           "claim": "H19",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H2",
           "field": "paper_reference"
         },
         {
@@ -317,23 +361,47 @@
           "field": "paper_reference"
         },
         {
+          "claim": "H3",
+          "field": "paper_reference"
+        },
+        {
           "claim": "H30",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H4",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H5",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H6",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H7",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H8",
+          "field": "paper_reference"
+        },
+        {
+          "claim": "H9",
           "field": "paper_reference"
         }
       ],
       "run_source_revision": null,
-      "sha256": "637d3f796286a8baddd58b50fc6a543b29f516eeafeab274027e2b4d3e7e5b35",
+      "sha256": "e7e4a1a73ec887a5c2885b3eb26fdfec54d93dd7dd90817c0bff58b3fcff962a",
       "tracked": true,
-      "worktree_status": null
+      "worktree_status": "M reproduction/docs/paper-evidence-brief.md"
     },
     "docs/task-artifact-audit.md": {
       "artifact_last_commit": "fa7b680f6f09e54029a7a46a7df56b899d46310b",
       "bytes": 2623,
       "referenced_by": [
-        {
-          "claim": "H5",
-          "field": "comparison"
-        },
         {
           "claim": "H14",
           "field": "comparison"
@@ -344,6 +412,10 @@
         },
         {
           "claim": "H17",
+          "field": "comparison"
+        },
+        {
+          "claim": "H5",
           "field": "comparison"
         }
       ],
@@ -1106,6 +1178,3492 @@
       "tracked": true,
       "worktree_status": null
     },
+    "experiments/end-to-end-azure/fp16/results-batch5/commands.txt": {
+      "artifact_last_commit": null,
+      "bytes": 1541,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "commands"
+        },
+        {
+          "claim": "H24",
+          "field": "commands"
+        },
+        {
+          "claim": "H25",
+          "field": "commands"
+        },
+        {
+          "claim": "H26",
+          "field": "commands"
+        },
+        {
+          "claim": "H28",
+          "field": "commands"
+        },
+        {
+          "claim": "H8",
+          "field": "commands"
+        },
+        {
+          "claim": "H9",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "74f85ec00200a14669697398854436b2da244e04f0d9ec921301f4dc6b7fe854",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/commands.txt"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/controller-events.json": {
+      "artifact_last_commit": null,
+      "bytes": 102,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "416942a813433009d779947a27fcd519154c7b267b44ac5416139488c31ada49",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/controller-events.json"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 951,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "165cf73124e29b42e6623bfdd7f651d34e6384b19ec2d58c249ba5541f114940",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv": {
+      "artifact_last_commit": null,
+      "bytes": 951,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "675d0ac3f17d1926222b03938606f43c63f5bf6c87d6ed80f6577aee7b08e22f",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 546,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "6e6bfaf208233a71ea795d13ffe88de5f203f5f35759496c75e095c582b91c5b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv": {
+      "artifact_last_commit": null,
+      "bytes": 546,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "6e6bfaf208233a71ea795d13ffe88de5f203f5f35759496c75e095c582b91c5b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 6277427,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "7fe2025e50d584f3913bea82e0a851ff476c11d6f3e06c8ecf3cb63de25a4dc5",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json": {
+      "artifact_last_commit": null,
+      "bytes": 5989,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "f4fb3db0a279897f2890a77c0ce51dc71fef8e9d01e14425ac7ffcb00230a13f",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/run.exitcode": {
+      "artifact_last_commit": null,
+      "bytes": 2,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/run.exitcode"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt": {
+      "artifact_last_commit": null,
+      "bytes": 41,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "ab60cfced4bb5816e1ccb5210b381929fef2ef4f20c5766101149bbbc970699e",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/source-status.txt": {
+      "artifact_last_commit": null,
+      "bytes": 457,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "789a95e63bc8a54cef25fa3961b5aeb72256809931a6a4d302cc4d7eaa9ae785",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/source-status.txt"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/summary.json": {
+      "artifact_last_commit": null,
+      "bytes": 1782,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "fc71b3f34ad8d41ed4f2c252687a215ae3ad8d4a97ef3c847ca955164d9a2683",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/summary.json"
+    },
+    "experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 7017901,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "fc1b2d2230a7217d6055e931f47bd53618cabe88587720ddbfdd724cd5128b04",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt": {
+      "artifact_last_commit": null,
+      "bytes": 1569,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "commands"
+        },
+        {
+          "claim": "H24",
+          "field": "commands"
+        },
+        {
+          "claim": "H25",
+          "field": "commands"
+        },
+        {
+          "claim": "H26",
+          "field": "commands"
+        },
+        {
+          "claim": "H28",
+          "field": "commands"
+        },
+        {
+          "claim": "H8",
+          "field": "commands"
+        },
+        {
+          "claim": "H9",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "41945acc3bbd00d6a62db2bbc5dccf7b860d33647b9ee890c4a080a9cdef13c6",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json": {
+      "artifact_last_commit": null,
+      "bytes": 18698649,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "926d3fc5dba14e62d483085a9c188f4f5a436b177269ab6a38dd83ad434cd432",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 948,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "1746be1856fea77dd7935091861af4ce480e06c983fb19bc97efdb450e7ebd26",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv": {
+      "artifact_last_commit": null,
+      "bytes": 952,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "b7c6691dfe90885163175c7e5c6bd0215c735dc7f43fd4dcfc4e796cd2859f39",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 541,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "1dbb701d38359ca2c4f0faa671ee349626c8365981cb52c7a76cda25833b8e84",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv": {
+      "artifact_last_commit": null,
+      "bytes": 546,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "c043c5a173a4531623623815bfc748be1544dcfdfe009a701af40fe78b32d678",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 7633158,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "efe52021b0d788ddaba21d4939bbbf8c2f75cd232929f6e6cd3665d9b5352290",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json": {
+      "artifact_last_commit": null,
+      "bytes": 6066,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "0237bfc7a3e4e584fc23df8bd20e69758ecd7289c27909835278c179da3fd982",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode": {
+      "artifact_last_commit": null,
+      "bytes": 2,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt": {
+      "artifact_last_commit": null,
+      "bytes": 41,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "ab60cfced4bb5816e1ccb5210b381929fef2ef4f20c5766101149bbbc970699e",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt": {
+      "artifact_last_commit": null,
+      "bytes": 457,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "789a95e63bc8a54cef25fa3961b5aeb72256809931a6a4d302cc4d7eaa9ae785",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json": {
+      "artifact_last_commit": null,
+      "bytes": 1818,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "95c891f73a1762e9c633f8faed009205e6918467b55a0dfae63110c41f4c62e2",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json"
+    },
+    "experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 7416780,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "5bfab21e05046716a5aa91894e9c01b45654b4b0ae49e4b4cd70a48e0f8b5405",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/commands.txt": {
+      "artifact_last_commit": null,
+      "bytes": 1551,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "commands"
+        },
+        {
+          "claim": "H24",
+          "field": "commands"
+        },
+        {
+          "claim": "H25",
+          "field": "commands"
+        },
+        {
+          "claim": "H26",
+          "field": "commands"
+        },
+        {
+          "claim": "H28",
+          "field": "commands"
+        },
+        {
+          "claim": "H8",
+          "field": "commands"
+        },
+        {
+          "claim": "H9",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "8d4d1ffddf739cc13b6cb980bca4a352e765ace9e4211e7c937924ae063ad7f6",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/commands.txt"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json": {
+      "artifact_last_commit": null,
+      "bytes": 103,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "95a15ecf764fa1fd8462eb5960a655980ffbe31ac5d77672ff0b4314a64730e0",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 951,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "085555d2b1e465eeeead0ef88ed861997cd8c94c074dbfe3a140eadfc73b8f79",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv": {
+      "artifact_last_commit": null,
+      "bytes": 951,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "477c46e3ed7afdc2aef585c19817e32c749d900f40bc07a99dc418c07758c88b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 546,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "6e6bfaf208233a71ea795d13ffe88de5f203f5f35759496c75e095c582b91c5b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv": {
+      "artifact_last_commit": null,
+      "bytes": 546,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "6e6bfaf208233a71ea795d13ffe88de5f203f5f35759496c75e095c582b91c5b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 11742506,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "5a2257c522d7c7aa78ab2b99f14122316f4b5cd9c1159bb85621023961fe10ee",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json": {
+      "artifact_last_commit": null,
+      "bytes": 6126,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "eda5f0d7edadeba8784f5016e1f680a67903291be050206655960ae4ca539447",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode": {
+      "artifact_last_commit": null,
+      "bytes": 2,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt": {
+      "artifact_last_commit": null,
+      "bytes": 41,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "ab60cfced4bb5816e1ccb5210b381929fef2ef4f20c5766101149bbbc970699e",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt": {
+      "artifact_last_commit": null,
+      "bytes": 457,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "789a95e63bc8a54cef25fa3961b5aeb72256809931a6a4d302cc4d7eaa9ae785",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/summary.json": {
+      "artifact_last_commit": null,
+      "bytes": 1796,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "162972c265767aa94b9fd8a5e726435d3a7bcc2df9877118573d1b6dd3f5cb9e",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/summary.json"
+    },
+    "experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 8151792,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "30a60243b3de5d4bfd49d8feaea15c2bdcca442980f6a91567ad8ee3ae088f15",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt": {
+      "artifact_last_commit": null,
+      "bytes": 1550,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "commands"
+        },
+        {
+          "claim": "H24",
+          "field": "commands"
+        },
+        {
+          "claim": "H25",
+          "field": "commands"
+        },
+        {
+          "claim": "H26",
+          "field": "commands"
+        },
+        {
+          "claim": "H28",
+          "field": "commands"
+        },
+        {
+          "claim": "H8",
+          "field": "commands"
+        },
+        {
+          "claim": "H9",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "39cd6cc318dd6de4f7fc1b28d843027f44074f4d394d757c9a6c88e7daef8e62",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json": {
+      "artifact_last_commit": null,
+      "bytes": 103,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "a589467e97538e13525eb40de450591b87b333de42acd7d34224bbeb1c7d1da1",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 944,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "3437825bf753a2591b9daf745db2d88a12eb556543cc2d61670b4f4b9b51df4f",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv": {
+      "artifact_last_commit": null,
+      "bytes": 944,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "cdff52caba52567b693e802d7d401b209b99ebcdaff5aaa70bdedf10aa7344a7",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 471,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "8af048dd7dc3a694e4fe6796dde2cae68e9c8fb39ce32742630097da73bf9c4a",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv": {
+      "artifact_last_commit": null,
+      "bytes": 405,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "81727c1e97bedb95982ad8351a7373f7809565fc2439ece3d272fc3df6616220",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 8208879,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "e044d403fd2d3dcb1833cf263554455af2810882149a05e2483dd8f21dd5aa5b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json": {
+      "artifact_last_commit": null,
+      "bytes": 5992,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "cd95a604a73dddb39bbe4e48a1a374a3a6ba7655588c670e6ae83628bfa22a0d",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode": {
+      "artifact_last_commit": null,
+      "bytes": 2,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt": {
+      "artifact_last_commit": null,
+      "bytes": 41,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "ab60cfced4bb5816e1ccb5210b381929fef2ef4f20c5766101149bbbc970699e",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt": {
+      "artifact_last_commit": null,
+      "bytes": 408,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "5a8e4726daba5621538d23dcad4915a5df07c2929899db1cfb22cc4cf4d92d78",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json": {
+      "artifact_last_commit": null,
+      "bytes": 1781,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "342af3feb8de8d5b164e670a65566e8991bb1e96aefa8ac665bc624b0a5bd0d9",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json"
+    },
+    "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 9125058,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "3860ac7ad33e04245500b661a364510c8ccfaa2a8a7d9f8d3f8a87671bfbc965",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt": {
+      "artifact_last_commit": null,
+      "bytes": 1575,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "commands"
+        },
+        {
+          "claim": "H24",
+          "field": "commands"
+        },
+        {
+          "claim": "H25",
+          "field": "commands"
+        },
+        {
+          "claim": "H26",
+          "field": "commands"
+        },
+        {
+          "claim": "H28",
+          "field": "commands"
+        },
+        {
+          "claim": "H8",
+          "field": "commands"
+        },
+        {
+          "claim": "H9",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "e14ccd45716bb62f84ef55475505c35432bbbb67f43bb9b6a18b6f806b227f5b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json": {
+      "artifact_last_commit": null,
+      "bytes": 26513538,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "a9e7353621cba35844873b8ba21656300e43a219927d3b071998dd564319c037",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 951,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "477c46e3ed7afdc2aef585c19817e32c749d900f40bc07a99dc418c07758c88b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv": {
+      "artifact_last_commit": null,
+      "bytes": 944,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "cfbe6781ab28755839d69699937ddb1dbbea9a6e637f0f5b13d7ef790fb2bfb9",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 546,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "6e6bfaf208233a71ea795d13ffe88de5f203f5f35759496c75e095c582b91c5b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv": {
+      "artifact_last_commit": null,
+      "bytes": 471,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "a92b02a40060801b69ee105ee28e4c5008877e9c3f025f861087fb2bbc7cb09b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 10042274,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "dfa1720b20dac4f0aea7187fc548891213a5ec1695636757529b40d128a1f010",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json": {
+      "artifact_last_commit": null,
+      "bytes": 6076,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "f96a493f3362ac046c4fe73a704a08fa1d2d06b42f8530efa5c277e3a54eb5dd",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode": {
+      "artifact_last_commit": null,
+      "bytes": 2,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt": {
+      "artifact_last_commit": null,
+      "bytes": 41,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "ab60cfced4bb5816e1ccb5210b381929fef2ef4f20c5766101149bbbc970699e",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt": {
+      "artifact_last_commit": null,
+      "bytes": 408,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "5a8e4726daba5621538d23dcad4915a5df07c2929899db1cfb22cc4cf4d92d78",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json": {
+      "artifact_last_commit": null,
+      "bytes": 1824,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "6737b13d2c7cbc74287a532ecaffcb989fdf5ea6061e8d9a6721c81ead4ff0ae",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json"
+    },
+    "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 9652674,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "3c9e54e9f9faf606668a1ecada895cebd160a5ec2bc4afc92843bf741c3dfe69",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt": {
+      "artifact_last_commit": null,
+      "bytes": 1560,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "commands"
+        },
+        {
+          "claim": "H24",
+          "field": "commands"
+        },
+        {
+          "claim": "H25",
+          "field": "commands"
+        },
+        {
+          "claim": "H26",
+          "field": "commands"
+        },
+        {
+          "claim": "H28",
+          "field": "commands"
+        },
+        {
+          "claim": "H8",
+          "field": "commands"
+        },
+        {
+          "claim": "H9",
+          "field": "commands"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "bcb38fbf0ace767c515dbed1485e8c55b09273a9743b2bd47776f7cf6bb476c4",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json": {
+      "artifact_last_commit": null,
+      "bytes": 103,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "cead39de5bf82e4a7f714e55eef265e73fc8dad85ade68a07227ff1efca71716",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log": {
+      "artifact_last_commit": null,
+      "bytes": 5724,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "595878163bdcd8cbd3c0ae33f3a52bb459f845674cd282f4a9b0fdc9b7b67025",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 944,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "312bdb89b66da6b44c8662d4ccba160c175c955bf3b0f38552fbfe4867fe7caa",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv": {
+      "artifact_last_commit": null,
+      "bytes": 943,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "102548838c856329c650188937bdf5d2333723234035d865d0e15131dfdd23db",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv": {
+      "artifact_last_commit": null,
+      "bytes": 471,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "a92b02a40060801b69ee105ee28e4c5008877e9c3f025f861087fb2bbc7cb09b",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv": {
+      "artifact_last_commit": null,
+      "bytes": 471,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "8af048dd7dc3a694e4fe6796dde2cae68e9c8fb39ce32742630097da73bf9c4a",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 15360099,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "dc0b553dfde16d92ef6b95ac3c4fc86ad6100682968e6e690cac5edb29f701c9",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json": {
+      "artifact_last_commit": null,
+      "bytes": 6138,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "a2a32b4f65eac25804c097875fd3898c03dc479eba03213648fdf990e93a3bd5",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode": {
+      "artifact_last_commit": null,
+      "bytes": 2,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt": {
+      "artifact_last_commit": null,
+      "bytes": 41,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "ab60cfced4bb5816e1ccb5210b381929fef2ef4f20c5766101149bbbc970699e",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt": {
+      "artifact_last_commit": null,
+      "bytes": 408,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "5a8e4726daba5621538d23dcad4915a5df07c2929899db1cfb22cc4cf4d92d78",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json": {
+      "artifact_last_commit": null,
+      "bytes": 1804,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "2348ab4adcea5e572db2fc57e93ea8d8930d56d159e91261ce62ea73fa4ccf1e",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json"
+    },
+    "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl": {
+      "artifact_last_commit": null,
+      "bytes": 10666030,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
+      "sha256": "94d570f531faf0a5aed79163be4435ecbf80ed8f06f91ee939cb3301079328a2",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl"
+    },
+    "experiments/end-to-end-report.md": {
+      "artifact_last_commit": null,
+      "bytes": 4957,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H10",
+          "field": "comparison"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "comparison"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "comparison"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "comparison"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "comparison"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "comparison"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "fae7c2afcc43823e1b2d2627608b18d60724e027fa525573fc55d5dd1a0a4baa",
+      "tracked": false,
+      "worktree_status": "?? reproduction/experiments/end-to-end-report.md"
+    },
     "experiments/lis-algorithm/analysis.md": {
       "artifact_last_commit": "a3572a8aa6c1bfb99ceaa703e04c1494b1dbf3d3",
       "bytes": 1365,
@@ -1295,10 +4853,6 @@
       "bytes": 1711,
       "referenced_by": [
         {
-          "claim": "H8",
-          "field": "comparison"
-        },
-        {
           "claim": "H25",
           "field": "comparison"
         },
@@ -1308,6 +4862,10 @@
         },
         {
           "claim": "H28",
+          "field": "comparison"
+        },
+        {
+          "claim": "H8",
           "field": "comparison"
         }
       ],
@@ -1321,15 +4879,15 @@
       "bytes": 1873,
       "referenced_by": [
         {
-          "claim": "H8",
-          "field": "configs"
-        },
-        {
           "claim": "H25",
           "field": "configs"
         },
         {
           "claim": "H28",
+          "field": "configs"
+        },
+        {
+          "claim": "H8",
           "field": "configs"
         }
       ],
@@ -1343,15 +4901,15 @@
       "bytes": 1306,
       "referenced_by": [
         {
-          "claim": "H8",
-          "field": "commands"
-        },
-        {
           "claim": "H25",
           "field": "commands"
         },
         {
           "claim": "H28",
+          "field": "commands"
+        },
+        {
+          "claim": "H8",
           "field": "commands"
         }
       ],
@@ -1365,15 +4923,15 @@
       "bytes": 3712,
       "referenced_by": [
         {
-          "claim": "H8",
-          "field": "raw"
-        },
-        {
           "claim": "H25",
           "field": "raw"
         },
         {
           "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -1387,10 +4945,6 @@
       "bytes": 1306,
       "referenced_by": [
         {
-          "claim": "H8",
-          "field": "commands"
-        },
-        {
           "claim": "H25",
           "field": "commands"
         },
@@ -1400,6 +4954,10 @@
         },
         {
           "claim": "H28",
+          "field": "commands"
+        },
+        {
+          "claim": "H8",
           "field": "commands"
         }
       ],
@@ -1413,10 +4971,6 @@
       "bytes": 21124,
       "referenced_by": [
         {
-          "claim": "H8",
-          "field": "raw"
-        },
-        {
           "claim": "H25",
           "field": "raw"
         },
@@ -1426,6 +4980,10 @@
         },
         {
           "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -1439,11 +4997,11 @@
       "bytes": 350,
       "referenced_by": [
         {
-          "claim": "H8",
+          "claim": "H25",
           "field": "raw"
         },
         {
-          "claim": "H25",
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -1457,11 +5015,11 @@
       "bytes": 350,
       "referenced_by": [
         {
-          "claim": "H8",
+          "claim": "H25",
           "field": "raw"
         },
         {
-          "claim": "H25",
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -1475,10 +5033,6 @@
       "bytes": 41,
       "referenced_by": [
         {
-          "claim": "H8",
-          "field": "raw"
-        },
-        {
           "claim": "H25",
           "field": "raw"
         },
@@ -1488,6 +5042,10 @@
         },
         {
           "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -1501,10 +5059,6 @@
       "bytes": 0,
       "referenced_by": [
         {
-          "claim": "H8",
-          "field": "raw"
-        },
-        {
           "claim": "H25",
           "field": "raw"
         },
@@ -1514,6 +5068,10 @@
         },
         {
           "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -1583,11 +5141,11 @@
       "bytes": 1624,
       "referenced_by": [
         {
-          "claim": "H8",
+          "claim": "H26",
           "field": "comparison"
         },
         {
-          "claim": "H26",
+          "claim": "H8",
           "field": "comparison"
         }
       ],
@@ -1643,11 +5201,11 @@
       "bytes": 1290,
       "referenced_by": [
         {
-          "claim": "H8",
+          "claim": "H26",
           "field": "commands"
         },
         {
-          "claim": "H26",
+          "claim": "H8",
           "field": "commands"
         }
       ],
@@ -1661,11 +5219,11 @@
       "bytes": 7667,
       "referenced_by": [
         {
-          "claim": "H8",
+          "claim": "H26",
           "field": "raw"
         },
         {
-          "claim": "H26",
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -1707,11 +5265,11 @@
       "bytes": 41,
       "referenced_by": [
         {
-          "claim": "H8",
+          "claim": "H26",
           "field": "raw"
         },
         {
-          "claim": "H26",
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -1725,11 +5283,11 @@
       "bytes": 0,
       "referenced_by": [
         {
-          "claim": "H8",
+          "claim": "H26",
           "field": "raw"
         },
         {
-          "claim": "H26",
+          "claim": "H8",
           "field": "raw"
         }
       ],
@@ -2004,6 +5562,82 @@
       "tracked": true,
       "worktree_status": null
     },
+    "figures/end-to-end/comparison.csv": {
+      "artifact_last_commit": null,
+      "bytes": 2559,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "comparison"
+        },
+        {
+          "claim": "H24",
+          "field": "comparison"
+        },
+        {
+          "claim": "H25",
+          "field": "comparison"
+        },
+        {
+          "claim": "H26",
+          "field": "comparison"
+        },
+        {
+          "claim": "H28",
+          "field": "comparison"
+        },
+        {
+          "claim": "H8",
+          "field": "comparison"
+        },
+        {
+          "claim": "H9",
+          "field": "comparison"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "0b492d6e2f2ffe929c15087560147b8743c140a1808dc345b0a2ef4736692597",
+      "tracked": false,
+      "worktree_status": "?? reproduction/figures/end-to-end/comparison.csv"
+    },
+    "figures/end-to-end/comparison.json": {
+      "artifact_last_commit": null,
+      "bytes": 6483,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H24",
+          "field": "raw"
+        },
+        {
+          "claim": "H25",
+          "field": "raw"
+        },
+        {
+          "claim": "H26",
+          "field": "raw"
+        },
+        {
+          "claim": "H28",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "7bcfe46c62c1cff6d4b2cb3b031f909a489c22cc3369e8ee77fe65163164aa0c",
+      "tracked": false,
+      "worktree_status": "?? reproduction/figures/end-to-end/comparison.json"
+    },
     "profiles/llama31-8b-wikitext2-layers24-31.json": {
       "artifact_last_commit": "844a54b66349411ef6f7fb09e9f9005363c1898c",
       "bytes": 34535,
@@ -2021,6 +5655,28 @@
       "sha256": "dbf356acd424c3b76a6754d91da4d5e2f4113e9f5f92c620ef231c3ed9452104",
       "tracked": true,
       "worktree_status": null
+    },
+    "results/raw/burstgpt-end-to-end-audit.json": {
+      "artifact_last_commit": null,
+      "bytes": 4517,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "f8b8d78129b2e3e689fee4129e5e750779467e9356ecc83bc1d9068d550efad1",
+      "tracked": false,
+      "worktree_status": "?? reproduction/results/raw/burstgpt-end-to-end-audit.json"
     },
     "results/raw/candidate-git-history-audit.txt": {
       "artifact_last_commit": "062e51a98d219be3b2bab96eab88fe9dd26151e3",
@@ -2049,6 +5705,50 @@
       "sha256": "3b18fc9613aec1d3fda1c6a9287add531232160ad207b981462fc4268d43b778",
       "tracked": true,
       "worktree_status": null
+    },
+    "results/raw/end-to-end-audit.json": {
+      "artifact_last_commit": null,
+      "bytes": 8498,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "eff1885cd96bff39c01cead982b8734fe55c4cd91b70b2912574ee110c81d091",
+      "tracked": false,
+      "worktree_status": "?? reproduction/results/raw/end-to-end-audit.json"
+    },
+    "results/raw/end-to-end-plot-provenance.json": {
+      "artifact_last_commit": null,
+      "bytes": 2541,
+      "referenced_by": [
+        {
+          "claim": "H10",
+          "field": "raw"
+        },
+        {
+          "claim": "H8",
+          "field": "raw"
+        },
+        {
+          "claim": "H9",
+          "field": "raw"
+        }
+      ],
+      "run_source_revision": null,
+      "sha256": "68609982a69724408c1361356bb7bd5a8dfd24e37f557c1d4d7b52f13875ebee",
+      "tracked": false,
+      "worktree_status": "?? reproduction/results/raw/end-to-end-plot-provenance.json"
     },
     "results/raw/figure1b-trace-window-inference.json": {
       "artifact_last_commit": "042b4d27032ca4c64675f5c51dad69f8e593dcdc",
@@ -2130,7 +5830,7 @@
     }
   },
   "claim_map": "configs/claim-evidence-map.json",
-  "repository_head_at_generation": "2cabcb114e966f004104741b68ab91e9674d4665",
+  "repository_head_at_generation": "0fafe6b79f4128e3cb526a43701ff4ea5bf2e051",
   "schema_version": 1,
   "source_revision_caveat": "run_source_revision is null for historical runners that predate source-revision capture; artifact_last_commit is artifact provenance, not proof of the exact executed source tree"
 }

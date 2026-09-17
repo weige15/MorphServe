@@ -1,0 +1,172 @@
+{
+  "classification": "modified-condition end-to-end workload benchmark",
+  "configuration": {
+    "config": {
+      "block_size": 16,
+      "classification": "modified-condition end-to-end workload benchmark",
+      "controller_config": "configs/reconstructed-controller-modes.json",
+      "controller_mode": "default",
+      "controller_modes": {
+        "accuracy": {
+          "layers_per_action": 1,
+          "max_quantized_layers": 4
+        },
+        "default": {
+          "layers_per_action": 2,
+          "max_quantized_layers": 8
+        },
+        "performance": {
+          "layers_per_action": 4,
+          "max_quantized_layers": 16
+        }
+      },
+      "controller_settings_classification": "reconstructed settings, not author-recovered settings",
+      "deviations": [
+        "RTX 3090 rather than paper L4",
+        "Llama 3.1 8B base rather than the paper's exact Llama 3 8B revision",
+        "deterministic synthetic token payload rather than task contexts; no F1/ROUGE-L",
+        "trace windows are figure-inferred and systematic-thinned, not author-confirmed",
+        "common reconstructed engine uses serialized single-request GPU operations; arrivals remain independent and queue accounting is explicit",
+        "preemptions are recorded as not measured when the bounded scheduler does not expose a genuine cumulative counter"
+      ],
+      "fp16_base_kv_blocks": 512,
+      "max_batch_size": 1,
+      "max_blocks_per_seq": 128,
+      "max_seqs_in_block_table": 256,
+      "max_tokens_in_batch": 2048,
+      "model_name": "Llama 3.1 8B base",
+      "model_snapshot": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+      "preflight": {
+        "classification": "correctness evidence only; timing excluded from benchmark tables",
+        "output_tokens": 8,
+        "pressure_samples": 3,
+        "prompt_tokens": 32,
+        "recovery_cleanup_samples": 20
+      },
+      "request_timeout_s": 1800,
+      "schema_version": 1,
+      "slo_ttft_s": 2.0,
+      "static_w4_base_kv_blocks": 1024,
+      "trace_policy": "frozen figure-inferred manifests only; submit independently by scheduled timestamp and continue until completion/timeout",
+      "w4_artifact": "local AutoAWQ W4 G128 zero-point derivative",
+      "warmup": {
+        "attention_kv_mapping": true,
+        "cached_decode": true,
+        "excluded_from_timed_region": true,
+        "fp16_gemm": true,
+        "morph_path": true,
+        "prefill": true,
+        "w4_gemm": true
+      }
+    },
+    "kind": "morphserve-default",
+    "mode": "default",
+    "setup": {
+      "profile_order": "[25, 24, 26, 27, 28, 29, 30, 31]"
+    }
+  },
+  "final": {
+    "active_w4_layers": [
+      25,
+      24,
+      26,
+      27
+    ],
+    "controller_poisoned": false,
+    "executor_poisoned": false,
+    "kv_capacity_blocks": 1124,
+    "kv_free_blocks": 1124,
+    "pending_layer_events": []
+  },
+  "gate": {
+    "all_completed_exact_512": true,
+    "all_submitted_ids_once": true,
+    "controller_telemetry_present": true,
+    "final_executor_not_poisoned": true,
+    "final_no_pending_layer_events": true,
+    "morphing_observed": true,
+    "preflight_clean_final_state": false,
+    "preflight_physical_kv_expansion_observed": true,
+    "preflight_real_w4_module_observed": true,
+    "preflight_recovery_order_observed": true,
+    "raw_system_telemetry_present": true,
+    "recovery_observed": true,
+    "summary_matches_record_count": true
+  },
+  "generation_policy": {
+    "output_tokens": 8,
+    "prompt_tokens": 32,
+    "stop_on_eos": false
+  },
+  "model": {
+    "path": "/nfs/home/s314511048/.cache/huggingface/hub/models--meta-llama--Llama-3.1-8B/snapshots/d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "snapshot": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+    "w4_artifact": "/nfs/home/s314511048/.cache/morphserve/llama31-8b-autoawq-w4-g128-zp"
+  },
+  "passed": false,
+  "payload": {
+    "path": "/nfs/home/s314511048/MorphServe/reproduction/configs/request-payload-1024.json",
+    "sha256": "30c15554a1cb39be1006f6b422e8e628da1e6058e33c91f5169eb16173f18b49",
+    "token_count": 1024
+  },
+  "preflight": true,
+  "request_count": 2,
+  "schema_version": 2,
+  "summary": {
+    "classification": "modified-condition end-to-end workload benchmark",
+    "completed_count": 2,
+    "completed_request_throughput_s": 1.7409260409660356,
+    "completion_rate": 1.0,
+    "configuration": "MorphServe-default",
+    "duration_s": 1.1488138800486922,
+    "duration_with_one_or_more_quantized_layers_s": 1.0268728118389845,
+    "error_count": 0,
+    "final_active_w4_layers": [
+      25,
+      24,
+      26,
+      27
+    ],
+    "final_executor_poisoned": false,
+    "final_pending_layer_events": [],
+    "max_queue_depth": 1,
+    "maximum_simultaneous_quantized_layers": 8,
+    "morph_count": 4,
+    "output_token_throughput_s": 13.927408327728285,
+    "peak_kv_capacity_blocks": 1736,
+    "peak_kv_usage_fraction": 0.006112469437652812,
+    "peak_kv_used_blocks": 6,
+    "percentile_definition": "Hyndman-Fan type 7 linear interpolation; TTFT per request and TPOT per generated-token interval",
+    "queue_delay_s": {
+      "p50": 0.00011434173211455345,
+      "p95": 0.00014099031686782838,
+      "p99": 0.00014335907995700837
+    },
+    "raw_accounting_definition": "every submitted request is retained exactly once, including errors/timeouts; invalid runs are excluded from comparison",
+    "recovery_count": 2,
+    "request_count": 2,
+    "scheduler_preemption_count": null,
+    "scheduler_preemptions_measured": false,
+    "schema_version": 2,
+    "time_weighted_kv_capacity_blocks": 1176.4798667393145,
+    "time_weighted_kv_used_blocks": 4.843572656057336,
+    "timeout_count": 0,
+    "tpot_s": {
+      "p50": 0.11655964492820203,
+      "p95": 0.21065489205066107,
+      "p99": 0.3114808879839255
+    },
+    "trace": "burstgpt-v1.1-systematic-1.75x.jsonl",
+    "ttft_over_2s_count": 0,
+    "ttft_over_2s_fraction_completed": 0.0,
+    "ttft_over_2s_fraction_submitted": 0.0,
+    "ttft_s": {
+      "p50": 0.1621719948016107,
+      "p95": 0.28718085037544366,
+      "p99": 0.2982927486486733
+    },
+    "valid_for_comparison": false
+  },
+  "trace_manifest": "/nfs/home/s314511048/MorphServe/reproduction/traces/figure1b-inferred/burstgpt-v1.1-systematic-1.75x.jsonl",
+  "warmup_excluded": true
+}

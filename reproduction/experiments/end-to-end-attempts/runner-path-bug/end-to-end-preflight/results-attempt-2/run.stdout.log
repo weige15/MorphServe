@@ -1,0 +1,8 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([512, 32, 8, 16, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([512, 32, 8, 16, 128])
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([512, 32, 8, 16, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([512, 32, 8, 16, 128])

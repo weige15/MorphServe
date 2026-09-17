@@ -1,0 +1,78 @@
+[Weight] Allocating 14.96 GB pinned memory buffer
+[Weight] Pre-allocating GPU buffer
+[Weight] Freeing pinned CPU memory...
+[Weight] model loaded successfully.
+[Model.init_kvcache_and_swap] self.k_cache.shape: torch.Size([1024, 32, 8, 16, 128])
+[Model.init_kvcache_and_swap] self.v_cache.shape: torch.Size([1024, 32, 8, 16, 128])
+{
+  "passed": true,
+  "gate": {
+    "all_submitted_ids_once": true,
+    "all_completed_exact_512": true,
+    "raw_system_telemetry_present": true,
+    "controller_telemetry_present": true,
+    "morphing_observed": true,
+    "recovery_observed": true,
+    "final_no_pending_layer_events": true,
+    "final_executor_not_poisoned": true,
+    "summary_matches_record_count": true
+  },
+  "summary": {
+    "schema_version": 2,
+    "classification": "modified-condition end-to-end workload benchmark",
+    "configuration": "W4",
+    "trace": "burstgpt-v1.1-systematic-1.75x.jsonl",
+    "request_count": 2,
+    "completed_count": 2,
+    "completion_rate": 1.0,
+    "error_count": 0,
+    "timeout_count": 0,
+    "ttft_s": {
+      "p50": 0.07019032794050872,
+      "p95": 0.08153545705135912,
+      "p99": 0.0825439129723236
+    },
+    "tpot_s": {
+      "p50": 0.03558729309588671,
+      "p95": 0.08267259621061383,
+      "p99": 0.10094427620060739
+    },
+    "queue_delay_s": {
+      "p50": 0.025021570967510343,
+      "p95": 0.04651031920220702,
+      "p99": 0.04842043015640229
+    },
+    "ttft_over_2s_count": 0,
+    "ttft_over_2s_fraction_submitted": 0.0,
+    "ttft_over_2s_fraction_completed": 0.0,
+    "completed_request_throughput_s": 5.251105556864911,
+    "output_token_throughput_s": 42.00884445491929,
+    "duration_s": 0.3808721760287881,
+    "max_queue_depth": 1,
+    "peak_kv_capacity_blocks": 1024,
+    "peak_kv_used_blocks": 130,
+    "peak_kv_usage_fraction": 0.126953125,
+    "time_weighted_kv_capacity_blocks": 1024.0,
+    "time_weighted_kv_used_blocks": 102.24314219756009,
+    "morph_count": 0,
+    "recovery_count": 0,
+    "duration_with_one_or_more_quantized_layers_s": 0.32068311842158437,
+    "maximum_simultaneous_quantized_layers": 32,
+    "scheduler_preemption_count": null,
+    "scheduler_preemptions_measured": false,
+    "final_active_w4_layers": [],
+    "final_pending_layer_events": [],
+    "final_executor_poisoned": false,
+    "valid_for_comparison": false,
+    "percentile_definition": "Hyndman-Fan type 7 linear interpolation; TTFT per request and TPOT per generated-token interval",
+    "raw_accounting_definition": "every submitted request is retained exactly once, including errors/timeouts; invalid runs are excluded from comparison"
+  },
+  "final": {
+    "active_w4_layers": [],
+    "pending_layer_events": [],
+    "executor_poisoned": false,
+    "controller_poisoned": false,
+    "kv_capacity_blocks": 1024,
+    "kv_free_blocks": 1024
+  }
+}

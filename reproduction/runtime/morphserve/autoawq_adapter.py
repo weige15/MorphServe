@@ -97,24 +97,40 @@ def _checkpoint_getter(model_path: Path):
     return get, handles
 
 
-def backup_fp16_layer(model, layer_id: int, extension) -> dict:
+def _fp16_layer_layout(model, layer_id: int, extension) -> dict:
     weight = model.transformer_layers[layer_id].weight
     tensors = [(name, getattr(weight, name)) for name in FP16_ATTRIBUTES]
     tensors.sort(key=lambda item: item[1].data_ptr())
     base = tensors[0][1].data_ptr()
     end = max(tensor.data_ptr() + tensor.numel() * tensor.element_size() for _, tensor in tensors)
     size = end - base
-    buffer = torch.empty(size, dtype=torch.uint8, pin_memory=True)
-    tensor_map = []
-    for name, tensor in tensors:
-        offset = tensor.data_ptr() - base
-        byte_view = tensor.detach().view(torch.uint8).reshape(-1)
-        buffer[offset:offset + byte_view.numel()].copy_(byte_view)
-        tensor_map.append(_tensor_info(name, tensor, offset))
+    tensor_map = [_tensor_info(name, tensor, tensor.data_ptr() - base) for name, tensor in tensors]
     extension.register_layer_memory_org_gpu(layer_id, base, size)
-    extension.register_layer_memory_org_cpu(layer_id, buffer.data_ptr(), size)
     extension.register_layer_memory_tensor_map_org(layer_id, tensor_map)
-    return {"buffer": buffer, "base": base, "size": size, "tensor_map": tensor_map}
+    return {"base": base, "size": size, "tensor_map": tensor_map}
+
+
+def register_fp16_layer_region(model, layer_id: int, extension) -> dict:
+    """Register an existing FP16 GPU region without pinning a second copy.
+
+    Static-W4 serving does not need an FP16 rollback buffer.  Keeping this
+    registration-only path separate avoids claiming that static W4 requires
+    the full dual-variant pinned-memory footprint.
+    """
+    return _fp16_layer_layout(model, layer_id, extension)
+
+
+def backup_fp16_layer(model, layer_id: int, extension) -> dict:
+    layout = _fp16_layer_layout(model, layer_id, extension)
+    buffer = torch.empty(layout["size"], dtype=torch.uint8, pin_memory=True)
+    weight = model.transformer_layers[layer_id].weight
+    for entry in layout["tensor_map"]:
+        name, info = next(iter(entry.items()))
+        tensor = getattr(weight, name).detach().view(torch.uint8).reshape(-1)
+        buffer[info["offset"]:info["offset"] + tensor.numel()].copy_(tensor)
+    # The native API keys CPU registration by layer ID; keep it explicit here.
+    extension.register_layer_memory_org_cpu(layer_id, buffer.data_ptr(), layout["size"])
+    return {"buffer": buffer, **layout}
 
 
 def load_packed_layer(model_path: str | Path, layer_id: int, extension) -> dict:

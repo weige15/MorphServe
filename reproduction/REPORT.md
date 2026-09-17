@@ -1,12 +1,12 @@
 # MorphServe Reproduction Report
 
 **Investigation status:** current-revision GPU implementation verification complete / partial modified-condition reproduction / exact paper conditions blocked
-**Paper target:** supplied 19-page `morphserve-2506.02006-v2.pdf`  
+**Paper target:** supplied 20-page MLSys 2026 conference-final PDF
 **Overall result:** all four frozen current-revision full-model GPU verification surfaces pass on one RTX 3090 under the labeled reconstruction. No headline paper latency/quality aggregate or exact-condition table is reproduced. The official lab repository remains README-only. Several candidate-code correctness defects were found and repaired only in the labeled reconstruction.
 
 ## 1. Scope and source truth
 
-The supplied PDF was read and visually checked page by page. It contains Figures 1–7 and Tables 1–8; **there is no Table 9**. The objective's AWQ `[5.5223,0.1241,27.68]` target is rendered as PDF Table 2, not Table 4. Exact reported values are isolated in `configs/paper-reference-values.json`; measured values never populate that file.
+The supplied 20-page conference-final PDF was read and visually checked page by page. It contains Figures 1–7 and Tables 1–9. The objective's AWQ `[5.5223,0.1241,27.68]` target is the conference-final Table 4 row; the historical 19-page arXiv-v2 PDF called this Table 2. Exact reported values are isolated in `configs/paper-reference-values.json`; measured values never populate that file. The conference final also contains the LLM-PQ/PyramidKV comparison references, but exact task/config reproduction remains blocked.
 
 Primary evidence:
 
@@ -142,6 +142,17 @@ Current claim classifications strengthened only for bounded implementation evide
 
 This closes current-revision implementation verification, not the paper's headline latency, quality, throughput or exact-table reproduction.
 
+## 4.8 First common-engine end-to-end workload comparison
+
+The first auditable modified-condition comparison of FP16, static real W4, and reconstructed MorphServe-default is complete for both frozen figure-inferred workloads. It uses 1,024-token prompts and exactly 512 generated tokens, with raw per-request/system/controller telemetry and clean final-state gates. Results and limitations are in `experiments/end-to-end-report.md`; raw artifacts are under `experiments/end-to-end-{burstgpt,azure}/`; regenerated plots and consolidated metrics are under `figures/end-to-end/`. The pre-Azure BurstGPT three-condition audit is `results/raw/burstgpt-end-to-end-audit.json`.
+
+| Workload | FP16 output tok/s | static W4 output tok/s | MorphServe-default output tok/s | MorphServe peak KV blocks | All requests exact 512 |
+|---|---:|---:|---:|---:|---|
+| BurstGPT (123) | 164.584 | 114.647 | 72.243 | 1,736 | yes |
+| Azure Code (94) | 165.527 | 114.727 | 68.115 | 1,736 | yes |
+
+These are not paper-condition latency/quality results: hardware, exact model revision, task contexts, trace operation, context mapping, and controller settings differ or are unavailable. All six runs are valid modified-condition measurements, not confirmation of the paper's headline claims. No quality metric, LLM-PQ value, PyramidKV comparison, or exact paper-table agreement is inferred.
+
 ## 5. Claim-by-claim status
 
 `configs/claim-evidence-map.json` provides a machine-readable H1–H30 index of each claim's paper-reference, executed command, frozen config/protocol, raw artifact, comparison/analysis, and limitation paths. `results/raw/claim-evidence-provenance.json` hashes and Git-audits the current linked artifacts. Empty command/raw lists explicitly mean that no measurement is claimed. Historical runners predate exact source-revision capture, so their artifact commit is preserved but is not presented as proof of the executed source tree; the four current runners write `source-revision.txt` and source-status sidecars.
@@ -155,16 +166,16 @@ This closes current-revision implementation verification, not the paper's headli
 | H5 | §5.1 quality degradation | 0.51%–3.82%; accuracy 0.11%–2.18% | No exact task corpus/generated outputs | **Blocked exact** |
 | H6 | User objective only; absent from PDF | 41.3% average, 82.3% max LLM-PQ gap closure | No occurrence in target PDF/LaTeX | **Not a target-paper claim; not reproduced** |
 | H7 | User objective only; absent from PDF | 1.73× average, 2.4× max vs PyramidKV | PyramidKV appears only as related-work citation | **Not a target-paper result; not reproduced** |
-| H8 | Fig. 5 dynamic capacity | load-following KV expansion | Current executor and ownership runs show real physical expansion/recovery, 615-block groups, and occupied-region refusal; no 72-s trace | **Modified-condition partial; current implementation verified** |
-| H9 | Fig. 6 throughput | up to 1.83× FP16 | No valid common-engine RPS sweep | **Unverified** |
-| H10 | Fig. 7 TPOT | P99 up to 1.23×; average up to 1.17× | Corrected synthetic GPU replay passes independent arrivals, 3/3 completion, 9/9 tokens, raw timestamps and regenerated type-7 TTFT/TPOT; not paper trace replay | **Modified-condition instrumentation reproduced; paper claim unverified** |
+| H8 | Fig. 5 dynamic capacity | load-following KV expansion | Six common-engine workload runs save physical capacity/occupancy; MorphServe expands 512→1,736 blocks and recovers; ownership gates preserve occupied regions | **Modified-condition partial; paper preemption result unverified** |
+| H9 | Fig. 6 throughput | up to 1.83× FP16 | First common-engine BurstGPT (123) and Azure Code (94) runs complete all requests and save output-token throughput; no rate sweep | **Modified-condition measurement; paper multiplier unverified** |
+| H10 | Fig. 7 TPOT | P99 up to 1.23×; average up to 1.17× | Six common-engine runs save every output-token timestamp and regenerated type-7 TTFT/TPOT, in addition to the corrected replay seam | **Modified-condition measurement; exact paper comparison and performance mode unverified** |
 | H11 | §4.3 transfer | ≈4 ms W4, ≈16 ms FP16 | 15.67/58.55 ms blocking modified operation | **Tested-not-reproduced under modified conditions** |
 | H12 | §4.3 complete swap/overlap | ≈6 ms, hidden | Current full-layer W4/FP16 run passes raw activity overlap: 288.290/290.210 μs distinct-stream intersections; exposed delay remains 0.614–1.138 ms W4 and 37.781–37.895 ms FP16 | **Modified-condition overlap verified; paper numerical claim unverified** |
 | H13 | Appendix A profile time | <15 min for 32 layers | 8-layer inner 58.14 s; full simultaneous pin blocked | **Full claim unverified** |
 | H14 | Table 1 BookSum schedules | exact 8-row F1/ROUGE-L | Exact sample/prompts/checkpoint unavailable | **Blocked exact** |
-| H15 | PDF Table 2 AWQ/DuReader/Burst | FP16 `[5.5223,.1241,27.68]`; AWQ `[1.1686,.0735,25.55]`; MorphServe `[1.2420,.1064,27.33]` | No exact Llama 2/translated DuReader/window/controller | **Blocked exact** |
+| H15 | Conference-final Table 4 AWQ/DuReader/Burst (historical v2 Table 2) | FP16 `[5.5223,.1241,27.68]`; AWQ `[1.1686,.0735,25.55]`; MorphServe `[1.2420,.1064,27.33]` | No exact Llama 2/translated DuReader/window/controller | **Blocked exact** |
 | H16 | PDF Table 2 Uniform INT4 | values in reference JSON | Uniform implementation/config unavailable | **Blocked exact** |
-| H17 | PDF Table 8 Vicuna/QMSum/Azure | values in reference JSON | Exact model/window/prompt unavailable | **Blocked exact** |
+| H17 | Conference-final Table 9 Vicuna/QMSum/Azure (historical v2 Table 8) | values in reference JSON | Exact model/window/prompt unavailable | **Blocked exact** |
 | H18 | Table 3 C4 transfer | LIS rows in reference JSON | No full 32-layer profile/perplexity run | **Unverified** |
 | H19 | Table 4 LIS weights | reference perplexities | Formula used; table values not run | **Algorithm reproduced, numerical table unverified** |
 | H20 | Table 5 cosine vs L2 | reference perplexities | Cosine implemented; L2 table not run | **Partial** |
@@ -172,10 +183,10 @@ This closes current-revision implementation verification, not the paper's headli
 | H22 | Table 6 ordering | four models, CodeLlama 48 endpoint | 8-layer local order only | **Modified-condition partial** |
 | H23 | §4.2/Algorithm 1 | conditioned argmax LIS | 8 layers, 36 sets, saved real order | **Modified-condition expanded reproduction** |
 | H24 | §4.3 in-place W4/FP16 | real packed same-address swapping | Real W4 same base/exact restore/zero allocator delta; current full-layer async W4/FP16 run passes three repeats, same-history gates, raw activity overlap and exact FP16 restoration | **Modified-condition implementation verified; paper timing unverified** |
-| H25 | §4.4 non-contiguous KV | physical arbitrary-region capacity | Vendor corruption found; explicit fallback CUDA test passed; current ownership run passes two-request reclaimed ownership, occupied refusal, sentinels/counts/rows and final recovery | **Modified-condition repaired and current integrated implementation verified** |
-| H26 | §4.1 controller | persistent coordinated adaptation, 3 modes | Frozen reconstructed modes and CPU transactions pass; current real executor and ownership GPU runs pass atomic morph/expand/shrink/restore and queue-preservation gates | **Modified-condition implementation verified; author settings unverified** |
+| H25 | §4.4 non-contiguous KV | physical arbitrary-region capacity | Vendor corruption found; explicit fallback CUDA test passed; common-engine MorphServe runs physically expand/recover capacity while ownership gates preserve rows/counts/sentinels | **Modified-condition repaired and current integrated implementation verified; paper scheduler unverified** |
+| H26 | §4.1 controller | persistent coordinated adaptation, 3 modes | Frozen reconstructed default controller drives four real pressure morphs/four recoveries per workload, reaches eight W4 layers and 1,736 blocks, and ends clean | **Modified-condition implementation/workload measurement; author settings and other modes unverified** |
 | H27 | Appendix C added LOC | ≈2200 Python +500 C++/CUDA | Base commit unavailable | **Blocked exact** |
-| H28 | state preservation | no flush/re-prefill/eviction | Active same-history pilot plus current two-request ownership run pass migration/refusal/recovery, exact sentinels/counts and final FP16 restoration; no serving trace | **Modified-condition bounded state preservation verified** |
+| H28 | state preservation | no flush/re-prefill/eviction | Active same-history/ownership gates pass, and all six 1,024/512-token common-engine runs complete without re-prefill or eviction | **Modified-condition bounded serving/state evidence; exact paper behavior unverified** |
 | H29 | no-morph FP16 | baseline integrity | top-k match, rel L2 0.00204, exact weights | **Modified-condition reproduced numerically** |
 | H30 | supporting fixed W4 | real packed/deterministic behavior | Packed execution/storage verified; bit-exact repeats fail from atomic split-K, top-k stable | **Mixed result** |
 
@@ -202,7 +213,7 @@ Recovered primary files:
 - Azure Conversation SHA `2f1e5b...`, 19,366 requests.
 - BurstGPT v1.1 SHA `4bb378...`, 1,429,737 requests.
 
-Figure 1a matches Azure Code, not Conversation. Approximate Figure 1b shape matching ranks Azure relative second 1073 (443 requests/72 s; Pearson 0.8793) and BurstGPT timestamp 1,781,278 (214 requests/72 s; Pearson 0.7356), both with the same top candidate under request-count and token-volume rankings. Section 5 says evaluation uses the representative snippets in Figure 1, so these are frozen before serving outcomes as **figure-inferred evaluation-window candidates**, though sub-second boundaries remain approximate rather than explicitly published. A separately labeled deterministic systematic-thinning reconstruction produces 94 Azure and 123 Burst arrivals in `traces/figure1b-inferred/`; contexts remain unmapped. The unpublished author operation/seed and request-to-context map still block exact replay. The corrected synthetic GPU replay now passes as a short modified-condition instrumentation baseline; its raw records, warmup metadata, 3/3 completion and 9/9 token accounting are under `experiments/synthetic-gpu-replay/results/`. It is not Azure/BurstGPT or paper-latency evidence.
+Figure 1a matches Azure Code, not Conversation. Approximate Figure 1b shape matching ranks Azure relative second 1073 (443 requests/72 s; Pearson 0.8793) and BurstGPT timestamp 1,781,278 (214 requests/72 s; Pearson 0.7356), both with the same top candidate under request-count and token-volume rankings. Section 5 says evaluation uses the representative snippets in Figure 1, so these are frozen before serving outcomes as **figure-inferred evaluation-window candidates**, though sub-second boundaries remain approximate rather than explicitly published. A separately labeled deterministic systematic-thinning reconstruction produces 94 Azure and 123 Burst arrivals in `traces/figure1b-inferred/`; contexts remain unmapped. The unpublished author operation/seed and request-to-context map still block exact replay. The corrected synthetic GPU replay now passes as a short modified-condition instrumentation baseline; its raw records, warmup metadata, 3/3 completion and 9/9 token accounting are under `experiments/synthetic-gpu-replay/results/`. The first common-engine end-to-end runs now also exist for 123 BurstGPT and 94 Azure Code requests at 1,024/512 tokens; see §4.8 and `experiments/end-to-end-report.md`. They are modified-condition measurements, not exact Azure/BurstGPT context replay or paper-latency evidence.
 
 ## 8. Reproduction commands
 
@@ -245,4 +256,4 @@ Every experiment directory includes its locked protocol, commands, raw logs, mac
 
 The investigation supports MorphServe's **mechanical feasibility** under a labeled independent reconstruction: real same-address W4 replacement, physical KV reclamation, active state preservation, event-safe recovery, arbitrary-region mapping fallback, conditioned LIS, and coordinated controller actions all have executed evidence.
 
-It does **not** support the paper's headline performance/quality claims or exact result tables. Overall reproduction status remains **partial / exact reproduction blocked**, with several candidate-code negative findings and no manufactured agreement. This goal closes current-revision implementation verification: real transactional execution, two-request ownership/recovery, full-layer asynchronous W4/FP16 activity overlap, and corrected synthetic GPU replay all pass their frozen implementation/instrumentation gates on RTX 3090 GPU 0 with 24,124 MiB free before and after each run. The remaining blockers are paper-facing: exact author implementation/configuration, models, task artifacts, trace boundaries/mapping, and paper-equivalent hardware. This is not reproduction of the paper's headline results.
+It does **not** support the paper's headline performance/quality claims or exact result tables. Overall reproduction status remains **partial / exact reproduction blocked**, with several candidate-code negative findings and no manufactured agreement. This goal closes current-revision implementation verification and the first common-engine modified-condition workload comparison: real transactional execution, two-request ownership/recovery, full-layer asynchronous W4/FP16 activity overlap, corrected synthetic replay, and six 1,024/512-token BurstGPT/Azure runs pass their declared gates. The remaining blockers are paper-facing: exact author implementation/configuration, models, task artifacts, trace boundaries/mapping, controller settings, and paper-equivalent hardware. This is not reproduction of the paper's headline results.

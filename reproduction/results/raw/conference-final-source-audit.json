@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "classification": "authoritative local source audit",
+  "primary": {
+    "path": "/nfs/home/s314511048/MorphServe/references/morphserve-mlsys2026-conference-final.pdf",
+    "relative_path": "../references/morphserve-mlsys2026-conference-final.pdf",
+    "sha256": "080ddcfe8c23e12bb421e4c1107c09246c82144345064018401b49e1a8dd2678",
+    "page_count": 20,
+    "extracted_text": "sources/morphserve-mlsys2026-conference-final.txt",
+    "extracted_text_sha256": "4045eb047ae9545aa4788028e3904c088a50b5dcc1928bb79c30c2bcdb37984a",
+    "title": "MorphServe: Efficient and Workload-Aware LLM Serving via Runtime Quantized Layer Swapping and KV Cache Resizing",
+    "authors": ["Zhaoyuan Su", "Zeyu Zhang", "Tingfeng Lan", "Zirui Wang", "Haiying Shen", "Juncheng Yang", "Yue Cheng"],
+    "venue": "Proceedings of the 9th MLSys Conference, Bellevue, WA, USA, 2026",
+    "figures": [1, 2, 3, 4, 5, 6, 7],
+    "tables": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "visual_pages_inspected": [8, 9, 10, 11, 17, 18, 19, 20],
+    "text_checks": {
+      "table_9": true,
+      "section_5_1": true,
+      "appendix_c": true,
+      "llm_pq": true,
+      "llm_pq_average_percent": 41.3,
+      "llm_pq_max_percent": 82.3,
+      "pyramidkv": true,
+      "pyramidkv_accuracy_average_speedup": 1.73,
+      "pyramidkv_accuracy_max_speedup": 2.4
+    }
+  },
+  "historical_secondary": {
+    "path": "../references/morphserve-2506.02006-v2.pdf",
+    "absolute_path": "/nfs/home/s314511048/MorphServe/references/morphserve-2506.02006-v2.pdf",
+    "sha256": "e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30",
+    "page_count": 19,
+    "figures": [1, 2, 3, 4, 5, 6, 7],
+    "tables": [1, 2, 3, 4, 5, 6, 7, 8]
+  },
+  "verification": {
+    "conference_final_properties_present": true,
+    "replacement_used": false,
+    "stop_required": false,
+    "delta_artifact": "docs/paper-version-delta.md",
+    "notes": "The primary file is the exact requested local conference-final PDF. No alternate PDF was searched for or substituted."
+  }
+}

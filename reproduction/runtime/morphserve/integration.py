@@ -103,7 +103,11 @@ class AdaptiveCoordinator:
                         self.controller.quantized_layers = len(self.active_layers)
                         append_error("atomic recovery failed closed; coordinator poisoned")
                     else:
-                        self.controller.quantized_layers -= delta
+                        # A non-poisoning refusal (for example, an occupied KV
+                        # group) leaves the executor unchanged. Keep controller
+                        # state aligned instead of treating the negative delta
+                        # as a successful increment.
+                        self.controller.quantized_layers = len(self.active_layers)
         except Exception as exc:
             success = False
             append_error(f"{type(exc).__name__}: {exc}")

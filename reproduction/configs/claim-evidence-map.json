@@ -1,36 +1,1288 @@
 {
-  "schema_version": 1,
-  "scope": "Machine-readable evidence links for REPORT.md H1-H30. Empty command/raw arrays mean no measurement is claimed.",
   "claims": {
-    "H1": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["results/raw/trace-window-inference-commands.txt"], "configs": ["configs/figure1b-inferred-trace-windows.json"], "raw": ["results/raw/figure1b-trace-window-inference.json"], "comparison": ["docs/trace-audit.md"], "limitation": "Exact sub-second windows, scaling and context mapping are unavailable."},
-    "H2": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/claim-register.md"], "limitation": "No paper-condition serving run."},
-    "H3": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/claim-register.md"], "limitation": "No author default-mode configuration."},
-    "H4": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/claim-register.md"], "limitation": "No author performance-mode configuration."},
-    "H5": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/task-artifact-audit.md"], "limitation": "Exact task rows, prompts, decoding and metrics are unavailable."},
-    "H6": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/claim-register.md"], "limitation": "Objective-only LLM-PQ values are absent from the target PDF and LaTeX."},
-    "H7": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/claim-register.md"], "limitation": "Objective-only PyramidKV values are absent from target-v2 experiments."},
-    "H8": {"paper_reference": ["docs/paper-evidence-brief.md"], "commands": ["experiments/real-executor/results/commands.txt", "experiments/multirequest-ownership/results/commands.txt", "experiments/real-executor/results-before-atomic-repair/commands.txt", "experiments/multirequest-ownership/results-before-atomic-repair/commands.txt"], "configs": ["experiments/real-executor/protocol.md", "experiments/multirequest-ownership/protocol.md"], "raw": ["experiments/real-executor/results/metrics.json", "experiments/real-executor/results/source-revision.txt", "experiments/real-executor/results/source-status.txt", "experiments/real-executor/results/nvidia-before.csv", "experiments/real-executor/results/nvidia-after.csv", "experiments/multirequest-ownership/results/metrics.json", "experiments/multirequest-ownership/results/source-revision.txt", "experiments/multirequest-ownership/results/source-status.txt", "experiments/multirequest-ownership/results/nvidia-before.csv", "experiments/multirequest-ownership/results/nvidia-after.csv", "experiments/real-executor/results-before-atomic-repair/metrics.json", "experiments/multirequest-ownership/results-before-atomic-repair/metrics.json"], "comparison": ["experiments/real-executor/analysis.md", "experiments/multirequest-ownership/analysis.md"], "limitation": "Current modified-condition implementation verification; no 72-second paper trace or headline capacity result."},
-    "H9": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/claim-register.md"], "limitation": "No common-engine saturation sweep."},
-    "H10": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["experiments/synthetic-gpu-replay/results/commands.txt", "experiments/synthetic-gpu-replay/results-attempt-1/commands.txt"], "configs": ["configs/synthetic-gpu-replay.json", "experiments/synthetic-gpu-replay/protocol.md"], "raw": ["experiments/synthetic-gpu-replay/results/raw.jsonl", "experiments/synthetic-gpu-replay/results/metrics.json", "experiments/synthetic-gpu-replay/results/summary.json", "experiments/synthetic-gpu-replay/results/run-metadata.json", "experiments/synthetic-gpu-replay/results/source-revision.txt", "experiments/synthetic-gpu-replay/results/source-status.txt", "experiments/synthetic-gpu-replay/results/nvidia-before.csv", "experiments/synthetic-gpu-replay/results/nvidia-after.csv", "experiments/synthetic-gpu-replay/results-attempt-1/raw.jsonl", "experiments/synthetic-gpu-replay/results-attempt-1/metrics.json"], "comparison": ["experiments/synthetic-gpu-replay/attempt-3.md", "experiments/synthetic-gpu-replay/attempt-1.md"], "limitation": "Corrected short synthetic instrumentation baseline; not Azure/BurstGPT, paper trace replay or paper TPOT."},
-    "H11": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["experiments/autoawq-layer-switch/results/commands.txt", "experiments/async-layer-transfer/full-model-results-attempt-1/commands.txt"], "configs": ["experiments/autoawq-layer-switch/protocol.md", "experiments/async-layer-transfer/protocol.md"], "raw": ["experiments/autoawq-layer-switch/results/metrics.json", "experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json"], "comparison": ["experiments/autoawq-layer-switch/analysis.md", "experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json"], "limitation": "Different model, layer, GPU and PCIe path from the paper example."},
-    "H12": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["experiments/async-layer-transfer/results/commands.txt", "experiments/async-layer-transfer/full-model-results/commands.txt", "experiments/async-layer-transfer/full-model-results-attempt-1/commands.txt"], "configs": ["experiments/async-layer-transfer/protocol.md"], "raw": ["experiments/async-layer-transfer/results/metrics.json", "experiments/async-layer-transfer/full-model-results/metrics.json", "experiments/async-layer-transfer/full-model-results/cuda-activity-trace.json", "experiments/async-layer-transfer/full-model-results/activity-analysis.json", "experiments/async-layer-transfer/full-model-results/transfer-summary.json", "experiments/async-layer-transfer/full-model-results/source-revision.txt", "experiments/async-layer-transfer/full-model-results/source-status.txt", "experiments/async-layer-transfer/full-model-results/nvidia-before.csv", "experiments/async-layer-transfer/full-model-results/nvidia-after.csv", "experiments/async-layer-transfer/full-model-results/run.exitcode", "experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json", "experiments/async-layer-transfer/full-model-results-attempt-2/metrics.json"], "comparison": ["experiments/async-layer-transfer/analysis.md", "experiments/async-layer-transfer/full-model-attempt-1.md", "experiments/async-layer-transfer/full-model-results-attempt-2/CLASSIFICATION.md"], "limitation": "Current modified-condition full-layer overlap is verified; paper transfer/hidden-stall numerical claims remain unverified."},
-    "H13": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["experiments/lis-real-8layer/results/commands.txt"], "configs": ["experiments/lis-real-8layer/protocol.md"], "raw": ["experiments/lis-real-8layer/results/metrics.json", "results/raw/full-profile-memory-feasibility.json"], "comparison": ["experiments/lis-real-8layer/analysis.md"], "limitation": "Only eight layers; full simultaneous pinning exceeds memlock."},
-    "H14": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/task-artifact-audit.md"], "limitation": "Exact BookSum sample, prompt, decoding and checkpoint unavailable."},
-    "H15": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/task-artifact-audit.md", "docs/trace-audit.md"], "limitation": "Exact Llama 2, translated DuReader and workload configuration unavailable."},
-    "H16": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/claim-register.md"], "limitation": "Uniform-INT4 implementation and settings unavailable."},
-    "H17": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/task-artifact-audit.md", "docs/trace-audit.md"], "limitation": "Exact Vicuna, QMSum prompt and Azure mapping unavailable."},
-    "H18": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["experiments/lis-real-8layer/results/commands.txt"], "configs": ["experiments/lis-real-8layer/protocol.md"], "raw": ["experiments/lis-real-8layer/results/metrics.json"], "comparison": ["experiments/lis-real-8layer/analysis.md"], "limitation": "Local subset uses WikiText-2 only; no full C4 perplexity transfer run."},
-    "H19": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["experiments/lis-algorithm/results/commands.txt"], "configs": ["experiments/lis-algorithm/protocol.md"], "raw": ["experiments/lis-algorithm/results/final-verification.log"], "comparison": ["experiments/lis-algorithm/analysis.md"], "limitation": "Formula/selection reproduced; paper perplexity ablation not run."},
-    "H20": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["experiments/lis-algorithm/results/commands.txt"], "configs": ["experiments/lis-algorithm/protocol.md"], "raw": ["experiments/lis-algorithm/results/final-verification.log"], "comparison": ["experiments/lis-algorithm/analysis.md"], "limitation": "Cosine path tested; L2 numerical table not run."},
-    "H21": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": [], "comparison": ["docs/claim-register.md"], "limitation": "Exact Llama 2 assets unavailable."},
-    "H22": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": ["experiments/lis-real-8layer/results/commands.txt"], "configs": ["experiments/lis-real-8layer/protocol.md"], "raw": ["experiments/lis-real-8layer/results/metrics.json", "profiles/llama31-8b-wikitext2-layers24-31.json"], "comparison": ["experiments/lis-real-8layer/analysis.md"], "limitation": "Local eight-layer Llama 3.1 subset only."},
-    "H23": {"paper_reference": ["docs/paper-evidence-brief.md"], "commands": ["experiments/lis-real-8layer/results/commands.txt", "experiments/lis-algorithm/results/commands.txt"], "configs": ["experiments/lis-real-8layer/protocol.md", "experiments/lis-algorithm/protocol.md"], "raw": ["experiments/lis-real-8layer/results/metrics.json", "profiles/llama31-8b-wikitext2-layers24-31.json"], "comparison": ["experiments/lis-real-8layer/analysis.md"], "limitation": "Conditioned algorithm is exact; profile scope/model conditions are modified."},
-    "H24": {"paper_reference": ["docs/paper-evidence-brief.md"], "commands": ["experiments/autoawq-layer-switch/results/commands.txt", "experiments/async-layer-transfer/results/commands.txt", "experiments/async-layer-transfer/full-model-results/commands.txt"], "configs": ["experiments/autoawq-layer-switch/protocol.md", "experiments/async-layer-transfer/protocol.md"], "raw": ["experiments/autoawq-layer-switch/results/metrics.json", "experiments/async-layer-transfer/results/metrics.json", "experiments/async-layer-transfer/results/test.exitcode", "experiments/async-layer-transfer/results/test.log", "experiments/async-layer-transfer/results/source-revision.txt", "experiments/async-layer-transfer/results/source-status.txt", "experiments/async-layer-transfer/results/wall-time.json", "experiments/async-layer-transfer/full-model-results/metrics.json", "experiments/async-layer-transfer/full-model-results/cuda-activity-trace.json", "experiments/async-layer-transfer/full-model-results/activity-analysis.json", "experiments/async-layer-transfer/full-model-results/transfer-summary.json", "experiments/async-layer-transfer/full-model-results/source-revision.txt", "experiments/async-layer-transfer/full-model-results/source-status.txt", "experiments/async-layer-transfer/full-model-results/run.exitcode"], "comparison": ["experiments/autoawq-layer-switch/analysis.md", "experiments/async-layer-transfer/analysis.md"], "limitation": "Independent reconstruction and modified RTX 3090 condition; paper timing remains unverified."},
-    "H25": {"paper_reference": ["docs/paper-evidence-brief.md"], "commands": ["experiments/noncontiguous-mapping-repair/results/commands.txt", "experiments/multirequest-ownership/results/commands.txt", "experiments/multirequest-ownership/results-before-atomic-repair/commands.txt"], "configs": ["experiments/noncontiguous-mapping-repair/protocol.md", "experiments/multirequest-ownership/protocol.md"], "raw": ["experiments/noncontiguous-mapping-repair/results/metrics.json", "experiments/multirequest-ownership/results/metrics.json", "experiments/multirequest-ownership/results/source-revision.txt", "experiments/multirequest-ownership/results/source-status.txt", "experiments/multirequest-ownership/results/nvidia-before.csv", "experiments/multirequest-ownership/results/nvidia-after.csv", "experiments/multirequest-ownership/results-before-atomic-repair/metrics.json"], "comparison": ["experiments/noncontiguous-mapping-repair/analysis.md", "experiments/multirequest-ownership/analysis.md"], "limitation": "Modified-condition reconstruction, not verified author implementation or concurrent serving throughput."},
-    "H26": {"paper_reference": ["docs/paper-evidence-brief.md"], "commands": ["experiments/controller-core/results/commands.txt", "experiments/controller-integration/results/commands.txt", "experiments/async-layer-transfer/transaction-results/commands.txt", "experiments/real-executor/results/commands.txt", "experiments/multirequest-ownership/results/commands.txt"], "configs": ["configs/reconstructed-controller-modes.json"], "raw": ["experiments/controller-core/results/test.log", "experiments/controller-integration/results/test.log", "experiments/async-layer-transfer/transaction-results/test.exitcode", "experiments/async-layer-transfer/transaction-results/test.log", "experiments/real-executor/results/metrics.json", "experiments/real-executor/results/source-revision.txt", "experiments/real-executor/results/source-status.txt", "experiments/multirequest-ownership/results/metrics.json", "experiments/multirequest-ownership/results/source-revision.txt", "experiments/multirequest-ownership/results/source-status.txt", "results/raw/post-atomic-readiness-review.md", "results/raw/post-expansion-preflight-rereview.md"], "comparison": ["experiments/controller-core/analysis.md", "experiments/controller-integration/analysis.md", "experiments/real-executor/analysis.md", "experiments/multirequest-ownership/analysis.md", "results/raw/post-atomic-readiness-review.md", "results/raw/post-expansion-preflight-rereview.md"], "limitation": "Thresholds and modes are frozen reconstruction choices, not author settings; current GPU gates validate the independent atomic implementation only."},
-    "H27": {"paper_reference": ["docs/paper-evidence-brief.md", "configs/paper-reference-values.json"], "commands": [], "configs": [], "raw": ["results/raw/candidate-git-history-audit.txt", "results/raw/candidate-pyc-audit.json"], "comparison": ["docs/author-artifact-audit.md"], "limitation": "Conference base commit and patch unavailable, so comparable LOC delta is undefined."},
-    "H28": {"paper_reference": ["docs/paper-evidence-brief.md"], "commands": ["experiments/active-kv-switch/results-attempt-2/commands.txt", "experiments/async-layer-transfer/transaction-results/commands.txt", "experiments/multirequest-ownership/results/commands.txt", "experiments/multirequest-ownership/results-before-atomic-repair/commands.txt"], "configs": ["experiments/active-kv-switch/protocol.md", "experiments/multirequest-ownership/protocol.md"], "raw": ["experiments/active-kv-switch/results-attempt-2/metrics.json", "experiments/async-layer-transfer/transaction-results/test.exitcode", "experiments/async-layer-transfer/transaction-results/test.log", "experiments/multirequest-ownership/results/metrics.json", "experiments/multirequest-ownership/results/source-revision.txt", "experiments/multirequest-ownership/results/source-status.txt", "experiments/multirequest-ownership/results-before-atomic-repair/metrics.json"], "comparison": ["experiments/active-kv-switch/analysis.md", "experiments/multirequest-ownership/analysis.md"], "limitation": "Bounded modified-condition state preservation and ownership verification; no paper workload trace or ordinary scheduler-preemption measurement."},
-    "H29": {"paper_reference": ["docs/paper-evidence-brief.md"], "commands": ["experiments/candidate-fp16-baseline/results-attempt-3/commands.txt"], "configs": ["experiments/candidate-fp16-baseline/protocol.md"], "raw": ["experiments/candidate-fp16-baseline/results-attempt-3/metrics.json"], "comparison": ["experiments/candidate-fp16-baseline/analysis.md"], "limitation": "Local Llama 3.1 8B/RTX 3090 modified condition."},
-    "H30": {"paper_reference": ["docs/paper-evidence-brief.md"], "commands": ["experiments/static-autoawq/results/commands.txt"], "configs": ["experiments/static-autoawq/protocol.md"], "raw": ["experiments/static-autoawq/results/metrics.json"], "comparison": ["experiments/static-autoawq/analysis.md"], "limitation": "Real packed W4 path passes; split-K prevents bit-exact repeats."}
-  }
+    "H1": {
+      "commands": [
+        "results/raw/trace-window-inference-commands.txt"
+      ],
+      "comparison": [
+        "docs/trace-audit.md"
+      ],
+      "configs": [
+        "configs/figure1b-inferred-trace-windows.json"
+      ],
+      "limitation": "Exact sub-second windows, scaling and context mapping are unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "results/raw/figure1b-trace-window-inference.json"
+      ]
+    },
+    "H10": {
+      "commands": [
+        "experiments/synthetic-gpu-replay/results/commands.txt",
+        "experiments/synthetic-gpu-replay/results-attempt-1/commands.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt"
+      ],
+      "comparison": [
+        "experiments/synthetic-gpu-replay/attempt-3.md",
+        "experiments/synthetic-gpu-replay/attempt-1.md",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.csv"
+      ],
+      "configs": [
+        "configs/synthetic-gpu-replay.json",
+        "experiments/synthetic-gpu-replay/protocol.md",
+        "configs/end-to-end-benchmark.json",
+        "configs/request-payload-1024.json"
+      ],
+      "limitation": "Per-token timing and type-7 TPOT are measured in six modified-condition runs; exact paper Figure 7 comparison remains unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/synthetic-gpu-replay/results/raw.jsonl",
+        "experiments/synthetic-gpu-replay/results/metrics.json",
+        "experiments/synthetic-gpu-replay/results/summary.json",
+        "experiments/synthetic-gpu-replay/results/run-metadata.json",
+        "experiments/synthetic-gpu-replay/results/source-revision.txt",
+        "experiments/synthetic-gpu-replay/results/source-status.txt",
+        "experiments/synthetic-gpu-replay/results/nvidia-before.csv",
+        "experiments/synthetic-gpu-replay/results/nvidia-after.csv",
+        "experiments/synthetic-gpu-replay/results-attempt-1/raw.jsonl",
+        "experiments/synthetic-gpu-replay/results-attempt-1/metrics.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/summary.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/summary.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log",
+        "results/raw/end-to-end-plot-provenance.json",
+        "results/raw/end-to-end-audit.json",
+        "results/raw/burstgpt-end-to-end-audit.json"
+      ]
+    },
+    "H11": {
+      "commands": [
+        "experiments/autoawq-layer-switch/results/commands.txt",
+        "experiments/async-layer-transfer/full-model-results-attempt-1/commands.txt"
+      ],
+      "comparison": [
+        "experiments/autoawq-layer-switch/analysis.md",
+        "experiments/async-layer-transfer/full-model-results-attempt-1/transfer-summary.json"
+      ],
+      "configs": [
+        "experiments/autoawq-layer-switch/protocol.md",
+        "experiments/async-layer-transfer/protocol.md"
+      ],
+      "limitation": "Different model, layer, GPU and PCIe path from the paper example.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/autoawq-layer-switch/results/metrics.json",
+        "experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json"
+      ]
+    },
+    "H12": {
+      "commands": [
+        "experiments/async-layer-transfer/results/commands.txt",
+        "experiments/async-layer-transfer/full-model-results/commands.txt",
+        "experiments/async-layer-transfer/full-model-results-attempt-1/commands.txt"
+      ],
+      "comparison": [
+        "experiments/async-layer-transfer/analysis.md",
+        "experiments/async-layer-transfer/full-model-attempt-1.md",
+        "experiments/async-layer-transfer/full-model-results-attempt-2/CLASSIFICATION.md"
+      ],
+      "configs": [
+        "experiments/async-layer-transfer/protocol.md"
+      ],
+      "limitation": "Current modified-condition full-layer overlap is verified; paper transfer/hidden-stall numerical claims remain unverified.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/async-layer-transfer/results/metrics.json",
+        "experiments/async-layer-transfer/full-model-results/metrics.json",
+        "experiments/async-layer-transfer/full-model-results/cuda-activity-trace.json",
+        "experiments/async-layer-transfer/full-model-results/activity-analysis.json",
+        "experiments/async-layer-transfer/full-model-results/transfer-summary.json",
+        "experiments/async-layer-transfer/full-model-results/source-revision.txt",
+        "experiments/async-layer-transfer/full-model-results/source-status.txt",
+        "experiments/async-layer-transfer/full-model-results/nvidia-before.csv",
+        "experiments/async-layer-transfer/full-model-results/nvidia-after.csv",
+        "experiments/async-layer-transfer/full-model-results/run.exitcode",
+        "experiments/async-layer-transfer/full-model-results-attempt-1/metrics.json",
+        "experiments/async-layer-transfer/full-model-results-attempt-2/metrics.json"
+      ]
+    },
+    "H13": {
+      "commands": [
+        "experiments/lis-real-8layer/results/commands.txt"
+      ],
+      "comparison": [
+        "experiments/lis-real-8layer/analysis.md"
+      ],
+      "configs": [
+        "experiments/lis-real-8layer/protocol.md"
+      ],
+      "limitation": "Only eight layers; full simultaneous pinning exceeds memlock.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/lis-real-8layer/results/metrics.json",
+        "results/raw/full-profile-memory-feasibility.json"
+      ]
+    },
+    "H14": {
+      "commands": [],
+      "comparison": [
+        "docs/task-artifact-audit.md"
+      ],
+      "configs": [],
+      "limitation": "Exact BookSum sample, prompt, decoding and checkpoint unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H15": {
+      "commands": [],
+      "comparison": [
+        "docs/task-artifact-audit.md",
+        "docs/trace-audit.md"
+      ],
+      "configs": [],
+      "limitation": "Exact Llama 2, translated DuReader and workload configuration unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H16": {
+      "commands": [],
+      "comparison": [
+        "docs/claim-register.md"
+      ],
+      "configs": [],
+      "limitation": "Uniform-INT4 implementation and settings unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H17": {
+      "commands": [],
+      "comparison": [
+        "docs/task-artifact-audit.md",
+        "docs/trace-audit.md"
+      ],
+      "configs": [],
+      "limitation": "Exact Vicuna, QMSum prompt and Azure mapping unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H18": {
+      "commands": [
+        "experiments/lis-real-8layer/results/commands.txt"
+      ],
+      "comparison": [
+        "experiments/lis-real-8layer/analysis.md"
+      ],
+      "configs": [
+        "experiments/lis-real-8layer/protocol.md"
+      ],
+      "limitation": "Local subset uses WikiText-2 only; no full C4 perplexity transfer run.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/lis-real-8layer/results/metrics.json"
+      ]
+    },
+    "H19": {
+      "commands": [
+        "experiments/lis-algorithm/results/commands.txt"
+      ],
+      "comparison": [
+        "experiments/lis-algorithm/analysis.md"
+      ],
+      "configs": [
+        "experiments/lis-algorithm/protocol.md"
+      ],
+      "limitation": "Formula/selection reproduced; paper perplexity ablation not run.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/lis-algorithm/results/final-verification.log"
+      ]
+    },
+    "H2": {
+      "commands": [],
+      "comparison": [
+        "docs/claim-register.md"
+      ],
+      "configs": [],
+      "limitation": "No paper-condition serving run.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H20": {
+      "commands": [
+        "experiments/lis-algorithm/results/commands.txt"
+      ],
+      "comparison": [
+        "experiments/lis-algorithm/analysis.md"
+      ],
+      "configs": [
+        "experiments/lis-algorithm/protocol.md"
+      ],
+      "limitation": "Cosine path tested; L2 numerical table not run.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/lis-algorithm/results/final-verification.log"
+      ]
+    },
+    "H21": {
+      "commands": [],
+      "comparison": [
+        "docs/claim-register.md"
+      ],
+      "configs": [],
+      "limitation": "Exact Llama 2 assets unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H22": {
+      "commands": [
+        "experiments/lis-real-8layer/results/commands.txt"
+      ],
+      "comparison": [
+        "experiments/lis-real-8layer/analysis.md"
+      ],
+      "configs": [
+        "experiments/lis-real-8layer/protocol.md"
+      ],
+      "limitation": "Local eight-layer Llama 3.1 subset only.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/lis-real-8layer/results/metrics.json",
+        "profiles/llama31-8b-wikitext2-layers24-31.json"
+      ]
+    },
+    "H23": {
+      "commands": [
+        "experiments/lis-real-8layer/results/commands.txt",
+        "experiments/lis-algorithm/results/commands.txt"
+      ],
+      "comparison": [
+        "experiments/lis-real-8layer/analysis.md"
+      ],
+      "configs": [
+        "experiments/lis-real-8layer/protocol.md",
+        "experiments/lis-algorithm/protocol.md"
+      ],
+      "limitation": "Conditioned algorithm is exact; profile scope/model conditions are modified.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md"
+      ],
+      "raw": [
+        "experiments/lis-real-8layer/results/metrics.json",
+        "profiles/llama31-8b-wikitext2-layers24-31.json"
+      ]
+    },
+    "H24": {
+      "commands": [
+        "experiments/autoawq-layer-switch/results/commands.txt",
+        "experiments/async-layer-transfer/results/commands.txt",
+        "experiments/async-layer-transfer/full-model-results/commands.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt"
+      ],
+      "comparison": [
+        "experiments/autoawq-layer-switch/analysis.md",
+        "experiments/async-layer-transfer/analysis.md",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.csv"
+      ],
+      "configs": [
+        "experiments/autoawq-layer-switch/protocol.md",
+        "experiments/async-layer-transfer/protocol.md",
+        "configs/end-to-end-benchmark.json",
+        "configs/request-payload-1024.json"
+      ],
+      "limitation": "Independent reconstruction and modified RTX 3090 condition; six common-engine runs and asynchronous implementation gates pass; paper timing remains unverified.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md"
+      ],
+      "raw": [
+        "experiments/autoawq-layer-switch/results/metrics.json",
+        "experiments/async-layer-transfer/results/metrics.json",
+        "experiments/async-layer-transfer/results/test.exitcode",
+        "experiments/async-layer-transfer/results/test.log",
+        "experiments/async-layer-transfer/results/source-revision.txt",
+        "experiments/async-layer-transfer/results/source-status.txt",
+        "experiments/async-layer-transfer/results/wall-time.json",
+        "experiments/async-layer-transfer/full-model-results/metrics.json",
+        "experiments/async-layer-transfer/full-model-results/cuda-activity-trace.json",
+        "experiments/async-layer-transfer/full-model-results/activity-analysis.json",
+        "experiments/async-layer-transfer/full-model-results/transfer-summary.json",
+        "experiments/async-layer-transfer/full-model-results/source-revision.txt",
+        "experiments/async-layer-transfer/full-model-results/source-status.txt",
+        "experiments/async-layer-transfer/full-model-results/run.exitcode",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/summary.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/summary.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log"
+      ]
+    },
+    "H25": {
+      "commands": [
+        "experiments/noncontiguous-mapping-repair/results/commands.txt",
+        "experiments/multirequest-ownership/results/commands.txt",
+        "experiments/multirequest-ownership/results-before-atomic-repair/commands.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt"
+      ],
+      "comparison": [
+        "experiments/noncontiguous-mapping-repair/analysis.md",
+        "experiments/multirequest-ownership/analysis.md",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.csv"
+      ],
+      "configs": [
+        "experiments/noncontiguous-mapping-repair/protocol.md",
+        "experiments/multirequest-ownership/protocol.md",
+        "configs/end-to-end-benchmark.json",
+        "configs/request-payload-1024.json"
+      ],
+      "limitation": "Modified-condition reconstruction with physical capacity expansion/recovery; exact author scheduler behavior and paper workload remain unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md"
+      ],
+      "raw": [
+        "experiments/noncontiguous-mapping-repair/results/metrics.json",
+        "experiments/multirequest-ownership/results/metrics.json",
+        "experiments/multirequest-ownership/results/source-revision.txt",
+        "experiments/multirequest-ownership/results/source-status.txt",
+        "experiments/multirequest-ownership/results/nvidia-before.csv",
+        "experiments/multirequest-ownership/results/nvidia-after.csv",
+        "experiments/multirequest-ownership/results-before-atomic-repair/metrics.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/summary.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/summary.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log"
+      ]
+    },
+    "H26": {
+      "commands": [
+        "experiments/controller-core/results/commands.txt",
+        "experiments/controller-integration/results/commands.txt",
+        "experiments/async-layer-transfer/transaction-results/commands.txt",
+        "experiments/real-executor/results/commands.txt",
+        "experiments/multirequest-ownership/results/commands.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt"
+      ],
+      "comparison": [
+        "experiments/controller-core/analysis.md",
+        "experiments/controller-integration/analysis.md",
+        "experiments/real-executor/analysis.md",
+        "experiments/multirequest-ownership/analysis.md",
+        "results/raw/post-atomic-readiness-review.md",
+        "results/raw/post-expansion-preflight-rereview.md",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.csv"
+      ],
+      "configs": [
+        "configs/reconstructed-controller-modes.json",
+        "configs/end-to-end-benchmark.json",
+        "configs/request-payload-1024.json"
+      ],
+      "limitation": "Reconstructed controller drives real W4/KV morph/recovery in both workload runs; thresholds/modes are not author-recovered.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md"
+      ],
+      "raw": [
+        "experiments/controller-core/results/test.log",
+        "experiments/controller-integration/results/test.log",
+        "experiments/async-layer-transfer/transaction-results/test.exitcode",
+        "experiments/async-layer-transfer/transaction-results/test.log",
+        "experiments/real-executor/results/metrics.json",
+        "experiments/real-executor/results/source-revision.txt",
+        "experiments/real-executor/results/source-status.txt",
+        "experiments/multirequest-ownership/results/metrics.json",
+        "experiments/multirequest-ownership/results/source-revision.txt",
+        "experiments/multirequest-ownership/results/source-status.txt",
+        "results/raw/post-atomic-readiness-review.md",
+        "results/raw/post-expansion-preflight-rereview.md",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/summary.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/summary.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log"
+      ]
+    },
+    "H27": {
+      "commands": [],
+      "comparison": [
+        "docs/author-artifact-audit.md"
+      ],
+      "configs": [],
+      "limitation": "Conference base commit and patch unavailable, so comparable LOC delta is undefined.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "results/raw/candidate-git-history-audit.txt",
+        "results/raw/candidate-pyc-audit.json"
+      ]
+    },
+    "H28": {
+      "commands": [
+        "experiments/active-kv-switch/results-attempt-2/commands.txt",
+        "experiments/async-layer-transfer/transaction-results/commands.txt",
+        "experiments/multirequest-ownership/results/commands.txt",
+        "experiments/multirequest-ownership/results-before-atomic-repair/commands.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt"
+      ],
+      "comparison": [
+        "experiments/active-kv-switch/analysis.md",
+        "experiments/multirequest-ownership/analysis.md",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.csv"
+      ],
+      "configs": [
+        "experiments/active-kv-switch/protocol.md",
+        "experiments/multirequest-ownership/protocol.md",
+        "configs/end-to-end-benchmark.json",
+        "configs/request-payload-1024.json"
+      ],
+      "limitation": "Modified-condition state-preserving serving run completes all 1,024/512 requests; exact trace and ordinary preemption measurement remain unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md"
+      ],
+      "raw": [
+        "experiments/active-kv-switch/results-attempt-2/metrics.json",
+        "experiments/async-layer-transfer/transaction-results/test.exitcode",
+        "experiments/async-layer-transfer/transaction-results/test.log",
+        "experiments/multirequest-ownership/results/metrics.json",
+        "experiments/multirequest-ownership/results/source-revision.txt",
+        "experiments/multirequest-ownership/results/source-status.txt",
+        "experiments/multirequest-ownership/results-before-atomic-repair/metrics.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/summary.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/summary.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log"
+      ]
+    },
+    "H29": {
+      "commands": [
+        "experiments/candidate-fp16-baseline/results-attempt-3/commands.txt"
+      ],
+      "comparison": [
+        "experiments/candidate-fp16-baseline/analysis.md"
+      ],
+      "configs": [
+        "experiments/candidate-fp16-baseline/protocol.md"
+      ],
+      "limitation": "Local Llama 3.1 8B/RTX 3090 modified condition.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md"
+      ],
+      "raw": [
+        "experiments/candidate-fp16-baseline/results-attempt-3/metrics.json"
+      ]
+    },
+    "H3": {
+      "commands": [],
+      "comparison": [
+        "docs/claim-register.md"
+      ],
+      "configs": [],
+      "limitation": "No author default-mode configuration.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H30": {
+      "commands": [
+        "experiments/static-autoawq/results/commands.txt"
+      ],
+      "comparison": [
+        "experiments/static-autoawq/analysis.md"
+      ],
+      "configs": [
+        "experiments/static-autoawq/protocol.md"
+      ],
+      "limitation": "Real packed W4 path passes; split-K prevents bit-exact repeats.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md"
+      ],
+      "raw": [
+        "experiments/static-autoawq/results/metrics.json"
+      ]
+    },
+    "H4": {
+      "commands": [],
+      "comparison": [
+        "docs/claim-register.md"
+      ],
+      "configs": [],
+      "limitation": "No author performance-mode configuration.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H5": {
+      "commands": [],
+      "comparison": [
+        "docs/task-artifact-audit.md"
+      ],
+      "configs": [],
+      "limitation": "Exact task rows, prompts, decoding and metrics are unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H6": {
+      "commands": [],
+      "comparison": [
+        "docs/claim-register.md"
+      ],
+      "configs": [],
+      "limitation": "Objective-only LLM-PQ values are absent from the target PDF and LaTeX.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H7": {
+      "commands": [],
+      "comparison": [
+        "docs/claim-register.md"
+      ],
+      "configs": [],
+      "limitation": "Objective-only PyramidKV values are absent from target-v2 experiments.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": []
+    },
+    "H8": {
+      "commands": [
+        "experiments/real-executor/results/commands.txt",
+        "experiments/multirequest-ownership/results/commands.txt",
+        "experiments/real-executor/results-before-atomic-repair/commands.txt",
+        "experiments/multirequest-ownership/results-before-atomic-repair/commands.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt"
+      ],
+      "comparison": [
+        "experiments/real-executor/analysis.md",
+        "experiments/multirequest-ownership/analysis.md",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.csv"
+      ],
+      "configs": [
+        "experiments/real-executor/protocol.md",
+        "experiments/multirequest-ownership/protocol.md",
+        "configs/end-to-end-benchmark.json",
+        "configs/request-payload-1024.json"
+      ],
+      "limitation": "Modified-condition physical capacity telemetry; exact paper trace and preemption result remain unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md"
+      ],
+      "raw": [
+        "experiments/real-executor/results/metrics.json",
+        "experiments/real-executor/results/source-revision.txt",
+        "experiments/real-executor/results/source-status.txt",
+        "experiments/real-executor/results/nvidia-before.csv",
+        "experiments/real-executor/results/nvidia-after.csv",
+        "experiments/multirequest-ownership/results/metrics.json",
+        "experiments/multirequest-ownership/results/source-revision.txt",
+        "experiments/multirequest-ownership/results/source-status.txt",
+        "experiments/multirequest-ownership/results/nvidia-before.csv",
+        "experiments/multirequest-ownership/results/nvidia-after.csv",
+        "experiments/real-executor/results-before-atomic-repair/metrics.json",
+        "experiments/multirequest-ownership/results-before-atomic-repair/metrics.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/summary.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/summary.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log",
+        "results/raw/end-to-end-plot-provenance.json",
+        "results/raw/end-to-end-audit.json",
+        "results/raw/burstgpt-end-to-end-audit.json"
+      ]
+    },
+    "H9": {
+      "commands": [
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/commands.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/commands.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/commands.txt"
+      ],
+      "comparison": [
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.csv"
+      ],
+      "configs": [
+        "configs/end-to-end-benchmark.json",
+        "configs/request-payload-1024.json"
+      ],
+      "limitation": "Modified-condition common-engine comparison only; exact paper inputs, rate sweep and headline multiplier remain unavailable.",
+      "paper_reference": [
+        "docs/paper-evidence-brief.md",
+        "configs/paper-reference-values.json"
+      ],
+      "raw": [
+        "experiments/end-to-end-report.md",
+        "figures/end-to-end/comparison.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/summary.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/summary.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/fp16/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/processes-after.csv",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-revision.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/source-status.txt",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-before.log",
+        "experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/manifest-after.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-burstgpt/morphserve-default/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/fp16/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/fp16/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/fp16/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/static-w4/results-batch5/manifest-after.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-before.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/nvidia-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-pre-run.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/processes-after.csv",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-revision.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/source-status.txt",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-before.log",
+        "experiments/end-to-end-azure/morphserve-default/results-batch5/manifest-after.log",
+        "results/raw/end-to-end-plot-provenance.json",
+        "results/raw/end-to-end-audit.json",
+        "results/raw/burstgpt-end-to-end-audit.json"
+      ]
+    }
+  },
+  "schema_version": 1,
+  "scope": "Machine-readable evidence links for REPORT.md H1-H30 and the first modified-condition end-to-end comparison. Empty command/raw arrays mean no measurement is claimed."
 }

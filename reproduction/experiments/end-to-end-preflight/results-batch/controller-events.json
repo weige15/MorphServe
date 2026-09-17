@@ -1,0 +1,3565 @@
+[
+  {
+    "excluded": true,
+    "timestamp_s": 2.484086033888161,
+    "type": "warmup_complete"
+  },
+  {
+    "action_duration_s": 0.00020735617727041245,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 1,
+        "quantized_layers": 0,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.002716328017413616,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(0,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(0,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.679024629553586,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 0.0029236841946840286,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00012089964002370834,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 2,
+        "quantized_layers": 0,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.05781555734574795,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "queues_before": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793715688611275,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 1,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 0.057936456985771656,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.006087024696171284,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": true,
+        "layer_delta": 2,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.19793983735144138,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "queues_before": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "selected_layers": [
+        25,
+        24
+      ],
+      "success": true
+    },
+    "executor_log_delta": [
+      [
+        "morph",
+        25
+      ],
+      [
+        "morph",
+        24
+      ],
+      [
+        "expand",
+        25,
+        153
+      ],
+      [
+        "expand",
+        24,
+        153
+      ]
+    ],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793715688611275,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 1,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.20402686204761267,
+    "type": "pressure_trigger"
+  },
+  {
+    "action_duration_s": 8.862465620040894e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 1,
+        "quantized_layers": 2,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.3011118983849883,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "queues_before": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793715891014465,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 1,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.3012005230411887,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 6.393110379576683e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 2,
+        "quantized_layers": 2,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.3407377190887928,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "queues_before": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793715891014465,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 1,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.34080165019258857,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.0018417080864310265,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27
+      ],
+      "command": {
+        "expand_kv": true,
+        "layer_delta": 2,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 4,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.3850088552571833,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "queues_before": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "selected_layers": [
+        26,
+        27
+      ],
+      "success": true
+    },
+    "executor_log_delta": [
+      [
+        "morph",
+        26
+      ],
+      [
+        "morph",
+        27
+      ],
+      [
+        "expand",
+        26,
+        153
+      ],
+      [
+        "expand",
+        27,
+        153
+      ]
+    ],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793715891014465,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 1,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.38685056334361434,
+    "type": "pressure_trigger"
+  },
+  {
+    "action_duration_s": 0.0001132432371377945,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 1,
+        "quantized_layers": 4,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.49457686906680465,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "queues_before": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716093417654,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 1,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.49469011230394244,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00016638822853565216,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 2,
+        "quantized_layers": 4,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.5600070729851723,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "queues_before": "QueueState(waiting=(1,), running=(0,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716093417654,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 1,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.5601734612137079,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.007021764293313026,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "command": {
+        "expand_kv": true,
+        "layer_delta": 2,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 6,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.6313390480354428,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(1,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(1,), swapped=())",
+      "selected_layers": [
+        28,
+        29
+      ],
+      "success": true
+    },
+    "executor_log_delta": [
+      [
+        "morph",
+        28
+      ],
+      [
+        "morph",
+        29
+      ],
+      [
+        "expand",
+        28,
+        153
+      ],
+      [
+        "expand",
+        29,
+        153
+      ]
+    ],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716093417654,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.6383608123287559,
+    "type": "pressure_trigger"
+  },
+  {
+    "action_duration_s": 6.0862861573696136e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 1,
+        "quantized_layers": 6,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.753084946423769,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(1,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(1,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716093417654,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.7531458092853427,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 5.9412792325019836e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 2,
+        "quantized_layers": 6,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.8351935683749616,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(1,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(1,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716093417654,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.8352529811672866,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.005024363752454519,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": true,
+        "layer_delta": 2,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 0.9070581332780421,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(1,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(1,), swapped=())",
+      "selected_layers": [
+        30,
+        31
+      ],
+      "success": true
+    },
+    "executor_log_delta": [
+      [
+        "morph",
+        30
+      ],
+      [
+        "morph",
+        31
+      ],
+      [
+        "expand",
+        30,
+        153
+      ],
+      [
+        "expand",
+        31,
+        153
+      ]
+    ],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716093417654,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 0.9120824970304966,
+    "type": "pressure_trigger"
+  },
+  {
+    "action_duration_s": 0.0001573720946907997,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 1,
+        "quantized_layers": 8,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.0119661292992532,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(1,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(1,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.012123501393944,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00012832600623369217,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 2,
+        "quantized_layers": 8,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.0876295464113355,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(1,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(1,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.0877578724175692,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00018635112792253494,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 3,
+        "quantized_layers": 8,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.1662612902000546,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(1,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(1,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.1664476413279772,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.0003421558067202568,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 4,
+        "quantized_layers": 8,
+        "reason": "persistent_pressure",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.2461624843999743,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(1,), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(1,), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "pressure",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.9,
+      "queue_delay_s": 0.11,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.2465046402066946,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00031493231654167175,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "neutral",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3259124280884862,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3262273604050279,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00021260185167193413,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "neutral",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3282647882588208,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3284773901104927,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 7.487321272492409e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "neutral",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3302462631836534,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3303211363963783,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 7.750093936920166e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "neutral",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3319792384281754,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3320567393675447,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00029719388112425804,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "neutral",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3336263382807374,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3339235321618617,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00013235677033662796,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "neutral",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3397536734119058,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3398860301822424,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00013878708705306053,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "persistent_recovery",
+        "recovery_count": 1,
+        "sample_timestamp_s": 1.3406520690768957,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3407908561639488,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 5.1468610763549805e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "persistent_recovery",
+        "recovery_count": 2,
+        "sample_timestamp_s": 1.3416871223598719,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3417385909706354,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 5.17088919878006e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "persistent_recovery",
+        "recovery_count": 3,
+        "sample_timestamp_s": 1.3432676261290908,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3433193350210786,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 9.755510836839676e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 8,
+        "reason": "persistent_recovery",
+        "recovery_count": 4,
+        "sample_timestamp_s": 1.3440316230989993,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ],
+      "30": [
+        "WQLinear_GEMM"
+      ],
+      "31": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3441291782073677,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.002685435116291046,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -2,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 6,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.345073529984802,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [
+        31,
+        30
+      ],
+      "success": true
+    },
+    "executor_log_delta": [
+      [
+        "shrink",
+        31,
+        153
+      ],
+      [
+        "shrink",
+        30,
+        153
+      ],
+      [
+        "restore",
+        31
+      ],
+      [
+        "restore",
+        30
+      ]
+    ],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "restore_events": [
+      {
+        "first_affected_layer_wait_timestamp_s": null,
+        "h2d_completion_timestamp_s": null,
+        "layer": 31,
+        "remaining_transfer_time_at_wait_s": null,
+        "remaining_transfer_time_measurement": "not separately observable; next model forward event is recorded",
+        "restore_enqueue_timestamp_s": 1.345073529984802
+      },
+      {
+        "first_affected_layer_wait_timestamp_s": null,
+        "h2d_completion_timestamp_s": null,
+        "layer": 30,
+        "remaining_transfer_time_at_wait_s": null,
+        "remaining_transfer_time_measurement": "not separately observable; next model forward event is recorded",
+        "restore_enqueue_timestamp_s": 1.345073529984802
+      }
+    ],
+    "timestamp_s": 1.347758965101093,
+    "type": "recovery_trigger"
+  },
+  {
+    "action_duration_s": 0.00013413699343800545,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 6,
+        "reason": "persistent_recovery",
+        "recovery_count": 1,
+        "sample_timestamp_s": 1.3485576901584864,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3486918271519244,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 4.941225051879883e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 6,
+        "reason": "persistent_recovery",
+        "recovery_count": 2,
+        "sample_timestamp_s": 1.3494873880408704,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3495368002913892,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 8.304184302687645e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 6,
+        "reason": "persistent_recovery",
+        "recovery_count": 3,
+        "sample_timestamp_s": 1.3505750051699579,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3506580470129848,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00016549183055758476,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27,
+        28,
+        29
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 6,
+        "reason": "persistent_recovery",
+        "recovery_count": 4,
+        "sample_timestamp_s": 1.3514246833510697,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ],
+      "28": [
+        "WQLinear_GEMM"
+      ],
+      "29": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3515901751816273,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.0021179858595132828,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -2,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 4,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3522817073389888,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [
+        29,
+        28
+      ],
+      "success": true
+    },
+    "executor_log_delta": [
+      [
+        "shrink",
+        29,
+        153
+      ],
+      [
+        "shrink",
+        28,
+        153
+      ],
+      [
+        "restore",
+        29
+      ],
+      [
+        "restore",
+        28
+      ]
+    ],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "restore_events": [
+      {
+        "first_affected_layer_wait_timestamp_s": null,
+        "h2d_completion_timestamp_s": null,
+        "layer": 29,
+        "remaining_transfer_time_at_wait_s": null,
+        "remaining_transfer_time_measurement": "not separately observable; next model forward event is recorded",
+        "restore_enqueue_timestamp_s": 1.3522817073389888
+      },
+      {
+        "first_affected_layer_wait_timestamp_s": null,
+        "h2d_completion_timestamp_s": null,
+        "layer": 28,
+        "remaining_transfer_time_at_wait_s": null,
+        "remaining_transfer_time_measurement": "not separately observable; next model forward event is recorded",
+        "restore_enqueue_timestamp_s": 1.3522817073389888
+      }
+    ],
+    "timestamp_s": 1.354399693198502,
+    "type": "recovery_trigger"
+  },
+  {
+    "action_duration_s": 0.00014685001224279404,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 4,
+        "reason": "persistent_recovery",
+        "recovery_count": 1,
+        "sample_timestamp_s": 1.3554108161479235,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3555576661601663,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 3.382563591003418e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 4,
+        "reason": "persistent_recovery",
+        "recovery_count": 2,
+        "sample_timestamp_s": 1.3562935213558376,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3563273469917476,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 6.512226536870003e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 4,
+        "reason": "persistent_recovery",
+        "recovery_count": 3,
+        "sample_timestamp_s": 1.3568826471455395,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3569477694109082,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 3.177998587489128e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24,
+        26,
+        27
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 4,
+        "reason": "persistent_recovery",
+        "recovery_count": 4,
+        "sample_timestamp_s": 1.3574459571391344,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ],
+      "26": [
+        "WQLinear_GEMM"
+      ],
+      "27": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3574777371250093,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.0009333142079412937,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -2,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3578698202036321,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [
+        27,
+        26
+      ],
+      "success": true
+    },
+    "executor_log_delta": [
+      [
+        "shrink",
+        27,
+        153
+      ],
+      [
+        "shrink",
+        26,
+        153
+      ],
+      [
+        "restore",
+        27
+      ],
+      [
+        "restore",
+        26
+      ]
+    ],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "restore_events": [
+      {
+        "first_affected_layer_wait_timestamp_s": null,
+        "h2d_completion_timestamp_s": null,
+        "layer": 27,
+        "remaining_transfer_time_at_wait_s": null,
+        "remaining_transfer_time_measurement": "not separately observable; next model forward event is recorded",
+        "restore_enqueue_timestamp_s": 1.3578698202036321
+      },
+      {
+        "first_affected_layer_wait_timestamp_s": null,
+        "h2d_completion_timestamp_s": null,
+        "layer": 26,
+        "remaining_transfer_time_at_wait_s": null,
+        "remaining_transfer_time_measurement": "not separately observable; next model forward event is recorded",
+        "restore_enqueue_timestamp_s": 1.3578698202036321
+      }
+    ],
+    "timestamp_s": 1.3588031344115734,
+    "type": "recovery_trigger"
+  },
+  {
+    "action_duration_s": 7.277214899659157e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 1,
+        "sample_timestamp_s": 1.3594865882769227,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3595593604259193,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 7.023010402917862e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 2,
+        "sample_timestamp_s": 1.3605321650393307,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.36060239514336,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 7.814029231667519e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 3,
+        "sample_timestamp_s": 1.3615718791261315,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3616500194184482,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 3.199698403477669e-05,
+    "controller_event": {
+      "active_layers": [
+        25,
+        24
+      ],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 2,
+        "reason": "persistent_recovery",
+        "recovery_count": 4,
+        "sample_timestamp_s": 1.362074516247958,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {
+      "24": [
+        "WQLinear_GEMM"
+      ],
+      "25": [
+        "WQLinear_GEMM"
+      ]
+    },
+    "timestamp_s": 1.3621065132319927,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.0010317880660295486,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": -2,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 0,
+        "sample_timestamp_s": 1.3626706921495497,
+        "shrink_kv_before_restore": true
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [
+        24,
+        25
+      ],
+      "success": true
+    },
+    "executor_log_delta": [
+      [
+        "shrink",
+        24,
+        153
+      ],
+      [
+        "shrink",
+        25,
+        153
+      ],
+      [
+        "restore",
+        24
+      ],
+      [
+        "restore",
+        25
+      ]
+    ],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "restore_events": [
+      {
+        "first_affected_layer_wait_timestamp_s": null,
+        "h2d_completion_timestamp_s": null,
+        "layer": 24,
+        "remaining_transfer_time_at_wait_s": null,
+        "remaining_transfer_time_measurement": "not separately observable; next model forward event is recorded",
+        "restore_enqueue_timestamp_s": 1.3626706921495497
+      },
+      {
+        "first_affected_layer_wait_timestamp_s": null,
+        "h2d_completion_timestamp_s": null,
+        "layer": 25,
+        "remaining_transfer_time_at_wait_s": null,
+        "remaining_transfer_time_measurement": "not separately observable; next model forward event is recorded",
+        "restore_enqueue_timestamp_s": 1.3626706921495497
+      }
+    ],
+    "timestamp_s": 1.3637024802155793,
+    "type": "recovery_trigger"
+  },
+  {
+    "action_duration_s": 3.407010808587074e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 1,
+        "sample_timestamp_s": 1.3643020270392299,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3643360971473157,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 6.13420270383358e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 2,
+        "sample_timestamp_s": 1.3647593120113015,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3648206540383399,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 2.9826071113348007e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 3,
+        "sample_timestamp_s": 1.365362941287458,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3653927673585713,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 0.00010095583274960518,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 4,
+        "sample_timestamp_s": 1.365733329206705,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3658342850394547,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 5.707982927560806e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 5,
+        "sample_timestamp_s": 1.3664599084295332,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3665169882588089,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 2.8348993510007858e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 6,
+        "sample_timestamp_s": 1.3668432333506644,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3668715823441744,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 5.99161721765995e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 7,
+        "sample_timestamp_s": 1.367350202985108,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3674101191572845,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 3.292690962553024e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 8,
+        "sample_timestamp_s": 1.3678236273117363,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3678565542213619,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 4.365621134638786e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 9,
+        "sample_timestamp_s": 1.3681416800245643,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3681853362359107,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 4.633422940969467e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 10,
+        "sample_timestamp_s": 1.3686103872023523,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.368656721431762,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 2.588704228401184e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 11,
+        "sample_timestamp_s": 1.3690232750959694,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3690491621382535,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 4.4821761548519135e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 12,
+        "sample_timestamp_s": 1.3694537663832307,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3694985881447792,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 4.531675949692726e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 13,
+        "sample_timestamp_s": 1.369960400275886,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.370005717035383,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 5.38933090865612e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 14,
+        "sample_timestamp_s": 1.3719898629933596,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3720437563024461,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 2.5958754122257233e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 15,
+        "sample_timestamp_s": 1.3724972922354937,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.372523250989616,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 4.325108602643013e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 16,
+        "sample_timestamp_s": 1.3728029350750148,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3728461861610413,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 5.491403862833977e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 17,
+        "sample_timestamp_s": 1.3732781512662768,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3733330653049052,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 3.534602001309395e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 18,
+        "sample_timestamp_s": 1.3737690611742437,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3738044071942568,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 4.4656917452812195e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 19,
+        "sample_timestamp_s": 1.3742590071633458,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3743036640807986,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 3.1983014196157455e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 20,
+        "sample_timestamp_s": 1.3748198649846017,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.374851847998798,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 5.151890218257904e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 21,
+        "sample_timestamp_s": 1.375216576270759,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3752680951729417,
+    "type": "controller_sample"
+  },
+  {
+    "action_duration_s": 4.38150018453598e-05,
+    "controller_event": {
+      "active_layers": [],
+      "command": {
+        "expand_kv": false,
+        "layer_delta": 0,
+        "mode": "default",
+        "pressure_count": 0,
+        "quantized_layers": 0,
+        "reason": "persistent_recovery",
+        "recovery_count": 22,
+        "sample_timestamp_s": 1.3757378901354969,
+        "shrink_kv_before_restore": false
+      },
+      "error": null,
+      "poisoned": false,
+      "queues_after": "QueueState(waiting=(), running=(), swapped=())",
+      "queues_before": "QueueState(waiting=(), running=(), swapped=())",
+      "selected_layers": [],
+      "success": true
+    },
+    "executor_log_delta": [],
+    "force": "recovery",
+    "monitor_metrics": {
+      "gpu_memory_usage": 0.6793716295820844,
+      "kv_usage": 0.5,
+      "queue_delay_s": 0.01,
+      "queue_depth": 0,
+      "throughput_tokens_s": 0.0,
+      "tpot_s": 0.0,
+      "ttft_s": 0.0
+    },
+    "real_w4_module_classes": {},
+    "timestamp_s": 1.3757817051373422,
+    "type": "controller_sample"
+  }
+]

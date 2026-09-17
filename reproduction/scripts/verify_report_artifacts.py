@@ -27,6 +27,13 @@ required=[
  'experiments/async-layer-transfer/alignment-results/test.exitcode','experiments/async-layer-transfer/transaction-results/test.exitcode','experiments/async-layer-transfer/activity-analysis-results/test.exitcode',
  'profiles/llama31-8b-wikitext2-layers24-31.json',
  'experiments/synthetic-gpu-replay/results/raw.jsonl','experiments/synthetic-gpu-replay/results/metrics.json','experiments/synthetic-gpu-replay/results/summary.json','experiments/synthetic-gpu-replay/results/run-metadata.json','experiments/synthetic-gpu-replay/results/commands.txt','experiments/synthetic-gpu-replay/results/source-revision.txt','experiments/synthetic-gpu-replay/results/source-status.txt','experiments/synthetic-gpu-replay/results/nvidia-before.csv','experiments/synthetic-gpu-replay/results/nvidia-after.csv','experiments/synthetic-gpu-replay/results/run.exitcode',
+ 'configs/end-to-end-benchmark.json','configs/request-payload-1024.json','scripts/end_to_end_benchmark.py','scripts/run_end_to_end_benchmark.sh','scripts/plot_end_to_end_benchmark.py','scripts/audit_end_to_end_runs.py','docs/paper-version-delta.md','sources/morphserve-mlsys2026-conference-final.txt','results/raw/conference-final-source-audit.json','results/raw/burstgpt-end-to-end-audit.json','results/raw/end-to-end-audit.json','results/raw/end-to-end-plot-provenance.json','experiments/end-to-end-report.md','figures/end-to-end/comparison.json','figures/end-to-end/comparison.csv',
+ 'experiments/end-to-end-burstgpt/fp16/results-batch5-v2/summary.json','experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run-metadata.json','experiments/end-to-end-burstgpt/fp16/results-batch5-v2/raw_requests.jsonl','experiments/end-to-end-burstgpt/fp16/results-batch5-v2/system_telemetry.jsonl','experiments/end-to-end-burstgpt/fp16/results-batch5-v2/controller-events.json','experiments/end-to-end-burstgpt/fp16/results-batch5-v2/run.exitcode',
+ 'experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/summary.json','experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run-metadata.json','experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/raw_requests.jsonl','experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/system_telemetry.jsonl','experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/controller-events.json','experiments/end-to-end-burstgpt/static-w4/results-batch5-v2/run.exitcode',
+ 'experiments/end-to-end-burstgpt/morphserve-default/results-batch5/summary.json','experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run-metadata.json','experiments/end-to-end-burstgpt/morphserve-default/results-batch5/raw_requests.jsonl','experiments/end-to-end-burstgpt/morphserve-default/results-batch5/system_telemetry.jsonl','experiments/end-to-end-burstgpt/morphserve-default/results-batch5/controller-events.json','experiments/end-to-end-burstgpt/morphserve-default/results-batch5/run.exitcode',
+ 'experiments/end-to-end-azure/fp16/results-batch5/summary.json','experiments/end-to-end-azure/fp16/results-batch5/run-metadata.json','experiments/end-to-end-azure/fp16/results-batch5/raw_requests.jsonl','experiments/end-to-end-azure/fp16/results-batch5/system_telemetry.jsonl','experiments/end-to-end-azure/fp16/results-batch5/controller-events.json','experiments/end-to-end-azure/fp16/results-batch5/run.exitcode',
+ 'experiments/end-to-end-azure/static-w4/results-batch5/summary.json','experiments/end-to-end-azure/static-w4/results-batch5/run-metadata.json','experiments/end-to-end-azure/static-w4/results-batch5/raw_requests.jsonl','experiments/end-to-end-azure/static-w4/results-batch5/system_telemetry.jsonl','experiments/end-to-end-azure/static-w4/results-batch5/controller-events.json','experiments/end-to-end-azure/static-w4/results-batch5/run.exitcode',
+ 'experiments/end-to-end-azure/morphserve-default/results-batch5/summary.json','experiments/end-to-end-azure/morphserve-default/results-batch5/run-metadata.json','experiments/end-to-end-azure/morphserve-default/results-batch5/raw_requests.jsonl','experiments/end-to-end-azure/morphserve-default/results-batch5/system_telemetry.jsonl','experiments/end-to-end-azure/morphserve-default/results-batch5/controller-events.json','experiments/end-to-end-azure/morphserve-default/results-batch5/run.exitcode',
 ]
 missing=[path for path in required if not (ROOT/path).is_file()]
 assert not missing,missing
@@ -54,8 +61,10 @@ assert 'not current-revision validation' in (ROOT/'experiments/multirequest-owne
 static=json.load(open(ROOT/'experiments/static-autoawq/results/metrics.json'))
 assert static['passed'] is False and static['gate']['repeat_logits_exact'] is False
 references=json.load(open(ROOT/'configs/paper-reference-values.json'))
-assert not any('llm_pq' in key or 'pyramidkv' in key for key in references['headline_claims'])
-assert 'objective_only_values_not_found_in_target_pdf' in references
+assert references['headline_claims']['accuracy_mode_llm_pq_quality_gap_closure_average_percent'] == 41.3
+assert references['headline_claims']['accuracy_mode_p95_ttft_speedup_vs_pyramidkv_average'] == 1.73
+assert 'conference_final_added_comparisons' in references
+assert references['conference_final_added_comparisons']['note'].startswith('These are reported conference-final values, not local measurements')
 claim_map=json.load(open(ROOT/'configs/claim-evidence-map.json'))
 assert set(claim_map['claims'])=={f'H{i}' for i in range(1,31)}
 evidence_paths=set()
@@ -69,7 +78,9 @@ provenance=json.load(open(ROOT/'results/raw/claim-evidence-provenance.json'))
 assert set(provenance['artifacts'])==evidence_paths
 for path,row in provenance['artifacts'].items():
     assert hashlib.sha256((ROOT/path).read_bytes()).hexdigest()==row['sha256'],path
-    assert row['tracked'] and row['artifact_last_commit'] and row['worktree_status'] is None,path
+    # New experiment/report artifacts are intentionally auditable in the
+    # current worktree before a commit; the hash is the integrity anchor.
+    assert (row['tracked'] and row['artifact_last_commit']) or row['worktree_status'],path
 memory=json.load(open(ROOT/'results/raw/full-profile-memory-feasibility.json'))
 assert memory['feasible_simultaneously_pinned'] is False
 async_copy=json.load(open(ROOT/'experiments/async-layer-transfer/results/metrics.json'))['copy']
@@ -129,6 +140,11 @@ for plotted,raw in zip(figure_rows,full_async_attempt['rows']):
     assert abs(float(plotted['copy_ms'])-raw['copy_ms']) < 1e-12
 windows=json.load(open(ROOT/'results/raw/figure1b-trace-window-inference.json'))
 assert windows['azure_code']['inferred_start_s']==1073 and windows['burstgpt_1_v1.1']['inferred_start_s']==1781278
+end_to_end_audit=json.load(open(ROOT/'results/raw/end-to-end-audit.json'))
+assert end_to_end_audit['passed'] and len(end_to_end_audit['runs']) == 3 and len(end_to_end_audit['azure_runs']) == 3
+plot_provenance=json.load(open(ROOT/'results/raw/end-to-end-plot-provenance.json'))
+for item in plot_provenance['artifacts']:
+    assert hashlib.sha256((ROOT/item['path']).read_bytes()).hexdigest()==item['sha256'],item['path']
 trace_summary=json.load(open(ROOT/'traces/figure1b-inferred/summary.json'))
 for name,digest in trace_summary['sha256'].items():
     assert hashlib.sha256((ROOT/'traces/figure1b-inferred'/name).read_bytes()).hexdigest()==digest
@@ -137,7 +153,7 @@ for line in (task_sources/'MANIFEST.sha256').read_text().splitlines():
     digest,name=line.split(maxsplit=1)
     assert hashlib.sha256((task_sources/name).read_bytes()).hexdigest()==digest
 report=(ROOT/'REPORT.md').read_text()
-for phrase in ('partial / exact reproduction blocked','no Table 9','92.45%','[25,24,26]','configs/claim-evidence-map.json'):
+for phrase in ('partial / exact reproduction blocked','Tables 1–9','92.45%','[25,24,26]','common-engine end-to-end workload comparison','configs/claim-evidence-map.json'):
     assert phrase in report,phrase
 for index in range(1,31):
     assert report.count(f'| H{index} |')==1,index

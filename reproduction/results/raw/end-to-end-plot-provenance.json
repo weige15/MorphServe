@@ -1,0 +1,68 @@
+{
+  "artifacts": [
+    {
+      "bytes": 2559,
+      "path": "figures/end-to-end/comparison.csv",
+      "sha256": "0b492d6e2f2ffe929c15087560147b8743c140a1808dc345b0a2ef4736692597"
+    },
+    {
+      "bytes": 6483,
+      "path": "figures/end-to-end/comparison.json",
+      "sha256": "7bcfe46c62c1cff6d4b2cb3b031f909a489c22cc3369e8ee77fe65163164aa0c"
+    },
+    {
+      "bytes": 102634,
+      "path": "figures/end-to-end/kv-capacity-occupancy.pdf",
+      "sha256": "4a2b698dc63e9896c04b22c2b227a65c963807c552693ae1fc95f508d4ecee43"
+    },
+    {
+      "bytes": 215393,
+      "path": "figures/end-to-end/kv-capacity-occupancy.png",
+      "sha256": "5fd2fe030bc8278b768373cb4af2e25c38f61beaf1e73a991a0e07faf5d06bd0"
+    },
+    {
+      "bytes": 21888,
+      "path": "figures/end-to-end/morphserve-controller.pdf",
+      "sha256": "d7623b455ae76529186e01db065534ce00a78062a31c7c526312e8c211f2acb4"
+    },
+    {
+      "bytes": 111901,
+      "path": "figures/end-to-end/morphserve-controller.png",
+      "sha256": "88d852dacbad242f957fc4d49a45c3ddd10a097761b9d85cdaf2950bfdffff64"
+    },
+    {
+      "bytes": 16478,
+      "path": "figures/end-to-end/throughput.pdf",
+      "sha256": "93afefe549d14d7c32e9bc74a92d690695508ae2b6a483e471565ff231d79c5a"
+    },
+    {
+      "bytes": 83124,
+      "path": "figures/end-to-end/throughput.png",
+      "sha256": "71994eab34ea136f8b10b166877f37726126a2ecb9310eb8cadd7ad0a96dc049"
+    },
+    {
+      "bytes": 18386,
+      "path": "figures/end-to-end/ttft-percentiles.pdf",
+      "sha256": "c4277ab1d8b8ead44906857306b8c18520a441d9d37bb861f006344b7147544e"
+    },
+    {
+      "bytes": 100483,
+      "path": "figures/end-to-end/ttft-percentiles.png",
+      "sha256": "2d7e70a1c503d7b00397ca604f6c20a926d3575cacaf037800663cdaeb8d33ae"
+    }
+  ],
+  "classification": "modified-condition plot provenance",
+  "command": "/tmp/morphserve-analysis-venv/bin/python reproduction/scripts/plot_end_to_end_benchmark.py --root reproduction --output-dir reproduction/figures/end-to-end",
+  "generator": "scripts/plot_end_to_end_benchmark.py",
+  "generator_sha256": "d5a8d10b39546268c30e5b6db08cf57da6df3bfad7ca3706a00d15a765604377",
+  "inputs": [
+    "experiments/end-to-end-report.md",
+    "configs/end-to-end-benchmark.json",
+    "configs/request-payload-1024.json",
+    "experiments/end-to-end-burstgpt/*/summary.json",
+    "experiments/end-to-end-azure/*/summary.json",
+    "experiments/end-to-end-burstgpt/*/system_telemetry.jsonl",
+    "experiments/end-to-end-azure/*/system_telemetry.jsonl"
+  ],
+  "schema_version": 1
+}

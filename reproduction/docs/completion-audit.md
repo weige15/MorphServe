@@ -1,14 +1,16 @@
 # Prompt-to-artifact completion audit
 
-**Audit state:** current-revision GPU closure audit
+**Audit state:** current-revision GPU closure plus first end-to-end workload audit
 **Audit date:** 2026-09-17  
-**Decision:** all four requested current-revision full-model GPU verification surfaces pass their frozen modified-condition gates. The package remains a **partial / exact-condition-blocked paper reproduction**, not confirmation of the paper's headline results.
+**Decision:** all four implementation surfaces and all six selected common-engine end-to-end workload runs pass their declared modified-condition gates. The package remains a **partial / exact-condition-blocked paper reproduction**, not confirmation of the paper's headline results.
 
 ## Objective restated as checkable deliverables
 
 The terminal package must contain: (1) a complete paper/source/claim map; (2) immutable, correctly attributed upstream artifacts; (3) a recorded environment/resource audit; (4) a runnable SwiftLLM-based implementation of real packed AWQ swapping, physical non-contiguous KV resizing, controller coordination, and exact conditioned-MDS LIS; (5) executed correctness, lifetime, failure, active-state, and overlap tests; (6) exact or honestly modified-condition experiments for the prioritized paper claims using scheduled arrivals and complete accounting; (7) raw inputs/logs/configs/metrics plus regenerating analysis; and (8) a final claim-by-claim `REPORT.md` that separates implementation fidelity, numerical agreement, negative findings, blockers, and uncertainty. Completion requires either all feasible priority work or substantiated blocked-stop evidence—not merely passing unit tests.
 
-For this continuation goal, the concrete deliverables are: (1) real transactional executor GPU artifacts; (2) current atomic multi-request reclaimed-KV ownership/recovery artifacts; (3) current full-layer W4/FP16 asynchronous timing plus raw CUDA activity overlap artifacts; and (4) corrected synthetic GPU replay artifacts with independent scheduled arrivals and complete accounting. Each must pass its protocol gates, preserve prior attempts, record command/source/GPU provenance, and be reflected in the report and claim map.
+For the prior continuation goal, the concrete deliverables were: (1) real transactional executor GPU artifacts; (2) current atomic multi-request reclaimed-KV ownership/recovery artifacts; (3) current full-layer W4/FP16 asynchronous timing plus raw CUDA activity overlap artifacts; and (4) corrected synthetic GPU replay artifacts with independent scheduled arrivals and complete accounting. Those remain preserved and passing.
+
+For the current continuation, the concrete deliverables were: (1) adopt/audit the 20-page conference-final PDF while retaining the v2 audit; (2) freeze a 1,024-token payload and 512-token EOS-independent generation policy; (3) run BurstGPT FP16 → static real W4 → MorphServe-default in that order and audit them before Azure; (4) run the same three conditions on Azure Code; and (5) retain raw request/system/controller telemetry, metrics, plots, provenance, report, and completion audit without claiming exact paper or quality reproduction. All are complete under the labeled modified condition.
 
 | Goal surface | Required command | Current evidence | Gate result |
 |---|---|---|---|
@@ -24,13 +26,13 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | ID | Explicit requirement | Status | Inspected evidence / gap |
 |---|---|---|---|
 | A1 | Read complete supplied conference PDF, Sections 4–6, Algorithm 1, figures/tables/appendices | PASS | `docs/paper-evidence-brief.md`; page-render audit. PDF has Figures 1–7 and Tables 1–8. |
-| A2 | Resolve objective references to Tables 1–9 | NEGATIVE | No Table 9 exists in the supplied 19-page PDF; objective's stated Table-4 target is PDF Table 2. Recorded in `REPORT.md` and claim register. |
+| A2 | Resolve objective references to Tables 1–9 | PASS with historical delta | The adopted 20-page conference final contains Tables 1–9 and makes the AWQ target conference-final Table 4; the preserved 19-page arXiv-v2 audit has Tables 1–8 only and called the corresponding row Table 2. Recorded in `docs/paper-version-delta.md`. |
 | A3 | Source-to-implementation map | PASS | `docs/source-map.md` includes paper location, source mapping and unresolved semantics. |
 | A4 | Experiment/claim register | PASS | `docs/claim-register.md`, H1–H30. |
 | A5 | Visually verify ambiguous equations/tables/footnotes | PASS | `docs/paper-evidence-brief.md`; explicit cosine equations take precedence over contradictory prose. |
 | A6 | Keep paper values separate from measurements | PASS | `configs/paper-reference-values.json`; measured metrics remain under experiment directories. |
 | A7 | Runnable reproduction workspace and commands | PARTIAL | `README.md`, `doc/onboarding.md`, per-experiment `commands.txt`; exact headline workspace cannot be runnable without missing assets. |
-| A8 | Raw artifacts, configs, profiles, tests, plots | PARTIAL | Raw logs/configs/profiles/tests exist. A byte-identically regenerating local transfer diagnostic exists under `figures/`; no headline matrix plots exist because no valid headline runs. |
+| A8 | Raw artifacts, configs, profiles, tests, plots | PARTIAL | Raw logs/configs/profiles/tests and six modified-condition workload plot/metric artifacts exist. Exact paper headline matrix plots remain absent because exact models/tasks/configs are unavailable. |
 | A9 | Final claim-by-claim report | PASS for bounded investigation | `REPORT.md` covers H1–H30, current and historical evidence, negative findings, blockers, restart commands and limitations. Missing full-model runs are classified as blocked rather than silently omitted. |
 
 ## B. Provenance, authorization and environment
@@ -103,8 +105,8 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | E3 | Exact Llama 3 8B revision | BLOCKED | Paper revision absent; local Llama 3.1 8B is labeled deviation. |
 | E4 | Exact CodeLlama 34B | BLOCKED | Checkpoint/hardware unavailable. |
 | E5 | Paper L4/A100 hardware/RAM | BLOCKED | Local 7× RTX 3090/125 GiB differs materially. |
-| E6 | Exact 512/256 and 1024/512 lengths | MISSING headline runs | Short bounded correctness inputs only. |
-| E7 | Primary Azure/BurstGPT files | PARTIAL | Azure Code/Conversation and pre-paper BurstGPT v1.1 recovered; Figure 1a strongly resolves Azure Code. |
+| E6 | Exact 512/256 and 1024/512 lengths | PASS modified / BLOCKED exact | Six common-engine runs use exactly 1,024 prompt tokens and 512 forced generated tokens; paper model/task/trace conditions remain unavailable. |
+| E7 | Primary Azure/BurstGPT files | PARTIAL | Azure Code/Conversation and pre-paper BurstGPT v1.1 recovered; Figure 1a strongly resolves Azure Code. Frozen inferred/thinned Azure Code and BurstGPT manifests now drive the six modified-condition runs. |
 | E8 | Exact 72-s offsets | PARTIAL/BLOCKED | Section 5 ties evaluation to Figure 1; shape matching uniquely ranks starts 1073 and 1,781,278, frozen before outcomes. Sub-second boundaries/aggregation remain approximate. |
 | E9 | Exact 4.75×/1.75× operation | BLOCKED exact / PASS reconstructed | Systematic index thinning is frozen and deterministic (94/123 requests), but author operation/seed remain unknown. |
 | E10 | Context sampling/mapping/seed | BLOCKED | No artifact. |
@@ -128,7 +130,7 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | F4 | Mode-specific TTFT improvements | BLOCKED | No exact modes/workloads/hardware. |
 | F5 | Objective-added LLM-PQ quality-gap closure | NOT A TARGET-PDF CLAIM | LLM-PQ and 41.3%/82.3% do not occur in supplied PDF/LaTeX. |
 | F6 | Objective-added PyramidKV TTFT comparison | NOT A TARGET-PDF RESULT | PyramidKV is related-work citation only; 1.73×/2.4× do not occur. |
-| F7 | Figures 5–7 | PARTIAL/MISSING | Physical capacity behavior shown; no exact 72-s capacity plot, saturation RPS or valid P99 TPOT. |
+| F7 | Figures 5–7 | PARTIAL | Modified-condition physical capacity, output throughput and per-token TPOT plots now exist for both inferred windows; exact 72-s paper matrix, saturation sweep and headline factors remain unverified. |
 | F8 | Tables 2–8 ablations | PARTIAL/BLOCKED | LIS algorithm/order subset measured; exact model/task/perplexity tables not reproduced. |
 | F9 | Table 1 BookSum 6K/2K every schedule | BLOCKED | Exact BookSum sample/prompt/decoding and memory resources absent. |
 | F10 | 4/16/6 ms transfer and hidden stall | NEGATIVE/PARTIAL | Three isolated async copies: W4 median 15.214 ms, FP16 57.894 ms; no valid hidden-stall timeline yet. |
@@ -141,14 +143,14 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 |---|---|---|---|
 | G1 | Request IDs, inputs/references, generated text/counts | PASS for requested synthetic GPU replay | `results/raw.jsonl` contains all three IDs, prompts, generated text/token IDs and exact 3-token counts. |
 | G2 | Scheduled/actual/first/completion/token timestamps | PASS at replay seam | Same. |
-| G3 | Queue/errors/timeouts/preemptions/precision/KV occupancy | PARTIAL | Queue/errors/timeouts/precision/KV occupancy are saved. Bounded adapters lack cumulative scheduler preemption counters and now record that field as not measured; no headline workload. |
+| G3 | Queue/errors/timeouts/preemptions/precision/KV occupancy | PASS modified / PARTIAL exact | All six workload runs save queue/errors/timeouts/precision/KV occupancy plus per-token state; cumulative ordinary scheduler preemptions remain not measured and paper accounting is unavailable. |
 | G4 | Separate init/JIT/warmup | PASS for requested pilots | Async raw run follows warm FP16/W4/prefill/cached-decode setup; replay metadata records 13.303-s init and 3.622-s warmup excluded from timed origin. |
 | G5 | Verify percentile definitions/units/denominators | PASS at replay seam | Hyndman-Fan type 7 explicitly implemented/tested. Headline denominators absent. |
 | G6 | Absolute/relative loss and gap closure distinct | PASS in report definitions; no exact quality run | No manufactured aggregate. |
 | G7 | Repeat timings ≥3 when budget permits | PASS for requested async surface | Current async output has three W4 and three FP16 timed rows; replay is accounting, not a repeat-timing claim. |
 | G8 | Predeclare tolerances before target inspection | PARTIAL | W4 repeat envelope derived independently; many exact experiments never reached. |
 | G9 | Preserve failures/negative results | PASS | Multiple numbered attempts, SIGSEGV/race/mapping/JIT/OOM evidence retained. |
-| G10 | Regenerate plots/tables from raw | PARTIAL | Summaries and verifier check saved JSON. `figures/gen_fig_transfer_diagnostics.py` regenerates CSV/PDF/PNG byte-identically from raw attempt-1 metrics and fails closed if the source run is not rejected; unavailable numbered-paper plots remain absent. |
+| G10 | Regenerate plots/tables from raw | PASS modified / PARTIAL exact | `scripts/plot_end_to_end_benchmark.py` regenerates six-row comparison metrics and PNG/PDF plots from selected summaries/system telemetry; `figures/gen_fig_transfer_diagnostics.py` still regenerates the transfer diagnostic byte-identically. Unavailable numbered-paper plots remain absent. |
 | G11 | Every claimed result links command/config/raw/comparison | PASS after current closure update | `configs/claim-evidence-map.json` maps H1–H30 to current and historical evidence; regenerated provenance hashes/Git-audits every linked artifact. Current runners write source-revision/status and GPU/manifest sidecars; historical caveats remain explicit. |
 | G12 | Tests execute real work, not canned success | PASS for inspected tests | CUDA tests mutate/compare actual storage; CPU tests compute policy/profile/replay behavior. |
 
@@ -165,6 +167,20 @@ Legend: **PASS**, **PARTIAL**, **BLOCKED**, **MISSING**, **NEGATIVE**.
 | H7 | Final report classifications and implementation/result separation | PASS | `REPORT.md` is final for this bounded resource state and clearly marks optional future reruns as missing evidence, not completed results. |
 | H8 | Full prompt-to-artifact completion audit | PASS as an audit artifact, outcome NOT COMPLETE | This document maps explicit requirements and rejects proxy completion. |
 | H9 | Call completion mechanism only after full audit | PASS | This audit checks all four requested commands, gates, raw artifacts, source/GPU/manifest provenance and report/map updates. It supports current-revision implementation closure only, not full paper reproduction. |
+
+## Continuation benchmark audit
+
+| Deliverable | Evidence | Gate |
+|---|---|---|
+| Conference-final source adoption | `sources/morphserve-mlsys2026-conference-final.txt`, `docs/paper-version-delta.md`, `results/raw/conference-final-source-audit.json` | PASS; 20-page PDF/hash retained, v2 preserved |
+| Frozen request protocol | `configs/end-to-end-benchmark.json`, `configs/request-payload-1024.json`, `traces/figure1b-inferred/{burstgpt-v1.1-systematic-1.75x,azure-code-systematic-4.75x}.jsonl` | PASS; 1,024 prompt / 512 forced output; 123/94 frozen IDs |
+| BurstGPT three-condition sequence | `results/raw/burstgpt-end-to-end-audit.json` | PASS before Azure; all 3 runs complete 123/123 with exact 512 outputs |
+| Azure three-condition comparison | `experiments/end-to-end-azure/{fp16,static-w4,morphserve-default}/results-batch5/`, `results/raw/end-to-end-audit.json` | PASS; all 3 runs complete 94/94 with exact 512 outputs |
+| Raw telemetry/provenance | Each selected run's `raw_requests.jsonl`, `system_telemetry.jsonl`, `controller-events.json`, `run-metadata.json`, `commands.txt`, `source-revision.txt`, `source-status.txt`, `nvidia-*.csv`, `processes-*.csv`, manifest logs | PASS; selected run gates and no OOM/traceback audit pass |
+| Metrics and plots | `figures/end-to-end/comparison.{json,csv}`, `figures/end-to-end/*.{png,pdf}`, `scripts/plot_end_to_end_benchmark.py` | PASS; regenerated directly from selected summaries/system telemetry |
+| Limitation/report separation | `experiments/end-to-end-report.md`, `REPORT.md`, `configs/claim-evidence-map.json` | PASS; exact model/task/trace/controller/hardware and all quality claims remain blocked/unclaimed |
+
+The selected workload measurements are valid modified-condition runs, not paper reproduction: local RTX 3090, Llama 3.1 8B, deterministic token payload, inferred/thinned arrival windows, common reconstructed engine, and reconstructed controller settings differ from or are not identified by the paper. Failed preflight/runner attempts remain under `experiments/end-to-end-attempts/runner-path-bug/` and are not silently overwritten or counted as selected results.
 
 ## Verifier coverage audit
 

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "classification": "modified-condition end-to-end workload benchmark",
+  "model_snapshot": "d04e592bb4f6aa9cfee91e2e20afa771667e1d4b",
+  "model_name": "Llama 3.1 8B base",
+  "w4_artifact": "local AutoAWQ W4 G128 zero-point derivative",
+  "block_size": 16,
+  "fp16_base_kv_blocks": 512,
+  "static_w4_base_kv_blocks": 1024,
+  "max_batch_size": 16,
+  "max_active_requests": 5,
+  "max_tokens_in_batch": 2048,
+  "max_seqs_in_block_table": 256,
+  "max_blocks_per_seq": 128,
+  "request_timeout_s": 1800,
+  "slo_ttft_s": 2.0,
+  "controller_mode": "default",
+  "controller_config": "configs/reconstructed-controller-modes.json",
+  "controller_settings_classification": "reconstructed settings, not author-recovered settings",
+  "trace_policy": "frozen figure-inferred manifests only; submit independently by scheduled timestamp and continue until completion/timeout",
+  "preflight": {
+    "prompt_tokens": 32,
+    "output_tokens": 8,
+    "pressure_samples": 3,
+    "recovery_cleanup_samples": 48,
+    "classification": "correctness evidence only; timing excluded from benchmark tables"
+  },
+  "warmup": {
+    "fp16_gemm": true,
+    "w4_gemm": true,
+    "prefill": true,
+    "cached_decode": true,
+    "attention_kv_mapping": true,
+    "morph_path": true,
+    "excluded_from_timed_region": true
+  },
+  "deviations": [
+    "RTX 3090 rather than paper L4",
+    "Llama 3.1 8B base rather than the paper's exact Llama 3 8B revision",
+    "deterministic synthetic token payload rather than task contexts; no F1/ROUGE-L",
+    "trace windows are figure-inferred and systematic-thinned, not author-confirmed",
+    "common reconstructed engine uses one-worker GPU execution with continuous-batch prefill/decode; arrivals remain independently scheduled and queue accounting is explicit",
+    "preemptions are recorded as not measured when the bounded scheduler does not expose a genuine cumulative counter"
+  ]
+}

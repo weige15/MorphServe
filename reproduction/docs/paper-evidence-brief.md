@@ -1,17 +1,38 @@
 # MorphServe reproduction evidence brief
 
-## 1. Source attestation and extraction confidence
+## 1. Primary conference-final source attestation
 
-- Reviewed the complete 19-page PDF: `references/morphserve-2506.02006-v2.pdf`.
-- SHA-256: `e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30`.
-- Extracted text from all 19 pages with MuPDF and rendered all 19 pages at 150 DPI. I visually checked pages containing every equation, algorithm, figure, and table.
-- The document contains Figures 1–7 and Tables 1–8. **There is no Table 9 anywhere in this v2 PDF**; this was confirmed by full-document text search and visual inspection.
-- Confidence:
-  - Tables 1–8 and Equations 1–7: high; checked against rendered pages.
-  - Algorithm 1: high, except for an evident typesetting collision on its last line.
-  - Plot point coordinates in Figures 1 and 4–7: low-to-medium because the paper supplies no raw data and the plots are raster/vector graphics without tabulated coordinates. I do not treat visually estimated points as exact values.
+The authoritative paper source for the current reproduction is the exact requested local file:
 
-## 2. Page-by-page source-to-implementation requirements
+- `../references/morphserve-mlsys2026-conference-final.pdf`
+- absolute path: `/nfs/home/s314511048/MorphServe/references/morphserve-mlsys2026-conference-final.pdf`
+- SHA-256: `080ddcfe8c23e12bb421e4c1107c09246c82144345064018401b49e1a8dd2678`
+- page count: **20**
+- title: *MorphServe: Efficient and Workload-Aware LLM Serving via Runtime Quantized Layer Swapping and KV Cache Resizing*
+- authors: Zhaoyuan Su, Zeyu Zhang, Tingfeng Lan, Zirui Wang, Haiying Shen, Juncheng Yang, Yue Cheng
+- venue: Proceedings of the 9th MLSys Conference, Bellevue, WA, USA, 2026
+- extracted text: `../sources/morphserve-mlsys2026-conference-final.txt`
+- source audit: `../results/raw/conference-final-source-audit.json`
+- version delta: `paper-version-delta.md`
+
+The final contains Figures 1–7 and Tables 1–9. Table 9 is present on PDF page 19. MuPDF text extraction and visual inspection covered pages 8–11 and 17–20, including the main result figures/tables, §5.1, Appendix C, and final appendix tables. Full-document searches confirm Table 9, §5.1, Appendix C, LLM-PQ, PyramidKV, 41.3%, 82.3%, 1.73×, and 2.4×.
+
+The conference-final paper reports, in §5.1, LLM-PQ accuracy-gap closure of **41.3% on average and up to 82.3%**, and accuracy-mode PyramidKV P95 TTFT improvement of **1.73× on average and up to 2.4×**. These are paper references only. They must not be mixed with modified-condition local measurements.
+
+## 2. Historical arXiv-v2 source retained
+
+The former primary target remains preserved as a historical secondary source:
+
+- `../references/morphserve-2506.02006-v2.pdf`
+- SHA-256: `e2c0f12fcbc5188a04078a31a732acaa95e93e9662aff4b766a0b9d6a73fbe30`
+- 19 pages; Figures 1–7 and Tables 1–8 only; no Table 9
+- extracted text: `../sources/morphserve-2506.02006-v2.txt`
+
+Its audit, old table classifications, hashes, and prior measured evidence are not deleted or rewritten. See `paper-version-delta.md` for numbering, result, LLM-PQ/PyramidKV, and Appendix C differences.
+
+## 3. Historical v2 page-by-page source-to-implementation requirements
+
+The following detailed extraction is retained from the v2 audit and remains useful for mechanism comparison. Where its table numbers differ from the conference final, the final numbering in the primary source and `configs/paper-reference-values.json` takes precedence.
 
 ### PDF page 1 — abstract and problem contract
 

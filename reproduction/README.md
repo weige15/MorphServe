@@ -2,7 +2,7 @@
 
 ## What This Project Does
 
-Auditable reproduction of the supplied 19-page MorphServe paper. It preserves reported values separately from measurements, vendors immutable public snapshots, tests a repaired independent reconstruction, and records negative results/blockers. No headline paper claim is currently reproduced.
+Auditable reproduction of the supplied 20-page MLSys 2026 conference-final MorphServe paper. It preserves reported values separately from measurements, vendors immutable public snapshots, tests a repaired independent reconstruction, and records negative results/blockers. No headline paper claim is currently reproduced.
 
 ## Quickstart
 
@@ -37,6 +37,9 @@ CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_real_executor_pilot.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_multirequest_ownership.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_async_full_model_overlap.sh
 CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_synthetic_gpu_replay.sh
+
+# Common-engine end-to-end modified-condition workloads (raw artifacts under experiments/)
+CUDA_VISIBLE_DEVICES=1 reproduction/scripts/run_end_to_end_benchmark.sh --kind fp16 --trace traces/figure1b-inferred/burstgpt-v1.1-systematic-1.75x.jsonl --output-dir experiments/end-to-end-burstgpt/fp16/results
 ```
 
 ## Project Structure
@@ -56,6 +59,8 @@ Passing tests/runners must do real work and save raw evidence. Verified surfaces
 ## Documentation Map
 
 - [Current reproduction report](REPORT.md)
+- [First end-to-end comparison report](experiments/end-to-end-report.md)
+- [End-to-end comparison plots](figures/end-to-end/)
 - [Prompt-to-artifact completion audit](docs/completion-audit.md)
 - [Onboarding and handoff](doc/onboarding.md)
 - [Research state](research-state.yaml)
